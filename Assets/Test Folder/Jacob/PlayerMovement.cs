@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] float _movementSpeed;
-	[SerializeField] float _diStrength; // DI stands for direction input, used to reduce or enhance knockback when counteracting it with movement input.
+    [SerializeField] float _movementSpeed = 3;
+	[SerializeField] float _diStrength = 0.25f; // DI stands for direction input, used to reduce or enhance knockback when counteracting it with movement input.
 
 	Rigidbody2D _rb;
 
+	bool _isImmune = false;
 	bool _isGrounded = true;
 
 	private void Awake()
@@ -38,7 +39,11 @@ public class PlayerMovement : MonoBehaviour
 	/// <param name="stunDuration">Duration in seconds that movement is prevented after being hit.</param>
 	public void ApplyKnockback(Vector2 sourcePosition, float strength, float stunDuration)
 	{
+		if (_isImmune)
+			return;
+
 		_isGrounded = false;
+		_isImmune = true;
 
 		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
@@ -54,5 +59,6 @@ public class PlayerMovement : MonoBehaviour
 	void ResetKB()
 	{
 		_isGrounded = true;
+		_isImmune = false;
 	}
 }

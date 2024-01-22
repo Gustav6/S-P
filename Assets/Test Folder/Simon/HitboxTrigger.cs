@@ -13,7 +13,6 @@ public class HitboxTrigger : MonoBehaviour
 
         if (damageable == null)
         {
-            Debug.Log(damageable);
             return;
         }
 

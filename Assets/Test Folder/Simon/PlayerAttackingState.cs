@@ -22,7 +22,9 @@ public class PlayerAttackingState : PlayerBaseState
     /// </summary>
     internal IEnumerator StartAttack(PlayerControllerAttackTest player)
     {
-        // TODO: Clean-up and animation
+        // TODO: Create animation presets depending on weapon type.
+        // Use the indvidual weapons speeds to determine animation speeds.
+        // Rotate where the animation plays depending on where the player is looking.
 
         yield return new WaitForSeconds(player.CurrentWeapon.StartUp);
 

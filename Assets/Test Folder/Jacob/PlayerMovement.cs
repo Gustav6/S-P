@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour
 
 	bool _isImmune = false;
 	bool _isGrounded = true;
+	bool _movementLocked = false;
 
 	private void Awake()
 	{
@@ -24,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.E))
 			ScreenShake.instance.Shake(0.5f, 0.25f, Vector2.zero);
+
+		if (_movementLocked)
+			return;
 
 		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
@@ -61,4 +65,9 @@ public class PlayerMovement : MonoBehaviour
 		_isGrounded = true;
 		_isImmune = false;
 	}
+
+	public void ToggleMovementLock()
+    {
+		_movementLocked = !_movementLocked;
+    }
 }

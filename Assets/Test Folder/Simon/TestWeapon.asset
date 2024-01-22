@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitbox: {fileID: 8378186761250613226, guid: 2c3abb238b9f5a74d864deed567fef77, type: 3}
   hitboxToPlayerOffset: {x: 0, y: 0.65}
-  startUp: 2
+  startUp: 1
   active: 3
   windDown: 2
-  damage: 10000000
+  damage: 13

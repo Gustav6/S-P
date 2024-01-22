@@ -14,13 +14,13 @@ public class PlayerAttackingState : PlayerBaseState
         _weaponOffset = player.CurrentWeapon.HitboxToPlayerOffset;
         _playerTransform = player.transform;
 
-        player.StartCoroutine(Attack(player));
+        player.StartCoroutine(StartAttack(player));
     }
 
     /// <summary>
     /// Creates an attacking hitbox.
     /// </summary>
-    internal IEnumerator Attack(PlayerControllerAttackTest player)
+    internal IEnumerator StartAttack(PlayerControllerAttackTest player)
     {
         // TODO: Clean-up and animation
 

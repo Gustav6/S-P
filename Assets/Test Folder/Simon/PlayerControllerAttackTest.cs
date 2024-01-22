@@ -37,5 +37,9 @@ public class PlayerControllerAttackTest : MonoBehaviour
         stateToChange.EnterState(this);
     }
 
-
+    public void Attack(IDamageable damageable)
+    {
+        damageable.TakeDamage(CurrentWeapon.Damage);
+        damageable.TakeKnockback();
+    }
 }

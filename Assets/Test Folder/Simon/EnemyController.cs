@@ -8,6 +8,6 @@ public class EnemyController : MonoBehaviour, IDamageable
 
     public void TakeKnockback()
     {
-        Debug.Log($"Take knockback\nCurrent percent: {KnockbackPercent} %");
+        Debug.Log($"Current percent: {KnockbackPercent}%");
     }
 }

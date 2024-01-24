@@ -32,7 +32,10 @@ public class ButtonStateManager : MonoBehaviour
 
     void Update()
     {
-        currentState.UpdateState(this);
+        if (uI != null && !uI.Manager.Transitioning)
+        {
+            currentState.UpdateState(this);
+        }
     }
 
     public void SwitchState(ButtonBaseState state)

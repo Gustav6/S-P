@@ -44,7 +44,7 @@ public class SwitchSelectedState : SwitchBaseState
 
         if (@switch.uI.activated)
         {
-            @switch.switchStatus = !@switch.switchStatus;
+            @switch.switchOn = !@switch.switchOn;
             @switch.SwitchState(@switch.pressedState);
         }
     }

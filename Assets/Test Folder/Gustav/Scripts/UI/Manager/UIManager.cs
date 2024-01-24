@@ -53,15 +53,79 @@ public class UIManager : MonoBehaviour
                 value.x = maxXPos;
             }
 
-            currentUISelected = value;
+            if (CheckForGameObject(value) != null)
+            {
+                currentUISelected = value;
+            }
 
+            if (CheckForGameObject(value) == null && value.y > prevPosition.y || CheckForGameObject(value) == null && value.y < prevPosition.y)
+            {
+                float temp = 0;
+
+                if (value.y < prevPosition.y)
+                {
+                    temp = maxXPos;
+                }
+
+                for (int i = 0; i < amountOfUIObjects.Count; i++)
+                {
+                    if (CheckForGameObject(new Vector2(temp, value.y)))
+                    {
+                        currentUISelected = new Vector2(temp, value.y);
+                    }
+                    else
+                    {
+                        if (value.y < prevPosition.y)
+                        {
+                            temp--;
+                        }
+                        else
+                        {
+                            temp++;
+                        }
+                    }
+                }
+            }
+
+            if (CheckForGameObject(value) == null && value.x > prevPosition.x || CheckForGameObject(value) == null && value.x < prevPosition.x)
+            {
+                float temp = 0;
+
+                if (value.x < prevPosition.x)
+                {
+                    temp = maxYPos;
+                }
+
+                for (int i = 0; i < amountOfUIObjects.Count; i++)
+                {
+                    if (CheckForGameObject(new Vector2(value.x, temp)))
+                    {
+                        currentUISelected = new Vector2(value.x, temp);
+                    }
+                    else
+                    {
+                        if (value.x < prevPosition.x)
+                        {
+                            temp--;
+                        }
+                        else
+                        {
+                            temp++;
+                        }
+                    }
+                }
+            }
+
+            prevPosition = currentUISelected;
         }
     }
 
+    [SerializeField] private Vector2 prevPosition;
+
     public static List<GameObject> amountOfUIObjects = new();
 
-    private float maxXPos = 2;
-    private float maxYPos = 2;
+    private float maxXPos;
+    private float maxYPos;
     #endregion
 
     void Awake()
@@ -72,12 +136,22 @@ public class UIManager : MonoBehaviour
             {
                 currentUIObject = GetComponentInChildren<UI>().gameObject;
             }
-                
+
+            if (interactableUI.GetComponent<UI>().position.y > maxYPos)
+            {
+                maxYPos = interactableUI.GetComponent<UI>().position.y;
+            }
+
+            if (interactableUI.GetComponent<UI>().position.x > maxXPos)
+            {
+                maxXPos = interactableUI.GetComponent<UI>().position.x;
+            }
+
             amountOfUIObjects.Add(interactableUI);
         }
     }
 
-    private void Start()
+    void Start()
     {
         resolutionScaling = GetComponentInParent<Canvas>().scaleFactor;
     }
@@ -102,6 +176,19 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private GameObject CheckForGameObject(Vector2 value)
+    {
+        foreach (GameObject interactableUI in amountOfUIObjects)
+        {
+            if (interactableUI.GetComponent<UI>() != null && interactableUI.GetComponent<UI>().position == value)
+            {
+                return interactableUI;
+            }
+        }
+
+        return null;
     }
 
     private void DetectMouseMovement()

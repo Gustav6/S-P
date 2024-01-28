@@ -17,9 +17,12 @@ public class PlayerControllerAttackTest : MonoBehaviour
 
     internal Animator weaponAnimator;
 
+    private Transform _weaponRotationPoint;
+
     private void Awake()
     {
         weaponAnimator = GetComponentInChildren<Animator>();
+        _weaponRotationPoint = transform.GetChild(0);
     }
 
     private void Start()
@@ -32,6 +35,8 @@ public class PlayerControllerAttackTest : MonoBehaviour
     private void Update()
     {
         _currentState.UpdateState(this);
+
+        TurnToMouse();
     }
 
     /// <summary>
@@ -57,6 +62,16 @@ public class PlayerControllerAttackTest : MonoBehaviour
         _currentState = defaultState;
 
         defaultState.EnterState(this);
+    }
+
+    private void TurnToMouse()
+    {
+        Vector3 mousePosition = Input.mousePosition;
+        Vector3 targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+
+        Vector3 direction = targetPosition - _weaponRotationPoint.position;
+        float angle = Mathf.Atan2(direction.x, direction.y) * -Mathf.Rad2Deg;
+        _weaponRotationPoint.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
     public void Attack(IDamageable damageable)

@@ -21,7 +21,8 @@ public class AnimationTest : MonoBehaviour
 
     public void SpawnHitbox()
     {
-        _hitbox = Instantiate(_playerController.CurrentWeapon.Hitbox, player.transform.position + (Vector3)_playerController.CurrentWeapon.HitboxToPlayerOffset, Quaternion.identity, player.transform);
+        _hitbox = Instantiate(_playerController.CurrentWeapon.Hitbox, player.transform.GetChild(0));
+        _hitbox.transform.localPosition += (Vector3)_playerController.CurrentWeapon.HitboxToPlayerOffset;
     }
 
     public void DespawnHitbox()

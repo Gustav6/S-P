@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -56,7 +57,10 @@ public class ButtenPressedState : ButtonBaseState
 
     public override void ExitState(ButtonStateManager button)
     {
-        //button.uI.Manager.Transitioning = true;
+        if (button.methods.TransitionToScene || button.methods.TransitionToPrefab)
+        {
+            button.uI.Manager.SetTransitioning(true);
+        }
         button.uI.actionDelegate?.Invoke();
     }
 }

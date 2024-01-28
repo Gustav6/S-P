@@ -17,7 +17,7 @@ public class SliderDeselectedState : SliderBaseState
         TransitionSystem.AddColorTransition(new ColorTransition(slider.outLineImage, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));
         TransitionSystem.AddColorTransition(new ColorTransition(slider.sliderImage, newInterPartColor, timeItTakes, TransitionType.SmoothStart2));
 
-        if (!slider.uI.Manager.Transitioning)
+        if (slider.uI.Manager != null && !slider.uI.Manager.Transitioning)
         {
             TransitionSystem.AddScaleTransition(new ScaleTransition(slider.sliderImage.transform, newScale, timeItTakes, TransitionType.SmoothStart2));
         }
@@ -29,7 +29,7 @@ public class SliderDeselectedState : SliderBaseState
         {
             if (slider.uI.Manager.CurrentUISelected == slider.uI.position)
             {
-                slider.uI.Manager.CurrentButten = slider.gameObject;
+                slider.uI.Manager.CurrentUiElement = slider.gameObject;
                 slider.SwitchState(slider.selectedState);
             }
         }

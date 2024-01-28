@@ -66,7 +66,7 @@ public class ColorTransition : Transition
         {
             image.color = Color.Lerp(startingColor, target, t);
         }
-        else
+        else if (textMeshPro != null)
         {
             textMeshPro.color = Color.Lerp(startingColor, target, t);
         }

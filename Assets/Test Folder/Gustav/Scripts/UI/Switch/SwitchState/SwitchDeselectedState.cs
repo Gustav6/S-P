@@ -23,7 +23,7 @@ public class SwitchDeselectedState : SwitchBaseState
         {
             if (@switch.uI.Manager.CurrentUISelected == @switch.uI.position)
             {
-                @switch.uI.Manager.CurrentButten = @switch.gameObject;
+                @switch.uI.Manager.CurrentUiElement = @switch.gameObject;
                 @switch.SwitchState(@switch.selectedState);
             }
         }

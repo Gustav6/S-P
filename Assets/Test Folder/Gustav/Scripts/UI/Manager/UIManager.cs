@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
@@ -5,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -13,8 +15,8 @@ public class UIManager : MonoBehaviour
     private bool keyOrControlActive;
     public bool KeyOrControlActive { get { return keyOrControlActive; } set { keyOrControlActive = value; } }
 
-    [SerializeField] private GameObject currentUIObject;
-    public GameObject CurrentButten { get { return currentUIObject; } set { currentUIObject = value; } }
+    [SerializeField] private GameObject currentUiElement;
+    public GameObject CurrentUiElement { get { return currentUiElement; } set { currentUiElement = value; } }
 
     private Vector2 mousePosition;
     public Vector2 MousePosition { get { return mousePosition; } set { mousePosition = value; } }
@@ -23,7 +25,7 @@ public class UIManager : MonoBehaviour
     public float ResolutionScaling { get {  return resolutionScaling; } set {  resolutionScaling = value; } }
 
     private bool transitioning;
-    public bool Transitioning { get { return transitioning; } set { transitioning = value; } }
+    public bool Transitioning { get { return transitioning; } }
 
     [SerializeField] private Vector2 currentUISelected;
     public Vector2 CurrentUISelected
@@ -122,33 +124,23 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private Vector2 prevPosition;
 
-    public static List<GameObject> amountOfUIObjects = new();
+    private static List<GameObject> amountOfUIObjects = new();
+    public static List<GameObject> AmountOfUIObjects { get { return amountOfUIObjects; } }
 
-    private float maxXPos;
-    private float maxYPos;
+    [SerializeField] private static GameObject currentUIGameObject;
+    public static GameObject CurrentUIGameObject { get {  return currentUIGameObject; } }
+
+    [SerializeField] private float maxXPos;
+    [SerializeField] private float maxYPos;
+
+    [SerializeField] private GameObject pausePrefab;
+    public GameObject PausePrefab { get { return pausePrefab; } }
+
     #endregion
 
     void Awake()
     {
-        foreach (GameObject interactableUI in GameObject.FindGameObjectsWithTag("InteractableUI"))
-        {
-            if (interactableUI.GetComponent<UI>().position == Vector2.zero)
-            {
-                currentUIObject = GetComponentInChildren<UI>().gameObject;
-            }
-
-            if (interactableUI.GetComponent<UI>().position.y > maxYPos)
-            {
-                maxYPos = interactableUI.GetComponent<UI>().position.y;
-            }
-
-            if (interactableUI.GetComponent<UI>().position.x > maxXPos)
-            {
-                maxXPos = interactableUI.GetComponent<UI>().position.x;
-            }
-
-            amountOfUIObjects.Add(interactableUI);
-        }
+        LoadUI();
     }
 
     void Start()
@@ -178,6 +170,68 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void LoadUI(List<GameObject> list = null)
+    {
+        maxXPos = 0;
+        maxYPos = 0;
+        amountOfUIObjects.Clear();
+
+        if (list != null)
+        {
+            FindEveryUIElement(list);
+        }
+        else
+        {
+            FindEveryUIElement(new List<GameObject>(GameObject.FindGameObjectsWithTag("InteractableUI")));
+        }
+    }
+
+    private void FindEveryUIElement(List<GameObject> list)
+    {
+        foreach (GameObject interactableUI in list)
+        {
+            if (interactableUI.GetComponent<UI>().position == Vector2.zero)
+            {
+                currentUiElement = interactableUI;
+                Debug.Log(currentUiElement);
+            }
+
+            if (interactableUI.GetComponent<UI>().position.y > maxYPos)
+            {
+                maxYPos = interactableUI.GetComponent<UI>().position.y;
+            }
+
+            if (interactableUI.GetComponent<UI>().position.x > maxXPos)
+            {
+                maxXPos = interactableUI.GetComponent<UI>().position.x;
+            }
+
+            amountOfUIObjects.Add(interactableUI);
+        }
+    }
+
+    public void SetTransitioning(bool temp)
+    {
+        transitioning = temp;
+    }
+
+    public static void InstantiateNewUIPrefab(GameObject prefab, Transform currentObject)
+    {
+        currentUIGameObject = Instantiate(prefab);
+        currentUIGameObject.transform.parent = currentObject;
+        currentUIGameObject.transform.localScale = Vector3.one;
+        currentUIGameObject.transform.localPosition = Vector3.zero;
+
+        List<GameObject> tempList = new();
+
+        for (int i = 0; i < currentUIGameObject.GetComponentsInChildren<UI>().Length; i++)
+        {
+            tempList.Add(currentUIGameObject.GetComponentsInChildren<UI>()[i].gameObject);
+        }
+
+        currentUIGameObject.GetComponentInParent<UIManager>().LoadUI(tempList);
+    }
+
     private GameObject CheckForGameObject(Vector2 value)
     {
         foreach (GameObject interactableUI in amountOfUIObjects)
@@ -195,9 +249,9 @@ public class UIManager : MonoBehaviour
     {
         if (Mouse.current.delta.x.ReadValue() != 0 || Mouse.current.delta.y.ReadValue() != 0)
         {
-            if (currentUIObject.GetComponent<UI>())
+            if (currentUiElement.GetComponent<UI>())
             {
-                currentUIObject.GetComponent<UI>().activated = false;
+                currentUiElement.GetComponent<UI>().activated = false;
             }
 
             keyOrControlActive = false;
@@ -208,12 +262,15 @@ public class UIManager : MonoBehaviour
     {
         if (g.GetComponent<Collider2D>().OverlapPoint(mousePosition))
         {
-            currentUIObject = g;
-            if (g.GetComponent<UI>() != null)
+            if (!transitioning)
             {
-                currentUISelected = g.GetComponent<UI>().position;   
+                currentUiElement = g;
+                if (g.GetComponent<UI>() != null)
+                {
+                    currentUISelected = g.GetComponent<UI>().position;
+                }
+                return true;
             }
-            return true;
         }
 
         return false;

@@ -12,20 +12,16 @@ public class SwitchStateManager : MonoBehaviour
     public SwitchPressedState pressedState = new();
     #endregion
 
-    public UI uI;
-
-    public Image outLineImage;
-    public Image toggleImage;
-    public Image movingPartImage;
-
-    public TextMeshProUGUI text;
-
-    public RectTransform movingPart;
-    public RectTransform outLine;
+    [HideInInspector] public UI uI;
+    [HideInInspector] public Image outLineImage;
+    [HideInInspector] public Image toggleImage;
+    [HideInInspector] public Image movingPartImage;
+    [HideInInspector] public TextMeshProUGUI text;
+    [HideInInspector] public RectTransform movingPart;
+    [HideInInspector] public RectTransform outLine;
 
     public float movingPartOffset;
     public bool switchOn;
-
     public float transitionTime = 0.3f;
 
     private void Start()

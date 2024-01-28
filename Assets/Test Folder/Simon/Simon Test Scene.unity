@@ -294,7 +294,7 @@ Transform:
   m_GameObject: {fileID: 206853649}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.19, y: 2.86, z: 0}
+  m_LocalPosition: {x: -0.19, y: 2.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -387,6 +387,62 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87136e18bbce77447a5c13b8f04afdc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &434823612
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 434823613}
+  - component: {fileID: 434823614}
+  m_Layer: 0
+  m_Name: Weapon Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &434823613
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434823612}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &434823614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434823612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6df802509862d7c4ba9671c546aa5eeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 1000931023}
+--- !u!114 &1000931023 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 613504538970073463, guid: a1b9ce913da21e34ebc5b0ba81d97dc4, type: 3}
+  m_PrefabInstance: {fileID: 5098611981979512971}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7122204b3383def40a37ddef7a4dca09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1489620431
@@ -5150,11 +5206,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1472874299560902584, guid: a1b9ce913da21e34ebc5b0ba81d97dc4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.09
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1472874299560902584, guid: a1b9ce913da21e34ebc5b0ba81d97dc4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.09
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1472874299560902584, guid: a1b9ce913da21e34ebc5b0ba81d97dc4, type: 3}
       propertyPath: m_LocalPosition.z
@@ -5201,6 +5257,7 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 434823613}
   - {fileID: 78884998}
   - {fileID: 1489620433}
   - {fileID: 206853651}

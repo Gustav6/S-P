@@ -9,23 +9,24 @@ public class TestWeaponSO : ScriptableObject
 
     [SerializeField] private float damage, knockbackMultiplier;
 
-    [SerializeField] private CircleCollider2D hitbox;
-    [SerializeField] private Vector2 hitboxToPlayerOffset;
+    [SerializeField] private CapsuleCollider2D hitbox;
 
     // TODO: Add particles.
-    [SerializeField] private Texture2D weaponTexture;
+    [SerializeField] private Sprite weaponSprite;
     [SerializeField] private float animationSpeedMultiplier;
     // Will the animation play reset animation after initial weapon swing.
     [SerializeField] private bool isWeaponAnimationResetable;
+    // Only used if above bool is true.
+    [SerializeField] private float resetMultiplier;
 
     #region Properties
     public AnimatorOverrideController AnimatorOverride { get => weaponAnimationToUse; }
     public float Damage { get => damage; }
     public float KnockBackMultiplier { get => knockbackMultiplier; }
-    public CircleCollider2D Hitbox { get => hitbox; }
-    public Vector2 HitboxToPlayerOffset { get => hitboxToPlayerOffset; }
-    public Texture2D WeaponTexture { get => weaponTexture; }
+    public CapsuleCollider2D Hitbox { get => hitbox; }
+    public Sprite WeaponSprite { get => weaponSprite; }
     public float AnimationSpeed { get => animationSpeedMultiplier; }
     public bool IsWeaponResetable { get => isWeaponAnimationResetable; }
+    public float ResetMultiplier { get => resetMultiplier; }
     #endregion
 }

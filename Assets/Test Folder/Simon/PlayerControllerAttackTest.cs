@@ -19,6 +19,8 @@ public class PlayerControllerAttackTest : MonoBehaviour
 
     private Transform _weaponRotationPoint;
 
+    private bool _animationReadyToReset;
+
     private void Awake()
     {
         weaponAnimator = GetComponentInChildren<Animator>();
@@ -30,6 +32,9 @@ public class PlayerControllerAttackTest : MonoBehaviour
         _currentState = defaultState;
 
         _currentState.EnterState(this);
+
+        // Remove later.
+        WeaponManager.SwitchWeapon(CurrentWeapon);
     }
 
     private void Update()
@@ -57,11 +62,25 @@ public class PlayerControllerAttackTest : MonoBehaviour
     /// </summary>
     public void LeaveAttackState()
     {
+        if (CurrentWeapon.IsWeaponResetable && !_animationReadyToReset)
+        {
+            weaponAnimator.SetTrigger("PlayHit");
+            _animationReadyToReset = true;
+            weaponAnimator.SetFloat("s", CurrentWeapon.ResetMultiplier);
+            return;
+        }
+
         _currentState.ExitState(this);
 
         _currentState = defaultState;
 
         defaultState.EnterState(this);
+
+        if (CurrentWeapon.IsWeaponResetable)
+        {
+            _animationReadyToReset = false;
+            weaponAnimator.SetFloat("s", CurrentWeapon.AnimationSpeed);
+        }
     }
 
     private void TurnToMouse()

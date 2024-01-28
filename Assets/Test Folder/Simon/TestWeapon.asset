@@ -15,8 +15,8 @@ MonoBehaviour:
   weaponAnimationToUse: {fileID: 22100000, guid: eafe3064b1423a147b4430175d18f7f0, type: 2}
   damage: 13
   knockbackMultiplier: 1
-  hitbox: {fileID: 8378186761250613226, guid: 2c3abb238b9f5a74d864deed567fef77, type: 3}
-  hitboxToPlayerOffset: {x: 0, y: 2}
-  weaponTexture: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
+  hitbox: {fileID: 3999668371216255208, guid: 9fe73e10d19d0194a8b50a11e805d950, type: 3}
+  weaponSprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   animationSpeedMultiplier: 1
   isWeaponAnimationResetable: 0
+  resetMultiplier: 0.55

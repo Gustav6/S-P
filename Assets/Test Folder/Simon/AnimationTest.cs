@@ -12,7 +12,10 @@ public class AnimationTest : MonoBehaviour
 
     private PlayerControllerAttackTest _playerController;
 
-    private CircleCollider2D _hitbox;
+    private CapsuleCollider2D _hitbox;
+
+    // Only used if the weapon resests after initial swing.
+    private bool _isFirstHit;
 
     private void Awake()
     {
@@ -21,13 +24,23 @@ public class AnimationTest : MonoBehaviour
 
     public void SpawnHitbox()
     {
+        if (_playerController.CurrentWeapon.IsWeaponResetable && _isFirstHit)
+        {
+            _isFirstHit = false;
+            return;
+        }
+        else
+        {
+            _isFirstHit = true;
+        }
+
         _hitbox = Instantiate(_playerController.CurrentWeapon.Hitbox, player.transform.GetChild(0));
-        _hitbox.transform.localPosition += (Vector3)_playerController.CurrentWeapon.HitboxToPlayerOffset;
     }
 
     public void DespawnHitbox()
     {
-        Destroy(_hitbox.gameObject);
+        if (_hitbox != null)
+            Destroy(_hitbox.gameObject);
     }
 
     // TODO: Add methods for sound effects and visual effects like camera shake for events.

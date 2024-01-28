@@ -6,12 +6,13 @@ public class PlayerDefaultState : PlayerBaseState
 {
     internal override void EnterState(PlayerControllerAttackTest player)
     {
-
+        // TODO: Add this for whenever weapons switches and whatnot
+        player.weaponAnimator.runtimeAnimatorController = player.CurrentWeapon.AnimatorOverride;
     }
 
     internal override void UpdateState(PlayerControllerAttackTest player)
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
             player.SwitchState(player.attackState);
         }

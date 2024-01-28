@@ -112,7 +112,7 @@ MonoBehaviour:
   hitEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 954628894257645906, guid: b403ea0c59d658e4cbc7ca6555faa8c4, type: 3}
+      - m_Target: {fileID: 613504538970073463, guid: a1b9ce913da21e34ebc5b0ba81d97dc4, type: 3}
         m_TargetAssemblyTypeName: PlayerControllerAttackTest, Assembly-CSharp
         m_MethodName: Attack
         m_Mode: 0

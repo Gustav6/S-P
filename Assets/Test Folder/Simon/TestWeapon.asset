@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83798ac8aa17ef34981f663d8bb53092, type: 3}
   m_Name: TestWeapon
   m_EditorClassIdentifier: 
-  hitbox: {fileID: 8378186761250613226, guid: 2c3abb238b9f5a74d864deed567fef77, type: 3}
-  hitboxToPlayerOffset: {x: 0, y: 0.65}
-  startUp: 1
-  active: 3
-  windDown: 2
+  weaponAnimationToUse: {fileID: 22100000, guid: eafe3064b1423a147b4430175d18f7f0, type: 2}
   damage: 13
+  knockbackMultiplier: 1
+  hitbox: {fileID: 8378186761250613226, guid: 2c3abb238b9f5a74d864deed567fef77, type: 3}
+  hitboxToPlayerOffset: {x: 0, y: 2}
+  weaponTexture: {fileID: 10307, guid: 0000000000000000f000000000000000, type: 0}
+  animationSpeedMultiplier: 1
+  isWeaponAnimationResetable: 0

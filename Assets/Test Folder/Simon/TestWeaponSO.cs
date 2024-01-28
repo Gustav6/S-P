@@ -5,21 +5,27 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Test Weapon", menuName = "Weapon Scriptable Object/Melee Weapons")]
 public class TestWeaponSO : ScriptableObject
 {
-    // TODO: Add weapon sprite and animation to use depending on weapon varity
+    [SerializeField] private AnimatorOverrideController weaponAnimationToUse;
+
+    [SerializeField] private float damage, knockbackMultiplier;
 
     [SerializeField] private CircleCollider2D hitbox;
     [SerializeField] private Vector2 hitboxToPlayerOffset;
 
-    [SerializeField] private float startUp, active, windDown;
-
-    [SerializeField] private float damage;
+    // TODO: Add particles.
+    [SerializeField] private Texture2D weaponTexture;
+    [SerializeField] private float animationSpeedMultiplier;
+    // Will the animation play reset animation after initial weapon swing.
+    [SerializeField] private bool isWeaponAnimationResetable;
 
     #region Properties
+    public AnimatorOverrideController AnimatorOverride { get => weaponAnimationToUse; }
+    public float Damage { get => damage; }
+    public float KnockBackMultiplier { get => knockbackMultiplier; }
     public CircleCollider2D Hitbox { get => hitbox; }
     public Vector2 HitboxToPlayerOffset { get => hitboxToPlayerOffset; }
-    public float StartUp { get => startUp; }
-    public float Active { get => active; } 
-    public float WindDown { get => windDown; }
-    public float Damage { get => damage; }
+    public Texture2D WeaponTexture { get => weaponTexture; }
+    public float AnimationSpeed { get => animationSpeedMultiplier; }
+    public bool IsWeaponResetable { get => isWeaponAnimationResetable; }
     #endregion
 }

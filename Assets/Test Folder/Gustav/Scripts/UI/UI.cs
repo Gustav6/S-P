@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    [SerializeField] private UIManager manager;
+    private UIManager manager;
     public UIManager Manager { get { return manager; } }
 
     public bool activated = false;

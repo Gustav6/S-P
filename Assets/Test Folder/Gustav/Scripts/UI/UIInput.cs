@@ -2,27 +2,55 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class UIInput : MonoBehaviour
 {
     private UIManager manager;
+    private bool paused = false;
+    private GameObject temp;
 
     public void Start()
     {
         manager = GetComponent<UIManager>();
     }
 
+    public void Pause(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            paused = !paused;
+
+            if (paused)
+            {
+                Scene scene = SceneManager.GetActiveScene();
+
+                if (scene.buildIndex == (int)NewScene.Game)
+                {
+                    if (manager.PausePrefab != null)
+                    {
+                        UIManager.InstantiateNewUIPrefab(manager.PausePrefab, GetComponent<UIManager>().transform);
+                    }
+                }
+            }
+            else
+            {
+                Destroy(UIManager.CurrentUIGameObject);
+            }
+        }
+    }
+
     public void Navigate(InputAction.CallbackContext context)
     {
-        if (UIManager.amountOfUIObjects.Count > 0)
+        if (UIManager.AmountOfUIObjects.Count > 0)
         {
             if (context.performed)
             {
-                if (manager.CurrentButten.GetComponent<SliderStateManager>() != null)
+                if (manager.CurrentUiElement.GetComponent<SliderStateManager>() != null)
                 {
-                    if (manager.CurrentButten.GetComponent<UI>() != null)
+                    if (manager.CurrentUiElement.GetComponent<UI>() != null)
                     {
-                        if (manager.CurrentButten.GetComponent<UI>().activated)
+                        if (manager.CurrentUiElement.GetComponent<UI>().activated)
                         {
                             return;
                         }
@@ -68,14 +96,14 @@ public class UIInput : MonoBehaviour
 
     public void ChangeSlider(InputAction.CallbackContext context)
     {
-        if (UIManager.amountOfUIObjects.Count > 0)
+        if (UIManager.AmountOfUIObjects.Count > 0)
         {
             if (context.performed)
             {
-                if (manager.CurrentButten.GetComponent<SliderStateManager>() != null && manager.CurrentButten.GetComponent<UI>() != null)
+                if (manager.CurrentUiElement.GetComponent<SliderStateManager>() != null && manager.CurrentUiElement.GetComponent<UI>() != null)
                 {
-                    SliderStateManager sliderSM = manager.CurrentButten.GetComponent<SliderStateManager>();
-                    UI uI = manager.CurrentButten.GetComponent<UI>();
+                    SliderStateManager sliderSM = manager.CurrentUiElement.GetComponent<SliderStateManager>();
+                    UI uI = manager.CurrentUiElement.GetComponent<UI>();
 
                     if (uI.activated)
                     {
@@ -99,30 +127,30 @@ public class UIInput : MonoBehaviour
 
     public void Submit(InputAction.CallbackContext context)
     {
-        if (UIManager.amountOfUIObjects.Count > 0)
+        if (UIManager.AmountOfUIObjects.Count > 0)
         {
-            if (manager.CurrentButten.GetComponent<UI>() != null)
+            if (manager.CurrentUiElement.GetComponent<UI>() != null)
             {
-                UI uI = manager.CurrentButten.GetComponent<UI>();
+                UI uI = manager.CurrentUiElement.GetComponent<UI>();
 
                 if (context.performed)
                 {
-                    if (manager.CurrentButten.GetComponent<SliderStateManager>() == null)
+                    if (manager.CurrentUiElement.GetComponent<SliderStateManager>() == null)
                     {
                         uI.activated = true;
                     }
                     else
                     {
-                        bool temp = manager.CurrentButten.GetComponent<UI>().activated;
+                        bool temp = manager.CurrentUiElement.GetComponent<UI>().activated;
 
                         temp = !temp;
 
-                        manager.CurrentButten.GetComponent<UI>().activated = temp;
+                        manager.CurrentUiElement.GetComponent<UI>().activated = temp;
                     }
                 }
                 if (context.canceled)
                 {
-                    if (manager.CurrentButten.GetComponent<SliderStateManager>() == null)
+                    if (manager.CurrentUiElement.GetComponent<SliderStateManager>() == null)
                     {
                         uI.activated = false;
                     }
@@ -138,20 +166,23 @@ public class UIInput : MonoBehaviour
 
     public void ClickOnGameObject(InputAction.CallbackContext context)
     {
-        if (UIManager.amountOfUIObjects.Count > 0 && !manager.KeyOrControlActive)
+        if (UIManager.AmountOfUIObjects.Count > 0 && !manager.KeyOrControlActive)
         {
-            if (context.performed)
+            if (manager.HoveringGameObject(manager.CurrentUiElement))
             {
-                if (manager.CurrentButten.GetComponent<UI>() != null)
+                if (context.performed)
                 {
-                    manager.CurrentButten.GetComponent<UI>().activated = true;
+                    if (manager.CurrentUiElement.GetComponent<UI>() != null)
+                    {
+                        manager.CurrentUiElement.GetComponent<UI>().activated = true;
+                    }
                 }
-            }
-            else if (context.canceled)
-            {
-                if (manager.CurrentButten.GetComponent<UI>() != null)
+                else if (context.canceled)
                 {
-                    manager.CurrentButten.GetComponent<UI>().activated = false;
+                    if (manager.CurrentUiElement.GetComponent<UI>() != null)
+                    {
+                        manager.CurrentUiElement.GetComponent<UI>().activated = false;
+                    }
                 }
             }
         }

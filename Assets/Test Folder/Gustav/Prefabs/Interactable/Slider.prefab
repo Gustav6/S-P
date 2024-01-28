@@ -296,6 +296,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2022932340198358884}
   - component: {fileID: 5709297288863026197}
+  - component: {fileID: 2539527630839773317}
   - component: {fileID: 332013227068143540}
   - component: {fileID: 573889335522431877}
   m_Layer: 5
@@ -338,12 +339,24 @@ MonoBehaviour:
   uI: {fileID: 0}
   outLineImage: {fileID: 0}
   outLinePosition: {fileID: 0}
-  sliderPosition: {fileID: 0}
   sliderImage: {fileID: 0}
-  slidersOffset: 0
   text: {fileID: 0}
+  sliderPosition: {fileID: 0}
+  slidersOffset: 0
   maxMoveValue: 0
   moveDirection: 0
+--- !u!114 &2539527630839773317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6550605332572765445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8e9e6d44c19a0b47a91f94fe7abdb24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &332013227068143540
 MonoBehaviour:
   m_ObjectHideFlags: 0

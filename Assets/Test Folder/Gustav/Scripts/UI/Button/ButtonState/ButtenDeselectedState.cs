@@ -15,7 +15,7 @@ public class ButtenDeselectedState : ButtonBaseState
         TransitionSystem.AddColorTransition(new ColorTransition(button.image, newOutlineColor, timeItTakes, TransitionType.SmoothStop2));
         TransitionSystem.AddColorTransition(new ColorTransition(button.text, newTextColor, timeItTakes, TransitionType.SmoothStop2));
 
-        if (!button.uI.Manager.Transitioning)
+        if (button.uI.Manager != null && !button.uI.Manager.Transitioning)
         {
             TransitionSystem.AddScaleTransition(new ScaleTransition(button.transform, newScale, timeItTakes, TransitionType.SmoothStart2));
         }

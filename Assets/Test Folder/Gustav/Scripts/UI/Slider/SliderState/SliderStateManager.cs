@@ -13,17 +13,14 @@ public class SliderStateManager : MonoBehaviour
     public SliderPressedState pressedState = new();
     #endregion
 
-    public UI uI;
+    [HideInInspector] public UI uI;
+    [HideInInspector] public Image outLineImage;
+    [HideInInspector] public RectTransform outLinePosition;
+    [HideInInspector] public Image sliderImage;
+    [HideInInspector] public TextMeshProUGUI text;
+    [HideInInspector] public RectTransform sliderPosition;
 
-    public Image outLineImage;
-    public RectTransform outLinePosition;
-
-    public RectTransform sliderPosition;
-    public Image sliderImage;
     public float slidersOffset;
-
-    public TextMeshProUGUI text;
-
     public float maxMoveValue;
     public float moveDirection;
 

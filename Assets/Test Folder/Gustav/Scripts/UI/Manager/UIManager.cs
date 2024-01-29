@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float resolutionScaling;
     public float ResolutionScaling { get {  return resolutionScaling; } set {  resolutionScaling = value; } }
 
-    private bool transitioning;
+    [SerializeField] private bool transitioning;
     public bool Transitioning { get { return transitioning; } }
 
     [SerializeField] private Vector2 currentUISelected;
@@ -37,6 +37,7 @@ public class UIManager : MonoBehaviour
 
         set
         {
+            #region Value control
             if (value.y > maxYPos)
             {
                 value.y = 0;
@@ -69,7 +70,7 @@ public class UIManager : MonoBehaviour
                     temp = maxXPos;
                 }
 
-                for (int i = 0; i < amountOfUIObjects.Count; i++)
+                for (int i = 0; i < listOfUIObjects.Count; i++)
                 {
                     if (CheckForGameObject(new Vector2(temp, value.y)))
                     {
@@ -98,7 +99,7 @@ public class UIManager : MonoBehaviour
                     temp = maxYPos;
                 }
 
-                for (int i = 0; i < amountOfUIObjects.Count; i++)
+                for (int i = 0; i < listOfUIObjects.Count; i++)
                 {
                     if (CheckForGameObject(new Vector2(value.x, temp)))
                     {
@@ -117,25 +118,27 @@ public class UIManager : MonoBehaviour
                     }
                 }
             }
+            #endregion
 
             prevPosition = currentUISelected;
         }
     }
 
-    [SerializeField] private Vector2 prevPosition;
-
-    private static List<GameObject> amountOfUIObjects = new();
-    public static List<GameObject> AmountOfUIObjects { get { return amountOfUIObjects; } }
-
-    [SerializeField] private static GameObject currentUIGameObject;
-    public static GameObject CurrentUIGameObject { get {  return currentUIGameObject; } }
-
-    [SerializeField] private float maxXPos;
-    [SerializeField] private float maxYPos;
+    private Vector2 prevPosition;
 
     [SerializeField] private GameObject pausePrefab;
     public GameObject PausePrefab { get { return pausePrefab; } }
 
+    private float maxXPos;
+    private float maxYPos;
+    #endregion
+
+    #region Static variables
+    private static List<GameObject> listOfUIObjects = new();
+    public static List<GameObject> ListOfUIObjects { get { return listOfUIObjects; } }
+
+    private static GameObject currentUIGameObject;
+    public static GameObject CurrentUIGameObject { get { return currentUIGameObject; } }
     #endregion
 
     void Awake()
@@ -154,27 +157,17 @@ public class UIManager : MonoBehaviour
 
         if (keyOrControlActive)
         {
-            DetectMouseMovement();
-        }
-
-        if (transitioning)
-        {
-            for (int i = amountOfUIObjects.Count - 1; i >= 0; i--)
-            {
-                if (amountOfUIObjects[i].transform.localScale.x < 0.01f || amountOfUIObjects[i].transform.localScale.y < 0.01f)
-                {
-                    Destroy(amountOfUIObjects[i]);
-                    amountOfUIObjects.RemoveAt(i);
-                }
-            }
+            CheckMouseMovement();
         }
     }
 
     public void LoadUI(List<GameObject> list = null)
     {
+        #region Reset variables
         maxXPos = 0;
         maxYPos = 0;
-        amountOfUIObjects.Clear();
+        listOfUIObjects.Clear();
+        #endregion
 
         if (list != null)
         {
@@ -188,12 +181,13 @@ public class UIManager : MonoBehaviour
 
     private void FindEveryUIElement(List<GameObject> list)
     {
+        // Note that if there is no start position (0, 0) bug starts.
+        #region Find objects with script UI and max X & Y value
         foreach (GameObject interactableUI in list)
         {
             if (interactableUI.GetComponent<UI>().position == Vector2.zero)
             {
                 currentUiElement = interactableUI;
-                Debug.Log(currentUiElement);
             }
 
             if (interactableUI.GetComponent<UI>().position.y > maxYPos)
@@ -206,19 +200,25 @@ public class UIManager : MonoBehaviour
                 maxXPos = interactableUI.GetComponent<UI>().position.x;
             }
 
-            amountOfUIObjects.Add(interactableUI);
+            listOfUIObjects.Add(interactableUI);
         }
+        #endregion
     }
 
-    public void SetTransitioning(bool temp)
+    public void EnableTransitioning()
     {
-        transitioning = temp;
+        transitioning = true;
     }
 
-    public static void InstantiateNewUIPrefab(GameObject prefab, Transform currentObject)
+    public void DisableTransitioning()
+    {
+        transitioning = false;
+    }
+
+    public static void InstantiateNewUIPrefab(GameObject prefab, Transform parrentObject, Vector3 scale)
     {
         currentUIGameObject = Instantiate(prefab);
-        currentUIGameObject.transform.parent = currentObject;
+        currentUIGameObject.transform.SetParent(parrentObject);
         currentUIGameObject.transform.localScale = Vector3.one;
         currentUIGameObject.transform.localPosition = Vector3.zero;
 
@@ -227,6 +227,7 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < currentUIGameObject.GetComponentsInChildren<UI>().Length; i++)
         {
             tempList.Add(currentUIGameObject.GetComponentsInChildren<UI>()[i].gameObject);
+            currentUIGameObject.GetComponentsInChildren<UI>()[i].transform.localScale = scale;
         }
 
         currentUIGameObject.GetComponentInParent<UIManager>().LoadUI(tempList);
@@ -234,7 +235,7 @@ public class UIManager : MonoBehaviour
 
     private GameObject CheckForGameObject(Vector2 value)
     {
-        foreach (GameObject interactableUI in amountOfUIObjects)
+        foreach (GameObject interactableUI in listOfUIObjects)
         {
             if (interactableUI.GetComponent<UI>() != null && interactableUI.GetComponent<UI>().position == value)
             {
@@ -245,7 +246,7 @@ public class UIManager : MonoBehaviour
         return null;
     }
 
-    private void DetectMouseMovement()
+    private void CheckMouseMovement()
     {
         if (Mouse.current.delta.x.ReadValue() != 0 || Mouse.current.delta.y.ReadValue() != 0)
         {

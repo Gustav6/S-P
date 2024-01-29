@@ -12,21 +12,24 @@ public class ColorTransition : Transition
     Color target;
     Color startingColor;
 
-    public ColorTransition(Image _image, Color colorTarget, float timeItTakes, TransitionType _transitionType)
+    public ColorTransition(Image _image, Color colorTarget, float timeItTakes, TransitionType _transitionType, ActionDelegate d = null)
     {
         image = _image;
         startingColor = _image.color;
         target = colorTarget;
         timerMax = timeItTakes;
         transitionType = _transitionType;
+        actionDelegate += d;
     }
-    public ColorTransition(TextMeshProUGUI _textMeshPro, Color colorTarget, float timeItTakes, TransitionType _transitionType)
+
+    public ColorTransition(TextMeshProUGUI _textMeshPro, Color colorTarget, float timeItTakes, TransitionType _transitionType, ActionDelegate d = null)
     {
         textMeshPro = _textMeshPro;
         startingColor = textMeshPro.color;
         target = colorTarget;
         timerMax = timeItTakes;
         transitionType = _transitionType;
+        actionDelegate += d;
     }
 
     public override void Start()

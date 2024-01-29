@@ -28,8 +28,6 @@ public class ButtonStateManager : MonoBehaviour
         uI = GetComponent<UI>();
         methods = GetComponent<ButtonMethods>();
 
-        uI.actionDelegate += methods.MethodsToRun;
-
         currentState = deselectedState;
 
         currentState.EnterState(this);
@@ -37,9 +35,9 @@ public class ButtonStateManager : MonoBehaviour
 
     void Update()
     {
-        if (uI != null && uI.Manager != null)
+        if (uI != null && uI.UIManagerInstance != null)
         {
-            if (!uI.Manager.Transitioning)
+            if (!uI.UIManagerInstance.Transitioning)
             {
                 currentState.UpdateState(this);
             }

@@ -11,7 +11,7 @@ public class MoveTransition : Transition
     private readonly TransitionEnd transitionEnding;
     private readonly bool baseTargetFromObject;
 
-    public MoveTransition(Transform _transform, Vector3 _target, float timeItTakes, TransitionType _transitionType, bool _baseTargetFromObject = false)
+    public MoveTransition(Transform _transform, Vector3 _target, float timeItTakes, TransitionType _transitionType, bool _baseTargetFromObject = false, ActionDelegate d = null)
     {
         transform = _transform;
         start = _transform.position;
@@ -19,9 +19,10 @@ public class MoveTransition : Transition
         timerMax = timeItTakes;
         transitionType = _transitionType;
         baseTargetFromObject = _baseTargetFromObject;
+        actionDelegate += d;
     }
 
-    public MoveTransition(Transform _transform, Vector3 _target, float timeItTakes, TransitionStart _transitionStart, TransitionEnd _transitionEnding, bool _baseTargetFromObject = false)
+    public MoveTransition(Transform _transform, Vector3 _target, float timeItTakes, TransitionStart _transitionStart, TransitionEnd _transitionEnding, bool _baseTargetFromObject = false, ActionDelegate d = null)
     {
         transform = _transform;
         start = transform.position;
@@ -30,6 +31,7 @@ public class MoveTransition : Transition
         transitionStart = _transitionStart;
         transitionEnding = _transitionEnding;
         baseTargetFromObject = _baseTargetFromObject;
+        actionDelegate += d;
     }
 
     public override void Start()

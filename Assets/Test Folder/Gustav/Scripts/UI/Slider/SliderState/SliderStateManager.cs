@@ -42,7 +42,7 @@ public class SliderStateManager : MonoBehaviour
 
     void Update()
     {
-        if (uI != null && !uI.Manager.Transitioning)
+        if (uI != null && !uI.UIManagerInstance.Transitioning)
         {
             currentState.UpdateState(this);
         }
@@ -59,9 +59,9 @@ public class SliderStateManager : MonoBehaviour
 
     public float TotalSlidingPercentage()
     {
-        float maxMove = Mathf.Abs(maxMoveValue * 2) * uI.Manager.ResolutionScaling;
+        float maxMove = Mathf.Abs(maxMoveValue * 2) * uI.UIManagerInstance.ResolutionScaling;
 
-        float percentage = ((sliderPosition.localPosition.x + Mathf.Abs(slidersOffset)) / maxMove) * uI.Manager.ResolutionScaling;
+        float percentage = ((sliderPosition.localPosition.x + Mathf.Abs(slidersOffset)) / maxMove) * uI.UIManagerInstance.ResolutionScaling;
 
         if (percentage > 0.99f)
         {

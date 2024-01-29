@@ -5,7 +5,6 @@ using UnityEngine;
 public class SliderDeselectedState : SliderBaseState
 {
     public float timeItTakes = 0.2f;
-    public Vector3 newScale = new(1, 1, 1);
 
     Color newOutlineColor = new(0, 0, 0, 0.5f);
     Color newInterPartColor = new(1, 1, 1, 0.5f);
@@ -17,9 +16,9 @@ public class SliderDeselectedState : SliderBaseState
         TransitionSystem.AddColorTransition(new ColorTransition(slider.outLineImage, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));
         TransitionSystem.AddColorTransition(new ColorTransition(slider.sliderImage, newInterPartColor, timeItTakes, TransitionType.SmoothStart2));
 
-        if (slider.uI.UIManagerInstance != null && !slider.uI.UIManagerInstance.Transitioning)
+        if (!UIManager.Transitioning)
         {
-            TransitionSystem.AddScaleTransition(new ScaleTransition(slider.sliderImage.transform, newScale, timeItTakes, TransitionType.SmoothStart2));
+            TransitionSystem.AddScaleTransition(new ScaleTransition(slider.sliderImage.transform, Vector3.one, timeItTakes, TransitionType.SmoothStart2));
         }
     }
 

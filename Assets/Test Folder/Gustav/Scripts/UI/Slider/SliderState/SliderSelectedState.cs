@@ -13,7 +13,7 @@ public class SliderSelectedState : SliderBaseState
 
     public override void EnterState(SliderStateManager slider)
     {
-        if (!slider.uI.UIManagerInstance.Transitioning)
+        if (!UIManager.Transitioning)
         {
             TransitionSystem.AddColorTransition(new ColorTransition(slider.text, newTextColor, timeItTakes, TransitionType.SmoothStart2));
             TransitionSystem.AddColorTransition(new ColorTransition(slider.outLineImage, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));

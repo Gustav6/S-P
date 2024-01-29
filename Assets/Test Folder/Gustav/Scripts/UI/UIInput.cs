@@ -28,13 +28,14 @@ public class UIInput : MonoBehaviour
                 {
                     if (manager.PausePrefab != null)
                     {
-                        UIManager.InstantiateNewUIPrefab(manager.PausePrefab, GetComponent<UIManager>().transform, Vector3.one);
+                        UIManager.InstantiateNewUIPrefab(manager.PausePrefab, GetComponent<UIManager>().transform, Vector3.one, Vector3.zero);
                     }
                 }
             }
             else
             {
                 Destroy(UIManager.CurrentUIGameObject);
+                UIManager.ResetListOfUIObjects();
             }
         }
     }

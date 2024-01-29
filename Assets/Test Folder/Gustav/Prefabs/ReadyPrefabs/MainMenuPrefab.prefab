@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 438504448196318729}
   m_Layer: 5
   m_Name: MainMenuPrefab
-  m_TagString: Untagged
+  m_TagString: UIPrefab
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32755a2ba3654da46957b2a7f2dd7016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  whereWillPrefabMove: 0
 --- !u!1001 &2693954762142663607
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -293,6 +294,14 @@ PrefabInstance:
       objectReference: {fileID: 6128976556278935385, guid: df738c3cef1fced4a87102877decaae5, type: 3}
     - target: {fileID: 5582965914499597312, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: transitionToPrefab
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582965914499597312, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: prefabMoveTransition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5582965914499597312, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: prefabScaleTransition
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6776574943263549923, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}

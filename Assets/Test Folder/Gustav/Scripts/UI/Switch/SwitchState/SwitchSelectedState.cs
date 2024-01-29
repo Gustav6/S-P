@@ -13,7 +13,7 @@ public class SwitchSelectedState : SwitchBaseState
 
     public override void EnterState(SwitchStateManager @switch)
     {
-        if (!@switch.uI.UIManagerInstance.Transitioning)
+        if (!UIManager.Transitioning)
         {
             TransitionSystem.AddColorTransition(new ColorTransition(@switch.outLineImage, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));
             TransitionSystem.AddColorTransition(new ColorTransition(@switch.movingPartImage, newMovingPartColor, timeItTakes, TransitionType.SmoothStart2));

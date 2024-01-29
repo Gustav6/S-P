@@ -58,24 +58,28 @@ public class ButtenPressedState : ButtonBaseState
 
     public override void ExitState(ButtonStateManager button)
     {
-        Transition.ActionDelegate @delegate = null;
-
-        if (button.methods.TransitionToScene || button.methods.TransitionToPrefab)
-        {
-            button.uI.UIManagerInstance.EnableTransitioning();
-        }
+        Transition.ExecuteOnCompletion @delegate = null;
 
         if (button.methods.TransitionToPrefab)
         {
-            @delegate += button.methods.InstantiatePrefab;
-            @delegate += button.uI.UIManagerInstance.DisableTransitioning;
-            button.methods.ShrinkTransition(@delegate);
+            UIManager.EnableTransitioning();
+
+            if (button.methods.PrefabMoveTransition)
+            {
+                button.methods.MovePrefabToDestination();
+            }
+            else if (button.methods.PrefabScaleTransition)
+            {
+                button.methods.ShrinkTransition();
+            }
         }
 
         if (button.methods.TransitionToScene)
         {
+            UIManager.EnableTransitioning();
+
             @delegate += button.methods.SwitchScene;
-            TransitionSystem.AddColorTransition(new ColorTransition(PanalManager.PanalImage, fadeOutColor, 0.5f, TransitionType.SmoothStop2, @delegate));
+            TransitionSystem.AddColorTransition(new ColorTransition(PanelManager.PanelImage, fadeOutColor, 0.5f, TransitionType.SmoothStop2, @delegate));
         }
     }
 }

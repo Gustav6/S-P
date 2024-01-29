@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Transition
 {
-    public delegate void ActionDelegate();
-    public ActionDelegate actionDelegate;
+    public delegate void ExecuteOnCompletion();
+    public ExecuteOnCompletion executeOnCompletion;
 
     public bool isRemoved;
 

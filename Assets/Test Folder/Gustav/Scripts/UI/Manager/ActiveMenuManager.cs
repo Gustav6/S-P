@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class ActiveMenuManager : MonoBehaviour
 {
-    private UIManager manager;
+    public MoveTowards whereWillPrefabMove;
+
     void Start()
     {
-        manager = GetComponentInParent<UIManager>();
-
-        if (manager != null)
-        {
-            //manager.SetTransitioning(false);
-        }
     }
+}
+
+public enum MoveTowards
+{
+    Left, 
+    Right,
+    None
 }

@@ -279,7 +279,11 @@ MonoBehaviour:
   transitionToScene: 0
   scene: 0
   transitionToPrefab: 0
+  prefabScaleTransition: 0
+  prefabMoveTransition: 0
   prefab: {fileID: 0}
+  unPause: 0
+  exit: 0
 --- !u!114 &2439498831116210818
 MonoBehaviour:
   m_ObjectHideFlags: 0

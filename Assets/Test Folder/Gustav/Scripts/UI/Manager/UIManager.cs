@@ -21,11 +21,8 @@ public class UIManager : MonoBehaviour
     private Vector2 mousePosition;
     public Vector2 MousePosition { get { return mousePosition; } set { mousePosition = value; } }
 
-    [SerializeField] private float resolutionScaling;
-    public float ResolutionScaling { get {  return resolutionScaling; } set {  resolutionScaling = value; } }
-
-    [SerializeField] private bool transitioning;
-    public bool Transitioning { get { return transitioning; } }
+    private static float resolutionScaling;
+    public static float ResolutionScaling { get {  return resolutionScaling; } set {  resolutionScaling = value; } }
 
     [SerializeField] private Vector2 currentUISelected;
     public Vector2 CurrentUISelected
@@ -139,6 +136,10 @@ public class UIManager : MonoBehaviour
 
     private static GameObject currentUIGameObject;
     public static GameObject CurrentUIGameObject { get { return currentUIGameObject; } }
+
+    [SerializeField] static private bool transitioning;
+    public static bool Transitioning { get { return transitioning; } }
+
     #endregion
 
     void Awake()
@@ -161,12 +162,25 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private GameObject CheckForGameObject(Vector2 value)
+    {
+        foreach (GameObject interactableUI in listOfUIObjects)
+        {
+            if (interactableUI.GetComponent<UI>() != null && interactableUI.GetComponent<UI>().position == value)
+            {
+                return interactableUI;
+            }
+        }
+
+        return null;
+    }
+
     public void LoadUI(List<GameObject> list = null)
     {
         #region Reset variables
         maxXPos = 0;
         maxYPos = 0;
-        listOfUIObjects.Clear();
+        ResetListOfUIObjects();
         #endregion
 
         if (list != null)
@@ -205,20 +219,25 @@ public class UIManager : MonoBehaviour
         #endregion
     }
 
-    public void EnableTransitioning()
+    public static void EnableTransitioning()
     {
         transitioning = true;
     }
 
-    public void DisableTransitioning()
+    public static void DisableTransitioning()
     {
         transitioning = false;
     }
 
-    public static void InstantiateNewUIPrefab(GameObject prefab, Transform parrentObject, Vector3 scale)
+    public static void ResetListOfUIObjects()
+    {
+        listOfUIObjects.Clear();
+    }
+
+    public static void InstantiateNewUIPrefab(GameObject prefab, Transform parentObject, Vector3 scale, Vector3 offset)
     {
         currentUIGameObject = Instantiate(prefab);
-        currentUIGameObject.transform.SetParent(parrentObject);
+        currentUIGameObject.transform.SetParent(parentObject);
         currentUIGameObject.transform.localScale = Vector3.one;
         currentUIGameObject.transform.localPosition = Vector3.zero;
 
@@ -228,49 +247,43 @@ public class UIManager : MonoBehaviour
         {
             tempList.Add(currentUIGameObject.GetComponentsInChildren<UI>()[i].gameObject);
             currentUIGameObject.GetComponentsInChildren<UI>()[i].transform.localScale = scale;
+            currentUIGameObject.GetComponentsInChildren<UI>()[i].transform.position += offset;
         }
 
         currentUIGameObject.GetComponentInParent<UIManager>().LoadUI(tempList);
     }
 
-    private GameObject CheckForGameObject(Vector2 value)
-    {
-        foreach (GameObject interactableUI in listOfUIObjects)
-        {
-            if (interactableUI.GetComponent<UI>() != null && interactableUI.GetComponent<UI>().position == value)
-            {
-                return interactableUI;
-            }
-        }
-
-        return null;
-    }
-
     private void CheckMouseMovement()
     {
-        if (Mouse.current.delta.x.ReadValue() != 0 || Mouse.current.delta.y.ReadValue() != 0)
+        if (listOfUIObjects.Count != 0)
         {
-            if (currentUiElement.GetComponent<UI>())
+            if (Mouse.current.delta.x.ReadValue() != 0 || Mouse.current.delta.y.ReadValue() != 0)
             {
-                currentUiElement.GetComponent<UI>().activated = false;
-            }
+                if (currentUiElement.GetComponent<UI>())
+                {
+                    currentUiElement.GetComponent<UI>().activated = false;
+                }
 
-            keyOrControlActive = false;
+                keyOrControlActive = false;
+            }
         }
     }
 
     public bool HoveringGameObject(GameObject g)
     {
-        if (g.GetComponent<Collider2D>().OverlapPoint(mousePosition))
+        if (listOfUIObjects.Count != 0)
         {
-            if (!transitioning)
+            if (g.GetComponent<Collider2D>().OverlapPoint(mousePosition))
             {
-                currentUiElement = g;
-                if (g.GetComponent<UI>() != null)
+                if (!transitioning)
                 {
-                    currentUISelected = g.GetComponent<UI>().position;
+                    currentUiElement = g;
+                    if (g.GetComponent<UI>() != null)
+                    {
+                        currentUISelected = g.GetComponent<UI>().position;
+                    }
+                    return true;
                 }
-                return true;
             }
         }
 

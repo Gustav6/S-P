@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ButtenDeselectedState : ButtonBaseState
 {
-    private Vector3 newScale = new(0.925f, 0.925f, 1);
     private float timeItTakes = 0.25f;
 
     private Color newOutlineColor = new(0, 0, 0, 0.5f);
@@ -15,9 +14,9 @@ public class ButtenDeselectedState : ButtonBaseState
         TransitionSystem.AddColorTransition(new ColorTransition(button.image, newOutlineColor, timeItTakes, TransitionType.SmoothStop2));
         TransitionSystem.AddColorTransition(new ColorTransition(button.text, newTextColor, timeItTakes, TransitionType.SmoothStop2));
 
-        if (button.uI.UIManagerInstance != null && !button.uI.UIManagerInstance.Transitioning)
+        if (!UIManager.Transitioning)
         {
-            TransitionSystem.AddScaleTransition(new ScaleTransition(button.transform, newScale, timeItTakes, TransitionType.SmoothStart2));
+            TransitionSystem.AddScaleTransition(new ScaleTransition(button.transform, Vector3.one, timeItTakes, TransitionType.SmoothStart2));
         }
     }
 

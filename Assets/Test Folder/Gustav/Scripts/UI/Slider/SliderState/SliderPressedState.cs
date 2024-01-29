@@ -58,7 +58,7 @@ public class SliderPressedState : SliderBaseState
 
     public void MoveTowardsMouse(SliderStateManager slider, float mouseX)
     {
-        float scaling = slider.uI.UIManagerInstance.ResolutionScaling;
+        float scaling = UIManager.ResolutionScaling;
 
         if (slider.sliderPosition.localPosition.x * scaling > -slider.maxMoveValue * scaling || slider.sliderPosition.localPosition.x * scaling < slider.maxMoveValue * scaling)
         {
@@ -79,7 +79,7 @@ public class SliderPressedState : SliderBaseState
 
     public void MoveWithButton(SliderStateManager slider)
     {
-        float scaling = slider.uI.UIManagerInstance.ResolutionScaling;
+        float scaling = UIManager.ResolutionScaling;
 
         Vector3 des = new(moveAmount * slider.moveDirection * scaling, 0, 0);
         float timeItTakes = 0.1f;

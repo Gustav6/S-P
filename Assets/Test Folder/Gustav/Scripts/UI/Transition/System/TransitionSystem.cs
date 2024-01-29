@@ -17,7 +17,7 @@ public static class TransitionSystem
         {
             if (transitions[i].isRemoved)
             {
-                transitions[i].actionDelegate?.Invoke();
+                transitions[i].executeOnCompletion?.Invoke();
                 transitions.RemoveAt(i);
             }
         }

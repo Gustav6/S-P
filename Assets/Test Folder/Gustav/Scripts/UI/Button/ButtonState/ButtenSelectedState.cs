@@ -15,7 +15,7 @@ public class ButtenSelectedState : ButtonBaseState
     public override void EnterState(ButtonStateManager button)
     {
 
-        if (!button.uI.UIManagerInstance.Transitioning)
+        if (!UIManager.Transitioning)
         {
             button.uI.UIManagerInstance.CurrentUiElement = button.gameObject;
             timer = timeItTakes / 2;

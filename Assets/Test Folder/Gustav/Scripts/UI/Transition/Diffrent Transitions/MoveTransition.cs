@@ -11,7 +11,7 @@ public class MoveTransition : Transition
     private readonly TransitionEnd transitionEnding;
     private readonly bool baseTargetFromObject;
 
-    public MoveTransition(Transform _transform, Vector3 _target, float timeItTakes, TransitionType _transitionType, bool _baseTargetFromObject = false, ActionDelegate d = null)
+    public MoveTransition(Transform _transform, Vector3 _target, float timeItTakes, TransitionType _transitionType, bool _baseTargetFromObject = false, ExecuteOnCompletion d = null)
     {
         transform = _transform;
         start = _transform.position;
@@ -19,10 +19,10 @@ public class MoveTransition : Transition
         timerMax = timeItTakes;
         transitionType = _transitionType;
         baseTargetFromObject = _baseTargetFromObject;
-        actionDelegate += d;
+        executeOnCompletion += d;
     }
 
-    public MoveTransition(Transform _transform, Vector3 _target, float timeItTakes, TransitionStart _transitionStart, TransitionEnd _transitionEnding, bool _baseTargetFromObject = false, ActionDelegate d = null)
+    public MoveTransition(Transform _transform, Vector3 _target, float timeItTakes, TransitionStart _transitionStart, TransitionEnd _transitionEnding, bool _baseTargetFromObject = false, ExecuteOnCompletion d = null)
     {
         transform = _transform;
         start = transform.position;
@@ -31,7 +31,7 @@ public class MoveTransition : Transition
         transitionStart = _transitionStart;
         transitionEnding = _transitionEnding;
         baseTargetFromObject = _baseTargetFromObject;
-        actionDelegate += d;
+        executeOnCompletion += d;
     }
 
     public override void Start()
@@ -108,11 +108,11 @@ public class MoveTransition : Transition
             t = TransitionSystem.Crossfade(t, t2, timer / timerMax);
         }
 
-        if (!baseTargetFromObject)
+        if (transform != null && !baseTargetFromObject)
         {
             transform.position = Vector3.Lerp(start, target, t);
         }
-        else
+        else if (transform != null && baseTargetFromObject)
         {
             transform.position = Vector3.Lerp(start, start + target, t);
         }

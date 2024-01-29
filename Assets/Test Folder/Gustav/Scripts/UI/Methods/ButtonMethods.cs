@@ -15,26 +15,37 @@ public class ButtonMethods : MonoBehaviour
     [SerializeField] private bool transitionToPrefab;
     public bool TransitionToPrefab { get { return transitionToPrefab; } }
 
-    public bool prefabScaleTransition;
-    public bool prefabMoveTransition;
+    private bool prefabScaleTransition;
+    public bool PrefabScaleTransition { get { return prefabScaleTransition; } }
+
+    private bool prefabMoveTransition;
+    public bool PrefabMoveTransition { get { return prefabMoveTransition; } }
 
     [SerializeField] private GameObject prefab;
+
+    private ActiveMenuManager activeMenuManager;
 
     [SerializeField] bool unPause;
     [SerializeField] bool exit;
 
     private readonly float shrinkTime = 1.5f;
     private readonly float growTime = 1.5f;
+    private readonly float moveToDesDuration = 1.05f;
+    private readonly float moveToStartDuration = 0.8f;
 
     void Start()
     {
-        if (prefabScaleTransition)
+        activeMenuManager = GetComponentInParent<ActiveMenuManager>();
+
+        if (activeMenuManager.whereWillPrefabMove == MoveTowards.None)
         {
             prefabMoveTransition = false;
-        }
-        if (!prefabMoveTransition && !prefabScaleTransition)
-        {
             prefabScaleTransition = true;
+        }
+        else
+        {
+            prefabMoveTransition = true;
+            prefabScaleTransition = false;
         }
     }
 
@@ -49,29 +60,87 @@ public class ButtonMethods : MonoBehaviour
 
         if (prefabMoveTransition)
         {
-            UIManager.InstantiateNewUIPrefab(prefab, transform.parent.parent, Vector3.one);
+            Vector3 spawnLocation = GiveDestination() * -1;
+
+            UIManager.InstantiateNewUIPrefab(prefab, transform.parent.parent, Vector3.one, spawnLocation);
+            MovePrefabToStart();
         }
         else if (prefabScaleTransition)
         {
-            UIManager.InstantiateNewUIPrefab(prefab, transform.parent.parent, new Vector3(0.001f, 0.001f, 1));
+            UIManager.InstantiateNewUIPrefab(prefab, transform.parent.parent, new Vector3(0.0001f, 0.0001f, 1), Vector3.zero);
             GrowTransition();
         }
     }
 
-    public void ShrinkTransition(Transition.ActionDelegate @delegate)
+    #region Move Transition
+    public void MovePrefabToStart()
     {
         for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
         {
             GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
 
-            if (i == 0)
-            {
-                TransitionSystem.AddScaleTransition(new ScaleTransition(temp.transform, Vector3.zero, shrinkTime, TransitionType.SmoothStop2, @delegate));
-            }
-            else
-            {
-                TransitionSystem.AddScaleTransition(new ScaleTransition(temp.transform, Vector3.zero, shrinkTime, TransitionType.SmoothStop2));
-            }
+            Vector3 destination = GiveDestination();
+
+            Transition.ExecuteOnCompletion actions = null;
+            actions += UIManager.DisableTransitioning;
+
+            MoveGameObjects(temp, destination, moveToStartDuration, i, actions);
+        }
+    }
+
+    public void MovePrefabToDestination()
+    {
+        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        {
+            GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
+
+            Vector3 destination = GiveDestination();
+
+            Transition.ExecuteOnCompletion actions = null;
+            actions += InstantiatePrefab;
+
+            MoveGameObjects(temp, destination, moveToDesDuration, i, actions);
+        }
+    }
+
+    public void MoveGameObjects(GameObject g, Vector3 destination, float time, float i, Transition.ExecuteOnCompletion executeOnCompletion = null)
+    {
+        if (i == 0)
+        {
+            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionStart.SmoothStart2, TransitionEnd.SmoothStop2, true, executeOnCompletion));
+        }
+        else
+        {
+            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionStart.SmoothStart2, TransitionEnd.SmoothStop2, true));
+        }
+    }
+
+    public Vector3 GiveDestination()
+    {
+        if (activeMenuManager.whereWillPrefabMove == MoveTowards.Left)
+        {
+            return new(-Screen.width, 0, 0);
+        }
+        else if (activeMenuManager.whereWillPrefabMove == MoveTowards.Right)
+        {
+            return new(Screen.width, 0, 0);
+        }
+
+        return Vector3.zero;
+    }
+    #endregion
+
+    #region Scale Transition
+    public void ShrinkTransition()
+    {
+        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        {
+            GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
+
+            Transition.ExecuteOnCompletion actions = null;
+            actions += InstantiatePrefab;
+
+            ScaleGameObjects(temp, Vector3.zero, shrinkTime, i, actions);
         }
     }
 
@@ -81,9 +150,25 @@ public class ButtonMethods : MonoBehaviour
         {
             GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
 
-            TransitionSystem.AddScaleTransition(new ScaleTransition(temp.transform, Vector3.one, growTime, TransitionType.SmoothStop2));
+            Transition.ExecuteOnCompletion actions = null;
+            actions += UIManager.DisableTransitioning;
+
+            ScaleGameObjects(temp, Vector3.one, growTime, i, actions);
         }
     }
+
+    public void ScaleGameObjects(GameObject g, Vector3 newScale, float time, float i, Transition.ExecuteOnCompletion executeOnCompletion = null)
+    {
+        if (i == 0)
+        {
+            TransitionSystem.AddScaleTransition(new ScaleTransition(g.transform, newScale, time, TransitionType.SmoothStop2, executeOnCompletion));
+        }
+        else
+        {
+            TransitionSystem.AddScaleTransition(new ScaleTransition(g.transform, newScale, time, TransitionType.SmoothStop2));
+        }
+    }
+    #endregion
 }
 
 public enum NewScene

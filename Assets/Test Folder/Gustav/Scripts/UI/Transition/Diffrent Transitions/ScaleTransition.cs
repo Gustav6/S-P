@@ -10,14 +10,14 @@ public class ScaleTransition : Transition
     Vector3 target;
     Vector3 startingScale;
 
-    public ScaleTransition(Transform _transform, Vector3 scaleTarget, float timeItTakes, TransitionType _transitionType, ActionDelegate d = null)
+    public ScaleTransition(Transform _transform, Vector3 scaleTarget, float timeItTakes, TransitionType _transitionType, ExecuteOnCompletion d = null)
     {
         transform = _transform;
         startingScale = transform.localScale;
         target = scaleTarget;
         timerMax = timeItTakes;
         transitionType = _transitionType;
-        actionDelegate += d;
+        executeOnCompletion += d;
     }
 
 

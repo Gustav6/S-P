@@ -43,9 +43,12 @@ public class SwitchStateManager : MonoBehaviour
 
     void Update()
     {
-        if (uI != null && !uI.UIManagerInstance.Transitioning)
+        if (uI != null && uI.UIManagerInstance != null)
         {
-            currentState.UpdateState(this);
+            if (!UIManager.Transitioning)
+            {
+                currentState.UpdateState(this);
+            }
         }
     }
 
@@ -62,7 +65,7 @@ public class SwitchStateManager : MonoBehaviour
     {
         if (@switch.switchOn)
         {
-            Vector3 destination = new(@switch.movingPartOffset * -1 * @switch.uI.UIManagerInstance.ResolutionScaling, 0, 0);
+            Vector3 destination = new(@switch.movingPartOffset * -1 * UIManager.ResolutionScaling, 0, 0);
             destination += @switch.outLine.position;
             Color newColor = new(0, 0.8f, 0, 1);
             TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3, false));
@@ -70,7 +73,7 @@ public class SwitchStateManager : MonoBehaviour
         }
         else if (!@switch.switchOn)
         {
-            Vector3 destination = new(@switch.movingPartOffset * @switch.uI.UIManagerInstance.ResolutionScaling, 0, 0);
+            Vector3 destination = new(@switch.movingPartOffset * UIManager.ResolutionScaling, 0, 0);
             destination += @switch.outLine.position;
             Color newColor = new(0.8f, 0, 0, 1);
             TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3, false));

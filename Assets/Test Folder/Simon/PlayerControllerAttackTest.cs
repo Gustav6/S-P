@@ -22,7 +22,7 @@ public class PlayerControllerAttackTest : MonoBehaviour
     private void Start()
     {
         // Remove later.
-        WeaponManager.SwitchWeapon(CurrentWeapon);
+        WeaponManager.Instance.SwitchWeapon(CurrentWeapon);
     }
 
     private void Update()

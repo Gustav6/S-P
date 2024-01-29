@@ -5,12 +5,12 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     #region Singleton Pattern
-    public static WeaponManager instance;
+    public static WeaponManager Instance;
 
     private void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (Instance == null)
+            Instance = this;
         else
             Destroy(gameObject);
 
@@ -19,25 +19,28 @@ public class WeaponManager : MonoBehaviour
     #endregion
 
     [SerializeField] private PlayerControllerAttackTest playerController;
-    private static PlayerControllerAttackTest _player;
 
-    private static SpriteRenderer _weaponSprite;
+    private SpriteRenderer _weaponSprite;
+
+    private Transform _swingAnchor;
 
     private void Start()
     {
         _weaponSprite = playerController.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
-        _player = playerController;
+        _swingAnchor = playerController.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0);
     }
 
     /// <summary>
     /// Switches the CurrentWeapon for the player.
     /// </summary>
-    public static void SwitchWeapon(WeaponSO newWeapon)
+    public void SwitchWeapon(WeaponSO newWeapon)
     {
-        _player.CurrentWeapon = newWeapon;
-        _player.weaponAnimator.SetFloat("s", newWeapon.AnimationSpeed);
-        _player.weaponAnimator.runtimeAnimatorController = newWeapon.AnimatorOverride;
+        playerController.CurrentWeapon = newWeapon;
+        playerController.weaponAnimator.SetFloat("s", newWeapon.AnimationSpeed);
+        playerController.weaponAnimator.runtimeAnimatorController = newWeapon.AnimatorOverride;
 
         _weaponSprite.sprite = newWeapon.WeaponSprite;
+
+        Instantiate(playerController.CurrentWeapon.ParticleSystem, _swingAnchor);
     }
 }

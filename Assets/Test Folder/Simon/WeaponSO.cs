@@ -12,7 +12,7 @@ public class WeaponSO : ScriptableObject
     [SerializeField] private CapsuleCollider2D hitbox;
 
     [SerializeField] private Sprite weaponSprite;
-    // TODO: Add particles.
+    [SerializeField] private GameObject particleSystem;
     [SerializeField] private float animationSpeedMultiplier;
     // Will the animation play reset animation after initial weapon swing.
     [SerializeField] private bool isWeaponAnimationResetable;
@@ -25,6 +25,7 @@ public class WeaponSO : ScriptableObject
     public float KnockBackMultiplier { get => knockbackMultiplier; }
     public CapsuleCollider2D Hitbox { get => hitbox; }
     public Sprite WeaponSprite { get => weaponSprite; }
+    public GameObject ParticleSystem { get => particleSystem; }
     public float AnimationSpeed { get => animationSpeedMultiplier; }
     public bool IsWeaponResetable { get => isWeaponAnimationResetable; }
     public float ResetMultiplier { get => resetMultiplier; }

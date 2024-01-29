@@ -7,38 +7,39 @@ public class islandTransition : MonoBehaviour
 {
     public AnimationCurve curve;
 
-    float timer = 0;
     float timerMax = 1;
-    bool isSwitching = false;
-
     void Start()
     {
-
+        SwapIsland();
     }
 
     void Update()
     {
-        timer += Time.deltaTime;
 
-        Vector3 tempVector = transform.position;
-        if (isSwitching == true)
-        {
-            if (transform.position.x <= 18)
-            {
-                tempVector.x = Mathf.Lerp(0, 18, curve.Evaluate(timer / timerMax));
-            }
-            else
-            {
-
-            }
-            isSwitching = false;
-        }
-
-        transform.position = tempVector;
     }
 
     public void SwapIsland()
     {
-        isSwitching = true;
+        StartCoroutine(MoveIsland());
+    }
+
+    IEnumerator MoveIsland()
+    {
+        float startPos = transform.position.x;
+        float timer = 0;
+
+        while (timer < timerMax)
+        {
+
+            transform.position = new Vector2(Mathf.Lerp(startPos, startPos + 18, curve.Evaluate(timer / timerMax)), 0);
+            yield return null;
+            timer += Time.deltaTime;
+        }
+        transform.position = new Vector2(startPos + 18, 0);
+
+        if (transform.position.x == 18)
+        {
+            Destroy(gameObject);
+        }
     }
 }

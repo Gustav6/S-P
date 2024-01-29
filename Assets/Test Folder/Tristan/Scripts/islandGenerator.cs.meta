@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: c4d0f373b874f924488962dea2498e01
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - islandRoundPrefab: {fileID: 8070544362750448242, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  - islandDonutPrefab: {fileID: 1133597579595568451, guid: 72382b25bfb0c5545b2e11a98b548dd4, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

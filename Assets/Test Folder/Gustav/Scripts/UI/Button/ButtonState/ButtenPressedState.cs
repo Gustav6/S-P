@@ -10,6 +10,7 @@ public class ButtenPressedState : ButtonBaseState
     private float timeItTakes = 0.15f;
 
     private Vector3 newScale = new(1, 1, 1);
+    private Color fadeOutColor = new(0, 0, 0, 1);
     private Color newOutlineColor = new(1, 1, 1, 1);
 
     public override void EnterState(ButtonStateManager button)
@@ -25,9 +26,9 @@ public class ButtenPressedState : ButtonBaseState
         {
             if (!button.uI.activated)
             {
-                if (button.uI.Manager.KeyOrControlActive)
+                if (button.uI.UIManagerInstance.KeyOrControlActive)
                 {
-                    if (button.uI.Manager.CurrentUISelected == button.uI.position)
+                    if (button.uI.UIManagerInstance.CurrentUISelected == button.uI.position)
                     {
                         button.SwitchState(button.selectedState);
                     }
@@ -38,7 +39,7 @@ public class ButtenPressedState : ButtonBaseState
                 }
                 else
                 {
-                    if (button.uI.Manager.HoveringGameObject(button.gameObject))
+                    if (button.uI.UIManagerInstance.HoveringGameObject(button.gameObject))
                     {
                         button.SwitchState(button.selectedState);
                     }
@@ -57,10 +58,24 @@ public class ButtenPressedState : ButtonBaseState
 
     public override void ExitState(ButtonStateManager button)
     {
+        Transition.ActionDelegate @delegate = null;
+
         if (button.methods.TransitionToScene || button.methods.TransitionToPrefab)
         {
-            button.uI.Manager.SetTransitioning(true);
+            button.uI.UIManagerInstance.EnableTransitioning();
         }
-        button.uI.actionDelegate?.Invoke();
+
+        if (button.methods.TransitionToPrefab)
+        {
+            @delegate += button.methods.InstantiatePrefab;
+            @delegate += button.uI.UIManagerInstance.DisableTransitioning;
+            button.methods.ShrinkTransition(@delegate);
+        }
+
+        if (button.methods.TransitionToScene)
+        {
+            @delegate += button.methods.SwitchScene;
+            TransitionSystem.AddColorTransition(new ColorTransition(PanalManager.PanalImage, fadeOutColor, 0.5f, TransitionType.SmoothStop2, @delegate));
+        }
     }
 }

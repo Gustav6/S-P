@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ButtonMethods : MonoBehaviour
 {
@@ -13,43 +15,74 @@ public class ButtonMethods : MonoBehaviour
     [SerializeField] private bool transitionToPrefab;
     public bool TransitionToPrefab { get { return transitionToPrefab; } }
 
+    public bool prefabScaleTransition;
+    public bool prefabMoveTransition;
+
     [SerializeField] private GameObject prefab;
 
     [SerializeField] bool unPause;
     [SerializeField] bool exit;
 
+    private readonly float shrinkTime = 1.5f;
+    private readonly float growTime = 1.5f;
+
     void Start()
     {
-
-    }
-
-    void Update()
-    {
-        
-    }
-
-    public void MethodsToRun()
-    {
-        if (transitionToScene)
+        if (prefabScaleTransition)
         {
-            SwitchScene();
+            prefabMoveTransition = false;
         }
-
-        if (transitionToPrefab)
+        if (!prefabMoveTransition && !prefabScaleTransition)
         {
-            InstantiatePrefab();
+            prefabScaleTransition = true;
         }
     }
 
-    private void SwitchScene()
+    public void SwitchScene()
     {
         SceneManager.LoadScene((int)scene);
     }
 
-    private void InstantiatePrefab()
+    public void InstantiatePrefab()
     {
         Destroy(gameObject.GetComponentInParent<ActiveMenuManager>().transform.gameObject);
-        UIManager.InstantiateNewUIPrefab(prefab, transform.parent.parent);
+
+        if (prefabMoveTransition)
+        {
+            UIManager.InstantiateNewUIPrefab(prefab, transform.parent.parent, Vector3.one);
+        }
+        else if (prefabScaleTransition)
+        {
+            UIManager.InstantiateNewUIPrefab(prefab, transform.parent.parent, new Vector3(0.001f, 0.001f, 1));
+            GrowTransition();
+        }
+    }
+
+    public void ShrinkTransition(Transition.ActionDelegate @delegate)
+    {
+        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        {
+            GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
+
+            if (i == 0)
+            {
+                TransitionSystem.AddScaleTransition(new ScaleTransition(temp.transform, Vector3.zero, shrinkTime, TransitionType.SmoothStop2, @delegate));
+            }
+            else
+            {
+                TransitionSystem.AddScaleTransition(new ScaleTransition(temp.transform, Vector3.zero, shrinkTime, TransitionType.SmoothStop2));
+            }
+        }
+    }
+
+    public void GrowTransition()
+    {
+        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        {
+            GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
+
+            TransitionSystem.AddScaleTransition(new ScaleTransition(temp.transform, Vector3.one, growTime, TransitionType.SmoothStop2));
+        }
     }
 }
 

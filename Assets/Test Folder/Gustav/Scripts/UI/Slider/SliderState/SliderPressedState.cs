@@ -18,7 +18,7 @@ public class SliderPressedState : SliderBaseState
 
     public override void UpdateState(SliderStateManager slider)
     {
-        if (slider.uI.Manager.KeyOrControlActive)
+        if (slider.uI.UIManagerInstance.KeyOrControlActive)
         {
             if (slider.moveDirection != 0)
             {
@@ -30,10 +30,10 @@ public class SliderPressedState : SliderBaseState
         {
             if (slider.uI.activated)
             {
-                MoveTowardsMouse(slider, slider.uI.Manager.MousePosition.x);
+                MoveTowardsMouse(slider, slider.uI.UIManagerInstance.MousePosition.x);
             }
 
-            if (!slider.uI.Manager.HoveringGameObject(slider.gameObject))
+            if (!slider.uI.UIManagerInstance.HoveringGameObject(slider.gameObject))
             {
                 slider.SwitchState(slider.deselectedState);
                 slider.uI.activated = false;
@@ -58,7 +58,7 @@ public class SliderPressedState : SliderBaseState
 
     public void MoveTowardsMouse(SliderStateManager slider, float mouseX)
     {
-        float scaling = slider.uI.Manager.ResolutionScaling;
+        float scaling = slider.uI.UIManagerInstance.ResolutionScaling;
 
         if (slider.sliderPosition.localPosition.x * scaling > -slider.maxMoveValue * scaling || slider.sliderPosition.localPosition.x * scaling < slider.maxMoveValue * scaling)
         {
@@ -79,7 +79,7 @@ public class SliderPressedState : SliderBaseState
 
     public void MoveWithButton(SliderStateManager slider)
     {
-        float scaling = slider.uI.Manager.ResolutionScaling;
+        float scaling = slider.uI.UIManagerInstance.ResolutionScaling;
 
         Vector3 des = new(moveAmount * slider.moveDirection * scaling, 0, 0);
         float timeItTakes = 0.1f;

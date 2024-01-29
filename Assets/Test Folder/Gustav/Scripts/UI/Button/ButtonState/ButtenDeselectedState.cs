@@ -15,7 +15,7 @@ public class ButtenDeselectedState : ButtonBaseState
         TransitionSystem.AddColorTransition(new ColorTransition(button.image, newOutlineColor, timeItTakes, TransitionType.SmoothStop2));
         TransitionSystem.AddColorTransition(new ColorTransition(button.text, newTextColor, timeItTakes, TransitionType.SmoothStop2));
 
-        if (button.uI.Manager != null && !button.uI.Manager.Transitioning)
+        if (button.uI.UIManagerInstance != null && !button.uI.UIManagerInstance.Transitioning)
         {
             TransitionSystem.AddScaleTransition(new ScaleTransition(button.transform, newScale, timeItTakes, TransitionType.SmoothStart2));
         }
@@ -23,16 +23,16 @@ public class ButtenDeselectedState : ButtonBaseState
 
     public override void UpdateState(ButtonStateManager button)
     {
-        if (button.uI.Manager.KeyOrControlActive)
+        if (button.uI.UIManagerInstance.KeyOrControlActive)
         {
-            if (button.uI.Manager.CurrentUISelected == button.uI.position)
+            if (button.uI.UIManagerInstance.CurrentUISelected == button.uI.position)
             {
                 button.SwitchState(button.selectedState);
             }
         }
         else
         {
-            if (button.uI.Manager.HoveringGameObject(button.gameObject))
+            if (button.uI.UIManagerInstance.HoveringGameObject(button.gameObject))
             {
                 button.SwitchState(button.selectedState);
             }

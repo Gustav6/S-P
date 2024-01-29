@@ -15,9 +15,9 @@ public class ButtenSelectedState : ButtonBaseState
     public override void EnterState(ButtonStateManager button)
     {
 
-        if (!button.uI.Manager.Transitioning)
+        if (!button.uI.UIManagerInstance.Transitioning)
         {
-            button.uI.Manager.CurrentUiElement = button.gameObject;
+            button.uI.UIManagerInstance.CurrentUiElement = button.gameObject;
             timer = timeItTakes / 2;
             TransitionSystem.AddScaleTransition(new ScaleTransition(button.transform, newScale, timeItTakes, TransitionType.SmoothStart2));
             TransitionSystem.AddColorTransition(new ColorTransition(button.image, newOutlineColor, timeItTakes, TransitionType.SmoothStop2));
@@ -31,16 +31,16 @@ public class ButtenSelectedState : ButtonBaseState
 
     public override void UpdateState(ButtonStateManager button)
     {
-        if (button.uI.Manager.KeyOrControlActive)
+        if (button.uI.UIManagerInstance.KeyOrControlActive)
         {
-            if (button.uI.Manager.CurrentUISelected != button.uI.position)
+            if (button.uI.UIManagerInstance.CurrentUISelected != button.uI.position)
             {
                 button.SwitchState(button.deselectedState);
             }
         }
         else
         {
-            if (!button.uI.Manager.HoveringGameObject(button.gameObject))
+            if (!button.uI.UIManagerInstance.HoveringGameObject(button.gameObject))
             {
                 button.SwitchState(button.deselectedState);
             }

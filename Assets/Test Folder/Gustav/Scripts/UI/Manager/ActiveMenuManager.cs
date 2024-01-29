@@ -11,7 +11,7 @@ public class ActiveMenuManager : MonoBehaviour
 
         if (manager != null)
         {
-            manager.SetTransitioning(false);
+            //manager.SetTransitioning(false);
         }
     }
 }

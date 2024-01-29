@@ -8,7 +8,6 @@ public class UIInput : MonoBehaviour
 {
     private UIManager manager;
     private bool paused = false;
-    private GameObject temp;
 
     public void Start()
     {
@@ -29,7 +28,7 @@ public class UIInput : MonoBehaviour
                 {
                     if (manager.PausePrefab != null)
                     {
-                        UIManager.InstantiateNewUIPrefab(manager.PausePrefab, GetComponent<UIManager>().transform);
+                        UIManager.InstantiateNewUIPrefab(manager.PausePrefab, GetComponent<UIManager>().transform, Vector3.one);
                     }
                 }
             }
@@ -42,7 +41,7 @@ public class UIInput : MonoBehaviour
 
     public void Navigate(InputAction.CallbackContext context)
     {
-        if (UIManager.AmountOfUIObjects.Count > 0)
+        if (UIManager.ListOfUIObjects.Count > 0)
         {
             if (context.performed)
             {
@@ -96,7 +95,7 @@ public class UIInput : MonoBehaviour
 
     public void ChangeSlider(InputAction.CallbackContext context)
     {
-        if (UIManager.AmountOfUIObjects.Count > 0)
+        if (UIManager.ListOfUIObjects.Count > 0)
         {
             if (context.performed)
             {
@@ -127,7 +126,7 @@ public class UIInput : MonoBehaviour
 
     public void Submit(InputAction.CallbackContext context)
     {
-        if (UIManager.AmountOfUIObjects.Count > 0)
+        if (UIManager.ListOfUIObjects.Count > 0)
         {
             if (manager.CurrentUiElement.GetComponent<UI>() != null)
             {
@@ -166,7 +165,7 @@ public class UIInput : MonoBehaviour
 
     public void ClickOnGameObject(InputAction.CallbackContext context)
     {
-        if (UIManager.AmountOfUIObjects.Count > 0 && !manager.KeyOrControlActive)
+        if (UIManager.ListOfUIObjects.Count > 0 && !manager.KeyOrControlActive)
         {
             if (manager.HoveringGameObject(manager.CurrentUiElement))
             {

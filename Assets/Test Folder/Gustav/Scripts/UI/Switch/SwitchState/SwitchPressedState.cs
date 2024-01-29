@@ -18,9 +18,9 @@ public class SwitchPressedState : SwitchBaseState
     {
         if (timer <= 0)
         {
-            if (@switch.uI.Manager.KeyOrControlActive)
+            if (@switch.uI.UIManagerInstance.KeyOrControlActive)
             {
-                if (@switch.uI.Manager.CurrentUiElement == @switch.gameObject)
+                if (@switch.uI.UIManagerInstance.CurrentUiElement == @switch.gameObject)
                 {
                     @switch.SwitchState(@switch.selectedState);
                 }
@@ -31,7 +31,7 @@ public class SwitchPressedState : SwitchBaseState
             }
             else
             {
-                if (@switch.uI.Manager.HoveringGameObject(@switch.gameObject))
+                if (@switch.uI.UIManagerInstance.HoveringGameObject(@switch.gameObject))
                 {
                     @switch.SwitchState(@switch.selectedState);
                 }

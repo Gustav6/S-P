@@ -4,17 +4,14 @@ using UnityEngine;
 
 public class UI : MonoBehaviour
 {
-    private UIManager manager;
-    public UIManager Manager { get { return manager; } }
+    private UIManager uIManager;
+    public UIManager UIManagerInstance { get { return uIManager; } }
 
     public bool activated = false;
     public Vector2 position;
 
-    public delegate void ActionDelegate();
-    public ActionDelegate actionDelegate;
-
     public void Start()
     {
-        manager = GetComponentInParent<UIManager>();
+        uIManager = GetComponentInParent<UIManager>();
     }
 }

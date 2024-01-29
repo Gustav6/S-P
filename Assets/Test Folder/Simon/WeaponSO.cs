@@ -12,7 +12,7 @@ public class WeaponSO : ScriptableObject
     [SerializeField] private CapsuleCollider2D hitbox;
 
     [SerializeField] private Sprite weaponSprite;
-    //[SerializeField] private GameObject 
+    // TODO: Add particles.
     [SerializeField] private float animationSpeedMultiplier;
     // Will the animation play reset animation after initial weapon swing.
     [SerializeField] private bool isWeaponAnimationResetable;

@@ -6,6 +6,7 @@ public class PlayerControllerAttackTest : MonoBehaviour
 {
     public WeaponSO CurrentWeapon;
 
+    // Animator on the Weapon Swing Anchor
     internal Animator weaponAnimator;
 
     private Transform _weaponRotationPoint;
@@ -36,8 +37,8 @@ public class PlayerControllerAttackTest : MonoBehaviour
     }
 
     /// <summary>
-    /// Switch the player state from the attacking state to the default state.
-    /// Used to escape the state when an attack animation is finished playing.
+    /// Stop the players attack.
+    /// Used to leave the state when an attack animation is finished playing.
     /// </summary>
     public void LeaveAttackState()
     {
@@ -58,6 +59,9 @@ public class PlayerControllerAttackTest : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// For testing, remove later.
+    /// </summary>
     private void TurnToMouse()
     {
         Vector3 mousePosition = Input.mousePosition;
@@ -74,6 +78,7 @@ public class PlayerControllerAttackTest : MonoBehaviour
         weaponAnimator.SetFloat("s", CurrentWeapon.AnimationSpeed);
     }
 
+    // Referenced in Unity Event.
     public void Attack(IDamageable damageable)
     {
         damageable.TakeDamage(CurrentWeapon.Damage);

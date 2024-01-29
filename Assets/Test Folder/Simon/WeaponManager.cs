@@ -32,7 +32,7 @@ public class WeaponManager : MonoBehaviour
     /// <summary>
     /// Switches the CurrentWeapon for the player.
     /// </summary>
-    public static void SwitchWeapon(TestWeaponSO newWeapon)
+    public static void SwitchWeapon(WeaponSO newWeapon)
     {
         _player.CurrentWeapon = newWeapon;
         _player.weaponAnimator.SetFloat("s", newWeapon.AnimationSpeed);

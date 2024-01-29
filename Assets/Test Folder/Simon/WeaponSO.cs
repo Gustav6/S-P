@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Test Weapon", menuName = "Weapon Scriptable Object/Melee Weapons")]
-public class TestWeaponSO : ScriptableObject
+public class WeaponSO : ScriptableObject
 {
     [SerializeField] private AnimatorOverrideController weaponAnimationToUse;
 
@@ -11,8 +11,8 @@ public class TestWeaponSO : ScriptableObject
 
     [SerializeField] private CapsuleCollider2D hitbox;
 
-    // TODO: Add particles.
     [SerializeField] private Sprite weaponSprite;
+    //[SerializeField] private GameObject 
     [SerializeField] private float animationSpeedMultiplier;
     // Will the animation play reset animation after initial weapon swing.
     [SerializeField] private bool isWeaponAnimationResetable;

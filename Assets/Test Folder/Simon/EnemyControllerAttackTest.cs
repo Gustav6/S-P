@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour, IDamageable
+public class EnemyControllerAttackTest : MonoBehaviour, IDamageable
 {
     public float KnockbackPercent { get; set; }
 

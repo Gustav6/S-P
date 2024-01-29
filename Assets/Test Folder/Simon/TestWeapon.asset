@@ -16,7 +16,7 @@ MonoBehaviour:
   damage: 13
   knockbackMultiplier: 1
   hitbox: {fileID: 3999668371216255208, guid: 9fe73e10d19d0194a8b50a11e805d950, type: 3}
-  weaponSprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  animationSpeedMultiplier: 1
+  weaponSprite: {fileID: -1692451804227615028, guid: 962da15309302a246817c52372453c02, type: 3}
+  animationSpeedMultiplier: 0.02
   isWeaponAnimationResetable: 0
   resetMultiplier: 0.55

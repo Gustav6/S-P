@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AnimationTest : MonoBehaviour
+public class WeaponAnimationController : MonoBehaviour
 {
-    // TODO: Rotate the sprite anchor to the mouse.
-
     [SerializeField] private UnityEvent animationComplete;
     [SerializeField] private GameObject player;
 
@@ -24,6 +22,7 @@ public class AnimationTest : MonoBehaviour
 
     public void SpawnHitbox()
     {
+        // Makes sure a hitbox doesn't spawn if a weapon is playing animation as reset rather than hit animation.
         if (_playerController.CurrentWeapon.IsWeaponResetable && _isFirstHit)
         {
             _isFirstHit = false;

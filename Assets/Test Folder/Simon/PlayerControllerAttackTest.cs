@@ -4,22 +4,13 @@ using UnityEngine;
 
 public class PlayerControllerAttackTest : MonoBehaviour
 {
-    #region States
-    private PlayerBaseState _currentState;
-
-    internal PlayerDefaultState defaultState = new();
-    internal PlayerAttackingState attackState = new();
-    #endregion
-
-    // TODO: Remove states and rework with bools or something
-
-    public TestWeaponSO CurrentWeapon;
+    public WeaponSO CurrentWeapon;
 
     internal Animator weaponAnimator;
 
     private Transform _weaponRotationPoint;
 
-    private bool _animationReadyToReset;
+    private bool _animationReadyToReset, _isAnimationPlaying;
 
     private void Awake()
     {
@@ -29,31 +20,19 @@ public class PlayerControllerAttackTest : MonoBehaviour
 
     private void Start()
     {
-        _currentState = defaultState;
-
-        _currentState.EnterState(this);
-
         // Remove later.
         WeaponManager.SwitchWeapon(CurrentWeapon);
     }
 
     private void Update()
     {
-        _currentState.UpdateState(this);
+        if (Input.GetKey(KeyCode.Space) && !_isAnimationPlaying)
+        {
+            _isAnimationPlaying = true;
+            PlayHitAnimation();
+        }
 
         TurnToMouse();
-    }
-
-    /// <summary>
-    /// Switch the player state.
-    /// </summary>
-    public void SwitchState(PlayerBaseState stateToChange)
-    {
-        _currentState.ExitState(this);
-
-        _currentState = stateToChange;
-
-        stateToChange.EnterState(this);
     }
 
     /// <summary>
@@ -70,11 +49,7 @@ public class PlayerControllerAttackTest : MonoBehaviour
             return;
         }
 
-        _currentState.ExitState(this);
-
-        _currentState = defaultState;
-
-        defaultState.EnterState(this);
+        _isAnimationPlaying = false;
 
         if (CurrentWeapon.IsWeaponResetable)
         {
@@ -91,6 +66,12 @@ public class PlayerControllerAttackTest : MonoBehaviour
         Vector3 direction = targetPosition - _weaponRotationPoint.position;
         float angle = Mathf.Atan2(direction.x, direction.y) * -Mathf.Rad2Deg;
         _weaponRotationPoint.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+    }
+
+    private void PlayHitAnimation()
+    {
+        weaponAnimator.SetTrigger("PlayHit");
+        weaponAnimator.SetFloat("s", CurrentWeapon.AnimationSpeed);
     }
 
     public void Attack(IDamageable damageable)

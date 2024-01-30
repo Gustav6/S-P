@@ -96,7 +96,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2195661325101585982}
   - component: {fileID: 2634375162703423266}
+  - component: {fileID: 1495467272537946978}
   - component: {fileID: 1791450798474930561}
+  - component: {fileID: 683184779491990847}
   - component: {fileID: 2742962212720243662}
   - component: {fileID: 9059611254032492152}
   m_Layer: 0
@@ -135,6 +137,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87136e18bbce77447a5c13b8f04afdc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1495467272537946978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4265426338332356635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b41e3e48f3a18c5479cdaf5099a23083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animationComplete:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1791450798474930561}
+        m_TargetAssemblyTypeName: AttackController, Assembly-CSharp
+        m_MethodName: LeaveAttackState
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1791450798474930561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,9 +177,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentWeapon: {fileID: 11400000, guid: 3df5ca62f4da0ff41bb4319a20b7ea90, type: 2}
-  thisLayer:
-    serializedVersion: 2
-    m_Bits: 0
+--- !u!95 &683184779491990847
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4265426338332356635}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 74a213d23c6632245ba91b262dd341ed, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!60 &2742962212720243662
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -268,8 +316,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6314037904127665134}
-  - component: {fileID: 7336492899320044373}
-  - component: {fileID: 4706835162848312499}
   m_Layer: 0
   m_Name: Weapon Swing Anchor
   m_TagString: Untagged
@@ -293,56 +339,6 @@ Transform:
   - {fileID: 8866912039275340787}
   m_Father: {fileID: 2195661325101585982}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &7336492899320044373
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6047912046415143711}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 74a213d23c6632245ba91b262dd341ed, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
---- !u!114 &4706835162848312499
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6047912046415143711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b41e3e48f3a18c5479cdaf5099a23083, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationComplete:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1791450798474930561}
-        m_TargetAssemblyTypeName: AttackController, Assembly-CSharp
-        m_MethodName: LeaveAttackState
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  thisGameObject: {fileID: 4265426338332356635}
 --- !u!1 &8032587516467198528
 GameObject:
   m_ObjectHideFlags: 0

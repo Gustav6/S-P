@@ -6,11 +6,15 @@ public class PlayerControllerAttackTest : MonoBehaviour, IDamageable
 {
     public float KnockbackPercent { get; set; }
 
-    private AttackController _playerAttackController;
+    private AttackController _attackController;
+
+    // Remove later, maybe.
+    internal Transform _weaponRotationPoint;
 
     private void Awake()
     {
-        _playerAttackController = GetComponentInChildren<AttackController>();
+        _attackController = GetComponentInChildren<AttackController>();
+        _weaponRotationPoint = transform.GetChild(0);
     }
 
     public void TakeKnockback(float knockbackMultiplier)
@@ -20,10 +24,8 @@ public class PlayerControllerAttackTest : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && !_playerAttackController.IsAnimationPlaying)
-        {
-            _playerAttackController.PlayHitAnimation();
-        }
+        if (Input.GetKey(KeyCode.Space) && !_attackController.IsAnimationPlaying)
+            _attackController.PlayHitAnimation();
 
         TurnToMouse();
     }
@@ -36,8 +38,8 @@ public class PlayerControllerAttackTest : MonoBehaviour, IDamageable
         Vector3 mousePosition = Input.mousePosition;
         Vector3 targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
 
-        Vector3 direction = targetPosition - _playerAttackController._weaponRotationPoint.position;
+        Vector3 direction = targetPosition - _weaponRotationPoint.position;
         float angle = Mathf.Atan2(direction.x, direction.y) * -Mathf.Rad2Deg;
-        _playerAttackController._weaponRotationPoint.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        _weaponRotationPoint.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }

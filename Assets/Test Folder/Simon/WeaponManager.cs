@@ -10,11 +10,14 @@ public class WeaponManager : MonoBehaviour
     private void Awake()
     {
         if (Instance == null)
+        {
             Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
         else
+        {
             Destroy(gameObject);
-
-        DontDestroyOnLoad(gameObject);
+        }
     }
     #endregion
 
@@ -24,11 +27,13 @@ public class WeaponManager : MonoBehaviour
     public void SwitchWeapon(AttackController controller, WeaponSO newWeapon)
     {
         SpriteRenderer weaponSprite = controller.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
+        // Do not worry about it.
         Transform swingAnchor = controller.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0);
         GameObject oldParticleSystem;
 
         try
         {
+            // Don't worry about it.
             oldParticleSystem = controller.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).gameObject;
         }
         catch
@@ -43,9 +48,7 @@ public class WeaponManager : MonoBehaviour
         weaponSprite.sprite = newWeapon.WeaponSprite;
 
         if (oldParticleSystem != null)
-        {
             Destroy(oldParticleSystem);
-        }
 
         Instantiate(controller.CurrentWeapon.ParticleSystem, swingAnchor);
     }

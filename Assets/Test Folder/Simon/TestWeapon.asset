@@ -20,4 +20,4 @@ MonoBehaviour:
   particleSystem: {fileID: 1567073594253252592, guid: a03547f8df435af4b914589d0b209a2d, type: 3}
   animationSpeedMultiplier: 1
   isWeaponAnimationResetable: 0
-  resetMultiplier: 0.55
+  resetMultiplier: 0.4

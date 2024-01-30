@@ -6,11 +6,11 @@ public class EnemyControllerAttackTest : MonoBehaviour, IDamageable
 {
     public float KnockbackPercent { get; set; }
 
-    private AttackController _enemyController;
+    private AttackController _enemyAttackController;
 
     private void Awake()
     {
-        _enemyController = GetComponentInChildren<AttackController>();
+        _enemyAttackController = GetComponentInChildren<AttackController>();
     }
 
     public void TakeKnockback(float knockbackMultiplier)
@@ -20,9 +20,7 @@ public class EnemyControllerAttackTest : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.P) && !_enemyController.IsAnimationPlaying)
-        {
-            _enemyController.PlayHitAnimation();
-        }
+        if (Input.GetKey(KeyCode.P) && !_enemyAttackController.IsAnimationPlaying)
+            _enemyAttackController.PlayHitAnimation();
     }
 }

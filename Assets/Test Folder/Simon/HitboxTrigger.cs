@@ -20,9 +20,7 @@ public class HitboxTrigger : MonoBehaviour
         var damageable = triggerInfo.GetComponent<IDamageable>();
 
         if (damageable == null || triggerInfo.CompareTag(_parentController.tag))
-        {
             return;
-        }
 
         hitEvent?.Invoke(damageable);
     }

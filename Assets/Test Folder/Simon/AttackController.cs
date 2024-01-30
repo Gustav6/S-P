@@ -9,8 +9,6 @@ public class AttackController : MonoBehaviour
     // Animator on the Weapon Swing Anchor
     internal Animator weaponAnimator;
 
-    // Remove later.
-    internal Transform _weaponRotationPoint;
 
     private bool _animationReadyToReset;
     public bool IsAnimationPlaying { get; private set; }
@@ -18,7 +16,6 @@ public class AttackController : MonoBehaviour
     private void Awake()
     {
         weaponAnimator = GetComponentInChildren<Animator>();
-        _weaponRotationPoint = transform.GetChild(0);
     }
 
     private void Start()
@@ -42,8 +39,8 @@ public class AttackController : MonoBehaviour
     {
         if (CurrentWeapon.IsWeaponResetable && !_animationReadyToReset)
         {
-            weaponAnimator.SetTrigger("PlayHit");
             _animationReadyToReset = true;
+            weaponAnimator.SetTrigger("PlayReturn");
             weaponAnimator.SetFloat("s", CurrentWeapon.ResetMultiplier);
             return;
         }
@@ -55,12 +52,5 @@ public class AttackController : MonoBehaviour
             _animationReadyToReset = false;
             weaponAnimator.SetFloat("s", CurrentWeapon.AnimationSpeed);
         }
-    }
-
-    // Referenced in Unity Event.
-    public void Attack(IDamageable damageable)
-    {
-        damageable.TakeDamage(CurrentWeapon.Damage);
-        damageable.TakeKnockback(CurrentWeapon.KnockBackMultiplier);
     }
 }

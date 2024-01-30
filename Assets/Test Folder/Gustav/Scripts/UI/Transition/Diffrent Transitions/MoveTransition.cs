@@ -6,31 +6,35 @@ public class MoveTransition : Transition
     public Transform transform;
     public Vector3 start;
     public Vector3 target;
+    public float pointA;
+    public float pointB;
     private readonly TransitionType? transitionType;
     private readonly TransitionStart transitionStart;
     private readonly TransitionEnd transitionEnding;
     private readonly bool baseTargetFromObject;
 
-    public MoveTransition(Transform _transform, Vector3 _target, float timeItTakes, TransitionType _transitionType, bool _baseTargetFromObject = false, ExecuteOnCompletion d = null)
+    public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionType type, bool fromObject = false, ExecuteOnCompletion d = null, float _pointA = 0, float _pointB = 0)
     {
-        transform = _transform;
-        start = _transform.position;
+        transform = t;
+        start = t.position;
         target = _target;
-        timerMax = timeItTakes;
-        transitionType = _transitionType;
-        baseTargetFromObject = _baseTargetFromObject;
+        timerMax = totalTime;
+        transitionType = type;
+        baseTargetFromObject = fromObject;
         executeOnCompletion += d;
+        pointA = _pointA;
+        pointB = _pointB;
     }
 
-    public MoveTransition(Transform _transform, Vector3 _target, float timeItTakes, TransitionStart _transitionStart, TransitionEnd _transitionEnding, bool _baseTargetFromObject = false, ExecuteOnCompletion d = null)
+    public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionStart tStart, TransitionEnd tEnding, bool fromObject = false, ExecuteOnCompletion d = null)
     {
-        transform = _transform;
-        start = transform.position;
+        transform = t;
+        start = t.position;
         target = _target;
-        timerMax = timeItTakes;
-        transitionStart = _transitionStart;
-        transitionEnding = _transitionEnding;
-        baseTargetFromObject = _baseTargetFromObject;
+        timerMax = totalTime;
+        transitionStart = tStart;
+        transitionEnding = tEnding;
+        baseTargetFromObject = fromObject;
         executeOnCompletion += d;
     }
 
@@ -65,7 +69,8 @@ public class MoveTransition : Transition
                 case TransitionType.SmoothStop4:
                     t = TransitionSystem.SmoothStop4(timer / timerMax);
                     break;
-                case TransitionType.bounceClampTop:
+                case TransitionType.NormalizedBezier3:
+                    t = TransitionSystem.NormalizedBezier3(pointA, pointB, timer / timerMax);
                     break;
                 default:
                     break;
@@ -108,13 +113,21 @@ public class MoveTransition : Transition
             t = TransitionSystem.Crossfade(t, t2, timer / timerMax);
         }
 
-        if (transform != null && !baseTargetFromObject)
+        if (transitionType != TransitionType.NormalizedBezier3)
         {
-            transform.position = Vector3.Lerp(start, target, t);
+            if (transform != null && !baseTargetFromObject)
+            {
+                transform.position = Vector3.Lerp(start, target, t);
+            }
+            else if (transform != null && baseTargetFromObject)
+            {
+                transform.position = Vector3.Lerp(start, start + target, t);
+            }
         }
-        else if (transform != null && baseTargetFromObject)
+        else
         {
-            transform.position = Vector3.Lerp(start, start + target, t);
+            Vector2 temp =  start + target * t;
+            transform.position = temp;
         }
 
         base.Update();

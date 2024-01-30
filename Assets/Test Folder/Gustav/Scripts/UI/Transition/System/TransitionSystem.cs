@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public static class TransitionSystem
@@ -36,9 +37,27 @@ public static class TransitionSystem
         transitions.Add(colorTransition);
     }
 
+    public static float BounceClampTop(float t)
+    {
+        return Mathf.Abs(t);
+    }
+    public static float BounceClampBottom(float t)
+    {
+        return 1 - Mathf.Abs(1 - t);
+    }
+
     public static float Flip(float t)
     {
         return 1 - t;
+    }
+
+    public static float Scale(float t)
+    {
+        return t * t;
+    }
+    public static float ReverseScale(float t)
+    {
+        return t * (1 - t);
     }
 
     public static float SmoothStart2(float t)
@@ -71,6 +90,15 @@ public static class TransitionSystem
         return 1 - (1 - t) * (1 - t) * (1 - t) * (1 - t);
     }
 
+    public static float NormalizedBezier3(float b, float c, float t)
+    {
+        float s = 1 - t;
+        float t2 = t * t;
+        float s2 = s * s;
+        float t3 = t2 * t;
+        return (3 * b * s2 * t) + (3 * c * s * t2) + (t3);
+    }
+
     public static float Crossfade(float a, float b, float t)
     {
         return (1 - t) * a + t * b;
@@ -87,9 +115,7 @@ public enum TransitionType
     SmoothStop3,
     SmoothStop4,
 
-    bounceClampTop, 
-    bounceClampBottom, 
-    bounceClampBottomTop,
+    NormalizedBezier3,
 }
 
 public enum TransitionStart

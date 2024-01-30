@@ -12,23 +12,23 @@ public class ColorTransition : Transition
     Color target;
     Color startingColor;
 
-    public ColorTransition(Image _image, Color colorTarget, float timeItTakes, TransitionType _transitionType, ExecuteOnCompletion d = null)
+    public ColorTransition(Image i, Color colorTarget, float totalTime, TransitionType type, ExecuteOnCompletion d = null)
     {
-        image = _image;
-        startingColor = _image.color;
+        image = i;
+        startingColor = i.color;
         target = colorTarget;
-        timerMax = timeItTakes;
-        transitionType = _transitionType;
+        timerMax = totalTime;
+        transitionType = type;
         executeOnCompletion += d;
     }
 
-    public ColorTransition(TextMeshProUGUI _textMeshPro, Color colorTarget, float timeItTakes, TransitionType _transitionType, ExecuteOnCompletion d = null)
+    public ColorTransition(TextMeshProUGUI t, Color colorTarget, float totalTime, TransitionType type, ExecuteOnCompletion d = null)
     {
-        textMeshPro = _textMeshPro;
-        startingColor = textMeshPro.color;
+        textMeshPro = t;
+        startingColor = t.color;
         target = colorTarget;
-        timerMax = timeItTakes;
-        transitionType = _transitionType;
+        timerMax = totalTime;
+        transitionType = type;
         executeOnCompletion += d;
     }
 

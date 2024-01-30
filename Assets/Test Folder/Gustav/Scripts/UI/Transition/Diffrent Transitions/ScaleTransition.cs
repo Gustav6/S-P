@@ -9,15 +9,19 @@ public class ScaleTransition : Transition
     TransitionType transitionType;
     Vector3 target;
     Vector3 startingScale;
+    float pointA;
+    float pointB;
 
-    public ScaleTransition(Transform _transform, Vector3 scaleTarget, float timeItTakes, TransitionType _transitionType, ExecuteOnCompletion d = null)
+    public ScaleTransition(Transform t, Vector3 scaleTarget, float totalTime, TransitionType type, ExecuteOnCompletion d = null, float _pointA = 0, float _pointB = 0)
     {
-        transform = _transform;
+        transform = t;
         startingScale = transform.localScale;
         target = scaleTarget;
-        timerMax = timeItTakes;
-        transitionType = _transitionType;
+        timerMax = totalTime;
+        transitionType = type;
         executeOnCompletion += d;
+        pointA = _pointA;
+        pointB = _pointB;
     }
 
 
@@ -50,13 +54,24 @@ public class ScaleTransition : Transition
             case TransitionType.SmoothStop4:
                 t = TransitionSystem.SmoothStop4(timer / timerMax);
                 break;
+            case TransitionType.NormalizedBezier3:
+                t = TransitionSystem.NormalizedBezier3(-1, -3, timer / timerMax);
+                break;
             default:
                 break;
         }
 
-        if (transform != null)
+        if (transitionType != TransitionType.NormalizedBezier3)
         {
-            transform.localScale = Vector3.Lerp(startingScale, target, t);
+            if (transform != null)
+            {
+                transform.localScale = Vector3.Lerp(startingScale, target, t);
+            }
+        }
+        else
+        {
+            Vector2 temp = startingScale + target * t;
+            transform.localScale = temp;
         }
 
         base.Update();

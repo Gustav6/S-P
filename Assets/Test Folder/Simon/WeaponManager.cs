@@ -18,29 +18,35 @@ public class WeaponManager : MonoBehaviour
     }
     #endregion
 
-    [SerializeField] private PlayerControllerAttackTest playerController;
-
-    private SpriteRenderer _weaponSprite;
-
-    private Transform _swingAnchor;
-
-    private void Start()
-    {
-        _weaponSprite = playerController.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
-        _swingAnchor = playerController.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0);
-    }
-
     /// <summary>
     /// Switches the CurrentWeapon for the player.
     /// </summary>
-    public void SwitchWeapon(WeaponSO newWeapon)
+    public void SwitchWeapon(AttackController controller, WeaponSO newWeapon)
     {
-        playerController.CurrentWeapon = newWeapon;
-        playerController.weaponAnimator.SetFloat("s", newWeapon.AnimationSpeed);
-        playerController.weaponAnimator.runtimeAnimatorController = newWeapon.AnimatorOverride;
+        SpriteRenderer weaponSprite = controller.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
+        Transform swingAnchor = controller.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0);
+        GameObject oldParticleSystem;
 
-        _weaponSprite.sprite = newWeapon.WeaponSprite;
+        try
+        {
+            oldParticleSystem = controller.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).gameObject;
+        }
+        catch
+        {
+            oldParticleSystem = null;
+        }
 
-        Instantiate(playerController.CurrentWeapon.ParticleSystem, _swingAnchor);
+        controller.CurrentWeapon = newWeapon;
+        controller.weaponAnimator.SetFloat("s", newWeapon.AnimationSpeed);
+        controller.weaponAnimator.runtimeAnimatorController = newWeapon.AnimatorOverride;
+
+        weaponSprite.sprite = newWeapon.WeaponSprite;
+
+        if (oldParticleSystem != null)
+        {
+            Destroy(oldParticleSystem);
+        }
+
+        Instantiate(controller.CurrentWeapon.ParticleSystem, swingAnchor);
     }
 }

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - InteractableUI
   - UIPrefab
+  - Enemy
   layers:
   - Default
   - TransparentFX

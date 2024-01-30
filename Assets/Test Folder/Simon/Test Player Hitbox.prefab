@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7348263442630229771}
   - component: {fileID: -2066877407776561136}
   m_Layer: 0
-  m_Name: Test Hitbox
+  m_Name: Test Player Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 613504538970073463, guid: a1b9ce913da21e34ebc5b0ba81d97dc4, type: 3}
-        m_TargetAssemblyTypeName: PlayerControllerAttackTest, Assembly-CSharp
+        m_TargetAssemblyTypeName: AttackController, Assembly-CSharp
         m_MethodName: Attack
         m_Mode: 0
         m_Arguments:

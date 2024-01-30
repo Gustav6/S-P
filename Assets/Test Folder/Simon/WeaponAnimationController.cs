@@ -6,9 +6,9 @@ using UnityEngine.Events;
 public class WeaponAnimationController : MonoBehaviour
 {
     [SerializeField] private UnityEvent animationComplete;
-    [SerializeField] private GameObject player;
+    [SerializeField] private GameObject thisGameObject;
 
-    private PlayerControllerAttackTest _playerController;
+    private AttackController _attackController;
 
     private CapsuleCollider2D _hitbox;
 
@@ -17,13 +17,13 @@ public class WeaponAnimationController : MonoBehaviour
 
     private void Awake()
     {
-        _playerController = player.GetComponent<PlayerControllerAttackTest>();
+        _attackController = thisGameObject.GetComponent<AttackController>();
     }
 
     public void SpawnHitbox()
     {
         // Makes sure a hitbox doesn't spawn if a weapon is playing animation as reset rather than hit animation.
-        if (_playerController.CurrentWeapon.IsWeaponResetable && _isFirstHit)
+        if (_isFirstHit && _attackController.CurrentWeapon.IsWeaponResetable)
         {
             _isFirstHit = false;
             return;
@@ -33,7 +33,7 @@ public class WeaponAnimationController : MonoBehaviour
             _isFirstHit = true;
         }
 
-        _hitbox = Instantiate(_playerController.CurrentWeapon.Hitbox, player.transform.GetChild(0));
+        _hitbox = Instantiate(_attackController.CurrentWeapon.Hitbox, thisGameObject.transform.GetChild(0));
     }
 
     public void DespawnHitbox()

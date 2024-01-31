@@ -66,11 +66,11 @@ public class ButtenPressedState : ButtonBaseState
 
             if (button.methods.PrefabMoveTransition)
             {
-                button.methods.MovePrefabToDestination();
+                button.methods.MovePrefabToDestination(button.methods.InstantiatePrefab, 1);
             }
             else if (button.methods.PrefabScaleTransition)
             {
-                button.methods.ShrinkTransition();
+                button.methods.ShrinkTransition(button.methods.InstantiatePrefab, 1);
             }
         }
 
@@ -79,7 +79,8 @@ public class ButtenPressedState : ButtonBaseState
             UIManager.EnableTransitioning();
 
             @delegate += button.methods.SwitchScene;
-            TransitionSystem.AddColorTransition(new ColorTransition(PanelManager.PanelImage, fadeOutColor, 0.5f, TransitionType.SmoothStop2, @delegate));
+            button.methods.ShrinkTransition(null, 1);
+            PanelManager.FadeOut(0.8f, new Color(0, 0, 0, 1), @delegate);
         }
     }
 }

@@ -98,6 +98,16 @@ public static class TransitionSystem
         float t3 = t2 * t;
         return (3 * b * s2 * t) + (3 * c * s * t2) + (t3);
     }
+    public static float NormalizedBezier4(float b, float c, float d, float t)
+    {
+        float s = 1 - t;
+        float t2 = t * t;
+        float s2 = s * s;
+        float t3 = t2 * t;
+        float s3 = s2 * s;
+        float t4 = t3 * t;
+        return (4 * b * s3 * t) + (8 * c * s2 * t2) + (4 * d * s * t3) + (t4);
+    }
 
     public static float Crossfade(float a, float b, float t)
     {
@@ -114,8 +124,13 @@ public enum TransitionType
     SmoothStop2,
     SmoothStop3,
     SmoothStop4,
+}
+
+public enum TransitionBezier
+{
 
     NormalizedBezier3,
+    NormalizedBezier4,
 }
 
 public enum TransitionStart

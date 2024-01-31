@@ -422,7 +422,7 @@ MonoBehaviour:
   scene: 0
   transitionToPrefab: 1
   prefabScaleTransition: 0
-  prefabMoveTransition: 0
+  prefabMoveTransition: 1
   prefab: {fileID: 9189982670187135639, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
   unPause: 0
   exit: 0

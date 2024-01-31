@@ -8,12 +8,14 @@ public class MoveTransition : Transition
     public Vector3 target;
     public float pointA;
     public float pointB;
+    public float pointC;
     private readonly TransitionType? transitionType;
-    private readonly TransitionStart transitionStart;
-    private readonly TransitionEnd transitionEnding;
+    private readonly TransitionStart? transitionStart;
+    private readonly TransitionEnd? transitionEnding;
+    private readonly TransitionBezier? transitionBezier;
     private readonly bool baseTargetFromObject;
 
-    public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionType type, bool fromObject = false, ExecuteOnCompletion d = null, float _pointA = 0, float _pointB = 0)
+    public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionType type, bool fromObject = false, ExecuteOnCompletion d = null)
     {
         transform = t;
         start = t.position;
@@ -22,8 +24,6 @@ public class MoveTransition : Transition
         transitionType = type;
         baseTargetFromObject = fromObject;
         executeOnCompletion += d;
-        pointA = _pointA;
-        pointB = _pointB;
     }
 
     public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionStart tStart, TransitionEnd tEnding, bool fromObject = false, ExecuteOnCompletion d = null)
@@ -36,6 +36,20 @@ public class MoveTransition : Transition
         transitionEnding = tEnding;
         baseTargetFromObject = fromObject;
         executeOnCompletion += d;
+    }
+
+    public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionBezier type, bool fromObject = false, ExecuteOnCompletion d = null, float _pA = 0, float _pB = 0, float _pC = 0)
+    {
+        transform = t;
+        start = t.position;
+        target = _target;
+        timerMax = totalTime;
+        transitionBezier = type;
+        baseTargetFromObject = fromObject;
+        executeOnCompletion += d;
+        pointA = _pA;
+        pointB = _pB;
+        pointC = _pC;
     }
 
     public override void Start()
@@ -69,14 +83,11 @@ public class MoveTransition : Transition
                 case TransitionType.SmoothStop4:
                     t = TransitionSystem.SmoothStop4(timer / timerMax);
                     break;
-                case TransitionType.NormalizedBezier3:
-                    t = TransitionSystem.NormalizedBezier3(pointA, pointB, timer / timerMax);
-                    break;
                 default:
                     break;
             }
         }
-        else
+        else if (transitionStart != null && transitionEnding != null)
         {
             float t2 = 0;
 
@@ -112,8 +123,22 @@ public class MoveTransition : Transition
 
             t = TransitionSystem.Crossfade(t, t2, timer / timerMax);
         }
+        else if (transitionBezier != null)
+        {
+            switch (transitionBezier)
+            {
+                case TransitionBezier.NormalizedBezier3:
+                    t = TransitionSystem.NormalizedBezier3(pointA, pointB, timer / timerMax);
+                    break;
+                case TransitionBezier.NormalizedBezier4:
+                    t = TransitionSystem.NormalizedBezier4(pointA, pointB, pointC, timer / timerMax);
+                    break;
+                default:
+                    break;
+            }
+        }
 
-        if (transitionType != TransitionType.NormalizedBezier3)
+        if (pointA == 0 && pointB == 0 && pointC == 0)
         {
             if (transform != null && !baseTargetFromObject)
             {
@@ -126,7 +151,7 @@ public class MoveTransition : Transition
         }
         else
         {
-            Vector2 temp =  start + target * t;
+            Vector2 temp = start + target * t;
             transform.position = temp;
         }
 

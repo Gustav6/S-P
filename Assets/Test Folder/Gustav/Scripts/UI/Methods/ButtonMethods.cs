@@ -15,10 +15,10 @@ public class ButtonMethods : MonoBehaviour
     [SerializeField] private bool transitionToPrefab;
     public bool TransitionToPrefab { get { return transitionToPrefab; } }
 
-    private bool prefabScaleTransition;
+    [SerializeField] private bool prefabScaleTransition;
     public bool PrefabScaleTransition { get { return prefabScaleTransition; } }
 
-    private bool prefabMoveTransition;
+    [SerializeField] private bool prefabMoveTransition;
     public bool PrefabMoveTransition { get { return prefabMoveTransition; } }
 
     [SerializeField] private GameObject prefab;
@@ -28,24 +28,13 @@ public class ButtonMethods : MonoBehaviour
     [SerializeField] bool unPause;
     [SerializeField] bool exit;
 
-    private readonly float shrinkTime = 1.5f;
-    private readonly float growTime = 1.5f;
-    private readonly float moveToDesDuration = 1.05f;
-    private readonly float moveToStartDuration = 0.8f;
-
     void Start()
     {
         activeMenuManager = GetComponentInParent<ActiveMenuManager>();
 
-        if (activeMenuManager.whereWillPrefabMove == MoveTowards.None)
-        {
-            prefabMoveTransition = false;
-            prefabScaleTransition = true;
-        }
-        else
+        if (!prefabMoveTransition && !prefabScaleTransition)
         {
             prefabMoveTransition = true;
-            prefabScaleTransition = false;
         }
     }
 
@@ -63,17 +52,17 @@ public class ButtonMethods : MonoBehaviour
             Vector3 spawnLocation = GiveDestination() * -1;
 
             UIManager.InstantiateNewUIPrefab(prefab, transform.parent.parent, Vector3.one, spawnLocation);
-            MovePrefabToStart();
+            MovePrefabToStart(UIManager.DisableTransitioning, 1);
         }
         else if (prefabScaleTransition)
         {
             UIManager.InstantiateNewUIPrefab(prefab, transform.parent.parent, new Vector3(0.0001f, 0.0001f, 1), Vector3.zero);
-            GrowTransition();
+            GrowTransition(UIManager.DisableTransitioning, 1);
         }
     }
 
     #region Move Transition
-    public void MovePrefabToStart()
+    public void MovePrefabToStart(Transition.ExecuteOnCompletion actions, float time)
     {
         for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
         {
@@ -81,14 +70,11 @@ public class ButtonMethods : MonoBehaviour
 
             Vector3 destination = GiveDestination();
 
-            Transition.ExecuteOnCompletion actions = null;
-            actions += UIManager.DisableTransitioning;
-
-            MoveGameObjects(temp, destination, moveToStartDuration, i, actions);
+            MoveGameObjects(temp, destination, time, i, actions, 0.85f, 1.2f);
         }
     }
 
-    public void MovePrefabToDestination()
+    public void MovePrefabToDestination(Transition.ExecuteOnCompletion actions, float time)
     {
         for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
         {
@@ -96,26 +82,23 @@ public class ButtonMethods : MonoBehaviour
 
             Vector3 destination = GiveDestination();
 
-            Transition.ExecuteOnCompletion actions = null;
-            actions += InstantiatePrefab;
-
-            MoveGameObjects(temp, destination, moveToDesDuration, i, actions);
+            MoveGameObjects(temp, destination, time, i, actions, -0.35f, 0);
         }
     }
 
-    public void MoveGameObjects(GameObject g, Vector3 destination, float time, float i, Transition.ExecuteOnCompletion executeOnCompletion = null)
+    public void MoveGameObjects(GameObject g, Vector3 destination, float time, float i, Transition.ExecuteOnCompletion executeOnCompletion = null, float underShoot = 0, float overShoot = 0)
     {
         if (i == 0)
         {
-            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionStart.SmoothStart2, TransitionEnd.SmoothStop2, true, executeOnCompletion));
+            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionBezier.NormalizedBezier3, true, executeOnCompletion, underShoot, overShoot));
         }
         else
         {
-            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionStart.SmoothStart2, TransitionEnd.SmoothStop2, true));
+            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionBezier.NormalizedBezier3, true, null, underShoot, overShoot));
         }
     }
 
-    public Vector3 GiveDestination()
+    private Vector3 GiveDestination()
     {
         if (activeMenuManager.whereWillPrefabMove == MoveTowards.Left)
         {
@@ -131,33 +114,25 @@ public class ButtonMethods : MonoBehaviour
     #endregion
 
     #region Scale Transition
-    public void ShrinkTransition()
+    public void ShrinkTransition(Transition.ExecuteOnCompletion actions, float time)
     {
         for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
         {
             GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
-
-            Transition.ExecuteOnCompletion actions = null;
-            actions += InstantiatePrefab;
-
-            ScaleGameObjects(temp, Vector3.zero, shrinkTime, i, actions);
+            ScaleGameObjects(temp, Vector3.zero, time, i, actions);
         }
     }
 
-    public void GrowTransition()
+    public void GrowTransition(Transition.ExecuteOnCompletion actions, float time)
     {
         for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
         {
             GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
-
-            Transition.ExecuteOnCompletion actions = null;
-            actions += UIManager.DisableTransitioning;
-
-            ScaleGameObjects(temp, Vector3.one, growTime, i, actions);
+            ScaleGameObjects(temp, Vector3.one, time, i, actions);
         }
     }
 
-    public void ScaleGameObjects(GameObject g, Vector3 newScale, float time, float i, Transition.ExecuteOnCompletion executeOnCompletion = null)
+    private void ScaleGameObjects(GameObject g, Vector3 newScale, float time, float i, Transition.ExecuteOnCompletion executeOnCompletion = null)
     {
         if (i == 0)
         {

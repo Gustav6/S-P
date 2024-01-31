@@ -6,6 +6,14 @@ public class TestCurve : MonoBehaviour
 {
     void Start()
     {
-        TransitionSystem.AddScaleTransition(new ScaleTransition(transform, new Vector3(2, 2, 1), 1, TransitionType.NormalizedBezier3, null, 0, 1));
+
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyUp(KeyCode.Return))
+        {
+            TransitionSystem.AddMoveTransition(new MoveTransition(transform, new Vector3(2, 2, 0), 1, TransitionBezier.NormalizedBezier3, false, null, -2, 2));
+        }
     }
 }

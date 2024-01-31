@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,19 +9,19 @@ public class PanelManager : MonoBehaviour
     private static Image panelImage;
     public static Image PanelImage { get { return panelImage; } }
 
-    private Color fadeInColor = new(0, 0, 0, 0);
-    private float fadeInTime = 1;
-
     void Start()
     {
         panelImage = GetComponent<Image>();
-        FadeIn();
+        FadeIn(1, new Color(0, 0, 0, 0), UIManager.DisableTransitioning);
     }
 
-    public void FadeIn()
+    public static void FadeIn(float time, Color color, Transition.ExecuteOnCompletion @delegate)
     {
-        Transition.ExecuteOnCompletion @delegate = null;
-        @delegate += UIManager.DisableTransitioning;
-        TransitionSystem.AddColorTransition(new ColorTransition(PanelImage, fadeInColor, fadeInTime, TransitionType.SmoothStart2, @delegate));
+        TransitionSystem.AddColorTransition(new ColorTransition(PanelImage, color, time, TransitionType.SmoothStart2, @delegate));
+    }
+
+    public static void FadeOut(float time, Color color, Transition.ExecuteOnCompletion @delegate)
+    {
+        TransitionSystem.AddColorTransition(new ColorTransition(PanelImage, color, time, TransitionType.SmoothStop2, @delegate));
     }
 }

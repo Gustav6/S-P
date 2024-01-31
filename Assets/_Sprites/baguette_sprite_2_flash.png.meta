@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      baguette_sprite_2_flash_0: -7978083749908223333
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

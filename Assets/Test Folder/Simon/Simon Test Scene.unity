@@ -5229,7 +5229,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1552747140306470863, guid: a1b9ce913da21e34ebc5b0ba81d97dc4, type: 3}
       propertyPath: m_Name
-      value: Player Attack Test
+      value: Attacking Entity
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

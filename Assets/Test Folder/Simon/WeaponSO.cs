@@ -8,6 +8,9 @@ public class WeaponSO : ScriptableObject
     [SerializeField] private AnimatorOverrideController weaponAnimationToUse;
 
     [SerializeField] private float damage, knockbackMultiplier;
+    // Used to determine how much force is added to the entity on attack and for how long it will last.
+    // Set either of these variables to 0 to disable the weapon force on hit;
+    [SerializeField] private float weaponImpulseMultiplier, weaponImpulseTime;
 
     [SerializeField] private CapsuleCollider2D hitbox;
 
@@ -23,6 +26,8 @@ public class WeaponSO : ScriptableObject
     public AnimatorOverrideController AnimatorOverride { get => weaponAnimationToUse; }
     public float Damage { get => damage; }
     public float KnockBackMultiplier { get => knockbackMultiplier; }
+    public float ImpulseMultiplier { get => weaponImpulseMultiplier; }
+    public float ImpulseEffectTime { get => weaponImpulseTime; }
     public CapsuleCollider2D Hitbox { get => hitbox; }
     public Sprite WeaponSprite { get => weaponSprite; }
     public Sprite WeaponFlashSprite { get => weaponFlashSprite; }

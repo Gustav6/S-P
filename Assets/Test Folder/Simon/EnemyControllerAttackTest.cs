@@ -21,6 +21,6 @@ public class EnemyControllerAttackTest : MonoBehaviour, IDamageable
     private void Update()
     {
         if (Input.GetKey(KeyCode.P) && !_enemyAttackController.IsAnimationPlaying)
-            _enemyAttackController.PlayHitAnimation();
+            _enemyAttackController.PlayHitAnimation(Vector2.one.normalized);
     }
 }

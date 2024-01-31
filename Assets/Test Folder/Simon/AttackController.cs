@@ -11,7 +11,10 @@ public class AttackController : MonoBehaviour
 
     private SpriteRenderer _flashSpriteRenderer;
     private Color flashOpaque = new Color(1, 1, 1, 0.6f), flashTransparent = new Color(1, 1, 1, 0);
-    
+
+    private Rigidbody2D _rb;
+
+    private Coroutine _attackForceCoroutine;
 
     private bool _animationReadyToReset;
     public bool IsAnimationPlaying { get; private set; }
@@ -20,6 +23,7 @@ public class AttackController : MonoBehaviour
     {
         weaponAnimator = GetComponentInChildren<Animator>();
         _flashSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[1]; // Index 0: Weapon sprite, 1: Flash sprite, 2: Player sprite.
+        _rb = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
@@ -27,7 +31,11 @@ public class AttackController : MonoBehaviour
         WeaponManager.Instance.SwitchWeapon(this, CurrentWeapon);
     }
 
-    internal void PlayHitAnimation()
+    /// <summary>
+    /// Plays the attack animation, which will then begin calling the attack logic.
+    /// </summary>
+    /// <param name="attackForceDirection">The direction the entity should get a force added towards when attacking</param>
+    internal void PlayHitAnimation(Vector2 attackForceDirection)
     {
         // TODO: Play SFX.
 
@@ -35,6 +43,17 @@ public class AttackController : MonoBehaviour
 
         weaponAnimator.SetTrigger("PlayHit");
         weaponAnimator.SetFloat("s", CurrentWeapon.AnimationSpeed);
+
+        float impulseMultiplier = CurrentWeapon.ImpulseMultiplier;
+        float impulseTime = CurrentWeapon.ImpulseEffectTime;
+
+        if (impulseMultiplier == 0 || impulseTime == 0)
+            return;
+
+        if (_attackForceCoroutine != null)
+            StopCoroutine(_attackForceCoroutine);
+
+        _attackForceCoroutine = StartCoroutine(AttackLogic.AddAttackBoost(_rb, attackForceDirection, impulseMultiplier, impulseTime));
     }
 
     /// <summary>

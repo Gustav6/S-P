@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7348263442630229771}
   - component: {fileID: -2066877407776561136}
   m_Layer: 0
-  m_Name: Test Enemy Hitbox
+  m_Name: Test Weapon Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -113,7 +113,7 @@ MonoBehaviour:
   hitEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1495467272537946978, guid: 585cae06a1faf544785178b4fb2d7010, type: 3}
+      - m_Target: {fileID: 6513452007123114228, guid: a1b9ce913da21e34ebc5b0ba81d97dc4, type: 3}
         m_TargetAssemblyTypeName: AttackLogic, Assembly-CSharp
         m_MethodName: Attack
         m_Mode: 0

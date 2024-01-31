@@ -25,7 +25,12 @@ public class PlayerControllerAttackTest : MonoBehaviour, IDamageable
     private void Update()
     {
         if (Input.GetKey(KeyCode.Space) && !_attackController.IsAnimationPlaying)
-            _attackController.PlayHitAnimation();
+        {
+            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 targetDirection = (mousePosition - (Vector2)transform.position).normalized;
+
+            _attackController.PlayHitAnimation(targetDirection);
+        }
 
         TurnToMouse();
     }
@@ -35,10 +40,9 @@ public class PlayerControllerAttackTest : MonoBehaviour, IDamageable
     /// </summary>
     private void TurnToMouse()
     {
-        Vector3 mousePosition = Input.mousePosition;
-        Vector3 targetPosition = Camera.main.ScreenToWorldPoint(mousePosition);
+        Vector2 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        Vector3 direction = targetPosition - _weaponRotationPoint.position;
+        Vector2 direction = targetPosition - (Vector2)_weaponRotationPoint.position;
         float angle = Mathf.Atan2(direction.x, direction.y) * -Mathf.Rad2Deg;
         _weaponRotationPoint.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }

@@ -34,6 +34,16 @@ public class AttackLogic : MonoBehaviour
         animationComplete?.Invoke();
     }
 
+    public static IEnumerator AddAttackBoost(Rigidbody2D rb, Vector2 targetDirection, float forceAmount, float forceActiveTime)
+    {
+        rb.AddForce(targetDirection * forceAmount, ForceMode2D.Impulse);
+
+        yield return new WaitForSeconds(forceActiveTime);
+
+        rb.velocity = Vector2.zero;
+        //rb.angularVelocity = 0;
+    }
+
     // Referenced in Unity Event.
     public void Attack(IDamageable damageable, AttackController attackController)
     {

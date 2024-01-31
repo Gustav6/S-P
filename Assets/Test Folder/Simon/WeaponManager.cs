@@ -26,7 +26,10 @@ public class WeaponManager : MonoBehaviour
     /// </summary>
     public void SwitchWeapon(AttackController controller, WeaponSO newWeapon)
     {
-        SpriteRenderer weaponSprite = controller.transform.GetChild(0).GetComponentInChildren<SpriteRenderer>();
+        // Index 0: Weapon sprite, 1: Flash sprite, 2: Player sprite.
+        SpriteRenderer weaponSpriteRenderer = controller.GetComponentsInChildren<SpriteRenderer>()[0];
+        SpriteRenderer flashSpriteRenderer = controller.GetComponentsInChildren<SpriteRenderer>()[1];
+
         // Do not worry about it.
         Transform swingAnchor = controller.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0);
         GameObject oldParticleSystem;
@@ -45,7 +48,8 @@ public class WeaponManager : MonoBehaviour
         controller.weaponAnimator.SetFloat("s", newWeapon.AnimationSpeed);
         controller.weaponAnimator.runtimeAnimatorController = newWeapon.AnimatorOverride;
 
-        weaponSprite.sprite = newWeapon.WeaponSprite;
+        weaponSpriteRenderer.sprite = newWeapon.WeaponSprite;
+        flashSpriteRenderer.sprite = newWeapon.WeaponFlashSprite;
 
         if (oldParticleSystem != null)
             Destroy(oldParticleSystem);

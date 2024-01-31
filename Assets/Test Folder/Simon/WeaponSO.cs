@@ -11,13 +11,13 @@ public class WeaponSO : ScriptableObject
 
     [SerializeField] private CapsuleCollider2D hitbox;
 
-    [SerializeField] private Sprite weaponSprite;
+    // weaponFlashSprite: Leave null if you do not want weapon to flash after an attack animation.
+    [SerializeField] private Sprite weaponSprite, weaponFlashSprite;
     [SerializeField] private GameObject particleSystem;
+
     [SerializeField] private float animationSpeedMultiplier;
-    // Will the animation play reset animation after initial weapon swing.
-    [SerializeField] private bool isWeaponAnimationResetable;
-    // Only used if above bool is true.
-    [SerializeField] private float resetMultiplier;
+    [SerializeField] private bool isWeaponAnimationResetable; // Will the animation play reset animation after initial weapon swing.
+    [SerializeField] private float resetMultiplier; // Only used if above bool is true.
 
     #region Properties
     public AnimatorOverrideController AnimatorOverride { get => weaponAnimationToUse; }
@@ -25,6 +25,7 @@ public class WeaponSO : ScriptableObject
     public float KnockBackMultiplier { get => knockbackMultiplier; }
     public CapsuleCollider2D Hitbox { get => hitbox; }
     public Sprite WeaponSprite { get => weaponSprite; }
+    public Sprite WeaponFlashSprite { get => weaponFlashSprite; }
     public GameObject ParticleSystem { get => particleSystem; }
     public float AnimationSpeed { get => animationSpeedMultiplier; }
     public bool IsWeaponResetable { get => isWeaponAnimationResetable; }

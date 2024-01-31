@@ -27,18 +27,21 @@ public class AttackLogic : MonoBehaviour
             Destroy(_hitbox.gameObject);
     }
 
-    // TODO: Add methods for sound effects and visual effects like camera shake for events.
-
     public void AnimationFinished()
     {
+        // TODO: Play SFX to show player can swing weapon again.
+
         animationComplete?.Invoke();
     }
 
     // Referenced in Unity Event.
-    public void Attack(IDamageable damageable)
+    public void Attack(IDamageable damageable, AttackController attackController)
     {
-        // IF I USE THE VARIABLE HERE IT BECOMES NULL FOR A FRAME OR SOMETHING.
-        damageable.TakeDamage(GetComponent<AttackController>().CurrentWeapon.Damage);
-        damageable.TakeKnockback(GetComponent<AttackController>().CurrentWeapon.KnockBackMultiplier);
+        // If any cached variables are used within this method they will turn null, but remain the same value outside of method.
+        // They will also not be null in the inspector. This did not happen before and just randomly began happening.
+
+        // TODO: Play SFX in take damage method.
+        damageable.TakeDamage(attackController.CurrentWeapon.Damage);
+        damageable.TakeKnockback(attackController.CurrentWeapon.KnockBackMultiplier);
     }
 }

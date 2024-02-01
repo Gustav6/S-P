@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour, IDamageable
 {
-    [SerializeField] float _movementSpeed = 3;
+	[SerializeField] float _movementSpeed = 3;
 	[SerializeField] float _diStrength = 0.25f; // DI stands for direction input, used to reduce or enhance knockback when counteracting it with movement input.
+
+	[SerializeField] float _turnTime;
+	[SerializeField] Transform _spriteTransform;
 
 	Rigidbody2D _rb;
 
@@ -13,25 +16,53 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 	bool _isGrounded = true;
 	bool _movementLocked = false;
 
-    public float KnockbackPercent { get; set; }
+	float previousXInput;
 
-    private void Awake()
+	public float KnockbackPercent { get; set; }
+
+	private void Awake()
 	{
 		_rb = GetComponent<Rigidbody2D>();
 	}
 
 	private void Update()
 	{
+		if (Input.GetKeyDown(KeyCode.Space))
+			TakeKnockback(Vector2.zero, 5, 0.25f);
+
 		if (Input.GetKeyDown(KeyCode.E))
 			ScreenShake.instance.Shake(0.5f, 0.25f, Vector2.zero);
 
 		if (_movementLocked)
 			return;
 
-		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+		if (input.x != previousXInput && input.x != 0)
+		{
+			StartCoroutine(TurnAround(input.x));
+		}
 
 		if (_isGrounded)
-			_rb.velocity = input * _movementSpeed;
+			_rb.velocity = input.normalized * _movementSpeed;
+
+		previousXInput = input.x;
+	}
+
+	IEnumerator TurnAround(float direction)
+	{
+		Debug.Log("Turning around");
+
+		float time = 0;
+
+		while (time <= _turnTime)
+		{
+			_spriteTransform.localScale = new Vector2(Mathf.Lerp(-direction, direction, time / _turnTime), 1);
+			time += Time.deltaTime;
+			yield return null;
+		}
+
+		_spriteTransform.localScale = new Vector2(direction, 1);
 	}
 
 	/// <summary>
@@ -66,7 +97,8 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 	}
 
 	public void ToggleMovementLock()
-    {
+	{
 		_movementLocked = !_movementLocked;
-    }
+	}
 }
+

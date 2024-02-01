@@ -5,6 +5,7 @@ using UnityEngine;
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] EnemyPreset[] _enemyAssortment;
+    [SerializeField] List<Transform> _spawnPoints;
 
     int _enemiesRemaining;
 
@@ -12,6 +13,8 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] int _rewardIncrement = 2; 
     [SerializeField] int _stageMorphIncrement = 5;
+
+    [SerializeField] AnimationCurve _horizontalCurve, _verticalCurve;
 
     private void Start()
     {
@@ -32,8 +35,29 @@ public class WaveManager : MonoBehaviour
 
         foreach (GameObject g in enemiesToSpawn)
         {
-            Instantiate(g);
+            SpawnEnemy(Instantiate(g).transform);
         }
+    }
+
+    void SpawnEnemy(Transform enemy)
+    {
+        Transform randomSpawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
+        StartCoroutine(DispenseEnemy(enemy.transform, randomSpawnPoint.GetChild(0).position, randomSpawnPoint.GetChild(1).position));
+    }
+
+    // Enemy gets dispensed out of the ocean, onto the island
+    IEnumerator DispenseEnemy(Transform enemyTransform, Vector2 startPos, Vector2 endPos)
+    {
+        float time = 0;
+
+        while (time < 1)
+        {
+            enemyTransform.position = new Vector2(Mathf.Lerp(startPos.x, endPos.x, time), Mathf.Lerp(startPos.y, endPos.y, _verticalCurve.Evaluate(time)));
+            time += Time.deltaTime;
+            yield return null;
+        }
+
+        enemyTransform.position = endPos;
     }
 
     List<GameObject> GetEnemies(int totalBudget, WaveType waveType)

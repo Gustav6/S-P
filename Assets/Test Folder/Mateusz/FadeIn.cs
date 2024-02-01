@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,12 +23,13 @@ public class FadeIn : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-            fadeDuration = 0.7f;
+            fadeDuration = 1.7f;
         }
     }
 
     IEnumerator DoFadeOut(CanvasGroup canvGroup, float start, float end)
     {
+            
         float elapsedTime = 0F;
 
         while (canvGroup.alpha > 0)

@@ -4,17 +4,16 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Weapon
   - InteractableUI
-  - UIPrefab
-  - Enemy
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - 
+  - wall
   - 
   - 
   - 

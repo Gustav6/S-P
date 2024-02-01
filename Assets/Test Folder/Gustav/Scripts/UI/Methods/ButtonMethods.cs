@@ -90,11 +90,11 @@ public class ButtonMethods : MonoBehaviour
     {
         if (i == 0)
         {
-            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionType.SmoothStop2, true, executeOnCompletion));
+            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionType.SmoothStop2, true, windUp, overShoot, executeOnCompletion));
         }
         else
         {
-            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionType.SmoothStop2, true, executeOnCompletion));
+            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionType.SmoothStop2, true, windUp, overShoot));
         }
     }
 

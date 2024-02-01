@@ -42,12 +42,9 @@ public class SliderStateManager : MonoBehaviour
 
     void Update()
     {
-        if (uI != null && uI.UIManagerInstance != null)
+        if (!UIManager.Transitioning)
         {
-            if (!UIManager.Transitioning)
-            {
-                currentState.UpdateState(this);
-            }
+            currentState.UpdateState(this);
         }
     }
 

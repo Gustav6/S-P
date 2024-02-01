@@ -49,7 +49,7 @@ public class UIManager : MonoBehaviour
             #endregion
 
             #region Find next ui element
-            if (FindUIElement(value) != null)
+            if (CheckForInteractableUI(value) != null)
             {
                 currentUISelected = value;
             }
@@ -66,7 +66,7 @@ public class UIManager : MonoBehaviour
 
                     for (int i = 0; i < ListOfUIObjects.Count; i++)
                     {
-                        if (FindUIElement(new Vector2(temp, value.y)))
+                        if (CheckForInteractableUI(new Vector2(temp, value.y)))
                         {
                             currentUISelected = new Vector2(temp, value.y);
                         }
@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour
 
                     for (int i = 0; i < ListOfUIObjects.Count; i++)
                     {
-                        if (FindUIElement(new Vector2(value.x, temp)))
+                        if (CheckForInteractableUI(new Vector2(value.x, temp)))
                         {
                             currentUISelected = new Vector2(value.x, temp);
                         }
@@ -153,11 +153,11 @@ public class UIManager : MonoBehaviour
 
         if (KeyOrControlActive)
         {
-            CheckMouseMovement();
+            CheckForMouseMovement();
         }
     }
 
-    public GameObject FindUIElement(Vector2 value)
+    public GameObject CheckForInteractableUI(Vector2 value)
     {
         foreach (GameObject interactableUI in ListOfUIObjects)
         {
@@ -180,15 +180,15 @@ public class UIManager : MonoBehaviour
 
         if (list != null)
         {
-            FindUIElements(list);
+            FindEveryInteractableUI(list);
         }
         else
         {
-            FindUIElements(new List<GameObject>(GameObject.FindGameObjectsWithTag("InteractableUI")));
+            FindEveryInteractableUI(new List<GameObject>(GameObject.FindGameObjectsWithTag("InteractableUI")));
         }
     }
 
-    public void FindUIElements(List<GameObject> list)
+    public void FindEveryInteractableUI(List<GameObject> list)
     {
         // Note that if there is no start position (0, 0) bug starts.
         #region Find objects with script UI and max X & Y value
@@ -243,7 +243,7 @@ public class UIManager : MonoBehaviour
         CurrentUIPrefab.GetComponentInParent<UIManager>().LoadUI(tempList);
     }
 
-    private void CheckMouseMovement()
+    private void CheckForMouseMovement()
     {
         if (ListOfUIObjects.Count > 0)
         {
@@ -256,17 +256,14 @@ public class UIManager : MonoBehaviour
 
     public bool HoveringGameObject(GameObject g)
     {
-        if (ListOfUIObjects.Count > 0)
+        if (ListOfUIObjects.Count > 0 && !Transitioning)
         {
             if (g.GetComponent<Collider2D>().OverlapPoint(MousePosition))
             {
-                if (!Transitioning)
+                if (g.GetComponent<UI>() != null)
                 {
-                    if (g.GetComponent<UI>() != null)
-                    {
-                        currentUISelected = g.GetComponent<UI>().position;
-                        return true;
-                    }
+                    currentUISelected = g.GetComponent<UI>().position;
+                    return true;
                 }
             }
         }

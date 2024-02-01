@@ -13,7 +13,7 @@ public class MoveTransition : Transition
     private readonly TransitionType? transitionEnding;
     private readonly bool baseTargetFromObject;
 
-    public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionType type, bool fromObject = false, ExecuteOnCompletion d = null)
+    public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionType type, bool fromObject = false, float _windUp = 0, float _overShoot = 0, ExecuteOnCompletion d = null)
     {
         transform = t;
         start = t.position;
@@ -22,6 +22,8 @@ public class MoveTransition : Transition
         transitionType = type;
         baseTargetFromObject = fromObject;
         executeOnCompletion += d;
+        windUp = _windUp;
+        overShoot = _overShoot;
     }
 
     public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionType tStart, TransitionType tEnding, bool fromObject = false, ExecuteOnCompletion d = null)
@@ -34,19 +36,6 @@ public class MoveTransition : Transition
         transitionEnding = tEnding;
         baseTargetFromObject = fromObject;
         executeOnCompletion += d;
-    }
-
-    public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionType type, bool fromObject = false, float _windUp = 0, float _overShoot = 0, ExecuteOnCompletion d = null)
-    {
-        transform = t;
-        start = t.position;
-        target = _target;
-        timerMax = totalTime;
-        transitionType = type;
-        baseTargetFromObject = fromObject;
-        executeOnCompletion += d;
-        windUp = _windUp;
-        overShoot = _overShoot;
     }
 
     public override void Start()

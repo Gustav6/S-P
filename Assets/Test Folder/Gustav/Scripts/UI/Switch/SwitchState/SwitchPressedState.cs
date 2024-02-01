@@ -11,7 +11,7 @@ public class SwitchPressedState : SwitchBaseState
     public override void EnterState(SwitchStateManager @switch)
     {
         timer = @switch.transitionTime;
-        @switch.SwitchOnOff(@switch, timer);
+        @switch.TransitionFromOnOff(@switch, timer);
     }
 
     public override void UpdateState(SwitchStateManager @switch)

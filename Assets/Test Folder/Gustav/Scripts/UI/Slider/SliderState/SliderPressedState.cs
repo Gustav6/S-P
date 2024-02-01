@@ -95,6 +95,6 @@ public class SliderPressedState : SliderBaseState
             des.x = (-slider.maxMoveValue * scaling) - slider.sliderPosition.localPosition.x * scaling;
         }
 
-        TransitionSystem.AddMoveTransition(new MoveTransition(slider.sliderPosition.transform, des, timeItTakes, TransitionType.SmoothStop2, true, null));
+        TransitionSystem.AddMoveTransition(new MoveTransition(slider.sliderPosition.transform, des, timeItTakes, TransitionType.SmoothStop2, true));
     }
 }

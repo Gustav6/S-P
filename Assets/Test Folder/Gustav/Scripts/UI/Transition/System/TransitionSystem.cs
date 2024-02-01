@@ -109,6 +109,16 @@ public static class TransitionSystem
         return (4 * b * s3 * t) + (8 * c * s2 * t2) + (4 * d * s * t3) + (t4);
     }
 
+    public static float WindUp(float amount, float t)
+    {
+        return 0;
+    }
+
+    public static float OverShoot(float amount, float t)
+    {
+        return 0;
+    }
+
     public static float Crossfade(float a, float b, float t)
     {
         return (1 - t) * a + t * b;
@@ -121,26 +131,6 @@ public enum TransitionType
     SmoothStart3,
     SmoothStart4,
 
-    SmoothStop2,
-    SmoothStop3,
-    SmoothStop4,
-}
-
-public enum TransitionBezier
-{
-
-    NormalizedBezier3,
-    NormalizedBezier4,
-}
-
-public enum TransitionStart
-{
-    SmoothStart2,
-    SmoothStart3,
-    SmoothStart4,
-}
-public enum TransitionEnd
-{
     SmoothStop2,
     SmoothStop3,
     SmoothStop4,

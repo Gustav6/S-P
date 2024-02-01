@@ -20,7 +20,7 @@ public class SwitchPressedState : SwitchBaseState
         {
             if (@switch.uI.UIManagerInstance.KeyOrControlActive)
             {
-                if (@switch.uI.UIManagerInstance.CurrentUiElement == @switch.gameObject)
+                if (@switch.uI.UIManagerInstance.currentUISelected == @switch.uI.position)
                 {
                     @switch.SwitchState(@switch.selectedState);
                 }

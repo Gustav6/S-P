@@ -17,7 +17,6 @@ public class ButtenSelectedState : ButtonBaseState
 
         if (!UIManager.Transitioning)
         {
-            button.uI.UIManagerInstance.CurrentUiElement = button.gameObject;
             timer = timeItTakes / 2;
             TransitionSystem.AddScaleTransition(new ScaleTransition(button.transform, newScale, timeItTakes, TransitionType.SmoothStart2));
             TransitionSystem.AddColorTransition(new ColorTransition(button.image, newOutlineColor, timeItTakes, TransitionType.SmoothStop2));

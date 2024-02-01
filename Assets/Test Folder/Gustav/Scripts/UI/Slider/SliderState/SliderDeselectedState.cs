@@ -28,7 +28,6 @@ public class SliderDeselectedState : SliderBaseState
         {
             if (slider.uI.UIManagerInstance.CurrentUISelected == slider.uI.position)
             {
-                slider.uI.UIManagerInstance.CurrentUiElement = slider.gameObject;
                 slider.SwitchState(slider.selectedState);
             }
         }

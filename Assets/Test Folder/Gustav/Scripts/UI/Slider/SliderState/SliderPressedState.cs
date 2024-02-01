@@ -14,6 +14,7 @@ public class SliderPressedState : SliderBaseState
     {
         originalColor = slider.sliderImage.color;
         TransitionSystem.AddColorTransition(new ColorTransition(slider.sliderImage, newSlidingPartColor, timeItTakes, TransitionType.SmoothStop2));
+        slider.uI.UIManagerInstance.ChangingSlider = true;
     }
 
     public override void UpdateState(SliderStateManager slider)
@@ -54,6 +55,7 @@ public class SliderPressedState : SliderBaseState
     public override void ExitState(SliderStateManager slider)
     {
         ResetButtonValue(slider);
+        slider.uI.UIManagerInstance.ChangingSlider = false;
     }
 
     public void MoveTowardsMouse(SliderStateManager slider, float mouseX)
@@ -93,6 +95,6 @@ public class SliderPressedState : SliderBaseState
             des.x = (-slider.maxMoveValue * scaling) - slider.sliderPosition.localPosition.x * scaling;
         }
 
-        TransitionSystem.AddMoveTransition(new MoveTransition(slider.sliderPosition.transform, des, timeItTakes, TransitionType.SmoothStop2, true));
+        TransitionSystem.AddMoveTransition(new MoveTransition(slider.sliderPosition.transform, des, timeItTakes, TransitionType.SmoothStop2, true, null));
     }
 }

@@ -36,6 +36,8 @@ public class SwitchStateManager : MonoBehaviour
 
         movingPartOffset = movingPart.localPosition.x;
 
+        //SwitchOnOff(this, 0.1f);
+
         currentState = deselectedState;
 
         currentState.EnterState(this);
@@ -68,7 +70,7 @@ public class SwitchStateManager : MonoBehaviour
             Vector3 destination = new(@switch.movingPartOffset * -1 * UIManager.ResolutionScaling, 0, 0);
             destination += @switch.outLine.position;
             Color newColor = new(0, 0.8f, 0, 1);
-            TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3, false));
+            TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3, false, null));
             TransitionSystem.AddColorTransition(new ColorTransition(@switch.toggleImage, newColor, transitionTime, TransitionType.SmoothStop2));
         }
         else if (!@switch.switchOn)
@@ -76,7 +78,7 @@ public class SwitchStateManager : MonoBehaviour
             Vector3 destination = new(@switch.movingPartOffset * UIManager.ResolutionScaling, 0, 0);
             destination += @switch.outLine.position;
             Color newColor = new(0.8f, 0, 0, 1);
-            TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3, false));
+            TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3, false, null));
             TransitionSystem.AddColorTransition(new ColorTransition(@switch.toggleImage, newColor, transitionTime, TransitionType.SmoothStop2));
         }
 

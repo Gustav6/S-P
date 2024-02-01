@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Weapon
   - InteractableUI
+  - UIPrefab
+  - Enemy
   layers:
   - Default
   - TransparentFX

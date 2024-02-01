@@ -6,13 +6,11 @@ public class MoveTransition : Transition
     public Transform transform;
     public Vector3 start;
     public Vector3 target;
-    public float pointA;
-    public float pointB;
-    public float pointC;
+    public float windUp;
+    public float overShoot;
     private readonly TransitionType? transitionType;
-    private readonly TransitionStart? transitionStart;
-    private readonly TransitionEnd? transitionEnding;
-    private readonly TransitionBezier? transitionBezier;
+    private readonly TransitionType? transitionStart;
+    private readonly TransitionType? transitionEnding;
     private readonly bool baseTargetFromObject;
 
     public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionType type, bool fromObject = false, ExecuteOnCompletion d = null)
@@ -26,7 +24,7 @@ public class MoveTransition : Transition
         executeOnCompletion += d;
     }
 
-    public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionStart tStart, TransitionEnd tEnding, bool fromObject = false, ExecuteOnCompletion d = null)
+    public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionType tStart, TransitionType tEnding, bool fromObject = false, ExecuteOnCompletion d = null)
     {
         transform = t;
         start = t.position;
@@ -38,18 +36,17 @@ public class MoveTransition : Transition
         executeOnCompletion += d;
     }
 
-    public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionBezier type, bool fromObject = false, ExecuteOnCompletion d = null, float _pA = 0, float _pB = 0, float _pC = 0)
+    public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionType type, bool fromObject = false, float _windUp = 0, float _overShoot = 0, ExecuteOnCompletion d = null)
     {
         transform = t;
         start = t.position;
         target = _target;
         timerMax = totalTime;
-        transitionBezier = type;
+        transitionType = type;
         baseTargetFromObject = fromObject;
         executeOnCompletion += d;
-        pointA = _pA;
-        pointB = _pB;
-        pointC = _pC;
+        windUp = _windUp;
+        overShoot = _overShoot;
     }
 
     public override void Start()
@@ -93,13 +90,13 @@ public class MoveTransition : Transition
 
             switch (transitionStart)
             {
-                case TransitionStart.SmoothStart2:
+                case TransitionType.SmoothStart2:
                     t = TransitionSystem.SmoothStop2(timer / timerMax);
                     break;
-                case TransitionStart.SmoothStart3:
+                case TransitionType.SmoothStart3:
                     t = TransitionSystem.SmoothStop3(timer / timerMax);
                     break;
-                case TransitionStart.SmoothStart4:
+                case TransitionType.SmoothStart4:
                     t = TransitionSystem.SmoothStop4(timer / timerMax);
                     break;
                 default:
@@ -108,13 +105,13 @@ public class MoveTransition : Transition
 
             switch (transitionEnding)
             {
-                case TransitionEnd.SmoothStop2:
+                case TransitionType.SmoothStop2:
                     t2 = TransitionSystem.SmoothStop2(timer / timerMax);
                     break;
-                case TransitionEnd.SmoothStop3:
+                case TransitionType.SmoothStop3:
                     t2 = TransitionSystem.SmoothStop3(timer / timerMax);
                     break;
-                case TransitionEnd.SmoothStop4:
+                case TransitionType.SmoothStop4:
                     t2 = TransitionSystem.SmoothStop4(timer / timerMax);
                     break;
                 default:
@@ -123,22 +120,8 @@ public class MoveTransition : Transition
 
             t = TransitionSystem.Crossfade(t, t2, timer / timerMax);
         }
-        else if (transitionBezier != null)
-        {
-            switch (transitionBezier)
-            {
-                case TransitionBezier.NormalizedBezier3:
-                    t = TransitionSystem.NormalizedBezier3(pointA, pointB, timer / timerMax);
-                    break;
-                case TransitionBezier.NormalizedBezier4:
-                    t = TransitionSystem.NormalizedBezier4(pointA, pointB, pointC, timer / timerMax);
-                    break;
-                default:
-                    break;
-            }
-        }
 
-        if (pointA == 0 && pointB == 0 && pointC == 0)
+        if (overShoot == 0 && windUp == 0)
         {
             if (transform != null && !baseTargetFromObject)
             {

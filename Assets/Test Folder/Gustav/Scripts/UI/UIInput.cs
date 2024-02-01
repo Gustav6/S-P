@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,7 +35,7 @@ public class UIInput : MonoBehaviour
             }
             else
             {
-                Destroy(UIManager.CurrentUIGameObject);
+                Destroy(UIManager.CurrentUIPrefab);
                 UIManager.ResetListOfUIObjects();
             }
         }
@@ -46,15 +47,24 @@ public class UIInput : MonoBehaviour
         {
             if (context.performed)
             {
-                if (manager.CurrentUiElement.GetComponent<SliderStateManager>() != null)
+                try
                 {
-                    if (manager.CurrentUiElement.GetComponent<UI>() != null)
+                    GameObject g = manager.FindUIElement(manager.currentUISelected).gameObject;
+
+                    if (g.GetComponent<SliderStateManager>() != null)
                     {
-                        if (manager.CurrentUiElement.GetComponent<UI>().activated)
+                        if (g.GetComponent<UI>() != null)
                         {
-                            return;
+                            if (g.GetComponent<UI>().activated)
+                            {
+                                return;
+                            }
                         }
                     }
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.Log("Navigate problem");
                 }
 
                 if (!manager.KeyOrControlActive)
@@ -96,30 +106,31 @@ public class UIInput : MonoBehaviour
 
     public void ChangeSlider(InputAction.CallbackContext context)
     {
-        if (UIManager.ListOfUIObjects.Count > 0)
+        if (UIManager.ListOfUIObjects.Count > 0 && manager.ChangingSlider)
         {
             if (context.performed)
             {
-                if (manager.CurrentUiElement.GetComponent<SliderStateManager>() != null && manager.CurrentUiElement.GetComponent<UI>() != null)
+                try
                 {
-                    SliderStateManager sliderSM = manager.CurrentUiElement.GetComponent<SliderStateManager>();
-                    UI uI = manager.CurrentUiElement.GetComponent<UI>();
+                    GameObject g = manager.FindUIElement(manager.currentUISelected).gameObject;
+                    SliderStateManager sm = g.GetComponent<SliderStateManager>();
 
-                    if (uI.activated)
+                    if (context.ReadValue<float>() < 0)
                     {
-                        if (context.ReadValue<float>() < 0)
-                        {
-                            sliderSM.moveDirection = -1;
-                        }
-                        else if (context.ReadValue<float>() > 0)
-                        {
-                            sliderSM.moveDirection = 1;
-                        }
-                        else
-                        {
-                            sliderSM.moveDirection = 0;
-                        }
+                        sm.moveDirection = -1;
                     }
+                    else if (context.ReadValue<float>() > 0)
+                    {
+                        sm.moveDirection = 1;
+                    }
+                    else
+                    {
+                        sm.moveDirection = 0;
+                    }
+                }
+                catch (NullReferenceException)
+                {
+                    Debug.Log("Cant change slider");
                 }
             }
         }
@@ -129,32 +140,37 @@ public class UIInput : MonoBehaviour
     {
         if (UIManager.ListOfUIObjects.Count > 0)
         {
-            if (manager.CurrentUiElement.GetComponent<UI>() != null)
+            try
             {
-                UI uI = manager.CurrentUiElement.GetComponent<UI>();
+                GameObject g = manager.FindUIElement(manager.currentUISelected).gameObject;
+                UI uI = g.GetComponent<UI>();
 
                 if (context.performed)
                 {
-                    if (manager.CurrentUiElement.GetComponent<SliderStateManager>() == null)
+                    if (g.GetComponent<SliderStateManager>() == null)
                     {
                         uI.activated = true;
                     }
                     else
                     {
-                        bool temp = manager.CurrentUiElement.GetComponent<UI>().activated;
+                        bool temp = uI.activated;
 
                         temp = !temp;
 
-                        manager.CurrentUiElement.GetComponent<UI>().activated = temp;
+                        uI.activated = temp;
                     }
                 }
                 if (context.canceled)
                 {
-                    if (manager.CurrentUiElement.GetComponent<SliderStateManager>() == null)
+                    if (g.GetComponent<SliderStateManager>() == null)
                     {
                         uI.activated = false;
                     }
                 }
+            }
+            catch (NullReferenceException)
+            {
+                Debug.Log("Cant submit");
             }
         }
     }
@@ -168,21 +184,29 @@ public class UIInput : MonoBehaviour
     {
         if (UIManager.ListOfUIObjects.Count > 0 && !manager.KeyOrControlActive)
         {
-            if (manager.HoveringGameObject(manager.CurrentUiElement))
+            if (context.performed)
             {
-                if (context.performed)
+                try
                 {
-                    if (manager.CurrentUiElement.GetComponent<UI>() != null)
+                    GameObject g = manager.FindUIElement(manager.currentUISelected).gameObject;
+                    UI uI = g.GetComponent<UI>();
+
+                    if (manager.HoveringGameObject(g))
                     {
-                        manager.CurrentUiElement.GetComponent<UI>().activated = true;
+                        if (context.performed)
+                        {
+                            uI.activated = true;
+                        }
+                        else if (context.canceled)
+                        {
+                            uI.activated = false;
+                        }
                     }
                 }
-                else if (context.canceled)
+                catch (NullReferenceException)
                 {
-                    if (manager.CurrentUiElement.GetComponent<UI>() != null)
-                    {
-                        manager.CurrentUiElement.GetComponent<UI>().activated = false;
-                    }
+                    Debug.Log("Cant click");
+                    throw;
                 }
             }
         }

@@ -70,7 +70,7 @@ public class ButtonMethods : MonoBehaviour
 
             Vector3 destination = GiveDestination();
 
-            MoveGameObjects(temp, destination, time, i, actions, 0.85f, 1.2f);
+            MoveGameObjects(temp, destination, time, i, actions);
         }
     }
 
@@ -82,19 +82,19 @@ public class ButtonMethods : MonoBehaviour
 
             Vector3 destination = GiveDestination();
 
-            MoveGameObjects(temp, destination, time, i, actions, -0.35f, 0);
+            MoveGameObjects(temp, destination, time, i, actions);
         }
     }
 
-    public void MoveGameObjects(GameObject g, Vector3 destination, float time, float i, Transition.ExecuteOnCompletion executeOnCompletion = null, float underShoot = 0, float overShoot = 0)
+    public void MoveGameObjects(GameObject g, Vector3 destination, float time, float i, Transition.ExecuteOnCompletion executeOnCompletion = null, float windUp = 0, float overShoot = 0)
     {
         if (i == 0)
         {
-            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionBezier.NormalizedBezier3, true, executeOnCompletion, underShoot, overShoot));
+            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionType.SmoothStop2, true, executeOnCompletion));
         }
         else
         {
-            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionBezier.NormalizedBezier3, true, null, underShoot, overShoot));
+            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionType.SmoothStop2, true, executeOnCompletion));
         }
     }
 

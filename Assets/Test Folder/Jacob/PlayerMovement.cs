@@ -16,7 +16,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 	bool _isGrounded = true;
 	bool _movementLocked = false;
 
-	float previousXInput;
+	float previousNonZeroXInput;
 
 	public float KnockbackPercent { get; set; }
 
@@ -38,15 +38,14 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
 		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-		if (input.x != previousXInput && input.x != 0)
+		if (input.x != previousNonZeroXInput && input.x != 0)
 		{
 			StartCoroutine(TurnAround(input.x));
+			previousNonZeroXInput = input.x;
 		}
 
 		if (_isGrounded)
 			_rb.velocity = input.normalized * _movementSpeed;
-
-		previousXInput = input.x;
 	}
 
 	IEnumerator TurnAround(float direction)
@@ -99,6 +98,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 	public void ToggleMovementLock()
 	{
 		_movementLocked = !_movementLocked;
+		_rb.velocity = Vector2.zero;
 	}
 }
 

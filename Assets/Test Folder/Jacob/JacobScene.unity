@@ -666,6 +666,7 @@ GameObject:
   - component: {fileID: 1017423047}
   - component: {fileID: 1017423046}
   - component: {fileID: 1017423045}
+  - component: {fileID: 1017423050}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -770,6 +771,28 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!95 &1017423050
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017423044}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4efd8b65726752b43a77eb3dd462d5a3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1035417431
 GameObject:
   m_ObjectHideFlags: 0
@@ -894,7 +917,6 @@ GameObject:
   - component: {fileID: 1355633972}
   - component: {fileID: 1355633975}
   - component: {fileID: 1355633974}
-  - component: {fileID: 1355633973}
   m_Layer: 5
   m_Name: Arm
   m_TagString: Untagged
@@ -921,28 +943,6 @@ RectTransform:
   m_AnchoredPosition: {x: 554, y: 408}
   m_SizeDelta: {x: 2010.87, y: 956.51}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!95 &1355633973
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355633971}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4efd8b65726752b43a77eb3dd462d5a3, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1355633974
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1201,65 +1201,18 @@ MonoBehaviour:
     EnemyPrefab: {fileID: 8305121399259637760, guid: dc4396d9fe43dbc47aa5cba9a3927aa0, type: 3}
     Cost: 12
     WaveUnlocked: 0
-  _spawnPoints:
-  - {fileID: 320314749}
-  - {fileID: 1608309568}
+  _spawnPoints: []
   _rewardIncrement: 2
   _stageMorphIncrement: 5
   _horizontalCurve:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 34
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
   _verticalCurve:
     serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 9.723331
-      outSlope: 9.723331
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.042735044
-    - serializedVersion: 3
-      time: 0.5
-      value: 2
-      inSlope: -1.9861674
-      outSlope: -1.9861674
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.1452992
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: -2.1360884
-      outSlope: -2.1360884
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.1424501
-      outWeight: 0
+    m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4

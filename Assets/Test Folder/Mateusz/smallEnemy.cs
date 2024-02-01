@@ -17,4 +17,8 @@ public class smallEnemy : Enemy, IDamageable
 
     }
 
+    public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
+    {
+        throw new System.NotImplementedException();
+    }
 }

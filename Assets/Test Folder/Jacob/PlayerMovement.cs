@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IDamageable
 {
     [SerializeField] float _movementSpeed = 3;
 	[SerializeField] float _diStrength = 0.25f; // DI stands for direction input, used to reduce or enhance knockback when counteracting it with movement input.
@@ -13,16 +13,15 @@ public class PlayerMovement : MonoBehaviour
 	bool _isGrounded = true;
 	bool _movementLocked = false;
 
-	private void Awake()
+    public float KnockbackPercent { get; set; }
+
+    private void Awake()
 	{
 		_rb = GetComponent<Rigidbody2D>();
 	}
 
 	private void Update()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
-			ApplyKnockback(Vector2.zero, 5, 0.25f);
-
 		if (Input.GetKeyDown(KeyCode.E))
 			ScreenShake.instance.Shake(0.5f, 0.25f, Vector2.zero);
 
@@ -39,9 +38,9 @@ public class PlayerMovement : MonoBehaviour
 	/// Applies knockback to player and prevents them from moving for a specified time.
 	/// </summary>
 	/// <param name="sourcePosition">The position of the entity dealing the knockback.</param>
-	/// <param name="strength">Intensity of knockback.</param>
+	/// <param name="knockbackMultiplier">Intensity of knockback.</param>
 	/// <param name="stunDuration">Duration in seconds that movement is prevented after being hit.</param>
-	public void ApplyKnockback(Vector2 sourcePosition, float strength, float stunDuration)
+	public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
 	{
 		if (_isImmune)
 			return;
@@ -51,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
 		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
-		Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized * strength;
+		Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized * knockbackMultiplier;
 
 		Vector2 diVector = input * (knockbackVector.magnitude * _diStrength);
 

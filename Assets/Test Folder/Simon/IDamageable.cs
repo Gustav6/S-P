@@ -11,5 +11,5 @@ public interface IDamageable
         KnockbackPercent += damageAmount;
     }
 
-    public void TakeKnockback(float knockbackMultiplier);
+    public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration);
 }

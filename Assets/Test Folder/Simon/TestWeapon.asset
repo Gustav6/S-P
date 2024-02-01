@@ -15,7 +15,7 @@ MonoBehaviour:
   weaponAnimationToUse: {fileID: 22100000, guid: eafe3064b1423a147b4430175d18f7f0, type: 2}
   damage: 13
   knockbackMultiplier: 1.2
-  weaponImpulseMultiplier: 3
+  weaponImpulseMultiplier: 6
   weaponImpulseTime: 0.3
   hitbox: {fileID: 3999668371216255208, guid: 9fe73e10d19d0194a8b50a11e805d950, type: 3}
   weaponSprite: {fileID: -1692451804227615028, guid: 962da15309302a246817c52372453c02, type: 3}

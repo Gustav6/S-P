@@ -2,10 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerAttackTest : MonoBehaviour, IDamageable
+public class PlayerAttack : MonoBehaviour
 {
-    public float KnockbackPercent { get; set; }
-
     private AttackController _attackController;
 
     // Remove later, maybe.
@@ -15,11 +13,6 @@ public class PlayerControllerAttackTest : MonoBehaviour, IDamageable
     {
         _attackController = GetComponentInChildren<AttackController>();
         _weaponRotationPoint = transform.GetChild(0);
-    }
-
-    public void TakeKnockback(float knockbackMultiplier)
-    {
-        Debug.Log($"Current player percent: {KnockbackPercent}%\nPlayer knockback as: {KnockbackPercent * knockbackMultiplier}");
     }
 
     private void Update()

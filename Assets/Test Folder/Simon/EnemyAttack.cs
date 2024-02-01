@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyControllerAttackTest : MonoBehaviour, IDamageable
+public class EnemyAttack : MonoBehaviour, IDamageable
 {
     public float KnockbackPercent { get; set; }
 
@@ -13,9 +13,10 @@ public class EnemyControllerAttackTest : MonoBehaviour, IDamageable
         _enemyAttackController = GetComponentInChildren<AttackController>();
     }
 
-    public void TakeKnockback(float knockbackMultiplier)
+    public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
     {
-        Debug.Log($"Current enemy percent: {KnockbackPercent}%\nEnemy knockback as: {KnockbackPercent * knockbackMultiplier}");
+        Debug.Log($"Current enemy percent: {KnockbackPercent}% Enemy knockback as: {KnockbackPercent * knockbackMultiplier}\n" +
+                  $"Hit from: {sourcePosition} and stunned for: {stunDuration}");
     }
 
     private void Update()

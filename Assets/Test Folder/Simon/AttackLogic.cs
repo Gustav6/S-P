@@ -36,12 +36,14 @@ public class AttackLogic : MonoBehaviour
 
     public static IEnumerator AddAttackBoost(Rigidbody2D rb, Vector2 targetDirection, float forceAmount, float forceActiveTime)
     {
+        // TODO: If the enemy movement allows for it, add an interface IMoveable that contains the same movement as player along with the TogglrMovementLock.
+        // Then use the method in here before adding force.
+        //rb.GetComponent<PlayerMovement>().ToggleMovementLock();
         rb.AddForce(targetDirection * forceAmount, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(forceActiveTime);
 
         rb.velocity = Vector2.zero;
-        //rb.angularVelocity = 0;
     }
 
     // Referenced in Unity Event.
@@ -52,6 +54,18 @@ public class AttackLogic : MonoBehaviour
 
         // TODO: Play SFX in take damage method.
         damageable.TakeDamage(attackController.CurrentWeapon.Damage);
-        damageable.TakeKnockback(attackController.CurrentWeapon.KnockBackMultiplier);
+        damageable.TakeKnockback(attackController.transform.position, attackController.CurrentWeapon.KnockBackMultiplier, CalculateStunTime(damageable.KnockbackPercent));
+    }
+
+    /// <summary>
+    /// Calculates how long an entity should be stunned for after getting hit.
+    /// </summary>
+    /// <param name="currentKnockbackPercent">The knockback percent of the entity getting hit</param>
+    /// <returns></returns>
+    private float CalculateStunTime(float currentKnockbackPercent)
+    {
+        // TODO: Change later.
+
+        return currentKnockbackPercent / 100;
     }
 }

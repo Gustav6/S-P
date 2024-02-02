@@ -18,7 +18,7 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
-        StartTestWave();
+        Invoke(nameof(StartTestWave), 2);
     }
 
     private void Update()
@@ -42,22 +42,8 @@ public class WaveManager : MonoBehaviour
     void SpawnEnemy(Transform enemy)
     {
         Transform randomSpawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
-        StartCoroutine(DispenseEnemy(enemy.transform, randomSpawnPoint.GetChild(0).position, randomSpawnPoint.GetChild(1).position));
-    }
-
-    // Enemy gets dispensed out of the ocean, onto the island
-    IEnumerator DispenseEnemy(Transform enemyTransform, Vector2 startPos, Vector2 endPos)
-    {
-        float time = 0;
-
-        while (time < 1)
-        {
-            enemyTransform.position = new Vector2(Mathf.Lerp(startPos.x, endPos.x, time), Mathf.Lerp(startPos.y, endPos.y, _verticalCurve.Evaluate(time)));
-            time += Time.deltaTime;
-            yield return null;
-        }
-
-        enemyTransform.position = endPos;
+        
+        // Spawn enemy --> Animate it going from water to island --> Enable enemy AI.
     }
 
     List<GameObject> GetEnemies(int totalBudget, WaveType waveType)
@@ -78,7 +64,7 @@ public class WaveManager : MonoBehaviour
 
                     int randomEnemyCost = _enemyAssortment[randomEnemyID].Cost;
 
-                    if (remainingBudget <= 2)
+                    if (remainingBudget < 2)
                         break;
 
                     finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
@@ -105,7 +91,7 @@ public class WaveManager : MonoBehaviour
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
                             remainingBudget -= randomEnemyCost;
 
-                            if (remainingBudget <= 2)
+                            if (remainingBudget < 2)
                                 break;
                         }
                     }
@@ -143,7 +129,7 @@ public class WaveManager : MonoBehaviour
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
                             remainingBudget -= randomEnemyCost;
 
-                            if (remainingBudget <= 2)
+                            if (remainingBudget < 2)
                                 break;
                         }
                     }
@@ -181,7 +167,7 @@ public class WaveManager : MonoBehaviour
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
                             remainingBudget -= randomEnemyCost;
 
-                            if (remainingBudget <= 2)
+                            if (remainingBudget < 2)
                                 break;
                         }
                     }
@@ -220,7 +206,7 @@ public class WaveManager : MonoBehaviour
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
                             remainingBudget -= randomEnemyCost;
 
-                            if (remainingBudget <= 2)
+                            if (remainingBudget < 2)
                                 break;
                         }
                     }
@@ -268,7 +254,7 @@ public class EnemyPreset
 
     public GameObject EnemyPrefab;
 
-    [Tooltip("How expensive this unit is, the wave system gets a budget and spends it on units.")]
+    [Tooltip("How expensive this unit is, the wave system gets a budget and spends it on units based on their cost.")]
     public int Cost;
 
     [Tooltip("The wave at which this enemy can start spawning")]

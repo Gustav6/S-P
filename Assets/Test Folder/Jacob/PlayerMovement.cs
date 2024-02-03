@@ -11,6 +11,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 	[SerializeField] Transform _spriteTransform;
 
 	Rigidbody2D _rb;
+	Animator _anim;
 
 	bool _isImmune = false;
 	bool _isGrounded = true;
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 	private void Awake()
 	{
 		_rb = GetComponent<Rigidbody2D>();
+		_anim = GetComponent<Animator>();
 	}
 
 	private void Update()
@@ -38,9 +40,11 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
 		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
+		_anim.SetBool("IsMoving", input.magnitude > 0);
+
 		if (input.x != previousNonZeroXInput && input.x != 0)
 		{
-			StartCoroutine(TurnAround(input.x));
+			StartCoroutine(TurnAround(-input.x));
 			previousNonZeroXInput = input.x;
 		}
 

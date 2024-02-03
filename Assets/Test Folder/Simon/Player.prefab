@@ -152,6 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementSpeed: 3
   _diStrength: 0.25
+  _turnTime: 0.2
+  _spriteTransform: {fileID: 1794134669211245479}
 --- !u!114 &6513452007123114228
 MonoBehaviour:
   m_ObjectHideFlags: 0

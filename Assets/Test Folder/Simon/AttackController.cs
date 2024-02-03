@@ -22,7 +22,7 @@ public class AttackController : MonoBehaviour
     private void Awake()
     {
         weaponAnimator = GetComponentInChildren<Animator>();
-        _flashSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[1]; // Index 0: Weapon sprite, 1: Flash sprite, 2: Player sprite.
+        _flashSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[2]; // Index 1: Weapon sprite, 2: Flash sprite.
         _rb = GetComponent<Rigidbody2D>();
     }
 

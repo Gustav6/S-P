@@ -18,7 +18,7 @@ public class AttackLogic : MonoBehaviour
 
     public void SpawnHitbox()
     {
-        _hitbox = Instantiate(_attackController.CurrentWeapon.Hitbox, transform.GetChild(0));
+        _hitbox = Instantiate(_attackController.CurrentWeapon.Hitbox, transform.GetChild(0).GetChild(0));
     }
 
     public void DespawnHitbox()
@@ -36,9 +36,8 @@ public class AttackLogic : MonoBehaviour
 
     public static IEnumerator AddAttackBoost(Rigidbody2D rb, Vector2 targetDirection, float forceAmount, float forceActiveTime)
     {
-        // TODO: If the enemy movement allows for it, add an interface IMoveable that contains the same movement as player along with the TogglrMovementLock.
-        // Then use the method in here before adding force.
-        //rb.GetComponent<PlayerMovement>().ToggleMovementLock();
+        // TODO: Use knockback method.
+
         rb.AddForce(targetDirection * forceAmount, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(forceActiveTime);

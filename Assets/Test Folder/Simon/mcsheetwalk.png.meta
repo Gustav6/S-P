@@ -1,0 +1,435 @@
+fileFormatVersion: 2
+guid: f67e023bdd2b0f340a3976abe314d2e7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7997678529141486072
+    second: mcsheetwalk_0
+  - first:
+      213: -7455626963848170976
+    second: mcsheetwalk_1
+  - first:
+      213: 6695095161480105605
+    second: mcsheetwalk_2
+  - first:
+      213: 6744782372203997253
+    second: mcsheetwalk_3
+  - first:
+      213: -4138673378095289963
+    second: mcsheetwalk_4
+  - first:
+      213: -3313559689619570695
+    second: mcsheetwalk_5
+  - first:
+      213: 7648425315546806034
+    second: mcsheetwalk_6
+  - first:
+      213: 6566043660631597403
+    second: mcsheetwalk_7
+  - first:
+      213: 5028416987224595848
+    second: mcsheetwalk_8
+  - first:
+      213: -1290228442815863858
+    second: mcsheetwalk_9
+  - first:
+      213: -1243956967925509936
+    second: mcsheetwalk_10
+  - first:
+      213: 363146186601620396
+    second: mcsheetwalk_11
+  - first:
+      213: -6144743923706107885
+    second: mcsheetwalk_12
+  - first:
+      213: -2188944138260670047
+    second: mcsheetwalk_13
+  - first:
+      213: 1005056069157804980
+    second: mcsheetwalk_14
+  - first:
+      213: 2258475306076614776
+    second: mcsheetwalk_15
+  - first:
+      213: -7039367235103210027
+    second: mcsheetwalk_16
+  - first:
+      213: 4188926246761149267
+    second: mcsheetwalk_17
+  - first:
+      213: 2877210909973147563
+    second: mcsheetwalk_18
+  - first:
+      213: -588147941913617809
+    second: mcsheetwalk_19
+  - first:
+      213: -3326123890477611500
+    second: mcsheetwalk_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mcsheetwalk_0
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 935
+        width: 71
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 80ec0c250c9820190800000000000000
+      internalID: -7997678529141486072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mcsheetwalk_1
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 939
+        width: 53
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 022710a27ca488890800000000000000
+      internalID: -7455626963848170976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mcsheetwalk_2
+      rect:
+        serializedVersion: 2
+        x: 277
+        y: 935
+        width: 43
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58e4575c391c9ec50800000000000000
+      internalID: 6695095161480105605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mcsheetwalk_3
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 939
+        width: 56
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 548298605d74a9d50800000000000000
+      internalID: 6744782372203997253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mcsheetwalk_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 546
+        width: 209
+        height: 273
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fffb2ea40fd302d0800000000000000
+      internalID: -3313559689619570695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mcsheetwalk_7
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 638
+        width: 184
+        height: 184
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b51e6a3cbe54f1b50800000000000000
+      internalID: 6566043660631597403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mcsheetwalk_10
+      rect:
+        serializedVersion: 2
+        x: 524
+        y: 499
+        width: 32
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d09dea7ab39cbee0800000000000000
+      internalID: -1243956967925509936
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mcsheetwalk_13
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 494
+        width: 98
+        height: 88
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a99ccd57ee4f91e0800000000000000
+      internalID: -2188944138260670047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mcsheetwalk_14
+      rect:
+        serializedVersion: 2
+        x: 858
+        y: 479
+        width: 45
+        height: 87
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bb508d7b2da2fd00800000000000000
+      internalID: 1005056069157804980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mcsheetwalk_20
+      rect:
+        serializedVersion: 2
+        x: 676
+        y: 394
+        width: 46
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4164425b1fb37d1d0800000000000000
+      internalID: -3326123890477611500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 9855cd304968c4848b3c38410a80007c
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      mcsheetwalk_0: -7997678529141486072
+      mcsheetwalk_1: -7455626963848170976
+      mcsheetwalk_10: -1243956967925509936
+      mcsheetwalk_11: 363146186601620396
+      mcsheetwalk_12: -6144743923706107885
+      mcsheetwalk_13: -2188944138260670047
+      mcsheetwalk_14: 1005056069157804980
+      mcsheetwalk_15: 2258475306076614776
+      mcsheetwalk_16: -7039367235103210027
+      mcsheetwalk_17: 4188926246761149267
+      mcsheetwalk_18: 2877210909973147563
+      mcsheetwalk_19: -588147941913617809
+      mcsheetwalk_2: 6695095161480105605
+      mcsheetwalk_20: -3326123890477611500
+      mcsheetwalk_21: -821629329
+      mcsheetwalk_3: 6744782372203997253
+      mcsheetwalk_4: -4138673378095289963
+      mcsheetwalk_5: -3313559689619570695
+      mcsheetwalk_6: 7648425315546806034
+      mcsheetwalk_7: 6566043660631597403
+      mcsheetwalk_8: 5028416987224595848
+      mcsheetwalk_9: -1290228442815863858
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -6,7 +6,6 @@ public class FPSCounter : MonoBehaviour
 {
     private float _deltaTime, _fps;
     private bool _shouldCountFPS;
-
     
     private void Start()
     {
@@ -19,11 +18,12 @@ public class FPSCounter : MonoBehaviour
     /// Unity VSync seems to have some issues.
     /// </summary>
     // refreshRate is obsolete, but it is useful in this case.
-    [System.Obsolete]
     public void ToggleVSync()
     {
         if (Application.targetFrameRate == -1)
+#pragma warning disable CS0618
             Application.targetFrameRate = Screen.currentResolution.refreshRate;
+#pragma warning restore CS0618
         else
         {
             Application.targetFrameRate = -1;
@@ -40,7 +40,7 @@ public class FPSCounter : MonoBehaviour
 
     public void ToggleFPSCounter()
     {
-        _shouldCountFPS = true;
+        _shouldCountFPS = !_shouldCountFPS;
     }
 
     private void Update()

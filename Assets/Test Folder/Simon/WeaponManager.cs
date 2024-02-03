@@ -26,18 +26,16 @@ public class WeaponManager : MonoBehaviour
     /// </summary>
     public void SwitchWeapon(AttackController controller, WeaponSO newWeapon)
     {
-        // Index 0: Weapon sprite, 1: Flash sprite, 2: Player sprite.
-        SpriteRenderer weaponSpriteRenderer = controller.GetComponentsInChildren<SpriteRenderer>()[0];
-        SpriteRenderer flashSpriteRenderer = controller.GetComponentsInChildren<SpriteRenderer>()[1];
+        // Index 1: Weapon sprite, 2: Flash sprite.
+        SpriteRenderer weaponSpriteRenderer = controller.GetComponentsInChildren<SpriteRenderer>()[1];
+        SpriteRenderer flashSpriteRenderer = controller.GetComponentsInChildren<SpriteRenderer>()[2];
 
-        // Do not worry about it.
-        Transform swingAnchor = controller.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0);
+        Transform swingEffect = controller.GetComponentsInChildren<Transform>(true)[7];
         GameObject oldParticleSystem;
 
         try
         {
-            // Don't worry about it.
-            oldParticleSystem = controller.transform.GetChild(0).GetChild(0).GetChild(0).GetChild(0).GetChild(0).gameObject;
+            oldParticleSystem = swingEffect.GetChild(0).gameObject;
         }
         catch
         {
@@ -54,6 +52,6 @@ public class WeaponManager : MonoBehaviour
         if (oldParticleSystem != null)
             Destroy(oldParticleSystem);
 
-        Instantiate(controller.CurrentWeapon.ParticleSystem, swingAnchor);
+        Instantiate(controller.CurrentWeapon.ParticleSystem, swingEffect);
     }
 }

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Base Weapon", menuName = "Scriptable Object/Weapons")]
+[CreateAssetMenu(fileName = "Weapon", menuName = "ScriptableObject/Weapon")]
 public class WeaponSO : ScriptableObject
 {
     [SerializeField] private AnimatorOverrideController weaponAnimationToUse;
@@ -13,7 +13,7 @@ public class WeaponSO : ScriptableObject
     [SerializeField] private float damage, knockbackMultiplier;
 
     #region SerializeField variables with tooltips
-    [Tooltip("Used to determine how much force is added to an entity after swinging a weapon.\n" +
+    [Tooltip("Used to determine how much force is added to an entity after swinging a weapon. Can be negative for a recoil effect.\n" +
             "Leave this variable, or the one below, at 0 and this effect will not occur.")]
     [SerializeField] private float weaponImpulseMultiplier;
 
@@ -24,12 +24,14 @@ public class WeaponSO : ScriptableObject
     [Tooltip("Create a new GameObject and add a CapsuleCollider2D. Then determine its size and change its transform to where you want it to spawn.\n" +
             "To determine the transform, imagine that the hitbox will spawn at (0, 0) which will be inside the entity and move accordingly.")]
     [SerializeField] private CapsuleCollider2D hitbox;
+    // TODO: Maybe change collider to gameobject to allow for all types of different colliders
+    // and so that it can have a rigidbody which can impart velocity on spawn.
 
     [Tooltip("A sprite of the same shape as the weapon, but colored white. Will be used to create a flash effect on weapons.\n" +
             "Leave null for entities that you do not want this to happen on, such as very common enemies.")]
     [SerializeField] private Sprite weaponFlashSprite;
 
-    [Tooltip("The particles you want to spawn behind the weapon, the transform on the prefab will affect spawn position on weapon")]
+    [Tooltip("The particles you want to spawn behind the weapon, the transform on the prefab will affect spawn position on weapon.")]
     [SerializeField] private GameObject particleSystem;
 
     [Tooltip("Will the animation play a reset animation after initial weapon swing.")]

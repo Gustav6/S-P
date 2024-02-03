@@ -26,11 +26,11 @@ public class WeaponManager : MonoBehaviour
     /// </summary>
     public void SwitchWeapon(AttackController controller, WeaponSO newWeapon)
     {
-        // Index 1: Weapon sprite, 2: Flash sprite.
-        SpriteRenderer weaponSpriteRenderer = controller.GetComponentsInChildren<SpriteRenderer>()[1];
-        SpriteRenderer flashSpriteRenderer = controller.GetComponentsInChildren<SpriteRenderer>()[2];
+        // Index 3: Weapon sprite, 4: Flash sprite.
+        SpriteRenderer weaponSpriteRenderer = controller.GetComponentsInChildren<SpriteRenderer>()[3];
+        SpriteRenderer flashSpriteRenderer = controller.GetComponentsInChildren<SpriteRenderer>()[4];
 
-        Transform swingEffect = controller.GetComponentsInChildren<Transform>(true)[7];
+        Transform swingEffect = weaponSpriteRenderer.transform.GetChild(0);
         GameObject oldParticleSystem;
 
         try

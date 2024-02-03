@@ -113,15 +113,15 @@ MonoBehaviour:
   hitEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6513452007123114228, guid: a1b9ce913da21e34ebc5b0ba81d97dc4, type: 3}
-        m_TargetAssemblyTypeName: AttackLogic, Assembly-CSharp
-        m_MethodName: Attack
-        m_Mode: 0
+      - m_Target: {fileID: 11500000, guid: b41e3e48f3a18c5479cdaf5099a23083, type: 3}
+        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
+        m_MethodName: set_name
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Attack
           m_BoolArgument: 0
         m_CallState: 2

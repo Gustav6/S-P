@@ -12,11 +12,6 @@ public class AimController : MonoBehaviour
 
 	private float _previousAimDirection = 1;
 
-    private void Start()
-    {
-		_previousAimDirection = 1;
-    }
-
     /// <summary>
     /// Aims the weapon of the entity towards a certain target.
     /// </summary>

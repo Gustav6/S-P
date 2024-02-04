@@ -5,9 +5,6 @@ using UnityEngine.Events;
 
 public class HitboxTrigger : MonoBehaviour
 {
-    // Event calls the attack method for player.
-    //[SerializeField] private UnityEvent<IDamageable, AttackController> hitEvent;
-
     private AttackController _parentController;
 
     private void Awake()
@@ -23,8 +20,6 @@ public class HitboxTrigger : MonoBehaviour
             return;
 
         Attack(damageable, _parentController);
-
-        //hitEvent?.Invoke(damageable, _parentController);
     }
 
     public void Attack(IDamageable damageable, AttackController attackController)

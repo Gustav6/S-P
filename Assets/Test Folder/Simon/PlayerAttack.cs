@@ -23,7 +23,8 @@ public class PlayerAttack : MonoBehaviour
             _attackController.PlayHitAnimation(targetDirection);
         }
 
-        TurnToMouse();
+        if (!_attackController.IsAnimationPlaying)
+            TurnToMouse();
     }
 
     private void TurnToMouse()

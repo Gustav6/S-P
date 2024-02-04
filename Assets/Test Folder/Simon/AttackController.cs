@@ -6,6 +6,8 @@ public class AttackController : MonoBehaviour
 {
     public WeaponSO CurrentWeapon;
 
+    private PlayerMovement _player;
+
     // Animator on the Weapon Swing Anchor
     internal Animator weaponAnimator;
 
@@ -17,6 +19,7 @@ public class AttackController : MonoBehaviour
     private Coroutine _attackForceCoroutine;
 
     private bool _animationReadyToReset;
+
     public bool IsAnimationPlaying { get; private set; }
     
     private void Awake()
@@ -24,6 +27,8 @@ public class AttackController : MonoBehaviour
         weaponAnimator = GetComponentInChildren<Animator>();
         _flashSpriteRenderer = GetComponentsInChildren<SpriteRenderer>()[4]; // Index 3: Weapon sprite, 4: Flash sprite.
         _rb = GetComponent<Rigidbody2D>();
+
+        _player = GetComponent<PlayerMovement>();
     }
 
     private void Start()
@@ -47,13 +52,13 @@ public class AttackController : MonoBehaviour
         float impulseMultiplier = CurrentWeapon.ImpulseMultiplier;
         float impulseTime = CurrentWeapon.ImpulseEffectTime;
 
-        if (impulseMultiplier == 0 || impulseTime == 0)
+        if (_player == null || impulseMultiplier == 0 || impulseTime == 0)
             return;
 
         if (_attackForceCoroutine != null)
             StopCoroutine(_attackForceCoroutine);
 
-        _attackForceCoroutine = StartCoroutine(AttackLogic.AddAttackBoost(_rb, attackForceDirection, impulseMultiplier, impulseTime));
+        _attackForceCoroutine = StartCoroutine(AttackLogic.AddAttackBoost(_player , _rb, attackForceDirection, impulseMultiplier, impulseTime));
     }
 
     /// <summary>

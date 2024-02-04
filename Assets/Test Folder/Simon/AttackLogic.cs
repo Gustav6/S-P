@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class AttackLogic : MonoBehaviour
 {
     [SerializeField] private UnityEvent animationComplete;
+    [SerializeField] private Transform weaponSpawnParent;
 
     private AttackController _attackController;
 
@@ -18,7 +19,7 @@ public class AttackLogic : MonoBehaviour
 
     public void SpawnHitbox()
     {
-        _hitbox = Instantiate(_attackController.CurrentWeapon.Hitbox, transform.GetChild(0).GetChild(0));
+        _hitbox = Instantiate(_attackController.CurrentWeapon.Hitbox, weaponSpawnParent);
     }
 
     public void DespawnHitbox()
@@ -34,14 +35,16 @@ public class AttackLogic : MonoBehaviour
         animationComplete?.Invoke();
     }
 
-    public static IEnumerator AddAttackBoost(Rigidbody2D rb, Vector2 targetDirection, float forceAmount, float forceActiveTime)
+    public static IEnumerator AddAttackBoost(PlayerMovement player, Rigidbody2D rb, Vector2 targetDirection, float forceAmount, float forceActiveTime)
     {
-        // TODO: Use knockback method.
+        player.ToggleMovementLock();
 
         rb.AddForce(targetDirection * forceAmount, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(forceActiveTime);
 
         rb.velocity = Vector2.zero;
+
+        player.ToggleMovementLock();
     }
 }

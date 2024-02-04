@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class AttackController : MonoBehaviour
 {
-    public WeaponSO CurrentWeapon;
+    public UnityEvent OnControlRegained;
 
+    public WeaponSO CurrentWeapon;
     private PlayerMovement _player;
 
-    // Animator on the Weapon Swing Anchor
     internal Animator weaponAnimator;
 
     private SpriteRenderer _flashSpriteRenderer;
@@ -74,6 +75,8 @@ public class AttackController : MonoBehaviour
             weaponAnimator.SetFloat("s", CurrentWeapon.ResetMultiplier);
             return;
         }
+
+        OnControlRegained?.Invoke();
 
         IsAnimationPlaying = false;
 

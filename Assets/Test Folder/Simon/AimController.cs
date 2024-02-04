@@ -5,8 +5,9 @@ using UnityEngine;
 public class AimController : MonoBehaviour
 {
 	[SerializeField] private float turnTime;
+    [SerializeField] private float turnThreshold = 0.45f;
 
-	[SerializeField] private Transform spriteTransform;
+    [SerializeField] private Transform spriteTransform;
 	[SerializeField] private Transform weaponSwingAnchor;
     [SerializeField] private Transform neckAnchor;
 
@@ -25,14 +26,16 @@ public class AimController : MonoBehaviour
 		// Add 90 to align with mouse, because of how equation circle works.
 		weaponSwingAnchor.localRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
 
-        // The minus is there because of how the rotation reacts when using Atan2.
-        // This may cause issue for enemy rotation, if so: just remove it and debug the player.
+		// Minus is here because of how the sprites interact with their local scale and different pivot points.
         float currentAimDirection = -Mathf.Sign(x);
 
-	 	RotateHead(weaponSwingAnchor.localRotation.eulerAngles.z);
+        RotateHead(weaponSwingAnchor.localRotation.eulerAngles.z);
 
 		if (currentAimDirection != _previousAimDirection)
         {
+			if (Mathf.Abs(x)! < turnThreshold)
+				return;
+
 			StopAllCoroutines();
 
 			_previousAimDirection = currentAimDirection;

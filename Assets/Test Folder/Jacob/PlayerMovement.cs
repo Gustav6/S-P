@@ -24,7 +24,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 	private void Awake()
 	{
 		_rb = GetComponent<Rigidbody2D>();
-		_anim = GetComponent<Animator>();
+		_anim = transform.GetChild(0).GetComponent<Animator>();
 	}
 
 	private void Update()
@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
 		if (input.x != previousNonZeroXInput && input.x != 0)
 		{
-			StartCoroutine(TurnAround(-input.x));
+			//StartCoroutine(TurnAround(-input.x));
 			previousNonZeroXInput = input.x;
 		}
 

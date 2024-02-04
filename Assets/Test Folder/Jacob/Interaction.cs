@@ -35,7 +35,7 @@ public class PlayerInteraction : MonoBehaviour
     }
 }
 
-public abstract class Interactable
+public abstract class Interactable : MonoBehaviour
 {
     public float InteractionRadius;
 

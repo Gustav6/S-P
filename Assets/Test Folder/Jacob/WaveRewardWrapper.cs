@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class WaveRewardWrapper : Interactable
 {
-	WaveReward containedReward;
+	[SerializeField] WaveReward containedReward;
+
+	[SerializeField] GameObject statRewardPanel, weaponRewardPanel;
+
+	private void Start()
+	{
+		Instantiate(statRewardPanel, transform);
+	}
 
 	public override void EnterInteractionRange()
 	{
@@ -19,5 +26,10 @@ public class WaveRewardWrapper : Interactable
 	public override void Interact()
 	{
 		throw new System.NotImplementedException();
+	}
+
+	private void OnDrawGizmosSelected()
+	{
+		Gizmos.DrawWireSphere(transform.position, InteractionRadius);
 	}
 }

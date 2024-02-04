@@ -17,7 +17,7 @@ public class UIInput : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !UIManager.Transitioning)
         {
             paused = !paused;
 
@@ -43,9 +43,9 @@ public class UIInput : MonoBehaviour
 
     public void Navigate(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (CanInteractWithUI())
         {
-            if (CheckForUIInstance())
+            if (context.performed)
             {
                 GameObject g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
 
@@ -99,9 +99,9 @@ public class UIInput : MonoBehaviour
 
     public void ChangeSlider(InputAction.CallbackContext context)
     {
-        if (context.performed && manager.ChangingSlider)
+        if (CanInteractWithUI())
         {
-            if (CheckForUIInstance())
+            if (context.performed && manager.ChangingSlider)
             {
                 GameObject g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
                 SliderStateManager sm = g.GetComponent<SliderStateManager>();
@@ -124,7 +124,7 @@ public class UIInput : MonoBehaviour
 
     public void Submit(InputAction.CallbackContext context)
     {
-        if (CheckForUIInstance())
+        if (CanInteractWithUI())
         {
             GameObject g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
             UI uI = g.GetComponent<UI>();
@@ -161,7 +161,7 @@ public class UIInput : MonoBehaviour
 
     public void ClickOnGameObject(InputAction.CallbackContext context)
     {
-        if (CheckForUIInstance() && !manager.KeyOrControlActive)
+        if (CanInteractWithUI() && !manager.KeyOrControlActive)
         {
             GameObject g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
             UI uI = g.GetComponent<UI>();
@@ -172,17 +172,18 @@ public class UIInput : MonoBehaviour
                 {
                     uI.activated = true;
                 }
-                else if (context.canceled)
-                {
-                    uI.activated = false;
-                }
+            }
+
+            if (context.canceled)
+            {
+                uI.activated = false;
             }
         }
     }
 
-    public bool CheckForUIInstance()
+    public bool CanInteractWithUI()
     {
-        if (UIManager.ListOfUIObjects.Count > 0 || manager.CheckForInteractableUI(manager.currentUISelected).gameObject != null && !UIManager.Transitioning)
+        if (UIManager.ListOfUIObjects.Count > 0 && !UIManager.Transitioning)
         {
             return true;
         }

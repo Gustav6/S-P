@@ -8,6 +8,7 @@ public class Transition
     public ExecuteOnCompletion executeOnCompletion;
 
     public bool isRemoved;
+    public bool shouldBeRemoved = true;
 
     public float timer;
     public float timerMax;
@@ -23,7 +24,10 @@ public class Transition
 
         if (timer > timerMax)
         {
-            isRemoved = true;
+            if (shouldBeRemoved)
+            {
+                isRemoved = true;
+            }
         }
     }
 }

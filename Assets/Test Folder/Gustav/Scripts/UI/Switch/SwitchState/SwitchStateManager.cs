@@ -51,7 +51,7 @@ public class SwitchStateManager : MonoBehaviour
 
     void Update()
     {
-        if (!UIManager.Transitioning)
+        if (uI.UIManagerInstance != null && !UIManager.Transitioning)
         {
             currentState.UpdateState(this);
         }
@@ -68,9 +68,9 @@ public class SwitchStateManager : MonoBehaviour
 
     public void SetState()
     {
-        if (UIManager.DataManagerInstance.switchValues.ContainsKey(methods.switchType))
+        if (UIManager.DataManagerInstance.switchValues.ContainsKey(methods.type))
         {
-            switchOn = UIManager.DataManagerInstance.switchValues[methods.switchType];
+            switchOn = UIManager.DataManagerInstance.switchValues[methods.type];
         }
         else
         {

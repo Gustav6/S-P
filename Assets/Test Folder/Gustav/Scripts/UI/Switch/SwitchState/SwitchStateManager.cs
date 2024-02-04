@@ -20,14 +20,14 @@ public class SwitchStateManager : MonoBehaviour
     [HideInInspector] public RectTransform movingPart;
     [HideInInspector] public RectTransform outLine;
 
-
+    public SwitchMethods methods;
     public Color offColor = new(0, 0.8f, 0, 1);
     public Color onColor = new(0.8f, 0, 0, 1);
 
     public bool switchOn;
     [Range(0.1f, 1)] public float transitionTime = 0.3f;
 
-    private float movingPartOffset;
+    public float movingPartOffset;
 
     private void Start()
     {
@@ -37,11 +37,12 @@ public class SwitchStateManager : MonoBehaviour
         movingPartImage = transform.GetChild(1).GetComponent<Image>();
         toggleImage = transform.GetChild(1).GetChild(0).GetComponent<Image>();
         text = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        uI = GetComponent<UI>();
-
         movingPartOffset = movingPart.localPosition.x;
 
-        SetDefaultState();
+        uI = GetComponent<UI>();
+        methods = GetComponent<SwitchMethods>();
+
+        SetState();
 
         currentState = deselectedState;
 
@@ -65,29 +66,17 @@ public class SwitchStateManager : MonoBehaviour
         currentState.EnterState(this);
     }
 
-    public void TransitionFromOnOff(SwitchStateManager @switch, float transitionTime)
+    public void SetState()
     {
-        if (@switch.switchOn)
+        if (UIManager.DataManagerInstance.switchValues.ContainsKey(methods.switchType))
         {
-            Vector3 destination = new(@switch.movingPartOffset * -1 * UIManager.ResolutionScaling, 0, 0);
-            destination += @switch.outLine.position;
-            Color newColor = new(0, 0.8f, 0, 1);
-            TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3));
-            TransitionSystem.AddColorTransition(new ColorTransition(@switch.toggleImage, onColor, transitionTime, TransitionType.SmoothStop2));
+            switchOn = UIManager.DataManagerInstance.switchValues[methods.switchType];
         }
         else
         {
-            Vector3 destination = new(@switch.movingPartOffset * UIManager.ResolutionScaling, 0, 0);
-            destination += @switch.outLine.position;
-            TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3));
-            TransitionSystem.AddColorTransition(new ColorTransition(@switch.toggleImage, offColor, transitionTime, TransitionType.SmoothStop2));
+            switchOn = true;
         }
 
-        @switch.uI.activated = false;
-    }
-
-    public void SetDefaultState()
-    {
         if (switchOn)
         {
             Vector3 destination = new(movingPartOffset * -1, 0, 0);

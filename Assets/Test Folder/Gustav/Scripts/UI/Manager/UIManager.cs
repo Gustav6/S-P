@@ -134,12 +134,16 @@ public class UIManager : MonoBehaviour
     public static List<GameObject> ListOfUIObjects { get; private set; }
     public static GameObject CurrentUIPrefab { get; private set; }
     public static bool Transitioning { get; private set; }
+    public static DataManager DataManagerInstance { get; private set; }
     #endregion
 
     void Awake()
     {
         ListOfUIObjects = new();
+
         LoadUI();
+
+        DataManagerInstance = GameObject.FindGameObjectWithTag("DataManager").GetComponent<DataManager>();
     }
 
     void Start()

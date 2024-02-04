@@ -24,7 +24,7 @@ public class SliderDeselectedState : SliderBaseState
 
     public override void UpdateState(SliderStateManager slider)
     {
-        if (slider.uI.UIManagerInstance.KeyOrControlActive)
+        if (slider.uI.UIManagerInstance.KeyOrControlActive) 
         {
             if (slider.uI.UIManagerInstance.CurrentUISelected == slider.uI.position)
             {

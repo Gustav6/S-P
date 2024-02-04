@@ -60,21 +60,21 @@ public class ButtenPressedState : ButtonBaseState
     {
         Transition.ExecuteOnCompletion @delegate = null;
 
-        if (button.methods.TransitionToPrefab)
+        if (button.methods.transitionToPrefab)
         {
             UIManager.EnableTransitioning();
 
-            if (button.methods.PrefabMoveTransition)
+            if (button.methods.prefabMoveTransition)
             {
                 button.methods.MovePrefabToDestination(button.methods.InstantiatePrefab, 1);
             }
-            else if (button.methods.PrefabScaleTransition)
+            else if (button.methods.prefabScaleTransition)
             {
                 button.methods.ShrinkTransition(button.methods.InstantiatePrefab, 1);
             }
         }
 
-        if (button.methods.TransitionToScene)
+        if (button.methods.transitionToScene)
         {
             UIManager.EnableTransitioning();
 

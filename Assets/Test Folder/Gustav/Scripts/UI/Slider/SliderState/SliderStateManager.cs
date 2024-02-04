@@ -20,6 +20,7 @@ public class SliderStateManager : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI text;
     [HideInInspector] public RectTransform sliderPosition;
 
+    public SliderMethods methods;
     public float slidersOffset;
     public float maxMoveValue;
     public float moveDirection;
@@ -28,12 +29,16 @@ public class SliderStateManager : MonoBehaviour
     {
         outLineImage = transform.GetChild(0).GetComponent<Image>();
         sliderImage = transform.GetChild(1).GetComponent<Image>();
-        uI = GetComponent<UI>();
         sliderPosition = transform.GetChild(1).GetComponent<RectTransform>();
         outLinePosition = transform.GetChild(0).GetComponent<RectTransform>();
         maxMoveValue = Mathf.Abs(sliderPosition.localPosition.x);
         text = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         slidersOffset = sliderPosition.localPosition.x;
+
+        methods = GetComponent<SliderMethods>();
+        uI = GetComponent<UI>();
+
+        SetStartPositionToValue();
 
         currentState = deselectedState;
 
@@ -74,6 +79,20 @@ public class SliderStateManager : MonoBehaviour
         else
         {
             return percentage;
+        }
+    }
+
+    public float PercentageToPosition(float value)
+    {
+        return value * (maxMoveValue * 2) - maxMoveValue;
+    }
+
+    public void SetStartPositionToValue()
+    {
+        if (UIManager.DataManagerInstance.sliderValues.ContainsKey(methods.sliderType))
+        {
+            Vector2 temp = new Vector2(PercentageToPosition(UIManager.DataManagerInstance.sliderValues[methods.sliderType]), sliderPosition.localPosition.y);
+            sliderPosition.localPosition = temp;
         }
     }
 }

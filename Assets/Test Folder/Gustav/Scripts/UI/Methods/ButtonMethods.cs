@@ -7,26 +7,22 @@ using UnityEngine.UI;
 
 public class ButtonMethods : MonoBehaviour
 {
-    [SerializeField] private bool transitionToScene;
-    public bool TransitionToScene { get { return transitionToScene; } }
-
+    #region Transition to new scene
+    public bool transitionToScene;
     [SerializeField] private NewScene scene;
+    #endregion
 
-    [SerializeField] private bool transitionToPrefab;
-    public bool TransitionToPrefab { get { return transitionToPrefab; } }
-
-    [SerializeField] private bool prefabScaleTransition;
-    public bool PrefabScaleTransition { get { return prefabScaleTransition; } }
-
-    [SerializeField] private bool prefabMoveTransition;
-    public bool PrefabMoveTransition { get { return prefabMoveTransition; } }
-
+    #region Transitions to a new prefab
+    public bool transitionToPrefab;
+    public bool prefabScaleTransition;
+    public bool prefabMoveTransition;
     [SerializeField] private GameObject prefab;
+    #endregion
+
+    [SerializeField] private bool unPause;
+    [SerializeField] private bool exit;
 
     private ActiveMenuManager activeMenuManager;
-
-    [SerializeField] bool unPause;
-    [SerializeField] bool exit;
 
     void Start()
     {

@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class SliderPressedState : SliderBaseState
 {
-    float timeItTakes = 0.15f;
-    float moveAmount = 50;
+    readonly float timeItTakes = 0.15f;
+    readonly float moveAmount = 50;
     Color newSlidingPartColor = new(1, 1, 0, 1);
     Color originalColor;
 
@@ -47,15 +47,16 @@ public class SliderPressedState : SliderBaseState
         }
     }
 
-    public void ResetButtonValue(SliderStateManager slider)
-    {
-        TransitionSystem.AddColorTransition(new ColorTransition(slider.sliderImage, originalColor, timeItTakes, TransitionType.SmoothStop2));
-    }
-
     public override void ExitState(SliderStateManager slider)
     {
         ResetButtonValue(slider);
+        slider.methods.SaveToDataManager(UIManager.DataManagerInstance, slider.TotalSlidingPercentage());
         slider.uI.UIManagerInstance.ChangingSlider = false;
+    }
+
+    public void ResetButtonValue(SliderStateManager slider)
+    {
+        TransitionSystem.AddColorTransition(new ColorTransition(slider.sliderImage, originalColor, timeItTakes, TransitionType.SmoothStop2));
     }
 
     public void MoveTowardsMouse(SliderStateManager slider, float mouseX)

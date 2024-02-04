@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class SwitchPressedState : SwitchBaseState
 {
@@ -11,7 +12,7 @@ public class SwitchPressedState : SwitchBaseState
     public override void EnterState(SwitchStateManager @switch)
     {
         timer = @switch.transitionTime;
-        @switch.TransitionFromOnOff(@switch, timer);
+        TransitionFromOnOff(@switch, timer);
     }
 
     public override void UpdateState(SwitchStateManager @switch)
@@ -49,6 +50,27 @@ public class SwitchPressedState : SwitchBaseState
 
     public override void ExitState(SwitchStateManager @switch)
     {
+        @switch.methods.SaveToDataManager(UIManager.DataManagerInstance, @switch.switchOn);
+    }
 
+    public void TransitionFromOnOff(SwitchStateManager @switch, float transitionTime)
+    {
+        if (@switch.switchOn)
+        {
+            Vector3 destination = new(@switch.movingPartOffset * -1 * UIManager.ResolutionScaling, 0, 0);
+            destination += @switch.outLine.position;
+            Color newColor = new(0, 0.8f, 0, 1);
+            TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3));
+            TransitionSystem.AddColorTransition(new ColorTransition(@switch.toggleImage, @switch.onColor, transitionTime, TransitionType.SmoothStop2));
+        }
+        else
+        {
+            Vector3 destination = new(@switch.movingPartOffset * UIManager.ResolutionScaling, 0, 0);
+            destination += @switch.outLine.position;
+            TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3));
+            TransitionSystem.AddColorTransition(new ColorTransition(@switch.toggleImage, @switch.offColor, transitionTime, TransitionType.SmoothStop2));
+        }
+
+        @switch.uI.activated = false;
     }
 }

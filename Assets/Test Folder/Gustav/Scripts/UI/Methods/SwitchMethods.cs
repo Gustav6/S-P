@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class SwitchMethods : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public SwitchType switchType;
+    public void SaveToDataManager(DataManager manager, bool value)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (!manager.switchValues.ContainsKey(switchType))
+        {
+            manager.switchValues.Add(switchType, value);
+        }
+        else
+        {
+            manager.switchValues[switchType] = value;
+        }
     }
 }

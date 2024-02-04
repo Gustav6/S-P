@@ -8,6 +8,8 @@ TagManager:
   - InteractableUI
   - UIPrefab
   - Enemy
+  - UIManager
+  - DataManager
   layers:
   - Default
   - TransparentFX

@@ -47,7 +47,7 @@ public class SliderStateManager : MonoBehaviour
 
     void Update()
     {
-        if (!UIManager.Transitioning)
+        if (uI.UIManagerInstance != null && !UIManager.Transitioning)
         {
             currentState.UpdateState(this);
         }
@@ -89,9 +89,9 @@ public class SliderStateManager : MonoBehaviour
 
     public void SetStartPositionToValue()
     {
-        if (UIManager.DataManagerInstance.sliderValues.ContainsKey(methods.sliderType))
+        if (UIManager.DataManagerInstance.sliderValues.ContainsKey(methods.type))
         {
-            Vector2 temp = new Vector2(PercentageToPosition(UIManager.DataManagerInstance.sliderValues[methods.sliderType]), sliderPosition.localPosition.y);
+            Vector2 temp = new Vector2(PercentageToPosition(UIManager.DataManagerInstance.sliderValues[methods.type]), sliderPosition.localPosition.y);
             sliderPosition.localPosition = temp;
         }
     }

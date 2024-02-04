@@ -1,31 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class ScaleTransition : Transition
+public class RotationTransition : Transition
 {
-    Transform transform;
-    TransitionType transitionType;
-    Vector3 target;
-    Vector3 startingScale;
-    float pointA;
-    float pointB;
-    float pointC;
+    static private Transform transform;
+    static private Vector3 target;
+    private readonly TransitionType? transitionType;
+    private float repetitions;
+    private float amplitude;
 
-    public ScaleTransition(Transform t, Vector3 scaleTarget, float totalTime, TransitionType type, ExecuteOnCompletion execute = null, float pA = 0, float pB = 0, float pC = 0)
+    public RotationTransition(Transform t, Vector3 _target, float totalTime, TransitionType type, float _repetitions = 0, float _amplitude = 0, ExecuteOnCompletion execute = null)
     {
         transform = t;
-        startingScale = transform.localScale;
-        target = scaleTarget;
+        target = _target;
         timerMax = totalTime;
+        repetitions = _repetitions;
+        amplitude = _amplitude;
         transitionType = type;
         executeOnCompletion += execute;
-        pointA = pA;
-        pointB = pB;
-        pointC = pC;
     }
-
 
     public override void Start()
     {
@@ -56,23 +50,15 @@ public class ScaleTransition : Transition
             case TransitionType.SmoothStop4:
                 t = TransitionSystem.SmoothStop4(timer / timerMax);
                 break;
+            case TransitionType.SinCurve:
+                t = TransitionSystem.SinCurve(repetitions, amplitude, timer / timerMax);
+                break;
             default:
                 break;
         }
 
-
-        if (pointA == 0 && pointB == 0 && pointC == 0)
-        {
-            if (transform != null)
-            {
-                transform.localScale = Vector3.Lerp(startingScale, target, t);
-            }
-        }
-        else
-        {
-            Vector2 temp = startingScale + target * t;
-            transform.localScale = temp;
-        }
+        Vector3 temp = target * t;
+        transform.Rotate(temp);
 
         base.Update();
     }

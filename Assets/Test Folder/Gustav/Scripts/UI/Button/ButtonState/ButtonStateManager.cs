@@ -35,7 +35,7 @@ public class ButtonStateManager : MonoBehaviour
 
     void Update()
     {
-        if (!UIManager.Transitioning)
+        if (uI.UIManagerInstance != null && !UIManager.Transitioning)
         {
             currentState.UpdateState(this);
         }

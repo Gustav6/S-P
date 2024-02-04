@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
     public Vector2 MousePosition { get; set; }
     public static float ResolutionScaling { get; private set; }
 
-    [SerializeField] public Vector2 currentUISelected;
+    public Vector2 currentUISelected;
     public Vector2 CurrentUISelected
     {
         get

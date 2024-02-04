@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class SliderMethods : MonoBehaviour
 {   
-    public SliderType sliderType;
+    public SliderType type;
 
     public void SaveToDataManager(DataManager manager, float value)
     {
-        if (!manager.sliderValues.ContainsKey(sliderType))
+        if (!manager.sliderValues.ContainsKey(type))
         {
-            manager.sliderValues.Add(sliderType, value);
+            manager.sliderValues.Add(type, value);
         }
         else
         {
-            manager.sliderValues[sliderType] = value;
+            manager.sliderValues[type] = value;
         }
     }
 }

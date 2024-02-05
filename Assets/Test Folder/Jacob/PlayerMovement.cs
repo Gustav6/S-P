@@ -15,9 +15,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
 	bool _isImmune = false;
 	bool _isGrounded = true;
-	bool _movementLocked = false;
-
-	float previousNonZeroXInput;
+	public bool MovementLocked { get; private set; }
 
 	public float KnockbackPercent { get; set; }
 
@@ -35,37 +33,15 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 		if (Input.GetKeyDown(KeyCode.E))
 			ScreenShake.instance.Shake(0.5f, 0.25f, Vector2.zero);
 
-		if (_movementLocked)
+		if (MovementLocked)
 			return;
 
 		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
 		_anim.SetBool("IsMoving", input.magnitude > 0);
 
-		if (input.x != previousNonZeroXInput && input.x != 0)
-		{
-			//StartCoroutine(TurnAround(-input.x));
-			previousNonZeroXInput = input.x;
-		}
-
 		if (_isGrounded)
 			_rb.velocity = input.normalized * _movementSpeed;
-	}
-
-	IEnumerator TurnAround(float direction)
-	{
-		Debug.Log("Turning around");
-
-		float time = 0;
-
-		while (time <= _turnTime)
-		{
-			_spriteTransform.localScale = new Vector2(Mathf.Lerp(-direction, direction, time / _turnTime), 1);
-			time += Time.deltaTime;
-			yield return null;
-		}
-
-		_spriteTransform.localScale = new Vector2(direction, 1);
 	}
 
 	/// <summary>
@@ -101,7 +77,7 @@ public class PlayerMovement : MonoBehaviour, IDamageable
 
 	public void ToggleMovementLock()
 	{
-		_movementLocked = !_movementLocked;
+		MovementLocked = !MovementLocked;
 		_rb.velocity = Vector2.zero;
 	}
 }

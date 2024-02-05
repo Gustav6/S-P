@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,13 +10,18 @@ public class PlayerInteraction : MonoBehaviour
 
     Interactable _focusedInteractable;
 
-    void Interact()
-	{
+    private void Update()
+    {
+        CheckRadiusForInteractables();
+    }
+
+    void CheckRadiusForInteractables()
+    {
         // Where the hell did my beautiful OverLapCircleNonAlloc go??? It's supposed to exist. WGHERE DID IT GO????
         Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(transform.position, _maxInteractionRadius, _interactableLayer);
 
         for (int i = 0; i < nearbyColliders.Length; i++)
-		{
+        {
             if (!nearbyColliders[i].TryGetComponent(out Interactable interactable))
                 continue;
 
@@ -24,24 +30,33 @@ public class PlayerInteraction : MonoBehaviour
                 // New focused interactable
                 if (interactable != _focusedInteractable)
                 {
-                    _focusedInteractable.ExitInteractionRange();
+                    _focusedInteractable?.ExitInteractionRange();
                     interactable.EnterInteractionRange();
                     _focusedInteractable = interactable;
 
                     break;
                 }
-			}
-		}
+            }
+        }
+
+        if (_focusedInteractable == null)
+            return;
+
+        // Out of range from current focused interactable
+        if (Vector2.Distance(_focusedInteractable.transform.position, transform.position) > _focusedInteractable.InteractionRadius)
+        {
+            _focusedInteractable.ExitInteractionRange();
+            _focusedInteractable = null;
+        }
+
+
     }
-}
 
-public abstract class Interactable : MonoBehaviour
-{
-    public float InteractionRadius;
+    void Interact()
+	{
+        if (_focusedInteractable == null)
+            return;
 
-    public abstract void EnterInteractionRange();
-
-    public abstract void ExitInteractionRange();
-
-    public abstract void Interact();
+        _focusedInteractable.Interact();
+    }
 }

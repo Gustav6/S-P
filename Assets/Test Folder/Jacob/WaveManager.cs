@@ -6,6 +6,10 @@ public class WaveManager : MonoBehaviour
 {
     [SerializeField] EnemyPreset[] _enemyAssortment;
     [SerializeField] List<Transform> _spawnPoints;
+    public GameObject StatRewardPanel, WeaponRewardPanel;
+
+    [SerializeField] WaveRewardInteractable _testReward;
+    [SerializeField] WaveReward _testRewardReward;
 
     int _enemiesRemaining;
 
@@ -19,6 +23,7 @@ public class WaveManager : MonoBehaviour
     private void Start()
     {
         Invoke(nameof(StartTestWave), 2);
+        _testReward.SetContainedReward(_testRewardReward);
     }
 
     private void Update()

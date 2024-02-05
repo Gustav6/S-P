@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: TestStatReward
   m_EditorClassIdentifier: Assembly-CSharp::StatReward
-  _rewardName: wow reward
-  _rewardDescription: 'cool :thumbs_up:'
-  _waveUnlocked: 0
-  _statModifier:
-    AttackSpeed: 1.5
-    DamageModifier: 1
+  RewardName: Beehive
+  RewardDescription: 
+  WaveUnlocked: 0
+  StatModifier:
+    AttackSpeed: 1.1
+    DamageModifier: 0.9
     DamageResistanceModifier: 1
     KnockbackModifier: 1
-    KnockbackResitanceModifier: 10
-    MovementSpeedModifier: 2
+    KnockbackResitanceModifier: 1
+    MovementSpeedModifier: 1
     AbilityCooldownModifier: 1

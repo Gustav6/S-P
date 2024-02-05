@@ -101,22 +101,33 @@ public class UIInput : MonoBehaviour
     {
         if (CanInteractWithUI())
         {
-            if (context.performed && manager.ChangingSlider)
-            {
-                GameObject g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
-                SliderStateManager sm = g.GetComponent<SliderStateManager>();
+            SliderStateManager sm;
+            GameObject g;
 
-                if (context.ReadValue<float>() < 0)
+            if (manager.CheckForInteractableUI(manager.currentUISelected).gameObject != null)
+            {
+                g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
+
+                if (g.GetComponent<SliderStateManager>() != null)
                 {
-                    sm.moveDirection = -1;
-                }
-                else if (context.ReadValue<float>() > 0)
-                {
-                    sm.moveDirection = 1;
-                }
-                else
-                {
-                    sm.moveDirection = 0;
+                    sm = g.GetComponent<SliderStateManager>();
+
+                    if (manager.ChangingSlider)
+                    {
+                        if (context.ReadValue<float>() < 0)
+                        {
+                            sm.moveDirection = -1;
+                        }
+                        else if (context.ReadValue<float>() > 0)
+                        {
+                            sm.moveDirection = 1;
+                        }
+                    }
+
+                    if (context.canceled)
+                    {
+                        sm.moveDirection = 0;
+                    }
                 }
             }
         }

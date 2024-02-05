@@ -3,30 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-<<<<<<< HEAD
-  - InteractableUI
-=======
-  - Weapon
-  - InteractableUI
-  - UIPrefab
-  - Enemy
-  - UIManager
-  - DataManager
-<<<<<<< Updated upstream
->>>>>>> c2e1298875d298fbc7367cbc0c3c03a3a8ba879b
-=======
-  - Water
->>>>>>> Stashed changes
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Ground
+  - 
   - Water
   - UI
-  - wall
-  - Interactable
+  - 
+  - 
   - 
   - 
   - 

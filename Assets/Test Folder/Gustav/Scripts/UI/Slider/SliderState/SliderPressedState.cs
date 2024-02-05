@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SliderPressedState : SliderBaseState
 {
     readonly float timeItTakes = 0.15f;
-    readonly float moveAmount = 50;
     Color newSlidingPartColor = new(1, 1, 0, 1);
     Color originalColor;
 
@@ -25,20 +25,19 @@ public class SliderPressedState : SliderBaseState
             if (slider.moveDirection != 0)
             {
                 MoveWithButton(slider);
-                slider.moveDirection = 0;
             }
         }
         else
         {
-            if (slider.uI.activated)
+            if (slider.uI.UIManagerInstance.HoveringGameObject(slider.gameObject) && slider.uI.activated)
             {
                 MoveTowardsMouse(slider, slider.uI.UIManagerInstance.MousePosition.x);
             }
 
             if (!slider.uI.UIManagerInstance.HoveringGameObject(slider.gameObject))
             {
-                slider.SwitchState(slider.deselectedState);
                 slider.uI.activated = false;
+                slider.SwitchState(slider.deselectedState);
             }
         }
 
@@ -89,9 +88,9 @@ public class SliderPressedState : SliderBaseState
     public void MoveWithButton(SliderStateManager slider)
     {
         float scaling = UIManager.ResolutionScaling;
+        float moveAmount = slider.maxMoveValue / 100;
 
         Vector3 des = new(moveAmount * slider.moveDirection * scaling, 0, 0);
-        float timeItTakes = 0.1f;
 
         if (slider.sliderPosition.localPosition.x * scaling + des.x > slider.maxMoveValue * scaling)
         {
@@ -102,6 +101,6 @@ public class SliderPressedState : SliderBaseState
             des.x = (-slider.maxMoveValue * scaling) - slider.sliderPosition.localPosition.x * scaling;
         }
 
-        TransitionSystem.AddMoveTransition(new MoveTransition(slider.sliderPosition.transform, des, timeItTakes, TransitionType.SmoothStop2, true));
+        slider.sliderPosition.localPosition += des;
     }
 }

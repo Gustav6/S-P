@@ -19,17 +19,16 @@ public class SwitchDeselectedState : SwitchBaseState
 
     public override void UpdateState(SwitchStateManager @switch)
     {
-        if (@switch.uI.Manager.KeyOrControlActive)
+        if (@switch.uI.UIManagerInstance.KeyOrControlActive)
         {
-            if (@switch.uI.Manager.CurrentUISelected == @switch.uI.position)
+            if (@switch.uI.UIManagerInstance.CurrentUISelected == @switch.uI.position)
             {
-                @switch.uI.Manager.CurrentButten = @switch.gameObject;
                 @switch.SwitchState(@switch.selectedState);
             }
         }
         else
         {
-            if (@switch.uI.Manager.HoveringGameObject(@switch.gameObject))
+            if (@switch.uI.UIManagerInstance.HoveringGameObject(@switch.gameObject))
             {
                 @switch.SwitchState(@switch.selectedState);
             }

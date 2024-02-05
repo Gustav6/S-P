@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.GraphicsBuffer;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class ButtenPressedState : ButtonBaseState
 {
     private float timer;
-    private float timeItTakes = 0.15f;
+    private float timeItTakes = 0.25f;
 
     private Vector3 newScale = new(1, 1, 1);
     private Color newOutlineColor = new(1, 1, 1, 1);
+
+    private readonly Vector3 rotation = new(0, 0, 0.1f);
 
     public override void EnterState(ButtonStateManager button)
     {
@@ -24,9 +29,9 @@ public class ButtenPressedState : ButtonBaseState
         {
             if (!button.uI.activated)
             {
-                if (button.uI.Manager.KeyOrControlActive)
+                if (button.uI.UIManagerInstance.KeyOrControlActive)
                 {
-                    if (button.uI.Manager.CurrentUISelected == button.uI.position)
+                    if (button.uI.UIManagerInstance.CurrentUISelected == button.uI.position)
                     {
                         button.SwitchState(button.selectedState);
                     }
@@ -37,7 +42,7 @@ public class ButtenPressedState : ButtonBaseState
                 }
                 else
                 {
-                    if (button.uI.Manager.HoveringGameObject(button.gameObject))
+                    if (button.uI.UIManagerInstance.HoveringGameObject(button.gameObject))
                     {
                         button.SwitchState(button.selectedState);
                     }
@@ -56,7 +61,29 @@ public class ButtenPressedState : ButtonBaseState
 
     public override void ExitState(ButtonStateManager button)
     {
-        //button.uI.Manager.Transitioning = true;
-        button.uI.actionDelegate?.Invoke();
+        Transition.ExecuteOnCompletion @delegate = null;
+
+        if (button.methods.transitionToPrefab)
+        {
+            UIManager.EnableTransitioning();
+
+            if (button.methods.prefabMoveTransition)
+            {
+                button.methods.MovePrefabToDestination(button.methods.InstantiatePrefab, 1);
+            }
+            else if (button.methods.prefabScaleTransition)
+            {
+                button.methods.ShrinkTransition(button.methods.InstantiatePrefab, 1);
+            }
+        }
+
+        if (button.methods.transitionToScene)
+        {
+            UIManager.EnableTransitioning();
+
+            @delegate += button.methods.SwitchScene;
+            button.methods.ShrinkTransition(null, 1);
+            PanelManager.FadeOut(0.8f, new Color(0, 0, 0, 1), @delegate);
+        }
     }
 }

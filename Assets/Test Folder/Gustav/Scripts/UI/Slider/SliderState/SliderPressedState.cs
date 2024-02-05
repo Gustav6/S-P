@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class SliderPressedState : SliderBaseState
 {
-    float timeItTakes = 0.15f;
-    float moveAmount = 50;
+    readonly float timeItTakes = 0.15f;
+    readonly float moveAmount = 50;
     Color newSlidingPartColor = new(1, 1, 0, 1);
     Color originalColor;
 
@@ -14,11 +14,12 @@ public class SliderPressedState : SliderBaseState
     {
         originalColor = slider.sliderImage.color;
         TransitionSystem.AddColorTransition(new ColorTransition(slider.sliderImage, newSlidingPartColor, timeItTakes, TransitionType.SmoothStop2));
+        slider.uI.UIManagerInstance.ChangingSlider = true;
     }
 
     public override void UpdateState(SliderStateManager slider)
     {
-        if (slider.uI.Manager.KeyOrControlActive)
+        if (slider.uI.UIManagerInstance.KeyOrControlActive)
         {
             if (slider.moveDirection != 0)
             {
@@ -30,10 +31,10 @@ public class SliderPressedState : SliderBaseState
         {
             if (slider.uI.activated)
             {
-                MoveTowardsMouse(slider, slider.uI.Manager.MousePosition.x);
+                MoveTowardsMouse(slider, slider.uI.UIManagerInstance.MousePosition.x);
             }
 
-            if (!slider.uI.Manager.HoveringGameObject(slider.gameObject))
+            if (!slider.uI.UIManagerInstance.HoveringGameObject(slider.gameObject))
             {
                 slider.SwitchState(slider.deselectedState);
                 slider.uI.activated = false;
@@ -46,19 +47,21 @@ public class SliderPressedState : SliderBaseState
         }
     }
 
+    public override void ExitState(SliderStateManager slider)
+    {
+        ResetButtonValue(slider);
+        slider.methods.SaveToDataManager(UIManager.DataManagerInstance, slider.TotalSlidingPercentage());
+        slider.uI.UIManagerInstance.ChangingSlider = false;
+    }
+
     public void ResetButtonValue(SliderStateManager slider)
     {
         TransitionSystem.AddColorTransition(new ColorTransition(slider.sliderImage, originalColor, timeItTakes, TransitionType.SmoothStop2));
     }
 
-    public override void ExitState(SliderStateManager slider)
-    {
-        ResetButtonValue(slider);
-    }
-
     public void MoveTowardsMouse(SliderStateManager slider, float mouseX)
     {
-        float scaling = slider.uI.Manager.ResolutionScaling;
+        float scaling = UIManager.ResolutionScaling;
 
         if (slider.sliderPosition.localPosition.x * scaling > -slider.maxMoveValue * scaling || slider.sliderPosition.localPosition.x * scaling < slider.maxMoveValue * scaling)
         {
@@ -79,7 +82,7 @@ public class SliderPressedState : SliderBaseState
 
     public void MoveWithButton(SliderStateManager slider)
     {
-        float scaling = slider.uI.Manager.ResolutionScaling;
+        float scaling = UIManager.ResolutionScaling;
 
         Vector3 des = new(moveAmount * slider.moveDirection * scaling, 0, 0);
         float timeItTakes = 0.1f;

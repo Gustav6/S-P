@@ -12,9 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83798ac8aa17ef34981f663d8bb53092, type: 3}
   m_Name: TestWeapon
   m_EditorClassIdentifier: 
-  hitbox: {fileID: 8378186761250613226, guid: 2c3abb238b9f5a74d864deed567fef77, type: 3}
-  hitboxToPlayerOffset: {x: 0, y: 0.65}
-  startUp: 2
-  active: 3
-  windDown: 2
-  damage: 10000000
+  weaponAnimationToUse: {fileID: 22100000, guid: eafe3064b1423a147b4430175d18f7f0, type: 2}
+  weaponSprite: {fileID: -1692451804227615028, guid: 962da15309302a246817c52372453c02, type: 3}
+  animationSpeedMultiplier: 1
+  damage: 13
+  knockbackMultiplier: 1.2
+  weaponImpulseMultiplier: 6
+  weaponImpulseTime: 0.3
+  hitbox: {fileID: 1271849746066367273, guid: 1d9ee8be3b40b134abf86b08d7937f4e, type: 3}
+  weaponFlashSprite: {fileID: -7978083749908223333, guid: e391f5039968edc479031973dcc73d92, type: 3}
+  particleSystem: {fileID: 1567073594253252592, guid: a03547f8df435af4b914589d0b209a2d, type: 3}
+  isWeaponAnimationResetable: 0
+  resetMultiplier: 0.5

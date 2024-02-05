@@ -15,15 +15,18 @@ public class ButtonStateManager : MonoBehaviour
     public ButtenDeselectedState deselectedState = new();
     #endregion
 
-    public UI uI;
-    public Image image;
-    public TextMeshProUGUI text;
+    [HideInInspector] public UI uI;
+    [HideInInspector] public Image image;
+    [HideInInspector] public TextMeshProUGUI text;
+
+    public ButtonMethods methods;
 
     void Start()
     {
         image = GetComponentInChildren<Image>();
         text = GetComponentInChildren<TextMeshProUGUI>();
         uI = GetComponent<UI>();
+        methods = GetComponent<ButtonMethods>();
 
         currentState = deselectedState;
 
@@ -32,7 +35,10 @@ public class ButtonStateManager : MonoBehaviour
 
     void Update()
     {
-        currentState.UpdateState(this);
+        if (uI.UIManagerInstance != null && !UIManager.Transitioning)
+        {
+            currentState.UpdateState(this);
+        }
     }
 
     public void SwitchState(ButtonBaseState state)

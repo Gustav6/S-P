@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public static class TransitionSystem
@@ -17,6 +18,7 @@ public static class TransitionSystem
         {
             if (transitions[i].isRemoved)
             {
+                transitions[i].executeOnCompletion?.Invoke();
                 transitions.RemoveAt(i);
             }
         }
@@ -34,10 +36,32 @@ public static class TransitionSystem
     {
         transitions.Add(colorTransition);
     }
+    public static void AddRotationTransition(RotationTransition rotationTransition)
+    {
+        transitions.Add(rotationTransition);
+    }
+
+    public static float BounceClampTop(float t)
+    {
+        return Mathf.Abs(t);
+    }
+    public static float BounceClampBottom(float t)
+    {
+        return 1 - Mathf.Abs(1 - t);
+    }
 
     public static float Flip(float t)
     {
         return 1 - t;
+    }
+
+    public static float Scale(float t)
+    {
+        return t * t;
+    }
+    public static float ReverseScale(float t)
+    {
+        return t * (1 - t);
     }
 
     public static float SmoothStart2(float t)
@@ -70,6 +94,30 @@ public static class TransitionSystem
         return 1 - (1 - t) * (1 - t) * (1 - t) * (1 - t);
     }
 
+    public static float SinCurve(float repetitions, float amplitude, float t)
+    {
+        return math.sin(t * math.PI * repetitions) * amplitude * -1;
+    }
+
+    public static float NormalizedBezier3(float windUp, float overShoot, float t)
+    {
+        float s = 1 - t;
+        float t2 = t * t;
+        float s2 = s * s;
+        float t3 = t2 * t;
+        return (3 * windUp * s2 * t) + (3 * overShoot * s * t2) + (t3);
+    }
+    public static float NormalizedBezier4(float b, float c, float d, float t)
+    {
+        float s = 1 - t;
+        float t2 = t * t;
+        float s2 = s * s;
+        float t3 = t2 * t;
+        float s3 = s2 * s;
+        float t4 = t3 * t;
+        return (4 * b * s3 * t) + (8 * c * s2 * t2) + (4 * d * s * t3) + (t4);
+    }
+
     public static float Crossfade(float a, float b, float t)
     {
         return (1 - t) * a + t * b;
@@ -86,20 +134,7 @@ public enum TransitionType
     SmoothStop3,
     SmoothStop4,
 
-    bounceClampTop, 
-    bounceClampBottom, 
-    bounceClampBottomTop,
-}
+    NormalizedBezier3,
 
-public enum TransitionStart
-{
-    SmoothStart2,
-    SmoothStart3,
-    SmoothStart4,
-}
-public enum TransitionEnd
-{
-    SmoothStop2,
-    SmoothStop3,
-    SmoothStop4,
+    SinCurve,
 }

@@ -3,25 +3,25 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class SwitchPressedState : SwitchBaseState
 {
-    float timer;
-    float transitionTime = 0.3f;
+    float timer = 0.3f;
 
     public override void EnterState(SwitchStateManager @switch)
     {
-        timer = transitionTime;
-        SwitchToOnOrOff(@switch);
+        timer = @switch.transitionTime;
+        TransitionFromOnOff(@switch, timer);
     }
 
     public override void UpdateState(SwitchStateManager @switch)
     {
         if (timer <= 0)
         {
-            if (@switch.uI.Manager.KeyOrControlActive)
+            if (@switch.uI.UIManagerInstance.KeyOrControlActive)
             {
-                if (@switch.uI.Manager.CurrentButten == @switch.gameObject)
+                if (@switch.uI.UIManagerInstance.currentUISelected == @switch.uI.position)
                 {
                     @switch.SwitchState(@switch.selectedState);
                 }
@@ -32,7 +32,7 @@ public class SwitchPressedState : SwitchBaseState
             }
             else
             {
-                if (@switch.uI.Manager.HoveringGameObject(@switch.gameObject))
+                if (@switch.uI.UIManagerInstance.HoveringGameObject(@switch.gameObject))
                 {
                     @switch.SwitchState(@switch.selectedState);
                 }
@@ -50,26 +50,25 @@ public class SwitchPressedState : SwitchBaseState
 
     public override void ExitState(SwitchStateManager @switch)
     {
-
+        @switch.methods.SaveToDataManager(UIManager.DataManagerInstance, @switch.switchOn);
     }
 
-    public void SwitchToOnOrOff(SwitchStateManager @switch)
+    public void TransitionFromOnOff(SwitchStateManager @switch, float transitionTime)
     {
-        if (@switch.switchStatus)
+        if (@switch.switchOn)
         {
-            Vector3 destination = new(@switch.movingPartOffset * -1 * @switch.uI.Manager.ResolutionScaling, 0, 0);
+            Vector3 destination = new(@switch.movingPartOffset * -1 * UIManager.ResolutionScaling, 0, 0);
             destination += @switch.outLine.position;
-            Color newColor = new(0, 1, 0, 1);
-            TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3, false));
-            TransitionSystem.AddColorTransition(new ColorTransition(@switch.toggleImage, newColor, transitionTime, TransitionType.SmoothStop2));
+            Color newColor = new(0, 0.8f, 0, 1);
+            TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3));
+            TransitionSystem.AddColorTransition(new ColorTransition(@switch.toggleImage, @switch.onColor, transitionTime, TransitionType.SmoothStop2));
         }
-        else if (!@switch.switchStatus)
+        else
         {
-            Vector3 destination = new(@switch.movingPartOffset * @switch.uI.Manager.ResolutionScaling, 0, 0);
+            Vector3 destination = new(@switch.movingPartOffset * UIManager.ResolutionScaling, 0, 0);
             destination += @switch.outLine.position;
-            Color newColor = new(1, 0, 0, 1);
-            TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3, false));
-            TransitionSystem.AddColorTransition(new ColorTransition(@switch.toggleImage, newColor, transitionTime, TransitionType.SmoothStop2));
+            TransitionSystem.AddMoveTransition(new MoveTransition(@switch.movingPart, destination, transitionTime, TransitionType.SmoothStop3));
+            TransitionSystem.AddColorTransition(new ColorTransition(@switch.toggleImage, @switch.offColor, transitionTime, TransitionType.SmoothStop2));
         }
 
         @switch.uI.activated = false;

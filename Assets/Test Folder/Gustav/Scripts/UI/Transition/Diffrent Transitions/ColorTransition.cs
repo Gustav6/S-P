@@ -12,21 +12,24 @@ public class ColorTransition : Transition
     Color target;
     Color startingColor;
 
-    public ColorTransition(Image _image, Color colorTarget, float timeItTakes, TransitionType _transitionType)
+    public ColorTransition(Image i, Color colorTarget, float totalTime, TransitionType type, ExecuteOnCompletion execute = null)
     {
-        image = _image;
-        startingColor = _image.color;
+        image = i;
+        startingColor = i.color;
         target = colorTarget;
-        timerMax = timeItTakes;
-        transitionType = _transitionType;
+        timerMax = totalTime;
+        transitionType = type;
+        executeOnCompletion += execute;
     }
-    public ColorTransition(TextMeshProUGUI _textMeshPro, Color colorTarget, float timeItTakes, TransitionType _transitionType)
+
+    public ColorTransition(TextMeshProUGUI t, Color colorTarget, float totalTime, TransitionType type, ExecuteOnCompletion execute = null)
     {
-        textMeshPro = _textMeshPro;
-        startingColor = textMeshPro.color;
+        textMeshPro = t;
+        startingColor = t.color;
         target = colorTarget;
-        timerMax = timeItTakes;
-        transitionType = _transitionType;
+        timerMax = totalTime;
+        transitionType = type;
+        executeOnCompletion += execute;
     }
 
     public override void Start()
@@ -66,7 +69,7 @@ public class ColorTransition : Transition
         {
             image.color = Color.Lerp(startingColor, target, t);
         }
-        else
+        else if (textMeshPro != null)
         {
             textMeshPro.color = Color.Lerp(startingColor, target, t);
         }

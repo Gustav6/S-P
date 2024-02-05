@@ -74,7 +74,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 2
 --- !u!1 &4891497738101236767
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +111,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -44, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 48, y: 48}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4766251762751206078
 CanvasRenderer:
@@ -236,6 +236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6569544173159653361}
   - component: {fileID: 8144284902123102026}
+  - component: {fileID: 1287571845730752342}
   - component: {fileID: 7933385075221148905}
   - component: {fileID: 8959228491638266491}
   m_Layer: 5
@@ -282,8 +283,22 @@ MonoBehaviour:
   text: {fileID: 0}
   movingPart: {fileID: 0}
   outLine: {fileID: 0}
-  movingPartOffset: 0
-  switchStatus: 0
+  offColor: {r: 0.8, g: 0, b: 0, a: 1}
+  onColor: {r: 0.06666667, g: 0.8117647, b: 0, a: 1}
+  switchOn: 1
+  transitionTime: 0.3
+--- !u!114 &1287571845730752342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8260442939952280279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f537ef24fc3bb9847ae404f345c3a77f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7933385075221148905
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -297,7 +312,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   activated: 0
-  position: {x: 0, y: 0}
+  position: {x: 1, y: 1}
 --- !u!61 &8959228491638266491
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -411,8 +426,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Switch
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4ccb64f7af233ff4f9ed2a2a604484a6, type: 2}
+  m_sharedMaterial: {fileID: -3262743510935591868, guid: 4ccb64f7af233ff4f9ed2a2a604484a6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

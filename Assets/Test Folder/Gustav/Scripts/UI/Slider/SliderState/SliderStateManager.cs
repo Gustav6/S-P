@@ -13,17 +13,15 @@ public class SliderStateManager : MonoBehaviour
     public SliderPressedState pressedState = new();
     #endregion
 
-    public UI uI;
+    [HideInInspector] public UI uI;
+    [HideInInspector] public Image outLineImage;
+    [HideInInspector] public RectTransform outLinePosition;
+    [HideInInspector] public Image sliderImage;
+    [HideInInspector] public TextMeshProUGUI text;
+    [HideInInspector] public RectTransform sliderPosition;
 
-    public Image outLineImage;
-    public RectTransform outLinePosition;
-
-    public RectTransform sliderPosition;
-    public Image sliderImage;
+    public SliderMethods methods;
     public float slidersOffset;
-
-    public TextMeshProUGUI text;
-
     public float maxMoveValue;
     public float moveDirection;
 
@@ -31,12 +29,16 @@ public class SliderStateManager : MonoBehaviour
     {
         outLineImage = transform.GetChild(0).GetComponent<Image>();
         sliderImage = transform.GetChild(1).GetComponent<Image>();
-        uI = GetComponent<UI>();
         sliderPosition = transform.GetChild(1).GetComponent<RectTransform>();
         outLinePosition = transform.GetChild(0).GetComponent<RectTransform>();
         maxMoveValue = Mathf.Abs(sliderPosition.localPosition.x);
         text = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         slidersOffset = sliderPosition.localPosition.x;
+
+        methods = GetComponent<SliderMethods>();
+        uI = GetComponent<UI>();
+
+        SetStartPositionToValue();
 
         currentState = deselectedState;
 
@@ -45,7 +47,7 @@ public class SliderStateManager : MonoBehaviour
 
     void Update()
     {
-        if (!uI.Manager.Transitioning)
+        if (uI.UIManagerInstance != null && !UIManager.Transitioning)
         {
             currentState.UpdateState(this);
         }
@@ -62,9 +64,9 @@ public class SliderStateManager : MonoBehaviour
 
     public float TotalSlidingPercentage()
     {
-        float maxMove = Mathf.Abs(maxMoveValue * 2) * uI.Manager.ResolutionScaling;
+        float maxMove = Mathf.Abs(maxMoveValue * 2) * UIManager.ResolutionScaling;
 
-        float percentage = ((sliderPosition.localPosition.x + Mathf.Abs(slidersOffset)) / maxMove) * uI.Manager.ResolutionScaling;
+        float percentage = ((sliderPosition.localPosition.x + Mathf.Abs(slidersOffset)) / maxMove) * UIManager.ResolutionScaling;
 
         if (percentage > 0.99f)
         {
@@ -77,6 +79,20 @@ public class SliderStateManager : MonoBehaviour
         else
         {
             return percentage;
+        }
+    }
+
+    public float PercentageToPosition(float value)
+    {
+        return value * (maxMoveValue * 2) - maxMoveValue;
+    }
+
+    public void SetStartPositionToValue()
+    {
+        if (UIManager.DataManagerInstance.sliderValues.ContainsKey(methods.type))
+        {
+            Vector2 temp = new Vector2(PercentageToPosition(UIManager.DataManagerInstance.sliderValues[methods.type]), sliderPosition.localPosition.y);
+            sliderPosition.localPosition = temp;
         }
     }
 }

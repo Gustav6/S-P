@@ -13,7 +13,11 @@ TagManager:
   - Enemy
   - UIManager
   - DataManager
+<<<<<<< Updated upstream
 >>>>>>> c2e1298875d298fbc7367cbc0c3c03a3a8ba879b
+=======
+  - Water
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

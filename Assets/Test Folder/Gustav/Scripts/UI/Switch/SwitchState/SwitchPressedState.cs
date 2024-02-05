@@ -12,6 +12,7 @@ public class SwitchPressedState : SwitchBaseState
     public override void EnterState(SwitchStateManager @switch)
     {
         timer = @switch.transitionTime;
+        //@switch.uI.AudioManagerInstance.PlaySound(AudioType.ClickSound);
         TransitionFromOnOff(@switch, timer);
     }
 

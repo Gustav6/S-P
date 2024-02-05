@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(UI))]
 public class SliderStateManager : MonoBehaviour
 {
     #region States
@@ -19,6 +20,7 @@ public class SliderStateManager : MonoBehaviour
     [HideInInspector] public Image sliderImage;
     [HideInInspector] public TextMeshProUGUI text;
     [HideInInspector] public RectTransform sliderPosition;
+    [HideInInspector] public Transform pointers;
 
     public SliderMethods methods;
     public float slidersOffset;
@@ -33,6 +35,7 @@ public class SliderStateManager : MonoBehaviour
         outLinePosition = transform.GetChild(0).GetComponent<RectTransform>();
         maxMoveValue = Mathf.Abs(sliderPosition.localPosition.x);
         text = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
+        pointers = transform.GetChild(3).GetComponent<Transform>();
         slidersOffset = sliderPosition.localPosition.x;
 
         methods = GetComponent<SliderMethods>();

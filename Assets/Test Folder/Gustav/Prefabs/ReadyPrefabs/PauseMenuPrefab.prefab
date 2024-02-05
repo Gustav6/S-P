@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_SizeDelta.x
       value: 470
       objectReference: {fileID: 0}
+    - target: {fileID: 5194336702494647950, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 265
+      objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -134,6 +138,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8966469076544473362, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -265
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -159,6 +167,10 @@ PrefabInstance:
     - target: {fileID: 3195562526669914697, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_SizeDelta.x
       value: 170
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194336702494647950, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 115
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -220,6 +232,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Button (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8966469076544473362, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -115
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -249,6 +265,10 @@ PrefabInstance:
     - target: {fileID: 3195562526669914697, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_SizeDelta.x
       value: 305
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194336702494647950, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 185
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -313,6 +333,10 @@ PrefabInstance:
     - target: {fileID: 8732738409933366688, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_Name
       value: Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 8966469076544473362, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -185
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

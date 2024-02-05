@@ -16,11 +16,18 @@ public class DataManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            SetDefaultValues();
             DontDestroyOnLoad(gameObject);
             return;
         }
 
         Destroy(gameObject);
+    }
+
+    public void SetDefaultValues()
+    {
+        sliderValues.Add(SliderType.MainVolume, 1);
+        sliderValues.Add(SliderType.MusicVolume, 1);
     }
 }
 

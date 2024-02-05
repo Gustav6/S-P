@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(UI))]
 public class ButtonStateManager : MonoBehaviour
 {
     #region States
@@ -18,6 +19,7 @@ public class ButtonStateManager : MonoBehaviour
     [HideInInspector] public UI uI;
     [HideInInspector] public Image image;
     [HideInInspector] public TextMeshProUGUI text;
+    [HideInInspector] public Transform pointers;
 
     public ButtonMethods methods;
 
@@ -27,6 +29,7 @@ public class ButtonStateManager : MonoBehaviour
         text = GetComponentInChildren<TextMeshProUGUI>();
         uI = GetComponent<UI>();
         methods = GetComponent<ButtonMethods>();
+        pointers = transform.GetChild(2).GetComponent<Transform>();
 
         currentState = deselectedState;
 

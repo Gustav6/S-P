@@ -12,6 +12,8 @@ public class SliderDeselectedState : SliderBaseState
 
     public override void EnterState(SliderStateManager slider)
     {
+        slider.pointers.gameObject.SetActive(false);
+
         TransitionSystem.AddColorTransition(new ColorTransition(slider.text, newTextColor, timeItTakes, TransitionType.SmoothStart2));
         TransitionSystem.AddColorTransition(new ColorTransition(slider.outLineImage, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));
         TransitionSystem.AddColorTransition(new ColorTransition(slider.sliderImage, newInterPartColor, timeItTakes, TransitionType.SmoothStart2));
@@ -42,6 +44,6 @@ public class SliderDeselectedState : SliderBaseState
 
     public override void ExitState(SliderStateManager slider)
     {
-
+        slider.uI.AudioManagerInstance.PlaySound(AudioType.SelectSound);
     }
 }

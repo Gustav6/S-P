@@ -126,8 +126,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pausePrefab;
     public GameObject PausePrefab { get { return pausePrefab; } }
 
-    private float maxXPos;
-    private float maxYPos;
+    [SerializeField] private float maxXPos;
+    [SerializeField] private float maxYPos;
     #endregion
 
     #region Static variables
@@ -194,10 +194,15 @@ public class UIManager : MonoBehaviour
 
     public void FindEveryInteractableUI(List<GameObject> list)
     {
-        // Note that if there is no start position (0, 0) bug starts.
+        // Note that if there is no start position (0, 0) bugs will appear.
         #region Find objects with script UI and max X & Y value
         foreach (GameObject interactableUI in list)
         {
+            if (interactableUI.GetComponent<UI>().position == Vector2.zero)
+            {
+                currentUISelected = interactableUI.GetComponent<UI>().position;
+            }
+
             if (interactableUI.GetComponent<UI>().position.y > maxYPos)
             {
                 maxYPos = interactableUI.GetComponent<UI>().position.y;

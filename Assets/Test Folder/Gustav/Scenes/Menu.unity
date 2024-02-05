@@ -396,6 +396,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentUISelected: {x: 0, y: 0}
   pausePrefab: {fileID: 0}
+  maxXPos: 0
+  maxYPos: 0
 --- !u!1 &528776792
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,18 +883,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4976460259830838166, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802014962264341911, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802014962264341911, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802014962264341911, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

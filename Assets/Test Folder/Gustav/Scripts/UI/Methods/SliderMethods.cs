@@ -8,11 +8,7 @@ public class SliderMethods : MonoBehaviour
 
     public void SaveToDataManager(DataManager manager, float value)
     {
-        if (!manager.sliderValues.ContainsKey(type))
-        {
-            manager.sliderValues.Add(type, value);
-        }
-        else
+        if (manager.sliderValues.ContainsKey(type))
         {
             manager.sliderValues[type] = value;
         }

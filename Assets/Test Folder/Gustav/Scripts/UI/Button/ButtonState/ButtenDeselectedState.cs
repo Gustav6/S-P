@@ -11,6 +11,8 @@ public class ButtenDeselectedState : ButtonBaseState
 
     public override void EnterState(ButtonStateManager button)
     {
+        button.pointers.gameObject.SetActive(false);
+
         TransitionSystem.AddColorTransition(new ColorTransition(button.image, newOutlineColor, timeItTakes, TransitionType.SmoothStop2));
         TransitionSystem.AddColorTransition(new ColorTransition(button.text, newTextColor, timeItTakes, TransitionType.SmoothStop2));
 
@@ -39,6 +41,6 @@ public class ButtenDeselectedState : ButtonBaseState
     }
     public override void ExitState(ButtonStateManager button)
     {
-
+        button.uI.AudioManagerInstance.PlaySound(AudioType.SelectSound);
     }
 }

@@ -15,6 +15,8 @@ public class SliderSelectedState : SliderBaseState
     {
         if (!UIManager.Transitioning)
         {
+            slider.pointers.gameObject.SetActive(true);
+
             TransitionSystem.AddColorTransition(new ColorTransition(slider.text, newTextColor, timeItTakes, TransitionType.SmoothStart2));
             TransitionSystem.AddColorTransition(new ColorTransition(slider.outLineImage, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));
             TransitionSystem.AddColorTransition(new ColorTransition(slider.sliderImage, newSliderColor, timeItTakes, TransitionType.SmoothStart2));

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class ScaleTransition : Transition
 {
@@ -13,11 +14,14 @@ public class ScaleTransition : Transition
     float pointB;
     float pointC;
 
-    public ScaleTransition(Transform t, Vector3 scaleTarget, float totalTime, TransitionType type, ExecuteOnCompletion execute = null, float pA = 0, float pB = 0, float pC = 0)
+    float amplitude;
+    float repetiotions;
+
+    public ScaleTransition(Transform t, Vector3 _target, float totalTime, TransitionType type, ExecuteOnCompletion execute = null, float pA = 0, float pB = 0, float pC = 0)
     {
         transform = t;
         startingScale = transform.localScale;
-        target = scaleTarget;
+        target = _target;
         timerMax = totalTime;
         transitionType = type;
         executeOnCompletion += execute;
@@ -26,6 +30,16 @@ public class ScaleTransition : Transition
         pointC = pC;
     }
 
+    public ScaleTransition(Transform t, Vector3 _target, float totalTime, TransitionType type, float _amplitude, float _repetiotions)
+    {
+        transform = t;
+        startingScale = transform.localScale;
+        target = _target;
+        timerMax = totalTime;
+        transitionType = type;
+        amplitude = _amplitude;
+        repetiotions = _repetiotions;
+    }
 
     public override void Start()
     {
@@ -55,6 +69,9 @@ public class ScaleTransition : Transition
                 break;
             case TransitionType.SmoothStop4:
                 t = TransitionSystem.SmoothStop4(timer / timerMax);
+                break;
+            case TransitionType.SinCurve:
+                t = TransitionSystem.SinCurve(repetiotions, amplitude, timer / timerMax);
                 break;
             default:
                 break;

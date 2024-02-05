@@ -14,10 +14,10 @@ public class ButtenSelectedState : ButtonBaseState
 
     public override void EnterState(ButtonStateManager button)
     {
-
         if (!UIManager.Transitioning)
         {
-            timer = timeItTakes / 2;
+            button.pointers.gameObject.SetActive(true);
+
             TransitionSystem.AddScaleTransition(new ScaleTransition(button.transform, newScale, timeItTakes, TransitionType.SmoothStart2));
             TransitionSystem.AddColorTransition(new ColorTransition(button.image, newOutlineColor, timeItTakes, TransitionType.SmoothStop2));
             TransitionSystem.AddColorTransition(new ColorTransition(button.text, newTextColor, timeItTakes, TransitionType.SmoothStop2));

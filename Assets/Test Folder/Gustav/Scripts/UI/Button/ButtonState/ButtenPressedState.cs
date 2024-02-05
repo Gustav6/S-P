@@ -14,11 +14,10 @@ public class ButtenPressedState : ButtonBaseState
     private Vector3 newScale = new(1, 1, 1);
     private Color newOutlineColor = new(1, 1, 1, 1);
 
-    private readonly Vector3 rotation = new(0, 0, 0.1f);
-
     public override void EnterState(ButtonStateManager button)
     {
         timer = timeItTakes;
+        //button.uI.AudioManagerInstance.PlaySound(AudioType.ClickSound);
         TransitionSystem.AddScaleTransition(new ScaleTransition(button.transform, newScale, timeItTakes, TransitionType.SmoothStop2));
         TransitionSystem.AddColorTransition(new ColorTransition(button.image, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));
     }

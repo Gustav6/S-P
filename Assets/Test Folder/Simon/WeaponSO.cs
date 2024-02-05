@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Weapon", menuName = "ScriptableObject/Weapon")]
+[CreateAssetMenu(fileName = "Weapon", menuName = "ScriptableObjects/Weapon")]
 public class WeaponSO : ScriptableObject
 {
     [SerializeField] private AnimatorOverrideController weaponAnimationToUse;
@@ -14,7 +14,7 @@ public class WeaponSO : ScriptableObject
 
     #region SerializeField variables with tooltips
     [Tooltip("Used to determine how much force is added to an entity after swinging a weapon. Can be negative for a recoil effect.\n" +
-            "Leave this variable, or the one below, at 0 and this effect will not occur.")]
+            "Leave this variable, or the one below, at 0 and this effect will not occur. This only works for the player.")]
     [SerializeField] private float weaponImpulseMultiplier;
 
     [Tooltip("Used to determine how long the force after a hit will last.\n" +
@@ -24,8 +24,7 @@ public class WeaponSO : ScriptableObject
     [Tooltip("Create a new GameObject and add a CapsuleCollider2D. Then determine its size and change its transform to where you want it to spawn.\n" +
             "To determine the transform, imagine that the hitbox will spawn at (0, 0) which will be inside the entity and move accordingly.")]
     [SerializeField] private CapsuleCollider2D hitbox;
-    // TODO: Maybe change collider to gameobject to allow for all types of different colliders
-    // and so that it can have a rigidbody which can impart velocity on spawn.
+    // TODO: Add a variable for the ranged weapons.
 
     [Tooltip("A sprite of the same shape as the weapon, but colored white. Will be used to create a flash effect on weapons.\n" +
             "Leave null for entities that you do not want this to happen on, such as very common enemies.")]

@@ -345,9 +345,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5270490091103469088}
-  - component: {fileID: 3919317039693071516}
-  - component: {fileID: 5582965914499597312}
-  - component: {fileID: 2439498831116210818}
+  - component: {fileID: 6993807035743754040}
+  - component: {fileID: 8400108020923393028}
   - component: {fileID: 6776574943263549923}
   m_Layer: 5
   m_Name: Button
@@ -374,7 +373,7 @@ Transform:
   - {fileID: 2414562495873335305}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3919317039693071516
+--- !u!114 &6993807035743754040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -386,12 +385,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70db9597454a1a542991dbbddb82042a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uI: {fileID: 0}
   outlineImage: {fileID: 0}
   text: {fileID: 0}
   pointers: {fileID: 0}
-  methods: {fileID: 0}
---- !u!114 &5582965914499597312
+--- !u!114 &8400108020923393028
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -400,31 +397,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 8732738409933366688}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6ce1e49dbc5e67439c1c052e220fbfb, type: 3}
+  m_Script: {fileID: 11500000, guid: f7f9f7027cfc19e4d8db1c09406fa128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionToScene: 0
-  scene: 0
-  transitionToPrefab: 0
-  prefabScaleTransition: 0
-  prefabMoveTransition: 0
-  prefab: {fileID: 0}
-  unPause: 0
-  exit: 0
---- !u!114 &2439498831116210818
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8732738409933366688}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce2fd423e839e5943a1385eeec852215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activated: 0
-  position: {x: 0, y: 2}
 --- !u!61 &6776574943263549923
 BoxCollider2D:
   m_ObjectHideFlags: 0

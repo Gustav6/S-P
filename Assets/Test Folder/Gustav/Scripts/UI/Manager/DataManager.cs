@@ -7,7 +7,7 @@ using UnityEngine.Rendering;
 public class DataManager : MonoBehaviour
 {
     public Dictionary<SliderType, float> sliderValues = new();
-    public Dictionary<SwitchType, bool> switchValues = new();
+    public Dictionary<ToggleType, bool> switchValues = new();
     public Dictionary<string, int> leaderBoard = new();
 
     private static DataManager instance = null;
@@ -38,7 +38,7 @@ public enum SliderType
     MusicVolume,
 }
 
-public enum SwitchType
+public enum ToggleType
 {
     MainOnOrOff,
     MusicOnOrOff,

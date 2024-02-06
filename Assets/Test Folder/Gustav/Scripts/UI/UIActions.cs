@@ -5,6 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class UIActions : MonoBehaviour
 {
+    public void SaveToDataManager(DataManager manager, float value, SliderType type)
+    {
+        if (manager.sliderValues.ContainsKey(type))
+        {
+            manager.sliderValues[type] = value;
+        }
+    }
+
+    public void SaveToDataManager(DataManager manager, bool value, ToggleType type)
+    {
+        if (!manager.switchValues.ContainsKey(type))
+        {
+            manager.switchValues.Add(type, value);
+        }
+        else
+        {
+            manager.switchValues[type] = value;
+        }
+    }
+
     public static void SwitchScene(NewScene scene)
     {
         SceneManager.LoadScene((int)scene);

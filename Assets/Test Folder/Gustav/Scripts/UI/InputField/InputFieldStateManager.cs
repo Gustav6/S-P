@@ -1,51 +1,36 @@
-using NUnit.Framework.Internal;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InputFieldStateManager : MonoBehaviour
+public class InputFieldStateManager : BaseStateManager
 {
-    #region States
-    private InputFieldBaseState currentState;
-
-    public InputFieldSelectedState selectedState = new();
     public InputFieldDeselectedState deselectedState = new();
+    public InputFieldSelectedState selectedState = new();
     public InputFieldPressedState pressedState = new();
-    #endregion
 
-    [HideInInspector] public UI uI;
     [HideInInspector] public Image image;
     [HideInInspector] public TextMeshProUGUI text;
     [HideInInspector] public GameObject pointers;
 
-    void Start()
+    public override void OnStart()
     {
-        uI = GetComponent<UI>();
+        InputManagerInstance = this;
+
+        base.OnStart();
+
         image = GetComponentInChildren<Image>();
         text = GetComponentInChildren<TextMeshProUGUI>();
         pointers = transform.GetChild(2).GetComponent<Transform>().gameObject;
 
-        currentState = deselectedState;
+        CurrentState = deselectedState;
 
-        currentState.EnterState(this);
+        CurrentState.EnterState(this);
     }
 
-    void Update()
+    public override void OnUpdate()
     {
-        if (uI.UIManagerInstance != null && !UIManager.Transitioning)
-        {
-            currentState.UpdateState(this);
-        }
-    }
-
-    public void SwitchState(InputFieldBaseState state)
-    {
-        currentState.ExitState(this);
-
-        currentState = state;
-
-        currentState.EnterState(this);
+        base.OnUpdate();
     }
 }

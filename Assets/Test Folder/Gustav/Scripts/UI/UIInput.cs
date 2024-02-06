@@ -53,9 +53,9 @@ public class UIInput : MonoBehaviour
 
                 if (g.GetComponent<SliderStateManager>() != null)
                 {
-                    if (g.GetComponent<UI>() != null)
+                    if (g.GetComponent<BaseStateManager>() != null)
                     {
-                        if (g.GetComponent<UI>().activated)
+                        if (g.GetComponent<BaseStateManager>().UIActivated)
                         {
                             return;
                         }
@@ -106,32 +106,32 @@ public class UIInput : MonoBehaviour
             SliderStateManager sm;
             GameObject g;
 
-            if (manager.CheckForInteractableUI(manager.currentUISelected).gameObject != null)
-            {
-                g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
+            //if (manager.CheckForInteractableUI(manager.currentUISelected).gameObject != null)
+            //{
+            //    g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
 
-                if (g.GetComponent<SliderStateManager>() != null)
-                {
-                    sm = g.GetComponent<SliderStateManager>();
+            //    if (g.GetComponent<SliderStateManager>() != null)
+            //    {
+            //        sm = g.GetComponent<SliderStateManager>();
 
-                    if (manager.ChangingSlider)
-                    {
-                        if (context.ReadValue<float>() < 0)
-                        {
-                            sm.moveDirection = -1;
-                        }
-                        else if (context.ReadValue<float>() > 0)
-                        {
-                            sm.moveDirection = 1;
-                        }
-                    }
+            //        if (manager.ChangingSlider)
+            //        {
+            //            if (context.ReadValue<float>() < 0)
+            //            {
+            //                sm.moveDirection = -1;
+            //            }
+            //            else if (context.ReadValue<float>() > 0)
+            //            {
+            //                sm.moveDirection = 1;
+            //            }
+            //        }
 
-                    if (context.canceled)
-                    {
-                        sm.moveDirection = 0;
-                    }
-                }
-            }
+            //        if (context.canceled)
+            //        {
+            //            sm.moveDirection = 0;
+            //        }
+            //    }
+            //}
         }
     }
 
@@ -140,28 +140,28 @@ public class UIInput : MonoBehaviour
         if (CanInteractWithUI())
         {
             GameObject g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
-            UI uI = g.GetComponent<UI>();
+            BaseStateManager uI = g.GetComponent<BaseStateManager>();
 
             if (context.performed)
             {
                 if (g.GetComponent<SliderStateManager>() == null)
                 {
-                    uI.activated = true;
+                    uI.UIActivated = true;
                 }
                 else
                 {
-                    bool temp = uI.activated;
+                    bool temp = uI.UIActivated;
 
                     temp = !temp;
 
-                    uI.activated = temp;
+                    uI.UIActivated = temp;
                 }
             }
             if (context.canceled)
             {
                 if (g.GetComponent<SliderStateManager>() == null)
                 {
-                    uI.activated = false;
+                    uI.UIActivated = false;
                 }
             }
         }
@@ -177,19 +177,19 @@ public class UIInput : MonoBehaviour
         if (CanInteractWithUI() && !manager.KeyOrControlActive)
         {
             GameObject g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
-            UI uI = g.GetComponent<UI>();
+            BaseStateManager uI = g.GetComponent<BaseStateManager>();
 
             if (manager.HoveringGameObject(g))
             {
                 if (context.performed)
                 {
-                    uI.activated = true;
+                    uI.UIActivated = true;
                 }
             }
 
             if (context.canceled)
             {
-                uI.activated = false;
+                uI.UIActivated = false;
             }
         }
     }

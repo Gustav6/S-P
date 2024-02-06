@@ -14,6 +14,8 @@ public class WaveRewardInteractable : Interactable
 
 	[SerializeField] Color _redColor;
 
+	On
+
 	private void Start()
 	{
 

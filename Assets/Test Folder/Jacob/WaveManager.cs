@@ -27,7 +27,8 @@ public class WaveManager : MonoBehaviour
     {
         GenerateRewards(_statRewardPool, _statRewardInteractables);
         GenerateRewards(_weaponRewardPool, _weaponRewardInteractables);
- 
+
+        _onRewardClaimedCallback += DisableRewardInteractables;
     }
 
     private void Update()

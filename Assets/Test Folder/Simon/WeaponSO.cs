@@ -22,8 +22,7 @@ public class WeaponSO : ScriptableObject
     [SerializeField] private float weaponImpulseTime;
 
     [Tooltip("If a weapon is ranged, use this variable to dictate the speed of the projectile.\n" +
-            "If it is not ranged leave as 0. Ranged weapons should use animations of which don't move the body pivot 2 too much.\n" +
-            "This is due to how the hitbox spawning system is set up.")]
+            "If it is not ranged leave as 0.")]
     [SerializeField] private float rangedWeaponSpeed;
 
     [Tooltip("Create a new GameObject and add a CapsuleCollider2D. Then determine its size and change its transform to where you want it to spawn.\n" +

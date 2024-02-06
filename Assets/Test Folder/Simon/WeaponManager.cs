@@ -21,6 +21,8 @@ public class WeaponManager : MonoBehaviour
     }
     #endregion
 
+    private int _hitStopRequests;
+
     /// <summary>
     /// Switches the CurrentWeapon for the player.
     /// </summary>
@@ -53,5 +55,25 @@ public class WeaponManager : MonoBehaviour
             Destroy(oldParticleSystem);
 
         Instantiate(controller.CurrentWeapon.ParticleSystem, swingEffect);
+    }
+
+    /// <summary>
+    /// Sends a request to stop the entity from attacking.
+    /// </summary>
+    /// <param name="canHit">True sends a request to enable, false sends a request to disable.</param>
+    public void ToggleHit(bool canHit)
+    {
+        if (canHit)
+            _hitStopRequests--;
+        else
+            _hitStopRequests++;
+    }
+
+    public bool CanHit()
+    {
+        if (_hitStopRequests < 0)
+            _hitStopRequests = 0;
+
+        return _hitStopRequests == 0;
     }
 }

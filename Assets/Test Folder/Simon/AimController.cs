@@ -56,7 +56,11 @@ public class AimController : MonoBehaviour
 
 	private IEnumerator TurnAround(float direction)
 	{
+		WeaponManager.Instance.ToggleHit(false);
+
 		float time = 0;
+
+		neckAnchor.localRotation = Quaternion.Euler(0, 0, 0);
 
 		while (time <= turnTime && direction != 0)
 		{
@@ -66,6 +70,8 @@ public class AimController : MonoBehaviour
 		}
 
 		spriteTransform.localScale = new Vector3(0.5f * direction, 0.5f, 0.5f);
+
+		WeaponManager.Instance.ToggleHit(true);
 	}
 
     #region Static Methods

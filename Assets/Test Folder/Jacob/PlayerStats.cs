@@ -29,7 +29,7 @@ public class PlayerStats : MonoBehaviour
 
     public float GetStat(StatType stat)
     {
-        return (_mainStatBlock * _weaponStatBlock).GetValue(stat).Value;
+        return (_mainStatBlock * _weaponStatBlock).GetValue((int)stat).Value;
     }
 
     public void AddStatModifier(StatBlock statChange)

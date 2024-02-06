@@ -20,10 +20,14 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] AnimationCurve _horizontalCurve, _verticalCurve;
 
+    delegate void OnRewardClaimed();
+    OnRewardClaimed _onRewardClaimedCallback;
+
     private void Start()
     {
         GenerateRewards(_statRewardPool, _statRewardInteractables);
         GenerateRewards(_weaponRewardPool, _weaponRewardInteractables);
+ 
     }
 
     private void Update()
@@ -66,6 +70,16 @@ public class WaveManager : MonoBehaviour
         Transform randomSpawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
         
         // Spawn enemy --> Animate it going from water to island --> Enable enemy AI.
+    }
+
+    void DisableRewardInteractables()
+    {
+        for (int i = 0; i < _statRewardInteractables.Length; i++)
+            _statRewardInteractables[i].enabled = false;
+
+        for (int i = 0; i < _weaponRewardInteractables.Length; i++)
+            _weaponRewardInteractables[i].enabled = false;
+
     }
 
     List<GameObject> GetEnemies(int totalBudget, WaveType waveType)

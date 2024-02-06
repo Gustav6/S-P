@@ -35,7 +35,12 @@ public struct StatBlock
 			l.AbilityCooldownModifier * r.AbilityCooldownModifier);
 	}
 
-	public KeyValuePair<string, float> GetValue(StatType statType)
+	/// <summary>
+	/// Cast statType from the StatType enum to an integer
+	/// </summary>
+	/// <param name="statType">Cast statType from the StatType enum to an integer</param>
+	/// <returns></returns>
+	public KeyValuePair<string, float> GetValue(int statType)
     {
         switch ((int)statType)
         {

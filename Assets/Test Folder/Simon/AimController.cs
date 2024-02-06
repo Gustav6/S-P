@@ -11,6 +11,8 @@ public class AimController : MonoBehaviour
 	[SerializeField] private Transform weaponSwingAnchor;
     [SerializeField] private Transform neckAnchor;
 
+	private float _topHeadRotation = -44, _bottomHeadRotation = 44;
+
 	private float _previousAimDirection = 1;
 
     /// <summary>
@@ -44,7 +46,7 @@ public class AimController : MonoBehaviour
 	private void RotateBody(float x, float angle)
 	{
 		// Add 90 to align with mouse, because of how equation circle works.
-		if (Mathf.Abs(x) >= 0.4f)
+		if (Mathf.Abs(x) >= turnThreshold)
 			weaponSwingAnchor.localRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
 
 		if (Mathf.Abs(x) >= 0.9)
@@ -52,15 +54,21 @@ public class AimController : MonoBehaviour
 			// Subtract by 180 to adjust the head position so the eyes face the mouse rather than the neck.
 			neckAnchor.localRotation = Quaternion.AngleAxis(angle - 180, Vector3.forward);
 		}
+		else if (weaponSwingAnchor.localEulerAngles.z <= 230 && weaponSwingAnchor.localEulerAngles.z >= 100) // Had to make sure it was above 100 because while turning it would be set to 14 for onr frame.
+        {
+			neckAnchor.localRotation = Quaternion.Euler(Vector3.forward * _topHeadRotation);
+        }
+        else
+        {
+			neckAnchor.localRotation = Quaternion.Euler(Vector3.forward * _bottomHeadRotation);
+		}
 	}
 
-	private IEnumerator TurnAround(float direction)
+    private IEnumerator TurnAround(float direction)
 	{
 		WeaponManager.Instance.ToggleHit(false);
 
 		float time = 0;
-
-		neckAnchor.localRotation = Quaternion.Euler(0, 0, 0);
 
 		while (time <= turnTime && direction != 0)
 		{

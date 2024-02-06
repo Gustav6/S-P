@@ -21,10 +21,14 @@ public class WeaponSO : ScriptableObject
             "Leave this variable, or the one above, at 0 and this effect will not occur.")]
     [SerializeField] private float weaponImpulseTime;
 
+    [Tooltip("If a weapon is ranged, use this variable to dictate the speed of the projectile.\n" +
+            "If it is not ranged leave as 0. Ranged weapons should use animations of which don't move the body pivot 2 too much.\n" +
+            "This is due to how the hitbox spawning system is set up.")]
+    [SerializeField] private float rangedWeaponSpeed;
+
     [Tooltip("Create a new GameObject and add a CapsuleCollider2D. Then determine its size and change its transform to where you want it to spawn.\n" +
-            "To determine the transform, imagine that the hitbox will spawn at (0, 0) which will be inside the entity and move accordingly.")]
-    [SerializeField] private CapsuleCollider2D hitbox;
-    // TODO: Add a variable for the ranged weapons.
+            "To determine the transform, imagine that the hitbox will spawn at (0, 0) which will be inside the entity and move accordingly. Needs rigidbody for ranged weapons.")]
+    [SerializeField] private GameObject hitbox;
 
     [Tooltip("A sprite of the same shape as the weapon, but colored white. Will be used to create a flash effect on weapons.\n" +
             "Leave null for entities that you do not want this to happen on, such as very common enemies.")]
@@ -48,7 +52,8 @@ public class WeaponSO : ScriptableObject
     public float AnimationSpeed { get => animationSpeedMultiplier; }
     public float ImpulseMultiplier { get => weaponImpulseMultiplier; }
     public float ImpulseEffectTime { get => weaponImpulseTime; }
-    public CapsuleCollider2D Hitbox { get => hitbox; }
+    public float HitboxVelocity { get => rangedWeaponSpeed; }
+    public GameObject Hitbox { get => hitbox; }
     public Sprite WeaponFlashSprite { get => weaponFlashSprite; }
     public GameObject ParticleSystem { get => particleSystem; }
     public bool IsWeaponResetable { get => isWeaponAnimationResetable; }

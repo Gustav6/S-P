@@ -5,8 +5,6 @@ using UnityEngine.Events;
 
 public class AttackController : MonoBehaviour
 {
-    public UnityEvent OnControlRegained;
-
     public WeaponSO CurrentWeapon;
     private PlayerMovement _player;
 
@@ -41,6 +39,7 @@ public class AttackController : MonoBehaviour
     /// Plays the attack animation, which will then begin calling the attack logic.
     /// </summary>
     /// <param name="attackForceDirection">The direction the entity should get a force added towards when attacking</param>
+    /// <returns></returns>
     internal void PlayHitAnimation(Vector2 attackForceDirection)
     {
         // TODO: Play SFX.
@@ -76,8 +75,6 @@ public class AttackController : MonoBehaviour
             return;
         }
 
-        OnControlRegained?.Invoke();
-
         IsAnimationPlaying = false;
 
         // If there's an entity whos weapon shouldn't flash, like common enemies, just leave the flash sprite null in WeaponSO.
@@ -94,7 +91,6 @@ public class AttackController : MonoBehaviour
     /// <summary>
     /// Brefily turns the flash sprite of the weapon slightly opaque, before reverting.
     /// </summary>
-    /// <returns></returns>
     private IEnumerator FlashWeapon()
     {
         _flashSpriteRenderer.color = flashOpaque;

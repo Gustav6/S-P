@@ -8,6 +8,7 @@ public class DataManager : MonoBehaviour
 {
     public Dictionary<SliderType, float> sliderValues = new();
     public Dictionary<SwitchType, bool> switchValues = new();
+    public Dictionary<string, int> leaderBoard = new();
 
     private static DataManager instance = null;
 

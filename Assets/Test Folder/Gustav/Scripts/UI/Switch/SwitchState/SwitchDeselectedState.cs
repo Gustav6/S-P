@@ -12,7 +12,7 @@ public class SwitchDeselectedState : SwitchBaseState
 
     public override void EnterState(SwitchStateManager @switch)
     {
-        @switch.pointers.gameObject.SetActive(false);
+        @switch.pointers.SetActive(false);
 
         TransitionSystem.AddColorTransition(new ColorTransition(@switch.outLineImage, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));
         TransitionSystem.AddColorTransition(new ColorTransition(@switch.movingPartImage, newMovingPartColor, timeItTakes, TransitionType.SmoothStart2));

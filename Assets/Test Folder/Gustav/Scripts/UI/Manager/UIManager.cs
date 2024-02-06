@@ -123,11 +123,10 @@ public class UIManager : MonoBehaviour
 
     private Vector2 prevPosition;
 
-    [SerializeField] private GameObject pausePrefab;
-    public GameObject PausePrefab { get { return pausePrefab; } }
+    public GameObject pausePrefab;
 
-    [SerializeField] private float maxXPos;
-    [SerializeField] private float maxYPos;
+    private float maxXPos;
+    private float maxYPos;
     #endregion
 
     #region Static variables

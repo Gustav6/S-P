@@ -382,6 +382,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95057c79320671e4db29a5c4cac52c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inputField: {fileID: 0}
+  text: {fileID: 0}
 --- !u!114 &519030763
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,8 +398,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentUISelected: {x: 0, y: 0}
   pausePrefab: {fileID: 0}
-  maxXPos: 0
-  maxYPos: 0
 --- !u!1 &528776792
 GameObject:
   m_ObjectHideFlags: 0
@@ -804,6 +804,10 @@ PrefabInstance:
     - target: {fileID: 3381804027909635715, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
       propertyPath: m_Name
       value: MainMenuPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381804027909635715, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4976460259830838166, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
       propertyPath: m_Pivot.x

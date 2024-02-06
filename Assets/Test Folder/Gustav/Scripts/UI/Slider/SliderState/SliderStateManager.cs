@@ -20,7 +20,7 @@ public class SliderStateManager : MonoBehaviour
     [HideInInspector] public Image sliderImage;
     [HideInInspector] public TextMeshProUGUI text;
     [HideInInspector] public RectTransform sliderPosition;
-    [HideInInspector] public Transform pointers;
+    [HideInInspector] public GameObject pointers;
 
     public SliderMethods methods;
     public float slidersOffset;
@@ -35,7 +35,7 @@ public class SliderStateManager : MonoBehaviour
         outLinePosition = transform.GetChild(0).GetComponent<RectTransform>();
         maxMoveValue = Mathf.Abs(sliderPosition.localPosition.x);
         text = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        pointers = transform.GetChild(3).GetComponent<Transform>();
+        pointers = transform.GetChild(3).GetComponent<Transform>().gameObject;
         slidersOffset = sliderPosition.localPosition.x;
 
         methods = GetComponent<SliderMethods>();

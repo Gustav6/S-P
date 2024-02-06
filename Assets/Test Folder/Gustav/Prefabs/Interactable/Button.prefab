@@ -259,6 +259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 12
   magnitude: 2
+  left: {fileID: 0}
+  right: {fileID: 0}
 --- !u!1 &4187804337531870304
 GameObject:
   m_ObjectHideFlags: 0
@@ -271,7 +273,7 @@ GameObject:
   - component: {fileID: 2445320651262414892}
   - component: {fileID: 5154025753127744046}
   m_Layer: 0
-  m_Name: OutLine
+  m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

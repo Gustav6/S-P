@@ -88,7 +88,7 @@ public class SliderPressedState : SliderBaseState
     public void MoveWithButton(SliderStateManager slider)
     {
         float scaling = UIManager.ResolutionScaling;
-        float moveAmount = slider.maxMoveValue / 100;
+        float moveAmount = slider.maxMoveValue / 200;
 
         Vector3 des = new(moveAmount * slider.moveDirection * scaling, 0, 0);
 

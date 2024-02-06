@@ -5,15 +5,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(UI))]
-public class ButtonStateManager : MonoBehaviour
+public class InputFieldStateManager : MonoBehaviour
 {
     #region States
-    private ButtonBaseState currentState;
+    private InputFieldBaseState currentState;
 
-    public ButtenSelectedState selectedState = new();
-    public ButtenPressedState pressedState = new();
-    public ButtenDeselectedState deselectedState = new();
+    public InputFieldSelectedState selectedState = new();
+    public InputFieldDeselectedState deselectedState = new();
+    public InputFieldPressedState pressedState = new();
     #endregion
 
     [HideInInspector] public UI uI;
@@ -21,14 +20,11 @@ public class ButtonStateManager : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI text;
     [HideInInspector] public GameObject pointers;
 
-    public ButtonMethods methods;
-
     void Start()
     {
+        uI = GetComponent<UI>();
         image = GetComponentInChildren<Image>();
         text = GetComponentInChildren<TextMeshProUGUI>();
-        uI = GetComponent<UI>();
-        methods = GetComponent<ButtonMethods>();
         pointers = transform.GetChild(2).GetComponent<Transform>().gameObject;
 
         currentState = deselectedState;
@@ -44,7 +40,7 @@ public class ButtonStateManager : MonoBehaviour
         }
     }
 
-    public void SwitchState(ButtonBaseState state)
+    public void SwitchState(InputFieldBaseState state)
     {
         currentState.ExitState(this);
 

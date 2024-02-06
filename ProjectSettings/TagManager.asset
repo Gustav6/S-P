@@ -7,6 +7,9 @@ TagManager:
   - InteractableUI
   - UIPrefab
   - Enemy
+  - Weapon
+  - Water
+  - WaterCollision
   layers:
   - Default
   - TransparentFX
@@ -14,6 +17,8 @@ TagManager:
   - 
   - Water
   - UI
+  - Player
+  - Enemy
   - 
   - 
   - 
@@ -38,8 +43,6 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - Interactable
   m_SortingLayers:
   - name: Default
     uniqueID: 0

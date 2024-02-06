@@ -1,16 +1,15 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using TMPro;
 using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
     public float _diStrength = 0.25f;
+    public float _kbResistance;
 
-    public bool _isImmune = false;
     [HideInInspector]
+    public bool _isImmune = false;
     public bool _isGrounded = true;
     public bool _movementLocked = false;
 
@@ -25,11 +24,12 @@ public class Enemy : MonoBehaviour
 
 
 
+
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        player = FindObjectOfType<PlayerMovement>();
+        player = FindFirstObjectByType<PlayerMovement>();
     }
 
 }

@@ -6,21 +6,14 @@ public class smallEnemy : Enemy, IDamageable
 {
     public float KnockbackPercent { get; set; }
 
-    private void Awake()
-    {
-        anim = transform.GetChild(0).GetComponent<Animator>();
-    }
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
             TakeKnockback(Vector2.zero, 10, 0.25f);
         }
-
-        anim.SetBool("isMoving", true);
-
     }
-    
+
     public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
     {
         if (_isImmune)
@@ -42,26 +35,18 @@ public class smallEnemy : Enemy, IDamageable
         Debug.Log("hit");
     }
 
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        Debug.Log("Collision");
-        if (other.gameObject.tag == "Weapon")
-        {
-            TakeKnockback(Vector2.zero, 20, 0.25f);
-            Debug.Log("Collided w player");
-        }
-
-        if (other.gameObject.tag == "Player")
-        {
-            player.TakeKnockback(Vector2.zero, 2, 0.25f);
-            Debug.Log("player took knockback");
-        }
-    }
-
-
     void ResetKB()
     {
         _isGrounded = true;
         _isImmune = false;
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "WaterCollision")
+        {
+            Debug.Log("Man overboard");
+            Destroy(this.gameObject);
+        }
     }
 }

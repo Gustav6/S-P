@@ -14,6 +14,7 @@ public class EnemyAI : MonoBehaviour
     Path path;
     Seeker seeker;
     Rigidbody2D rb;
+    Animator anim;
 
     public SpriteRenderer spriteRenderer;
 
@@ -27,6 +28,11 @@ public class EnemyAI : MonoBehaviour
         InvokeRepeating("UpdatePath", 0f, .2f);
     }
 
+    private void Awake()
+    {
+        anim = transform.GetChild(0).GetComponent<Animator>();
+    }
+
     public void Update()
     {
         //    Vector2 direction = (target.position - transform.position).normalized;
@@ -38,6 +44,7 @@ public class EnemyAI : MonoBehaviour
         if (seeker.IsDone())
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);
+            anim.SetBool("isMoving", true);
         }
     }
 
@@ -53,29 +60,38 @@ public class EnemyAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (target != null)
+        
+
+        if (path == null)
         {
-            if (path == null)
-            {
-                reachedDestination = true;
-                return;
-            }
-            else
-            {
-                reachedDestination = false;
-            }
+            reachedDestination = true;
+            return;
+        }
+        else
+        {
+            reachedDestination = false;
+        }
+       
 
-            Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
-            Vector2 force = direction * speed * Time.deltaTime;
+        Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
+        Vector2 force = (direction * speed * Time.deltaTime).normalized;
 
-            rb.AddForce(force);
+        rb.AddForce(force);
 
-            float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
+        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
 
-            if (distance < nextWayPointDistance)
-            {
-                currentWayPoint++;
-            }
+        if (distance < nextWayPointDistance)
+        {
+            currentWayPoint++;
+        }
+
+        if (rb.velocity.x > 0)
+        {
+            spriteRenderer.flipX = false;
+        }
+        else if (rb.velocity.x < 0)
+        {
+            spriteRenderer.flipX = true;
         }
     }
 }

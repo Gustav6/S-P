@@ -88,17 +88,18 @@ public class SliderPressedState : SliderBaseState
     public void MoveWithButton(SliderStateManager slider)
     {
         float scaling = UIManager.ResolutionScaling;
-        float moveAmount = slider.maxMoveValue / 200;
+        float moveAmount = slider.maxMoveValue / (100 * scaling);
+        Vector3 limit = new(slider.maxMoveValue, 0, 0);
 
         Vector3 des = new(moveAmount * slider.moveDirection * scaling, 0, 0);
 
         if (slider.sliderPosition.localPosition.x * scaling + des.x > slider.maxMoveValue * scaling)
         {
-            des.x = (slider.maxMoveValue * scaling) - slider.sliderPosition.localPosition.x * scaling;
+            slider.sliderPosition.localPosition = limit;
         }
         else if (slider.sliderPosition.localPosition.x * scaling + des.x < -slider.maxMoveValue * scaling)
         {
-            des.x = (-slider.maxMoveValue * scaling) - slider.sliderPosition.localPosition.x * scaling;
+            slider.sliderPosition.localPosition = -limit;
         }
 
         slider.sliderPosition.localPosition += des;

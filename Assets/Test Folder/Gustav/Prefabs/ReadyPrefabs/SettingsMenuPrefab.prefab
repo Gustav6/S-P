@@ -53,9 +53,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32755a2ba3654da46957b2a7f2dd7016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whereWillPrefabMove: 1
+  moveDirection: 1
   enableBlurOnInsansiate: 1
-  blurScirpt: {fileID: 0}
 --- !u!1001 &2959698983137051828
 PrefabInstance:
   m_ObjectHideFlags: 0

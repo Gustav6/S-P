@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -9,6 +11,9 @@ public class UIInput : MonoBehaviour
 {
     private UIManager manager;
     private bool paused = false;
+
+    public GameObject inputField;
+    public TextMeshProUGUI text;
 
     public void Start()
     {
@@ -27,9 +32,9 @@ public class UIInput : MonoBehaviour
 
                 if (scene.buildIndex == (int)NewScene.Game)
                 {
-                    if (manager.PausePrefab != null)
+                    if (manager.pausePrefab != null)
                     {
-                        UIManager.InstantiateNewUIPrefab(manager.PausePrefab, GetComponent<UIManager>().transform, Vector3.one, Vector3.zero);
+                        UIManager.InstantiateNewUIPrefab(manager.pausePrefab, GetComponent<UIManager>().transform, Vector3.one, Vector3.zero);
                     }
                 }
             }

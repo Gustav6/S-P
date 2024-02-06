@@ -26,7 +26,7 @@ public class Bobbing : MonoBehaviour
 
     void Update()
     {
-        BobbingScale();
+        BobLeftToRight();
     }
 
     public void BobLeftToRight()
@@ -35,12 +35,6 @@ public class Bobbing : MonoBehaviour
         Vector3 tempRight = new(SinCurve() + xOffsetRight, 0);
         left.transform.localPosition = tempLeft;
         right.transform.localPosition = tempRight;
-    }
-
-    public void BobbingScale()
-    {
-        Vector3 temp = new(SinCurve() + 1, 1, 1);
-        transform.localScale = temp;
     }
 
     public float SinCurve()

@@ -20,7 +20,7 @@ public class SwitchStateManager : MonoBehaviour
     [HideInInspector] public TextMeshProUGUI text;
     [HideInInspector] public RectTransform movingPart;
     [HideInInspector] public RectTransform outLine;
-    [HideInInspector] public Transform pointers;
+    [HideInInspector] public GameObject pointers;
 
     public SwitchMethods methods;
     public Color offColor = new(0, 0.8f, 0, 1);
@@ -39,7 +39,7 @@ public class SwitchStateManager : MonoBehaviour
         movingPartImage = transform.GetChild(1).GetComponent<Image>();
         toggleImage = transform.GetChild(1).GetChild(0).GetComponent<Image>();
         text = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        pointers = transform.GetChild(3).GetComponent<Transform>();
+        pointers = transform.GetChild(3).GetComponent<Transform>().gameObject;
         movingPartOffset = movingPart.localPosition.x;
 
         uI = GetComponent<UI>();

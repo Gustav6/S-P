@@ -16,7 +16,7 @@ public class ButtenSelectedState : ButtonBaseState
     {
         if (!UIManager.Transitioning)
         {
-            button.pointers.gameObject.SetActive(true);
+            button.pointers.SetActive(true);
 
             TransitionSystem.AddScaleTransition(new ScaleTransition(button.transform, newScale, timeItTakes, TransitionType.SmoothStart2));
             TransitionSystem.AddColorTransition(new ColorTransition(button.image, newOutlineColor, timeItTakes, TransitionType.SmoothStop2));

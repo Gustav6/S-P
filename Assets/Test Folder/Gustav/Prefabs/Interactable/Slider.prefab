@@ -334,6 +334,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 12
   magnitude: 2
+  left: {fileID: 0}
+  right: {fileID: 0}
 --- !u!1 &4310609079021684693
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +348,7 @@ GameObject:
   - component: {fileID: 8122393608256876510}
   - component: {fileID: 8429929896292928221}
   m_Layer: 0
-  m_Name: OutLine
+  m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -468,6 +470,7 @@ MonoBehaviour:
   sliderImage: {fileID: 0}
   text: {fileID: 0}
   sliderPosition: {fileID: 0}
+  pointers: {fileID: 0}
   methods: {fileID: 0}
   slidersOffset: 0
   maxMoveValue: 0

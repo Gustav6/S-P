@@ -15,7 +15,7 @@ public class SwitchSelectedState : SwitchBaseState
     {
         if (!UIManager.Transitioning)
         {
-            @switch.pointers.gameObject.SetActive(true);
+            @switch.pointers.SetActive(true);
 
             TransitionSystem.AddColorTransition(new ColorTransition(@switch.outLineImage, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));
             TransitionSystem.AddColorTransition(new ColorTransition(@switch.movingPartImage, newMovingPartColor, timeItTakes, TransitionType.SmoothStart2));

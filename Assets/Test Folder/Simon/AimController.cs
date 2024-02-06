@@ -12,11 +12,6 @@ public class AimController : MonoBehaviour
     [SerializeField] private Transform neckAnchor;
 
 	private float _previousAimDirection = 1;
-	private float _angle;
-
-	private bool _isArmReseting;
-
-	// TODO: Add an IEnumarator so the arm of the entity moves towards target slowly after an attack instead of snapping.
 
     /// <summary>
     /// Aims the weapon of the entity towards a certain target.
@@ -28,18 +23,11 @@ public class AimController : MonoBehaviour
 		direction.x *= weaponSwingAnchor.lossyScale.x;
 
 		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-		_angle = angle;
-
-		if (_isArmReseting)
-			return;
-
-		// Add 90 to align with mouse, because of how equation circle works.
-		weaponSwingAnchor.localRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
 
 		// Minus is here because of how the sprites interact with their local scale and different pivot points.
         float currentAimDirection = -Mathf.Sign(x);
 
-        RotateHead(weaponSwingAnchor.localRotation.eulerAngles.z);
+		RotateBody(x, angle);
 
 		if (currentAimDirection != _previousAimDirection)
         {
@@ -53,50 +41,17 @@ public class AimController : MonoBehaviour
         }
 	}
 
-	public void StartFacingTargetAfterAttack()
+	private void RotateBody(float x, float angle)
 	{
-		StartCoroutine(FaceTargetAfterAttack());
-	}
+		// Add 90 to align with mouse, because of how equation circle works.
+		if (Mathf.Abs(x) >= 0.4f)
+			weaponSwingAnchor.localRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
 
-	// TODO: Make work
-	private IEnumerator FaceTargetAfterAttack()
-	{
-		_isArmReseting = true;
-
-        float time = 0;
-		float startAngle = Mathf.Atan2(weaponSwingAnchor.position.y, weaponSwingAnchor.position.x) * Mathf.Rad2Deg;
-		float b;
-
-		Debug.Log($"Start: {startAngle}\nTarget: {_angle}");
-
-        while (time < 1f)
+		if (Mathf.Abs(x) >= 0.9)
 		{
-			b = Mathf.Lerp(startAngle, _angle, time / 1);
-            weaponSwingAnchor.localRotation = Quaternion.AngleAxis(b + 90, Vector3.forward);
-
-            time += Time.deltaTime;
-            yield return null;
+			// Subtract by 180 to adjust the head position so the eyes face the mouse rather than the neck.
+			neckAnchor.localRotation = Quaternion.AngleAxis(angle - 180, Vector3.forward);
 		}
-
-		_isArmReseting = false;
-	}
-
-	private void RotateHead(float angle)
-	{
-		const float a = 180 / 3;
-		float newZ;
-
-		// Feels like these two if statements should swap what newZ is set to, but no.
-		if (angle >= 360 - a)
-			newZ = 30;
-		else if (angle <= 180 + a)
-			newZ = -20;
-		else
-		{
-			newZ = 0;
-		}
-
-		neckAnchor.localRotation = Quaternion.Euler(0, 0, newZ);
 	}
 
 	private IEnumerator TurnAround(float direction)
@@ -112,4 +67,30 @@ public class AimController : MonoBehaviour
 
 		spriteTransform.localScale = new Vector3(0.5f * direction, 0.5f, 0.5f);
 	}
+
+    #region Static Methods
+	/// <summary>
+	/// Returns the angle needed for an object to face a certain target.
+	/// </summary>
+    public static float PointToRotation(Vector2 thisPosition, Vector2 targetPosition)
+    {
+		Vector2 direction = (targetPosition - thisPosition).normalized;
+		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+		return angle + 90;
+	}
+
+	/// <summary>
+	/// Returns the angle needed for an object to face the mouse.
+	/// </summary>
+	public static float PointToRotation(Vector2 thisPosition)
+	{
+		Vector2 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+		Vector2 direction = (targetPosition - thisPosition).normalized;
+		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+		return angle + 90;
+	}
+    #endregion
 }

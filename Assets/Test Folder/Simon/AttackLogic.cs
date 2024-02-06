@@ -10,7 +10,7 @@ public class AttackLogic : MonoBehaviour
 
     private AttackController _attackController;
 
-    private CapsuleCollider2D _hitbox;
+    private GameObject _hitbox;
 
     private void Awake()
     {
@@ -19,7 +19,27 @@ public class AttackLogic : MonoBehaviour
 
     public void SpawnHitbox()
     {
+        ScreenShake.instance.Shake(0.3f, 0.2f, _attackController.transform);
+
         _hitbox = Instantiate(_attackController.CurrentWeapon.Hitbox, weaponSpawnParent);
+
+        if (_attackController.CurrentWeapon.HitboxVelocity != 0)
+            StartCoroutine(MoveHitbox(_attackController.CurrentWeapon.HitboxVelocity));
+    }
+
+    private IEnumerator MoveHitbox(float velocity)
+    {
+        if (_hitbox == null)
+            yield break;
+
+        _hitbox.transform.parent = null;
+        _hitbox.transform.rotation = Quaternion.AngleAxis(AimController.PointToRotation(_hitbox.transform.position), Vector3.forward);
+
+        while (_hitbox != null)
+        {
+            _hitbox.transform.position += _hitbox.transform.TransformDirection(Vector3.down) * velocity;
+            yield return null;
+        }
     }
 
     public void DespawnHitbox()
@@ -37,6 +57,9 @@ public class AttackLogic : MonoBehaviour
 
     public static IEnumerator AddAttackBoost(PlayerMovement player, Rigidbody2D rb, Vector2 targetDirection, float forceAmount, float forceActiveTime)
     {
+        if (player.MovementLocked)
+            yield break;
+
         player.ToggleMovementLock();
 
         rb.AddForce(targetDirection * forceAmount, ForceMode2D.Impulse);

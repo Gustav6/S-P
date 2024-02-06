@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviour
@@ -20,17 +21,21 @@ public class PlayerInteraction : MonoBehaviour
         // Where the hell did my beautiful OverLapCircleNonAlloc go??? It's supposed to exist. WGHERE DID IT GO????
         Collider2D[] nearbyColliders = Physics2D.OverlapCircleAll(transform.position, _maxInteractionRadius, _interactableLayer);
 
+
         for (int i = 0; i < nearbyColliders.Length; i++)
         {
+            // Edge case, only occurs if another object is accidentally set to the Interactable layer
             if (!nearbyColliders[i].TryGetComponent(out Interactable interactable))
                 continue;
 
-            if (interactable.InteractionRadius <= Mathf.Abs((nearbyColliders[i].transform.position - transform.position).magnitude))
+            if (Mathf.Abs((nearbyColliders[i].transform.position - transform.position).magnitude) <= interactable.InteractionRadius)
             {
                 // New focused interactable
                 if (interactable != _focusedInteractable)
                 {
-                    _focusedInteractable?.ExitInteractionRange();
+                    if (_focusedInteractable != null)
+                        _focusedInteractable.ExitInteractionRange();
+
                     interactable.EnterInteractionRange();
                     _focusedInteractable = interactable;
 
@@ -45,6 +50,7 @@ public class PlayerInteraction : MonoBehaviour
         // Out of range from current focused interactable
         if (Vector2.Distance(_focusedInteractable.transform.position, transform.position) > _focusedInteractable.InteractionRadius)
         {
+            Debug.Log("Out of range");
             _focusedInteractable.ExitInteractionRange();
             _focusedInteractable = null;
         }

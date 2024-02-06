@@ -8,8 +8,8 @@ public class WaveManager : MonoBehaviour
     [SerializeField] List<Transform> _spawnPoints;
     public GameObject StatRewardPanel, WeaponRewardPanel;
 
-    [SerializeField] WaveRewardInteractable _testReward;
-    [SerializeField] WaveReward _testRewardReward;
+    [SerializeField] WaveRewardInteractable[] _statRewardInteractables, _weaponRewardInteractables;
+    [SerializeField] WaveReward[] _statRewardPool, _weaponRewardPool;
 
     int _enemiesRemaining;
 
@@ -22,8 +22,8 @@ public class WaveManager : MonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(StartTestWave), 2);
-        _testReward.SetContainedReward(_testRewardReward);
+        GenerateRewards(_statRewardPool, _statRewardInteractables);
+        GenerateRewards(_weaponRewardPool, _weaponRewardInteractables);
     }
 
     private void Update()
@@ -31,6 +31,23 @@ public class WaveManager : MonoBehaviour
         if (_enemiesRemaining <= 0)
         {
             WaveClear();
+        }
+    }
+
+    void GenerateRewards(WaveReward[] rewardPool, WaveRewardInteractable[] interactables)
+    {
+        List<int> generatedRewardIndexes = new();
+
+        for (int i = 0; i < interactables.Length; i++)
+        {
+            int randomIndex = Random.Range(0, rewardPool.Length);
+
+            while (generatedRewardIndexes.Contains(randomIndex))
+                randomIndex = Random.Range(0, rewardPool.Length);
+
+            generatedRewardIndexes.Add(randomIndex);
+
+            interactables[i].SetContainedReward(rewardPool[randomIndex]);
         }
     }
 

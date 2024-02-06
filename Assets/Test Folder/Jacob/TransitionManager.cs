@@ -35,7 +35,7 @@ public class TransitionManager : MonoBehaviour
 
     private void Start()
     {
-		Invoke(nameof(ApproachPlayer), 4);
+		//Invoke(nameof(ApproachPlayer), 4);
     }
 
     void ApproachPlayer()

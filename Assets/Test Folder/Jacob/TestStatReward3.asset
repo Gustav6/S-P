@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: TestStatReward
+  m_Name: TestStatReward3
   m_EditorClassIdentifier: Assembly-CSharp::StatReward
-  RewardName: Beehive
+  RewardName: Fortnite Gaming
   WaveUnlocked: 0
   StatModifier:
-    AttackSpeed: 1.1
-    DamageModifier: 0.9
-    DamageResistanceModifier: 1
-    KnockbackModifier: 1
-    KnockbackResitanceModifier: 0.1
+    AttackSpeed: 1
+    DamageModifier: 1
+    DamageResistanceModifier: 1.2
+    KnockbackModifier: 1.2
+    KnockbackResitanceModifier: 0.9
     MovementSpeedModifier: 1
     AbilityCooldownModifier: 1

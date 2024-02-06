@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 
@@ -32,13 +33,13 @@ public class WaveRewardInteractable : Interactable
 
 		if (isStatReward)
         {
-            _rewardPanel = Instantiate(_waveManager.StatRewardPanel);
+            _rewardPanel = Instantiate(_waveManager.StatRewardPanel, gameObject.transform);
 			SetStatPanelStats(_containedReward as StatReward);
         }
         else
 		{
 			_rewardPanel = Instantiate(_waveManager.WeaponRewardPanel, gameObject.transform);
-
+			SetWeaponPanelStats(_containedReward as WeaponReward);
 		}
     }
 
@@ -48,7 +49,7 @@ public class WaveRewardInteractable : Interactable
 
 		int textIndex = 2;
 
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < 6; i++)
         {
 			float currentModifier = currentReward.StatModifier.GetValue(i).Value - 1;
 			string signPrefix = currentModifier < 0 ? "-" : "+";
@@ -66,25 +67,61 @@ public class WaveRewardInteractable : Interactable
 				if (signPrefix == "-")
 					text.color = _redColor;
 
-				text.text = signPrefix + " " + Mathf.Abs((currentModifier * 100)).ToString() + 
-																		  "\n" + currentReward.StatModifier.GetValue(i).Key.ToString();
+				text.text = signPrefix + " " + Mathf.Abs((currentModifier * 100)).ToString() + "%\n" + currentReward.StatModifier.GetValue(i).Key.ToString();
 				textIndex++;
-
 			}
-			else
+			else if (textIndex <= 4)
             {
 				panel.GetChild(textIndex).GetComponent<TMP_Text>().text = "";
 			}
         }
 
 		panel.GetChild(1).GetComponent<TMP_Text>().text = currentReward.RewardName;
-
 	}
 
 	void SetWeaponPanelStats(WeaponReward currentReward)
     {
+		Transform panel = _rewardPanel.transform.GetChild(0);
 
-    }
+		panel.GetChild(1).GetComponent<TMP_Text>().text = currentReward.RewardName;
+
+		panel.GetChild(2).GetComponent<Image>().sprite = currentReward.RewardSprite;
+
+		int randomStatIndex = Random.Range(0, 7);
+		float randomStatValue = 1;
+
+        switch (Random.Range(0, 3))
+        {
+			case 0:
+				randomStatValue = 1.1f;
+				break;
+
+			case 1:
+				randomStatValue = 0.9f;
+				break;
+
+			default:
+				break;
+        }
+
+		float currentModifier = randomStatValue - 1;
+		string signPrefix = currentModifier < 0 ? "-" : "+";
+
+		if (currentModifier != 0)
+		{
+			TMP_Text text = panel.GetChild(3).GetComponent<TMP_Text>();
+
+			if (signPrefix == "-")
+				text.color = _redColor;
+
+			text.text = signPrefix + " " + Mathf.Abs(currentModifier * 100).ToString() + "%\n" + currentReward.StatModifier.GetValue(randomStatIndex).Key.ToString();
+		}
+		else
+		{
+			panel.GetChild(3).GetComponent<TMP_Text>().text = "";
+		}
+
+	}
 
 	public override void EnterInteractionRange()
 	{

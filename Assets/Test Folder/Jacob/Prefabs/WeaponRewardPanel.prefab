@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 1036653958994176406}
   - component: {fileID: 1477605149268935954}
   m_Layer: 5
-  m_Name: Description
+  m_Name: StatChange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -285,8 +285,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293848814
-  m_fontColor: {r: 0.9339623, g: 0.9339623, b: 0.9339623, a: 1}
+    rgba: 4284402729
+  m_fontColor: {r: 0.16078432, g: 0.8, b: 0.36862746, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -580,7 +580,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8685992926494357086
 RectTransform:
   m_ObjectHideFlags: 0

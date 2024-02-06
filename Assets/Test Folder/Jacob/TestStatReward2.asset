@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: TestStatReward
+  m_Name: TestStatReward2
   m_EditorClassIdentifier: Assembly-CSharp::StatReward
-  RewardName: Beehive
+  RewardName: Reeward
   WaveUnlocked: 0
   StatModifier:
-    AttackSpeed: 1.1
-    DamageModifier: 0.9
-    DamageResistanceModifier: 1
+    AttackSpeed: 2
+    DamageModifier: 1
+    DamageResistanceModifier: 3
     KnockbackModifier: 1
-    KnockbackResitanceModifier: 0.1
+    KnockbackResitanceModifier: 1
     MovementSpeedModifier: 1
-    AbilityCooldownModifier: 1
+    AbilityCooldownModifier: 0.5

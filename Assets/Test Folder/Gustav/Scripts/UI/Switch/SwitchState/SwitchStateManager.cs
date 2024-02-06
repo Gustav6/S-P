@@ -45,6 +45,8 @@ public class SwitchStateManager : MonoBehaviour
         uI = GetComponent<UI>();
         methods = GetComponent<SwitchMethods>();
 
+        uI.SetRefrences();
+
         SetState();
 
         currentState = deselectedState;

@@ -1,25 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtenDeselectedState : ButtonBaseState
 {
     private float timeItTakes = 0.25f;
 
-    private Color newOutlineColor = new(0, 0, 0, 0.5f);
-    private Color newTextColor = new(1, 1, 1, 0.5f);
-
     public override void EnterState(ButtonStateManager button)
     {
-        button.pointers.SetActive(false);
-
-        TransitionSystem.AddColorTransition(new ColorTransition(button.image, newOutlineColor, timeItTakes, TransitionType.SmoothStop2));
-        TransitionSystem.AddColorTransition(new ColorTransition(button.text, newTextColor, timeItTakes, TransitionType.SmoothStop2));
-
-        if (!UIManager.Transitioning)
-        {
-            TransitionSystem.AddScaleTransition(new ScaleTransition(button.transform, Vector3.one, timeItTakes, TransitionType.SmoothStart2));
-        }
+        button.uI.DefaultDeselectTransition(timeItTakes, button.pointers, button.transform, button.outlineImage, button.text);
     }
 
     public override void UpdateState(ButtonStateManager button)

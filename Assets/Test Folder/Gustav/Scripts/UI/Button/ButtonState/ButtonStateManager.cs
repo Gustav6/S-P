@@ -17,7 +17,7 @@ public class ButtonStateManager : MonoBehaviour
     #endregion
 
     [HideInInspector] public UI uI;
-    [HideInInspector] public Image image;
+    [HideInInspector] public Image outlineImage;
     [HideInInspector] public TextMeshProUGUI text;
     [HideInInspector] public GameObject pointers;
 
@@ -25,11 +25,13 @@ public class ButtonStateManager : MonoBehaviour
 
     void Start()
     {
-        image = GetComponentInChildren<Image>();
+        outlineImage = GetComponentInChildren<Image>();
         text = GetComponentInChildren<TextMeshProUGUI>();
         uI = GetComponent<UI>();
         methods = GetComponent<ButtonMethods>();
         pointers = transform.GetChild(2).GetComponent<Transform>().gameObject;
+
+        uI.SetRefrences();
 
         currentState = deselectedState;
 

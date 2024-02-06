@@ -19,7 +19,7 @@ public class ButtenPressedState : ButtonBaseState
         timer = timeItTakes;
         //button.uI.AudioManagerInstance.PlaySound(AudioType.ClickSound);
         TransitionSystem.AddScaleTransition(new ScaleTransition(button.transform, newScale, timeItTakes, TransitionType.SmoothStop2));
-        TransitionSystem.AddColorTransition(new ColorTransition(button.image, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));
+        TransitionSystem.AddColorTransition(new ColorTransition(button.outlineImage, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));
     }
 
     public override void UpdateState(ButtonStateManager button)

@@ -41,6 +41,8 @@ public class SliderStateManager : MonoBehaviour
         methods = GetComponent<SliderMethods>();
         uI = GetComponent<UI>();
 
+        uI.SetRefrences();
+
         SetStartPositionToValue();
 
         currentState = deselectedState;

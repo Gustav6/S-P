@@ -132,12 +132,16 @@ public class UIManager : MonoBehaviour
     #region Static variables
     public static List<GameObject> ListOfUIObjects { get; private set; }
     public static GameObject CurrentUIPrefab { get; private set; }
+    public static bool Paused { get; set; }
+    public static GameObject CameraInstance { get; private set; }
     public static bool Transitioning { get; private set; }
     public static DataManager DataManagerInstance { get; private set; }
     #endregion
 
     void Awake()
     {
+        CameraInstance = GameObject.FindGameObjectWithTag("MainCamera");
+
         ListOfUIObjects = new();
 
         LoadUI();
@@ -238,6 +242,17 @@ public class UIManager : MonoBehaviour
         CurrentUIPrefab.transform.SetParent(parentObject);
         CurrentUIPrefab.transform.localScale = Vector3.one;
         CurrentUIPrefab.transform.localPosition = Vector3.zero;
+
+        ActiveMenuManager activePrefab = prefab.GetComponent<ActiveMenuManager>();
+
+        if (activePrefab.enableBlurOnInsansiate)
+        {
+            activePrefab.EnableBlur(CameraInstance.GetComponent<Blur>());
+        }
+        else
+        {
+            activePrefab.DisableBlur(CameraInstance.GetComponent<Blur>());
+        }
 
         List<GameObject> tempList = new();
 

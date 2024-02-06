@@ -96,11 +96,11 @@ public class ButtonMethods : MonoBehaviour
 
     private Vector3 GiveDestination()
     {
-        if (activeMenuManager.whereWillPrefabMove == MoveTowards.Left)
+        if (activeMenuManager.moveDirection == PrefabDirection.Left)
         {
             return new(-Screen.width, 0, 0);
         }
-        else if (activeMenuManager.whereWillPrefabMove == MoveTowards.Right)
+        else if (activeMenuManager.moveDirection == PrefabDirection.Right)
         {
             return new(Screen.width, 0, 0);
         }

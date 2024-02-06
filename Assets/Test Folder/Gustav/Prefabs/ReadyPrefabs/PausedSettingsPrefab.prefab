@@ -54,6 +54,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   whereWillPrefabMove: 1
+  enableBlurOnInsansiate: 1
+  blurScirpt: {fileID: 0}
 --- !u!1001 &3121643190153200486
 PrefabInstance:
   m_ObjectHideFlags: 0

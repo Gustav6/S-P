@@ -10,10 +10,6 @@ using UnityEngine.SceneManagement;
 public class UIInput : MonoBehaviour
 {
     private UIManager manager;
-    private bool paused = false;
-
-    public GameObject inputField;
-    public TextMeshProUGUI text;
 
     public void Start()
     {
@@ -24,9 +20,9 @@ public class UIInput : MonoBehaviour
     {
         if (context.performed && !UIManager.Transitioning)
         {
-            paused = !paused;
+            UIManager.Paused = !UIManager.Paused;
 
-            if (paused)
+            if (UIManager.Paused)
             {
                 Scene scene = SceneManager.GetActiveScene();
 
@@ -40,6 +36,7 @@ public class UIInput : MonoBehaviour
             }
             else
             {
+                manager.pausePrefab.GetComponent<ActiveMenuManager>().DisableBlur(UIManager.CameraInstance.GetComponent<Blur>());
                 Destroy(UIManager.CurrentUIPrefab);
                 UIManager.ResetListOfUIObjects();
             }

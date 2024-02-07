@@ -14,6 +14,9 @@ public class PlayerInteraction : MonoBehaviour
     private void Update()
     {
         CheckRadiusForInteractables();
+
+        if (Input.GetKeyDown(KeyCode.F))
+            Interact();
     }
 
     void CheckRadiusForInteractables()
@@ -28,7 +31,7 @@ public class PlayerInteraction : MonoBehaviour
             if (!nearbyColliders[i].TryGetComponent(out Interactable interactable))
                 continue;
 
-            if (Mathf.Abs((nearbyColliders[i].transform.position - transform.position).magnitude) <= interactable.InteractionRadius)
+            if (Mathf.Abs((nearbyColliders[i].transform.position - transform.position).magnitude) <= interactable.InteractionRadius && interactable.enabled)
             {
                 // New focused interactable
                 if (interactable != _focusedInteractable)
@@ -64,5 +67,8 @@ public class PlayerInteraction : MonoBehaviour
             return;
 
         _focusedInteractable.Interact();
+
+        _focusedInteractable.ExitInteractionRange();
+        _focusedInteractable = null;
     }
 }

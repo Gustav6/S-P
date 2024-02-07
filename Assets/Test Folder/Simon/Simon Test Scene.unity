@@ -1111,6 +1111,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1514461423}
+  - component: {fileID: 1514461426}
   - component: {fileID: 1514461425}
   - component: {fileID: 1514461424}
   - component: {fileID: 1514461422}
@@ -1261,7 +1262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7122204b3383def40a37ddef7a4dca09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentWeapon: {fileID: 11400000, guid: 95b744dc794b44f429292791b805445b, type: 2}
 --- !u!114 &1514461422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1274,7 +1274,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c266e31aaecf914d9c080f1cab4681f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnTime: 10
+  turnTime: 0.15
   turnThreshold: 0.45
   spriteTransform: {fileID: 1681277700}
   weaponSwingAnchor: {fileID: 2140581736}
@@ -1320,9 +1320,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementSpeed: 3
+--- !u!114 &1514461426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514461416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e58b132261466ea44b9cf0a50740a1c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentWeapon: {fileID: 11400000, guid: 95b744dc794b44f429292791b805445b, type: 2}
   _diStrength: 0.25
-  _turnTime: 0
-  _spriteTransform: {fileID: 0}
 --- !u!1 &1528197644
 GameObject:
   m_ObjectHideFlags: 0

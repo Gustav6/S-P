@@ -5,48 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class UIActions : MonoBehaviour
 {
-    public void SaveToDataManager(DataManager manager, float value, SliderType type)
-    {
-        if (manager.sliderValues.ContainsKey(type))
-        {
-            manager.sliderValues[type] = value;
-        }
-    }
-
-    public void SaveToDataManager(DataManager manager, bool value, ToggleType type)
-    {
-        if (!manager.switchValues.ContainsKey(type))
-        {
-            manager.switchValues.Add(type, value);
-        }
-        else
-        {
-            manager.switchValues[type] = value;
-        }
-    }
-
-    public static void SwitchScene(NewScene scene)
-    {
-        SceneManager.LoadScene((int)scene);
-    }
-
-    public static void InstantiatePrefab(bool prefabMove, bool prefabScale, PrefabDirection direction, GameObject prefab, GameObject currentMenu)
-    {
-        Destroy(currentMenu);
-
-        if (prefabMove)
-        {
-            Vector3 spawnLocation = GiveDestination(direction) * -1;
-
-            UIManager.InstantiateNewUIPrefab(prefab, currentMenu.transform, Vector3.one, spawnLocation);
-            MovePrefabToStart(UIManager.DisableTransitioning, direction, 1);
-        }
-        else if (prefabScale)
-        {
-            UIManager.InstantiateNewUIPrefab(prefab, currentMenu.transform, new Vector3(0.0001f, 0.0001f, 1), Vector3.zero);
-            GrowTransition(UIManager.DisableTransitioning, 1);
-        }
-    }
 
     #region Move Transition
     public static void MovePrefabToStart(Transition.ExecuteOnCompletion actions, PrefabDirection direction, float time)

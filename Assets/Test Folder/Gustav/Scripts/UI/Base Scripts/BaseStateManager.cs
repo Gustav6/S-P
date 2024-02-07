@@ -6,11 +6,6 @@ using UnityEngine.UI;
 
 public abstract class BaseStateManager : MonoBehaviour
 {
-    public ButtonStateManager ButtonManagerInstance { get; protected set; }
-    public SliderStateManager SliderManagerInstance { get; protected set; }
-    public ToggleStateManager ToggleManagerInstance { get; protected set; }
-    public InputFieldStateManager InputManagerInstance { get; protected set; }
-
     public UI UIInstance { get; set; }
     public Dictionary<string, Color> ColorPairs { get; private set; }
     public Dictionary<string, Vector3> ScalePairs { get; private set; }

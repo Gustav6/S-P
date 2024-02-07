@@ -892,6 +892,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: SettingsMenuPrefab
       objectReference: {fileID: 0}
+    - target: {fileID: 6737907542597591216, guid: df738c3cef1fced4a87102877decaae5, type: 3}
+      propertyPath: prefab
+      value: 
+      objectReference: {fileID: 3381804027909635715, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
+    - target: {fileID: 6737907542597591216, guid: df738c3cef1fced4a87102877decaae5, type: 3}
+      propertyPath: transitionToPrefab
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6737907542597591216, guid: df738c3cef1fced4a87102877decaae5, type: 3}
+      propertyPath: prefabMoveTransition
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8442048998401145677, guid: df738c3cef1fced4a87102877decaae5, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

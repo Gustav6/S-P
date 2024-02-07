@@ -17,8 +17,6 @@ public class ButtonStateManager : BaseStateManager
 
     public override void OnStart()
     {
-        ButtonManagerInstance = this;
-
         base.OnStart();
 
         outlineImage = UIInstance.GetComponentInChildren<Image>();

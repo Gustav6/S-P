@@ -19,12 +19,12 @@ public class AttackLogic : MonoBehaviour
 
     public void SpawnHitbox()
     {
-        ScreenShake.instance.Shake(0.3f, 0.2f, _attackController.transform);
+        ScreenShake.instance.Shake(0.3f, 0.2f, Vector2.zero);
 
-        _hitbox = Instantiate(_attackController.CurrentWeapon.Hitbox, weaponSpawnParent);
+        _hitbox = Instantiate(PlayerStats.Instance.CurrentWeapon.Hitbox, weaponSpawnParent);
 
-        if (_attackController.CurrentWeapon.HitboxVelocity != 0)
-            StartCoroutine(MoveHitbox(_attackController.CurrentWeapon.HitboxVelocity));
+        if (PlayerStats.Instance.CurrentWeapon.HitboxVelocity != 0)
+            StartCoroutine(MoveHitbox(PlayerStats.Instance.CurrentWeapon.HitboxVelocity));
     }
 
     private IEnumerator MoveHitbox(float velocity)

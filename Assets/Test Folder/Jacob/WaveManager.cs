@@ -18,17 +18,17 @@ public class WaveManager : MonoBehaviour
     [SerializeField] int _rewardIncrement = 2; 
     [SerializeField] int _stageMorphIncrement = 5;
 
-    [SerializeField] AnimationCurve _horizontalCurve, _verticalCurve;
+    [SerializeField] AnimationCurve _dropCurve, _ascensionCurve, _verticalSpawnCurve;
 
-    delegate void OnRewardClaimed();
-    OnRewardClaimed _onRewardClaimedCallback;
 
     private void Start()
     {
         GenerateRewards(_statRewardPool, _statRewardInteractables);
         GenerateRewards(_weaponRewardPool, _weaponRewardInteractables);
 
-        _onRewardClaimedCallback += DisableRewardInteractables;
+        EnableRewardInteractables();
+
+        Invoke(nameof(StartTestWave), 2);
     }
 
     private void Update()
@@ -39,48 +39,45 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    void GenerateRewards(WaveReward[] rewardPool, WaveRewardInteractable[] interactables)
-    {
-        List<int> generatedRewardIndexes = new();
-
-        for (int i = 0; i < interactables.Length; i++)
-        {
-            int randomIndex = Random.Range(0, rewardPool.Length);
-
-            while (generatedRewardIndexes.Contains(randomIndex))
-                randomIndex = Random.Range(0, rewardPool.Length);
-
-            generatedRewardIndexes.Add(randomIndex);
-
-            interactables[i].SetContainedReward(rewardPool[randomIndex]);
-        }
-    }
-
     void StartTestWave()
     {
         List<GameObject> enemiesToSpawn = GetEnemies(50, WaveType.Balanced);
 
-        foreach (GameObject g in enemiesToSpawn)
-        {
-            SpawnEnemy(Instantiate(g).transform);
-        }
+        SpawnEnemy(Instantiate(enemiesToSpawn[0]).transform);
     }
 
     void SpawnEnemy(Transform enemy)
     {
         Transform randomSpawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
-        
+
+        StartCoroutine(AnimateEnemySpawn(enemy, randomSpawnPoint));
+
         // Spawn enemy --> Animate it going from water to island --> Enable enemy AI.
     }
 
-    void DisableRewardInteractables()
+    IEnumerator AnimateEnemySpawn(Transform enemy, Transform spawnPoint)
     {
-        for (int i = 0; i < _statRewardInteractables.Length; i++)
-            _statRewardInteractables[i].enabled = false;
+        Transform parentTransform = new GameObject().transform;
+        enemy.position = parentTransform.position;
+        enemy.SetParent(parentTransform);
 
-        for (int i = 0; i < _weaponRewardInteractables.Length; i++)
-            _weaponRewardInteractables[i].enabled = false;
+        Vector2 startPos = spawnPoint.GetChild(0).position;
+        Vector2 endPos = spawnPoint.GetChild(1).position;
 
+        parentTransform.position = startPos;
+
+        float time = 0;
+
+        while (time <= 1.25f)
+        {
+            yield return null;
+            time += Time.deltaTime;
+            parentTransform.position = Vector2.Lerp(startPos, endPos, time / 1.25f);
+            enemy.localPosition = new Vector2(0, Mathf.Lerp(0, 1.5f, _verticalSpawnCurve.Evaluate(time / 1.25f)));
+        }
+
+        enemy.SetParent(null);
+        Destroy(parentTransform.gameObject);
     }
 
     List<GameObject> GetEnemies(int totalBudget, WaveType waveType)
@@ -92,7 +89,7 @@ public class WaveManager : MonoBehaviour
         switch (waveType)
         {
             case WaveType.Random:
-                for ( ; ; )
+                for (; ; )
                 {
                     int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
 
@@ -110,7 +107,7 @@ public class WaveManager : MonoBehaviour
                 break;
 
             case WaveType.Light:
-                for ( ; ; )
+                for (; ; )
                 {
                     // Get random enemy
                     int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
@@ -148,7 +145,7 @@ public class WaveManager : MonoBehaviour
                 break;
 
             case WaveType.Balanced:
-                for ( ; ; )
+                for (; ; )
                 {
                     // Get random enemy
                     int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
@@ -186,7 +183,7 @@ public class WaveManager : MonoBehaviour
                 break;
 
             case WaveType.Heavy:
-                for ( ; ; )
+                for (; ; )
                 {
                     // Get random enemy
                     int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
@@ -225,7 +222,7 @@ public class WaveManager : MonoBehaviour
                 break;
 
             case WaveType.Swarm:
-                for ( ; ; )
+                for (; ; )
                 {
                     // Get random enemy
                     int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
@@ -274,7 +271,7 @@ public class WaveManager : MonoBehaviour
     }
 
     enum WaveType
-    { 
+    {
         Random,
         Light,
         Balanced,
@@ -282,6 +279,92 @@ public class WaveManager : MonoBehaviour
         Swarm,
         Boss
     }
+
+    #region Wave Rewards
+    void GenerateRewards(WaveReward[] rewardPool, WaveRewardInteractable[] interactables)
+    {
+        List<int> generatedRewardIndexes = new();
+
+        for (int i = 0; i < interactables.Length; i++)
+        {
+            int randomIndex = Random.Range(0, rewardPool.Length);
+
+            while (generatedRewardIndexes.Contains(randomIndex))
+                randomIndex = Random.Range(0, rewardPool.Length);
+
+            generatedRewardIndexes.Add(randomIndex);
+
+            interactables[i].SetContainedReward(rewardPool[randomIndex]);
+
+            interactables[i].OnRewardClaimedCallback += DisableRewardInteractables;
+        }
+    }
+
+    void DisableRewardInteractables()
+    {
+        for (int i = 0; i < _statRewardInteractables.Length; i++)
+            StartCoroutine(AscendReward(_statRewardInteractables[i], Random.Range(0, 0.4f)));
+
+        for (int i = 0; i < _weaponRewardInteractables.Length; i++)
+            StartCoroutine(AscendReward(_weaponRewardInteractables[i], Random.Range(0, 0.4f)));
+    }
+
+    void EnableRewardInteractables()
+    {
+        for (int i = 0; i < _statRewardInteractables.Length; i++)
+            StartCoroutine(DropReward(_statRewardInteractables[i], Random.Range(0, 0.4f)));
+
+        for (int i = 0; i < _weaponRewardInteractables.Length; i++)
+            StartCoroutine(DropReward(_weaponRewardInteractables[i], Random.Range(0, 0.4f)));
+    }
+
+    IEnumerator AscendReward(WaveRewardInteractable rewardInteractable, float initialDelay)
+    {
+        rewardInteractable.GetComponent<Animator>().enabled = false;
+        rewardInteractable.enabled = false;
+
+        yield return new WaitForSeconds(initialDelay);
+
+        Transform spriteTransform = rewardInteractable.transform.GetChild(0);
+
+        Vector2 endPos = rewardInteractable.transform.position + new Vector3(0, 11.5f);
+
+        float time = 0;
+
+        while (time <= 0.75f)
+        {
+            time += Time.deltaTime;
+            yield return null;
+            spriteTransform.position = new Vector2(rewardInteractable.transform.position.x, Mathf.Lerp(rewardInteractable.transform.position.y, endPos.y, _ascensionCurve.Evaluate(time / 0.75f)));
+        }
+
+        spriteTransform.position = new Vector2(rewardInteractable.transform.position.x, endPos.y);
+    }
+
+    IEnumerator DropReward(WaveRewardInteractable rewardInteractable, float initialDelay)
+    {
+        yield return new WaitForSeconds(initialDelay);
+
+        Transform spriteTransform = rewardInteractable.transform.GetChild(0);
+
+        Vector2 startPos = rewardInteractable.transform.position + new Vector3(0, 11.5f);
+
+        float time = 0;
+
+        while (time <= 0.75f)
+        {
+            time += Time.deltaTime;
+            yield return null;
+            spriteTransform.transform.position = new Vector2(startPos.x, Mathf.Lerp(startPos.y, rewardInteractable.transform.position.y, _dropCurve.Evaluate(time / 0.75f)));
+        }
+
+        spriteTransform.position = new Vector2(startPos.x, rewardInteractable.transform.position.y);
+
+        rewardInteractable.enabled = true;
+        rewardInteractable.GetComponent<Animator>().enabled = true;
+    }
+
+    #endregion
 }
 
 [System.Serializable]

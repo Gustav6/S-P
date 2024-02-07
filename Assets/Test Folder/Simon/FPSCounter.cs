@@ -17,7 +17,7 @@ public class FPSCounter : MonoBehaviour
     /// Toggles custom VSync off and on.
     /// Unity VSync seems to have some issues.
     /// </summary>
-    // refreshRate is obsolete, but it is useful in this case.
+    // refreshRate variable is obsolete, but it is useful in this case.
     public void ToggleVSync()
     {
         if (Application.targetFrameRate == -1)

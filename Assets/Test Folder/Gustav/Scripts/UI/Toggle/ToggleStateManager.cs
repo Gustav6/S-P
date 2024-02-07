@@ -18,18 +18,10 @@ public class ToggleStateManager : BaseStateManager
     [HideInInspector] public RectTransform outLine;
     [HideInInspector] public GameObject pointers;
 
-    public Color offColor = new(0, 0.8f, 0, 1);
-    public Color onColor = new(0.8f, 0, 0, 1);
-
-    public bool switchOn;
-    [Range(0.1f, 1)] public float transitionTime = 0.3f;
-
     public float movingPartOffset;
 
     public override void OnStart()
     {
-        ToggleManagerInstance = this;
-
         base.OnStart();
 
         outLineImage = transform.GetChild(0).GetComponent<Image>();

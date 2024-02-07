@@ -5,13 +5,15 @@ using UnityEngine;
 public class SliderDeselectedState : UIBaseState
 {
     private SliderStateManager manager;
+    private Slider sliderInstance;
 
     public float timeItTakes = 0.2f;
     Color newInterPartColor = new(1, 1, 1, 0.5f);
 
     public override void EnterState(BaseStateManager referenceManager)
     {
-        manager = referenceManager.SliderManagerInstance;
+        manager = (SliderStateManager)referenceManager;
+        sliderInstance = (Slider)referenceManager.UIInstance;
 
         manager.DefaultDeselectTransition(timeItTakes, manager.pointers, manager.transform, manager.outLineImage, manager.text);
 
@@ -43,6 +45,7 @@ public class SliderDeselectedState : UIBaseState
 public class SliderSelectedState : UIBaseState
 {
     private SliderStateManager manager;
+    private Slider sliderInstance;
 
     public float timeItTakes = 0.15f;
     public Vector3 newScale = new(1.1f, 1.1f, 1);
@@ -51,7 +54,8 @@ public class SliderSelectedState : UIBaseState
 
     public override void EnterState(BaseStateManager referenceManager)
     {
-        manager = referenceManager.SliderManagerInstance;
+        manager = (SliderStateManager)referenceManager;
+        sliderInstance = (Slider)referenceManager.UIInstance;
 
         if (!UIManager.Transitioning)
         {
@@ -96,6 +100,7 @@ public class SliderSelectedState : UIBaseState
 public class SliderPressedState : UIBaseState
 {
     private SliderStateManager manager;
+    private Slider sliderInstance;
 
     readonly float timeItTakes = 0.15f;
     Color newSlidingPartColor = new(1, 1, 0, 1);
@@ -103,7 +108,8 @@ public class SliderPressedState : UIBaseState
 
     public override void EnterState(BaseStateManager referenceManager)
     {
-        manager = referenceManager.SliderManagerInstance;
+        manager = (SliderStateManager)referenceManager;
+        sliderInstance = (Slider)referenceManager.UIInstance;
 
         originalColor = manager.sliderImage.color;
         TransitionSystem.AddColorTransition(new ColorTransition(manager.sliderImage, newSlidingPartColor, timeItTakes, TransitionType.SmoothStop2));
@@ -146,7 +152,7 @@ public class SliderPressedState : UIBaseState
     }
     private void ApplyValues(SliderStateManager slider)
     {
-        //slider.methods.SaveToDataManager(UIManager.DataManagerInstance, slider.TotalSlidingPercentage());
+        sliderInstance.SaveToDataManager(UIManager.DataManagerInstance, slider.TotalSlidingPercentage(), sliderInstance.sliderType);
     }
 
     private void ResetButtonValue(SliderStateManager slider)

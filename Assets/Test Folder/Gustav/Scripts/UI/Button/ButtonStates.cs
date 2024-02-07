@@ -11,7 +11,7 @@ public class ButtonDeselectedState : UIBaseState
 
     public override void EnterState(BaseStateManager referenceManager)
     {
-        manager = referenceManager.ButtonManagerInstance;
+        manager = (ButtonStateManager)referenceManager;
 
         manager.DefaultDeselectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, manager.text);
     }
@@ -50,12 +50,11 @@ public class ButtonSelectedState : UIBaseState
 
     public override void EnterState(BaseStateManager stateManager)
     {
-        manager = stateManager.ButtonManagerInstance;
+        manager = (ButtonStateManager)stateManager;
 
         if (!UIManager.Transitioning)
         {
-            ButtonStateManager g = stateManager.ButtonManagerInstance;
-            stateManager.DefaultSelectTransition(timeItTakes, g.pointers, g.transform, g.outlineImage, g.text);
+            stateManager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, manager.text);
         }
         else
         {
@@ -113,7 +112,7 @@ public class ButtonPressedState : UIBaseState
 
     public override void EnterState(BaseStateManager referenceManager)
     {
-        manager = referenceManager.ButtonManagerInstance;
+        manager = (ButtonStateManager)referenceManager;
 
         timer = timeItTakes;
         TransitionSystem.AddScaleTransition(new ScaleTransition(manager.transform, newScale, timeItTakes, TransitionType.SmoothStop2));

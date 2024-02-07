@@ -16,8 +16,6 @@ public class InputFieldStateManager : BaseStateManager
 
     public override void OnStart()
     {
-        InputManagerInstance = this;
-
         base.OnStart();
 
         image = GetComponentInChildren<Image>();

@@ -17,14 +17,12 @@ public class SliderStateManager : BaseStateManager
     [HideInInspector] public RectTransform sliderPosition;
     [HideInInspector] public GameObject pointers;
 
-    public float slidersOffset;
-    public float maxMoveValue;
-    public float moveDirection;
+    [HideInInspector] public float slidersOffset;
+    [HideInInspector] public float maxMoveValue;
+    [HideInInspector] public float moveDirection;
 
     public override void OnStart()
     {
-        SliderManagerInstance = this;
-
         base.OnStart();
 
         outLineImage = transform.GetChild(0).GetComponent<Image>();

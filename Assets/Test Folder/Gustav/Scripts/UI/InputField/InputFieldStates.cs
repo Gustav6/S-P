@@ -9,7 +9,7 @@ public class InputFieldDeselectedState : UIBaseState
 
     public override void EnterState(BaseStateManager referenceManager)
     {
-        manager = referenceManager.InputManagerInstance;
+        manager = (InputFieldStateManager)referenceManager;
 
         //inputField.pointers.SetActive(false);
         //TransitionSystem.AddColorTransition(new ColorTransition(inputField.text, newTextColor, timeItTakes, TransitionType.SmoothStart2));
@@ -49,7 +49,7 @@ public class InputFieldSelectedState : UIBaseState
     {
         if (!UIManager.Transitioning)
         {
-            manager = referenceManager.InputManagerInstance;
+            manager = (InputFieldStateManager)referenceManager;
 
             timer = timeItTakes;
             TransitionSystem.AddColorTransition(new ColorTransition(manager.text, newTextColor, timeItTakes, TransitionType.SmoothStart2));
@@ -102,7 +102,7 @@ public class InputFieldPressedState : UIBaseState
     private InputFieldStateManager manager;
     public override void EnterState(BaseStateManager referenceManager)
     {
-        manager = referenceManager.InputManagerInstance;
+        manager = (InputFieldStateManager)referenceManager;
     }
 
     public override void UpdateState(BaseStateManager referenceManager)

@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class HitboxTrigger : MonoBehaviour
 {
-    // TODO: Change for enemy controllr if null do the bellow if not then use enemy controller stat.
+    // TODO: Change for enemy controller if null do the bellow if not then use enemy controller stat.
     private AttackController _parentController;
 
     private void Awake()

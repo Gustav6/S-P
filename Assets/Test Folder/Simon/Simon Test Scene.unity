@@ -1262,7 +1262,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7122204b3383def40a37ddef7a4dca09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentWeapon: {fileID: 11400000, guid: 95b744dc794b44f429292791b805445b, type: 2}
 --- !u!114 &1514461422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1333,6 +1332,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e58b132261466ea44b9cf0a50740a1c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentWeapon: {fileID: 11400000, guid: 95b744dc794b44f429292791b805445b, type: 2}
   _diStrength: 0.25
 --- !u!1 &1528197644
 GameObject:

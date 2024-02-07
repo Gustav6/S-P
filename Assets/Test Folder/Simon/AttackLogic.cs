@@ -19,7 +19,7 @@ public class AttackLogic : MonoBehaviour
 
     public void SpawnHitbox()
     {
-        ScreenShake.instance.Shake(0.3f, 0.2f, _attackController.transform);
+        ScreenShake.instance.Shake(0.3f, 0.2f, Vector2.zero);
 
         _hitbox = Instantiate(PlayerStats.Instance.CurrentWeapon.Hitbox, weaponSpawnParent);
 

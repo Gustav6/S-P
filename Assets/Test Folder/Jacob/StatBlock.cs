@@ -24,7 +24,52 @@ public struct StatBlock
 		AbilityCooldownModifier = abilityCooldownModifier;
 	}
 
-	public static StatBlock operator*(StatBlock l, StatBlock r)
+	public StatBlock(int index, float value)
+    {
+        AttackSpeed = 1;
+        DamageModifier = 1;
+        DamageResistanceModifier = 1;
+        KnockbackModifier = 1;
+        KnockbackResitanceModifier = 1;
+        MovementSpeedModifier = 1;
+        AbilityCooldownModifier = 1;
+
+        switch (index)
+        {
+            case 0:
+                AttackSpeed = value;
+                break;
+
+            case 1:
+                DamageModifier = value;
+                break;
+
+            case 2:
+                DamageResistanceModifier = value;
+                break;
+
+            case 3:
+                KnockbackModifier = value;
+                break;
+
+            case 4:
+                KnockbackResitanceModifier = value;
+                break;
+
+            case 5:
+                MovementSpeedModifier = value;
+                break;
+
+            case 6:
+                AbilityCooldownModifier = value;
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    public static StatBlock operator*(StatBlock l, StatBlock r)
 	{
 		return new StatBlock(l.AttackSpeed * r.AttackSpeed,
 			l.DamageModifier * r.DamageModifier,
@@ -42,7 +87,7 @@ public struct StatBlock
 	/// <returns></returns>
 	public KeyValuePair<string, float> GetValue(int statType)
     {
-        switch ((int)statType)
+        switch (statType)
         {
             case 0:
                 return new KeyValuePair<string, float>("Attack Speed", AttackSpeed);

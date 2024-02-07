@@ -28,6 +28,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     StatBlock _mainStatBlock = new(1, 1, 1, 1, 1, 1, 1);
 
     StatBlock _weaponStatBlock;
+    StatBlock _abilityStatBlock;
 
     private PlayerMovement _playerMovement;
 
@@ -47,7 +48,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public float GetStat(StatType stat)
     {
-        return (_mainStatBlock * _weaponStatBlock).GetValue((int)stat).Value;
+        return (_mainStatBlock * _weaponStatBlock * _abilityStatBlock).GetValue((int)stat).Value;
     }
 
     public void AddStatModifier(StatBlock statChange)
@@ -58,6 +59,17 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void NewWeaponEquipped(StatBlock newWeaponStatBlock)
     {
         _weaponStatBlock = newWeaponStatBlock;
+    }
+
+    public void ActivateAbilityStats(StatBlock stats)
+    {
+        _abilityStatBlock = stats;
+    }
+
+    public void OnDestroy()
+    {
+
+        _abilityStatBlock = new(1, 1, 1, 1, 1, 1, 1);
     }
 
     #region Damage and Knockback

@@ -18,17 +18,15 @@ public class WaveManager : MonoBehaviour
     [SerializeField] int _rewardIncrement = 2; 
     [SerializeField] int _stageMorphIncrement = 5;
 
-    [SerializeField] AnimationCurve _horizontalCurve, _verticalCurve;
+    [SerializeField] AnimationCurve _dropCurve, _ascensionCurve;
 
-    delegate void OnRewardClaimed();
-    OnRewardClaimed _onRewardClaimedCallback;
 
     private void Start()
     {
         GenerateRewards(_statRewardPool, _statRewardInteractables);
         GenerateRewards(_weaponRewardPool, _weaponRewardInteractables);
 
-        _onRewardClaimedCallback += DisableRewardInteractables;
+        Invoke(nameof(EnableRewardInteractables), 2);
     }
 
     private void Update()
@@ -53,6 +51,8 @@ public class WaveManager : MonoBehaviour
             generatedRewardIndexes.Add(randomIndex);
 
             interactables[i].SetContainedReward(rewardPool[randomIndex]);
+
+            interactables[i].OnRewardClaimedCallback += DisableRewardInteractables;
         }
     }
 
@@ -76,11 +76,65 @@ public class WaveManager : MonoBehaviour
     void DisableRewardInteractables()
     {
         for (int i = 0; i < _statRewardInteractables.Length; i++)
-            _statRewardInteractables[i].enabled = false;
+            StartCoroutine(AscendReward(_statRewardInteractables[i], Random.Range(0, 0.4f)));
 
         for (int i = 0; i < _weaponRewardInteractables.Length; i++)
-            _weaponRewardInteractables[i].enabled = false;
+            StartCoroutine(AscendReward(_weaponRewardInteractables[i], Random.Range(0, 0.4f)));
+    }
 
+    void EnableRewardInteractables()
+    {
+        for (int i = 0; i < _statRewardInteractables.Length; i++)
+            StartCoroutine(DropReward(_statRewardInteractables[i], Random.Range(0, 0.4f)));
+
+        for (int i = 0; i < _weaponRewardInteractables.Length; i++)
+            StartCoroutine(DropReward(_weaponRewardInteractables[i], Random.Range(0, 0.4f)));
+    }
+
+    IEnumerator AscendReward(WaveRewardInteractable rewardInteractable, float initialDelay)
+    {
+        rewardInteractable.GetComponent<Animator>().enabled = false;
+        rewardInteractable.enabled = false;
+
+        yield return new WaitForSeconds(initialDelay);
+
+        Transform spriteTransform = rewardInteractable.transform.GetChild(0);
+
+        Vector2 endPos = rewardInteractable.transform.position + new Vector3(0, 11.5f);
+
+        float time = 0;
+
+        while (time <= 0.75f)
+        {
+            time += Time.deltaTime;
+            yield return null;
+            spriteTransform.position = new Vector2(rewardInteractable.transform.position.x, Mathf.Lerp(rewardInteractable.transform.position.y, endPos.y, _ascensionCurve.Evaluate(time / 0.75f)));
+        }
+
+        spriteTransform.position = new Vector2(rewardInteractable.transform.position.x, endPos.y);
+    }
+
+    IEnumerator DropReward(WaveRewardInteractable rewardInteractable, float initialDelay)
+    {
+        yield return new WaitForSeconds(initialDelay);
+
+        Transform spriteTransform = rewardInteractable.transform.GetChild(0);
+
+        Vector2 startPos = rewardInteractable.transform.position + new Vector3(0, 11.5f);
+
+        float time = 0;
+
+        while (time <= 0.75f)
+        {
+            time += Time.deltaTime;
+            yield return null;
+            spriteTransform.transform.position = new Vector2(startPos.x, Mathf.Lerp(startPos.y, rewardInteractable.transform.position.y, _dropCurve.Evaluate(time / 0.75f)));
+        }
+
+        spriteTransform.position = new Vector2(startPos.x, rewardInteractable.transform.position.y);
+
+        rewardInteractable.enabled = true;
+        rewardInteractable.GetComponent<Animator>().enabled = true;
     }
 
     List<GameObject> GetEnemies(int totalBudget, WaveType waveType)

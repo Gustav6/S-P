@@ -14,7 +14,12 @@ public class WaveRewardInteractable : Interactable
 
 	[SerializeField] Color _redColor;
 
+	Animator _panelAnimator;
 	
+    public delegate void OnRewardClaimed();
+	public OnRewardClaimed OnRewardClaimedCallback;
+
+	StatBlock _randomStatBlock;
 
 	private void Start()
 	{
@@ -43,6 +48,8 @@ public class WaveRewardInteractable : Interactable
 			_rewardPanel = Instantiate(_waveManager.WeaponRewardPanel, gameObject.transform);
 			SetWeaponPanelStats(_containedReward as WeaponReward);
 		}
+
+		_panelAnimator = _rewardPanel.GetComponent<Animator>();
     }
 
 	void SetStatPanelStats(StatReward currentReward)
@@ -90,6 +97,7 @@ public class WaveRewardInteractable : Interactable
 		panel.GetChild(2).GetComponent<Image>().sprite = currentReward.RewardSprite;
 
 		int randomStatIndex = Random.Range(0, 7);
+
 		float randomStatValue = 1;
 
         switch (Random.Range(0, 3))
@@ -105,6 +113,8 @@ public class WaveRewardInteractable : Interactable
 			default:
 				break;
         }
+
+		_randomStatBlock = new(randomStatIndex, randomStatValue);
 
 		float currentModifier = randomStatValue - 1;
 		string signPrefix = currentModifier < 0 ? "-" : "+";
@@ -128,16 +138,29 @@ public class WaveRewardInteractable : Interactable
 	public override void EnterInteractionRange()
 	{
 		_rewardPanel.SetActive(true);
+		_panelAnimator.Play("PanelExpand");
 	}
 
 	public override void ExitInteractionRange()
 	{
 		_rewardPanel.SetActive(false);
+		_panelAnimator.Play("PanelClose");
 	}
 
 	public override void Interact()
 	{
-		throw new System.NotImplementedException();
+		if (_containedReward is StatReward)
+        {
+			PopupManager.Instance.SpawnText("Stat boost added!\n" + _containedReward.RewardName, (Vector2)transform.position + new Vector2(0, 1), 2);
+            PlayerStats.Instance.AddStatModifier((_containedReward as StatReward).StatModifier);
+        }
+        else
+        {
+			PopupManager.Instance.SpawnText("Weapon aquired!\n" + _containedReward.RewardName, (Vector2)transform.position + new Vector2(0, 1), 2);
+			PlayerStats.Instance.NewWeaponEquipped(_randomStatBlock);
+		}
+
+		OnRewardClaimedCallback.Invoke();
 	}
 
 	private void OnDrawGizmosSelected()

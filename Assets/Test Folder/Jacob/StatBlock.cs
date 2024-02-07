@@ -11,9 +11,8 @@ public struct StatBlock
 	public float KnockbackModifier;
 	public float KnockbackResitanceModifier;
 	public float MovementSpeedModifier;
-	public float AbilityCooldownModifier;
 
-	public StatBlock(float attackSpeed, float damageModifier, float damageResistanceModifier, float knockbackModifier, float knockbackResitanceModifier, float movementSpeedModifier, float abilityCooldownModifier)
+	public StatBlock(float attackSpeed, float damageModifier, float damageResistanceModifier, float knockbackModifier, float knockbackResitanceModifier, float movementSpeedModifier)
 	{
 		AttackSpeed = attackSpeed;
 		DamageModifier = damageModifier;
@@ -21,7 +20,6 @@ public struct StatBlock
 		KnockbackModifier = knockbackModifier;
 		KnockbackResitanceModifier = knockbackResitanceModifier;
 		MovementSpeedModifier = movementSpeedModifier;
-		AbilityCooldownModifier = abilityCooldownModifier;
 	}
 
 	public StatBlock(int index, float value)
@@ -32,7 +30,6 @@ public struct StatBlock
         KnockbackModifier = 1;
         KnockbackResitanceModifier = 1;
         MovementSpeedModifier = 1;
-        AbilityCooldownModifier = 1;
 
         switch (index)
         {
@@ -60,10 +57,6 @@ public struct StatBlock
                 MovementSpeedModifier = value;
                 break;
 
-            case 6:
-                AbilityCooldownModifier = value;
-                break;
-
             default:
                 break;
         }
@@ -71,13 +64,12 @@ public struct StatBlock
 
     public static StatBlock operator*(StatBlock l, StatBlock r)
 	{
-		return new StatBlock(l.AttackSpeed * r.AttackSpeed,
-			l.DamageModifier * r.DamageModifier,
-			l.DamageResistanceModifier * r.DamageResistanceModifier,
-			l.KnockbackModifier * r.KnockbackModifier,
-			l.KnockbackResitanceModifier * r.KnockbackResitanceModifier,
-			l.MovementSpeedModifier * r.MovementSpeedModifier,
-			l.AbilityCooldownModifier * r.AbilityCooldownModifier);
+        return new StatBlock(l.AttackSpeed * r.AttackSpeed,
+            l.DamageModifier * r.DamageModifier,
+            l.DamageResistanceModifier * r.DamageResistanceModifier,
+            l.KnockbackModifier * r.KnockbackModifier,
+            l.KnockbackResitanceModifier * r.KnockbackResitanceModifier,
+            l.MovementSpeedModifier * r.MovementSpeedModifier);
 	}
 
 	/// <summary>
@@ -107,9 +99,6 @@ public struct StatBlock
             case 5:
                 return new KeyValuePair<string, float>("Movement Speed", MovementSpeedModifier);
 
-            case 6:
-                return new KeyValuePair<string, float>("Ability Cooldown", AbilityCooldownModifier);
-
             default:
                 break;
         }
@@ -125,6 +114,5 @@ public enum StatType
 	DamageResistance,
 	KnockbackDealt,
 	KnockbackResistance,
-	MovementSpeed,
-	AbilityCooldown
+	MovementSpeed
 }

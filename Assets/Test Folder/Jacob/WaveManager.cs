@@ -18,7 +18,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] int _rewardIncrement = 2; 
     [SerializeField] int _stageMorphIncrement = 5;
 
-    [SerializeField] AnimationCurve _dropCurve, _ascensionCurve;
+    [SerializeField] AnimationCurve _dropCurve, _ascensionCurve, _verticalSpawnCurve;
 
 
     private void Start()
@@ -26,7 +26,9 @@ public class WaveManager : MonoBehaviour
         GenerateRewards(_statRewardPool, _statRewardInteractables);
         GenerateRewards(_weaponRewardPool, _weaponRewardInteractables);
 
-        Invoke(nameof(EnableRewardInteractables), 2);
+        EnableRewardInteractables();
+
+        Invoke(nameof(StartTestWave), 2);
     }
 
     private void Update()
@@ -37,6 +39,248 @@ public class WaveManager : MonoBehaviour
         }
     }
 
+    void StartTestWave()
+    {
+        List<GameObject> enemiesToSpawn = GetEnemies(50, WaveType.Balanced);
+
+        SpawnEnemy(Instantiate(enemiesToSpawn[0]).transform);
+    }
+
+    void SpawnEnemy(Transform enemy)
+    {
+        Transform randomSpawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
+
+        StartCoroutine(AnimateEnemySpawn(enemy, randomSpawnPoint));
+
+        // Spawn enemy --> Animate it going from water to island --> Enable enemy AI.
+    }
+
+    IEnumerator AnimateEnemySpawn(Transform enemy, Transform spawnPoint)
+    {
+        Transform parentTransform = new GameObject().transform;
+        enemy.position = parentTransform.position;
+        enemy.SetParent(parentTransform);
+
+        Vector2 startPos = spawnPoint.GetChild(0).position;
+        Vector2 endPos = spawnPoint.GetChild(1).position;
+
+        parentTransform.position = startPos;
+
+        float time = 0;
+
+        while (time <= 1.25f)
+        {
+            yield return null;
+            time += Time.deltaTime;
+            parentTransform.position = Vector2.Lerp(startPos, endPos, time / 1.25f);
+            enemy.localPosition = new Vector2(0, Mathf.Lerp(0, 1.5f, _verticalSpawnCurve.Evaluate(time / 1.25f)));
+        }
+
+        enemy.SetParent(null);
+        Destroy(parentTransform.gameObject);
+    }
+
+    List<GameObject> GetEnemies(int totalBudget, WaveType waveType)
+    {
+        List<GameObject> finalEnemyList = new();
+
+        int remainingBudget = totalBudget;
+
+        switch (waveType)
+        {
+            case WaveType.Random:
+                for (; ; )
+                {
+                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
+
+                    if (_waveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
+                        continue;
+
+                    int randomEnemyCost = _enemyAssortment[randomEnemyID].Cost;
+
+                    if (remainingBudget < 2)
+                        break;
+
+                    finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                    remainingBudget -= randomEnemyCost;
+                }
+                break;
+
+            case WaveType.Light:
+                for (; ; )
+                {
+                    // Get random enemy
+                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
+
+                    if (_waveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
+                        continue;
+
+                    int randomEnemyCost = _enemyAssortment[randomEnemyID].Cost;
+
+                    // Spend 60% of budget on enemies with a cost lower than 10% of the budget
+                    if (remainingBudget >= totalBudget * 0.40f)
+                    {
+                        if (randomEnemyCost <= totalBudget * 0.1f)
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            remainingBudget -= randomEnemyCost;
+
+                            if (remainingBudget < 2)
+                                break;
+                        }
+                    }
+                    // Spend the rest on other enemies that cost more than 10% of the budget
+                    else
+                    {
+                        if (randomEnemyCost > totalBudget * 0.1f)
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            remainingBudget -= randomEnemyCost;
+
+                            if (remainingBudget < totalBudget * 0.1f)
+                                break;
+                        }
+                    }
+                }
+                break;
+
+            case WaveType.Balanced:
+                for (; ; )
+                {
+                    // Get random enemy
+                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
+
+                    if (_waveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
+                        continue;
+
+                    int randomEnemyCost = _enemyAssortment[randomEnemyID].Cost;
+
+                    // Spend 40% of budget on enemies with a cost lower than 10% of the budget
+                    if (remainingBudget >= totalBudget * 0.60f)
+                    {
+                        if (randomEnemyCost <= totalBudget * 0.1f)
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            remainingBudget -= randomEnemyCost;
+
+                            if (remainingBudget < 2)
+                                break;
+                        }
+                    }
+                    // Spend the rest on other enemies that cost more than 10% of the budget
+                    else
+                    {
+                        if (randomEnemyCost > totalBudget * 0.1f)
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            remainingBudget -= randomEnemyCost;
+
+                            if (remainingBudget < totalBudget * 0.1f)
+                                break;
+                        }
+                    }
+                }
+                break;
+
+            case WaveType.Heavy:
+                for (; ; )
+                {
+                    // Get random enemy
+                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
+
+                    if (_waveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
+                        continue;
+
+                    int randomEnemyCost = _enemyAssortment[randomEnemyID].Cost;
+
+                    // Spend 10% of budget on enemies with a cost lower than 10% of the budget
+                    if (remainingBudget >= totalBudget * 0.90f)
+                    {
+                        if (randomEnemyCost <= totalBudget * 0.1f)
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            remainingBudget -= randomEnemyCost;
+
+                            if (remainingBudget < 2)
+                                break;
+                        }
+                    }
+                    // Spend the rest on other enemies that cost more than 10% of the budget
+                    else
+                    {
+                        if (randomEnemyCost > totalBudget * 0.1f)
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            remainingBudget -= randomEnemyCost;
+
+
+                            if (remainingBudget < totalBudget * 0.1f)
+                                break;
+                        }
+                    }
+                }
+                break;
+
+            case WaveType.Swarm:
+                for (; ; )
+                {
+                    // Get random enemy
+                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
+
+                    if (_waveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
+                        continue;
+
+                    int randomEnemyCost = _enemyAssortment[randomEnemyID].Cost;
+
+                    // Spend 100% of budget on enemies with a cost lower than 15% of the budget
+                    if (remainingBudget >= 0)
+                    {
+                        if (randomEnemyCost <= totalBudget * 0.15f)
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            remainingBudget -= randomEnemyCost;
+
+                            if (remainingBudget < 2)
+                                break;
+                        }
+                    }
+                }
+                break;
+
+            case WaveType.Boss:
+                EnemyPreset wealthiestEnemy = _enemyAssortment[0];
+
+                foreach (EnemyPreset e in _enemyAssortment)
+                {
+                    if (e.Cost > wealthiestEnemy.Cost && _waveNumber >= e.WaveUnlocked)
+                        wealthiestEnemy = e;
+                }
+
+                finalEnemyList.Add(wealthiestEnemy.EnemyPrefab);
+                break;
+        }
+
+        return finalEnemyList;
+    }
+
+    void WaveClear()
+    {
+        _waveNumber++;
+
+        // Give rewards
+    }
+
+    enum WaveType
+    {
+        Random,
+        Light,
+        Balanced,
+        Heavy,
+        Swarm,
+        Boss
+    }
+
+    #region Wave Rewards
     void GenerateRewards(WaveReward[] rewardPool, WaveRewardInteractable[] interactables)
     {
         List<int> generatedRewardIndexes = new();
@@ -54,23 +298,6 @@ public class WaveManager : MonoBehaviour
 
             interactables[i].OnRewardClaimedCallback += DisableRewardInteractables;
         }
-    }
-
-    void StartTestWave()
-    {
-        List<GameObject> enemiesToSpawn = GetEnemies(50, WaveType.Balanced);
-
-        foreach (GameObject g in enemiesToSpawn)
-        {
-            SpawnEnemy(Instantiate(g).transform);
-        }
-    }
-
-    void SpawnEnemy(Transform enemy)
-    {
-        Transform randomSpawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
-        
-        // Spawn enemy --> Animate it going from water to island --> Enable enemy AI.
     }
 
     void DisableRewardInteractables()
@@ -137,205 +364,7 @@ public class WaveManager : MonoBehaviour
         rewardInteractable.GetComponent<Animator>().enabled = true;
     }
 
-    List<GameObject> GetEnemies(int totalBudget, WaveType waveType)
-    {
-        List<GameObject> finalEnemyList = new();
-
-        int remainingBudget = totalBudget;
-
-        switch (waveType)
-        {
-            case WaveType.Random:
-                for ( ; ; )
-                {
-                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
-
-                    if (_waveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
-                        continue;
-
-                    int randomEnemyCost = _enemyAssortment[randomEnemyID].Cost;
-
-                    if (remainingBudget < 2)
-                        break;
-
-                    finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
-                    remainingBudget -= randomEnemyCost;
-                }
-                break;
-
-            case WaveType.Light:
-                for ( ; ; )
-                {
-                    // Get random enemy
-                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
-
-                    if (_waveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
-                        continue;
-
-                    int randomEnemyCost = _enemyAssortment[randomEnemyID].Cost;
-
-                    // Spend 60% of budget on enemies with a cost lower than 10% of the budget
-                    if (remainingBudget >= totalBudget * 0.40f)
-                    {
-                        if (randomEnemyCost <= totalBudget * 0.1f)
-                        {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
-                            remainingBudget -= randomEnemyCost;
-
-                            if (remainingBudget < 2)
-                                break;
-                        }
-                    }
-                    // Spend the rest on other enemies that cost more than 10% of the budget
-                    else
-                    {
-                        if (randomEnemyCost > totalBudget * 0.1f)
-                        {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
-                            remainingBudget -= randomEnemyCost;
-
-                            if (remainingBudget < totalBudget * 0.1f)
-                                break;
-                        }
-                    }
-                }
-                break;
-
-            case WaveType.Balanced:
-                for ( ; ; )
-                {
-                    // Get random enemy
-                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
-
-                    if (_waveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
-                        continue;
-
-                    int randomEnemyCost = _enemyAssortment[randomEnemyID].Cost;
-
-                    // Spend 40% of budget on enemies with a cost lower than 10% of the budget
-                    if (remainingBudget >= totalBudget * 0.60f)
-                    {
-                        if (randomEnemyCost <= totalBudget * 0.1f)
-                        {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
-                            remainingBudget -= randomEnemyCost;
-
-                            if (remainingBudget < 2)
-                                break;
-                        }
-                    }
-                    // Spend the rest on other enemies that cost more than 10% of the budget
-                    else
-                    {
-                        if (randomEnemyCost > totalBudget * 0.1f)
-                        {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
-                            remainingBudget -= randomEnemyCost;
-
-                            if (remainingBudget < totalBudget * 0.1f)
-                                break;
-                        }
-                    }
-                }
-                break;
-
-            case WaveType.Heavy:
-                for ( ; ; )
-                {
-                    // Get random enemy
-                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
-
-                    if (_waveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
-                        continue;
-
-                    int randomEnemyCost = _enemyAssortment[randomEnemyID].Cost;
-
-                    // Spend 10% of budget on enemies with a cost lower than 10% of the budget
-                    if (remainingBudget >= totalBudget * 0.90f)
-                    {
-                        if (randomEnemyCost <= totalBudget * 0.1f)
-                        {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
-                            remainingBudget -= randomEnemyCost;
-
-                            if (remainingBudget < 2)
-                                break;
-                        }
-                    }
-                    // Spend the rest on other enemies that cost more than 10% of the budget
-                    else
-                    {
-                        if (randomEnemyCost > totalBudget * 0.1f)
-                        {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
-                            remainingBudget -= randomEnemyCost;
-
-
-                            if (remainingBudget < totalBudget * 0.1f)
-                                break;
-                        }
-                    }
-                }
-                break;
-
-            case WaveType.Swarm:
-                for ( ; ; )
-                {
-                    // Get random enemy
-                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
-
-                    if (_waveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
-                        continue;
-
-                    int randomEnemyCost = _enemyAssortment[randomEnemyID].Cost;
-
-                    // Spend 100% of budget on enemies with a cost lower than 15% of the budget
-                    if (remainingBudget >= 0)
-                    {
-                        if (randomEnemyCost <= totalBudget * 0.15f)
-                        {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
-                            remainingBudget -= randomEnemyCost;
-
-                            if (remainingBudget < 2)
-                                break;
-                        }
-                    }
-                }
-                break;
-
-            case WaveType.Boss:
-                EnemyPreset wealthiestEnemy = _enemyAssortment[0];
-
-                foreach (EnemyPreset e in _enemyAssortment)
-                {
-                    if (e.Cost > wealthiestEnemy.Cost && _waveNumber >= e.WaveUnlocked)
-                        wealthiestEnemy = e;
-                }
-
-                finalEnemyList.Add(wealthiestEnemy.EnemyPrefab);
-                break;
-        }
-
-        return finalEnemyList;
-    }
-
-    void WaveClear()
-    {
-        _waveNumber++;
-
-        // Give rewards
-    }
-
-    enum WaveType
-    { 
-        Random,
-        Light,
-        Balanced,
-        Heavy,
-        Swarm,
-        Boss
-    }
+    #endregion
 }
 
 [System.Serializable]

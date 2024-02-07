@@ -25,7 +25,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     #endregion
 
-    StatBlock _mainStatBlock = new(1, 1, 1, 1, 1, 1, 1);
+    StatBlock _mainStatBlock = new(1, 1, 1, 1, 1, 1);
 
     StatBlock _weaponStatBlock;
     StatBlock _abilityStatBlock;
@@ -61,15 +61,19 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _weaponStatBlock = newWeaponStatBlock;
     }
 
+    public void NewAbilityEquipped()
+    {
+
+    }
+
     public void ActivateAbilityStats(StatBlock stats)
     {
         _abilityStatBlock = stats;
     }
 
-    public void OnDestroy()
+    public void DeActivateAbilityStats()
     {
-
-        _abilityStatBlock = new(1, 1, 1, 1, 1, 1, 1);
+        _abilityStatBlock = new(1, 1, 1, 1, 1, 1);
     }
 
     #region Damage and Knockback

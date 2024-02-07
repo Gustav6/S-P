@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class HitboxTrigger : MonoBehaviour
 {
+    // TODO: Change for enemy controllr if null do the bellow if not then use enemy controller stat.
     private AttackController _parentController;
 
     private void Awake()
@@ -19,17 +20,16 @@ public class HitboxTrigger : MonoBehaviour
         if (damageable == null || triggerInfo.CompareTag(_parentController.tag))
             return;
 
-        Attack(damageable, _parentController);
+        if (_parentController != null)
+            Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage * PlayerStats.Instance.GetStat(StatType.DamageDealt),
+                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), transform.position);
     }
 
-    public void Attack(IDamageable damageable, AttackController attackController)
+    public void Attack(IDamageable damageable, float damage, float knockbackMultiplier, Vector2 sourcePosition)
     {
-        // If any cached variables are used within this method they will turn null, but remain the same value outside of method.
-        // They will also not be null in the inspector. This did not happen before and just randomly began happening.
-
         // TODO: Play SFX in take damage method.
-        damageable.TakeDamage(attackController.CurrentWeapon.Damage);
-        damageable.TakeKnockback(attackController.transform.position, attackController.CurrentWeapon.KnockBackMultiplier, CalculateStunTime(damageable.KnockbackPercent));
+        damageable.TakeDamage(damage);
+        damageable.TakeKnockback(sourcePosition, knockbackMultiplier, CalculateStunTime(damageable.KnockbackPercent));
     }
 
     /// <summary>

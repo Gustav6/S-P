@@ -5,9 +5,7 @@ using UnityEngine.Events;
 
 public class AttackController : MonoBehaviour
 {
-    public WeaponSO CurrentWeapon;
     private PlayerMovement _player;
-
     internal Animator weaponAnimator;
 
     private SpriteRenderer _flashSpriteRenderer;
@@ -28,11 +26,6 @@ public class AttackController : MonoBehaviour
         _player = GetComponent<PlayerMovement>();
     }
 
-    private void Start()
-    {
-        WeaponManager.Instance.SwitchWeapon(this, CurrentWeapon);
-    }
-
     /// <summary>
     /// Plays the attack animation, which will then begin calling the attack logic.
     /// </summary>
@@ -45,10 +38,10 @@ public class AttackController : MonoBehaviour
         WeaponManager.Instance.ToggleHit(false);
 
         weaponAnimator.SetTrigger("PlayHit");
-        weaponAnimator.SetFloat("s", CurrentWeapon.AnimationSpeed);
+        weaponAnimator.SetFloat("s", PlayerStats.Instance.CurrentWeapon.AnimationSpeed);
 
-        float impulseMultiplier = CurrentWeapon.ImpulseMultiplier;
-        float impulseTime = CurrentWeapon.ImpulseEffectTime;
+        float impulseMultiplier = PlayerStats.Instance.CurrentWeapon.ImpulseMultiplier;
+        float impulseTime = PlayerStats.Instance.CurrentWeapon.ImpulseEffectTime;
 
         if (_player == null || impulseMultiplier == 0 || impulseTime == 0)
             return;
@@ -65,11 +58,11 @@ public class AttackController : MonoBehaviour
     /// </summary>
     public void LeaveAttackState()
     {
-        if (CurrentWeapon.IsWeaponResetable && !_animationReadyToReset)
+        if (PlayerStats.Instance.CurrentWeapon.IsWeaponResetable && !_animationReadyToReset)
         {
             _animationReadyToReset = true;
             weaponAnimator.SetTrigger("PlayReturn");
-            weaponAnimator.SetFloat("s", CurrentWeapon.ResetMultiplier);
+            weaponAnimator.SetFloat("s", PlayerStats.Instance.CurrentWeapon.ResetMultiplier);
             return;
         }
 
@@ -79,10 +72,10 @@ public class AttackController : MonoBehaviour
         if (_flashSpriteRenderer.sprite != null)
             StartCoroutine(FlashWeapon());
 
-        if (CurrentWeapon.IsWeaponResetable)
+        if (PlayerStats.Instance.CurrentWeapon.IsWeaponResetable)
         {
             _animationReadyToReset = false;
-            weaponAnimator.SetFloat("s", CurrentWeapon.AnimationSpeed);
+            weaponAnimator.SetFloat("s", PlayerStats.Instance.CurrentWeapon.AnimationSpeed);
         }
     }
 

@@ -477,6 +477,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
+  toggleType: 0
+  onColor: {r: 0, g: 0.8, b: 0, a: 1}
+  offColor: {r: 0.8, g: 0, b: 0.004718399, a: 1}
+  toggleOn: 0
+  transitionTime: 0.3
 --- !u!114 &1393227582848674268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -496,10 +501,6 @@ MonoBehaviour:
   movingPart: {fileID: 0}
   outLine: {fileID: 0}
   pointers: {fileID: 0}
-  offColor: {r: 0.8235294, g: 0, b: 0, a: 1}
-  onColor: {r: 0, g: 0.8235294, b: 0, a: 1}
-  switchOn: 0
-  transitionTime: 0.3
   movingPartOffset: 0
 --- !u!61 &8959228491638266491
 BoxCollider2D:

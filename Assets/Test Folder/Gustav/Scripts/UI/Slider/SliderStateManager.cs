@@ -73,10 +73,12 @@ public class SliderStateManager : BaseStateManager
 
     public void SetStartPositionToValue()
     {
-        //if (UIManager.DataManagerInstance.sliderValues.ContainsKey(methods.type))
-        //{
-        //    Vector2 temp = new Vector2(PercentageToPosition(UIManager.DataManagerInstance.sliderValues[methods.type]), sliderPosition.localPosition.y);
-        //    sliderPosition.localPosition = temp;
-        //}
+        Slider sliderInstance = (Slider)UIInstance;
+
+        if (UIManager.DataManagerInstance.sliderValues.ContainsKey(sliderInstance.sliderType))
+        {
+            Vector2 temp = new Vector2(PercentageToPosition(UIManager.DataManagerInstance.sliderValues[sliderInstance.sliderType]), sliderPosition.localPosition.y);
+            sliderPosition.localPosition = temp;
+        }
     }
 }

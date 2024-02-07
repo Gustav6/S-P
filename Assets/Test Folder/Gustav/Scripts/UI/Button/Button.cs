@@ -32,63 +32,60 @@ public class Button : UI
         base.Update();
     }
 
-    public static void SwitchScene(NewScene scene)
+    public void SwitchScene()
     {
-        SceneManager.LoadScene((int)scene);
+        SceneManager.LoadScene((int)NewScene);
     }
 
     #region Move Transition
-    public static void InstantiatePrefab(bool prefabMove, bool prefabScale, PrefabDirection direction, GameObject prefab, GameObject currentMenu)
+    public void InstantiatePrefab(PrefabDirection direction, GameObject currentMenu, Transform parentTransform)
     {
         Destroy(currentMenu);
 
-        if (prefabMove)
+        if (prefabMoveTransition)
         {
             Vector3 spawnLocation = GiveDestination(direction) * -1;
 
-            UIManager.InstantiateNewUIPrefab(prefab, currentMenu.transform, Vector3.one, spawnLocation);
-            MovePrefabToStart(UIManager.DisableTransitioning, direction, 1);
+            UIManager.InstantiateNewUIPrefab(menu, parentTransform, Vector3.one, spawnLocation);
+            MoveUIToStart(menu.transform, 1, UIManager.DisableTransitioning, direction);
         }
-        else if (prefabScale)
+        else if (prefabScaleTransition)
         {
-            UIManager.InstantiateNewUIPrefab(prefab, currentMenu.transform, new Vector3(0.0001f, 0.0001f, 1), Vector3.zero);
+            UIManager.InstantiateNewUIPrefab(menu, currentMenu.transform, new Vector3(0.0001f, 0.0001f, 1), Vector3.zero);
             GrowTransition(UIManager.DisableTransitioning, 1);
         }
     }
 
-    public static void MovePrefabToStart(Transition.ExecuteOnCompletion actions, PrefabDirection direction, float time)
+    public void MoveUIToStart(Transform t, float time, Transition.ExecuteOnCompletion actions, PrefabDirection direction)
     {
-        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        foreach (Transform child in t)
         {
-            GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
-
             Vector3 destination = GiveDestination(direction);
 
-            MoveGameObject(temp, destination, time, i, actions);
+            MoveGameObject(child, destination, time);
         }
+
+        StartCoroutine(WaitCoroutine(time, actions));
     }
 
-    public static void MovePrefabToDestination(Transition.ExecuteOnCompletion actions, PrefabDirection direction, float time)
+    public void MoveThenDestoryUI(Transform t, float time, Transition.ExecuteOnCompletion actions, PrefabDirection direction)
     {
-        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        foreach (Transform child in t)
         {
-            GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
-
             Vector3 destination = GiveDestination(direction);
 
-            MoveGameObject(temp, destination, time, i, actions);
+            MoveGameObject(child, destination, time);
         }
+
+        StartCoroutine(WaitCoroutine(time, actions));
     }
 
-    private static void MoveGameObject(GameObject g, Vector3 destination, float time, float i, Transition.ExecuteOnCompletion executeOnCompletion = null, float windUp = 0, float overShoot = 0)
+    private void MoveGameObject(Transform t, Vector3 destination, float time, float windUp = 0, float overShoot = 0)
     {
-        if (i == 0)
-            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionType.SmoothStop2, true, windUp, overShoot, executeOnCompletion));
-        else
-            TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionType.SmoothStop2, true, windUp, overShoot));
+        TransitionSystem.AddMoveTransition(new MoveTransition(t, destination, time, TransitionType.SmoothStop2, true, windUp, overShoot));
     }
 
-    private static Vector3 GiveDestination(PrefabDirection direction)
+    private Vector3 GiveDestination(PrefabDirection direction)
     {
         if (direction == PrefabDirection.Left)
             return new(-Screen.width, 0, 0);
@@ -100,7 +97,7 @@ public class Button : UI
     #endregion
 
     #region Scale Transition
-    public static void ShrinkTransition(Transition.ExecuteOnCompletion actions, float time)
+    public void ShrinkTransition(Transition.ExecuteOnCompletion actions, float time)
     {
         for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
         {
@@ -109,7 +106,7 @@ public class Button : UI
         }
     }
 
-    public static void GrowTransition(Transition.ExecuteOnCompletion actions, float time)
+    public void GrowTransition(Transition.ExecuteOnCompletion actions, float time)
     {
         for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
         {
@@ -118,7 +115,7 @@ public class Button : UI
         }
     }
 
-    private static void ScaleGameObject(GameObject g, Vector3 newScale, float time, float i, Transition.ExecuteOnCompletion executeOnCompletion = null)
+    private void ScaleGameObject(GameObject g, Vector3 newScale, float time, float i, Transition.ExecuteOnCompletion executeOnCompletion = null)
     {
         if (i == 0)
             TransitionSystem.AddScaleTransition(new ScaleTransition(g.transform, newScale, time, TransitionType.SmoothStop2, executeOnCompletion));
@@ -126,6 +123,13 @@ public class Button : UI
             TransitionSystem.AddScaleTransition(new ScaleTransition(g.transform, newScale, time, TransitionType.SmoothStop2));
     }
     #endregion
+
+    private IEnumerator WaitCoroutine(float time, Transition.ExecuteOnCompletion actions)
+    {
+        yield return new WaitForSeconds(time);
+
+        actions?.Invoke();
+    }
 }
 
 public enum NewScene

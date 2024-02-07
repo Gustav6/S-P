@@ -6,6 +6,15 @@ public class ShrimpEnemy : Enemy, IDamageable
 {
     public float KnockbackPercent { get; set; }
 
+    Enemy enemy;
+
+    private void Start()
+    {
+         enemy = FindFirstObjectByType< Enemy>();
+
+        rb = GetComponent<Rigidbody2D>();
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
@@ -16,17 +25,23 @@ public class ShrimpEnemy : Enemy, IDamageable
 
     public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
     {
-        
-
-        Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
+        if (_isImmune)
+            return;
+            
+        _isGrounded = false;
+        _isImmune = true;
 
         Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized * knockbackMultiplier;
 
-        Vector2 diVector = input * (knockbackVector.magnitude * _diStrength);
+        rb.AddForce(knockbackVector, ForceMode2D.Impulse);
 
-        rb.AddForce(knockbackVector + diVector, ForceMode2D.Impulse);
+        Invoke(nameof(ResetKB), stunDuration);
+    }
 
-        Debug.Log("hit");
+    void ResetKB()
+    {
+        _isGrounded = true;
+        _isImmune = false;
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -36,5 +51,17 @@ public class ShrimpEnemy : Enemy, IDamageable
             Debug.Log("Man overboard");
             Destroy(this.gameObject);
         }
+
+        if (collision.gameObject.tag == "Player")
+        {
+            TakeKnockback(Vector2.zero, 10, 0.25f);
+            Debug.Log("Collided with player");
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+            TakeKnockback(Vector2.zero, 5, 0.25f);
+            Debug.Log("Collided with player");
     }
 }

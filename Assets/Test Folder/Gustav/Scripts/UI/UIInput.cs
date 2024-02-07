@@ -106,32 +106,32 @@ public class UIInput : MonoBehaviour
             SliderStateManager sm;
             GameObject g;
 
-            //if (manager.CheckForInteractableUI(manager.currentUISelected).gameObject != null)
-            //{
-            //    g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
+            if (manager.CheckForInteractableUI(manager.currentUISelected).gameObject != null)
+            {
+                g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
 
-            //    if (g.GetComponent<SliderStateManager>() != null)
-            //    {
-            //        sm = g.GetComponent<SliderStateManager>();
+                if (g.GetComponent<SliderStateManager>() != null)
+                {
+                    sm = g.GetComponent<SliderStateManager>();
 
-            //        if (manager.ChangingSlider)
-            //        {
-            //            if (context.ReadValue<float>() < 0)
-            //            {
-            //                sm.moveDirection = -1;
-            //            }
-            //            else if (context.ReadValue<float>() > 0)
-            //            {
-            //                sm.moveDirection = 1;
-            //            }
-            //        }
+                    if (manager.ChangingSlider)
+                    {
+                        if (context.ReadValue<float>() < 0)
+                        {
+                            sm.moveDirection = -1;
+                        }
+                        else if (context.ReadValue<float>() > 0)
+                        {
+                            sm.moveDirection = 1;
+                        }
+                    }
 
-            //        if (context.canceled)
-            //        {
-            //            sm.moveDirection = 0;
-            //        }
-            //    }
-            //}
+                    if (context.canceled)
+                    {
+                        sm.moveDirection = 0;
+                    }
+                }
+            }
         }
     }
 

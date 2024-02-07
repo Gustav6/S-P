@@ -6,30 +6,17 @@ using UnityEngine.UI;
 public class InputFieldDeselectedState : UIBaseState
 {
     private InputFieldStateManager manager;
+    private readonly float timeItTakes = 0.25f;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (InputFieldStateManager)referenceManager;
 
-        //inputField.pointers.SetActive(false);
-        //TransitionSystem.AddColorTransition(new ColorTransition(inputField.text, newTextColor, timeItTakes, TransitionType.SmoothStart2));
+        manager.DefaultDeselectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, manager.text);
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (manager.UIManagerInstance.KeyOrControlActive)
-        {
-            if (manager.UIManagerInstance.CurrentUISelected == manager.UIInstance.position)
-            {
-                manager.SwitchState(manager.selectedState);
-            }
-        }
-        else
-        {
-            if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
-            {
-                manager.SwitchState(manager.selectedState);
-            }
-        }
+        CheckIfSelected(referenceManager, manager.selectedState);
     }
 
     public override void ExitState(BaseStateManager referenceManager)
@@ -41,9 +28,7 @@ public class InputFieldSelectedState : UIBaseState
 {
     private InputFieldStateManager manager;
 
-    private float timer;
-    private Color newTextColor = new(1, 1, 1, 1);
-    private float timeItTakes = 0.25f;
+    private readonly float timeItTakes = 0.25f;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
@@ -51,9 +36,8 @@ public class InputFieldSelectedState : UIBaseState
         {
             manager = (InputFieldStateManager)referenceManager;
 
-            timer = timeItTakes;
-            TransitionSystem.AddColorTransition(new ColorTransition(manager.text, newTextColor, timeItTakes, TransitionType.SmoothStart2));
-            manager.pointers.SetActive(true);
+            manager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, manager.text);
+            CheckIfSelected(manager, manager.selectedState);
         }
         else
         {
@@ -63,31 +47,11 @@ public class InputFieldSelectedState : UIBaseState
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (manager.UIManagerInstance.KeyOrControlActive)
-        {
-            if (manager.UIManagerInstance.CurrentUISelected != manager.UIInstance.position)
-            {
-                manager.SwitchState(manager.deselectedState);
-            }
-        }
-        else
-        {
-            if (!manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
-            {
-                manager.SwitchState(manager.deselectedState);
-            }
-        }
+        CheckIfDeselected(referenceManager, manager.deselectedState);
 
-        if (timer <= 0)
+        if (canTransition && HasPressed(manager))
         {
-            if (manager.UIActivated)
-            {
-                manager.SwitchState(manager.pressedState);
-            }
-        }
-        else
-        {
-            timer -= Time.deltaTime;
+            manager.SwitchState(manager.pressedState);
         }
     }
 
@@ -100,6 +64,7 @@ public class InputFieldSelectedState : UIBaseState
 public class InputFieldPressedState : UIBaseState
 {
     private InputFieldStateManager manager;
+
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (InputFieldStateManager)referenceManager;

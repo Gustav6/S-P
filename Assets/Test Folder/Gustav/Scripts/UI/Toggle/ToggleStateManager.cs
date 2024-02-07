@@ -44,28 +44,31 @@ public class ToggleStateManager : BaseStateManager
     {
         base.OnUpdate();
     }
+
     public void SetState()
     {
-        //if (UIManager.DataManagerInstance.switchValues.ContainsKey(methods.type))
-        //{
-        //    switchOn = UIManager.DataManagerInstance.switchValues[methods.type];
-        //}
-        //else
-        //{
-        //    switchOn = true;
-        //}
+        Toggle toggleInstance = (Toggle)UIInstance;
 
-        //if (switchOn)
-        //{
-        //    Vector3 destination = new(movingPartOffset * -1, 0, 0);
-        //    movingPart.localPosition = destination;
-        //    toggleImage.color = onColor;
-        //}
-        //else
-        //{
-        //    Vector3 destination = new(movingPartOffset, 0, 0);
-        //    movingPart.localPosition = destination;
-        //    toggleImage.color = offColor;
-        //}
+        if (UIManager.DataManagerInstance.switchValues.ContainsKey(toggleInstance.toggleType))
+        {
+            toggleInstance.toggleOn = UIManager.DataManagerInstance.switchValues[toggleInstance.toggleType];
+        }
+        else
+        {
+            toggleInstance.toggleOn = true;
+        }
+
+        if (toggleInstance.toggleOn)
+        {
+            Vector3 destination = new(movingPartOffset * -1, 0, 0);
+            movingPart.localPosition = destination;
+            toggleImage.color = toggleInstance.onColor;
+        }
+        else
+        {
+            Vector3 destination = new(movingPartOffset, 0, 0);
+            movingPart.localPosition = destination;
+            toggleImage.color = toggleInstance.offColor;
+        }
     }
 }

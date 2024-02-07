@@ -8,8 +8,8 @@ public class Toggle : UI
 
     public ToggleType toggleType;
 
-    public Color offColor = new(0, 0.8f, 0, 1);
     public Color onColor = new(0.8f, 0, 0, 1);
+    public Color offColor = new(0, 0.8f, 0, 1);
 
     public bool toggleOn;
     [Range(0.1f, 1)] public float transitionTime = 0.3f;

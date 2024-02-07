@@ -100,48 +100,19 @@ public class TogglePressedState : UIBaseState
 {
     private ToggleStateManager managerInstance;
     private Toggle toggleInstance;
-    float timer;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
         managerInstance = (ToggleStateManager)referenceManager;
         toggleInstance = (Toggle)referenceManager.UIInstance;
 
-        timer = toggleInstance.transitionTime;
-        TransitionFromOnOff(toggleInstance, managerInstance, timer);
+        TransitionFromOnOff(toggleInstance, managerInstance, toggleInstance.transitionTime);
+        referenceManager.StartCoroutine(WaitCoroutine(toggleInstance.transitionTime));
     }
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (timer <= 0)
-        {
-            if (managerInstance.UIManagerInstance.KeyOrControlActive)
-            {
-                if (managerInstance.UIManagerInstance.currentUISelected == managerInstance.UIInstance.position)
-                {
-                    managerInstance.SwitchState(managerInstance.selectedState);
-                }
-                else
-                {
-                    managerInstance.SwitchState(managerInstance.deselectedState);
-                }
-            }
-            else
-            {
-                if (managerInstance.UIManagerInstance.HoveringGameObject(managerInstance.gameObject))
-                {
-                    managerInstance.SwitchState(managerInstance.selectedState);
-                }
-                else
-                {
-                    managerInstance.SwitchState(managerInstance.deselectedState);
-                }
-            }
-        }
-        else
-        {
-            timer -= Time.deltaTime;
-        }
+
     }
 
     public override void ExitState(BaseStateManager referenceManager)
@@ -167,5 +138,32 @@ public class TogglePressedState : UIBaseState
         }
 
         manager.UIActivated = false;
+    }
+    public IEnumerator WaitCoroutine(float time)
+    {
+        yield return new WaitForSeconds(time);
+
+        if (managerInstance.UIManagerInstance.KeyOrControlActive)
+        {
+            if (managerInstance.UIManagerInstance.currentUISelected == managerInstance.UIInstance.position)
+            {
+                managerInstance.SwitchState(managerInstance.selectedState);
+            }
+            else
+            {
+                managerInstance.SwitchState(managerInstance.deselectedState);
+            }
+        }
+        else
+        {
+            if (managerInstance.UIManagerInstance.HoveringGameObject(managerInstance.gameObject))
+            {
+                managerInstance.SwitchState(managerInstance.selectedState);
+            }
+            else
+            {
+                managerInstance.SwitchState(managerInstance.deselectedState);
+            }
+        }
     }
 }

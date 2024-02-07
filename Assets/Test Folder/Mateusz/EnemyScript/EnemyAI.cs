@@ -44,7 +44,6 @@ public class EnemyAI : MonoBehaviour
         if (seeker.IsDone())
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);
-            anim.SetBool("isMoving", true);
         }
     }
 
@@ -74,7 +73,7 @@ public class EnemyAI : MonoBehaviour
        
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
-        Vector2 force = (direction * speed * Time.deltaTime).normalized;
+        Vector2 force = (direction * speed * Time.deltaTime);
 
         rb.AddForce(force);
 
@@ -91,7 +90,16 @@ public class EnemyAI : MonoBehaviour
         }
         else if (rb.velocity.x < 0)
         {
-            spriteRenderer.flipX = true;
+            spriteRenderer.flipX = true;    
+        }
+
+        if (speed > 190)
+        {
+            anim.SetInteger("Velocity", 1);
+        }
+        else if (speed < 190)
+        {
+            anim.SetInteger("Velocity", 0);
         }
     }
 }

@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class EnemyAttackController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    Enemy _enemy;
+
+    SpriteRenderer _spriteRenderer;
+
+    Rigidbody2D _rb;
+
+    Animator _anim;
+
+  
+    private void Awake()
     {
-        
+        _enemy = FindFirstObjectByType<Enemy>();
+
+        _rb = GetComponent<Rigidbody2D>();
+
+        _anim = GetComponentInChildren<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+   internal void EnterAttackState()
     {
-        
+       
+            WeaponManager.Instance.ToggleHit(true);
+            _anim.SetBool("isAttacking", true);
+            Debug.Log("Is Attacking");
+       
+    }
+
+    public void LeaveAttack()
+    {
+
     }
 }

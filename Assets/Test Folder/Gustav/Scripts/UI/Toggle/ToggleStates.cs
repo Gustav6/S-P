@@ -4,47 +4,47 @@ using UnityEngine;
 
 public class ToggleDeselectedState : UIBaseState
 {
-    private ToggleStateManager managerInstance;
+    private ToggleStateManager manager;
 
     public float timeItTakes = 0.25f;
     Color newMovingPartColor = new(0, 0, 0, 0.2f);
 
     public override void EnterState(BaseStateManager referenceManager)
     {
-        managerInstance = (ToggleStateManager)referenceManager;
+        manager = (ToggleStateManager)referenceManager;
 
-        managerInstance.DefaultDeselectTransition(timeItTakes, managerInstance.pointers, null, managerInstance.outLineImage, managerInstance.text);
+        manager.DefaultDeselectTransition(timeItTakes, manager.pointers, null, manager.outLineImage, manager.text);
 
-        TransitionSystem.AddColorTransition(new ColorTransition(managerInstance.movingPartImage, newMovingPartColor, timeItTakes, TransitionType.SmoothStart2));
+        TransitionSystem.AddColorTransition(new ColorTransition(manager.movingPartImage, newMovingPartColor, timeItTakes, TransitionType.SmoothStart2));
     }
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (managerInstance.UIManagerInstance.KeyOrControlActive)
+        if (manager.UIManagerInstance.KeyOrControlActive)
         {
-            if (managerInstance.UIManagerInstance.CurrentUISelected == managerInstance.UIInstance.position)
+            if (manager.UIManagerInstance.CurrentUISelected == manager.UIInstance.position)
             {
-                managerInstance.SwitchState(managerInstance.selectedState);
+                manager.SwitchState(manager.selectedState);
             }
         }
         else
         {
-            if (managerInstance.UIManagerInstance.HoveringGameObject(managerInstance.gameObject))
+            if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
             {
-                managerInstance.SwitchState(managerInstance.selectedState);
+                manager.SwitchState(manager.selectedState);
             }
         }
     }
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        managerInstance.AudioManagerInstance.PlaySound(AudioType.SelectSound);
+        manager.AudioManagerInstance.PlaySound(AudioType.SelectSound);
     }
 }
 
 public class ToggleSelectedState : UIBaseState
 {
-    private ToggleStateManager managerInstance;
+    private ToggleStateManager manager;
     private Toggle toggleInstance;
 
     public float timeItTakes = 0.2f;
@@ -52,41 +52,41 @@ public class ToggleSelectedState : UIBaseState
 
     public override void EnterState(BaseStateManager referenceManager)
     {
-        managerInstance = (ToggleStateManager)referenceManager;
+        manager = (ToggleStateManager)referenceManager;
         toggleInstance = (Toggle)referenceManager.UIInstance;
 
         if (!UIManager.Transitioning)
         {
-            managerInstance.DefaultSelectTransition(timeItTakes, managerInstance.pointers, null, managerInstance.outLineImage, managerInstance.text);
+            manager.DefaultSelectTransition(timeItTakes, manager.pointers, null, manager.outLineImage, manager.text);
 
-            TransitionSystem.AddColorTransition(new ColorTransition(managerInstance.movingPartImage, newMovingPartColor, timeItTakes, TransitionType.SmoothStart2));
+            TransitionSystem.AddColorTransition(new ColorTransition(manager.movingPartImage, newMovingPartColor, timeItTakes, TransitionType.SmoothStart2));
         }
         else
         {
-            managerInstance.SwitchState(managerInstance.deselectedState);
+            manager.SwitchState(manager.deselectedState);
         }
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (managerInstance.UIManagerInstance.KeyOrControlActive)
+        if (manager.UIManagerInstance.KeyOrControlActive)
         {
-            if (managerInstance.UIManagerInstance.CurrentUISelected != managerInstance.UIInstance.position)
+            if (manager.UIManagerInstance.CurrentUISelected != manager.UIInstance.position)
             {
-                managerInstance.SwitchState(managerInstance.deselectedState);
+                manager.SwitchState(manager.deselectedState);
             }
         }
         else
         {
-            if (!managerInstance.UIManagerInstance.HoveringGameObject(managerInstance.gameObject))
+            if (!manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
             {
-                managerInstance.SwitchState(managerInstance.deselectedState);
+                manager.SwitchState(manager.deselectedState);
             }
         }
 
-        if (managerInstance.UIActivated)
+        if (manager.UIActivated)
         {
             toggleInstance.toggleOn = !toggleInstance.toggleOn;
-            managerInstance.SwitchState(managerInstance.pressedState);
+            manager.SwitchState(manager.pressedState);
         }
     }
 
@@ -98,15 +98,15 @@ public class ToggleSelectedState : UIBaseState
 
 public class TogglePressedState : UIBaseState
 {
-    private ToggleStateManager managerInstance;
+    private ToggleStateManager manager;
     private Toggle toggleInstance;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
-        managerInstance = (ToggleStateManager)referenceManager;
+        manager = (ToggleStateManager)referenceManager;
         toggleInstance = (Toggle)referenceManager.UIInstance;
 
-        TransitionFromOnOff(toggleInstance, managerInstance, toggleInstance.transitionTime);
+        TransitionFromOnOff(toggleInstance, manager, toggleInstance.transitionTime);
         referenceManager.StartCoroutine(WaitCoroutine(toggleInstance.transitionTime));
     }
 
@@ -143,26 +143,26 @@ public class TogglePressedState : UIBaseState
     {
         yield return new WaitForSeconds(time);
 
-        if (managerInstance.UIManagerInstance.KeyOrControlActive)
+        if (manager.UIManagerInstance.KeyOrControlActive)
         {
-            if (managerInstance.UIManagerInstance.currentUISelected == managerInstance.UIInstance.position)
+            if (manager.UIManagerInstance.currentUISelected == manager.UIInstance.position)
             {
-                managerInstance.SwitchState(managerInstance.selectedState);
+                manager.SwitchState(manager.selectedState);
             }
             else
             {
-                managerInstance.SwitchState(managerInstance.deselectedState);
+                manager.SwitchState(manager.deselectedState);
             }
         }
         else
         {
-            if (managerInstance.UIManagerInstance.HoveringGameObject(managerInstance.gameObject))
+            if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
             {
-                managerInstance.SwitchState(managerInstance.selectedState);
+                manager.SwitchState(manager.selectedState);
             }
             else
             {
-                managerInstance.SwitchState(managerInstance.deselectedState);
+                manager.SwitchState(manager.deselectedState);
             }
         }
     }

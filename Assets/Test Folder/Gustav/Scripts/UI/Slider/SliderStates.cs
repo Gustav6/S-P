@@ -30,7 +30,7 @@ public class SliderDeselectedState : UIBaseState
         }
         else
         {
-            if (manager.UIManagerInstance.HoveringGameObject(manager.gameObject))
+            if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
             {
                 manager.SwitchState(manager.selectedState);
             }
@@ -79,7 +79,7 @@ public class SliderSelectedState : UIBaseState
         }
         else
         {
-            if (!manager.UIManagerInstance.HoveringGameObject(manager.gameObject))
+            if (!manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
             {
                 manager.SwitchState(manager.deselectedState);
             }
@@ -126,12 +126,12 @@ public class SliderPressedState : UIBaseState
         }
         else
         {
-            if (manager.UIManagerInstance.HoveringGameObject(manager.gameObject) && manager.UIActivated)
+            if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance) && manager.UIActivated)
             {
                 MoveTowardsMouse(manager, manager.UIManagerInstance.MousePosition.x);
             }
 
-            if (!manager.UIManagerInstance.HoveringGameObject(manager.gameObject))
+            if (!manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
             {
                 manager.UIActivated = false;
                 manager.SwitchState(manager.deselectedState);

@@ -27,7 +27,7 @@ public class ButtonDeselectedState : UIBaseState
         }
         else
         {
-            if (Hovering(manager.UIInstance, manager.UIManagerInstance))
+            if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
             {
                 manager.SwitchState(manager.selectedState);
             }
@@ -73,7 +73,7 @@ public class ButtonSelectedState : UIBaseState
         }
         else
         {
-            if (!Hovering(stateManager.UIInstance, stateManager.UIManagerInstance))
+            if (!manager.Hovering(stateManager.UIInstance, stateManager.UIManagerInstance))
             {
                 stateManager.SwitchState(manager.deselectedState);
             }
@@ -104,6 +104,7 @@ public class ButtonPressedState : UIBaseState
 {
     private ButtonStateManager manager;
     Button buttonInstance;
+    private bool canTranstion;
 
     private float timeItTakes = 0.25f;
 
@@ -123,47 +124,7 @@ public class ButtonPressedState : UIBaseState
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-
-    }
-
-    public override void ExitState(BaseStateManager referenceManager)
-    {
-        Transition.ExecuteOnCompletion @delegate = null;
-
-        if (buttonInstance.transitionToPrefab)
-        {
-            UIManager.EnableTransitioning();
-            ActiveMenuManager currentMenu = buttonInstance.GetComponentInParent<ActiveMenuManager>();
-
-            if (buttonInstance.prefabMoveTransition)
-            {
-                @delegate += InstantiatePrefab;
-                buttonInstance.MoveThenDestoryUI(currentMenu.transform, 0.5f, @delegate, currentMenu.moveDirection);
-                Debug.Log("Move In Prefab");
-            }
-            else if (buttonInstance.prefabScaleTransition)
-            {
-                //button.methods.ShrinkTransition(button.methods.InstantiatePrefab, 1);
-                Debug.Log("Scale In Prefab");
-            }
-        }
-
-        if (buttonInstance.transitionToScene)
-        {
-            UIManager.EnableTransitioning();
-
-            //@delegate += button.methods.SwitchScene;
-            //button.methods.ShrinkTransition(null, 1);
-            //PanelManager.FadeOut(0.8f, new Color(0, 0, 0, 1), @delegate);
-            Debug.Log("Change Scene");
-        }
-    }
-
-    private IEnumerator WaitCoroutine(float time)
-    {
-        yield return new WaitForSeconds(time);
-
-        if (!manager.UIActivated)
+        if (!manager.UIActivated && canTranstion)
         {
             if (manager.UIManagerInstance.KeyOrControlActive)
             {
@@ -178,7 +139,7 @@ public class ButtonPressedState : UIBaseState
             }
             else
             {
-                if (manager.UIManagerInstance.HoveringGameObject(manager.gameObject))
+                if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
                 {
                     manager.SwitchState(manager.selectedState);
                 }
@@ -188,6 +149,49 @@ public class ButtonPressedState : UIBaseState
                 }
             }
         }
+    }
+
+    public override void ExitState(BaseStateManager referenceManager)
+    {
+        Transition.ExecuteOnCompletion execute = null;
+
+        if (buttonInstance.transitionToPrefab)
+        {
+            UIManager.EnableTransitioning();
+            ActiveMenuManager currentMenu = buttonInstance.GetComponentInParent<ActiveMenuManager>();
+
+            if (buttonInstance.prefabMoveTransition)
+            {
+                execute += InstantiatePrefab;
+                buttonInstance.MoveThenDestoryUI(0.5f, execute, currentMenu.moveDirection);
+                Debug.Log("Move In Prefab");
+            }
+            else if (buttonInstance.prefabScaleTransition)
+            {
+                execute += InstantiatePrefab;
+                buttonInstance.ShrinkTransition(1, execute);
+                Debug.Log("Scale In Prefab");
+            }
+        }
+
+        if (buttonInstance.transitionToScene)
+        {
+            UIManager.EnableTransitioning();
+
+            execute += buttonInstance.SwitchScene;
+            buttonInstance.ShrinkTransition(1, null);
+            PanelManager.FadeOut(0.8f, new Color(0, 0, 0, 1), execute);
+            Debug.Log("Change Scene");
+        }
+    }
+
+    private IEnumerator WaitCoroutine(float time)
+    {
+        canTranstion = false;
+
+        yield return new WaitForSeconds(time);
+
+        canTranstion = true;
     }
 
 

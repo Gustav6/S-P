@@ -156,6 +156,8 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(Transitioning);
+
         TransitionSystem.Update();
 
         if (KeyOrControlActive)
@@ -275,22 +277,5 @@ public class UIManager : MonoBehaviour
                 KeyOrControlActive = false;
             }
         }
-    }
-
-    public bool HoveringGameObject(GameObject g)
-    {
-        if (ListOfUIObjects.Count > 0 && !Transitioning)
-        {
-            if (g.GetComponent<Collider2D>().OverlapPoint(MousePosition))
-            {
-                if (g.GetComponent<UI>() != null)
-                {
-                    currentUISelected = g.GetComponent<UI>().position;
-                    return true;
-                }
-            }
-        }
-
-        return false;
     }
 }

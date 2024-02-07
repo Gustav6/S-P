@@ -14,7 +14,8 @@ public class Button : UI
     public bool prefabScaleTransition;
     public bool prefabMoveTransition;
 
-    public GameObject menu;
+    [Header("Drag in the prefab here")]
+    public GameObject menuPrefab;
 
     public override void Start()
     {
@@ -46,43 +47,46 @@ public class Button : UI
         {
             Vector3 spawnLocation = GiveDestination(direction) * -1;
 
-            UIManager.InstantiateNewUIPrefab(menu, parentTransform, Vector3.one, spawnLocation);
-            MoveUIToStart(menu.transform, 1, UIManager.DisableTransitioning, direction);
+            UIManager.InstantiateNewUIPrefab(menuPrefab.gameObject, parentTransform, Vector3.one, spawnLocation);
+            MoveUIToStart(menuPrefab.gameObject, 1, UIManager.DisableTransitioning, direction);
         }
         else if (prefabScaleTransition)
         {
-            UIManager.InstantiateNewUIPrefab(menu, currentMenu.transform, new Vector3(0.0001f, 0.0001f, 1), Vector3.zero);
-            GrowTransition(UIManager.DisableTransitioning, 1);
+            UIManager.InstantiateNewUIPrefab(menuPrefab, currentMenu.transform, new Vector3(0.0001f, 0.0001f, 1), Vector3.zero);
+            GrowTransition(1, UIManager.DisableTransitioning);
         }
     }
 
-    public void MoveUIToStart(Transform t, float time, Transition.ExecuteOnCompletion actions, PrefabDirection direction)
+    public void MoveUIToStart(GameObject g, float time, Transition.ExecuteOnCompletion actions, PrefabDirection direction)
     {
-        foreach (Transform child in t)
+        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
         {
             Vector3 destination = GiveDestination(direction);
 
-            MoveGameObject(child, destination, time);
+            MoveGameObject(UIManager.ListOfUIObjects[i].gameObject, destination, 1);
         }
 
-        StartCoroutine(WaitCoroutine(time, actions));
+        actions += UIManager.DisableTransitioning;
+
+        ButtonStateManager.UIManagerInstance.StartCoroutine(WaitCoroutine(time, actions));
+
     }
 
-    public void MoveThenDestoryUI(Transform t, float time, Transition.ExecuteOnCompletion actions, PrefabDirection direction)
+    public void MoveThenDestoryUI(float time, Transition.ExecuteOnCompletion actions, PrefabDirection direction)
     {
-        foreach (Transform child in t)
+        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
         {
             Vector3 destination = GiveDestination(direction);
 
-            MoveGameObject(child, destination, time);
+            MoveGameObject(UIManager.ListOfUIObjects[i].gameObject, destination, 1);
         }
 
-        StartCoroutine(WaitCoroutine(time, actions));
+        ButtonStateManager.UIManagerInstance.StartCoroutine(WaitCoroutine(time, actions));
     }
 
-    private void MoveGameObject(Transform t, Vector3 destination, float time, float windUp = 0, float overShoot = 0)
+    private void MoveGameObject(GameObject g, Vector3 destination, float time, float windUp = 0, float overShoot = 0)
     {
-        TransitionSystem.AddMoveTransition(new MoveTransition(t, destination, time, TransitionType.SmoothStop2, true, windUp, overShoot));
+        TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionType.SmoothStop2, true, windUp, overShoot));
     }
 
     private Vector3 GiveDestination(PrefabDirection direction)
@@ -97,7 +101,7 @@ public class Button : UI
     #endregion
 
     #region Scale Transition
-    public void ShrinkTransition(Transition.ExecuteOnCompletion actions, float time)
+    public void ShrinkTransition(float time, Transition.ExecuteOnCompletion actions)
     {
         for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
         {
@@ -106,7 +110,7 @@ public class Button : UI
         }
     }
 
-    public void GrowTransition(Transition.ExecuteOnCompletion actions, float time)
+    public void GrowTransition(float time, Transition.ExecuteOnCompletion actions)
     {
         for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
         {
@@ -123,7 +127,6 @@ public class Button : UI
             TransitionSystem.AddScaleTransition(new ScaleTransition(g.transform, newScale, time, TransitionType.SmoothStop2));
     }
     #endregion
-
     private IEnumerator WaitCoroutine(float time, Transition.ExecuteOnCompletion actions)
     {
         yield return new WaitForSeconds(time);

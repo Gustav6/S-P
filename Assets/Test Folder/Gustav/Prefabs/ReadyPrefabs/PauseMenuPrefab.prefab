@@ -51,9 +51,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32755a2ba3654da46957b2a7f2dd7016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  whereWillPrefabMove: 0
+  moveDirection: 0
   enableBlurOnInsansiate: 1
-  blurScirpt: {fileID: 0}
 --- !u!1001 &2794340464266266413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -128,7 +127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6776574943263549923, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_Size.x
-      value: 350
+      value: 480
       objectReference: {fileID: 0}
     - target: {fileID: 7292290588515505781, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_text
@@ -224,11 +223,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6776574943263549923, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_Size.x
-      value: 275
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 7292290588515505781, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_VerticalAlignment
       value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: NewScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: menuPrefab
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: position.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: transitionToScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: prefabScaleTransition
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8732738409933366688, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_Name
@@ -331,6 +350,26 @@ PrefabInstance:
     - target: {fileID: 7292290588515505781, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_text
       value: SETTINGS
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: menuPrefab
+      value: 
+      objectReference: {fileID: 5771690559064764648, guid: 5cc7ce1acce9582498d67d2ab5fd667b, type: 3}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: position.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: transitionToPrefab
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: prefabMoveTransition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: prefabScaleTransition
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8732738409933366688, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_Name

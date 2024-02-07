@@ -628,17 +628,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 519030760}
     m_Modifications:
-    - target: {fileID: 1908934817010239872, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -450
-      objectReference: {fileID: 0}
-    - target: {fileID: 2867176092890370980, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
-      propertyPath: menu
-      value: 
-      objectReference: {fileID: 6128976556278935385, guid: df738c3cef1fced4a87102877decaae5, type: 3}
     - target: {fileID: 3381804027909635715, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
       propertyPath: m_Name
       value: MainMenuPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 3381804027909635715, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4976460259830838166, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
       propertyPath: m_Pivot.x
@@ -719,14 +715,6 @@ PrefabInstance:
     - target: {fileID: 4976460259830838166, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7802014962264341911, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -450
-      objectReference: {fileID: 0}
-    - target: {fileID: 8118433467633306933, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -450
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

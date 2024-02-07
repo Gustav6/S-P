@@ -176,20 +176,19 @@ public class UIInput : MonoBehaviour
     {
         if (CanInteractWithUI() && !manager.KeyOrControlActive)
         {
-            GameObject g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
-            BaseStateManager uI = g.GetComponent<BaseStateManager>();
+            BaseStateManager stateManager = manager.CheckForInteractableUI(manager.currentUISelected).gameObject.GetComponent<BaseStateManager>();
 
-            if (manager.HoveringGameObject(g))
+            if (stateManager.Hovering(stateManager.UIInstance, stateManager.UIManagerInstance))
             {
                 if (context.performed)
                 {
-                    uI.UIActivated = true;
+                    stateManager.UIActivated = true;
                 }
             }
 
             if (context.canceled)
             {
-                uI.UIActivated = false;
+                stateManager.UIActivated = false;
             }
         }
     }

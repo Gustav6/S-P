@@ -99,4 +99,24 @@ public abstract class BaseStateManager : MonoBehaviour
             ColorPairs.Add("TextDeSelected", new Color(1, 1, 1, 0.5f));
         }
     }
+
+    public bool Hovering(UI UIInstance, UIManager uIManager)
+    {
+        if (UIManager.ListOfUIObjects.Count > 0 && !UIManager.Transitioning)
+        {
+            if (UIInstance != null)
+            {
+                if (UIInstance.GetComponent<Collider2D>().OverlapPoint(uIManager.MousePosition))
+                {
+                    if (UIInstance.GetComponent<UI>() != null)
+                    {
+                        uIManager.currentUISelected = UIInstance.GetComponent<UI>().position;
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
 }

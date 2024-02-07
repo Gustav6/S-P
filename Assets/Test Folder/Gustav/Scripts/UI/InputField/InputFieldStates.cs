@@ -25,7 +25,7 @@ public class InputFieldDeselectedState : UIBaseState
         }
         else
         {
-            if (manager.UIManagerInstance.HoveringGameObject(manager.gameObject))
+            if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
             {
                 manager.SwitchState(manager.selectedState);
             }
@@ -72,7 +72,7 @@ public class InputFieldSelectedState : UIBaseState
         }
         else
         {
-            if (!manager.UIManagerInstance.HoveringGameObject(manager.gameObject))
+            if (!manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
             {
                 manager.SwitchState(manager.deselectedState);
             }

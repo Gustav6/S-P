@@ -256,11 +256,11 @@ public class UIManager : MonoBehaviour
 
         List<GameObject> tempList = new();
 
-        for (int i = 0; i < CurrentUIPrefab.GetComponentsInChildren<UI>().Length; i++)
+        for (int i = 0; i < CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>().Length; i++)
         {
-            tempList.Add(CurrentUIPrefab.GetComponentsInChildren<UI>()[i].gameObject);
-            CurrentUIPrefab.GetComponentsInChildren<UI>()[i].transform.localScale = scale;
-            CurrentUIPrefab.GetComponentsInChildren<UI>()[i].transform.position += offset;
+            tempList.Add(CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>()[i].gameObject);
+            CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>()[i].transform.localScale = scale;
+            CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>()[i].transform.position += offset;
         }
 
         CurrentUIPrefab.GetComponentInParent<UIManager>().LoadUI(tempList);

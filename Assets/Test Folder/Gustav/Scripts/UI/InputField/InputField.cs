@@ -6,6 +6,8 @@ public class InputField : UI
 {
     public InputFieldStateManager InputFieldStateManager { get; private set; }
 
+    [Range(1, 20)] public int maxAmountOfLetters;
+
     public override void Start()
     {
         InputFieldStateManager = GetComponent<InputFieldStateManager>();

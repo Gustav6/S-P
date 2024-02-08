@@ -996,7 +996,7 @@ GameObject:
   - component: {fileID: 1610556614}
   - component: {fileID: 1610556615}
   m_Layer: 0
-  m_Name: DataManager
+  m_Name: UIDataManager
   m_TagString: DataManager
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -1026,7 +1026,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1610556613}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0fcee8faafcb17d41b513082c3a4adc2, type: 3}
+  m_Script: {fileID: 11500000, guid: cd12a4bb1ff04f74f874beee6d6b1a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807

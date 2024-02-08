@@ -95,7 +95,7 @@ public class TogglePressedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        toggleInstance.SaveToDataManager(UIManager.DataManagerInstance, toggleInstance.toggleOn, toggleInstance.toggleType);
+        toggleInstance.SaveToDataManager(UIManager.UIDataManagerInstance, toggleInstance.toggleOn, toggleInstance.toggleType);
     }
 
     public void TransitionFromOnOff(Toggle toggle, ToggleStateManager manager, float transitionTime)

@@ -126,7 +126,7 @@ public class SliderPressedState : UIBaseState
     }
     private void ApplyValues(SliderStateManager slider)
     {
-        sliderInstance.SaveToDataManager(UIManager.DataManagerInstance, slider.TotalSlidingPercentage(), sliderInstance.sliderType);
+        sliderInstance.SaveToDataManager(UIManager.UIDataManagerInstance, slider.TotalSlidingPercentage(), sliderInstance.sliderType);
     }
 
     private void ResetButtonValue(SliderStateManager slider)

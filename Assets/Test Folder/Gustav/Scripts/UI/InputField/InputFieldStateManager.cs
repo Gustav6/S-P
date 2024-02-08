@@ -18,9 +18,9 @@ public class InputFieldStateManager : BaseStateManager
     {
         base.OnStart();
 
-        outlineImage = GetComponentInChildren<Image>();
-        text = GetComponentInChildren<TextMeshProUGUI>();
-        pointers = transform.GetChild(2).GetComponent<Transform>().gameObject;
+        outlineImage = UIInstance.GetComponentInChildren<Image>();
+        text = UIInstance.GetComponentInChildren<TextMeshProUGUI>();
+        pointers = UIInstance.transform.GetChild(2).GetComponent<Transform>().gameObject;
 
         CurrentState = deselectedState;
 

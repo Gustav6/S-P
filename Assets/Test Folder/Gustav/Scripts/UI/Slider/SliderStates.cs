@@ -87,11 +87,11 @@ public class SliderPressedState : UIBaseState
 
         originalColor = manager.sliderImage.color;
         TransitionSystem.AddColorTransition(new ColorTransition(manager.sliderImage, newSlidingPartColor, timeItTakes, TransitionType.SmoothStop2));
-        manager.UIManagerInstance.ChangingSlider = true;
+        UIManager.instance.ChangingSlider = true;
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (manager.UIManagerInstance.KeyOrControlActive)
+        if (UIManager.instance.KeyOrControlActive)
         {
             if (manager.moveDirection != 0)
             {
@@ -100,12 +100,12 @@ public class SliderPressedState : UIBaseState
         }
         else
         {
-            if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance) && manager.UIActivated)
+            if (referenceManager.UIInstance.hovering && manager.UIActivated)
             {
-                MoveTowardsMouse(manager, manager.UIManagerInstance.MousePosition.x);
+                MoveTowardsMouse(manager, UIManager.instance.MousePosition.x);
             }
 
-            if (!manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
+            if (!referenceManager.UIInstance.hovering)
             {
                 manager.UIActivated = false;
                 manager.SwitchState(manager.deselectedState);
@@ -122,7 +122,7 @@ public class SliderPressedState : UIBaseState
     {
         ApplyValues(manager);
         ResetButtonValue(manager);
-        manager.UIManagerInstance.ChangingSlider = false;
+        UIManager.instance.ChangingSlider = false;
     }
     private void ApplyValues(SliderStateManager slider)
     {

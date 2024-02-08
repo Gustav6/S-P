@@ -9,17 +9,15 @@ public class InputField : UI
     public override void Start()
     {
         InputFieldStateManager = GetComponent<InputFieldStateManager>();
-        InputFieldStateManager.UIInstance = this;
+
+        LoadFunction(InputFieldStateManager);
 
         base.Start();
     }
 
     public override void Update()
     {
-        if (InputFieldStateManager.UIInstance != null)
-        {
-            InputFieldStateManager.OnUpdate();
-        }
+        UpdateFunction(InputFieldStateManager);
 
         base.Update();
     }

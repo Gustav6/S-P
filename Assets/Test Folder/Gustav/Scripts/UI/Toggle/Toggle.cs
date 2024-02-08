@@ -31,7 +31,7 @@ public class Toggle : UI
         base.Update();
     }
 
-    public void SaveToDataManager(DataManager manager, bool value, ToggleType type)
+    public void SaveToDataManager(UIDataManager manager, bool value, ToggleType type)
     {
         if (!manager.switchValues.ContainsKey(type))
         {

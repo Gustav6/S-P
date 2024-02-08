@@ -23,7 +23,7 @@ public class Slider : UI
 
         base.Update();
     }
-    public void SaveToDataManager(DataManager manager, float value, SliderType type)
+    public void SaveToDataManager(UIDataManager manager, float value, SliderType type)
     {
         if (manager.sliderValues.ContainsKey(type))
         {

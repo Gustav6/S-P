@@ -135,7 +135,7 @@ public class UIManager : MonoBehaviour
     public static bool Paused { get; set; }
     public static GameObject CameraInstance { get; private set; }
     public static bool Transitioning { get; private set; }
-    public static DataManager DataManagerInstance { get; private set; }
+    public static UIDataManager UIDataManagerInstance { get; private set; }
     #endregion
 
     void Awake()
@@ -146,7 +146,7 @@ public class UIManager : MonoBehaviour
 
         LoadUI();
 
-        DataManagerInstance = GameObject.FindGameObjectWithTag("DataManager").GetComponent<DataManager>();
+        UIDataManagerInstance = GameObject.FindGameObjectWithTag("DataManager").GetComponent<UIDataManager>();
     }
 
     void Start()
@@ -156,8 +156,6 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(Transitioning);
-
         TransitionSystem.Update();
 
         if (KeyOrControlActive)

@@ -6,11 +6,11 @@ using UnityEngine.Events;
 public class HitboxTrigger : MonoBehaviour
 {
     // TODO: Change for enemy controller if null do the bellow if not then use enemy controller stat.
-    private AttackController _parentController;
+    private PlayerAnimationController _parentController;
 
     private void Awake()
     {
-        _parentController = GetComponentInParent<AttackController>();
+        _parentController = GetComponentInParent<PlayerAnimationController>();
     }
 
     private void OnTriggerEnter2D(Collider2D triggerInfo)

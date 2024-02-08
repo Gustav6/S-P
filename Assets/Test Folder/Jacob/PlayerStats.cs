@@ -31,19 +31,19 @@ public class PlayerStats : MonoBehaviour, IDamageable
     StatBlock _abilityStatBlock;
 
     private PlayerMovement _playerMovement;
-
     public WeaponSO CurrentWeapon;
 
     [SerializeField] float _diStrength = 0.25f; // DI stands for direction input, used to reduce or enhance knockback when counteracting it with movement input.
 
+    bool _isImmune = false;
     public float KnockbackPercent { get; set; }
 
-    bool _isImmune = false;
+    public PowerUp currentPowerUp { get; private set; }
 
     private void Start()
     {
         // Call this when you want to change the player weapon n stuff.
-        WeaponManager.Instance.SwitchWeapon(CurrentWeapon);
+        EquipmentManager.Instance.SwitchWeapon(CurrentWeapon);
     }
 
     public float GetStat(StatType stat)
@@ -61,9 +61,18 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _weaponStatBlock = newWeaponStatBlock;
     }
 
-    public void NewAbilityEquipped()
+    public void NewAbilityEquipped(PowerUp powerUp)
     {
+        currentPowerUp = powerUp;
+    }
 
+    public void ClearEquippedAbility()
+    {
+        if (currentPowerUp = null)
+            return;
+
+        Destroy(GetComponent<PowerUp>());
+        currentPowerUp = null;
     }
 
     public void ActivateAbilityStats(StatBlock stats)

@@ -10,7 +10,7 @@ public class InputFieldStateManager : BaseStateManager
     public InputFieldSelectedState selectedState = new();
     public InputFieldPressedState pressedState = new();
 
-    [HideInInspector] public Image image;
+    [HideInInspector] public Image outlineImage;
     [HideInInspector] public TextMeshProUGUI text;
     [HideInInspector] public GameObject pointers;
 
@@ -18,7 +18,7 @@ public class InputFieldStateManager : BaseStateManager
     {
         base.OnStart();
 
-        image = GetComponentInChildren<Image>();
+        outlineImage = GetComponentInChildren<Image>();
         text = GetComponentInChildren<TextMeshProUGUI>();
         pointers = transform.GetChild(2).GetComponent<Transform>().gameObject;
 

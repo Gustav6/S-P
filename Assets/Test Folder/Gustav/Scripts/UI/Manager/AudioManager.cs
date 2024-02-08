@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(AudioType audio)
     {
-        float volume = UIManager.DataManagerInstance.sliderValues[SliderType.MainVolume];
+        float volume = UIManager.UIDataManagerInstance.sliderValues[SliderType.MainVolume];
         audioSource.PlayOneShot(clips[(int)audio], volume);
     }
 }

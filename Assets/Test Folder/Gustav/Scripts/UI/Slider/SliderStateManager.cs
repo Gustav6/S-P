@@ -75,9 +75,9 @@ public class SliderStateManager : BaseStateManager
     {
         Slider sliderInstance = (Slider)UIInstance;
 
-        if (UIManager.DataManagerInstance.sliderValues.ContainsKey(sliderInstance.sliderType))
+        if (UIManager.UIDataManagerInstance.sliderValues.ContainsKey(sliderInstance.sliderType))
         {
-            Vector2 temp = new Vector2(PercentageToPosition(UIManager.DataManagerInstance.sliderValues[sliderInstance.sliderType]), sliderPosition.localPosition.y);
+            Vector2 temp = new Vector2(PercentageToPosition(UIManager.UIDataManagerInstance.sliderValues[sliderInstance.sliderType]), sliderPosition.localPosition.y);
             sliderPosition.localPosition = temp;
         }
     }

@@ -4,27 +4,38 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private AttackController _attackController;
+    private PlayerAnimationController _attackController;
     private AimController _aimController;
+    private PlayerStats _player;
 
     private void Awake()
     {
-        _attackController = GetComponentInChildren<AttackController>();
+        _attackController = GetComponentInChildren<PlayerAnimationController>();
         _aimController = GetComponent<AimController>();
+        _player = GetComponent<PlayerStats>();
     }
 
     private void Update()
     {
-        if (WeaponManager.Instance.CanHit())
+        if (EquipmentManager.Instance.CanHit())
             TurnToMouse();
 
-        if (Input.GetKey(KeyCode.Q) && WeaponManager.Instance.CanHit())
+        if (Input.GetKey(KeyCode.Q) && EquipmentManager.Instance.CanHit())
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 targetDirection = (mousePosition - (Vector2)transform.position).normalized;
 
             _attackController.PlayHitAnimation(targetDirection);
         }
+
+        if (Input.GetKeyDown(KeyCode.F) && _player.currentPowerUp != null)
+            _player.currentPowerUp.UsePowerUp();
+
+        if (Input.GetKeyDown(KeyCode.K))
+            EquipmentManager.Instance.OnSpawnPowerUp?.Invoke(Vector2.zero, 100, PowerUpTypes.Dash);
+
+        if (Input.GetKeyDown(KeyCode.T))
+            PlayerStats.Instance.ClearEquippedAbility();
     }
 
     private void TurnToMouse()

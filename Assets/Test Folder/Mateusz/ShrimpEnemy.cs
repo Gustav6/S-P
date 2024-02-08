@@ -6,62 +6,54 @@ public class ShrimpEnemy : Enemy, IDamageable
 {
     public float KnockbackPercent { get; set; }
 
-    Enemy enemy;
+    Enemy _enemy;
 
     private void Start()
     {
-         enemy = FindFirstObjectByType< Enemy>();
-
-        rb = GetComponent<Rigidbody2D>();
+         _enemy = FindFirstObjectByType< Enemy>();
+         _player = FindFirstObjectByType<PlayerMovement>();
+         _rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            TakeKnockback(Vector2.zero, 10, 0.25f);
+            TakeKnockback(Vector2.zero, 2, 0.25f);
         }
-    }
 
-    public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
-    {
-        if (_isImmune)
-            return;
-            
-        _isGrounded = false;
-        _isImmune = true;
-
-        Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized * knockbackMultiplier;
-
-        rb.AddForce(knockbackVector, ForceMode2D.Impulse);
-
-        Invoke(nameof(ResetKB), stunDuration);
-    }
-
-    void ResetKB()
-    {
-        _isGrounded = true;
-        _isImmune = false;
-    }
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "WaterCollision")
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log("Man overboard");
-            Destroy(this.gameObject);
-        }
-
-        if (collision.gameObject.tag == "Player")
-        {
-            TakeKnockback(Vector2.zero, 10, 0.25f);
-            Debug.Log("Collided with player");
+            OnHit(_kbPower);
         }
     }
-
-    void OnCollisionEnter2D(Collision2D collision)
+    public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stuntDuration)
     {
-            TakeKnockback(Vector2.zero, 5, 0.25f);
-            Debug.Log("Collided with player");
+        Vector2 knockbackVector = (transform.localPosition - _player.transform.localPosition).normalized;
+
+        _rb.AddForce(knockbackVector * _kbPower, ForceMode2D.Impulse);
+
+        Debug.Log("knockback applied " +knockbackVector);
     }
+
+    private void OnHit(float kbPower)
+    {
+        _kbPower = (kbPower * 1.06f);
+
+    }
+
+    //void OnTriggerEnter2D(Collider2D collision)
+    //{
+    //    if (collision.gameObject.tag == "WaterCollision")
+    //    {
+    //        Debug.Log("Man overboard");
+    //        Destroy(this.gameObject);
+    //    }
+
+    //    if (collision.gameObject.tag == "Player")
+    //    {
+    //        TakeKnockback(Vector2.zero, 10, 0.25f);
+    //        Debug.Log("Collided with player");
+    //    }
+    //}
 }

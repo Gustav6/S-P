@@ -404,8 +404,9 @@ GameObject:
   m_Component:
   - component: {fileID: 285348306}
   - component: {fileID: 285348305}
+  - component: {fileID: 285348307}
   m_Layer: 0
-  m_Name: Basic Graphics Manager
+  m_Name: Basic Data Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -438,6 +439,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &285348307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285348304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bae75dd0922b274f91aeaa9ab306fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &397027260
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,8 +549,9 @@ GameObject:
   m_Component:
   - component: {fileID: 434823613}
   - component: {fileID: 434823614}
+  - component: {fileID: 434823615}
   m_Layer: 0
-  m_Name: Weapon Manager
+  m_Name: Equipment Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -567,9 +581,22 @@ MonoBehaviour:
   m_GameObject: {fileID: 434823612}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6df802509862d7c4ba9671c546aa5eeb, type: 3}
+  m_Script: {fileID: 11500000, guid: 8a6138fef475b2d4d8c70739ba001e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &434823615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434823612}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172ef22f3d537e0468e9d77a87ea5fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpPrefab: {fileID: 3373117574710748933, guid: 2866aecfd7238e440985ff8144094d9d, type: 3}
 --- !u!1 &552680978
 GameObject:
   m_ObjectHideFlags: 0
@@ -1115,7 +1142,7 @@ GameObject:
   - component: {fileID: 1514461425}
   - component: {fileID: 1514461424}
   - component: {fileID: 1514461422}
-  - component: {fileID: 1514461421}
+  - component: {fileID: 1514461427}
   - component: {fileID: 1514461420}
   - component: {fileID: 1514461419}
   - component: {fileID: 1514461418}
@@ -1237,8 +1264,8 @@ MonoBehaviour:
   animationComplete:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1514461421}
-        m_TargetAssemblyTypeName: AttackController, Assembly-CSharp
+      - m_Target: {fileID: 1514461427}
+        m_TargetAssemblyTypeName: PlayerAnimationController, Assembly-CSharp
         m_MethodName: LeaveAttackState
         m_Mode: 1
         m_Arguments:
@@ -1250,18 +1277,6 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   weaponSpawnParent: {fileID: 2140581736}
---- !u!114 &1514461421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514461416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7122204b3383def40a37ddef7a4dca09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1514461422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1334,6 +1349,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentWeapon: {fileID: 11400000, guid: 95b744dc794b44f429292791b805445b, type: 2}
   _diStrength: 0.25
+--- !u!114 &1514461427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514461416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d8303108b80add45b8b1668deb1fa90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1528197644
 GameObject:
   m_ObjectHideFlags: 0
@@ -6553,8 +6580,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 434823613}
-  - {fileID: 1367930026}
   - {fileID: 285348306}
+  - {fileID: 1367930026}
   - {fileID: 78884998}
   - {fileID: 1489620433}
   - {fileID: 1514461423}

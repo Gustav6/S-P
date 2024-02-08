@@ -6,8 +6,8 @@ public class ToggleDeselectedState : UIBaseState
 {
     private ToggleStateManager manager;
 
-    public float timeItTakes = 0.25f;
-    Color newMovingPartColor = new(0, 0, 0, 0.2f);
+    private readonly float timeItTakes = 0.25f;
+    private Color newMovingPartColor = new(0, 0, 0, 0.2f);
 
     public override void EnterState(BaseStateManager referenceManager)
     {
@@ -20,20 +20,7 @@ public class ToggleDeselectedState : UIBaseState
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (manager.UIManagerInstance.KeyOrControlActive)
-        {
-            if (manager.UIManagerInstance.CurrentUISelected == manager.UIInstance.position)
-            {
-                manager.SwitchState(manager.selectedState);
-            }
-        }
-        else
-        {
-            if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
-            {
-                manager.SwitchState(manager.selectedState);
-            }
-        }
+        CheckIfSelected(manager, manager.selectedState);
     }
 
     public override void ExitState(BaseStateManager referenceManager)
@@ -47,7 +34,7 @@ public class ToggleSelectedState : UIBaseState
     private ToggleStateManager manager;
     private Toggle toggleInstance;
 
-    public float timeItTakes = 0.2f;
+    private readonly float timeItTakes = 0.2f;
     Color newMovingPartColor = new(0, 0, 0, 1);
 
     public override void EnterState(BaseStateManager referenceManager)
@@ -68,22 +55,9 @@ public class ToggleSelectedState : UIBaseState
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (manager.UIManagerInstance.KeyOrControlActive)
-        {
-            if (manager.UIManagerInstance.CurrentUISelected != manager.UIInstance.position)
-            {
-                manager.SwitchState(manager.deselectedState);
-            }
-        }
-        else
-        {
-            if (!manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
-            {
-                manager.SwitchState(manager.deselectedState);
-            }
-        }
+        CheckIfDeselected(manager, manager.deselectedState);
 
-        if (manager.UIActivated)
+        if (HasPressed(manager))
         {
             toggleInstance.toggleOn = !toggleInstance.toggleOn;
             manager.SwitchState(manager.pressedState);
@@ -107,17 +81,21 @@ public class TogglePressedState : UIBaseState
         toggleInstance = (Toggle)referenceManager.UIInstance;
 
         TransitionFromOnOff(toggleInstance, manager, toggleInstance.transitionTime);
-        referenceManager.StartCoroutine(WaitCoroutine(toggleInstance.transitionTime));
+        manager.StartCoroutine(WaitCoroutine(toggleInstance.transitionTime));
     }
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-
+        if (canTransition)
+        {
+            CheckIfDeselected(manager, manager.deselectedState);
+            CheckIfSelected(manager, manager.selectedState);
+        }
     }
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        toggleInstance.SaveToDataManager(UIManager.DataManagerInstance, toggleInstance.toggleOn, toggleInstance.toggleType);
+        toggleInstance.SaveToDataManager(UIManager.UIDataManagerInstance, toggleInstance.toggleOn, toggleInstance.toggleType);
     }
 
     public void TransitionFromOnOff(Toggle toggle, ToggleStateManager manager, float transitionTime)
@@ -138,32 +116,5 @@ public class TogglePressedState : UIBaseState
         }
 
         manager.UIActivated = false;
-    }
-    public IEnumerator WaitCoroutine(float time)
-    {
-        yield return new WaitForSeconds(time);
-
-        if (manager.UIManagerInstance.KeyOrControlActive)
-        {
-            if (manager.UIManagerInstance.currentUISelected == manager.UIInstance.position)
-            {
-                manager.SwitchState(manager.selectedState);
-            }
-            else
-            {
-                manager.SwitchState(manager.deselectedState);
-            }
-        }
-        else
-        {
-            if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
-            {
-                manager.SwitchState(manager.selectedState);
-            }
-            else
-            {
-                manager.SwitchState(manager.deselectedState);
-            }
-        }
     }
 }

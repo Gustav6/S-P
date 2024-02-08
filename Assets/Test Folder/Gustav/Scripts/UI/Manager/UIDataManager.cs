@@ -1,23 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class DataManager : MonoBehaviour
+public class UIDataManager : MonoBehaviour
 {
     public Dictionary<SliderType, float> sliderValues = new();
     public Dictionary<ToggleType, bool> switchValues = new();
     public Dictionary<string, int> leaderBoard = new();
 
-    private static DataManager instance = null;
+    private static UIDataManager instance = null;
 
     void Awake()
     {
         if (instance == null)
         {
             instance = this;
-            SetDefaultValues();
+            SetValues();
             DontDestroyOnLoad(gameObject);
             return;
         }
@@ -25,8 +23,9 @@ public class DataManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void SetDefaultValues()
+    public void SetValues()
     {
+        // Load saved settings
         sliderValues.Add(SliderType.MainVolume, 1);
         sliderValues.Add(SliderType.MusicVolume, 1);
     }

@@ -7,7 +7,7 @@ public class SliderDeselectedState : UIBaseState
     private SliderStateManager manager;
     private Slider sliderInstance;
 
-    public float timeItTakes = 0.2f;
+    private readonly float timeItTakes = 0.2f;
     Color newInterPartColor = new(1, 1, 1, 0.5f);
 
     public override void EnterState(BaseStateManager referenceManager)
@@ -21,20 +21,7 @@ public class SliderDeselectedState : UIBaseState
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (manager.UIManagerInstance.KeyOrControlActive)
-        {
-            if (manager.UIManagerInstance.CurrentUISelected == manager.UIInstance.position)
-            {
-                manager.SwitchState(manager.selectedState);
-            }
-        }
-        else
-        {
-            if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
-            {
-                manager.SwitchState(manager.selectedState);
-            }
-        }
+        CheckIfSelected(referenceManager, manager.selectedState);
     }
 
     public override void ExitState(BaseStateManager referenceManager)
@@ -47,10 +34,10 @@ public class SliderSelectedState : UIBaseState
     private SliderStateManager manager;
     private Slider sliderInstance;
 
-    public float timeItTakes = 0.15f;
-    public Vector3 newScale = new(1.1f, 1.1f, 1);
+    private readonly float timeItTakes = 0.15f;
 
-    Color newSliderColor = new(1, 1, 1, 1);
+    private Vector3 newScale = new(1.1f, 1.1f, 1);
+    private Color newSliderColor = new(1, 1, 1, 1);
 
     public override void EnterState(BaseStateManager referenceManager)
     {
@@ -70,20 +57,7 @@ public class SliderSelectedState : UIBaseState
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (manager.UIManagerInstance.KeyOrControlActive)
-        {
-            if (manager.UIManagerInstance.CurrentUISelected != manager.UIInstance.position)
-            {
-                manager.SwitchState(manager.deselectedState);
-            }
-        }
-        else
-        {
-            if (!manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
-            {
-                manager.SwitchState(manager.deselectedState);
-            }
-        }
+        CheckIfDeselected(referenceManager, manager.deselectedState);
 
         if (manager.UIActivated)
         {
@@ -152,7 +126,7 @@ public class SliderPressedState : UIBaseState
     }
     private void ApplyValues(SliderStateManager slider)
     {
-        sliderInstance.SaveToDataManager(UIManager.DataManagerInstance, slider.TotalSlidingPercentage(), sliderInstance.sliderType);
+        sliderInstance.SaveToDataManager(UIManager.UIDataManagerInstance, slider.TotalSlidingPercentage(), sliderInstance.sliderType);
     }
 
     private void ResetButtonValue(SliderStateManager slider)

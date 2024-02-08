@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class AttackController : MonoBehaviour
+public class PlayerAnimationController : MonoBehaviour
 {
     private PlayerMovement _player;
     internal Animator weaponAnimator;
@@ -35,7 +35,7 @@ public class AttackController : MonoBehaviour
     {
         // TODO: Play SFX.
 
-        WeaponManager.Instance.ToggleHit(false);
+        EquipmentManager.Instance.ToggleHit(false);
 
         weaponAnimator.SetTrigger("PlayHit");
         weaponAnimator.SetFloat("s", PlayerStats.Instance.CurrentWeapon.AnimationSpeed);
@@ -66,7 +66,7 @@ public class AttackController : MonoBehaviour
             return;
         }
 
-        WeaponManager.Instance.ToggleHit(true);
+        EquipmentManager.Instance.ToggleHit(true);
 
         // If there's an entity whos weapon shouldn't flash, like common enemies, just leave the flash sprite null in WeaponSO.
         if (_flashSpriteRenderer.sprite != null)

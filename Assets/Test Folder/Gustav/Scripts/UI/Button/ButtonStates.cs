@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class ButtonDeselectedState : UIBaseState
 {
     private ButtonStateManager manager;
-    private float timeItTakes = 0.25f;
+    private readonly float timeItTakes = 0.25f;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
@@ -18,20 +18,7 @@ public class ButtonDeselectedState : UIBaseState
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (manager.UIManagerInstance.KeyOrControlActive)
-        {
-            if (manager.UIManagerInstance.CurrentUISelected == manager.UIInstance.position)
-            {
-                manager.SwitchState(manager.selectedState);
-            }
-        }
-        else
-        {
-            if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
-            {
-                manager.SwitchState(manager.selectedState);
-            }
-        }
+        CheckIfSelected(referenceManager, manager.selectedState);
     }
 
     public override void ExitState(BaseStateManager referenceManager)
@@ -45,50 +32,30 @@ public class ButtonDeselectedState : UIBaseState
 public class ButtonSelectedState : UIBaseState
 {
     private ButtonStateManager manager;
-    private float timer;
-    private float timeItTakes = 0.2f;
+    private readonly float timeItTakes = 0.2f;
 
-    public override void EnterState(BaseStateManager stateManager)
+    public override void EnterState(BaseStateManager referenceManager)
     {
-        manager = (ButtonStateManager)stateManager;
+        manager = (ButtonStateManager)referenceManager;
 
         if (!UIManager.Transitioning)
         {
-            stateManager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, manager.text);
+            manager.StartCoroutine(WaitCoroutine(timeItTakes));
+            manager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, manager.text);
         }
         else
         {
-            stateManager.SwitchState(manager.deselectedState);
+            manager.SwitchState(manager.deselectedState);
         }
     }
 
-    public override void UpdateState(BaseStateManager stateManager)
+    public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (stateManager.UIManagerInstance.KeyOrControlActive)
-        {
-            if (stateManager.UIManagerInstance.CurrentUISelected != manager.UIInstance.position)
-            {
-                stateManager.SwitchState(manager.deselectedState);
-            }
-        }
-        else
-        {
-            if (!manager.Hovering(stateManager.UIInstance, stateManager.UIManagerInstance))
-            {
-                stateManager.SwitchState(manager.deselectedState);
-            }
-        }
+        CheckIfDeselected(referenceManager, manager.deselectedState);
 
-        if (timer <= 0)
+        if (canTransition && HasPressed(manager))
         {
-            if (stateManager.UIActivated)
-            {
-                stateManager.SwitchState(manager.pressedState);
-            }
-        }
-        else
-        {
-            timer -= Time.deltaTime;
+            manager.SwitchState(manager.pressedState);
         }
     }
 
@@ -103,10 +70,9 @@ public class ButtonSelectedState : UIBaseState
 public class ButtonPressedState : UIBaseState
 {
     private ButtonStateManager manager;
-    Button buttonInstance;
-    private bool canTranstion;
+    private Button buttonInstance;
 
-    private float timeItTakes = 0.25f;
+    private readonly float timeItTakes = 0.25f;
 
     private Vector3 newScale = new(1, 1, 1);
     private Color newOutlineColor = new(1, 1, 1, 1);
@@ -124,30 +90,10 @@ public class ButtonPressedState : UIBaseState
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (!manager.UIActivated && canTranstion)
+        if (canTransition)
         {
-            if (manager.UIManagerInstance.KeyOrControlActive)
-            {
-                if (manager.UIManagerInstance.CurrentUISelected == manager.UIInstance.position)
-                {
-                    manager.SwitchState(manager.selectedState);
-                }
-                else
-                {
-                    manager.SwitchState(manager.deselectedState);
-                }
-            }
-            else
-            {
-                if (manager.Hovering(manager.UIInstance, manager.UIManagerInstance))
-                {
-                    manager.SwitchState(manager.selectedState);
-                }
-                else
-                {
-                    manager.SwitchState(manager.deselectedState);
-                }
-            }
+            CheckIfDeselected(referenceManager, manager.deselectedState);
+            CheckIfSelected(referenceManager, manager.deselectedState);
         }
     }
 
@@ -184,16 +130,6 @@ public class ButtonPressedState : UIBaseState
             Debug.Log("Change Scene");
         }
     }
-
-    private IEnumerator WaitCoroutine(float time)
-    {
-        canTranstion = false;
-
-        yield return new WaitForSeconds(time);
-
-        canTranstion = true;
-    }
-
 
     public void InstantiatePrefab()
     {

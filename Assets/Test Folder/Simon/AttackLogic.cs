@@ -8,13 +8,13 @@ public class AttackLogic : MonoBehaviour
     [SerializeField] private UnityEvent animationComplete;
     [SerializeField] private Transform weaponSpawnParent;
 
-    private AttackController _attackController;
+    private PlayerAnimationController _attackController;
 
     private GameObject _hitbox;
 
     private void Awake()
     {
-        _attackController = GetComponent<AttackController>();
+        _attackController = GetComponent<PlayerAnimationController>();
     }
 
     public void SpawnHitbox()

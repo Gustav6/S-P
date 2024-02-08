@@ -67,6 +67,7 @@ public class InputFieldSelectedState : UIBaseState
 public class InputFieldPressedState : UIBaseState
 {
     private InputFieldStateManager manager;
+    private InputField inputFieldInstance;
 
     private readonly Color textColor = new(1, 1, 0, 0.8f);
     private readonly float timeItTakes = 0.25f;
@@ -74,6 +75,7 @@ public class InputFieldPressedState : UIBaseState
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (InputFieldStateManager)referenceManager;
+        inputFieldInstance = (InputField)referenceManager.UIInstance;
         TransitionSystem.AddColorTransition(new ColorTransition(manager.text, textColor, timeItTakes, TransitionType.SmoothStop2));
     }
 
@@ -96,7 +98,7 @@ public class InputFieldPressedState : UIBaseState
 
                 break;
             }
-            else
+            else if (manager.text.text.Length < inputFieldInstance.maxAmountOfLetters)
             {
                 manager.text.text += c;
             }

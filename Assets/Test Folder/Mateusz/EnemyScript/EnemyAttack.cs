@@ -1,43 +1,57 @@
+using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAttack : MonoBehaviour
 {
-    private EnemyAttackController enemyAttackController;
+    private EnemyAttackController _enemyAttackController;
 
-    PlayerMovement player;
-    Enemy enemy;
+    PlayerStats _player;
+    Enemy _enemy;
 
-    Animator anim;
+    Animator _anim;
 
-    public Transform target;
+    public Transform _target;
 
     float minDist = 3f;
-    bool attackReady;
 
     float attackCooldown;
     float maxCooldown = 3f;
 
-    private GameObject hitbox;
+    private bool hasAttacked;
+    bool attackReady;
+    private bool isAttacking;
+
+    [SerializeField] internal float damage, knockbackMultiplier;
+
+    [SerializeField] private GameObject hitbox;
+
+
 
     private void Awake()
     {
-        enemyAttackController = GetComponentInChildren<EnemyAttackController>();
-        anim = GetComponentInChildren<Animator>();
+        _enemyAttackController = GetComponentInChildren<EnemyAttackController>();
+        _anim = GetComponentInChildren<Animator>();
+        _player = FindFirstObjectByType<PlayerStats>();
+        _enemy = FindFirstObjectByType<Enemy>();
 
-        player = FindFirstObjectByType<PlayerMovement>();
-        enemy = FindFirstObjectByType<Enemy>();
     }
 
-   private void spawnEnemyHitbox()
+    private void spawnEnemyHitbox()
     {
 
     }
 
     void Update()
     {
-        attackCooldown += Time.deltaTime;
+        EnemyAttacking();
+
+        if (hasAttacked && attackReady)
+        {
+            attackCooldown = 0;
+            hasAttacked = false;
+        }
 
         if (attackCooldown >= maxCooldown)
         {
@@ -45,24 +59,36 @@ public class EnemyAttack : MonoBehaviour
         }
         else
         {
+            attackCooldown += Time.deltaTime;
             attackReady = false;
         }
+    }
 
-        float dist = Vector2.Distance(transform.localPosition, player.transform.localPosition);
+    public void EnemyAttacking()
+    {
+        float dist = Vector2.Distance(transform.position, _player.transform.position);
 
-        if(dist < minDist)
+        if (dist <= minDist && attackReady && !isAttacking)
         {
-            enemyAttackController.EnterAttackState();
-            Debug.Log("Attacking");
+            StartCoroutine(IsAttacking());
         }
-        else if (dist > minDist)
+        else if (!attackReady)
         {
-            enemyAttackController.LeaveAttack();
-            Debug.Log("Cannot attack");
+            _enemyAttackController.LeaveAttack();
+            hitbox.SetActive(false);
         }
-   
+    }
 
-        Debug.Log("Distance from player: " +dist);
+    IEnumerator IsAttacking()
+    {
+        _enemyAttackController.EnterAttackState();
+        isAttacking = true;
+        hitbox.SetActive(true);
+
+        yield return new WaitForSeconds(3);
+
+        hasAttacked = true;
+        isAttacking = false;
     }
 }
 

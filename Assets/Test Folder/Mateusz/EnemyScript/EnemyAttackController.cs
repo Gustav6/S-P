@@ -5,7 +5,6 @@ using UnityEngine;
 public class EnemyAttackController : MonoBehaviour
 {
     Enemy _enemy;
-    PlayerStats _player;
 
     SpriteRenderer _spriteRenderer;
 
@@ -17,22 +16,19 @@ public class EnemyAttackController : MonoBehaviour
     private void Awake()
     {
         _enemy = FindFirstObjectByType<Enemy>();
-        _player = FindFirstObjectByType<PlayerStats>();
 
         _rb = GetComponent<Rigidbody2D>();
 
         _anim = GetComponentInChildren<Animator>();
     }
 
-   internal void EnterAttackState()
+    public void EnterAttackState()
     {
-        _anim.SetTrigger("Attack ");
-        _player.TakeKnockback(Vector2.zero, 2, 0.25f);
-        Debug.Log("Is Attacking");
+        _anim.SetBool("IsAttacking", true);
     }
 
     public void LeaveAttack()
     {
-
+        _anim.SetBool("IsAttacking", false);
     }
 }

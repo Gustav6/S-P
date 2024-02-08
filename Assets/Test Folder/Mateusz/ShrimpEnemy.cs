@@ -7,12 +7,16 @@ public class ShrimpEnemy : Enemy, IDamageable
     public float KnockbackPercent { get; set; }
 
     Enemy _enemy;
+    EnemyAI _enemyAI;
 
     private void Start()
     {
          _enemy = FindFirstObjectByType< Enemy>();
          _player = FindFirstObjectByType<PlayerMovement>();
          _rb = GetComponent<Rigidbody2D>();
+
+        _enemyAttack = GetComponentInChildren<EnemyAttack>();
+        _enemyAI = GetComponent<EnemyAI>();
     }
 
     private void Update()
@@ -21,39 +25,22 @@ public class ShrimpEnemy : Enemy, IDamageable
         {
             TakeKnockback(Vector2.zero, 2, 0.25f);
         }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            OnHit(_kbPower);
-        }
     }
+
     public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stuntDuration)
     {
-        Vector2 knockbackVector = (transform.localPosition - _player.transform.localPosition).normalized;
+        Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized;
 
-        _rb.AddForce(knockbackVector * _kbPower, ForceMode2D.Impulse);
+        _enemyAI.CanMove = false;
 
-        Debug.Log("knockback applied " +knockbackVector);
+        _rb.AddForce(knockbackVector * knockbackMultiplier, ForceMode2D.Impulse);
+
+        StartCoroutine(GiveEnemyMovement(stuntDuration));
     }
 
-    private void OnHit(float kbPower)
+    IEnumerator GiveEnemyMovement(float time)
     {
-        _kbPower = (kbPower * 1.06f);
-
+        yield return new WaitForSeconds(time);
+        _enemyAI.CanMove = true;
     }
-
-    //void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.gameObject.tag == "WaterCollision")
-    //    {
-    //        Debug.Log("Man overboard");
-    //        Destroy(this.gameObject);
-    //    }
-
-    //    if (collision.gameObject.tag == "Player")
-    //    {
-    //        TakeKnockback(Vector2.zero, 10, 0.25f);
-    //        Debug.Log("Collided with player");
-    //    }
-    //}
 }

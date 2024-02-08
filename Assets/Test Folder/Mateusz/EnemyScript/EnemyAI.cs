@@ -7,23 +7,29 @@ public class EnemyAI : MonoBehaviour
 {
     public Transform target;
 
-    public float speed = 200f;
+    public float speed = 0.5f;
     public float flipSpeed;
     public float nextWayPointDistance = 3f;
 
     Path path;
     Seeker seeker;
     Rigidbody2D rb;
-    Animator anim;
 
     public SpriteRenderer spriteRenderer;
 
     int currentWayPoint = 0;
     bool reachedDestination = false;
+    
+    public bool CanMove { get; set; }
+
+    Animator anim;
+
     void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
+
+        CanMove = true;
 
         InvokeRepeating("UpdatePath", 0f, .2f);
     }
@@ -33,12 +39,6 @@ public class EnemyAI : MonoBehaviour
         anim = transform.GetChild(0).GetComponent<Animator>();
     }
 
-    public void Update()
-    {
-        //    Vector2 direction = (target.position - transform.position).normalized;
-        //    spriteRenderer.flipX = direction.x < 0;
-        //    rb.velocity = direction * speed * Time.deltaTime;
-    }
     void UpdatePath()
     {
         if (seeker.IsDone())
@@ -57,11 +57,15 @@ public class EnemyAI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        
 
         if (path == null)
+        {
+            return;
+        }
+
+        if (currentWayPoint >= path.vectorPath.Count)
         {
             reachedDestination = true;
             return;
@@ -70,12 +74,14 @@ public class EnemyAI : MonoBehaviour
         {
             reachedDestination = false;
         }
-       
+
+        if (!CanMove)
+            return;
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
-        Vector2 force = (direction * speed * Time.deltaTime);
+        Vector2 force = (direction * speed);
 
-        rb.AddForce(force);
+        rb.velocity = force;
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
 
@@ -84,22 +90,14 @@ public class EnemyAI : MonoBehaviour
             currentWayPoint++;
         }
 
+        // TODO: Ändra sen
         if (rb.velocity.x > 0)
         {
-            spriteRenderer.flipX = false;
+            transform.localScale = new Vector2(0.5f, 0.5f);
         }
         else if (rb.velocity.x < 0)
         {
-            spriteRenderer.flipX = true;    
-        }
-
-        if (speed > 190)
-        {
-            anim.SetInteger("Velocity", 1);
-        }
-        else if (speed < 190)
-        {
-            anim.SetInteger("Velocity", 0);
+            transform.localScale = new Vector2(-0.5f, 0.5f);
         }
     }
 }

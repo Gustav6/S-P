@@ -6,14 +6,10 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float _kbPower;
- 
-    [HideInInspector]
-    public bool _isImmune = false;
-    public bool _isGrounded = true;
-    public bool _movementLocked = false;
 
     [HideInInspector]
     public PlayerMovement _player;
+    public EnemyAttack _enemyAttack;
 
     [HideInInspector]
     public Rigidbody2D _rb;
@@ -27,8 +23,8 @@ public class Enemy : MonoBehaviour
 
         _player = FindFirstObjectByType<PlayerMovement>();
 
+        _enemyAttack = GetComponent<EnemyAttack>();
     }
-
 }
     
   

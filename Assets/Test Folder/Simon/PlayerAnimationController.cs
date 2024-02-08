@@ -55,7 +55,7 @@ public class PlayerAnimationController : MonoBehaviour
     /// <summary>
     /// Stop the current attack.
     /// Used to leave the state when an attack animation is finished playing.
-    /// </summary>
+    /// < /summary>
     public void LeaveAttackState()
     {
         if (PlayerStats.Instance.CurrentWeapon.IsWeaponResetable && !_animationReadyToReset)

@@ -32,13 +32,19 @@ public class Toggle : UI
 
     public void SaveToDataManager(UIDataManager manager, bool value, ToggleType type)
     {
-        if (!manager.switchValues.ContainsKey(type))
+        if (manager.toggleValues.ContainsKey(type))
         {
-            manager.switchValues.Add(type, value);
+            manager.toggleValues[type] = value;
+
+            for (int i = 0; i < UIDataManager.instance.Currentdata.toggleTypes.Length; i++)
+            {
+                if (type == (ToggleType)i)
+                {
+                    UIDataManager.instance.Currentdata.toggleValues[i] = value;
+                }
+            }
         }
-        else
-        {
-            manager.switchValues[type] = value;
-        }
+
+        SaveSystem.Instance.SaveData(UIDataManager.instance.Currentdata);
     }
 }

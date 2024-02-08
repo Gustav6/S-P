@@ -30,20 +30,20 @@ public class SaveSystem : MonoBehaviour
     /// Checks if a game save file has been created and loads it.
     /// If a save file has not been created, it will use the constructor of PlayerStats to load base values.
     /// </summary>
-    public PlayerStats LoadGameSave()
+    public PlayerData LoadGameSave()
     {
         Debug.Log("Application " + Application.dataPath + "\nFull " + playerStatsSaveFileDirectory);
 
-        PlayerStats loadedData;
+        PlayerData loadedData;
 
         if (File.Exists(playerStatsSaveFileDirectory))
         {
             string savedData = File.ReadAllText(playerStatsSaveFileDirectory);
-            loadedData = JsonUtility.FromJson<PlayerStats>(savedData);
+            loadedData = JsonUtility.FromJson<PlayerData>(savedData);
         }
         else
         {
-            loadedData = new PlayerStats();
+            loadedData = new PlayerData();
         }
 
         return loadedData;
@@ -75,7 +75,7 @@ public class SaveSystem : MonoBehaviour
     /// <summary>
     /// Saves the given object game data in a json file, file can be found in Save System folder as "pSaveFile.json".
     /// </summary>
-    public void SaveGame(PlayerStats playerData)
+    public void SaveGame(PlayerData playerData)
     {
         string data = JsonUtility.ToJson(playerData);
 

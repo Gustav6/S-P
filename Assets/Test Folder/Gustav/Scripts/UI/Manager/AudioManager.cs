@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class AudioManager : MonoBehaviour
+public class TestAudioManager : MonoBehaviour
 {
     [SerializeField] private AudioClip[] clips;
     private AudioSource audioSource;

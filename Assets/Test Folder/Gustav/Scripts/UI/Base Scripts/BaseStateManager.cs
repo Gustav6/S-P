@@ -11,7 +11,7 @@ public abstract class BaseStateManager : MonoBehaviour
     public Dictionary<string, Vector3> ScalePairs { get; private set; }
     public UIBaseState CurrentState { get; set; }
     public UIManager UIManagerInstance { get; private set; }
-    public AudioManager AudioManagerInstance { get; private set; }
+    public TestAudioManager AudioManagerInstance { get; private set; }
     public bool UIActivated { get; set; }
 
     public virtual void OnStart()
@@ -19,7 +19,7 @@ public abstract class BaseStateManager : MonoBehaviour
         ColorPairs = new Dictionary<string, Color>();
         ScalePairs = new Dictionary<string, Vector3>();
 
-        AudioManagerInstance = UIInstance.GetComponentInParent<AudioManager>();
+        AudioManagerInstance = UIInstance.GetComponentInParent<TestAudioManager>();
         UIManagerInstance = UIInstance.GetComponentInParent<UIManager>();
 
         SetDictionaries();

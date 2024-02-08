@@ -1,9 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaveManager : MonoBehaviour
 {
+    #region Singleton
+
+    public static WaveManager Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    #endregion
+
+
     [SerializeField] EnemyPreset[] _enemyAssortment;
     [SerializeField] List<Transform> _spawnPoints;
     public GameObject StatRewardPanel, WeaponRewardPanel;
@@ -11,7 +25,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField] WaveRewardInteractable[] _statRewardInteractables, _weaponRewardInteractables;
     [SerializeField] WaveReward[] _statRewardPool, _weaponRewardPool;
 
+    int _enemyCount;
     int _enemiesRemaining;
+    int _enemyValueAlive;
 
     int _waveNumber = 1;
 
@@ -20,39 +36,74 @@ public class WaveManager : MonoBehaviour
 
     [SerializeField] AnimationCurve _dropCurve, _ascensionCurve, _verticalSpawnCurve;
 
+    [SerializeField] Image _waveProgressFill;
+
 
     private void Start()
     {
         GenerateRewards(_statRewardPool, _statRewardInteractables);
         GenerateRewards(_weaponRewardPool, _weaponRewardInteractables);
 
-        EnableRewardInteractables();
+        EnableStatRewardInteractables();
+        EnableWeaponRewardInteractables();
 
         Invoke(nameof(StartTestWave), 2);
     }
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+            OnEnemyDied(2);
+
         if (_enemiesRemaining <= 0)
         {
-            WaveClear();
+            //WaveClear();
         }
     }
 
     void StartTestWave()
     {
-        List<GameObject> enemiesToSpawn = GetEnemies(50, WaveType.Balanced);
-
-        SpawnEnemy(Instantiate(enemiesToSpawn[0]).transform);
+        EnemyPreset[] enemiesToSpawn = GetEnemies(50, WaveType.Balanced).ToArray();
+        _enemiesRemaining = enemiesToSpawn.Length;
+        _waveProgressFill.fillAmount = 1;
+        StartCoroutine(SpawnEnemies(enemiesToSpawn));
     }
 
-    void SpawnEnemy(Transform enemy)
+    IEnumerator SpawnEnemies(EnemyPreset[] enemiesToSpawn)
+    {
+        int maxValueAlive = (int)(_waveNumber * 1.25f + _waveNumber / 2f * 10f);
+        Debug.Log(maxValueAlive + "       " + _enemyValueAlive);
+
+        for (int i = 0; i < enemiesToSpawn.Length; i++)
+        {
+            if (_enemyValueAlive >= maxValueAlive)
+            {
+                i--;
+                yield return null;
+                continue;
+            }
+
+            yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
+            SpawnEnemy(enemiesToSpawn[i].EnemyPrefab);
+            _enemyValueAlive += enemiesToSpawn[i].Cost;
+        }
+    }
+
+    public void OnEnemyDied(int enemyValue)
+    {
+        _enemiesRemaining--;
+        _enemyValueAlive -= enemyValue;
+
+        _waveProgressFill.fillAmount = (_enemyCount - _enemiesRemaining) / _enemyCount;
+    }
+
+    void SpawnEnemy(GameObject enemyPrefab)
     {
         Transform randomSpawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Count)];
 
-        StartCoroutine(AnimateEnemySpawn(enemy, randomSpawnPoint));
+        StartCoroutine(AnimateEnemySpawn(Instantiate(enemyPrefab).transform, randomSpawnPoint));
 
-        // Spawn enemy --> Animate it going from water to island --> Enable enemy AI.
+        // Enable enemy AI.
     }
 
     IEnumerator AnimateEnemySpawn(Transform enemy, Transform spawnPoint)
@@ -80,9 +131,10 @@ public class WaveManager : MonoBehaviour
         Destroy(parentTransform.gameObject);
     }
 
-    List<GameObject> GetEnemies(int totalBudget, WaveType waveType)
+    List<EnemyPreset> GetEnemies(int totalBudget, WaveType waveType)
     {
-        List<GameObject> finalEnemyList = new();
+        List<EnemyPreset> finalEnemyList = new();
+
 
         int remainingBudget = totalBudget;
 
@@ -101,7 +153,7 @@ public class WaveManager : MonoBehaviour
                     if (remainingBudget < 2)
                         break;
 
-                    finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                    finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                     remainingBudget -= randomEnemyCost;
                 }
                 break;
@@ -122,7 +174,7 @@ public class WaveManager : MonoBehaviour
                     {
                         if (randomEnemyCost <= totalBudget * 0.1f)
                         {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
 
                             if (remainingBudget < 2)
@@ -134,7 +186,7 @@ public class WaveManager : MonoBehaviour
                     {
                         if (randomEnemyCost > totalBudget * 0.1f)
                         {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
 
                             if (remainingBudget < totalBudget * 0.1f)
@@ -160,7 +212,7 @@ public class WaveManager : MonoBehaviour
                     {
                         if (randomEnemyCost <= totalBudget * 0.1f)
                         {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
 
                             if (remainingBudget < 2)
@@ -172,7 +224,7 @@ public class WaveManager : MonoBehaviour
                     {
                         if (randomEnemyCost > totalBudget * 0.1f)
                         {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
 
                             if (remainingBudget < totalBudget * 0.1f)
@@ -198,7 +250,7 @@ public class WaveManager : MonoBehaviour
                     {
                         if (randomEnemyCost <= totalBudget * 0.1f)
                         {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
 
                             if (remainingBudget < 2)
@@ -210,7 +262,7 @@ public class WaveManager : MonoBehaviour
                     {
                         if (randomEnemyCost > totalBudget * 0.1f)
                         {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
 
 
@@ -237,7 +289,7 @@ public class WaveManager : MonoBehaviour
                     {
                         if (randomEnemyCost <= totalBudget * 0.15f)
                         {
-                            finalEnemyList.Add(_enemyAssortment[randomEnemyID].EnemyPrefab);
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
 
                             if (remainingBudget < 2)
@@ -256,7 +308,7 @@ public class WaveManager : MonoBehaviour
                         wealthiestEnemy = e;
                 }
 
-                finalEnemyList.Add(wealthiestEnemy.EnemyPrefab);
+                finalEnemyList.Add(wealthiestEnemy);
                 break;
         }
 
@@ -296,24 +348,30 @@ public class WaveManager : MonoBehaviour
 
             interactables[i].SetContainedReward(rewardPool[randomIndex]);
 
-            interactables[i].OnRewardClaimedCallback += DisableRewardInteractables;
+            interactables[i].OnRewardClaimedCallback += (rewardPool[randomIndex] is StatReward) ? DisableStatRewardInteractables : DisableWeaponRewardInteractables;
         }
     }
 
-    void DisableRewardInteractables()
+    void DisableStatRewardInteractables()
     {
         for (int i = 0; i < _statRewardInteractables.Length; i++)
             StartCoroutine(AscendReward(_statRewardInteractables[i], Random.Range(0, 0.4f)));
+    }
 
+    void EnableStatRewardInteractables()
+    {
+        for (int i = 0; i < _statRewardInteractables.Length; i++)
+            StartCoroutine(DropReward(_statRewardInteractables[i], Random.Range(0, 0.4f)));
+    }
+
+    void DisableWeaponRewardInteractables()
+    {
         for (int i = 0; i < _weaponRewardInteractables.Length; i++)
             StartCoroutine(AscendReward(_weaponRewardInteractables[i], Random.Range(0, 0.4f)));
     }
 
-    void EnableRewardInteractables()
+    void EnableWeaponRewardInteractables()
     {
-        for (int i = 0; i < _statRewardInteractables.Length; i++)
-            StartCoroutine(DropReward(_statRewardInteractables[i], Random.Range(0, 0.4f)));
-
         for (int i = 0; i < _weaponRewardInteractables.Length; i++)
             StartCoroutine(DropReward(_weaponRewardInteractables[i], Random.Range(0, 0.4f)));
     }

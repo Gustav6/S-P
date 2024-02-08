@@ -15,7 +15,7 @@ public class UIDataManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            SetDefaultValues();
+            SetValues();
             DontDestroyOnLoad(gameObject);
             return;
         }
@@ -23,8 +23,9 @@ public class UIDataManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void SetDefaultValues()
+    public void SetValues()
     {
+        // Load saved settings
         sliderValues.Add(SliderType.MainVolume, 1);
         sliderValues.Add(SliderType.MusicVolume, 1);
     }

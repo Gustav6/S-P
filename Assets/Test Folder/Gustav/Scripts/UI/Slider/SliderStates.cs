@@ -44,7 +44,7 @@ public class SliderSelectedState : UIBaseState
         manager = (SliderStateManager)referenceManager;
         sliderInstance = (Slider)referenceManager.UIInstance;
 
-        if (!UIManager.Transitioning)
+        if (!UIManager.instance.Transitioning)
         {
             manager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outLineImage, manager.text);
 
@@ -126,7 +126,7 @@ public class SliderPressedState : UIBaseState
     }
     private void ApplyValues(SliderStateManager slider)
     {
-        sliderInstance.SaveToDataManager(UIManager.UIDataManagerInstance, slider.TotalSlidingPercentage(), sliderInstance.sliderType);
+        sliderInstance.SaveToDataManager(UIDataManager.instance, slider.TotalSlidingPercentage(), sliderInstance.sliderType);
     }
 
     private void ResetButtonValue(SliderStateManager slider)
@@ -136,7 +136,7 @@ public class SliderPressedState : UIBaseState
 
     private void MoveTowardsMouse(SliderStateManager slider, float mouseX)
     {
-        float scaling = UIManager.ResolutionScaling;
+        float scaling = UIManager.instance.ResolutionScaling;
 
         if (slider.sliderPosition.localPosition.x * scaling > -slider.maxMoveValue * scaling || slider.sliderPosition.localPosition.x * scaling < slider.maxMoveValue * scaling)
         {
@@ -157,7 +157,7 @@ public class SliderPressedState : UIBaseState
 
     public void MoveWithButton(SliderStateManager slider)
     {
-        float scaling = UIManager.ResolutionScaling;
+        float scaling = UIManager.instance.ResolutionScaling;
         float moveAmount = slider.maxMoveValue / (100 * scaling);
         Vector3 limit = new(slider.maxMoveValue, 0, 0);
 

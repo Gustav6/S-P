@@ -9,9 +9,9 @@ public class UIActions : MonoBehaviour
     #region Move Transition
     public static void MovePrefabToStart(Transition.ExecuteOnCompletion actions, PrefabDirection direction, float time)
     {
-        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        for (int i = 0; i < UIManager.instance.ListOfUIObjects.Count; i++)
         {
-            GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
+            GameObject temp = UIManager.instance.ListOfUIObjects[i];
 
             Vector3 destination = GiveDestination(direction);
 
@@ -21,9 +21,9 @@ public class UIActions : MonoBehaviour
 
     public static void MovePrefabToDestination(Transition.ExecuteOnCompletion actions, PrefabDirection direction, float time)
     {
-        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        for (int i = 0; i < UIManager.instance.ListOfUIObjects.Count; i++)
         {
-            GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
+            GameObject temp = UIManager.instance.ListOfUIObjects[i];
 
             Vector3 destination = GiveDestination(direction);
 
@@ -61,18 +61,18 @@ public class UIActions : MonoBehaviour
     #region Scale Transition
     public static void ShrinkTransition(Transition.ExecuteOnCompletion actions, float time)
     {
-        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        for (int i = 0; i < UIManager.instance.ListOfUIObjects.Count; i++)
         {
-            GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
+            GameObject temp = UIManager.instance.ListOfUIObjects[i];
             ScaleGameObjects(temp, Vector3.zero, time, i, actions);
         }
     }
 
     public static void GrowTransition(Transition.ExecuteOnCompletion actions, float time)
     {
-        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        for (int i = 0; i < UIManager.instance.ListOfUIObjects.Count; i++)
         {
-            GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
+            GameObject temp = UIManager.instance.ListOfUIObjects[i];
             ScaleGameObjects(temp, Vector3.one, time, i, actions);
         }
     }

@@ -18,11 +18,11 @@ public class UIInput : MonoBehaviour
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if (context.performed && !UIManager.Transitioning)
+        if (context.performed && !UIManager.instance.Transitioning)
         {
-            UIManager.Paused = !UIManager.Paused;
+            UIManager.instance.Paused = !UIManager.instance.Paused;
 
-            if (UIManager.Paused)
+            if (UIManager.instance.Paused)
             {
                 Scene scene = SceneManager.GetActiveScene();
 
@@ -30,15 +30,15 @@ public class UIInput : MonoBehaviour
                 {
                     if (manager.pausePrefab != null)
                     {
-                        UIManager.InstantiateNewUIPrefab(manager.pausePrefab, GetComponent<UIManager>().transform, Vector3.one, Vector3.zero);
+                        UIManager.instance.InstantiateNewUIPrefab(manager.pausePrefab, GetComponent<UIManager>().transform, Vector3.one, Vector3.zero);
                     }
                 }
             }
             else
             {
-                manager.pausePrefab.GetComponent<ActiveMenuManager>().DisableBlur(UIManager.CameraInstance.GetComponent<Blur>());
-                Destroy(UIManager.CurrentUIPrefab);
-                UIManager.ResetListOfUIObjects();
+                manager.pausePrefab.GetComponent<ActiveMenuManager>().DisableBlur(UIManager.instance.CameraInstance.GetComponent<Blur>());
+                Destroy(UIManager.instance.CurrentUIPrefab);
+                UIManager.instance.ResetListOfUIObjects();
             }
         }
     }
@@ -49,7 +49,7 @@ public class UIInput : MonoBehaviour
         {
             if (context.performed)
             {
-                GameObject g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
+                GameObject g = manager.CheckForInteractableUI(manager.currentUISelected);
 
                 if (g.GetComponent<SliderStateManager>() != null)
                 {
@@ -106,9 +106,9 @@ public class UIInput : MonoBehaviour
             SliderStateManager sm;
             GameObject g;
 
-            if (manager.CheckForInteractableUI(manager.currentUISelected).gameObject != null)
+            if (manager.CheckForInteractableUI(manager.currentUISelected) != null)
             {
-                g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
+                g = manager.CheckForInteractableUI(manager.currentUISelected);
 
                 if (g.GetComponent<SliderStateManager>() != null)
                 {
@@ -139,7 +139,7 @@ public class UIInput : MonoBehaviour
     {
         if (CanInteractWithUI())
         {
-            GameObject g = manager.CheckForInteractableUI(manager.currentUISelected).gameObject;
+            GameObject g = manager.CheckForInteractableUI(manager.currentUISelected);
             BaseStateManager uI = g.GetComponent<BaseStateManager>();
 
             if (context.performed)
@@ -176,7 +176,7 @@ public class UIInput : MonoBehaviour
     {
         if (CanInteractWithUI() && !manager.KeyOrControlActive)
         {
-            BaseStateManager stateManager = manager.CheckForInteractableUI(manager.currentUISelected).gameObject.GetComponent<BaseStateManager>();
+            BaseStateManager stateManager = manager.CheckForInteractableUI(manager.currentUISelected).GetComponent<BaseStateManager>();
 
             if (stateManager.Hovering(stateManager.UIInstance, stateManager.UIManagerInstance))
             {
@@ -195,7 +195,7 @@ public class UIInput : MonoBehaviour
 
     public bool CanInteractWithUI()
     {
-        if (UIManager.ListOfUIObjects.Count > 0 && !UIManager.Transitioning)
+        if (UIManager.instance.ListOfUIObjects.Count > 0 && !UIManager.instance.Transitioning)
         {
             return true;
         }

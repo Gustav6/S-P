@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,7 @@ public class UIDataManager : MonoBehaviour
     public Dictionary<ToggleType, bool> switchValues = new();
     public Dictionary<string, int> leaderBoard = new();
 
-    private static UIDataManager instance = null;
+    public static UIDataManager instance = null;
 
     void Awake()
     {
@@ -17,15 +18,16 @@ public class UIDataManager : MonoBehaviour
             instance = this;
             SetValues();
             DontDestroyOnLoad(gameObject);
-            return;
         }
-
-        Destroy(gameObject);
+        else
+            Destroy(gameObject);
     }
 
     public void SetValues()
     {
         // Load saved settings
+        //SaveSystem.Instance.LoadData();
+
         sliderValues.Add(SliderType.MainVolume, 1);
         sliderValues.Add(SliderType.MusicVolume, 1);
     }
@@ -33,12 +35,12 @@ public class UIDataManager : MonoBehaviour
 
 public enum SliderType
 {
-    MainVolume,
-    MusicVolume,
+    MainVolume = 0,
+    MusicVolume = 1,
 }
 
 public enum ToggleType
 {
-    MainOnOrOff,
-    MusicOnOrOff,
+    MainOnOrOff = 0,
+    MusicOnOrOff = 1,
 }

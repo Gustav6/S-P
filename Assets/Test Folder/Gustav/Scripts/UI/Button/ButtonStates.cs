@@ -38,7 +38,7 @@ public class ButtonSelectedState : UIBaseState
     {
         manager = (ButtonStateManager)referenceManager;
 
-        if (!UIManager.Transitioning)
+        if (!UIManager.instance.Transitioning)
         {
             manager.StartCoroutine(WaitCoroutine(timeItTakes));
             manager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, manager.text);
@@ -103,7 +103,7 @@ public class ButtonPressedState : UIBaseState
 
         if (buttonInstance.transitionToPrefab)
         {
-            UIManager.EnableTransitioning();
+            UIManager.instance.EnableTransitioning();
             ActiveMenuManager currentMenu = buttonInstance.GetComponentInParent<ActiveMenuManager>();
 
             if (buttonInstance.prefabMoveTransition)
@@ -122,7 +122,7 @@ public class ButtonPressedState : UIBaseState
 
         if (buttonInstance.transitionToScene)
         {
-            UIManager.EnableTransitioning();
+            UIManager.instance.EnableTransitioning();
 
             execute += buttonInstance.SwitchScene;
             buttonInstance.ShrinkTransition(1, null);

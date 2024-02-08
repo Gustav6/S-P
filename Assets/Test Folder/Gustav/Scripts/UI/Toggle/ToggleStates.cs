@@ -42,7 +42,7 @@ public class ToggleSelectedState : UIBaseState
         manager = (ToggleStateManager)referenceManager;
         toggleInstance = (Toggle)referenceManager.UIInstance;
 
-        if (!UIManager.Transitioning)
+        if (!UIManager.instance.Transitioning)
         {
             manager.DefaultSelectTransition(timeItTakes, manager.pointers, null, manager.outLineImage, manager.text);
 
@@ -95,21 +95,21 @@ public class TogglePressedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        toggleInstance.SaveToDataManager(UIManager.UIDataManagerInstance, toggleInstance.toggleOn, toggleInstance.toggleType);
+        toggleInstance.SaveToDataManager(UIDataManager.instance, toggleInstance.toggleOn, toggleInstance.toggleType);
     }
 
     public void TransitionFromOnOff(Toggle toggle, ToggleStateManager manager, float transitionTime)
     {
         if (toggle.toggleOn)
         {
-            Vector3 destination = new(manager.movingPartOffset * -1 * UIManager.ResolutionScaling, 0, 0);
+            Vector3 destination = new(manager.movingPartOffset * -1 * UIManager.instance.ResolutionScaling, 0, 0);
             destination += manager.outLine.position;
             TransitionSystem.AddMoveTransition(new MoveTransition(manager.movingPart, destination, transitionTime, TransitionType.SmoothStop3));
             TransitionSystem.AddColorTransition(new ColorTransition(manager.toggleImage, toggle.onColor, transitionTime, TransitionType.SmoothStop2));
         }
         else
         {
-            Vector3 destination = new(manager.movingPartOffset * UIManager.ResolutionScaling, 0, 0);
+            Vector3 destination = new(manager.movingPartOffset * UIManager.instance.ResolutionScaling, 0, 0);
             destination += manager.outLine.position;
             TransitionSystem.AddMoveTransition(new MoveTransition(manager.movingPart, destination, transitionTime, TransitionType.SmoothStop3));
             TransitionSystem.AddColorTransition(new ColorTransition(manager.toggleImage, toggle.offColor, transitionTime, TransitionType.SmoothStop2));

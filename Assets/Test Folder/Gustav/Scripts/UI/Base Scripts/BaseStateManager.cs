@@ -11,7 +11,7 @@ public abstract class BaseStateManager : MonoBehaviour
     public Dictionary<string, Vector3> ScalePairs { get; private set; }
     public UIBaseState CurrentState { get; set; }
     public UIManager UIManagerInstance { get; private set; }
-    public AudioManager AudioManagerInstance { get; private set; }
+    public TestAudioManager AudioManagerInstance { get; private set; }
     public bool UIActivated { get; set; }
 
     public virtual void OnStart()
@@ -19,7 +19,7 @@ public abstract class BaseStateManager : MonoBehaviour
         ColorPairs = new Dictionary<string, Color>();
         ScalePairs = new Dictionary<string, Vector3>();
 
-        AudioManagerInstance = UIInstance.GetComponentInParent<AudioManager>();
+        AudioManagerInstance = UIInstance.GetComponentInParent<TestAudioManager>();
         UIManagerInstance = UIInstance.GetComponentInParent<UIManager>();
 
         SetDictionaries();
@@ -27,7 +27,7 @@ public abstract class BaseStateManager : MonoBehaviour
 
     public virtual void OnUpdate()
     {
-        if (UIManagerInstance != null && !UIManager.Transitioning)
+        if (UIManagerInstance != null && !UIManager.instance.Transitioning)
         {
             CurrentState.UpdateState(this);
         }
@@ -74,7 +74,7 @@ public abstract class BaseStateManager : MonoBehaviour
             TransitionSystem.AddColorTransition(new ColorTransition(tmp, ColorPairs["TextDeSelected"], time, TransitionType.SmoothStop2));
         }
 
-        if (!UIManager.Transitioning && t != null)
+        if (!UIManager.instance.Transitioning && t != null)
         {
             TransitionSystem.AddScaleTransition(new ScaleTransition(t, Vector3.one, time, TransitionType.SmoothStart2));
         }
@@ -102,7 +102,7 @@ public abstract class BaseStateManager : MonoBehaviour
 
     public bool Hovering(UI UIInstance, UIManager uIManager)
     {
-        if (UIManager.ListOfUIObjects.Count > 0 && !UIManager.Transitioning)
+        if (UIManager.instance.ListOfUIObjects.Count > 0 && !UIManager.instance.Transitioning)
         {
             if (UIInstance != null)
             {

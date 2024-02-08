@@ -48,35 +48,35 @@ public class Button : UI
         {
             Vector3 spawnLocation = GiveDestination(direction) * -1;
 
-            UIManager.InstantiateNewUIPrefab(menuPrefab.gameObject, parentTransform, Vector3.one, spawnLocation);
-            MoveUIToStart(1, UIManager.DisableTransitioning, direction);
+            UIManager.instance.InstantiateNewUIPrefab(menuPrefab, parentTransform, Vector3.one, spawnLocation);
+            MoveUIToStart(1, UIManager.instance.DisableTransitioning, direction);
         }
         else if (prefabScaleTransition)
         {
-            UIManager.InstantiateNewUIPrefab(menuPrefab, currentMenu.transform, new Vector3(0.0001f, 0.0001f, 1), Vector3.zero);
-            GrowTransition(1, UIManager.DisableTransitioning);
+            UIManager.instance.InstantiateNewUIPrefab(menuPrefab, currentMenu.transform, new Vector3(0.0001f, 0.0001f, 1), Vector3.zero);
+            GrowTransition(1, UIManager.instance.DisableTransitioning);
         }
     }
 
     public void MoveUIToStart(float time, ExecuteOnCompletion actions, PrefabDirection direction)
     {
-        actions += UIManager.DisableTransitioning;
+        actions += UIManager.instance.DisableTransitioning;
 
-        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        for (int i = 0; i < UIManager.instance.ListOfUIObjects.Count; i++)
         {
             Vector3 destination = GiveDestination(direction);
 
-            MoveGameObject(UIManager.ListOfUIObjects[i].gameObject, time, destination, i, actions);
+            MoveGameObject(UIManager.instance.ListOfUIObjects[i], time, destination, i, actions);
         }
     }
 
     public void MoveThenDestoryUI(float time, ExecuteOnCompletion actions, PrefabDirection direction)
     {
-        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        for (int i = 0; i < UIManager.instance.ListOfUIObjects.Count; i++)
         {
             Vector3 destination = GiveDestination(direction);
 
-            MoveGameObject(UIManager.ListOfUIObjects[i].gameObject, time, destination, i, actions);
+            MoveGameObject(UIManager.instance.ListOfUIObjects[i], time, destination, i, actions);
         }
     }
 
@@ -102,18 +102,18 @@ public class Button : UI
     #region Scale Transition
     public void ShrinkTransition(float time, ExecuteOnCompletion actions)
     {
-        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        for (int i = 0; i < UIManager.instance.ListOfUIObjects.Count; i++)
         {
-            GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
+            GameObject temp = UIManager.instance.ListOfUIObjects[i];
             ScaleGameObject(temp, Vector3.zero, time, i, actions);
         }
     }
 
     public void GrowTransition(float time, Transition.ExecuteOnCompletion actions)
     {
-        for (int i = 0; i < UIManager.ListOfUIObjects.Count; i++)
+        for (int i = 0; i < UIManager.instance.ListOfUIObjects.Count; i++)
         {
-            GameObject temp = UIManager.ListOfUIObjects[i].gameObject;
+            GameObject temp = UIManager.instance.ListOfUIObjects[i];
             ScaleGameObject(temp, Vector3.one, time, i, actions);
         }
     }
@@ -126,17 +126,6 @@ public class Button : UI
             TransitionSystem.AddScaleTransition(new ScaleTransition(g.transform, newScale, time, TransitionType.SmoothStop2));
     }
     #endregion
-
-    private IEnumerator WaitCoroutine(float time, Transition.ExecuteOnCompletion actions)
-    {
-        Debug.Log("Startred");
-
-        yield return new WaitForSeconds(time);
-
-        Debug.Log("Done");
-
-        actions?.Invoke();
-    }
 }
 
 public enum NewScene

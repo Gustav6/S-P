@@ -12,11 +12,13 @@ using System;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
+
     #region Variables 
     public bool KeyOrControlActive { get; set; }
     public bool ChangingSlider { get; set; }
     public Vector2 MousePosition { get; set; }
-    public static float ResolutionScaling { get; private set; }
+    public float ResolutionScaling { get; private set; }
 
     public Vector2 currentUISelected;
     public Vector2 CurrentUISelected
@@ -120,6 +122,11 @@ public class UIManager : MonoBehaviour
             prevPosition = currentUISelected;
         }
     }
+    public List<GameObject> ListOfUIObjects { get; private set; }
+    public GameObject CurrentUIPrefab { get; private set; }
+    public bool Paused { get; set; }
+    public GameObject CameraInstance { get; private set; }
+    public bool Transitioning { get; private set; }
 
     private Vector2 prevPosition;
 
@@ -127,26 +134,21 @@ public class UIManager : MonoBehaviour
 
     private float maxXPos;
     private float maxYPos;
-    #endregion
 
-    #region Static variables
-    public static List<GameObject> ListOfUIObjects { get; private set; }
-    public static GameObject CurrentUIPrefab { get; private set; }
-    public static bool Paused { get; set; }
-    public static GameObject CameraInstance { get; private set; }
-    public static bool Transitioning { get; private set; }
-    public static UIDataManager UIDataManagerInstance { get; private set; }
     #endregion
 
     void Awake()
     {
+        if (instance == null)
+            instance = this;
+        else
+            Destroy(this);
+
         CameraInstance = GameObject.FindGameObjectWithTag("MainCamera");
 
         ListOfUIObjects = new();
 
         LoadUI();
-
-        UIDataManagerInstance = GameObject.FindGameObjectWithTag("DataManager").GetComponent<UIDataManager>();
     }
 
     void Start()
@@ -221,22 +223,22 @@ public class UIManager : MonoBehaviour
         #endregion
     }
 
-    public static void EnableTransitioning()
+    public void EnableTransitioning()
     {
         Transitioning = true;
     }
 
-    public static void DisableTransitioning()
+    public void DisableTransitioning()
     {
         Transitioning = false;
     }
 
-    public static void ResetListOfUIObjects()
+    public void ResetListOfUIObjects()
     {
         ListOfUIObjects.Clear();
     }
 
-    public static void InstantiateNewUIPrefab(GameObject prefab, Transform parentObject, Vector3 scale, Vector3 offset)
+    public void InstantiateNewUIPrefab(GameObject prefab, Transform parentObject, Vector3 scale, Vector3 offset)
     {
         CurrentUIPrefab = Instantiate(prefab);
         CurrentUIPrefab.transform.SetParent(parentObject);

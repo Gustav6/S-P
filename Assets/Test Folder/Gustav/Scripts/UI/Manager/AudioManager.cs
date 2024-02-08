@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(AudioSource))]
-public class AudioManager : MonoBehaviour
+public class TestAudioManager : MonoBehaviour
 {
     [SerializeField] private AudioClip[] clips;
     private AudioSource audioSource;
@@ -16,7 +16,7 @@ public class AudioManager : MonoBehaviour
 
     public void PlaySound(AudioType audio)
     {
-        float volume = UIManager.UIDataManagerInstance.sliderValues[SliderType.MainVolume];
+        float volume = UIDataManager.instance.sliderValues[SliderType.MainVolume];
         audioSource.PlayOneShot(clips[(int)audio], volume);
     }
 }

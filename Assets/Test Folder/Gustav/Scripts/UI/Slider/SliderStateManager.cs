@@ -48,9 +48,9 @@ public class SliderStateManager : BaseStateManager
 
     public float TotalSlidingPercentage()
     {
-        float maxMove = Mathf.Abs(maxMoveValue * 2) * UIManager.ResolutionScaling;
+        float maxMove = Mathf.Abs(maxMoveValue * 2) * UIManager.instance.ResolutionScaling;
 
-        float percentage = ((sliderPosition.localPosition.x + Mathf.Abs(slidersOffset)) / maxMove) * UIManager.ResolutionScaling;
+        float percentage = ((sliderPosition.localPosition.x + Mathf.Abs(slidersOffset)) / maxMove) * UIManager.instance.ResolutionScaling;
 
         if (percentage > 0.99f)
         {
@@ -75,9 +75,9 @@ public class SliderStateManager : BaseStateManager
     {
         Slider sliderInstance = (Slider)UIInstance;
 
-        if (UIManager.UIDataManagerInstance.sliderValues.ContainsKey(sliderInstance.sliderType))
+        if (UIDataManager.instance.sliderValues.ContainsKey(sliderInstance.sliderType))
         {
-            Vector2 temp = new Vector2(PercentageToPosition(UIManager.UIDataManagerInstance.sliderValues[sliderInstance.sliderType]), sliderPosition.localPosition.y);
+            Vector2 temp = new(PercentageToPosition(UIDataManager.instance.sliderValues[sliderInstance.sliderType]), sliderPosition.localPosition.y);
             sliderPosition.localPosition = temp;
         }
     }

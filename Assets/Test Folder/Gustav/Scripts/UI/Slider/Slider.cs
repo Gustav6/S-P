@@ -28,6 +28,16 @@ public class Slider : UI
         if (manager.sliderValues.ContainsKey(type))
         {
             manager.sliderValues[type] = value;
+
+            for (int i = 0; i < UIDataManager.instance.Currentdata.sliderTypes.Length; i++)
+            {
+                if (type == (SliderType)i)
+                {
+                    UIDataManager.instance.Currentdata.sliderValues[i] = value;
+                }
+            }
         }
+
+        SaveSystem.Instance.SaveData(UIDataManager.instance.Currentdata);
     }
 }

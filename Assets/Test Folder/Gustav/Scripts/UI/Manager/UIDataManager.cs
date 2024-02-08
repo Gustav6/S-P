@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,7 @@ public class UIDataManager : MonoBehaviour
     public void SetValues()
     {
         // Load saved settings
+        SaveSystem.Instance.LoadData();
         sliderValues.Add(SliderType.MainVolume, 1);
         sliderValues.Add(SliderType.MusicVolume, 1);
     }

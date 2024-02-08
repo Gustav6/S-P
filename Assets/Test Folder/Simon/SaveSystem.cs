@@ -11,8 +11,6 @@ public class SaveSystem : MonoBehaviour
     private string playerStatsSaveFileDirectory;
     private string dataSaveFileDirectory;
 
-    private Data test;
-
     private void Awake()
     {
         #region Singleton
@@ -26,9 +24,6 @@ public class SaveSystem : MonoBehaviour
 
         playerStatsSaveFileDirectory = Application.dataPath + "/_Scripts/Save System/pSaveFile.json";
         dataSaveFileDirectory = Application.dataPath + "/_Scripts/Save System/dSaveFile.json";
-
-        test = new Data();
-        SaveData(test);
     }
 
     /// <summary>

@@ -49,7 +49,7 @@ public class PlayerAnimationController : MonoBehaviour
         if (_attackForceCoroutine != null)
             StopCoroutine(_attackForceCoroutine);
 
-        _attackForceCoroutine = StartCoroutine(AttackLogic.AddAttackBoost(_player , _rb, attackForceDirection, impulseMultiplier, impulseTime));
+        _attackForceCoroutine = StartCoroutine(AttackLogic.AddBoost(_player , _rb, attackForceDirection, impulseMultiplier, impulseTime));
     }
 
     /// <summary>

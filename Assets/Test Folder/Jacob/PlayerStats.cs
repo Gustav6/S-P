@@ -25,13 +25,16 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     #endregion
 
+    #region Saved Data
+    private PlayerData _data;
     StatBlock _mainStatBlock = new(1, 1, 1, 1, 1, 1);
+    public WeaponSO CurrentWeapon;
+    #endregion
 
     StatBlock _weaponStatBlock;
     StatBlock _abilityStatBlock;
 
     private PlayerMovement _playerMovement;
-    public WeaponSO CurrentWeapon;
 
     [SerializeField] float _diStrength = 0.25f; // DI stands for direction input, used to reduce or enhance knockback when counteracting it with movement input.
 
@@ -43,8 +46,16 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        _data = SaveSystem.Instance.LoadGameSave();
+
         // Call this when you want to change the player weapon n stuff.
         EquipmentManager.Instance.SwitchWeapon(CurrentWeapon);
+    }
+
+    public void SetLocalDataToSave(PlayerData data)
+    {
+        _mainStatBlock = data.MainStatBlock;
+        CurrentWeapon = data.CurrentWeapon;
     }
 
     public float GetStat(StatType stat)

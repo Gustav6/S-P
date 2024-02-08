@@ -29,21 +29,6 @@ public class Enemy : MonoBehaviour
 
     }
 
-    //ublic void OnHit(float kbResistance, Vector2 knockback)
-    //{
-    //    if (!immune)
-    //    {
-    //        totalKbResistance -= kbResistance;
-
-    //        rb.AddForce(knockback, ForceMode2D.Impulse);
-
-    //        if (immunityTimer)
-    //        {
-    //            immune = true;
-    //        }
-    //    }
-    //}
-
 }
     
   

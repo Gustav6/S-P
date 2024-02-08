@@ -19,6 +19,8 @@ public class EnemyAttack : MonoBehaviour
     float attackCooldown;
     float maxCooldown = 3f;
 
+    private GameObject hitbox;
+
     private void Awake()
     {
         enemyAttackController = GetComponentInChildren<EnemyAttackController>();
@@ -28,9 +30,9 @@ public class EnemyAttack : MonoBehaviour
         enemy = FindFirstObjectByType<Enemy>();
     }
 
-    private void Start()
+   private void spawnEnemyHitbox()
     {
-        
+
     }
 
     void Update()
@@ -46,17 +48,19 @@ public class EnemyAttack : MonoBehaviour
             attackReady = false;
         }
 
-        float dist = Vector3.Distance(transform.localPosition, player.transform.localPosition);
+        float dist = Vector2.Distance(transform.localPosition, player.transform.localPosition);
 
-        if(dist <= minDist)
+        if(dist < minDist)
         {
-            anim.SetTrigger("Attack ");
+            enemyAttackController.EnterAttackState();
             Debug.Log("Attacking");
         }
-        else
+        else if (dist > minDist)
         {
+            enemyAttackController.LeaveAttack();
             Debug.Log("Cannot attack");
         }
+   
 
         Debug.Log("Distance from player: " +dist);
     }

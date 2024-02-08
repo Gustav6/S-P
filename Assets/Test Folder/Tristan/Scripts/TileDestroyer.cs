@@ -64,7 +64,7 @@ public class TileDestroyer : MonoBehaviour
     void Start()
     {
         tilemap = GetComponent<Tilemap>();
-        grid = GetComponent<Grid>();
+        grid = GetComponentInParent<Grid>();
     }
 
     void Update()

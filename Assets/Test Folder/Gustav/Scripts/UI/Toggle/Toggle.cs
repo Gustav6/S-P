@@ -20,7 +20,6 @@ public class Toggle : UI
 
         LoadFunction(ToggleStateManager);
 
-
         base.Start();
     }
 

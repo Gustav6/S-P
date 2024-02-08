@@ -32,7 +32,7 @@ public class InputFieldSelectedState : UIBaseState
 
     public override void EnterState(BaseStateManager referenceManager)
     {
-        if (!UIManager.Transitioning)
+        if (!UIManager.instance.Transitioning)
         {
             manager = (InputFieldStateManager)referenceManager;
 

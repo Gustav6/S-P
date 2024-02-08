@@ -12,7 +12,7 @@ public class PanelManager : MonoBehaviour
     void Start()
     {
         panelImage = GetComponent<Image>();
-        FadeIn(1, new Color(0, 0, 0, 0), UIManager.DisableTransitioning);
+        FadeIn(1, new Color(0, 0, 0, 0), UIManager.instance.DisableTransitioning);
     }
 
     public static void FadeIn(float time, Color color, Transition.ExecuteOnCompletion @delegate)

@@ -36,6 +36,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     [SerializeField] float _diStrength = 0.25f; // DI stands for direction input, used to reduce or enhance knockback when counteracting it with movement input.
 
     bool _isImmune = false;
+
     public float KnockbackPercent { get; set; }
 
     public PowerUp currentPowerUp { get; private set; }

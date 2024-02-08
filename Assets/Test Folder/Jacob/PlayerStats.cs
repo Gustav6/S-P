@@ -100,7 +100,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
     #region Damage and Knockback
     void IDamageable.TakeDamage(float damageAmount)
     {
-        KnockbackPercent += damageAmount / GetStat(StatType.DamageResistance);
+        // TODO: Add  GetStat(StatType.DamageResistance) back
+        KnockbackPercent += damageAmount;
     }
 
     /// <summary>
@@ -119,11 +120,14 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
-        Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized * knockbackMultiplier;
+        float multiplier = (2 + (KnockbackPercent / 100)) * knockbackMultiplier;
+
+        Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized * multiplier;
 
         Vector2 diVector = input * (knockbackVector.magnitude * _diStrength);
 
-        _playerMovement.rb.AddForce((knockbackVector + diVector) / GetStat(StatType.KnockbackResistance), ForceMode2D.Impulse);
+        // TODO: Add GetStat(StatType.KnockbackResistance) back. Was causing some issues before.
+        _playerMovement.rb.AddForce((knockbackVector + diVector), ForceMode2D.Impulse);
 
         Invoke(nameof(ResetKB), stunDuration);
     }

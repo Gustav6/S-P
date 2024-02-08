@@ -99,7 +99,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -120,6 +120,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -127,10 +140,10 @@ TextureImporter:
       name: pimpshrimpinsheetwalk_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 524
-        width: 500
-        height: 500
+        x: 133
+        y: 605
+        width: 236
+        height: 244
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -148,10 +161,10 @@ TextureImporter:
       name: pimpshrimpinsheetwalk_1
       rect:
         serializedVersion: 2
-        x: 500
-        y: 524
-        width: 500
-        height: 500
+        x: 621
+        y: 612
+        width: 235
+        height: 244
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,10 +182,10 @@ TextureImporter:
       name: pimpshrimpinsheetwalk_2
       rect:
         serializedVersion: 2
-        x: 1000
-        y: 524
-        width: 500
-        height: 500
+        x: 1101
+        y: 612
+        width: 236
+        height: 244
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -187,34 +200,13 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pimpshrimpinsheetwalk_3
-      rect:
-        serializedVersion: 2
-        x: 1500
-        y: 524
-        width: 500
-        height: 500
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 6ffd09f60d8e19146998b58f454ee149
-      internalID: 583509082
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: pimpshrimpinsheetwalk_4
       rect:
         serializedVersion: 2
-        x: 0
-        y: 24
-        width: 500
-        height: 500
+        x: 1576
+        y: 603
+        width: 236
+        height: 244
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -232,10 +224,10 @@ TextureImporter:
       name: pimpshrimpinsheetwalk_5
       rect:
         serializedVersion: 2
-        x: 501
-        y: 24
-        width: 500
-        height: 500
+        x: 151
+        y: 132
+        width: 236
+        height: 244
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,6 +237,27 @@ TextureImporter:
       bones: []
       spriteID: 49be2bbf0b1436242a8fc5e69e1d8c3f
       internalID: -1741948788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pimpshrimpinsheetwalk_7
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 132
+        width: 236
+        height: 244
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a64c250b785b6a541b43a76d6e917296
+      internalID: 1373376182
       vertices: []
       indices: 
       edges: []
@@ -266,6 +279,9 @@ TextureImporter:
       pimpshrimpinsheetwalk_3: 583509082
       pimpshrimpinsheetwalk_4: -1337852421
       pimpshrimpinsheetwalk_5: -1741948788
+      pimpshrimpinsheetwalk_6: -1970722569
+      pimpshrimpinsheetwalk_7: 1373376182
+      pimpshrimpinsheetwalk_8: 236030665
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

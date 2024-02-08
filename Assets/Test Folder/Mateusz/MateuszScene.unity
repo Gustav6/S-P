@@ -4932,11 +4932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b07e9ae77d861194c9e798f936b6f33d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1355813212}
-  speed: 550
   flipSpeed: 0
   nextWayPointDistance: 1.5
-  spriteRenderer: {fileID: 0}
 --- !u!50 &729113202
 Rigidbody2D:
   serializedVersion: 4
@@ -5108,13 +5105,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 788871493}
-  - component: {fileID: 788871490}
-  - component: {fileID: 788871494}
   - component: {fileID: 788871496}
   - component: {fileID: 788871498}
-  - component: {fileID: 788871497}
-  - component: {fileID: 788871499}
   - component: {fileID: 788871500}
+  - component: {fileID: 788871499}
+  - component: {fileID: 788871501}
+  - component: {fileID: 788871494}
+  - component: {fileID: 788871497}
+  - component: {fileID: 788871490}
   m_Layer: 7
   m_Name: Shrimp
   m_TagString: Enemy
@@ -5197,7 +5195,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -5215,11 +5213,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10727ac150f074247ade9ec06c7d77d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _kbPower: 0.2
-  _player: {fileID: 0}
-  _enemyAttack: {fileID: 788871500}
+  Damage: 20
+  KnockbackMultiplier: 2
   _rb: {fileID: 0}
-  _anim: {fileID: 0}
+  _enemyAI: {fileID: 0}
+  _attackController: {fileID: 0}
 --- !u!50 &788871497
 Rigidbody2D:
   serializedVersion: 4
@@ -5233,7 +5231,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 4
+  m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -5259,11 +5257,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b07e9ae77d861194c9e798f936b6f33d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1974044266}
-  speed: 500
-  flipSpeed: 0
+  flipSpeed: 0.25
   nextWayPointDistance: 3
-  spriteRenderer: {fileID: 1483345584}
 --- !u!114 &788871499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5288,8 +5283,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369d351a6e40e344e96566db2e0155f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _target: {fileID: 0}
   hitbox: {fileID: 1326689767}
+--- !u!95 &788871501
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 788871487}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fd53c634615b66540b6f1c723df1d9d0, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &823493603
 GameObject:
   m_ObjectHideFlags: 0
@@ -6364,7 +6380,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1483345583}
-  - component: {fileID: 1483345585}
   - component: {fileID: 1483345584}
   m_Layer: 7
   m_Name: Sprite
@@ -6442,28 +6457,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &1483345585
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1483345582}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fd53c634615b66540b6f1c723df1d9d0, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1500397896
 GameObject:
   m_ObjectHideFlags: 0

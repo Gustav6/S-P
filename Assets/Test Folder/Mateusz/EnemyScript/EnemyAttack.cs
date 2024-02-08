@@ -6,51 +6,54 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
     private EnemyAttackController _enemyAttackController;
-
-    PlayerStats _player;
     Enemy _enemy;
 
-    Animator _anim;
+    Transform _player;
 
-    public Transform _target;
-
-    float minDist = 3f;
+    float minDist = 1.5f;
 
     float attackCooldown;
-    float maxCooldown = 3f;
+    float maxCooldown = 4f;
 
     private bool hasAttacked;
-    bool attackReady;
+    private bool attackReady;
     private bool isAttacking;
-
-    [SerializeField] internal float damage, knockbackMultiplier;
 
     [SerializeField] private GameObject hitbox;
 
-
-
     private void Awake()
     {
-        _enemyAttackController = GetComponentInChildren<EnemyAttackController>();
-        _anim = GetComponentInChildren<Animator>();
-        _player = FindFirstObjectByType<PlayerStats>();
-        _enemy = FindFirstObjectByType<Enemy>();
-
+        _enemy = GetComponent<Enemy>();
     }
 
-    private void spawnEnemyHitbox()
+    private void Start()
     {
-
+        _enemyAttackController = _enemy._attackController;
+        _player = PlayerStats.Instance.transform;
     }
 
     void Update()
     {
-        EnemyAttacking();
+        if (DistanceToTarget())
+            _enemyAttackController.LeaveMovement();
+        else
+        {
+            _enemyAttackController.EnterMovement();
+        }
+
+        if (!isAttacking)
+        {
+            _enemyAttackController.LeaveAttack();
+        }
+
+        if (!isAttacking && attackReady)
+            EnemyAttacking();
 
         if (hasAttacked && attackReady)
         {
             attackCooldown = 0;
             hasAttacked = false;
+            attackReady = false;
         }
 
         if (attackCooldown >= maxCooldown)
@@ -60,35 +63,38 @@ public class EnemyAttack : MonoBehaviour
         else
         {
             attackCooldown += Time.deltaTime;
-            attackReady = false;
         }
     }
 
     public void EnemyAttacking()
     {
-        float dist = Vector2.Distance(transform.position, _player.transform.position);
-
-        if (dist <= minDist && attackReady && !isAttacking)
+        if (DistanceToTarget())
         {
             StartCoroutine(IsAttacking());
         }
-        else if (!attackReady)
-        {
-            _enemyAttackController.LeaveAttack();
-            hitbox.SetActive(false);
-        }
+    }
+
+    public bool DistanceToTarget()
+    {
+        float dist = Vector2.Distance(transform.position, _player.position);
+
+        return dist <= minDist;
     }
 
     IEnumerator IsAttacking()
     {
         _enemyAttackController.EnterAttackState();
+        _enemy._enemyAI.CanMove = false;
         isAttacking = true;
         hitbox.SetActive(true);
 
-        yield return new WaitForSeconds(3);
+        // TODO: Speed of actual animation + a little.
+        yield return new WaitForSeconds(0.6f);
 
+        hitbox.SetActive(false);
         hasAttacked = true;
         isAttacking = false;
+        // TODO: Change depending on enemies.
+        _enemy._enemyAI.CanMove = true;
     }
 }
-

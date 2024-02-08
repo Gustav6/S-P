@@ -4,22 +4,25 @@ using UnityEngine;
 
 public class EnemyAttackController : MonoBehaviour
 {
+    Animator _anim;
     Enemy _enemy;
 
-    SpriteRenderer _spriteRenderer;
-
-    Rigidbody2D _rb;
-
-    Animator _anim;
-
-  
     private void Awake()
     {
-        _enemy = FindFirstObjectByType<Enemy>();
+        _anim = GetComponent<Animator>();
+        _enemy = GetComponent<Enemy>();
+    }
 
-        _rb = GetComponent<Rigidbody2D>();
+    public void EnterMovement()
+    {
+        _enemy._enemyAI.CanMove = true;
+        _anim.SetBool("IsMoving", true);
+    }
 
-        _anim = GetComponentInChildren<Animator>();
+    public void LeaveMovement()
+    {
+        _enemy._enemyAI.CanMove = false;
+        _anim.SetBool("IsMoving", false);
     }
 
     public void EnterAttackState()

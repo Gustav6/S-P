@@ -49,9 +49,9 @@ public class ToggleStateManager : BaseStateManager
     {
         Toggle toggleInstance = (Toggle)UIInstance;
 
-        if (UIDataManager.instance.switchValues.ContainsKey(toggleInstance.toggleType))
+        if (UIDataManager.instance.toggleValues.ContainsKey(toggleInstance.toggleType))
         {
-            toggleInstance.toggleOn = UIDataManager.instance.switchValues[toggleInstance.toggleType];
+            toggleInstance.toggleOn = UIDataManager.instance.toggleValues[toggleInstance.toggleType];
         }
         else
         {

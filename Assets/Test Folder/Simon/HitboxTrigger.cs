@@ -5,24 +5,37 @@ using UnityEngine.Events;
 
 public class HitboxTrigger : MonoBehaviour
 {
-    // TODO: Change for enemy controller if null do the bellow if not then use enemy controller stat.
-    private PlayerAnimationController _parentController;
+    private Enemy _thisController;
 
     private void Awake()
     {
-        _parentController = GetComponentInParent<PlayerAnimationController>();
+        _thisController = GetComponentInParent<Enemy>();
     }
 
     private void OnTriggerEnter2D(Collider2D triggerInfo)
     {
         var damageable = triggerInfo.GetComponent<IDamageable>();
 
-        if (damageable == null || triggerInfo.CompareTag(_parentController.tag))
+        if (damageable == null)
             return;
 
-        if (_parentController != null)
-            Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage * PlayerStats.Instance.GetStat(StatType.DamageDealt),
-                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), transform.position);
+        if (_thisController == null)
+        {
+            if (triggerInfo.CompareTag(transform.parent.tag))
+                return;
+
+            //  * PlayerStats.Instance.GetStat(StatType.DamageDealt)
+            //  * PlayerStats.Instance.GetStat(StatType.KnockbackDealt)
+            Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage,
+                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier, transform.position);
+        }
+        else
+        {
+            if (triggerInfo.CompareTag(_thisController.tag))
+                return;
+
+            Attack(damageable, _thisController.Damage, _thisController.KnockbackMultiplier, _thisController.transform.position);
+        }
     }
 
     public void Attack(IDamageable damageable, float damage, float knockbackMultiplier, Vector2 sourcePosition)

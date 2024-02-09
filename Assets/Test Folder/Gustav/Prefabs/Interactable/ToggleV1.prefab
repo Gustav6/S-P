@@ -439,7 +439,7 @@ GameObject:
   - component: {fileID: 1393227582848674268}
   - component: {fileID: 8959228491638266491}
   m_Layer: 5
-  m_Name: Toggle
+  m_Name: ToggleV1
   m_TagString: InteractableUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -477,6 +477,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
+  hovering: 0
   toggleType: 0
   onColor: {r: 0, g: 0.8, b: 0, a: 1}
   offColor: {r: 0.8, g: 0, b: 0.004718399, a: 1}

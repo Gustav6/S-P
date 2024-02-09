@@ -10,7 +10,6 @@ public abstract class BaseStateManager : MonoBehaviour
     public Dictionary<string, Color> ColorPairs { get; private set; }
     public Dictionary<string, Vector3> ScalePairs { get; private set; }
     public UIBaseState CurrentState { get; set; }
-    public UIManager UIManagerInstance { get; private set; }
     public TestAudioManager AudioManagerInstance { get; private set; }
     public bool UIActivated { get; set; }
 
@@ -20,14 +19,13 @@ public abstract class BaseStateManager : MonoBehaviour
         ScalePairs = new Dictionary<string, Vector3>();
 
         AudioManagerInstance = UIInstance.GetComponentInParent<TestAudioManager>();
-        UIManagerInstance = UIInstance.GetComponentInParent<UIManager>();
 
         SetDictionaries();
     }
 
     public virtual void OnUpdate()
     {
-        if (UIManagerInstance != null && !UIManager.instance.Transitioning)
+        if (!UIManager.instance.Transitioning)
         {
             CurrentState.UpdateState(this);
         }
@@ -98,25 +96,5 @@ public abstract class BaseStateManager : MonoBehaviour
             ColorPairs.Add("OutlineDeSelected", new Color(0, 0, 0, 0.5f));
             ColorPairs.Add("TextDeSelected", new Color(1, 1, 1, 0.5f));
         }
-    }
-
-    public bool Hovering(UI UIInstance, UIManager uIManager)
-    {
-        if (UIManager.instance.ListOfUIObjects.Count > 0 && !UIManager.instance.Transitioning)
-        {
-            if (UIInstance != null)
-            {
-                if (UIInstance.GetComponent<Collider2D>().OverlapPoint(uIManager.MousePosition))
-                {
-                    if (UIInstance.GetComponent<UI>() != null)
-                    {
-                        uIManager.currentUISelected = UIInstance.GetComponent<UI>().position;
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
     }
 }

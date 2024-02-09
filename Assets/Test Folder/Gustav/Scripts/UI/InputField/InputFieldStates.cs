@@ -28,6 +28,7 @@ public class InputFieldSelectedState : UIBaseState
 {
     private InputFieldStateManager manager;
 
+    private readonly Color textColor = new(1, 1, 1, 1);
     private readonly float timeItTakes = 0.25f;
 
     public override void EnterState(BaseStateManager referenceManager)
@@ -36,8 +37,10 @@ public class InputFieldSelectedState : UIBaseState
         {
             manager = (InputFieldStateManager)referenceManager;
 
-            manager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, manager.text);
-            CheckIfSelected(manager, manager.selectedState);
+            referenceManager.StartCoroutine(WaitCoroutine(timeItTakes));
+            manager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, null);
+
+            TransitionSystem.AddColorTransition(new ColorTransition(manager.text, textColor, timeItTakes, TransitionType.SmoothStop2));
         }
         else
         {
@@ -64,10 +67,16 @@ public class InputFieldSelectedState : UIBaseState
 public class InputFieldPressedState : UIBaseState
 {
     private InputFieldStateManager manager;
+    private InputField inputFieldInstance;
+
+    private readonly Color textColor = new(1, 1, 0, 0.8f);
+    private readonly float timeItTakes = 0.25f;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (InputFieldStateManager)referenceManager;
+        inputFieldInstance = (InputField)referenceManager.UIInstance;
+        TransitionSystem.AddColorTransition(new ColorTransition(manager.text, textColor, timeItTakes, TransitionType.SmoothStop2));
     }
 
     public override void UpdateState(BaseStateManager referenceManager)
@@ -83,12 +92,13 @@ public class InputFieldPressedState : UIBaseState
             }
             else if ((c == '\n') || (c == '\r')) // enter/return
             {
-                manager.SwitchState(manager.deselectedState);
+                CheckIfDeselected(referenceManager, manager.deselectedState);
+                CheckIfSelected(referenceManager, manager.selectedState);
                 Debug.Log("User entered: " + manager.text.text);
 
                 break;
             }
-            else
+            else if (manager.text.text.Length < inputFieldInstance.maxAmountOfLetters)
             {
                 manager.text.text += c;
             }

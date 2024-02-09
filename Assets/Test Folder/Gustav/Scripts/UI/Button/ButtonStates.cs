@@ -135,7 +135,7 @@ public class ButtonPressedState : UIBaseState
     {
         ActiveMenuManager currentMenu = buttonInstance.GetComponentInParent<ActiveMenuManager>();
 
-        buttonInstance.InstantiatePrefab(currentMenu.moveDirection, currentMenu.gameObject, manager.UIManagerInstance.gameObject.transform);
+        buttonInstance.InstantiatePrefab(currentMenu.moveDirection, currentMenu.gameObject, UIManager.instance.transform);
     }
 }
 #endregion

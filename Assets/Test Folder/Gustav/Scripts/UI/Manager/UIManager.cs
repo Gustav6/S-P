@@ -278,4 +278,20 @@ public class UIManager : MonoBehaviour
             }
         }
     }
+
+    public bool Hovering(GameObject g)
+    {
+        if (ListOfUIObjects.Count > 0 && !Transitioning)
+        {
+            if (g.GetComponent<UI>() != null)
+            {
+                if (g.GetComponent<Collider2D>().OverlapPoint(MousePosition))
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }

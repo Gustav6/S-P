@@ -8,14 +8,7 @@ public class AttackLogic : MonoBehaviour
     [SerializeField] private UnityEvent animationComplete;
     [SerializeField] private Transform weaponSpawnParent;
 
-    private PlayerAnimationController _attackController;
-
     private GameObject _hitbox;
-
-    private void Awake()
-    {
-        _attackController = GetComponent<PlayerAnimationController>();
-    }
 
     public void SpawnHitbox()
     {
@@ -55,7 +48,7 @@ public class AttackLogic : MonoBehaviour
         animationComplete?.Invoke();
     }
 
-    public static IEnumerator AddAttackBoost(PlayerMovement player, Rigidbody2D rb, Vector2 targetDirection, float forceAmount, float forceActiveTime)
+    public static IEnumerator AddBoost(PlayerMovement player, Rigidbody2D rb, Vector2 targetDirection, float forceAmount, float forceActiveTime)
     {
         if (player.MovementLocked)
             yield break;

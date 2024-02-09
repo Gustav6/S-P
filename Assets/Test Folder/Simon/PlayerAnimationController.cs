@@ -49,13 +49,13 @@ public class PlayerAnimationController : MonoBehaviour
         if (_attackForceCoroutine != null)
             StopCoroutine(_attackForceCoroutine);
 
-        _attackForceCoroutine = StartCoroutine(AttackLogic.AddAttackBoost(_player , _rb, attackForceDirection, impulseMultiplier, impulseTime));
+        _attackForceCoroutine = StartCoroutine(AttackLogic.AddBoost(_player , _rb, attackForceDirection, impulseMultiplier, impulseTime));
     }
 
     /// <summary>
     /// Stop the current attack.
     /// Used to leave the state when an attack animation is finished playing.
-    /// </summary>
+    /// < /summary>
     public void LeaveAttackState()
     {
         if (PlayerStats.Instance.CurrentWeapon.IsWeaponResetable && !_animationReadyToReset)

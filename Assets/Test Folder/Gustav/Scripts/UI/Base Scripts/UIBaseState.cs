@@ -12,16 +12,16 @@ public abstract class UIBaseState
 
     protected void CheckIfSelected(BaseStateManager referenceManager, UIBaseState state)
     {
-        if (referenceManager.UIManagerInstance.KeyOrControlActive)
+        if (UIManager.instance.KeyOrControlActive)
         {
-            if (referenceManager.UIManagerInstance.CurrentUISelected == referenceManager.UIInstance.position)
+            if (UIManager.instance.CurrentUISelected == referenceManager.UIInstance.position)
             {
                 referenceManager.SwitchState(state);
             }
         }
         else
         {
-            if (referenceManager.Hovering(referenceManager.UIInstance, referenceManager.UIManagerInstance))
+            if (referenceManager.UIInstance.hovering)
             {
                 referenceManager.SwitchState(state);
             }
@@ -30,16 +30,16 @@ public abstract class UIBaseState
 
     protected void CheckIfDeselected(BaseStateManager referenceManager, UIBaseState state)
     {
-        if (referenceManager.UIManagerInstance.KeyOrControlActive)
+        if (UIManager.instance.KeyOrControlActive)
         {
-            if (referenceManager.UIManagerInstance.CurrentUISelected != referenceManager.UIInstance.position)
+            if (UIManager.instance.CurrentUISelected != referenceManager.UIInstance.position)
             {
                 referenceManager.SwitchState(state);
             }
         }
         else
         {
-            if (!referenceManager.Hovering(referenceManager.UIInstance, referenceManager.UIManagerInstance))
+            if (!referenceManager.UIInstance.hovering)
             {
                 referenceManager.SwitchState(state);
             }

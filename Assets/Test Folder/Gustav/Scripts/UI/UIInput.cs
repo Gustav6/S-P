@@ -178,7 +178,7 @@ public class UIInput : MonoBehaviour
         {
             BaseStateManager stateManager = manager.CheckForInteractableUI(manager.currentUISelected).GetComponent<BaseStateManager>();
 
-            if (stateManager.Hovering(stateManager.UIInstance, stateManager.UIManagerInstance))
+            if (UIManager.instance.Hovering(stateManager.UIInstance.gameObject))
             {
                 if (context.performed)
                 {

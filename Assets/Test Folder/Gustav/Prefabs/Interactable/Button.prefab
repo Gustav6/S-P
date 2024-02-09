@@ -400,6 +400,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7f9f7027cfc19e4d8db1c09406fa128, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  position: {x: 0, y: 0}
+  hovering: 0
+  transitionToScene: 0
+  NewScene: 0
+  transitionToPrefab: 0
+  prefabScaleTransition: 0
+  prefabMoveTransition: 0
+  menuPrefab: {fileID: 0}
 --- !u!61 &6776574943263549923
 BoxCollider2D:
   m_ObjectHideFlags: 0

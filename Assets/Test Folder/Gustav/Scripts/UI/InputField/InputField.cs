@@ -6,20 +6,20 @@ public class InputField : UI
 {
     public InputFieldStateManager InputFieldStateManager { get; private set; }
 
+    [Range(1, 20)] public int maxAmountOfLetters;
+
     public override void Start()
     {
         InputFieldStateManager = GetComponent<InputFieldStateManager>();
-        InputFieldStateManager.UIInstance = this;
+
+        LoadFunction(InputFieldStateManager);
 
         base.Start();
     }
 
     public override void Update()
     {
-        if (InputFieldStateManager.UIInstance != null)
-        {
-            InputFieldStateManager.OnUpdate();
-        }
+        UpdateFunction(InputFieldStateManager);
 
         base.Update();
     }

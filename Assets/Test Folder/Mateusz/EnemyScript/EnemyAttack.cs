@@ -10,16 +10,18 @@ public class EnemyAttack : MonoBehaviour
 
     Transform _player;
 
-    float minDist = 3.5f;
+    [SerializeField] float minDist = 1.5f;
 
     float attackCooldown;
-    float maxCooldown = 2.5f;
+    [SerializeField] float maxCooldown = 2.5f;
 
     private bool hasAttacked;
     private bool attackReady;
     private bool isAttacking;
 
-    [SerializeField] private GameObject hitbox;
+    private bool canAttack = true;
+
+    [SerializeField] internal GameObject hitbox, hitboxSpawn;
 
     private void Awake()
     {
@@ -32,18 +34,28 @@ public class EnemyAttack : MonoBehaviour
         _player = PlayerStats.Instance.transform;
     }
 
+    public void CanAttack(bool shouldEnemyAttack)
+    {
+        canAttack = shouldEnemyAttack;
+    }
+
+    public bool DistanceToTarget()
+    {
+        float dist = Vector2.Distance(transform.position, _player.position);
+
+        return dist <= minDist;
+    }
+
     void Update()
     {
-        if (DistanceToTarget())
-            _enemyAttackController.LeaveMovement();
+        if (!canAttack)
+            return;
+
+        if (!DistanceToTarget())
+            _enemyAttackController.EnterMovement();
         else
         {
-            _enemyAttackController.EnterMovement();
-        }
-
-        if (!isAttacking)
-        {
-            _enemyAttackController.LeaveAttack();
+            _enemyAttackController.LeaveMovement();
         }
 
         if (!isAttacking && attackReady)
@@ -70,31 +82,22 @@ public class EnemyAttack : MonoBehaviour
     {
         if (DistanceToTarget())
         {
-            StartCoroutine(IsAttacking());
+            IsAttacking();
         }
     }
 
-    public bool DistanceToTarget()
-    {
-        float dist = Vector2.Distance(transform.position, _player.position);
-
-        return dist <= minDist;
-    }
-
-    IEnumerator IsAttacking()
+    void IsAttacking()
     {
         _enemyAttackController.EnterAttackState();
         _enemy._attackController.LeaveMovement();
         isAttacking = true;
-        // Change hitbox to prefab and instantiate it.
-        hitbox.SetActive(true);
-        // TODO: Speed of actual animation + a little.
-        yield return new WaitForSeconds(0.6f);
+    }
 
-        hitbox.SetActive(false);
+    public void EnemyStopAttacking()
+    {
         hasAttacked = true;
         isAttacking = false;
-        // TODO: Change depending on enemies.
         _enemy._attackController.EnterMovement();
+        _enemy._attackController.LeaveAttack();
     }
 }

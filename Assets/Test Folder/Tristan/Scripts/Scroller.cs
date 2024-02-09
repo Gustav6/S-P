@@ -8,14 +8,14 @@ public class Scroller : MonoBehaviour
     float startPos;
     void Update()
     {
-        startPos = transform.position.x;
+        startPos = transform.localPosition.x;
         startPos += 0.0025f;
 
-        transform.position = new Vector3(startPos, 0, 0);
+        transform.localPosition = new Vector3(startPos, 0, 0);
 
-        if (transform.position.x >= 18)
+        if (transform.localPosition.x >= 23.41f)
         {
-            transform.position = new Vector3(-18,0,0);
+            transform.localPosition = new Vector3(-23.41f, 0,0);
         }
     }
 }

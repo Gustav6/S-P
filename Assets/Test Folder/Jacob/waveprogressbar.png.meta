@@ -1,34 +1,34 @@
 fileFormatVersion: 2
-guid: 6ee0156802e76dc4284d3c276be16cfa
+guid: dcddc167786a9d0479b05799254799f5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6456680437532968593
-    second: pimpshrimpin sheetattack_0
+      213: 1667601468329822946
+    second: waveprogressbar_0
   - first:
-      213: 7651414172107551000
-    second: pimpshrimpin sheetattack_1
+      213: -1556171519704935579
+    second: waveprogressbar_1
   - first:
-      213: 6336309098335418482
-    second: pimpshrimpin sheetattack_2
+      213: 6272925626018547505
+    second: waveprogressbar_2
   - first:
-      213: -4987598211676991777
-    second: pimpshrimpin sheetattack_3
+      213: 1875323647982327058
+    second: waveprogressbar_3
   - first:
-      213: -7917160189133391846
-    second: pimpshrimpin sheetattack_4
+      213: -3137909066225236605
+    second: waveprogressbar_4
   - first:
-      213: -3276749328437104691
-    second: pimpshrimpin sheetattack_5
+      213: 4979096525126728701
+    second: waveprogressbar_5
   - first:
-      213: 4775575575833532220
-    second: pimpshrimpin sheetattack_6
+      213: -7504627335874272671
+    second: waveprogressbar_6
   - first:
-      213: 6752023865899558846
-    second: pimpshrimpin sheetattack_7
+      213: -904018087009390275
+    second: waveprogressbar_7
   - first:
-      213: 972603980386303333
-    second: pimpshrimpin sheetattack_8
+      213: -7451818126678676738
+    second: waveprogressbar_8
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -99,7 +99,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -120,43 +120,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 3
-    buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 0
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: pimpshrimpin sheetattack_0
+      name: waveprogressbar_1
       rect:
         serializedVersion: 2
-        x: 94
-        y: 602
-        width: 305
-        height: 344
+        x: 116
+        y: 673
+        width: 73
+        height: 73
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -164,20 +138,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 196cd5326acba9950800000000000000
-      internalID: 6456680437532968593
+      spriteID: 563586e6f3e576ae0800000000000000
+      internalID: -1556171519704935579
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pimpshrimpin sheetattack_1
+      name: waveprogressbar_3
       rect:
         serializedVersion: 2
-        x: 619
-        y: 596
-        width: 305
-        height: 344
+        x: 275
+        y: 698
+        width: 1295
+        height: 26
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -185,20 +159,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8113cdd86a84f2a60800000000000000
-      internalID: 7651414172107551000
+      spriteID: 21550e40cec760a10800000000000000
+      internalID: 1875323647982327058
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pimpshrimpin sheetattack_2
+      name: waveprogressbar_4
       rect:
         serializedVersion: 2
-        x: 1089
-        y: 581
-        width: 305
-        height: 344
+        x: 47
+        y: 474
+        width: 388
+        height: 131
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -206,20 +180,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 278bb51cd871fe750800000000000000
-      internalID: 6336309098335418482
+      spriteID: 385ca226458e374d0800000000000000
+      internalID: -3137909066225236605
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pimpshrimpin sheetattack_3
+      name: waveprogressbar_7
       rect:
         serializedVersion: 2
-        x: 1522
-        y: 548
-        width: 305
-        height: 344
+        x: 1400
+        y: 499
+        width: 106
+        height: 106
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -227,20 +201,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fde8e961add78cab0800000000000000
-      internalID: -4987598211676991777
+      spriteID: d31f64de6584473f0800000000000000
+      internalID: -904018087009390275
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: pimpshrimpin sheetattack_6
+      name: waveprogressbar_8
       rect:
         serializedVersion: 2
-        x: 150
-        y: 34
-        width: 305
-        height: 344
+        x: 208
+        y: 420
+        width: 1284
+        height: 18
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -248,29 +222,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c37d6932fa0464240800000000000000
-      internalID: 4775575575833532220
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: pimpshrimpin sheetattack_8
-      rect:
-        serializedVersion: 2
-        x: 650
-        y: 125
-        width: 305
-        height: 344
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 56d7e06ca226f7d00800000000000000
-      internalID: 972603980386303333
+      spriteID: efa208c25e2d59890800000000000000
+      internalID: -7451818126678676738
       vertices: []
       indices: 
       edges: []
@@ -278,7 +231,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 54fcdc613ac32024d9f44c44aa8fefbb
+    spriteID: c6ee3d263503a9b40b27e0baf3b1733b
     internalID: 0
     vertices: []
     indices: 
@@ -286,15 +239,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      pimpshrimpin sheetattack_0: 6456680437532968593
-      pimpshrimpin sheetattack_1: 7651414172107551000
-      pimpshrimpin sheetattack_2: 6336309098335418482
-      pimpshrimpin sheetattack_3: -4987598211676991777
-      pimpshrimpin sheetattack_4: -7917160189133391846
-      pimpshrimpin sheetattack_5: -3276749328437104691
-      pimpshrimpin sheetattack_6: 4775575575833532220
-      pimpshrimpin sheetattack_7: 6752023865899558846
-      pimpshrimpin sheetattack_8: 972603980386303333
+      waveprogressbar_0: 1667601468329822946
+      waveprogressbar_1: -1556171519704935579
+      waveprogressbar_2: 6272925626018547505
+      waveprogressbar_3: 1875323647982327058
+      waveprogressbar_4: -3137909066225236605
+      waveprogressbar_5: 4979096525126728701
+      waveprogressbar_6: -7504627335874272671
+      waveprogressbar_7: -904018087009390275
+      waveprogressbar_8: -7451818126678676738
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

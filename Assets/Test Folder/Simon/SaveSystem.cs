@@ -13,6 +13,7 @@ public class SaveSystem : MonoBehaviour
 
     private void Awake()
     {
+        // TODO: Maybe use don't destroy on load if issues arise, should be fine.
         #region Singleton
         if (Instance == null)
             Instance = this;

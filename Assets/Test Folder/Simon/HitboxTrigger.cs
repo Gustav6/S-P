@@ -12,29 +12,69 @@ public class HitboxTrigger : MonoBehaviour
         _thisController = GetComponentInParent<Enemy>();
     }
 
-    private void OnTriggerEnter2D(Collider2D triggerInfo)
+    private void Start()
     {
-        var damageable = triggerInfo.GetComponent<IDamageable>();
+        Collider2D[] collidersInside = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0f);
 
-        if (damageable == null)
-            return;
-
-        if (_thisController == null)
+        foreach (Collider2D collider in collidersInside)
         {
-            if (triggerInfo.CompareTag(transform.parent.tag))
+            // Manually invoke OnTriggerEnter2D for each object inside the trigger
+            var damageable = collider.GetComponent<IDamageable>();
+
+            if (damageable == null)
                 return;
 
-            //  * PlayerStats.Instance.GetStat(StatType.DamageDealt)
-            //  * PlayerStats.Instance.GetStat(StatType.KnockbackDealt)
-            Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage,
-                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier, transform.position);
+            if (_thisController == null)
+            {
+                if (collider.CompareTag(transform.parent.tag))
+                    return;
+
+                //  * PlayerStats.Instance.GetStat(StatType.DamageDealt)
+                //  * PlayerStats.Instance.GetStat(StatType.KnockbackDealt)
+                Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage,
+                       PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier, transform.position);
+            }
+            else
+            {
+                if (collider.CompareTag(_thisController.tag))
+                    return;
+
+                Attack(damageable, _thisController.Damage, _thisController.KnockbackMultiplier, _thisController.transform.position);
+            }
         }
-        else
+    }
+
+    private void OnEnable()
+    {
+        Collider2D[] collidersInside = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0f);
+
+        foreach (Collider2D collider in collidersInside)
         {
-            if (triggerInfo.CompareTag(_thisController.tag))
+            // Manually invoke OnTriggerEnter2D for each object inside the trigger
+            var damageable = collider.GetComponent<IDamageable>();
+
+            if (damageable == null)
                 return;
 
-            Attack(damageable, _thisController.Damage, _thisController.KnockbackMultiplier, _thisController.transform.position);
+            if (_thisController == null)
+            {
+                Debug.Log("Testing");
+
+                if (collider.CompareTag(transform.parent.tag))
+                    return;
+
+                //  * PlayerStats.Instance.GetStat(StatType.DamageDealt)
+                //  * PlayerStats.Instance.GetStat(StatType.KnockbackDealt)
+                Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage,
+                       PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier, transform.position);
+            }
+            else
+            {
+                if (collider.CompareTag(_thisController.tag))
+                    return;
+
+                Attack(damageable, _thisController.Damage, _thisController.KnockbackMultiplier, _thisController.transform.position);
+            }
         }
     }
 
@@ -54,6 +94,6 @@ public class HitboxTrigger : MonoBehaviour
     {
         // TODO: Change later.
 
-        return currentKnockbackPercent / 100;
+        return 0.1f;
     }
 }

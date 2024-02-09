@@ -6,29 +6,12 @@ using UnityEngine.Tilemaps;
 public class TileDestroyer : MonoBehaviour
 {
     [SerializeField] Tile GrassTopMid, GrassCurveBotLeft, GrassCurveBotRight, GrassCurveTopLeft, GrassCurveTopRight, FullGrass, GrassMidLeft, GrassMidRight, GrassBotRight, GrassBotLeft, GrassBotMid, GrassTopLeft, GrassTopRight;
-    [SerializeField] Tile WaterBackground;
 
-    enum Tile_Type
-    {
-        Unknown,
-        GrassTopMid,
-        GrassTopRight,
-        GrassTopLeft,
-        GrassBotMid,
-        GrassBotLeft,
-        GrassBotRight,
-        GrassMidRight,
-        GrassMidLeft,
-        FullGrass,
-        GrassCurveTopRight,
-        GrassCurveTopLeft,
-        GrassCurveBotRight,
-        GrassCurveBotLeft,
-        WaterBackground,
+    enum Tile_Type {
+        Unknown, GrassTopMid, GrassTopRight, GrassTopLeft, GrassBotMid, GrassBotLeft, GrassBotRight, GrassMidRight, GrassMidLeft, FullGrass, GrassCurveTopRight, GrassCurveTopLeft, GrassCurveBotRight, GrassCurveBotLeft,
     }
 
-    enum Tile_Location
-    {
+    enum Tile_Location {
         N, W, S, E, NE, NW, SW, SE
     }
 
@@ -38,66 +21,31 @@ public class TileDestroyer : MonoBehaviour
     float tileHealth = 100;
     Tilemap tilemap;
     Vector3 mousePos;
-    Vector3Int snappedTile;
-    Vector3Int tilePos;
+    Vector3Int snappedTile, tilePos;
     
     [SerializeField] GridLayout grid;
 
-    Vector3Int nTilePos;
-    Vector3Int wTilePos;
-    Vector3Int sTilePos;
-    Vector3Int eTilePos;
-    Vector3Int neTilePos;
-    Vector3Int nwTilePos;
-    Vector3Int swTilePos;
-    Vector3Int seTilePos;
+    Vector3Int nTilePos, wTilePos, sTilePos, eTilePos, neTilePos, nwTilePos, swTilePos, seTilePos;
 
-    Tile nTile;
-    Tile wTile;
-    Tile sTile;
-    Tile eTile;
-    Tile neTile;
-    Tile nwTile;
-    Tile seTile;
-    Tile swTile;
-
-    void Start()
-    {
+    Tile nTile, wTile, sTile, eTile, neTile, nwTile, seTile, swTile;
+    void Start() {
         tilemap = GetComponent<Tilemap>();
-        grid = GetComponent<Grid>();
+        grid = GetComponentInParent<Grid>();
     }
 
-    void Update()
-    {
+    void Update() {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         tilePos = grid.WorldToCell(mousePos);
         snappedTile = new Vector3Int(tilePos.x,tilePos.y,0);
-        
-        //tilePos = grid.WorldToCell(mousePos);
-        
 
         
-        /*if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log("Mouse Pos is " + mousePos);
-            Debug.Log("Snapped Tile Pos is " + snappedTile);
-            GetLocalTiles(snappedTile);
-            if (tilemap != null && tilemap.HasTile(snappedTile))
-            {
-                Debug.Log("It has it");
-                tilemap.SetTile(snappedTile, null);
-                Debug.Log("It has been removed");
-            }
-            else
-            {
-                Debug.Log("Does not have it");
-            }
-            SetLocalTiles(snappedTile);
-        }*/
+            DestroyTile(mousePos, 50);
+        }
     }
 
-    Tile_Type GetTile_Type(Tile tile)
-    {
+    Tile_Type GetTile_Type(Tile tile) {
         if (tile == GrassTopMid) { return Tile_Type.GrassTopMid; }
         if (tile == GrassTopRight) { return Tile_Type.GrassTopRight; }
         if (tile == GrassTopLeft) { return Tile_Type.GrassTopLeft; }
@@ -111,12 +59,10 @@ public class TileDestroyer : MonoBehaviour
         if (tile == GrassCurveTopLeft) { return Tile_Type.GrassCurveTopLeft; }
         if (tile == GrassCurveBotRight) { return Tile_Type.GrassCurveBotRight; }
         if (tile == GrassCurveBotLeft) { return Tile_Type.GrassCurveBotLeft; }
-        if (tile == WaterBackground) { return Tile_Type.WaterBackground; }
         return Tile_Type.Unknown;
     }
 
-    void GetLocalTiles(Vector3Int snappedTile)
-    {
+    void GetLocalTiles(Vector3Int snappedTile) {
         nTilePos = new Vector3Int(snappedTile.x, snappedTile.y + 1, 0);
         sTilePos = new Vector3Int(snappedTile.x, snappedTile.y - 1, 0);
         wTilePos = new Vector3Int(snappedTile.x - 1, snappedTile.y, 0);
@@ -138,8 +84,8 @@ public class TileDestroyer : MonoBehaviour
         localTileTypes = new List<Tile_Type> { GetTile_Type(nTile), GetTile_Type(wTile), GetTile_Type(sTile), GetTile_Type(eTile), GetTile_Type(neTile), GetTile_Type(nwTile), GetTile_Type(swTile), GetTile_Type(seTile)};
     }
 
-    void UpdateTile(Tile_Location loc)
-    {
+    void UpdateTile(Tile_Location loc) {
+        // Checks all possible cases and places the correct tile for said case
         switch (loc)
         {
             case Tile_Location.N:
@@ -449,33 +395,30 @@ public class TileDestroyer : MonoBehaviour
         }
     }
 
-    void SetLocalTiles(Vector3Int tilePos)
-    {
-        foreach (Tile_Location loc in Tile_Location.GetValues(typeof(Tile_Location)))
-        {
+    void SetLocalTiles(Vector3Int tilePos) {
+        foreach (Tile_Location loc in Tile_Location.GetValues(typeof(Tile_Location))) {
             UpdateTile(loc);
         }
     }
 
-    void DestroyTile(Vector3 worldPos)
-    {
+    void DestroyTile(Vector3 worldPos, float dmg) {
+        tileHealth -= dmg;
         tilePos = grid.WorldToCell(worldPos);
         snappedTile = new Vector3Int(tilePos.x, tilePos.y, 0);
-
-        GetLocalTiles(snappedTile);
-        if (tileHealth <= 0)
-        {
-            if (tilemap != null && tilemap.HasTile(snappedTile))
-            {
+        // Fix it to be on Z-0 so it works
+        if (tileHealth <= 0) {
+            GetLocalTiles(snappedTile);
+            
+            if (tilemap != null && tilemap.HasTile(snappedTile)) {
                 Debug.Log("It has it");
                 tilemap.SetTile(snappedTile, null);
                 Debug.Log("It has been removed");
             }
-            else
-            {
+            else {
                 Debug.Log("Does not have it");
             }
             SetLocalTiles(snappedTile);
+            tileHealth = 100;
         }
     }
 }

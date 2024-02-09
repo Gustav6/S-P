@@ -8,78 +8,43 @@ public class EnemyAI : MonoBehaviour
 {
     private Transform target;
 
-    [SerializeField] private GameObject hitbox;
+    [SerializeField] private GameObject pivot;
 
     [SerializeField] private float speed = 2;
     [SerializeField] private float flipSpeed;
-    public float nextWayPointDistance = 3f;
 
-    Path path;
-    Seeker seeker;
     Rigidbody2D rb;
-
-    int currentWayPoint = 0;
 
     private int _previousDirection = 1;
 
     public bool CanMove { get; set; }
+    public bool IsNotGettingHit { get; set; }
 
     void Start()
     {
-        seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
         target = PlayerStats.Instance.transform;
 
         CanMove = true;
-
-        InvokeRepeating("UpdatePath", 0f, .2f);
     }
-
-    #region A*
-    void UpdatePath()
-    {
-        if (seeker.IsDone())
-        {
-            seeker.StartPath(rb.position, target.position, OnPathComplete);
-        }
-    }
-
-    private void OnPathComplete(Path p)
-    {
-        if (!p.error)
-        {
-            path = p;
-            currentWayPoint = 0;
-        }
-    }
-    #endregion
     
     void Update()
     {
+        if (!CanMove)
+        {
+            if (IsNotGettingHit)
+                rb.velocity = Vector2.zero;
+
+            return;
+        }
+
         Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        hitbox.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        angle *= Mathf.Sign(transform.localScale.x);
+        pivot.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        if (path == null)
-        {
-            return;
-        }
-
-        if (!CanMove)
-            return;
-
-        Vector2 pathDirection = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
-        Vector2 force = (pathDirection * speed);
-
-        rb.velocity = force;
-
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
-
-        if (distance < nextWayPointDistance)
-        {
-            currentWayPoint++;
-        }
+        rb.velocity = direction * speed;
 
         // Negative here because of how sprite reacts to parent object being flipped.
         if (_previousDirection != -Mathf.Sign(transform.position.x - target.position.x))
@@ -96,11 +61,11 @@ public class EnemyAI : MonoBehaviour
 
         while (time <= flipSpeed)
         {
-            transform.localScale = new Vector2(Mathf.Lerp(0.5f * -direction, 0.5f * direction, time / flipSpeed), 0.5f);
+            transform.localScale = new Vector3(Mathf.Lerp(-direction, direction, time / flipSpeed), 1, 1);
             time += Time.deltaTime;
             yield return null;
         }
 
-        transform.localScale = new Vector3(0.5f * direction, 0.5f, 0.5f);
+        transform.localScale = new Vector3(direction, 1, 1);
     }
 }

@@ -92,8 +92,7 @@ public class ButtonPressedState : UIBaseState
     {
         if (canTransition)
         {
-            CheckIfDeselected(referenceManager, manager.deselectedState);
-            CheckIfSelected(referenceManager, manager.deselectedState);
+            referenceManager.SwitchState(manager.selectedState);
         }
     }
 
@@ -133,9 +132,7 @@ public class ButtonPressedState : UIBaseState
 
     public void InstantiatePrefab()
     {
-        ActiveMenuManager currentMenu = buttonInstance.GetComponentInParent<ActiveMenuManager>();
-
-        buttonInstance.InstantiatePrefab(currentMenu.moveDirection, currentMenu.gameObject, UIManager.instance.transform);
+        buttonInstance.InstantiatePrefab();
     }
 }
 #endregion

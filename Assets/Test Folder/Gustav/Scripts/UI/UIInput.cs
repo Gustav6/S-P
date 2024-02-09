@@ -49,7 +49,7 @@ public class UIInput : MonoBehaviour
         {
             if (context.performed)
             {
-                GameObject g = manager.CheckForInteractableUI(manager.currentUISelected);
+                GameObject g = manager.CheckForInteractableUI(manager.CurrentUISelected);
 
                 if (g.GetComponent<SliderStateManager>() != null)
                 {
@@ -106,9 +106,9 @@ public class UIInput : MonoBehaviour
             SliderStateManager sm;
             GameObject g;
 
-            if (manager.CheckForInteractableUI(manager.currentUISelected) != null)
+            if (manager.CheckForInteractableUI(manager.CurrentUISelected) != null)
             {
-                g = manager.CheckForInteractableUI(manager.currentUISelected);
+                g = manager.CheckForInteractableUI(manager.CurrentUISelected);
 
                 if (g.GetComponent<SliderStateManager>() != null)
                 {
@@ -139,7 +139,7 @@ public class UIInput : MonoBehaviour
     {
         if (CanInteractWithUI())
         {
-            GameObject g = manager.CheckForInteractableUI(manager.currentUISelected);
+            GameObject g = manager.CheckForInteractableUI(manager.CurrentUISelected);
             BaseStateManager uI = g.GetComponent<BaseStateManager>();
 
             if (context.performed)
@@ -176,7 +176,7 @@ public class UIInput : MonoBehaviour
     {
         if (CanInteractWithUI() && !manager.KeyOrControlActive)
         {
-            BaseStateManager stateManager = manager.CheckForInteractableUI(manager.currentUISelected).GetComponent<BaseStateManager>();
+            BaseStateManager stateManager = manager.CheckForInteractableUI(manager.CurrentUISelected).GetComponent<BaseStateManager>();
 
             if (UIManager.instance.Hovering(stateManager.UIInstance.gameObject))
             {

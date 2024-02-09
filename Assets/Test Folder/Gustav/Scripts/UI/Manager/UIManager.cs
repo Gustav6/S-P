@@ -20,7 +20,7 @@ public class UIManager : MonoBehaviour
     public Vector2 MousePosition { get; set; }
     public float ResolutionScaling { get; private set; }
 
-    public Vector2 currentUISelected;
+    private Vector2 currentUISelected;
     public Vector2 CurrentUISelected
     {
         get
@@ -158,6 +158,9 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(Transitioning);
+        Debug.Log(ListOfUIObjects.Count);
+
         TransitionSystem.Update();
 
         if (KeyOrControlActive)
@@ -205,7 +208,7 @@ public class UIManager : MonoBehaviour
         {
             if (interactableUI.GetComponent<UI>().position == Vector2.zero)
             {
-                currentUISelected = interactableUI.GetComponent<UI>().position;
+                CurrentUISelected = interactableUI.GetComponent<UI>().position;
             }
 
             if (interactableUI.GetComponent<UI>().position.y > maxYPos)
@@ -245,27 +248,24 @@ public class UIManager : MonoBehaviour
         CurrentUIPrefab.transform.localScale = Vector3.one;
         CurrentUIPrefab.transform.localPosition = Vector3.zero;
 
-        ActiveMenuManager activePrefab = prefab.GetComponent<ActiveMenuManager>();
+        //ActiveMenuManager activePrefab = prefab.GetComponent<ActiveMenuManager>();
 
-        if (activePrefab.enableBlurOnInsansiate)
-        {
-            activePrefab.EnableBlur(CameraInstance.GetComponent<Blur>());
-        }
-        else
-        {
-            activePrefab.DisableBlur(CameraInstance.GetComponent<Blur>());
-        }
-
-        List<GameObject> tempList = new();
+        //if (activePrefab.enableBlurOnInsansiate)
+        //{
+        //    activePrefab.EnableBlur(CameraInstance.GetComponent<Blur>());
+        //}
+        //else
+        //{
+        //    activePrefab.DisableBlur(CameraInstance.GetComponent<Blur>());
+        //}
 
         for (int i = 0; i < CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>().Length; i++)
         {
-            tempList.Add(CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>()[i].gameObject);
+            Debug.Log(i + " " + CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>()[i].transform.position + offset);
+
             CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>()[i].transform.localScale = scale;
             CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>()[i].transform.position += offset;
         }
-
-        CurrentUIPrefab.GetComponentInParent<UIManager>().LoadUI(tempList);
     }
 
     private void CheckForMouseMovement()

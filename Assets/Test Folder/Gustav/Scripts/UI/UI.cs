@@ -18,7 +18,10 @@ public abstract class UI : MonoBehaviour
         if (UIManager.instance.Hovering(gameObject))
         {
             hovering = true;
-            UIManager.instance.CurrentUISelected = position;
+            if (UIManager.instance != null)
+            {
+                UIManager.instance.CurrentUISelected = position;
+            }
         }
         else
         {

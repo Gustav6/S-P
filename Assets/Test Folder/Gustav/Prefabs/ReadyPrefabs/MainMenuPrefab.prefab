@@ -63,11 +63,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -400
+      value: -662
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -280
+      value: -369
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -161,11 +161,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -400
+      value: -662
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -120
+      value: -209
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -259,11 +259,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -400
+      value: -662
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -200
+      value: -289
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -353,6 +353,10 @@ PrefabInstance:
       propertyPath: position.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: prefabToSpawn
+      value: 
+      objectReference: {fileID: 6128976556278935385, guid: df738c3cef1fced4a87102877decaae5, type: 3}
     - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: transitionToPrefab
       value: 1

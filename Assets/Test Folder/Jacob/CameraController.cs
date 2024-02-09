@@ -1,38 +1,57 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class ScreenShake : MonoBehaviour
+public class CameraController : MonoBehaviour
 {
 	#region Singleton
-	public static ScreenShake instance;
+	public static CameraController instance;
 
 	private void Awake()
 	{
 		if (instance == null)
 		{
 			instance = this;
-			DontDestroyOnLoad(gameObject);
 		}
 		else
 		{
+			Debug.LogError("More than one instance of CameraController found on " + gameObject + ", destroying instance");
 			Destroy(this);
 		}
 	}
 
 	#endregion
 
+	[SerializeField] Transform _playerTransform;
+	[SerializeField] float _lookAheadDistance = 1.25f;
+	bool _lookAheadEnabled = true;
+
 	// Temporary curve, will add support for custom curves depending on the shake-source.
 	[SerializeField] AnimationCurve _curve;
 
-	#region Shake overload methods
+    private void Update()
+    {
+        if (!_lookAheadEnabled)
+        {
+			transform.position = transform.position = Vector2.Lerp(transform.position, Vector2.zero, Time.deltaTime * 3);
+			return;
+        }
 
-	/// <summary>
-	/// Shakes the camera around a point. Recommended duration of 0.5f and intensity of 0.25f
-	/// </summary>
-	/// <param name="duration">The duration in seconds of the shake effect</param>
-	/// <param name="intensity">The strength of the shake</param>
-	/// <param name="centerPoint">The object which the screen should shake around, useful for moving targets</param>
-	public async void Shake(float duration, float intensity, Transform centerPoint)
+		Vector2 direction = (Vector2)_playerTransform.position - Vector2.zero;
+
+		transform.position = Vector2.Lerp(transform.position, Vector2.zero + direction.normalized * _lookAheadDistance * (direction.magnitude / 6.5f), Time.deltaTime * 3);
+
+		transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+	}
+
+    #region Shake overload methods
+
+    /// <summary>
+    /// Shakes the camera around a point. Recommended duration of 0.5f and intensity of 0.25f
+    /// </summary>
+    /// <param name="duration">The duration in seconds of the shake effect</param>
+    /// <param name="intensity">The strength of the shake</param>
+    /// <param name="centerPoint">The object which the screen should shake around, useful for moving targets</param>
+    public async void Shake(float duration, float intensity, Transform centerPoint)
 	{
 		float elapsedTime = 0f;
 
@@ -69,4 +88,9 @@ public class ScreenShake : MonoBehaviour
 	}
 
 	#endregion
+
+	public void ToggleLookAhead()
+    {
+		_lookAheadEnabled = !_lookAheadEnabled;
+    }
 }

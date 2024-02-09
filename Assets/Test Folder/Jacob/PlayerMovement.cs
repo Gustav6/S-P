@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
 	[SerializeField] float _movementSpeed = 3;
+	[SerializeField] ParticleSystem _bigPoofParticle;
+	[SerializeField] Transform _feetPosition;
 
 	internal Rigidbody2D rb;
 	Animator _anim;
@@ -12,6 +14,8 @@ public class PlayerMovement : MonoBehaviour
 	internal bool isGrounded = true;
 
 	public bool MovementLocked { get; private set; }
+
+	float _particleDelayCounter = 0;
 
 	private void Awake()
 	{
@@ -24,9 +28,20 @@ public class PlayerMovement : MonoBehaviour
 		if (MovementLocked)
 			return;
 
-		Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		Vector2 input = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
 		_anim.SetBool("IsMoving", input.magnitude > 0);
+
+		if (input.magnitude > 0)
+        {
+			_particleDelayCounter -= Time.deltaTime * Random.Range(0.85f, 1.15f);
+
+			if (_particleDelayCounter <= 0)
+			{
+				ParticleManager.Instance.SpawnParticle(_bigPoofParticle, _feetPosition.position);
+				_particleDelayCounter = 0.125f;
+			}
+		}
 
 		if (isGrounded)
 			rb.velocity = input.normalized * _movementSpeed;

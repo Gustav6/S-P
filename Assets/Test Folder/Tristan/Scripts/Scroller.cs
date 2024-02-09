@@ -15,7 +15,7 @@ public class Scroller : MonoBehaviour
 
         if (transform.position.x >= 18)
         {
-            transform.position = new Vector3(-18,0,0);
+            transform.position = new Vector3(-23.41f, 0,0);
         }
     }
 }

@@ -133,6 +133,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -140,8 +153,8 @@ TextureImporter:
       name: pimpshrimpin sheetattack_0
       rect:
         serializedVersion: 2
-        x: 107
-        y: 542
+        x: 94
+        y: 602
         width: 305
         height: 344
       alignment: 0
@@ -246,7 +259,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 650
-        y: 36
+        y: 125
         width: 305
         height: 344
       alignment: 0

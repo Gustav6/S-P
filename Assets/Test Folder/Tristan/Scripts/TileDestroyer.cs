@@ -418,6 +418,7 @@ public class TileDestroyer : MonoBehaviour
                 Debug.Log("Does not have it");
             }
             SetLocalTiles(snappedTile);
+            tileHealth = 100;
         }
     }
 }

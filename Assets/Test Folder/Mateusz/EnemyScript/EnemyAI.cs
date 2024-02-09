@@ -18,6 +18,7 @@ public class EnemyAI : MonoBehaviour
     private int _previousDirection = 1;
 
     public bool CanMove { get; set; }
+    public bool IsNotGettingHit { get; set; }
 
     void Start()
     {
@@ -30,17 +31,18 @@ public class EnemyAI : MonoBehaviour
     
     void Update()
     {
-        Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        pivot.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
-
         if (!CanMove)
         {
-            if (rb.velocity != Vector2.zero)
+            if (IsNotGettingHit)
                 rb.velocity = Vector2.zero;
 
             return;
         }
+
+        Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        angle *= Mathf.Sign(transform.localScale.x);
+        pivot.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         rb.velocity = direction * speed;
 
@@ -59,7 +61,7 @@ public class EnemyAI : MonoBehaviour
 
         while (time <= flipSpeed)
         {
-            transform.localScale = new Vector2(Mathf.Lerp(-direction, direction, time / flipSpeed), 1);
+            transform.localScale = new Vector3(Mathf.Lerp(-direction, direction, time / flipSpeed), 1, 1);
             time += Time.deltaTime;
             yield return null;
         }

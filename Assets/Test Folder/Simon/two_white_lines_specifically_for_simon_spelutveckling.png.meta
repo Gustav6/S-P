@@ -180,7 +180,9 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      two_white_lines_specifically_for_simon_spelutveckling_0: -4105421202916311177
+      two_white_lines_specifically_for_simon_spelutveckling_1: -5438637335464639414
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

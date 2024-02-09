@@ -46,7 +46,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        _data = SaveSystem.Instance.LoadGameSave();
+        //_data = SaveSystem.Instance.LoadGameSave();
 
         // Call this when you want to change the player weapon n stuff.
         EquipmentManager.Instance.SwitchWeapon(CurrentWeapon);

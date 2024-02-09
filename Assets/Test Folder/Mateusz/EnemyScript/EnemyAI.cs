@@ -8,11 +8,11 @@ public class EnemyAI : MonoBehaviour
 {
     private Transform target;
 
-    [SerializeField] private GameObject hitbox;
+    [SerializeField] private GameObject pivot;
 
     [SerializeField] private float speed = 2;
     [SerializeField] private float flipSpeed;
-    public float nextWayPointDistance = 3f;
+    private float nextWayPointDistance = 3f;
 
     Path path;
     Seeker seeker;
@@ -39,6 +39,9 @@ public class EnemyAI : MonoBehaviour
     #region A*
     void UpdatePath()
     {
+        if (!CanMove)
+            return;
+
         if (seeker.IsDone())
         {
             seeker.StartPath(rb.position, target.position, OnPathComplete);
@@ -59,7 +62,7 @@ public class EnemyAI : MonoBehaviour
     {
         Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        hitbox.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        pivot.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         if (path == null)
         {
@@ -67,7 +70,12 @@ public class EnemyAI : MonoBehaviour
         }
 
         if (!CanMove)
+        {
+            if (rb.velocity != Vector2.zero)
+                rb.velocity = Vector2.zero;
+
             return;
+        }
 
         Vector2 pathDirection = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
         Vector2 force = (pathDirection * speed);

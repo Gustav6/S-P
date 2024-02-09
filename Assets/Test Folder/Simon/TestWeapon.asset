@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponAnimationToUse: {fileID: 22100000, guid: eafe3064b1423a147b4430175d18f7f0, type: 2}
   weaponSprite: {fileID: -1692451804227615028, guid: 962da15309302a246817c52372453c02, type: 3}
-  animationSpeedMultiplier: 1
+  animationSpeedMultiplier: 0.05
   damage: 13
   knockbackMultiplier: 1.2
   weaponImpulseMultiplier: 6

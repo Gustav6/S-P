@@ -27,6 +27,7 @@ public class EnemyAttackController : MonoBehaviour
 
     public void EnterAttackState()
     {
+        _anim.SetFloat("AnimSpeed", 2f);
         _anim.SetBool("IsAttacking", true);
     }
 

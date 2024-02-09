@@ -8,13 +8,14 @@ public class ShrimpEnemy : Enemy
     {
         // Ändra på multiplier i olika enemies för olika knockback, följ detta som en outline.
 
+        _enemyAttack.CanAttack(false);
+        _attackController.LeaveMovement();
+
         Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized;
         float multiplier = (4 + (KnockbackPercent / 100)) * knockbackMultiplier;
 
+        _rb.velocity = (knockbackVector * multiplier);
+
         base.TakeKnockback(sourcePosition, knockbackMultiplier, stuntDuration);
-
-        _rb.AddForce(knockbackVector * multiplier, ForceMode2D.Impulse);
-
-        StartCoroutine(GiveEnemyMovement(stuntDuration));
     }
 }

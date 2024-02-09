@@ -9,21 +9,25 @@ public class EnemyAttack : MonoBehaviour
     Enemy _enemy;
 
     Transform _player;
+    Animator _anim;
 
-    float minDist = 3.5f;
+    [SerializeField] float minDist = 1f;
 
     float attackCooldown;
-    float maxCooldown = 2.5f;
+    [SerializeField] float maxCooldown = 2.5f;
 
     private bool hasAttacked;
     private bool attackReady;
     private bool isAttacking;
 
-    [SerializeField] private GameObject hitbox;
+    private bool canAttack = true;
+
+    [SerializeField] private GameObject hitbox, hitboxSpawn;
 
     private void Awake()
     {
         _enemy = GetComponent<Enemy>();
+        _anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -32,8 +36,19 @@ public class EnemyAttack : MonoBehaviour
         _player = PlayerStats.Instance.transform;
     }
 
+    public void CanAttack(bool shouldEnemyAttack)
+    {
+        canAttack = shouldEnemyAttack;
+    }
+
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.L))
+            StartCoroutine(IsAttacking());
+
+        if (!canAttack)
+            return;
+
         if (DistanceToTarget())
             _enemyAttackController.LeaveMovement();
         else
@@ -86,15 +101,13 @@ public class EnemyAttack : MonoBehaviour
         _enemyAttackController.EnterAttackState();
         _enemy._attackController.LeaveMovement();
         isAttacking = true;
-        // Change hitbox to prefab and instantiate it.
-        hitbox.SetActive(true);
+        GameObject go = Instantiate(hitbox, hitboxSpawn.transform);
         // TODO: Speed of actual animation + a little.
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(0.5f);
 
-        hitbox.SetActive(false);
+        Destroy(go);
         hasAttacked = true;
         isAttacking = false;
-        // TODO: Change depending on enemies.
         _enemy._attackController.EnterMovement();
     }
 }

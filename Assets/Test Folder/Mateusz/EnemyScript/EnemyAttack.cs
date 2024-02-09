@@ -9,9 +9,8 @@ public class EnemyAttack : MonoBehaviour
     Enemy _enemy;
 
     Transform _player;
-    Animator _anim;
 
-    [SerializeField] float minDist = 1f;
+    [SerializeField] float minDist = 1.5f;
 
     float attackCooldown;
     [SerializeField] float maxCooldown = 2.5f;
@@ -22,12 +21,11 @@ public class EnemyAttack : MonoBehaviour
 
     private bool canAttack = true;
 
-    [SerializeField] private GameObject hitbox, hitboxSpawn;
+    [SerializeField] internal GameObject hitbox, hitboxSpawn;
 
     private void Awake()
     {
         _enemy = GetComponent<Enemy>();
-        _anim = GetComponent<Animator>();
     }
 
     private void Start()
@@ -41,6 +39,13 @@ public class EnemyAttack : MonoBehaviour
         canAttack = shouldEnemyAttack;
     }
 
+    public bool DistanceToTarget()
+    {
+        float dist = Vector2.Distance(transform.position, _player.position);
+
+        return dist <= minDist;
+    }
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.L))
@@ -49,11 +54,11 @@ public class EnemyAttack : MonoBehaviour
         if (!canAttack)
             return;
 
-        if (DistanceToTarget())
-            _enemyAttackController.LeaveMovement();
+        if (!DistanceToTarget())
+            _enemyAttackController.EnterMovement();
         else
         {
-            _enemyAttackController.EnterMovement();
+            _enemyAttackController.LeaveMovement();
         }
 
         if (!isAttacking)
@@ -89,23 +94,16 @@ public class EnemyAttack : MonoBehaviour
         }
     }
 
-    public bool DistanceToTarget()
-    {
-        float dist = Vector2.Distance(transform.position, _player.position);
-
-        return dist <= minDist;
-    }
-
     IEnumerator IsAttacking()
     {
         _enemyAttackController.EnterAttackState();
         _enemy._attackController.LeaveMovement();
         isAttacking = true;
-        GameObject go = Instantiate(hitbox, hitboxSpawn.transform);
+        //GameObject go = Instantiate(hitbox, hitboxSpawn.transform);
         // TODO: Speed of actual animation + a little.
         yield return new WaitForSeconds(0.5f);
 
-        Destroy(go);
+        //Destroy(go);
         hasAttacked = true;
         isAttacking = false;
         _enemy._attackController.EnterMovement();

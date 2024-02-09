@@ -7,6 +7,8 @@ public class EnemyAttackController : MonoBehaviour
     Animator _anim;
     Enemy _enemy;
 
+    GameObject go;
+
     private void Awake()
     {
         _anim = GetComponent<Animator>();
@@ -27,12 +29,22 @@ public class EnemyAttackController : MonoBehaviour
 
     public void EnterAttackState()
     {
-        _anim.SetFloat("AnimSpeed", 2f);
         _anim.SetBool("IsAttacking", true);
     }
 
     public void LeaveAttack()
     {
         _anim.SetBool("IsAttacking", false);
+    }
+
+    public void AttackTest()
+    {
+        go = Instantiate(_enemy._enemyAttack.hitbox, _enemy._enemyAttack.hitboxSpawn.transform);
+    }
+
+    public void DespawnTest()
+    {
+        Debug.Log("ock");
+        Destroy(go);
     }
 }

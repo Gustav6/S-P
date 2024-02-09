@@ -12,6 +12,17 @@ public class HitboxTrigger : MonoBehaviour
         _thisController = GetComponentInParent<Enemy>();
     }
 
+    private void FixedUpdate()
+    {
+        Collider2D[] collidersInside = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0f);
+
+        foreach (Collider2D collider in collidersInside)
+        {
+            // Manually invoke OnTriggerEnter2D for each object inside the trigger
+            OnTriggerEnter2D(collider);
+        }
+    }
+
     private void OnTriggerEnter2D(Collider2D triggerInfo)
     {
         var damageable = triggerInfo.GetComponent<IDamageable>();

@@ -48,9 +48,6 @@ public class EnemyAttack : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.L))
-            StartCoroutine(IsAttacking());
-
         if (!canAttack)
             return;
 
@@ -59,11 +56,6 @@ public class EnemyAttack : MonoBehaviour
         else
         {
             _enemyAttackController.LeaveMovement();
-        }
-
-        if (!isAttacking)
-        {
-            _enemyAttackController.LeaveAttack();
         }
 
         if (!isAttacking && attackReady)
@@ -90,22 +82,22 @@ public class EnemyAttack : MonoBehaviour
     {
         if (DistanceToTarget())
         {
-            StartCoroutine(IsAttacking());
+            IsAttacking();
         }
     }
 
-    IEnumerator IsAttacking()
+    void IsAttacking()
     {
         _enemyAttackController.EnterAttackState();
         _enemy._attackController.LeaveMovement();
         isAttacking = true;
-        //GameObject go = Instantiate(hitbox, hitboxSpawn.transform);
-        // TODO: Speed of actual animation + a little.
-        yield return new WaitForSeconds(0.5f);
+    }
 
-        //Destroy(go);
+    public void EnemyStopAttacking()
+    {
         hasAttacked = true;
         isAttacking = false;
         _enemy._attackController.EnterMovement();
+        _enemy._attackController.LeaveAttack();
     }
 }

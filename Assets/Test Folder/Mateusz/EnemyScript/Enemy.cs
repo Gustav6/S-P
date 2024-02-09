@@ -16,6 +16,9 @@ public class Enemy : MonoBehaviour, IDamageable
     [HideInInspector]
     public EnemyAttackController _attackController;
 
+    [HideInInspector]
+    public EnemyAttack _enemyAttack;
+
     public float KnockbackPercent { get; set; }
 
     private void Awake()
@@ -23,16 +26,18 @@ public class Enemy : MonoBehaviour, IDamageable
         _rb = GetComponent<Rigidbody2D>();
         _enemyAI = GetComponent<EnemyAI>();
         _attackController = GetComponent<EnemyAttackController>();
+        _enemyAttack = GetComponent<EnemyAttack>();
     }
 
     public virtual void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stuntDuration)
     {
-        _enemyAI.CanMove = false;
+        StartCoroutine(GiveEnemyMovement(stuntDuration));
     }
 
     internal IEnumerator GiveEnemyMovement(float time)
     {
         yield return new WaitForSeconds(time);
-        _enemyAI.CanMove = true;
+        _attackController.EnterMovement();
+        _enemyAttack.CanAttack(true);
     }
 }

@@ -96,7 +96,7 @@ public class WaveRewardInteractable : Interactable
 
 		panel.GetChild(2).GetComponent<Image>().sprite = currentReward.RewardSprite;
 
-		int randomStatIndex = Random.Range(0, 7);
+		int randomStatIndex = Random.Range(0, 6);
 
 		float randomStatValue = 1;
 

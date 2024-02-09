@@ -37,6 +37,13 @@ public class WaveManager : MonoBehaviour
     [SerializeField] AnimationCurve _dropCurve, _ascensionCurve, _verticalSpawnCurve;
 
     [SerializeField] Image _waveProgressFill;
+    [SerializeField] RectTransform _feshTransform;
+    [SerializeField] Animator _progressBarAnim;
+
+    float _desiredFishPos = -824;
+    float _desiredFillAmount = 0;
+
+    
 
 
     private void Start()
@@ -46,6 +53,7 @@ public class WaveManager : MonoBehaviour
 
         EnableStatRewardInteractables();
         EnableWeaponRewardInteractables();
+        SetWaveProgress(0);
 
         Invoke(nameof(StartTestWave), 2);
     }
@@ -59,20 +67,30 @@ public class WaveManager : MonoBehaviour
         {
             //WaveClear();
         }
+
+        _feshTransform.anchoredPosition = new Vector2(Mathf.Lerp(_feshTransform.anchoredPosition.x, _desiredFishPos, Time.deltaTime * 3), _feshTransform.anchoredPosition.y);
+        _waveProgressFill.fillAmount = Mathf.Lerp(_waveProgressFill.fillAmount, _desiredFillAmount, Time.deltaTime * 3);
+    }
+
+    void SetWaveProgress(float progress)
+    {
+        _desiredFishPos = (progress * (446 + 824)) - 824;
+        _desiredFillAmount = progress;
     }
 
     void StartTestWave()
     {
         EnemyPreset[] enemiesToSpawn = GetEnemies(50, WaveType.Balanced).ToArray();
         _enemiesRemaining = enemiesToSpawn.Length;
-        _waveProgressFill.fillAmount = 1;
+        _enemyCount = _enemiesRemaining;
         StartCoroutine(SpawnEnemies(enemiesToSpawn));
+
+        _progressBarAnim.Play("ProgressBarActivate");
     }
 
     IEnumerator SpawnEnemies(EnemyPreset[] enemiesToSpawn)
     {
         int maxValueAlive = (int)(_waveNumber * 1.25f + _waveNumber / 2f * 10f);
-        Debug.Log(maxValueAlive + "       " + _enemyValueAlive);
 
         for (int i = 0; i < enemiesToSpawn.Length; i++)
         {
@@ -94,7 +112,7 @@ public class WaveManager : MonoBehaviour
         _enemiesRemaining--;
         _enemyValueAlive -= enemyValue;
 
-        _waveProgressFill.fillAmount = (_enemyCount - _enemiesRemaining) / _enemyCount;
+        SetWaveProgress((float)(_enemyCount - _enemiesRemaining) / _enemyCount);
     }
 
     void SpawnEnemy(GameObject enemyPrefab)
@@ -319,6 +337,7 @@ public class WaveManager : MonoBehaviour
     {
         _waveNumber++;
 
+        _progressBarAnim.Play("ProgressBarDeActivate");
         // Give rewards
     }
 

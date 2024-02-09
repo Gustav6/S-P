@@ -39,23 +39,10 @@ public class TileDestroyer : MonoBehaviour
         snappedTile = new Vector3Int(tilePos.x,tilePos.y,0);
 
         
-        /*if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
-            Debug.Log("Mouse Pos is " + mousePos);
-            Debug.Log("Snapped Tile Pos is " + snappedTile);
-            GetLocalTiles(snappedTile);
-            if (tilemap != null && tilemap.HasTile(snappedTile))
-            {
-                Debug.Log("It has it");
-                tilemap.SetTile(snappedTile, null);
-                Debug.Log("It has been removed");
-            }
-            else
-            {
-                Debug.Log("Does not have it");
-            }
-            SetLocalTiles(snappedTile);
-        }*/
+            DestroyTile(mousePos, 50);
+        }
     }
 
     Tile_Type GetTile_Type(Tile tile) {

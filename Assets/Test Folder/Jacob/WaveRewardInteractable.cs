@@ -6,7 +6,7 @@ using TMPro;
 
 public class WaveRewardInteractable : Interactable
 {
-	[SerializeField] WaveManager _waveManager;
+	[SerializeField] GameObject _statRewardPanel, _weaponRewardPanel;
 
 	[SerializeField] WaveReward _containedReward;
 	
@@ -20,11 +20,6 @@ public class WaveRewardInteractable : Interactable
 	public OnRewardClaimed OnRewardClaimedCallback;
 
 	StatBlock _randomStatBlock;
-
-	private void Start()
-	{
-
-	}
 
 	public void SetContainedReward(WaveReward newReward)
     {
@@ -40,12 +35,12 @@ public class WaveRewardInteractable : Interactable
 
 		if (isStatReward)
         {
-            _rewardPanel = Instantiate(_waveManager.StatRewardPanel, gameObject.transform);
+            _rewardPanel = Instantiate(_statRewardPanel, gameObject.transform);
 			SetStatPanelStats(_containedReward as StatReward);
         }
         else
 		{
-			_rewardPanel = Instantiate(_waveManager.WeaponRewardPanel, gameObject.transform);
+			_rewardPanel = Instantiate(_weaponRewardPanel, gameObject.transform);
 			SetWeaponPanelStats(_containedReward as WeaponReward);
 		}
 
@@ -137,14 +132,14 @@ public class WaveRewardInteractable : Interactable
 
 	public override void EnterInteractionRange()
 	{
-		_rewardPanel.SetActive(true);
 		_panelAnimator.Play("PanelExpand");
+		_rewardPanel.SetActive(true);
 	}
 
 	public override void ExitInteractionRange()
 	{
-		_rewardPanel.SetActive(false);
 		_panelAnimator.Play("PanelClose");
+		_rewardPanel.SetActive(false);
 	}
 
 	public override void Interact()

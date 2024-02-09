@@ -8,7 +8,9 @@ public class EnemyAI : MonoBehaviour
 {
     private Transform target;
 
-    private float speed = 2;
+    [SerializeField] private GameObject hitbox;
+
+    [SerializeField] private float speed = 2;
     [SerializeField] private float flipSpeed;
     public float nextWayPointDistance = 3f;
 
@@ -55,16 +57,20 @@ public class EnemyAI : MonoBehaviour
     
     void Update()
     {
-        if (!CanMove)
-            return;
+        Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        hitbox.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         if (path == null)
         {
             return;
         }
 
-        Vector2 direction = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
-        Vector2 force = (direction * speed);
+        if (!CanMove)
+            return;
+
+        Vector2 pathDirection = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
+        Vector2 force = (pathDirection * speed);
 
         rb.velocity = force;
 

@@ -10,10 +10,10 @@ public class EnemyAttack : MonoBehaviour
 
     Transform _player;
 
-    float minDist = 1.5f;
+    float minDist = 3.5f;
 
     float attackCooldown;
-    float maxCooldown = 4f;
+    float maxCooldown = 2.5f;
 
     private bool hasAttacked;
     private bool attackReady;
@@ -84,10 +84,10 @@ public class EnemyAttack : MonoBehaviour
     IEnumerator IsAttacking()
     {
         _enemyAttackController.EnterAttackState();
-        _enemy._enemyAI.CanMove = false;
+        _enemy._attackController.LeaveMovement();
         isAttacking = true;
+        // Change hitbox to prefab and instantiate it.
         hitbox.SetActive(true);
-
         // TODO: Speed of actual animation + a little.
         yield return new WaitForSeconds(0.6f);
 
@@ -95,6 +95,6 @@ public class EnemyAttack : MonoBehaviour
         hasAttacked = true;
         isAttacking = false;
         // TODO: Change depending on enemies.
-        _enemy._enemyAI.CanMove = true;
+        _enemy._attackController.EnterMovement();
     }
 }

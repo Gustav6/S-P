@@ -6,6 +6,8 @@ public class ShrimpEnemy : Enemy
 {
     public override void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stuntDuration)
     {
+        // Ändra på multiplier i olika enemies för olika knockback, följ detta som en outline.
+
         Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized;
         float multiplier = (4 + (KnockbackPercent / 100)) * knockbackMultiplier;
 

@@ -19,8 +19,7 @@ public class _PureTest : MonoBehaviour, IDamageable
 
     public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
     {
-        Debug.Log("Enemy took knockback");
-        _rb.AddForce(Vector2.left * knockbackMultiplier);
+        _rb.velocity = (Vector2.left * ((5 + (KnockbackPercent / 100)) * knockbackMultiplier));
     }
 
     private void Update()

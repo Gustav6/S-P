@@ -7,7 +7,7 @@ public class UIActions : MonoBehaviour
 {
 
     #region Move Transition
-    public static void MovePrefabToStart(Transition.ExecuteOnCompletion actions, PrefabDirection direction, float time)
+    public static void MovePrefabToStart(Transition.ExecuteOnCompletion actions, PrefabMoveDirection direction, float time)
     {
         for (int i = 0; i < UIManager.instance.ListOfUIObjects.Count; i++)
         {
@@ -19,7 +19,7 @@ public class UIActions : MonoBehaviour
         }
     }
 
-    public static void MovePrefabToDestination(Transition.ExecuteOnCompletion actions, PrefabDirection direction, float time)
+    public static void MovePrefabToDestination(Transition.ExecuteOnCompletion actions, PrefabMoveDirection direction, float time)
     {
         for (int i = 0; i < UIManager.instance.ListOfUIObjects.Count; i++)
         {
@@ -43,13 +43,13 @@ public class UIActions : MonoBehaviour
         }
     }
 
-    private static Vector3 GiveDestination(PrefabDirection direction)
+    private static Vector3 GiveDestination(PrefabMoveDirection direction)
     {
-        if (direction == PrefabDirection.Left)
+        if (direction == PrefabMoveDirection.Left)
         {
             return new(-Screen.width, 0, 0);
         }
-        else if (direction == PrefabDirection.Right)
+        else if (direction == PrefabMoveDirection.Right)
         {
             return new(Screen.width, 0, 0);
         }

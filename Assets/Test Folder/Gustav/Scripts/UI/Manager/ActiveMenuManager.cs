@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class ActiveMenuManager : MonoBehaviour
 {
-    public PrefabDirection moveDirection;
-    public bool enableBlurOnInsansiate;
+    public PrefabMoveDirection moveDirection;
+    public bool enableBlurOnInstantiate;
 
     public void EnableBlur(Blur blurScript)
     {
@@ -22,7 +22,7 @@ public class ActiveMenuManager : MonoBehaviour
     }
 }
 
-public enum PrefabDirection
+public enum PrefabMoveDirection
 {
     Left, 
     Right,

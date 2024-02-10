@@ -8,9 +8,11 @@ public abstract class UI : MonoBehaviour
     public Vector2 position;
     public bool hovering;
 
+    public bool IsDestroyed { get; set; }
+
     public virtual void Start()
     {
-
+        IsDestroyed = false;
     }
 
     public virtual void Update()

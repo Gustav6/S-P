@@ -13,7 +13,13 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float speed = 2;
     [SerializeField] private float flipSpeed;
 
+    private float nextWayPointDistance = 3f;
+
+    Path path;
+    Seeker seeker;
     Rigidbody2D rb;
+
+    int currentWayPoint = 0;
 
     private int _previousDirection = 1;
 
@@ -22,14 +28,41 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+        seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
         target = PlayerStats.Instance.transform;
 
         CanMove = true;
+
+        InvokeRepeating("UpdatePath", 0f, .2f);
     }
+
     
-    void Update()
+    void UpdatePath()
+    {
+        if (!CanMove)
+            return;
+
+        if (seeker.IsDone())
+        {
+            seeker.StartPath(rb.position, target.position, OnPathComplete);
+        }
+    }
+
+    void OnPathComplete(Path p)
+    {
+        
+        if (!p.error)
+        {
+            path = p;
+            currentWayPoint = 0;
+        }
+    }
+
+
+
+     void Update()
     {
         if (!CanMove)
         {
@@ -39,7 +72,15 @@ public class EnemyAI : MonoBehaviour
             return;
         }
 
+        if (path == null)
+            return;
+        
+         
+        
+
         Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
+        Vector2 pathDirection = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
+        Vector2 force = (pathDirection * speed);
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         angle *= Mathf.Sign(transform.localScale.x);
         pivot.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);

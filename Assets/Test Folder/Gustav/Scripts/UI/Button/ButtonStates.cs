@@ -92,47 +92,25 @@ public class ButtonPressedState : UIBaseState
     {
         if (canTransition)
         {
-            referenceManager.SwitchState(manager.selectedState);
+            referenceManager.SwitchState(manager.deselectedState);
         }
     }
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        Transition.ExecuteOnCompletion execute = null;
-
         if (buttonInstance.transitionToPrefab)
         {
             UIManager.instance.EnableTransitioning();
-            ActiveMenuManager currentMenu = buttonInstance.GetComponentInParent<ActiveMenuManager>();
 
-            if (buttonInstance.prefabMoveTransition)
-            {
-                execute += InstantiatePrefab;
-                buttonInstance.MoveThenDestoryUI(0.5f, execute, currentMenu.moveDirection);
-                Debug.Log("Move In Prefab");
-            }
-            else if (buttonInstance.prefabScaleTransition)
-            {
-                execute += InstantiatePrefab;
-                buttonInstance.ShrinkTransition(1, execute);
-                Debug.Log("Scale In Prefab");
-            }
+            buttonInstance.StartPrefabTransition();
         }
 
         if (buttonInstance.transitionToScene)
         {
             UIManager.instance.EnableTransitioning();
 
-            execute += buttonInstance.SwitchScene;
-            buttonInstance.ShrinkTransition(1, null);
-            PanelManager.FadeOut(0.8f, new Color(0, 0, 0, 1), execute);
-            Debug.Log("Change Scene");
+            buttonInstance.StartSceneTransition();
         }
-    }
-
-    public void InstantiatePrefab()
-    {
-        buttonInstance.InstantiatePrefab();
     }
 }
 #endregion

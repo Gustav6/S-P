@@ -248,9 +248,9 @@ public class UIManager : MonoBehaviour
         CurrentUIPrefab.transform.localScale = Vector3.one;
         CurrentUIPrefab.transform.localPosition = Vector3.zero;
 
-        //ActiveMenuManager activePrefab = prefab.GetComponent<ActiveMenuManager>();
+        ActiveMenuManager activePrefab = prefab.GetComponent<ActiveMenuManager>();
 
-        //if (activePrefab.enableBlurOnInsansiate)
+        //if (activePrefab.enableBlurOnInstantiate)
         //{
         //    activePrefab.EnableBlur(CameraInstance.GetComponent<Blur>());
         //}

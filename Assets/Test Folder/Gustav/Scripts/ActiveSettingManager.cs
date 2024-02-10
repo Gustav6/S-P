@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class ActiveSettingManager : MonoBehaviour
 {
-    public PrefabDirection moveDirection;
+    public PrefabMoveDirection moveDirection;
 }

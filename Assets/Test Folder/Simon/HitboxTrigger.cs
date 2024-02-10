@@ -44,40 +44,6 @@ public class HitboxTrigger : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        Collider2D[] collidersInside = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0f);
-
-        foreach (Collider2D collider in collidersInside)
-        {
-            // Manually invoke OnTriggerEnter2D for each object inside the trigger
-            var damageable = collider.GetComponent<IDamageable>();
-
-            if (damageable == null)
-                return;
-
-            if (_thisController == null)
-            {
-                Debug.Log("Testing");
-
-                if (collider.CompareTag(transform.parent.tag))
-                    return;
-
-                //  * PlayerStats.Instance.GetStat(StatType.DamageDealt)
-                //  * PlayerStats.Instance.GetStat(StatType.KnockbackDealt)
-                Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage,
-                       PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier, transform.position);
-            }
-            else
-            {
-                if (collider.CompareTag(_thisController.tag))
-                    return;
-
-                Attack(damageable, _thisController.Damage, _thisController.KnockbackMultiplier, _thisController.transform.position);
-            }
-        }
-    }
-
     public void Attack(IDamageable damageable, float damage, float knockbackMultiplier, Vector2 sourcePosition)
     {
         // TODO: Play SFX in take damage method.

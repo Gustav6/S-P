@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
 public class AimController : MonoBehaviour
@@ -25,17 +26,16 @@ public class AimController : MonoBehaviour
 		direction.x *= weaponSwingAnchor.lossyScale.x;
 
 		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+		float distance = Vector2.Distance((Vector2)transform.position, targetPosition);
 
 		// Minus is here because of how the sprites interact with their local scale and different pivot points.
         float currentAimDirection = -Mathf.Sign(x);
 
-		RotateBody(x, angle);
+		if (distance > 0.6f)
+			RotateBody(x, angle);
 
-		if (currentAimDirection != _previousAimDirection)
+		if (currentAimDirection != _previousAimDirection && Mathf.Abs(x) >= turnThreshold)
         {
-			if (Mathf.Abs(x)! < turnThreshold)
-				return;
-
 			StopAllCoroutines();
 
 			_previousAimDirection = currentAimDirection;
@@ -43,8 +43,11 @@ public class AimController : MonoBehaviour
         }
 	}
 
-	private void RotateBody(float x, float angle)
+    private void RotateBody(float x, float angle)
 	{
+		if (_previousAimDirection != -Mathf.Sign(x))
+			return;
+
 		// Add 90 to align with mouse, because of how equation circle works.
 		if (Mathf.Abs(x) >= turnThreshold)
 			weaponSwingAnchor.localRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
@@ -54,15 +57,24 @@ public class AimController : MonoBehaviour
 			// Subtract by 180 to adjust the head position so the eyes face the mouse rather than the neck.
 			neckAnchor.localRotation = Quaternion.AngleAxis(angle - 180, Vector3.forward);
 		}
-		else if (weaponSwingAnchor.localEulerAngles.z <= 230 && weaponSwingAnchor.localEulerAngles.z >= 100) // Had to make sure it was above 100 because while turning it would be set to 14 for onr frame.
+		else
         {
-			neckAnchor.localRotation = Quaternion.Euler(Vector3.forward * _topHeadRotation);
+			if (IsCloserToA(140, -130, angle))
+                neckAnchor.localRotation = Quaternion.Euler(Vector3.forward * _topHeadRotation);
+			else
+			{
+                neckAnchor.localRotation = Quaternion.Euler(Vector3.forward * _bottomHeadRotation);
+            }
         }
-        else
-        {
-			neckAnchor.localRotation = Quaternion.Euler(Vector3.forward * _bottomHeadRotation);
-		}
-	}
+    }
+
+	private bool IsCloserToA(float a, float b, float c)
+	{
+        float distToA = Mathf.Abs(c - a);
+        float distToB = Mathf.Abs(c - b);
+
+        return distToA < distToB;
+    }
 
     private IEnumerator TurnAround(float direction)
 	{

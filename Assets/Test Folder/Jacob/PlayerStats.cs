@@ -112,7 +112,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     /// <param name="stunDuration">Duration in seconds that movement is prevented after being hit.</param>
     public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
     {
-        if (_isImmune)
+        if (_isImmune || knockbackMultiplier == 0)
             return;
 
         _playerMovement.isGrounded = false;

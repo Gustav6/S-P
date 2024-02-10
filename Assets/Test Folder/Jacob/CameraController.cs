@@ -49,7 +49,7 @@ public class CameraController : MonoBehaviour
 
 		Vector2 direction = (Vector2)_targetTransform.position - _startPos;
 
-		_cameraTransform.localPosition = Vector2.Lerp(_cameraTransform.localPosition, _startPos + direction.normalized * _lookAheadDistance * (direction.magnitude / 6.5f), Time.deltaTime * 3);
+		_cameraTransform.localPosition = Vector2.Lerp(_cameraTransform.localPosition, direction.normalized * _lookAheadDistance * (direction.magnitude / 6.5f), Time.deltaTime * 3);
 	}
 
     #region Shake overload methods

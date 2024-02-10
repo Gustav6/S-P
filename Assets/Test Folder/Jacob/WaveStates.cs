@@ -472,8 +472,15 @@ public class WaveInProgressState : BaseWaveState
         _fishTransform.anchoredPosition = new Vector2(Mathf.Lerp(_fishTransform.anchoredPosition.x, _desiredFishPos, Time.deltaTime * 3), _fishTransform.anchoredPosition.y);
         _waveProgressFill.fillAmount = Mathf.Lerp(_waveProgressFill.fillAmount, _desiredFillAmount, Time.deltaTime * 3);
 
-        if (_waveProgressFill.fillAmount >= 0.999f)
-            _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.WaveCreation);
+        if (_enemiesKilled >= _enemyCountThisWave && _waveProgressFill.fillAmount >= 0.999f)
+            WaveCleared();
+    }
+
+    void WaveCleared()
+	{
+        _enemiesKilled = 0;
+        SetWaveProgress(0);
+        _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.WaveCreation);
     }
 
     void SetWaveProgress(float progress)

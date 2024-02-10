@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      fishybusiness_0: -7875108947837923629
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

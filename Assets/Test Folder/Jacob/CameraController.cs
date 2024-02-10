@@ -11,6 +11,8 @@ public class CameraController : MonoBehaviour
 		if (instance == null)
 		{
 			instance = this;
+			_cameraTransform = transform.GetChild(0);
+			_startPos = transform.position;
 		}
 		else
 		{
@@ -21,26 +23,33 @@ public class CameraController : MonoBehaviour
 
 	#endregion
 
-	[SerializeField] Transform _playerTransform;
+	[SerializeField] Transform _targetTransform;
 	[SerializeField] float _lookAheadDistance = 1.25f;
 	bool _lookAheadEnabled = true;
 
 	// Temporary curve, will add support for custom curves depending on the shake-source.
 	[SerializeField] AnimationCurve _curve;
 
+	Transform _cameraTransform;
+
+	Vector2 _startPos;
+
     private void Update()
     {
+		if (Input.GetKeyDown(KeyCode.Backspace))
+		{
+			Shake(0.5f, 0.25f);
+		}
+
         if (!_lookAheadEnabled)
         {
-			transform.position = transform.position = Vector2.Lerp(transform.position, Vector2.zero, Time.deltaTime * 3);
+			_cameraTransform.localPosition = Vector2.Lerp(_cameraTransform.localPosition, _startPos, Time.deltaTime * 3);
 			return;
         }
 
-		Vector2 direction = (Vector2)_playerTransform.position - Vector2.zero;
+		Vector2 direction = (Vector2)_targetTransform.position - _startPos;
 
-		transform.position = Vector2.Lerp(transform.position, Vector2.zero + direction.normalized * _lookAheadDistance * (direction.magnitude / 6.5f), Time.deltaTime * 3);
-
-		transform.position = new Vector3(transform.position.x, transform.position.y, -10);
+		_cameraTransform.localPosition = Vector2.Lerp(_cameraTransform.localPosition, _startPos + direction.normalized * _lookAheadDistance * (direction.magnitude / 6.5f), Time.deltaTime * 3);
 	}
 
     #region Shake overload methods
@@ -59,11 +68,11 @@ public class CameraController : MonoBehaviour
 		{
 			elapsedTime += Time.deltaTime;
 			float strength = _curve.Evaluate(elapsedTime / duration) * intensity;
-			Camera.main.transform.position = new Vector3(centerPoint.position.x, centerPoint.position.y, -10) + UnityEngine.Random.insideUnitSphere * strength;
+			transform.position = new Vector3(centerPoint.position.x, centerPoint.position.y, -10) + Random.insideUnitSphere * strength;
 			await Task.Yield();
 		}
 
-		Camera.main.transform.position = new Vector3(centerPoint.position.x, centerPoint.position.y, -10);
+		transform.position = new Vector3(centerPoint.position.x, centerPoint.position.y, -10);
 	}
 
 	/// <summary>
@@ -80,11 +89,31 @@ public class CameraController : MonoBehaviour
 		{
 			elapsedTime += Time.deltaTime;
 			float strength = _curve.Evaluate(elapsedTime / duration) * intensity;
-			Camera.main.transform.position = new Vector3(centerPoint.x, centerPoint.y, -10) + UnityEngine.Random.insideUnitSphere * strength;
+			transform.position = new Vector3(centerPoint.x, centerPoint.y, -10) + Random.insideUnitSphere * strength;
 			await Task.Yield();
 		}
 
-		Camera.main.transform.position = new Vector3(centerPoint.x, centerPoint.y, -10);
+		transform.position = new Vector3(centerPoint.x, centerPoint.y, -10);
+	}
+
+	/// <summary>
+	/// Shakes the camera around no specific point, useful paired with external camera movement such as lookahead. Recommended duration of 0.5f and intensity of 0.25f
+	/// </summary>
+	/// <param name="duration">The duration in seconds of the shake effect</param>
+	/// <param name="intensity">The strength of the shake</param>
+	public async void Shake(float duration, float intensity)
+	{
+		float elapsedTime = 0f;
+
+		while (elapsedTime < duration)
+		{
+			elapsedTime += Time.deltaTime;
+			float strength = _curve.Evaluate(elapsedTime / duration) * intensity;
+			transform.position = new Vector3(_startPos.x, _startPos.y, -10) + Random.insideUnitSphere * strength;
+			await Task.Yield();
+		}
+
+		transform.position = new Vector3(_startPos.x, _startPos.y, -10);
 	}
 
 	#endregion

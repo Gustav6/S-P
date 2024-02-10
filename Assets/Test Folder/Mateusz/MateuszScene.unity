@@ -297,7 +297,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27038e2e342d7bf4d9a70b0148992611, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 0}
+  _targetTransform: {fileID: 0}
   _lookAheadDistance: 1.25
   _curve:
     serializedVersion: 2
@@ -5549,6 +5549,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDist: 1
   maxCooldown: 2.5
+  hasAttacked: 0
+  attackReady: 0
+  isAttacking: 0
   hitbox: {fileID: 811381884863940619, guid: 131af9729027b4648bdc57a33308557a, type: 3}
   hitboxSpawn: {fileID: 763243785}
 --- !u!95 &788871501
@@ -6167,7 +6170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1080978104
 Rigidbody2D:
   serializedVersion: 4
@@ -6284,6 +6287,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDist: 1
   maxCooldown: 2.5
+  hasAttacked: 0
+  attackReady: 0
+  isAttacking: 0
   hitbox: {fileID: 811381884863940619, guid: 131af9729027b4648bdc57a33308557a, type: 3}
   hitboxSpawn: {fileID: 310874453}
 --- !u!114 &1080978109
@@ -6722,7 +6728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bcfb6af4188cd24293b9d94df5c8903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentWeapon: {fileID: 11400000, guid: cbbf78b4dbb50f74db9f93c0dc5a2037, type: 2}
+  CurrentWeapon: {fileID: 11400000, guid: 95b744dc794b44f429292791b805445b, type: 2}
   _diStrength: 0.25
 --- !u!95 &1279352830
 Animator:
@@ -6846,7 +6852,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  weaponSpawnParent: {fileID: 0}
+  weaponSpawnParent: {fileID: 1733693478}
 --- !u!114 &1279352834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9883,7 +9889,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2023741432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10083,6 +10089,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDist: 2
   maxCooldown: 1
+  hasAttacked: 0
+  attackReady: 0
+  isAttacking: 0
   hitbox: {fileID: 811381884863940619, guid: 131af9729027b4648bdc57a33308557a, type: 3}
   hitboxSpawn: {fileID: 164662518}
 --- !u!1 &2029326889

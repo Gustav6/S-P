@@ -12,35 +12,29 @@ public class HitboxTrigger : MonoBehaviour
         _thisController = GetComponentInParent<Enemy>();
     }
 
-    private void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Collider2D[] collidersInside = Physics2D.OverlapBoxAll(transform.position, transform.localScale, 0f);
+        var damageable = collision.GetComponent<IDamageable>();
 
-        foreach (Collider2D collider in collidersInside)
+        if (damageable == null)
+            return;
+
+        if (_thisController == null)
         {
-            // Manually invoke OnTriggerEnter2D for each object inside the trigger
-            var damageable = collider.GetComponent<IDamageable>();
-
-            if (damageable == null)
+            if (collision.CompareTag(transform.parent.tag))
                 return;
 
-            if (_thisController == null)
-            {
-                if (collider.CompareTag(transform.parent.tag))
-                    return;
+            //  * PlayerStats.Instance.GetStat(StatType.DamageDealt)
+            //  * PlayerStats.Instance.GetStat(StatType.KnockbackDealt)
+            Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage,
+                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier, transform.position);
+        }
+        else
+        {
+            if (collision.CompareTag(_thisController.tag))
+                return;
 
-                //  * PlayerStats.Instance.GetStat(StatType.DamageDealt)
-                //  * PlayerStats.Instance.GetStat(StatType.KnockbackDealt)
-                Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage,
-                       PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier, transform.position);
-            }
-            else
-            {
-                if (collider.CompareTag(_thisController.tag))
-                    return;
-
-                Attack(damageable, _thisController.Damage, _thisController.KnockbackMultiplier, _thisController.transform.position);
-            }
+            Attack(damageable, _thisController.Damage, _thisController.KnockbackMultiplier, _thisController.transform.position);
         }
     }
 
@@ -58,8 +52,9 @@ public class HitboxTrigger : MonoBehaviour
     /// <returns></returns>
     private float CalculateStunTime(float currentKnockbackPercent)
     {
-        // TODO: Change later.
+        float stunTime = currentKnockbackPercent / 250;
+        stunTime = stunTime >= 0.5f ? 0.5f + ((stunTime - 0.5f) / 4) : stunTime;
 
-        return 0.1f;
+        return stunTime;
     }
 }

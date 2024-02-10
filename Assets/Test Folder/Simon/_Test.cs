@@ -17,5 +17,8 @@ public class _Test : MonoBehaviour
             Destroy(go);
             go = Instantiate(spawn, Vector3.zero, Quaternion.identity);
         }
+
+        if (Input.GetKeyDown(KeyCode.M))
+            Destroy(go);
     }
 }

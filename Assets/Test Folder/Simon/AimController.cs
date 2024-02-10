@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class AimController : MonoBehaviour
@@ -13,6 +14,7 @@ public class AimController : MonoBehaviour
     [SerializeField] private Transform neckAnchor;
 
 	private float _topHeadRotation = -44, _bottomHeadRotation = 44;
+	private float _topArmRotation = -165, _bottomArmRotation = -14;
 
 	private float _previousAimDirection = 1;
 
@@ -51,6 +53,15 @@ public class AimController : MonoBehaviour
 		// Add 90 to align with mouse, because of how equation circle works.
 		if (Mathf.Abs(x) >= turnThreshold)
 			weaponSwingAnchor.localRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
+		else
+		{
+			if (IsCloserToA(90, -90, angle))
+				weaponSwingAnchor.localRotation = Quaternion.Euler(Vector3.forward * _topArmRotation);
+			else
+			{
+                weaponSwingAnchor.localRotation = Quaternion.Euler(Vector3.forward * _bottomArmRotation);
+            }
+		}
 
 		if (Mathf.Abs(x) >= 0.9)
 		{
@@ -59,7 +70,7 @@ public class AimController : MonoBehaviour
 		}
 		else
         {
-			if (IsCloserToA(140, -130, angle))
+			if (IsCloserToA(90, -90, angle))
                 neckAnchor.localRotation = Quaternion.Euler(Vector3.forward * _topHeadRotation);
 			else
 			{

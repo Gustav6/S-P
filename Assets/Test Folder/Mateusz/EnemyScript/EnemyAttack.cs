@@ -15,9 +15,9 @@ public class EnemyAttack : MonoBehaviour
     float attackCooldown;
     [SerializeField] float maxCooldown = 2.5f;
 
-    private bool hasAttacked;
-    private bool attackReady;
-    private bool isAttacking;
+    [SerializeField] private bool hasAttacked;
+    [SerializeField] private bool attackReady;
+   [SerializeField] private bool isAttacking;
 
     private bool canAttack = true;
 

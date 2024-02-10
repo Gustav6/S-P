@@ -80,12 +80,19 @@ public class EnemyAI : MonoBehaviour
 
         Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
         Vector2 pathDirection = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
-        Vector2 force = (pathDirection * speed);
+
+
+        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);    
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         angle *= Mathf.Sign(transform.localScale.x);
         pivot.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
         rb.velocity = direction * speed;
+
+        if (distance < nextWayPointDistance)
+        {
+            currentWayPoint++;
+        }
 
         // Negative here because of how sprite reacts to parent object being flipped.
         if (_previousDirection != -Mathf.Sign(transform.position.x - target.position.x))

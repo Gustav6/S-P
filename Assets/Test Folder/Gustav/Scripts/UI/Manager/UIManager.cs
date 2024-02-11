@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
+using static Transition;
 
 public class UIManager : MonoBehaviour
 {
@@ -137,6 +138,8 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
+    public GameObject prefabToSpawn;
+
     void Awake()
     {
         if (instance == null)
@@ -154,12 +157,15 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         ResolutionScaling = GetComponentInParent<Canvas>().scaleFactor;
+
+        CurrentUIPrefab = GameObject.FindGameObjectWithTag("UIPrefab");
     }
 
     void Update()
     {
-        Debug.Log(Transitioning);
+        //Debug.Log(Transitioning);
         Debug.Log(ListOfUIObjects.Count);
+        Debug.Log(CurrentUIPrefab);
 
         TransitionSystem.Update();
 
@@ -206,22 +212,25 @@ public class UIManager : MonoBehaviour
         #region Find objects with script UI and max X & Y value
         foreach (GameObject interactableUI in list)
         {
-            if (interactableUI.GetComponent<UI>().position == Vector2.zero)
+            if (!interactableUI.GetComponent<UI>().IsDestroyed)
             {
-                CurrentUISelected = interactableUI.GetComponent<UI>().position;
-            }
+                if (interactableUI.GetComponent<UI>().position == Vector2.zero)
+                {
+                    CurrentUISelected = interactableUI.GetComponent<UI>().position;
+                }
 
-            if (interactableUI.GetComponent<UI>().position.y > maxYPos)
-            {
-                maxYPos = interactableUI.GetComponent<UI>().position.y;
-            }
+                if (interactableUI.GetComponent<UI>().position.y > maxYPos)
+                {
+                    maxYPos = interactableUI.GetComponent<UI>().position.y;
+                }
 
-            if (interactableUI.GetComponent<UI>().position.x > maxXPos)
-            {
-                maxXPos = interactableUI.GetComponent<UI>().position.x;
-            }
+                if (interactableUI.GetComponent<UI>().position.x > maxXPos)
+                {
+                    maxXPos = interactableUI.GetComponent<UI>().position.x;
+                }
 
-            ListOfUIObjects.Add(interactableUI);
+                ListOfUIObjects.Add(interactableUI);
+            }
         }
         #endregion
     }
@@ -246,7 +255,7 @@ public class UIManager : MonoBehaviour
         CurrentUIPrefab = Instantiate(prefab);
         CurrentUIPrefab.transform.SetParent(parentObject);
         CurrentUIPrefab.transform.localScale = Vector3.one;
-        CurrentUIPrefab.transform.localPosition = Vector3.zero;
+        CurrentUIPrefab.transform.localPosition = offset;
 
         ActiveMenuManager activePrefab = prefab.GetComponent<ActiveMenuManager>();
 
@@ -258,14 +267,6 @@ public class UIManager : MonoBehaviour
         //{
         //    activePrefab.DisableBlur(CameraInstance.GetComponent<Blur>());
         //}
-
-        for (int i = 0; i < CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>().Length; i++)
-        {
-            Debug.Log(i + " " + CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>()[i].transform.position + offset);
-
-            CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>()[i].transform.localScale = scale;
-            CurrentUIPrefab.GetComponentsInChildren<BaseStateManager>()[i].transform.position += offset;
-        }
     }
 
     private void CheckForMouseMovement()
@@ -293,5 +294,106 @@ public class UIManager : MonoBehaviour
         }
 
         return false;
+    }
+
+    private void InstantiateNewPrefab()
+    {
+        Transform parent = gameObject.transform;
+
+        if (prefabToSpawn.GetComponent<ActiveSettingManager>() != null)
+        {
+            parent = GetComponentInChildren<ActiveMenuManager>().transform;
+        }
+
+        DestroyUI(CurrentUIPrefab);
+
+        Vector3 spawnLocation = GiveDestination(GiveDirection(prefabToSpawn));
+
+        InstantiateNewUIPrefab(prefabToSpawn, parent, Vector3.one, spawnLocation);
+        MoveUIToStart(1, DisableTransitioning);
+        prefabToSpawn = null;
+
+        List<GameObject> list = new();
+
+        foreach (UI uI in GetComponentsInChildren<UI>())
+        {
+            if (!uI.IsDestroyed)
+            {
+                list.Add(uI.gameObject);
+            }
+        }
+
+        LoadUI(list);
+    }
+
+    public void MoveUIToStart(float time, ExecuteOnCompletion actions)
+    {
+        Vector3 destination = GiveDestination(GiveDirection(CurrentUIPrefab)) * -1;
+
+        MoveGameObject(CurrentUIPrefab, time, destination, actions);
+    }
+
+    public void MoveUIThenRemove(float time, ExecuteOnCompletion actions)
+    {
+        if (prefabToSpawn != null)
+        {
+            actions += InstantiateNewPrefab;
+
+            if (prefabToSpawn.GetComponent<ActiveSettingManager>() != null)
+            {
+                CurrentUIPrefab = GetComponentInChildren<ActiveSettingManager>().gameObject;
+            }
+            else if (prefabToSpawn.GetComponent<ActiveMenuManager>() != null)
+            {
+                CurrentUIPrefab = GetComponentInChildren<ActiveMenuManager>().gameObject;
+            }
+        }
+
+        Vector3 destination = GiveDestination(GiveDirection(CurrentUIPrefab));
+
+        MoveGameObject(CurrentUIPrefab, time, destination, actions);
+    }
+
+    private void MoveGameObject(GameObject g, float time, Vector3 destination, ExecuteOnCompletion execute = null, float windUp = 0, float overShoot = 0)
+    {
+        TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionType.SmoothStop2, true, windUp, overShoot, execute));
+    }
+
+    private Vector3 GiveDestination(PrefabMoveDirection direction)
+    {
+        if (direction == PrefabMoveDirection.Left)
+        {
+            return new(-Screen.width, 0, 0);
+        }
+        else if (direction == PrefabMoveDirection.Right)
+        {
+            return new(Screen.width, 0, 0);
+        }
+
+        return Vector3.zero;
+    }
+
+    private PrefabMoveDirection GiveDirection(GameObject g)
+    {
+        if (g.GetComponent<ActiveMenuManager>() != null)
+        {
+            return PrefabMoveDirection.Left;
+        }
+        else if (g.GetComponent<ActiveSettingManager>() != null)
+        {
+            return PrefabMoveDirection.Right;
+        }
+
+        return PrefabMoveDirection.None;
+    }
+
+    public void DestroyUI(GameObject g)
+    {
+        foreach (UI uI in g.GetComponentsInChildren<UI>())
+        {
+            uI.IsDestroyed = true;
+        }
+
+        Destroy(g);
     }
 }

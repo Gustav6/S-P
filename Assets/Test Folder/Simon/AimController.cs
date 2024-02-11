@@ -47,20 +47,39 @@ public class AimController : MonoBehaviour
 
     private void RotateBody(float x, float angle)
 	{
+		void SetLocalRotation(bool isNeckRotation)
+		{
+			if (!isNeckRotation)
+			{
+                if (IsCloserToA(90, -90, angle))
+                    weaponSwingAnchor.localRotation = Quaternion.Euler(Vector3.forward * _topArmRotation);
+                else
+                {
+                    weaponSwingAnchor.localRotation = Quaternion.Euler(Vector3.forward * _bottomArmRotation);
+                }
+            }
+
+            if (IsCloserToA(90, -90, angle))
+                neckAnchor.localRotation = Quaternion.Euler(Vector3.forward * _topHeadRotation);
+            else
+            {
+                neckAnchor.localRotation = Quaternion.Euler(Vector3.forward * _bottomHeadRotation);
+            }
+        }
+
 		if (_previousAimDirection != -Mathf.Sign(x))
-			return;
+		{
+			SetLocalRotation(true);
+			SetLocalRotation(false);
+            return;
+        }
 
 		// Add 90 to align with mouse, because of how equation circle works.
 		if (Mathf.Abs(x) >= turnThreshold)
 			weaponSwingAnchor.localRotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
 		else
 		{
-			if (IsCloserToA(90, -90, angle))
-				weaponSwingAnchor.localRotation = Quaternion.Euler(Vector3.forward * _topArmRotation);
-			else
-			{
-                weaponSwingAnchor.localRotation = Quaternion.Euler(Vector3.forward * _bottomArmRotation);
-            }
+			SetLocalRotation(false);
 		}
 
 		if (Mathf.Abs(x) >= 0.9)
@@ -70,12 +89,7 @@ public class AimController : MonoBehaviour
 		}
 		else
         {
-			if (IsCloserToA(90, -90, angle))
-                neckAnchor.localRotation = Quaternion.Euler(Vector3.forward * _topHeadRotation);
-			else
-			{
-                neckAnchor.localRotation = Quaternion.Euler(Vector3.forward * _bottomHeadRotation);
-            }
+			SetLocalRotation(true);
         }
     }
 

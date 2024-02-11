@@ -16,10 +16,12 @@ public interface IDamageable
     public virtual void DeathCheck()
     {
         // TODO: Check if a majority of the entity's collider is in the water hitbox.
+        // Call after taking knockback.
     }
 
     public virtual void Die()
     {
         // TODO: Play an animation and sfx before destroying.
+        // Call in the death check.
     }
 }

@@ -12,4 +12,14 @@ public interface IDamageable
     }
 
     public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration);
+
+    public virtual void DeathCheck()
+    {
+        // TODO: Check if a majority of the entity's collider is in the water hitbox.
+    }
+
+    public virtual void Die()
+    {
+        // TODO: Play an animation and sfx before destroying.
+    }
 }

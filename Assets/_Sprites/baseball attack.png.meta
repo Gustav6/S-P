@@ -126,7 +126,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -164,111 +164,6 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: baseball attack_0
-      rect:
-        serializedVersion: 2
-        x: 127
-        y: 622
-        width: 180
-        height: 191
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5e3bd11624722a370800000000000000
-      internalID: 8332265426639500261
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: baseball attack_1
-      rect:
-        serializedVersion: 2
-        x: 602
-        y: 622
-        width: 187
-        height: 175
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 155bc81761c052c50800000000000000
-      internalID: 6639726516161525073
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: baseball attack_2
-      rect:
-        serializedVersion: 2
-        x: 1021
-        y: 752
-        width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 39212d5a450f6b2f0800000000000000
-      internalID: -957313624419724653
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: baseball attack_3
-      rect:
-        serializedVersion: 2
-        x: 1154
-        y: 622
-        width: 218
-        height: 176
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 3dd97aee2f50e1cb0800000000000000
-      internalID: -4891465604333593133
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: baseball attack_4
-      rect:
-        serializedVersion: 2
-        x: 1562
-        y: 580
-        width: 205
-        height: 160
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: cd7d40df318bd5d80800000000000000
-      internalID: -8260243745538779172
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: baseball attack_5
       rect:
         serializedVersion: 2
@@ -277,7 +172,7 @@ TextureImporter:
         width: 89
         height: 94
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -298,7 +193,7 @@ TextureImporter:
         width: 180
         height: 120
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -319,7 +214,7 @@ TextureImporter:
         width: 96
         height: 91
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -327,27 +222,6 @@ TextureImporter:
       bones: []
       spriteID: b1f2960964cf29ee0800000000000000
       internalID: -1255663966082224357
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: baseball attack_8
-      rect:
-        serializedVersion: 2
-        x: 1133
-        y: 322
-        width: 7
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 32721009f8507d160800000000000000
-      internalID: 7050109855826257699
       vertices: []
       indices: 
       edges: []
@@ -361,7 +235,7 @@ TextureImporter:
         width: 205
         height: 159
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -369,27 +243,6 @@ TextureImporter:
       bones: []
       spriteID: 2785c89cd518802b0800000000000000
       internalID: -5618098295331334030
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: baseball attack_10
-      rect:
-        serializedVersion: 2
-        x: 173
-        y: 103
-        width: 129
-        height: 163
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 5a95e63d5cc8778e0800000000000000
-      internalID: -1695731953398031963
       vertices: []
       indices: 
       edges: []
@@ -403,7 +256,7 @@ TextureImporter:
         width: 86
         height: 86
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -424,7 +277,7 @@ TextureImporter:
         width: 187
         height: 106
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -445,7 +298,7 @@ TextureImporter:
         width: 93
         height: 91
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -466,7 +319,7 @@ TextureImporter:
         width: 127
         height: 162
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -474,27 +327,6 @@ TextureImporter:
       bones: []
       spriteID: c04cd76c7ec0ff490800000000000000
       internalID: -7710429847427890164
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: baseball attack_15
-      rect:
-        serializedVersion: 2
-        x: 469
-        y: 149
-        width: 8
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 0ca6d12379b9746b0800000000000000
-      internalID: -5312106161777055040
       vertices: []
       indices: 
       edges: []
@@ -508,7 +340,7 @@ TextureImporter:
         width: 218
         height: 144
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -529,7 +361,7 @@ TextureImporter:
         width: 127
         height: 87
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -544,14 +376,32 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 77bdc231f6b6ca849b8692de99fd8f76
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      baseball attack_0: 8332265426639500261
+      baseball attack_1: 6639726516161525073
+      baseball attack_10: -1695731953398031963
+      baseball attack_11: 8505828549137750681
+      baseball attack_12: 9205924256341679240
+      baseball attack_13: -4698724572326364183
+      baseball attack_14: -7710429847427890164
+      baseball attack_15: -5312106161777055040
+      baseball attack_16: -226103520000482629
+      baseball attack_17: -4030167817214227398
+      baseball attack_2: -957313624419724653
+      baseball attack_3: -4891465604333593133
+      baseball attack_4: -8260243745538779172
+      baseball attack_5: 1687809263412551876
+      baseball attack_6: 3497228920678476357
+      baseball attack_7: -1255663966082224357
+      baseball attack_8: 7050109855826257699
+      baseball attack_9: -5618098295331334030
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

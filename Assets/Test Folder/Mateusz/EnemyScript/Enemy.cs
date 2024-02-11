@@ -40,4 +40,29 @@ public class Enemy : MonoBehaviour, IDamageable
         _attackController.EnterMovement();
         _enemyAttack.CanAttack(true);
     }
+
+    private IEnumerable<Vector2> GetEnemyEnemyVelocity(Vector2 knockbackVector, float multiplier, float stun)
+    {
+        Vector2 returningVector;
+
+        float t = 0;
+
+        while (t <= stun)
+        {
+            returningVector = (knockbackVector * multiplier) - ((knockbackVector * multiplier) * (t / stun));
+
+            yield return returningVector;
+
+            t += Time.deltaTime;
+        }
+    }
+
+    internal IEnumerator SetEnemyVelocity(Vector2 knockbackVector, float multiplier, float stunDuration)
+    {
+        foreach (Vector2 velocity in GetEnemyEnemyVelocity(knockbackVector, multiplier, stunDuration))
+        {
+            _rb.velocity = velocity;
+            yield return null;
+        }
+    }
 }

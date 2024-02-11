@@ -24,6 +24,7 @@ public class WaveStateContext
 
     public void NextWave()
 	{
+        Debug.Log("CALLING NEXTWAVE");
         EnemiesToSpawn = null;
         WaveNumber++;
 	}

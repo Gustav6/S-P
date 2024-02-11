@@ -386,6 +386,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pausePrefab: {fileID: 0}
+  prefabToSpawn: {fileID: 0}
 --- !u!82 &519030764
 AudioSource:
   m_ObjectHideFlags: 0

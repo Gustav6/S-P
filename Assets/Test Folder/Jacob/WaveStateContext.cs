@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class WaveStateContext
 {
-	public WaveStateContext(WaveStateMachine stateMachine)
+	public WaveStateContext(WaveStateMachine stateMachine, Transform[] spawnPoints)
 	{
         WaveNumber = 1;
         StateMachine = stateMachine;
+        SpawnPoints = spawnPoints;
 	}
 
 	// Creation State

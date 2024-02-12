@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      fatman launch_0: 8800592422112754555
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

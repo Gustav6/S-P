@@ -7,8 +7,8 @@ using TMPro;
 
 public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 {
-    public enum WaveState
-	{ 
+	public enum WaveState
+	{
 		WaveCreation,
 		StageSwap,
 		Reward,
@@ -53,16 +53,9 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 
 	private void Awake()
 	{
-		ValidateValues();
-
-		_context = new(this);
+		_context = new(this, _spawnPoints);
 
 		InitializeStates();
-	}
-
-	public void ValidateValues()
-	{
-		Assert.IsNotNull(_enemyAssortment, "Enemy Assortment is not assigned");
 	}
 
 	void InitializeStates()
@@ -70,9 +63,10 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 		States.Add(WaveState.WaveCreation, new WaveCreationState(_context, WaveState.WaveCreation, _enemyAssortment));
 		States.Add(WaveState.Reward, new WaveRewardState(_context, WaveState.Reward, _statRewardInteractables, _weaponRewardInteractables, _statRewardPool, _weaponRewardPool, _dropCurve, _ascensionCurve));
 		States.Add(WaveState.Intermission, new WaveIntermissionState(_context, WaveState.Intermission, _countDownAnim));
-		States.Add(WaveState.WaveInProgress, new WaveInProgressState(_context, WaveState.WaveInProgress, _waveProgressFill, _fishTransform, _progressBarAnim, _verticalSpawnCurve, _spawnPoints));
-		CurrentState = States[WaveState.WaveCreation];
+		States.Add(WaveState.WaveInProgress, new WaveInProgressState(_context, WaveState.WaveInProgress, _waveProgressFill, _fishTransform, _progressBarAnim, _verticalSpawnCurve));
 		States.Add(WaveState.WaveCleared, new WaveClearState(_context, WaveState.WaveCleared, _clearMessages, _messageText, _waveClearAnim));
-		States.Add(WaveState.StageSwap, new StageSwapState(_context, WaveState.StageSwap, _armAnim, _islandPrefabs, _currentIsland, _gridTransform, _statRewardInteractables, _weaponRewardInteractables));	
+		States.Add(WaveState.StageSwap, new StageSwapState(_context, WaveState.StageSwap, _armAnim, _islandPrefabs, _currentIsland, _gridTransform, _statRewardInteractables, _weaponRewardInteractables));
+
+		CurrentState = States[WaveState.WaveCleared];
 	}
 }

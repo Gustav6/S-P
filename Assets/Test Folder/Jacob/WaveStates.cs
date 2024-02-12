@@ -436,21 +436,17 @@ public class WaveInProgressState : BaseWaveState
 
     readonly AnimationCurve _verticalSpawnCurve;
 
-    readonly Transform[] _spawnPoints;
-
     public WaveInProgressState(WaveStateContext context, WaveStateMachine.WaveState stateKey,
                                Image waveProgressFill,
                                RectTransform fishTransform,
                                Animator progressBarAnim,
-                               AnimationCurve verticalSpawnCurve,
-                               Transform[] spawnPoints) : base(context, stateKey)
+                               AnimationCurve verticalSpawnCurve) : base(context, stateKey)
 	{
 		_context = context;
         _waveProgressFill = waveProgressFill;
         _fishTransform = fishTransform;
         _progressBarAnim = progressBarAnim;
         _verticalSpawnCurve = verticalSpawnCurve;
-        _spawnPoints = spawnPoints;
 	}
 
 	public override void EnterState()
@@ -515,7 +511,7 @@ public class WaveInProgressState : BaseWaveState
 
     void SpawnEnemy(EnemyPreset enemyPreset)
     {
-        Transform randomSpawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+        Transform randomSpawnPoint = _context.SpawnPoints[Random.Range(0, _context.SpawnPoints.Length)];
 
         GameObject enemy = Object.Instantiate(enemyPreset.EnemyPrefab);
         EnemyLifeStatus enemyLifeStatus = enemy.AddComponent<EnemyLifeStatus>();
@@ -657,13 +653,13 @@ public class StageSwapState : BaseWaveState
 
         Transform rewardPositionsParent = island.transform.GetChild(0);
 
-        for (int i = 0; i < _weaponRewardInteractables.Length; i++)
+        for (int i = 0; i < 2; i++)
             _weaponRewardInteractables[i].transform.position = rewardPositionsParent.GetChild(i).position;
 
-        for (int i = 2; i < _statRewardInteractables.Length + 2; i++)
+        for (int i = 2; i < 5 + 2; i++)
             _statRewardInteractables[i].transform.position = rewardPositionsParent.GetChild(i).position;
 
-        //_context.SetSpawnPoints()
+        _context.SetSpawnPoints(island.transform.GetChild(1).GetComponentsInChildren<Transform>());
     }
 
     public override void UpdateState()

@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      joe bidet_0: -7987457102585104195
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

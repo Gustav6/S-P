@@ -335,10 +335,9 @@ public class UIManager : MonoBehaviour
                 Vector3 temp = uI.transform.localPosition + startingPosition;
                 uI.transform.localPosition = temp;
 
-                TransitionType tStart = TransitionType.SmoothStart2;
-                TransitionType tEnd = TransitionType.SmoothStop2;
+                TransitionType type = TransitionType.SmoothStop2;
 
-                TransitionSystem.AddMoveTransition(new MoveTransition(uI.transform, destionation, time, tStart, tEnd, baseFromTarget));
+                TransitionSystem.AddMoveTransition(new MoveTransition(uI.transform, destionation, time, type, baseFromTarget));
             }
         }
     }

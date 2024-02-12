@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      obamna 3_0: 3770779925010785068
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

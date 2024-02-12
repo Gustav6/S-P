@@ -49,6 +49,6 @@ public class CanvasManager : MonoBehaviour
 
     public void MoveInUI()
     {
-        UIManager.instance.MoveUIToDestionation(moveUITime + panelFadeInTime, new Vector3(-1000, 0, 0), new Vector3(1000, 0, 0), true);
+        UIManager.instance.MoveUIToDestionation(moveUITime, new Vector3(-1000, 0, 0), new Vector3(1000, 0, 0), true);
     }
 }

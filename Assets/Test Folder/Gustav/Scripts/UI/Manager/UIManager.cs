@@ -326,6 +326,23 @@ public class UIManager : MonoBehaviour
         LoadUI(list);
     }
 
+    public void MoveUIToDestionation(float time, Vector3 startingPosition, Vector3 destionation, bool baseFromTarget = false)
+    {
+        foreach (UI uI in GetComponentsInChildren<UI>())
+        {
+            if (!uI.IsDestroyed)
+            {
+                Vector3 temp = uI.transform.localPosition + startingPosition;
+                uI.transform.localPosition = temp;
+
+                TransitionType tStart = TransitionType.SmoothStart2;
+                TransitionType tEnd = TransitionType.SmoothStop2;
+
+                TransitionSystem.AddMoveTransition(new MoveTransition(uI.transform, destionation, time, tStart, tEnd, baseFromTarget));
+            }
+        }
+    }
+
     public void MoveUIToStart(float time, ExecuteOnCompletion actions)
     {
         Vector3 destination = GiveDestination(GiveDirection(CurrentUIPrefab)) * -1;

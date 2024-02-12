@@ -7,8 +7,9 @@ public class CanvasManager : MonoBehaviour
 {
     private Image logo;
     public Color logoFadeInColor;
-    public float logoColorTime = 1f;
-    public float panelFadeInTime = 1f;
+    public float logoColorTime = 1.5f;
+    public float panelFadeInTime = 1;
+    public float moveUITime = 2;
 
     void Start()
     {
@@ -23,6 +24,13 @@ public class CanvasManager : MonoBehaviour
             }
         }
 
+        if (logo != null)
+        {
+            LoadLogeUponEntering();
+        }
+
+        MoveInUI();
+
         NewSceneLoad();
     }
 
@@ -31,16 +39,16 @@ public class CanvasManager : MonoBehaviour
         Transition.ExecuteOnCompletion execute = null;
         execute += UIManager.instance.DisableTransitioning;
 
-        if (logo != null)
-        {
-            execute += LoadLogeUponEntering;
-        }
-
         PanelManager.FadeIn(panelFadeInTime, new Color(0, 0, 0, 0), execute);
     }
 
     public void LoadLogeUponEntering()
     {
-        TransitionSystem.AddColorTransition(new ColorTransition(logo, logoFadeInColor, logoColorTime, TransitionType.SmoothStop2));
+        TransitionSystem.AddColorTransition(new ColorTransition(logo, logoFadeInColor, logoColorTime, TransitionType.SmoothStart2));
+    }
+
+    public void MoveInUI()
+    {
+        UIManager.instance.MoveUIToDestionation(moveUITime + panelFadeInTime, new Vector3(-1000, 0, 0), new Vector3(1000, 0, 0), true);
     }
 }

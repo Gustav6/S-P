@@ -307,7 +307,7 @@ public class UIManager : MonoBehaviour
 
         DestroyUI(CurrentUIPrefab);
 
-        Vector3 spawnLocation = GiveDestination(GiveDirection(prefabToSpawn));
+        Vector3 spawnLocation = GiveDestination(GetDirection(prefabToSpawn));
 
         InstantiateNewUIPrefab(prefabToSpawn, parent, Vector3.one, spawnLocation);
         MoveUIToStart(1, DisableTransitioning);
@@ -326,30 +326,44 @@ public class UIManager : MonoBehaviour
         LoadUI(list);
     }
 
-    public void MoveUIToDestionation(float time, Vector3 startingPosition, Vector3 destionation, bool baseFromTarget = false)
+    public void MoveUIToDestionation(float time, Vector3 start, Vector3 destionation, bool moveUI = true, bool baseFromObject = true, ExecuteOnCompletion execute = null)
     {
-        foreach (UI uI in GetComponentsInChildren<UI>())
+        if (moveUI)
         {
-            if (!uI.IsDestroyed)
+            foreach (UI uI in GetComponentsInChildren<UI>())
             {
-                Vector3 temp = uI.transform.localPosition + startingPosition;
-                uI.transform.localPosition = temp;
+                if (!uI.IsDestroyed)
+                {
+                    Vector3 temp = uI.transform.localPosition + start;
+                    uI.transform.localPosition = temp;
 
-                TransitionType type = TransitionType.SmoothStop2;
+                    TransitionType type = TransitionType.SmoothStop3;
 
-                TransitionSystem.AddMoveTransition(new MoveTransition(uI.transform, destionation, time, type, baseFromTarget));
+                    TransitionSystem.AddMoveTransition(new MoveTransition(uI.transform, destionation, time, type, baseFromObject, 0, 0, execute));
+                }
             }
+        }
+        else
+        {
+            Vector3 temp = CurrentUIPrefab.transform.localPosition + start;
+            CurrentUIPrefab.transform.localPosition = temp;
+
+            TransitionType type = TransitionType.SmoothStop4;
+
+            MoveGameObject(CurrentUIPrefab, time, destionation);
         }
     }
 
     public void MoveUIToStart(float time, ExecuteOnCompletion actions)
     {
-        Vector3 destination = GiveDestination(GiveDirection(CurrentUIPrefab)) * -1;
+        Debug.Log(CurrentUIPrefab);
 
-        MoveGameObject(CurrentUIPrefab, time, destination, actions);
+        Vector3 destination = GiveDestination(GetDirection(CurrentUIPrefab)) * -1;
+
+        MoveGameObject(CurrentUIPrefab, time, destination, actions, 1, 1.2f);
     }
 
-    public void MoveUIThenRemove(float time, ExecuteOnCompletion actions)
+    public void MoveUIThenRemove(float time, ExecuteOnCompletion actions, float windUp, float overShoot)
     {
         if (prefabToSpawn != null)
         {
@@ -365,17 +379,18 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        Vector3 destination = GiveDestination(GiveDirection(CurrentUIPrefab));
+        Vector3 destination = GiveDestination(GetDirection(CurrentUIPrefab));
 
-        MoveGameObject(CurrentUIPrefab, time, destination, actions);
+        MoveGameObject(CurrentUIPrefab, time, destination, actions, windUp, overShoot);
     }
 
     private void MoveGameObject(GameObject g, float time, Vector3 destination, ExecuteOnCompletion execute = null, float windUp = 0, float overShoot = 0)
     {
-        TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, TransitionType.SmoothStop2, true, windUp, overShoot, execute));
+        TransitionType type = TransitionType.NormalizedBezier3;
+        TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, type, true, windUp, overShoot, execute));
     }
 
-    private Vector3 GiveDestination(PrefabMoveDirection direction)
+    public Vector3 GiveDestination(PrefabMoveDirection direction)
     {
         if (direction == PrefabMoveDirection.Left)
         {
@@ -389,7 +404,7 @@ public class UIManager : MonoBehaviour
         return Vector3.zero;
     }
 
-    private PrefabMoveDirection GiveDirection(GameObject g)
+    private PrefabMoveDirection GetDirection(GameObject g)
     {
         if (g.GetComponent<ActiveMenuManager>() != null)
         {

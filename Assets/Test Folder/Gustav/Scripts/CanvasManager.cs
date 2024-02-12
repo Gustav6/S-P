@@ -5,25 +5,14 @@ using UnityEngine.UI;
 
 public class CanvasManager : MonoBehaviour
 {
-    private Image logo;
+    public Image logo;
     public Color logoFadeInColor;
     public float logoColorTime = 1.5f;
     public float panelFadeInTime = 1;
-    public float moveUITime = 2;
+    public float moveUITime = 1;
 
     void Start()
     {
-        for (int i = 0; i < transform.childCount; i++)
-        {
-            if (transform.GetChild(i).GetComponent<Image>() != null)
-            {
-                if (transform.GetChild(i).GetComponent<PanelManager>() == null)
-                {
-                    logo = transform.GetChild(i).GetComponent<Image>();
-                }
-            }
-        }
-
         if (logo != null)
         {
             LoadLogeUponEntering();
@@ -36,10 +25,7 @@ public class CanvasManager : MonoBehaviour
 
     public void NewSceneLoad()
     {
-        Transition.ExecuteOnCompletion execute = null;
-        execute += UIManager.instance.DisableTransitioning;
-
-        PanelManager.FadeIn(panelFadeInTime, new Color(0, 0, 0, 0), execute);
+        PanelManager.FadeIn(panelFadeInTime, new Color(0, 0, 0, 0), null);
     }
 
     public void LoadLogeUponEntering()
@@ -49,6 +35,10 @@ public class CanvasManager : MonoBehaviour
 
     public void MoveInUI()
     {
-        UIManager.instance.MoveUIToDestionation(moveUITime, new Vector3(-1000, 0, 0), new Vector3(1000, 0, 0), true);
+        Transition.ExecuteOnCompletion execute = null;
+        execute += UIManager.instance.DisableTransitioning;
+
+        //UIManager.instance.MoveUIToDestionation(moveUITime, new Vector3(-1000, 0, 0), new Vector3(1000, 0, 0), true, true, execute);
+        UIManager.instance.MoveUIToStart(moveUITime, execute);
     }
 }

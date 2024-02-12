@@ -1,3 +1,4 @@
+using NUnit.Framework;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using UnityEngine.SceneManagement;
 public class UIInput : MonoBehaviour
 {
     private UIManager manager;
+    private bool hasRemovedPauseMenu = true;
 
     public void Start()
     {
@@ -22,25 +24,77 @@ public class UIInput : MonoBehaviour
         {
             UIManager.instance.Paused = !UIManager.instance.Paused;
 
-            if (UIManager.instance.Paused)
+            if (UIManager.instance.Paused && hasRemovedPauseMenu)
             {
-                Scene scene = SceneManager.GetActiveScene();
+                OnPause();
 
-                if (scene.buildIndex == (int)NewScene.Game)
-                {
-                    if (manager.pausePrefab != null)
-                    {
-                        UIManager.instance.InstantiateNewUIPrefab(manager.pausePrefab, GetComponent<UIManager>().transform, Vector3.one, Vector3.zero);
-                    }
-                }
+                //Scene scene = SceneManager.GetActiveScene();
+
+                //if (scene.buildIndex == (int)NewScene.Game)
+                //{
+                //    if (manager.pausePrefab != null)
+                //    {
+                //        UIManager.instance.InstantiateNewUIPrefab(manager.pausePrefab, GetComponent<UIManager>().transform, Vector3.one, Vector3.zero);
+                //    }
+                //}
             }
-            else
+            else if (!UIManager.instance.Paused && !hasRemovedPauseMenu)
             {
-                manager.pausePrefab.GetComponent<ActiveMenuManager>().DisableBlur(UIManager.instance.CameraInstance.GetComponent<Blur>());
-                Destroy(UIManager.instance.CurrentUIPrefab);
-                UIManager.instance.ResetListOfUIObjects();
+                //manager.pausePrefab.GetComponent<ActiveMenuManager>().DisableBlur(UIManager.instance.CameraInstance.GetComponent<Blur>());
+                OnUnPause();
             }
         }
+    }
+
+    private void OnPause()
+    {
+        Transition.ExecuteOnCompletion execute = null;
+
+        Vector3 spawnLocation = UIManager.instance.GiveDestination(PrefabMoveDirection.Right);
+
+        hasRemovedPauseMenu = false;
+
+        execute += ExecuteAfterMovingAddedPauseMenu;
+
+        UIManager.instance.InstantiateNewUIPrefab(manager.pausePrefab, GetComponent<UIManager>().transform, Vector3.one, -spawnLocation);
+
+        Vector3 destionation = new(Screen.width / 2, 0);
+        destionation.y += UIManager.instance.CurrentUIPrefab.transform.position.y;
+
+        TransitionSystem.AddMoveTransition(new MoveTransition(UIManager.instance.CurrentUIPrefab.transform, destionation, 0.75f, TransitionType.SmoothStop2, false, 0, 0, execute));
+    }
+
+    private void OnUnPause()
+    {
+        Transition.ExecuteOnCompletion execute = null;
+
+        execute += ExecuteAfterMovingRemovingPauseMenu;
+
+        Vector3 destionation = new(-Screen.width / 2, 0);
+        destionation.y += UIManager.instance.CurrentUIPrefab.transform.position.y;
+
+        TransitionSystem.AddMoveTransition(new MoveTransition(UIManager.instance.CurrentUIPrefab.transform, destionation, 0.5f, TransitionType.SmoothStop2, false, 0, 0, execute));
+    }
+
+    private void ExecuteAfterMovingAddedPauseMenu()
+    {
+        List<GameObject> list = new();
+
+        foreach (UI uI in GetComponentsInChildren<UI>())
+        {
+            if (!uI.IsDestroyed)
+            {
+                list.Add(uI.gameObject);
+            }
+        }
+
+        UIManager.instance.LoadUI(list);
+    }
+    private void ExecuteAfterMovingRemovingPauseMenu()
+    {
+        Destroy(UIManager.instance.CurrentUIPrefab);
+        UIManager.instance.ResetListOfUIObjects();
+        hasRemovedPauseMenu = true;
     }
 
     public void Navigate(InputAction.CallbackContext context)

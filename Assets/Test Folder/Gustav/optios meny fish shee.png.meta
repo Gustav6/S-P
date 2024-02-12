@@ -1,0 +1,426 @@
+fileFormatVersion: 2
+guid: 3d245ad5c32852e408650a50a6363d15
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6188145753875815801
+    second: optios meny fish shee_0
+  - first:
+      213: -827621652084880518
+    second: optios meny fish shee_1
+  - first:
+      213: -2885510127570625105
+    second: optios meny fish shee_2
+  - first:
+      213: -598049032633064547
+    second: optios meny fish shee_3
+  - first:
+      213: -7042903665801128378
+    second: optios meny fish shee_4
+  - first:
+      213: 208746253203583619
+    second: optios meny fish shee_5
+  - first:
+      213: 1099349324107389376
+    second: optios meny fish shee_6
+  - first:
+      213: 6114942951911600568
+    second: optios meny fish shee_7
+  - first:
+      213: -1271919199497094851
+    second: optios meny fish shee_8
+  - first:
+      213: -785655764521095501
+    second: optios meny fish shee_9
+  - first:
+      213: 2454851539750305480
+    second: optios meny fish shee_10
+  - first:
+      213: 7229438682844638900
+    second: optios meny fish shee_11
+  - first:
+      213: -5997207897490689494
+    second: optios meny fish shee_12
+  - first:
+      213: -8976062443478742139
+    second: optios meny fish shee_13
+  - first:
+      213: 4262427854708758895
+    second: optios meny fish shee_14
+  - first:
+      213: 5137022516074750670
+    second: optios meny fish shee_15
+  - first:
+      213: 2961189461839125151
+    second: optios meny fish shee_16
+  - first:
+      213: -1294303349822303120
+    second: optios meny fish shee_17
+  - first:
+      213: -207283548508719234
+    second: optios meny fish shee_18
+  - first:
+      213: 7443730938163351153
+    second: optios meny fish shee_19
+  - first:
+      213: 1981308218092610582
+    second: optios meny fish shee_20
+  - first:
+      213: 6979447313428522001
+    second: optios meny fish shee_21
+  - first:
+      213: -6947769877912543363
+    second: optios meny fish shee_22
+  - first:
+      213: 8544290732265802868
+    second: optios meny fish shee_23
+  - first:
+      213: -8318607546666976587
+    second: optios meny fish shee_24
+  - first:
+      213: 4330390627026468852
+    second: optios meny fish shee_25
+  - first:
+      213: 8632902157692473293
+    second: optios meny fish shee_26
+  - first:
+      213: 2353240789008070977
+    second: optios meny fish shee_27
+  - first:
+      213: 5219830496607089918
+    second: optios meny fish shee_28
+  - first:
+      213: 2648037718756198148
+    second: optios meny fish shee_29
+  - first:
+      213: 2341024935331610442
+    second: optios meny fish shee_30
+  - first:
+      213: -8146194933325464588
+    second: optios meny fish shee_31
+  - first:
+      213: -8601640290403702455
+    second: optios meny fish shee_32
+  - first:
+      213: 8433680540872008421
+    second: optios meny fish shee_33
+  - first:
+      213: -6526817470031103371
+    second: optios meny fish shee_34
+  - first:
+      213: 1390784927368313448
+    second: optios meny fish shee_35
+  - first:
+      213: -6038298701253973382
+    second: optios meny fish shee_36
+  - first:
+      213: 6800753602719441897
+    second: optios meny fish shee_37
+  - first:
+      213: -7155575068751326861
+    second: optios meny fish shee_38
+  - first:
+      213: 7321005294022896740
+    second: optios meny fish shee_39
+  - first:
+      213: -5802785104959902265
+    second: optios meny fish shee_40
+  - first:
+      213: -7595441035015008563
+    second: optios meny fish shee_41
+  - first:
+      213: 6851398971564623476
+    second: optios meny fish shee_42
+  - first:
+      213: -1117802740789593029
+    second: optios meny fish shee_43
+  - first:
+      213: 7852762363907047794
+    second: optios meny fish shee_44
+  - first:
+      213: -7587642559563300880
+    second: optios meny fish shee_45
+  - first:
+      213: 5171059673395083247
+    second: optios meny fish shee_46
+  - first:
+      213: -3060865369463225181
+    second: optios meny fish shee_47
+  - first:
+      213: 7185333853293124430
+    second: optios meny fish shee_48
+  - first:
+      213: 7927992796696643824
+    second: optios meny fish shee_49
+  - first:
+      213: -5461884373428570386
+    second: optios meny fish shee_50
+  - first:
+      213: -5193862566601368765
+    second: optios meny fish shee_51
+  - first:
+      213: -2741808012101276467
+    second: optios meny fish shee_52
+  - first:
+      213: -4031807074358140683
+    second: optios meny fish shee_53
+  - first:
+      213: -5917275480014225587
+    second: optios meny fish shee_54
+  - first:
+      213: 4972874623060736368
+    second: optios meny fish shee_55
+  - first:
+      213: -3298629514373424653
+    second: optios meny fish shee_56
+  - first:
+      213: -3200150143820320466
+    second: optios meny fish shee_57
+  - first:
+      213: 4393829674478437398
+    second: optios meny fish shee_58
+  - first:
+      213: 4641806825110524114
+    second: optios meny fish shee_59
+  - first:
+      213: 4533882382078770384
+    second: optios meny fish shee_60
+  - first:
+      213: -897963173763954208
+    second: optios meny fish shee_61
+  - first:
+      213: -2325886704989545963
+    second: optios meny fish shee_62
+  - first:
+      213: 1557519802893752527
+    second: optios meny fish shee_63
+  - first:
+      213: 2208994739468623927
+    second: optios meny fish shee_64
+  - first:
+      213: -2138597380108145228
+    second: optios meny fish shee_65
+  - first:
+      213: -1780268591224232745
+    second: optios meny fish shee_66
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: optios meny fish shee_0
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 2380
+        width: 799
+        height: 850
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 782e3e9193a4f1aa0800000000000000
+      internalID: -6188145753875815801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: optios meny fish shee_1
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 2380
+        width: 799
+        height: 850
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7b0f0b0e72b384f0800000000000000
+      internalID: -827621652084880518
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: optios meny fish shee_2
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 1300
+        width: 799
+        height: 850
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fad5c5ab3db94f7d0800000000000000
+      internalID: -2885510127570625105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: optios meny fish shee_3
+      rect:
+        serializedVersion: 2
+        x: 3040
+        y: 1300
+        width: 799
+        height: 850
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d93e3abc29d43b7f0800000000000000
+      internalID: -598049032633064547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: optios meny fish shee_4
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 220
+        width: 799
+        height: 850
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64690ac4e64924e90800000000000000
+      internalID: -7042903665801128378
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 27d9f5408470a4e4a86dee385665023d
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      optios meny fish shee_0: -6188145753875815801
+      optios meny fish shee_1: -827621652084880518
+      optios meny fish shee_2: -2885510127570625105
+      optios meny fish shee_3: -598049032633064547
+      optios meny fish shee_4: -7042903665801128378
+      optios meny fish shee_5: 208746253203583619
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

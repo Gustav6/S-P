@@ -111,6 +111,11 @@ public class ButtonPressedState : UIBaseState
 
             buttonInstance.StartSceneTransition();
         }
+
+        if (buttonInstance.quit)
+        {
+            buttonInstance.QuitGame();
+        }
     }
 }
 #endregion

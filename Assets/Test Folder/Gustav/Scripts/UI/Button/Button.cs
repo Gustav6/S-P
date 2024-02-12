@@ -16,11 +16,15 @@ public class Button : UI
     public NewScene NewScene;
 
     public bool transitionToPrefab;
-    public bool scaleTransition;
     public bool moveTransition;
+
+    [Range(-2, 0)] public float windUp;
+    [Range(0, 2)] public float overShoot;
 
     [Header("Drag in the prefab here")]
     public GameObject prefabToSpawn;
+
+    public bool quit;
 
     public override void Start()
     {
@@ -53,8 +57,13 @@ public class Button : UI
     public void StartPrefabTransition()
     {
         UIManager.instance.prefabToSpawn = prefabToSpawn;
-        UIManager.instance.MoveUIThenRemove(transitionDuration, null);
+        UIManager.instance.MoveUIThenRemove(transitionDuration, null, windUp, overShoot);
         Debug.Log("Move In Prefab");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 
     private void SwitchScene()

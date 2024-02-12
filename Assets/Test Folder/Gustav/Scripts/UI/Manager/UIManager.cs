@@ -149,6 +149,8 @@ public class UIManager : MonoBehaviour
 
         CameraInstance = GameObject.FindGameObjectWithTag("MainCamera");
 
+        CurrentUIPrefab = GameObject.FindGameObjectWithTag("UIPrefab");
+
         ListOfUIObjects = new();
 
         LoadUI();
@@ -157,8 +159,6 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         ResolutionScaling = GetComponentInParent<Canvas>().scaleFactor;
-
-        CurrentUIPrefab = GameObject.FindGameObjectWithTag("UIPrefab");
     }
 
     void Update()
@@ -324,34 +324,6 @@ public class UIManager : MonoBehaviour
         }
 
         LoadUI(list);
-    }
-
-    public void MoveUIToDestionation(float time, Vector3 start, Vector3 destionation, bool moveUI = true, bool baseFromObject = true, ExecuteOnCompletion execute = null)
-    {
-        if (moveUI)
-        {
-            foreach (UI uI in GetComponentsInChildren<UI>())
-            {
-                if (!uI.IsDestroyed)
-                {
-                    Vector3 temp = uI.transform.localPosition + start;
-                    uI.transform.localPosition = temp;
-
-                    TransitionType type = TransitionType.SmoothStop3;
-
-                    TransitionSystem.AddMoveTransition(new MoveTransition(uI.transform, destionation, time, type, baseFromObject, 0, 0, execute));
-                }
-            }
-        }
-        else
-        {
-            Vector3 temp = CurrentUIPrefab.transform.localPosition + start;
-            CurrentUIPrefab.transform.localPosition = temp;
-
-            TransitionType type = TransitionType.SmoothStop4;
-
-            MoveGameObject(CurrentUIPrefab, time, destionation);
-        }
     }
 
     public void MoveUIToStart(float time, ExecuteOnCompletion actions)

@@ -235,7 +235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df404f7ab0ddc844698b220685087c9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logo: {fileID: 0}
   logoFadeInColor: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0}
   logoColorTime: 1
   panelFadeInTime: 1

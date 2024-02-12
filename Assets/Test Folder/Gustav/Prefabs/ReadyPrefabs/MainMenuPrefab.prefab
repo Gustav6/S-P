@@ -52,8 +52,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objects:
-  - {fileID: 8121875313926193308, guid: 018d3498d83e1a446a6bad61dedff835, type: 3}
   - {fileID: 5496225224347884214, guid: 21a66d444902c1f42b6e8ab8dae7a1be, type: 3}
+  - {fileID: 8121875313926193308, guid: 018d3498d83e1a446a6bad61dedff835, type: 3}
+  gameObjects: []
   moveDirection: 0
   enableBlurOnInstantiate: 0
 --- !u!1001 &2693954762142663607

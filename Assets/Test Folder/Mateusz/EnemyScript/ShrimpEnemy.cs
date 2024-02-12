@@ -13,6 +13,7 @@ public class ShrimpEnemy : Enemy
         // Ändra på multiplier i olika enemies för olika knockback, följ detta som en outline.
         _enemyAttack.CanAttack(false);
         _attackController.LeaveMovement();
+        _attackController.EnemyHit();
 
         Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized;
         float multiplier = (4 + (KnockbackPercent / 100)) * knockbackMultiplier;

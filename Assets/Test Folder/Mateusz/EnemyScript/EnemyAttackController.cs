@@ -20,6 +20,7 @@ public class EnemyAttackController : MonoBehaviour
         _enemy._enemyAI.CanMove = true;
         _enemy._enemyAI.IsNotGettingHit = true;
         _anim.SetBool("IsMoving", true);
+        _anim.SetBool("IsHit", false);
     }
 
     public void LeaveMovement()
@@ -45,6 +46,14 @@ public class EnemyAttackController : MonoBehaviour
         go = Instantiate(_enemy._enemyAttack.hitbox, _enemy._enemyAttack.hitboxSpawn.transform);
         go.transform.localPosition *= new Vector2(Mathf.Sign(transform.localScale.x), 1);
     }
+
+    public void EnemyHit()
+    {
+        if (go != null)
+            Destroy(go);
+        _anim.SetBool("IsHit", true);
+    }
+
 
     public void DespawnHitbox()
     {

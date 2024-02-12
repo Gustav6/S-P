@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class WaveCreationState : BaseWaveState
 {
@@ -386,15 +385,17 @@ public class WaveRewardState : BaseWaveState
 public class WaveIntermissionState : BaseWaveState
 {
     WaveStateContext _context;
+    Animator _countdownAnim;
 
-    public WaveIntermissionState(WaveStateContext context, WaveStateMachine.WaveState stateKey) : base(context, stateKey)
+    public WaveIntermissionState(WaveStateContext context, WaveStateMachine.WaveState stateKey, Animator countDownAnim) : base(context, stateKey)
 	{
 		_context = context;
+        _countdownAnim = countDownAnim;
 	}
 
     public override void EnterState()
     {
-        _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.WaveInProgress);
+        _countdownAnim.Play("Countdown");
     }
 
     public override void ExitState()
@@ -409,7 +410,10 @@ public class WaveIntermissionState : BaseWaveState
 
     public override void UpdateState()
     {
-
+        if (_countdownAnim.GetCurrentAnimatorStateInfo(0).IsName("Finished"))
+        {
+            _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.WaveInProgress);
+        }
     }
 }
 

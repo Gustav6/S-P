@@ -37,7 +37,7 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 
 	[SerializeField] Image _waveProgressFill;
 	[SerializeField] RectTransform _fishTransform;
-	[SerializeField] Animator _progressBarAnim;
+	[SerializeField] Animator _progressBarAnim, _countDownAnim;
 
 	private void Awake()
 	{
@@ -57,7 +57,7 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 	{
 		States.Add(WaveState.WaveCreation, new WaveCreationState(_context, WaveState.WaveCreation, _enemyAssortment));
 		States.Add(WaveState.Reward, new WaveRewardState(_context, WaveState.Reward, _statRewardInteractables, _weaponRewardInteractables, _statRewardPool, _weaponRewardPool, _dropCurve, _ascensionCurve));
-		States.Add(WaveState.Intermission, new WaveIntermissionState(_context, WaveState.Intermission));
+		States.Add(WaveState.Intermission, new WaveIntermissionState(_context, WaveState.Intermission, _countDownAnim));
 		States.Add(WaveState.WaveInProgress, new WaveInProgressState(_context, WaveState.WaveInProgress, _waveProgressFill, _fishTransform, _progressBarAnim, _verticalSpawnCurve, _spawnPoints));
 		CurrentState = States[WaveState.WaveCreation];
 	}

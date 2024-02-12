@@ -3,20 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class islandTransition : MonoBehaviour
+public class IslandTransition : MonoBehaviour
 {
     public AnimationCurve curve;
 
     float timerMax = 1;
-    void Start()
-    {
-        SwapIsland();
-    }
-
-    void Update()
-    {
-
-    }
 
     public void SwapIsland()
     {
@@ -30,7 +21,6 @@ public class islandTransition : MonoBehaviour
 
         while (timer < timerMax)
         {
-
             transform.position = new Vector2(Mathf.Lerp(startPos, startPos + 18, curve.Evaluate(timer / timerMax)), 0);
             yield return null;
             timer += Time.deltaTime;

@@ -2,31 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class islandGenerator : MonoBehaviour
+public class IslandGenerator : MonoBehaviour
 {
-    public GameObject islandRoundPrefab;
-    public GameObject islandDonutPrefab;
+    public GameObject[] islandPrefabs;
 
-    int islandNumber;
-    void Start()
-    {
-        GenerateIsland();
-    }
-
-    void Update()
-    {
-    }
+    public IslandTransition previousIsland;
 
     public void GenerateIsland()
     {
-        islandNumber = Random.Range(0, 2);
+        GameObject randomIsland = islandPrefabs[Random.Range(0, islandPrefabs.Length)];
         
-        if (islandNumber == 0) {
-            Transform island = Instantiate(islandRoundPrefab, new Vector3(-18, 0, 0), Quaternion.identity,transform).transform;
-            island.position = new Vector3(-18, 0, 0);
-        }
-        else if (islandNumber != 0) {
-            Instantiate(islandDonutPrefab, new Vector3(-18, 0, 0), Quaternion.identity,transform);
-        }
+        Transform island = Instantiate(randomIsland, new Vector3(-18, 0, 0), Quaternion.identity,transform).transform;
+        island.position = new Vector3(-18, 0, 0);
+
+        IslandTransition transition = island.GetComponent<IslandTransition>();
+
+        transition.SwapIsland();
+        previousIsland.SwapIsland();
+        previousIsland = transition;
     }
 }

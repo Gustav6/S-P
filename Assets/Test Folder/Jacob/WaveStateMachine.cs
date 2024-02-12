@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
+using TMPro;
 
 public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 {
     public enum WaveState
 	{ 
 		WaveCreation,
+		StageSwap,
 		Reward,
 		Intermission,
-		WaveInProgress
+		WaveInProgress,
+		WaveCleared
 	}
 
 	public enum WaveType
@@ -37,7 +40,16 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 
 	[SerializeField] Image _waveProgressFill;
 	[SerializeField] RectTransform _fishTransform;
-	[SerializeField] Animator _progressBarAnim, _countDownAnim;
+	[SerializeField] Animator _progressBarAnim, _countDownAnim, _armAnim;
+
+	[SerializeField] string[] _clearMessages;
+	[SerializeField] TMP_Text _messageText;
+	[SerializeField] Animator _waveClearAnim;
+
+	[SerializeField] IslandGenerator _islandGenerator;
+	[SerializeField] IslandTransition[] _islandPrefabs;
+	[SerializeField] IslandTransition _currentIsland;
+	[SerializeField] Transform _gridTransform;
 
 	private void Awake()
 	{
@@ -60,5 +72,7 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 		States.Add(WaveState.Intermission, new WaveIntermissionState(_context, WaveState.Intermission, _countDownAnim));
 		States.Add(WaveState.WaveInProgress, new WaveInProgressState(_context, WaveState.WaveInProgress, _waveProgressFill, _fishTransform, _progressBarAnim, _verticalSpawnCurve, _spawnPoints));
 		CurrentState = States[WaveState.WaveCreation];
+		States.Add(WaveState.WaveCleared, new WaveClearState(_context, WaveState.WaveCleared, _clearMessages, _messageText, _waveClearAnim));
+		States.Add(WaveState.StageSwap, new StageSwapState(_context, WaveState.StageSwap, _armAnim, _islandPrefabs, _currentIsland, _gridTransform, _statRewardInteractables, _weaponRewardInteractables));	
 	}
 }

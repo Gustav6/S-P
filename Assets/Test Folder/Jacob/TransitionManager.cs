@@ -38,12 +38,11 @@ public class TransitionManager : MonoBehaviour
 		//Invoke(nameof(ApproachPlayer), 4);
     }
 
-    void ApproachPlayer()
+    public void ApproachPlayer()
     {
 		_armTransform.position = _playerTransform.position;
 		_anim.Play("ArmApproach");
 		_playerMovement.ToggleMovementLock();
-		Invoke(nameof(PickUpPlayer), 0.85f);
     }
 
 	public void PickUpPlayer()
@@ -51,13 +50,11 @@ public class TransitionManager : MonoBehaviour
 		_playerTransform.SetParent(_armTransform.GetChild(0));
 		_playerMovement.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
 		_anim.Play("ArmPickUp");
-		Invoke(nameof(DropPlayer), 2f);
 	}
 
 	public void DropPlayer()
     {
 		_anim.Play("ArmDrop");
-		Invoke(nameof(UnParentPlayer), 0.42f);
     }
 
 	public void UnParentPlayer()

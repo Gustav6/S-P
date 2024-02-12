@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class WaveCreationState : BaseWaveState
 {
@@ -484,7 +485,7 @@ public class WaveInProgressState : BaseWaveState
 	{
         _enemiesKilled = 0;
         SetWaveProgress(0);
-        _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.WaveCreation);
+        _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.WaveCleared);
     }
 
     void SetWaveProgress(float progress)
@@ -556,5 +557,134 @@ public class WaveInProgressState : BaseWaveState
 
         enemy.SetParent(null);
 		Object.Destroy(parentTransform.gameObject);
+    }
+}
+
+public class WaveClearState : BaseWaveState
+{
+    WaveStateContext _context;
+    string[] _messages;
+    TMP_Text _messageText;
+
+    Animator _animator;
+
+    public WaveClearState(WaveStateContext context, WaveStateMachine.WaveState stateKey, string[] messages, TMP_Text messageText, Animator animator) : base(context, stateKey)
+    {
+        _context = context;
+        _messages = messages;
+        _messageText = messageText;
+        _animator = animator;
+    }
+
+    public override void EnterState()
+    {
+        _messageText.text = _messages[Random.Range(0, _messages.Length)];
+        _animator.Play("WaveClear");
+
+    }
+
+    public override void ExitState()
+    {
+
+    }
+
+    public override WaveStateMachine.WaveState GetNextState()
+    {
+        return StateKey;
+    }
+
+    public override void UpdateState()
+    {
+        if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Finished"))
+        {
+            _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.StageSwap);
+        }
+    }
+}
+
+public class StageSwapState : BaseWaveState
+{
+    WaveStateContext _context;
+
+    Animator _armAnim;
+
+    float _timer;
+    bool _isSwapping;
+
+    IslandTransition[] _islandPrefabs;
+    IslandTransition _previousIsland;
+
+    Transform _gridTransform;
+
+    WaveRewardInteractable[] _statRewardInteractables, _weaponRewardInteractables;
+
+    public StageSwapState(WaveStateContext context, WaveStateMachine.WaveState stateKey, Animator armAnim, IslandTransition[] islandPrefabs, IslandTransition currentIsland, Transform gridTransform, WaveRewardInteractable[] statRewardInteractables, WaveRewardInteractable[] weaponRewardInteractables) : base(context, stateKey)
+    {
+        _context = context;
+        _armAnim = armAnim;
+        _islandPrefabs = islandPrefabs;
+        _previousIsland = currentIsland;
+        _gridTransform = gridTransform;
+        _statRewardInteractables = statRewardInteractables;
+        _weaponRewardInteractables = weaponRewardInteractables;
+    }
+
+    public override void EnterState()
+    {
+        TransitionManager.Instance.ApproachPlayer();
+    }
+
+    public override void ExitState()
+    {
+
+    }
+
+    public override WaveStateMachine.WaveState GetNextState()
+    {
+        return StateKey;
+    }
+
+    public void GenerateIsland()
+    {
+        IslandTransition randomIsland = _islandPrefabs[Random.Range(0, _islandPrefabs.Length)];
+
+        IslandTransition island = Object.Instantiate(randomIsland, new Vector3(-18, 0, 0), Quaternion.identity, _gridTransform);
+        island.transform.position = new Vector3(-18, 0, 0);
+
+        island.SwapIsland();
+        _previousIsland.SwapIsland();
+        _previousIsland = island;
+
+        Transform rewardPositionsParent = island.transform.GetChild(0);
+
+        for (int i = 0; i < _weaponRewardInteractables.Length; i++)
+            _weaponRewardInteractables[i].transform.position = rewardPositionsParent.GetChild(i).position;
+
+        for (int i = 2; i < _statRewardInteractables.Length + 2; i++)
+            _statRewardInteractables[i].transform.position = rewardPositionsParent.GetChild(i).position;
+
+        //_context.SetSpawnPoints()
+    }
+
+    public override void UpdateState()
+    {
+        if (!_isSwapping && _armAnim.GetCurrentAnimatorStateInfo(0).IsName("ArmPickUp"))
+        {
+            if (_timer == 0)
+                GenerateIsland();
+
+            _timer += Time.deltaTime;
+
+            if (_timer >= 1.5f)
+            {
+                TransitionManager.Instance.DropPlayer();
+                _isSwapping = true;
+            }
+        }
+
+        if (_armAnim.GetCurrentAnimatorStateInfo(0).IsName("Finished"))
+        {
+            _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.Reward);
+        }
     }
 }

@@ -17,9 +17,16 @@ public class WaveStateContext
 
     public EnemyPreset[] EnemiesToSpawn { get; private set; }
 
+    public Transform[] SpawnPoints { get; private set; }
+
     public void SetEnemiesToSpawn(List<EnemyPreset> enemiesList)
     {
         EnemiesToSpawn = enemiesList.ToArray();
+    }
+
+    public void SetSpawnPoints(Transform[] spawnPoints)
+    {
+        SpawnPoints = spawnPoints;
     }
 
     public void NextWave()

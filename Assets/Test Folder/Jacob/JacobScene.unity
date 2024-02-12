@@ -374,9 +374,9 @@ Transform:
   - {fileID: 729724776}
   m_Father: {fileID: 948347490}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &81497594 stripped
+--- !u!4 &113013796 stripped
 Transform:
-  m_CorrespondingSourceObject: {fileID: 5967520384716174084, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  m_CorrespondingSourceObject: {fileID: 3225158508766823017, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
   m_PrefabInstance: {fileID: 1212505827}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &125814714
@@ -1149,16 +1149,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!4 &522320110 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1253261064684193014, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
-  m_PrefabInstance: {fileID: 1212505827}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &576750248 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7379101121298449355, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
-  m_PrefabInstance: {fileID: 1212505827}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &590235673
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,11 +1530,6 @@ Canvas:
   m_SortingLayerID: 1044948535
   m_SortingOrder: 1
   m_TargetDisplay: 0
---- !u!4 &712895763 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1772447598478530443, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
-  m_PrefabInstance: {fileID: 1212505827}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &729316593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,11 +1964,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &781870660 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6261488180814810622, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
-  m_PrefabInstance: {fileID: 1212505827}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &805295350
 GameObject:
   m_ObjectHideFlags: 0
@@ -13933,16 +13913,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3438687588386700965, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
   m_PrefabInstance: {fileID: 1212505827}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &1215642315 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1202203570773155811, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
-  m_PrefabInstance: {fileID: 1212505827}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1228132775 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 311267639701294575, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
-  m_PrefabInstance: {fileID: 1212505827}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1258235439
 GameObject:
   m_ObjectHideFlags: 0
@@ -14216,11 +14186,6 @@ Transform:
   - {fileID: 1437333473}
   m_Father: {fileID: 1793610425}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &1430950385 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 486267846494514727, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
-  m_PrefabInstance: {fileID: 1212505827}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1437333472
 GameObject:
   m_ObjectHideFlags: 0
@@ -14309,16 +14274,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!4 &1453680756 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2365914514874765484, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
-  m_PrefabInstance: {fileID: 1212505827}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1471291568 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 884839575809145932, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
-  m_PrefabInstance: {fileID: 1212505827}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1488114218
 GameObject:
   m_ObjectHideFlags: 0
@@ -14903,17 +14858,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  _spawnPoints:
-  - {fileID: 1471291568}
-  - {fileID: 522320110}
-  - {fileID: 1215642315}
-  - {fileID: 576750248}
-  - {fileID: 81497594}
-  - {fileID: 1453680756}
-  - {fileID: 1430950385}
-  - {fileID: 781870660}
-  - {fileID: 712895763}
-  - {fileID: 1228132775}
+  _spawnPointsParent: {fileID: 113013796}
   _waveProgressFill: {fileID: 709380285}
   _fishTransform: {fileID: 2065704071}
   _progressBarAnim: {fileID: 521558092}

@@ -356,6 +356,7 @@ public class WaveRewardState : BaseWaveState
         }
 
         spriteTransform.position = new Vector2(rewardInteractable.transform.position.x, endPos.y);
+        rewardInteractable.GetComponent<Animator>().Play("Clear");
     }
 
     IEnumerator DropReward(WaveRewardInteractable rewardInteractable, float initialDelay)
@@ -378,7 +379,7 @@ public class WaveRewardState : BaseWaveState
         spriteTransform.position = new Vector2(startPos.x, rewardInteractable.transform.position.y);
 
         rewardInteractable.enabled = true;
-        rewardInteractable.GetComponent<Animator>().enabled = true;
+        rewardInteractable.GetComponent<Animator>().Play("WaveRewardBob");
     }
 }
 
@@ -511,7 +512,7 @@ public class WaveInProgressState : BaseWaveState
 
     void SpawnEnemy(EnemyPreset enemyPreset)
     {
-        Transform randomSpawnPoint = _context.SpawnPoints[Random.Range(0, _context.SpawnPoints.Length)];
+        Transform randomSpawnPoint = _context.SpawnPointParent.GetChild(Random.Range(0, _context.SpawnPointParent.childCount));
 
         GameObject enemy = Object.Instantiate(enemyPreset.EnemyPrefab);
         EnemyLifeStatus enemyLifeStatus = enemy.AddComponent<EnemyLifeStatus>();
@@ -614,6 +615,8 @@ public class StageSwapState : BaseWaveState
 
     WaveRewardInteractable[] _statRewardInteractables, _weaponRewardInteractables;
 
+    Transform _rewardParent;
+
     public StageSwapState(WaveStateContext context, WaveStateMachine.WaveState stateKey, Animator armAnim, IslandTransition[] islandPrefabs, IslandTransition currentIsland, Transform gridTransform, WaveRewardInteractable[] statRewardInteractables, WaveRewardInteractable[] weaponRewardInteractables) : base(context, stateKey)
     {
         _context = context;
@@ -627,6 +630,7 @@ public class StageSwapState : BaseWaveState
 
     public override void EnterState()
     {
+        _isSwapping = false;
         TransitionManager.Instance.ApproachPlayer();
     }
 
@@ -640,6 +644,7 @@ public class StageSwapState : BaseWaveState
         return StateKey;
     }
 
+    // Property of Tristan
     public void GenerateIsland()
     {
         IslandTransition randomIsland = _islandPrefabs[Random.Range(0, _islandPrefabs.Length)];
@@ -651,15 +656,9 @@ public class StageSwapState : BaseWaveState
         _previousIsland.SwapIsland();
         _previousIsland = island;
 
-        Transform rewardPositionsParent = island.transform.GetChild(0);
+        _rewardParent = island.transform.GetChild(0);
 
-        for (int i = 0; i < 2; i++)
-            _weaponRewardInteractables[i].transform.position = rewardPositionsParent.GetChild(i).position;
-
-        for (int i = 2; i < 5 + 2; i++)
-            _statRewardInteractables[i].transform.position = rewardPositionsParent.GetChild(i).position;
-
-        _context.SetSpawnPoints(island.transform.GetChild(1).GetComponentsInChildren<Transform>());
+        _context.SetSpawnPointsParent(island.transform.GetChild(1));
     }
 
     public override void UpdateState()
@@ -673,6 +672,12 @@ public class StageSwapState : BaseWaveState
 
             if (_timer >= 1.5f)
             {
+                for (int i = 0; i < 2; i++)
+                    _weaponRewardInteractables[i].transform.position = _rewardParent.GetChild(i).position;
+
+                for (int i = 2; i < 5; i++)
+                    _statRewardInteractables[i - 2].transform.position = _rewardParent.GetChild(i).position;
+
                 TransitionManager.Instance.DropPlayer();
                 _isSwapping = true;
             }
@@ -680,7 +685,7 @@ public class StageSwapState : BaseWaveState
 
         if (_armAnim.GetCurrentAnimatorStateInfo(0).IsName("Finished"))
         {
-            _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.Reward);
+            _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.WaveCreation);
         }
     }
 }

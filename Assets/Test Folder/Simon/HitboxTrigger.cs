@@ -12,12 +12,6 @@ public class HitboxTrigger : MonoBehaviour
         _thisController = GetComponentInParent<Enemy>();
     }
 
-    private void Start()
-    {
-        Debug.Log($"Knockback: {PlayerStats.Instance.GetStat(StatType.KnockbackDealt)}\nDamage: {PlayerStats.Instance.GetStat(StatType.DamageDealt)}\n" +
-                  $"Knockback resistance: {PlayerStats.Instance.GetStat(StatType.KnockbackResistance)}\nDamage resistance: {PlayerStats.Instance.GetStat(StatType.KnockbackResistance)}");
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var damageable = collision.GetComponent<IDamageable>();
@@ -57,7 +51,7 @@ public class HitboxTrigger : MonoBehaviour
     private float CalculateStunTime(float currentKnockbackPercent)
     {
         float stunTime = currentKnockbackPercent / 250;
-        stunTime = stunTime >= 0.5f ? 0.5f + ((stunTime - 0.5f) / 4) : stunTime;
+        stunTime = stunTime < 0.1f ? 0.1f : stunTime >= 0.5f ? 0.5f + ((stunTime - 0.5f) / 4) : stunTime;
 
         return stunTime;
     }

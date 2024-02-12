@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 4726f9b8f95d75441bae27e0ced9c5c7
+guid: 665e88e68ec018740934e2027c18b6ba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -8578220159539669028
-    second: justthehandstogether_0
-  - first:
-      213: 3583568043032579722
-    second: justthehandstogether_1
-  - first:
-      213: -6527897936275187247
-    second: justthehandstogether_2
+      213: -8409191195015169317
+    second: rage even_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -81,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -132,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: justthehandstogether_0
+      name: rage even_0
       rect:
         serializedVersion: 2
-        x: 146
-        y: 159
-        width: 40
-        height: 38
+        x: 165
+        y: 167
+        width: 182
+        height: 181
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -146,50 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: cd71b89d63a04f880800000000000000
-      internalID: -8578220159539669028
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: justthehandstogether_1
-      rect:
-        serializedVersion: 2
-        x: 221
-        y: 111
-        width: 96
-        height: 75
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: a8e066906246bb130800000000000000
-      internalID: 3583568043032579722
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: justthehandstogether_2
-      rect:
-        serializedVersion: 2
-        x: 150
-        y: 103
-        width: 50
-        height: 46
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 1d9df4ac96f3865a0800000000000000
-      internalID: -6527897936275187247
+      spriteID: bda37c4792d8c4b80800000000000000
+      internalID: -8409191195015169317
       vertices: []
       indices: 
       edges: []
@@ -197,7 +149,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -205,9 +157,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      justthehandstogether_0: -8578220159539669028
-      justthehandstogether_1: 3583568043032579722
-      justthehandstogether_2: -6527897936275187247
+      rage even_0: -8409191195015169317
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

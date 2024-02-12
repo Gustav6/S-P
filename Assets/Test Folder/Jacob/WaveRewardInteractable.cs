@@ -133,13 +133,11 @@ public class WaveRewardInteractable : Interactable
 	public override void EnterInteractionRange()
 	{
 		_panelAnimator.Play("PanelExpand");
-		_rewardPanel.SetActive(true);
 	}
 
 	public override void ExitInteractionRange()
 	{
 		_panelAnimator.Play("PanelClose");
-		_rewardPanel.SetActive(false);
 	}
 
 	public override void Interact()

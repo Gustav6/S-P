@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerStats : MonoBehaviour, IDamageable
 {
@@ -21,6 +22,13 @@ public class PlayerStats : MonoBehaviour, IDamageable
         }
 
         _playerMovement = GetComponent<PlayerMovement>();
+        _headRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
+
+        _playerCollider = GetComponent<Collider2D>();
+
+        _thisDamagable = GetComponent<IDamageable>();
+
+        _initialHead = _headRenderer.sprite;
     }
 
     #endregion
@@ -36,6 +44,15 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private PlayerMovement _playerMovement;
 
+    private SpriteRenderer _headRenderer;
+    private Sprite _initialHead;
+    [SerializeField] private Sprite angryHead;
+
+    [SerializeField] private Tilemap tilemap;
+    private Dictionary<Vector2Int, TileBase> _tiles;
+    private Collider2D _playerCollider;
+    private IDamageable _thisDamagable;
+
     [SerializeField] float _diStrength = 0.25f; // DI stands for direction input, used to reduce or enhance knockback when counteracting it with movement input.
 
     bool _isImmune = false;
@@ -48,9 +65,14 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         //_data = SaveSystem.Instance.LoadGameSave();
 
+        _tiles = IDamageable.PopulateTilesDictonary(tilemap);
+
         // Call this when you want to change the player weapon n stuff.
         EquipmentManager.Instance.SwitchWeapon(CurrentWeapon);
     }
+    
+    // Seems like you can't access methods with default behavior in interface, from class implementing that interface.
+    //_thisDamagable.CheckDeath(tilemap, _tiles, transform.position, _playerCollider.bounds.size);
 
     public void SetLocalDataToSave(PlayerData data)
     {
@@ -100,8 +122,9 @@ public class PlayerStats : MonoBehaviour, IDamageable
     }
 
     #region Damage and Knockback
-    void IDamageable.TakeDamage(float damageAmount)
+    public void TakeDamage(float damageAmount)
     {
+        _headRenderer.sprite = angryHead;
         KnockbackPercent += damageAmount / GetStat(StatType.DamageResistance);
     }
 
@@ -114,10 +137,15 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
     {
         if (_isImmune || knockbackMultiplier == 0)
+        {
+            Invoke(nameof(ResetKB), 0.05f);
             return;
+        }
 
         _playerMovement.isGrounded = false;
         _isImmune = true;
+
+        _playerCollider.enabled = false;
 
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
@@ -134,8 +162,10 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     void ResetKB()
     {
+        _headRenderer.sprite = _initialHead;
         _playerMovement.isGrounded = true;
         _isImmune = false;
+        _playerCollider.enabled = true;
     }
     #endregion
 }

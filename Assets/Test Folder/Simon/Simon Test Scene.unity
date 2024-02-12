@@ -754,6 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08e26d71f8a56224fb3187fb4157a551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  colorTime: 10
 --- !u!114 &407331222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -839,7 +840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &423807937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1103,6 +1104,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentWeapon: {fileID: 11400000, guid: 95b744dc794b44f429292791b805445b, type: 2}
+  angryHead: {fileID: -8409191195015169317, guid: 665e88e68ec018740934e2027c18b6ba, type: 3}
+  tilemap: {fileID: 2050020650}
   _diStrength: 0.25
 --- !u!95 &533797567
 Animator:

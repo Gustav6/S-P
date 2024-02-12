@@ -312,7 +312,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1133,7 +1133,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -1731,21 +1731,21 @@ Tilemap:
       e33: 1
   - m_RefCount: 0
     m_Data:
-      e00: 1.4410738e-26
+      e00: -4.3511528e+20
       e01: NaN
-      e02: -6.2332084e+17
+      e02: -4.187308e+30
       e03: 0
-      e10: 1.84e-43
-      e11: NaN
+      e10: 3.39e-43
+      e11: 1.5e-44
       e12: 4.5911e-41
       e13: 0
-      e20: NaN
+      e20: 5.6413e-41
       e21: 0
-      e22: 1.4410714e-26
+      e22: -4.351147e+20
       e23: 0
       e30: 0
       e31: 7.34684e-40
-      e32: 1.84e-43
+      e32: 3.39e-43
       e33: 1
   m_TileColorArray:
   - m_RefCount: 24
@@ -1753,8 +1753,8 @@ Tilemap:
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Origin: {x: -13, y: -9, z: 0}
-  m_Size: {x: 26, y: 16, z: 1}
+  m_Origin: {x: -18, y: -14, z: 0}
+  m_Size: {x: 36, y: 26, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:

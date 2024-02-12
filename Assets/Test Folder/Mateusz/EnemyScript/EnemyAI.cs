@@ -23,6 +23,7 @@ public class EnemyAI : MonoBehaviour
 
     private int _previousDirection = 1;
 
+    bool reachedEndOfPath;
     public bool CanMove { get; set; }
     public bool IsNotGettingHit { get; set; }
 
@@ -74,9 +75,16 @@ public class EnemyAI : MonoBehaviour
 
         if (path == null)
             return;
-        
-         
-        
+        if (currentWayPoint >= path.vectorPath.Count)
+        {
+            reachedEndOfPath = true;
+            return;
+        }
+        else
+        {
+            reachedEndOfPath = false;
+        }
+                 
 
         Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
         Vector2 pathDirection = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;

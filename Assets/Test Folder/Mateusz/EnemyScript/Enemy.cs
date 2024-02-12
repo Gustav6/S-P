@@ -29,9 +29,9 @@ public class Enemy : MonoBehaviour, IDamageable
         _enemyAttack = GetComponent<EnemyAttack>();
     }
 
-    public virtual void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stuntDuration)
+    public virtual void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
     {
-        StartCoroutine(GiveEnemyMovement(stuntDuration));
+        StartCoroutine(GiveEnemyMovement(stunDuration));
     }
 
     internal IEnumerator GiveEnemyMovement(float time)

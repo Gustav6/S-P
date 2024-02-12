@@ -40,7 +40,9 @@ public class HitboxTrigger : MonoBehaviour
     {
         // TODO: Play SFX in take damage method.
         damageable.TakeDamage(damage);
-        damageable.TakeKnockback(sourcePosition, knockbackMultiplier, CalculateStunTime(damageable.KnockbackPercent));
+
+        if (knockbackMultiplier != 0)
+            damageable.TakeKnockback(sourcePosition, knockbackMultiplier, CalculateStunTime(damageable.KnockbackPercent));
     }
 
     /// <summary>

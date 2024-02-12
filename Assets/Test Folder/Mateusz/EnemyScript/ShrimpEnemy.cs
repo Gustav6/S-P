@@ -10,7 +10,6 @@ public class ShrimpEnemy : Enemy
         if (knockbackMultiplier == 0)
             return;
 
-        // Ändra på multiplier i olika enemies för olika knockback, följ detta som en outline.
         _enemyAttack.CanAttack(false);
         _attackController.LeaveMovement();
         _attackController.EnemyHit();

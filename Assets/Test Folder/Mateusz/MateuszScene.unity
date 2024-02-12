@@ -1024,7 +1024,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -116106894, guid: 752301e21677fce4db6c49eeca787de9, type: 3}
+  m_Sprite: {fileID: 309106485, guid: 137e990cfc86f7845a17c333dc6f126b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5944,7 +5944,7 @@ Transform:
   m_GameObject: {fileID: 875188850}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.65, y: 1.49, z: 1}
+  m_LocalPosition: {x: -3.12, y: 3.11, z: 1}
   m_LocalScale: {x: 0.7, y: 0.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6511,7 +6511,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!50 &1080978104
 Rigidbody2D:
   serializedVersion: 4
@@ -10231,7 +10231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2023741432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10350,8 +10350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd2242660a1c814cafee590f121ff7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 200
-  KnockbackMultiplier: 2
+  Damage: 2000
+  KnockbackMultiplier: 100
   _rb: {fileID: 0}
   _enemyAI: {fileID: 0}
   _attackController: {fileID: 0}

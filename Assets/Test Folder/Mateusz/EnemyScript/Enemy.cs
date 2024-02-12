@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [HideInInspector]
     public EnemyAttack _enemyAttack;
 
-    public GameObject go;
+    
 
     public float KnockbackPercent { get; set; }
 

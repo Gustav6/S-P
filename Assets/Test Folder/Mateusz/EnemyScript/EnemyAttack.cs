@@ -88,6 +88,7 @@ public class EnemyAttack : MonoBehaviour
 
     void IsAttacking()
     {
+        attackReady = false;
         _enemyAttackController.EnterAttackState();
         _enemy._attackController.LeaveMovement();
         isAttacking = true;

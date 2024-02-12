@@ -23,10 +23,12 @@ public class PowerUpController : MonoBehaviour
         if (rng > chance || chance == 0)
             return;
 
+        GameObject newSpawn;
+
         if (type == PowerUpTypes.Anything)
         {
             int index = UnityEngine.Random.Range(0, (int)PowerUpTypes.Anything - 1);
-            GameObject newSpawn = Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
+            newSpawn = Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
 
             try
             {
@@ -39,7 +41,7 @@ public class PowerUpController : MonoBehaviour
         }
         else
         {
-            GameObject newSpawn = Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
+            newSpawn = Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
 
             try
             {
@@ -50,6 +52,8 @@ public class PowerUpController : MonoBehaviour
                 Debug.LogError("No PowerUpActivation component found on powerUpPrefab.");
             }
         }
+
+        //newSpawn.GetComponent<PowerUp>().powerUpSprite;
     }
 }
 

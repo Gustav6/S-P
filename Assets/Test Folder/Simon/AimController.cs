@@ -13,7 +13,7 @@ public class AimController : MonoBehaviour
 	[SerializeField] private Transform weaponSwingAnchor;
     [SerializeField] private Transform neckAnchor;
 
-	private float _topHeadRotation = -30, _bottomHeadRotation = 44;
+	private float _topHeadRotation = -44, _bottomHeadRotation = 44;
 	private float _topArmRotation = -165, _bottomArmRotation = -14;
 
 	private float _previousAimDirection = 1;

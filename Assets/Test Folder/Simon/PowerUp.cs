@@ -4,5 +4,7 @@ using UnityEngine;
 
 public abstract class PowerUp : MonoBehaviour
 {
+    [SerializeField] internal Sprite powerUpSprite;
+
     public abstract void UsePowerUp();
 }

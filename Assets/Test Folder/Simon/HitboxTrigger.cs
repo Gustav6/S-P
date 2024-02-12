@@ -12,6 +12,12 @@ public class HitboxTrigger : MonoBehaviour
         _thisController = GetComponentInParent<Enemy>();
     }
 
+    private void Start()
+    {
+        Debug.Log($"Knockback: {PlayerStats.Instance.GetStat(StatType.KnockbackDealt)}\nDamage: {PlayerStats.Instance.GetStat(StatType.DamageDealt)}\n" +
+                  $"Knockback resistance: {PlayerStats.Instance.GetStat(StatType.KnockbackResistance)}\nDamage resistance: {PlayerStats.Instance.GetStat(StatType.KnockbackResistance)}");
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         var damageable = collision.GetComponent<IDamageable>();
@@ -24,10 +30,8 @@ public class HitboxTrigger : MonoBehaviour
             if (collision.CompareTag(transform.parent.tag))
                 return;
 
-            //  * PlayerStats.Instance.GetStat(StatType.DamageDealt)
-            //  * PlayerStats.Instance.GetStat(StatType.KnockbackDealt)
-            Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage,
-                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier, transform.position);
+            Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage * PlayerStats.Instance.GetStat(StatType.DamageDealt),
+                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), transform.position);
         }
         else
         {

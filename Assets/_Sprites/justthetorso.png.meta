@@ -133,6 +133,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -335,7 +348,16 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      justthetorso_0: -5162233019607948893
+      justthetorso_1: 3525589058921755344
+      justthetorso_2: -496533140436782808
+      justthetorso_3: -9072639342244541535
+      justthetorso_4: 6078996311369247006
+      justthetorso_5: 8975171097651528405
+      justthetorso_6: -2448601166303980228
+      justthetorso_7: -3808777208728754519
+      justthetorso_8: -3386557735474327577
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

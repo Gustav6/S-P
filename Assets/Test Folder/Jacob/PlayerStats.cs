@@ -31,8 +31,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public WeaponSO CurrentWeapon;
     #endregion
 
-    StatBlock _weaponStatBlock;
-    StatBlock _abilityStatBlock;
+    StatBlock _weaponStatBlock = new(1, 1, 1, 1, 1, 1);
+    StatBlock _abilityStatBlock = new(1, 1, 1, 1, 1, 1);
 
     private PlayerMovement _playerMovement;
 
@@ -56,6 +56,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         _mainStatBlock = data.MainStatBlock;
         CurrentWeapon = data.CurrentWeapon;
+
+        // Set other stuff based on above values.
     }
 
     public float GetStat(StatType stat)
@@ -100,8 +102,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     #region Damage and Knockback
     void IDamageable.TakeDamage(float damageAmount)
     {
-        // TODO: Add  GetStat(StatType.DamageResistance) back
-        KnockbackPercent += damageAmount;
+        KnockbackPercent += damageAmount / GetStat(StatType.DamageResistance);
     }
 
     /// <summary>
@@ -126,8 +127,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         Vector2 diVector = input * (knockbackVector.magnitude * _diStrength);
 
-        // TODO: Add GetStat(StatType.KnockbackResistance) back. Was causing some issues before.
-        _playerMovement.rb.AddForce((knockbackVector + diVector), ForceMode2D.Impulse);
+        _playerMovement.rb.AddForce((knockbackVector + diVector) / GetStat(StatType.KnockbackResistance), ForceMode2D.Impulse);
 
         Invoke(nameof(ResetKB), stunDuration);
     }

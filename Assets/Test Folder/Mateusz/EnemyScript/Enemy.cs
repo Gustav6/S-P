@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour, IDamageable
     [HideInInspector]
     public EnemyAttack _enemyAttack;
 
+    public GameObject go;
+
     public float KnockbackPercent { get; set; }
 
     private void Awake()
@@ -27,6 +29,11 @@ public class Enemy : MonoBehaviour, IDamageable
         _enemyAI = GetComponent<EnemyAI>();
         _attackController = GetComponent<EnemyAttackController>();
         _enemyAttack = GetComponent<EnemyAttack>();
+    }
+
+    private void DestroyGameObject()
+    {
+        Destroy(this.gameObject);
     }
 
     public virtual void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)

@@ -1,0 +1,603 @@
+fileFormatVersion: 2
+guid: 137e990cfc86f7845a17c333dc6f126b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -83101388794205078
+    second: suicide_bomber explosion sheet_0
+  - first:
+      213: -3367685806530449921
+    second: suicide_bomber explosion sheet_1
+  - first:
+      213: 8601330454410602704
+    second: suicide_bomber explosion sheet_2
+  - first:
+      213: 5421426331622342099
+    second: suicide_bomber explosion sheet_3
+  - first:
+      213: -599612425427997936
+    second: suicide_bomber explosion sheet_4
+  - first:
+      213: -1126822608707455942
+    second: suicide_bomber explosion sheet_5
+  - first:
+      213: 5487736762379659806
+    second: suicide_bomber explosion sheet_6
+  - first:
+      213: 4604978787882088794
+    second: suicide_bomber explosion sheet_7
+  - first:
+      213: 6053904358549986
+    second: suicide_bomber explosion sheet_8
+  - first:
+      213: -3517586002676236680
+    second: suicide_bomber explosion sheet_9
+  - first:
+      213: 5891860419464937585
+    second: suicide_bomber explosion sheet_10
+  - first:
+      213: -8473417318740383297
+    second: suicide_bomber explosion sheet_11
+  - first:
+      213: 4526975508179457608
+    second: suicide_bomber explosion sheet_12
+  - first:
+      213: -2637725986983466895
+    second: suicide_bomber explosion sheet_13
+  - first:
+      213: -2683232255052855940
+    second: suicide_bomber explosion sheet_14
+  - first:
+      213: 1378999161232502365
+    second: suicide_bomber explosion sheet_15
+  - first:
+      213: -295459080809180175
+    second: suicide_bomber explosion sheet_16
+  - first:
+      213: -1169810310892551116
+    second: suicide_bomber explosion sheet_17
+  - first:
+      213: 806123490508072198
+    second: suicide_bomber explosion sheet_18
+  - first:
+      213: 8818680283368635449
+    second: suicide_bomber explosion sheet_19
+  - first:
+      213: -2756075293809504358
+    second: suicide_bomber explosion sheet_20
+  - first:
+      213: 7171774103022995614
+    second: suicide_bomber explosion sheet_21
+  - first:
+      213: 4554994986776520226
+    second: suicide_bomber explosion sheet_22
+  - first:
+      213: -9037775156467506798
+    second: suicide_bomber explosion sheet_23
+  - first:
+      213: 5582852979982118509
+    second: suicide_bomber explosion sheet_24
+  - first:
+      213: -737224563492915668
+    second: suicide_bomber explosion sheet_25
+  - first:
+      213: -2473006826362865366
+    second: suicide_bomber explosion sheet_26
+  - first:
+      213: 5013507512424483100
+    second: suicide_bomber explosion sheet_27
+  - first:
+      213: -4926735138201397584
+    second: suicide_bomber explosion sheet_28
+  - first:
+      213: -3629925518213765450
+    second: suicide_bomber explosion sheet_29
+  - first:
+      213: -2391995000337763826
+    second: suicide_bomber explosion sheet_30
+  - first:
+      213: 6362220580271631406
+    second: suicide_bomber explosion sheet_31
+  - first:
+      213: 7778305791008230012
+    second: suicide_bomber explosion sheet_32
+  - first:
+      213: 7104396399658503534
+    second: suicide_bomber explosion sheet_33
+  - first:
+      213: -2848055119451233875
+    second: suicide_bomber explosion sheet_34
+  - first:
+      213: -5608306661396390504
+    second: suicide_bomber explosion sheet_35
+  - first:
+      213: -8658184202865865772
+    second: suicide_bomber explosion sheet_36
+  - first:
+      213: -5434236225748415656
+    second: suicide_bomber explosion sheet_37
+  - first:
+      213: 5752169347359452999
+    second: suicide_bomber explosion sheet_38
+  - first:
+      213: -7749898593842197873
+    second: suicide_bomber explosion sheet_39
+  - first:
+      213: -3222700065905445714
+    second: suicide_bomber explosion sheet_40
+  - first:
+      213: 4621857045917667711
+    second: suicide_bomber explosion sheet_41
+  - first:
+      213: 6716830676697402448
+    second: suicide_bomber explosion sheet_42
+  - first:
+      213: 3381553368216173186
+    second: suicide_bomber explosion sheet_43
+  - first:
+      213: 8378425493739215049
+    second: suicide_bomber explosion sheet_44
+  - first:
+      213: 7708307563226968344
+    second: suicide_bomber explosion sheet_45
+  - first:
+      213: -7200377763490694639
+    second: suicide_bomber explosion sheet_46
+  - first:
+      213: 3175792608855086556
+    second: suicide_bomber explosion sheet_47
+  - first:
+      213: 2423976970339512717
+    second: suicide_bomber explosion sheet_48
+  - first:
+      213: 3542444056173245570
+    second: suicide_bomber explosion sheet_49
+  - first:
+      213: -6058948798313951440
+    second: suicide_bomber explosion sheet_50
+  - first:
+      213: 1325356358480929274
+    second: suicide_bomber explosion sheet_51
+  - first:
+      213: 1441126927252862734
+    second: suicide_bomber explosion sheet_52
+  - first:
+      213: -699145272783563550
+    second: suicide_bomber explosion sheet_53
+  - first:
+      213: 6073151062514181535
+    second: suicide_bomber explosion sheet_54
+  - first:
+      213: 6430027883255909662
+    second: suicide_bomber explosion sheet_55
+  - first:
+      213: 5490034261954157596
+    second: suicide_bomber explosion sheet_56
+  - first:
+      213: -4803907706408967710
+    second: suicide_bomber explosion sheet_57
+  - first:
+      213: -5592610699669068977
+    second: suicide_bomber explosion sheet_58
+  - first:
+      213: -6081049101308201061
+    second: suicide_bomber explosion sheet_59
+  - first:
+      213: -5838291249383168736
+    second: suicide_bomber explosion sheet_60
+  - first:
+      213: -6292496945927342740
+    second: suicide_bomber explosion sheet_61
+  - first:
+      213: 1658602244377106744
+    second: suicide_bomber explosion sheet_62
+  - first:
+      213: -7388765315521918879
+    second: suicide_bomber explosion sheet_63
+  - first:
+      213: 9168373017802837766
+    second: suicide_bomber explosion sheet_64
+  - first:
+      213: 3593011617127065707
+    second: suicide_bomber explosion sheet_65
+  - first:
+      213: 4562851222350368602
+    second: suicide_bomber explosion sheet_66
+  - first:
+      213: 673230955473284114
+    second: suicide_bomber explosion sheet_67
+  - first:
+      213: -7833672270501999382
+    second: suicide_bomber explosion sheet_68
+  - first:
+      213: 5565656278024174937
+    second: suicide_bomber explosion sheet_69
+  - first:
+      213: -2523858152439575212
+    second: suicide_bomber explosion sheet_70
+  - first:
+      213: 5142017530306731950
+    second: suicide_bomber explosion sheet_71
+  - first:
+      213: -5695564009510625849
+    second: suicide_bomber explosion sheet_72
+  - first:
+      213: 8233640018345892388
+    second: suicide_bomber explosion sheet_73
+  - first:
+      213: -4238090414853949102
+    second: suicide_bomber explosion sheet_74
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: suicide_bomber explosion sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 988
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c5b9cbcb1b5e6f45b34cf05e887a2ef
+      internalID: 309106485
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suicide_bomber explosion sheet_1
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 988
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e3060207640ee004d97cdab1e8dfc224
+      internalID: -1175853737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suicide_bomber explosion sheet_2
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 988
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 072705b135a56934d8ba524b429bd99d
+      internalID: -353842906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suicide_bomber explosion sheet_3
+      rect:
+        serializedVersion: 2
+        x: 1455
+        y: 988
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4191249f27e9c344b81d4002c6cdb77
+      internalID: 591513435
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suicide_bomber explosion sheet_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 494
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13a8171471b7c80448cc58bfb7f003f8
+      internalID: 22756693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suicide_bomber explosion sheet_5
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 494
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39c883fc356593f43b3f1323fbf2a78f
+      internalID: 1339615620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suicide_bomber explosion sheet_6
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 494
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 960b058d87b68b540851a78011aed176
+      internalID: 358539684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suicide_bomber explosion sheet_7
+      rect:
+        serializedVersion: 2
+        x: 1455
+        y: 494
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e8b3c1c251821a54dbef3104e17465c9
+      internalID: 1130470828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suicide_bomber explosion sheet_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62d79cf8c08540e4fb25d7dbc6ebc563
+      internalID: 1817516781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suicide_bomber explosion sheet_9
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 0
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a48f3ac73d0b49147baed21a7d20a8cb
+      internalID: 931568181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suicide_bomber explosion sheet_10
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 0
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e37d525e763b46943beea8f5a3d247e9
+      internalID: -1651179428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: suicide_bomber explosion sheet_11
+      rect:
+        serializedVersion: 2
+        x: 1455
+        y: 0
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8010dac89e7ce6f4c99e433233a595d4
+      internalID: 1116979694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 9720d12353ea6ba4a914751d93b82ac0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      suicide_bomber explosion sheet_0: 309106485
+      suicide_bomber explosion sheet_1: -1175853737
+      suicide_bomber explosion sheet_10: -1651179428
+      suicide_bomber explosion sheet_11: 1116979694
+      suicide_bomber explosion sheet_2: -353842906
+      suicide_bomber explosion sheet_3: 591513435
+      suicide_bomber explosion sheet_4: 22756693
+      suicide_bomber explosion sheet_5: 1339615620
+      suicide_bomber explosion sheet_6: 358539684
+      suicide_bomber explosion sheet_7: 1130470828
+      suicide_bomber explosion sheet_8: 1817516781
+      suicide_bomber explosion sheet_9: 931568181
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

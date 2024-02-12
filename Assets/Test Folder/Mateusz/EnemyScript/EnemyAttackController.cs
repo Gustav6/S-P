@@ -51,6 +51,7 @@ public class EnemyAttackController : MonoBehaviour
     {
         if (go != null)
             Destroy(go);
+
         _anim.SetBool("IsHit", true);
     }
 

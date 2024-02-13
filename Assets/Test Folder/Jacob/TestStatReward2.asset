@@ -15,10 +15,9 @@ MonoBehaviour:
   RewardName: Reeward
   WaveUnlocked: 0
   StatModifier:
-    AttackSpeed: 2
+    AttackSpeed: 1
     DamageModifier: 1
-    DamageResistanceModifier: 3
+    DamageResistanceModifier: 1
     KnockbackModifier: 1
     KnockbackResitanceModifier: 1
-    MovementSpeedModifier: 1
-    AbilityCooldownModifier: 0.5
+    MovementSpeedModifier: 2

@@ -22,7 +22,7 @@ public class WaveCreationState : BaseWaveState
 
 	public override void EnterState()
 	{
-        _context.SetEnemiesToSpawn(GetEnemies(50, WaveStateMachine.WaveType.Boss)); // (WaveStateMachine.WaveType)Random.Range(0, 6)
+        _context.SetEnemiesToSpawn(GetEnemies(50, (WaveStateMachine.WaveType)Random.Range(0, 6)));
         _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.Reward);
 	}
 

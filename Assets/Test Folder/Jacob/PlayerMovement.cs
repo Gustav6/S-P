@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
 		}
 
 		if (isGrounded)
-			rb.velocity = input.normalized * _movementSpeed;
+			rb.velocity = input.normalized * _movementSpeed * PlayerStats.Instance.GetStat(StatType.MovementSpeed);
 	}
 
 	public void ToggleMovementLock()

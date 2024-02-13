@@ -245,8 +245,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000018479, y: -1.1522}
-  m_SizeDelta: {x: 2.5878, y: 0.6791}
+  m_AnchoredPosition: {x: 0, y: -1.1522}
+  m_SizeDelta: {x: 2.357, y: 0.6791}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1036653958994176406
 CanvasRenderer:
@@ -276,7 +276,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "+ 10% \nBack pain"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_sharedMaterial: {fileID: -1749147304458713139, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
@@ -303,7 +303,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.3
+  m_fontSize: 0.175
   m_fontSizeBase: 0.175
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -647,7 +647,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &1381389330513392326
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -150,6 +150,7 @@ public class WaveRewardInteractable : Interactable
         else
         {
 			PopupManager.Instance.SpawnText("Weapon aquired!\n" + _containedReward.RewardName, (Vector2)transform.position + new Vector2(0, 1), 2);
+			EquipmentManager.Instance.SwitchWeapon((_containedReward as WeaponReward).ContainedWeapon);
 			PlayerStats.Instance.NewWeaponEquipped(_randomStatBlock);
 		}
 

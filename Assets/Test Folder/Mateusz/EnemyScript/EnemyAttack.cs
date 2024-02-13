@@ -71,7 +71,6 @@ public class EnemyAttack : MonoBehaviour
             attackCooldown = 0;
             hasAttacked = false;
             attackReady = false;
-            _enemyAttackController.DespawnHitbox();
         }
 
         if (attackCooldown >= maxCooldown)

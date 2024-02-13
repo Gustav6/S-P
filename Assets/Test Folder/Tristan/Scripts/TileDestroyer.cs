@@ -39,10 +39,10 @@ public class TileDestroyer : MonoBehaviour
         snappedTile = new Vector3Int(tilePos.x,tilePos.y,0);
 
         
-        /*if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0))
         {
             DestroyTile(mousePos, 50);
-        }*/
+        }
     }
 
     Tile_Type GetTile_Type(Tile tile) {

@@ -9,7 +9,6 @@ public class EnemyAttackController : MonoBehaviour
 
     GameObject go;
 
-    public float colorTime = 10;
 
     SpriteRenderer _sr;
     Color originalColor;
@@ -18,7 +17,7 @@ public class EnemyAttackController : MonoBehaviour
     {
         _anim = GetComponent<Animator>();
         _enemy = GetComponent<Enemy>();
-        _sr = GetComponent<SpriteRenderer>();
+        _sr = GetComponentInChildren<SpriteRenderer>();
 
         originalColor = _sr.color;
     }
@@ -61,7 +60,11 @@ public class EnemyAttackController : MonoBehaviour
             Destroy(go);
 
         _anim.SetBool("IsHit", true);
-         StartCoroutine(SwitchColor());
+    }
+
+    public void GroundEnemyHit()
+    {
+        StartCoroutine(SwitchColor());
     }
 
     public void DespawnHitbox()
@@ -71,8 +74,10 @@ public class EnemyAttackController : MonoBehaviour
 
     IEnumerator SwitchColor()
     {
-        _sr.color = new Color(1, 0.28f, 0.28f);
-        yield return new WaitForSeconds(colorTime);
+        Debug.Log("bye bye");
+        _sr.color =  new Color(1, 0.00028f, 0.0028f);
+        yield return new WaitForSeconds(0.2f);
         _sr.color = originalColor;
+        
     }
 }

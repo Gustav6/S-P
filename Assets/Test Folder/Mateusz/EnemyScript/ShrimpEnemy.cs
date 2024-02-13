@@ -13,6 +13,7 @@ public class ShrimpEnemy : Enemy
         _enemyAttack.CanAttack(false);
         _attackController.LeaveMovement();
         _attackController.EnemyHit();
+        _attackController.GroundEnemyHit();
 
         Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized;
         float multiplier = (4 + (KnockbackPercent / 100)) * knockbackMultiplier;

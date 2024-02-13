@@ -7,16 +7,19 @@ using UnityEngine;
 public class AimController : MonoBehaviour
 {
 	[SerializeField] private float turnTime;
-    [SerializeField] private float turnThreshold = 0.45f;
 
     [SerializeField] private Transform spriteTransform;
 	[SerializeField] private Transform weaponSwingAnchor;
     [SerializeField] private Transform neckAnchor;
 
+	private float turnThreshold = 0.45f;
 	private float _topHeadRotation = -44, _bottomHeadRotation = 44;
 	private float _topArmRotation = -165, _bottomArmRotation = -14;
 
 	private float _previousAimDirection = 1;
+
+	// TODO: Make a bool that checks if the distance between the mouse and the rotation anchors are too great, if it is play the aim animations.
+	// Unless _previousAimDirection isn't equal to the current aim direction and the player should turn.
 
     /// <summary>
     /// Aims the weapon of the entity towards a certain target.
@@ -33,7 +36,7 @@ public class AimController : MonoBehaviour
 		// Minus is here because of how the sprites interact with their local scale and different pivot points.
         float currentAimDirection = -Mathf.Sign(x);
 
-		if (distance > 0.6f)
+		if (distance > 0.45f)
 			RotateBody(x, angle);
 
 		if (currentAimDirection != _previousAimDirection && Mathf.Abs(x) >= turnThreshold)

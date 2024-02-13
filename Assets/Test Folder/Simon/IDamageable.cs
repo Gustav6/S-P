@@ -56,10 +56,5 @@ public interface IDamageable
         }
     }
 
-    public virtual void Die()
-    {
-        // TODO: Play an animation and sfx before destroying.
-        // Call in the death check.
-        // Also don't make this virtual.
-    }
+    public void Die();
 }

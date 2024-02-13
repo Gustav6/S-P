@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class _PureTest : MonoBehaviour, IDamageable
+public class _PureTest : MonoBehaviour
 {
     public float KnockbackPercent { get; set; }
 

@@ -70,7 +70,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         // Call this when you want to change the player weapon n stuff.
         EquipmentManager.Instance.SwitchWeapon(CurrentWeapon);
     }
-    
+
     // Seems like you can't access methods with default behavior in interface, from class implementing that interface.
     //_thisDamagable.CheckDeath(tilemap, _tiles, transform.position, _playerCollider.bounds.size);
 
@@ -80,6 +80,11 @@ public class PlayerStats : MonoBehaviour, IDamageable
         CurrentWeapon = data.CurrentWeapon;
 
         // Set other stuff based on above values.
+    }
+
+    public void UpdateTilemap(Tilemap newTilemap)
+    {
+        tilemap = newTilemap;
     }
 
     public float GetStat(StatType stat)
@@ -166,6 +171,11 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _playerMovement.isGrounded = true;
         _isImmune = false;
         _playerCollider.enabled = true;
+    }
+
+    public void Die()
+    {
+        Debug.Log("Player dead baby");
     }
     #endregion
 }

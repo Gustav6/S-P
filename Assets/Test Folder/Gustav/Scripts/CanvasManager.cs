@@ -11,13 +11,6 @@ public class CanvasManager : MonoBehaviour
     void Start()
     {
         MoveInUI();
-
-        NewSceneLoad();
-    }
-
-    public void NewSceneLoad()
-    {
-        PanelManager.FadeIn(panelFadeInTime, new Color(0, 0, 0, 0), null);
     }
 
     public void MoveInUI()

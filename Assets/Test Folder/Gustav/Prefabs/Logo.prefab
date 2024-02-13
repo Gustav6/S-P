@@ -88,6 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22059464a44da74caa067109b7cfc29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  logoFadeInColor: {r: 0.6415094, g: 0.6415094, b: 0.6415094, a: 1}
-  logoColorTime: 1.5
+  image: {fileID: 6225560688937548918}
+  color: {r: 0.6150943, g: 0.6150943, b: 0.6150943, a: 1}
+  time: 1.5
   fadeIn: 1

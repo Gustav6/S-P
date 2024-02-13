@@ -105,14 +105,11 @@ public class UIInput : MonoBehaviour
             {
                 GameObject g = manager.CheckForInteractableUI(manager.CurrentUISelected);
 
-                if (g.GetComponent<SliderStateManager>() != null)
+                if (g.GetComponent<SliderStateManager>() != null || g.GetComponent<InputFieldStateManager>() != null)
                 {
-                    if (g.GetComponent<BaseStateManager>() != null)
+                    if (g.GetComponent<BaseStateManager>().UIActivated)
                     {
-                        if (g.GetComponent<BaseStateManager>().UIActivated)
-                        {
-                            return;
-                        }
+                        return;
                     }
                 }
 
@@ -198,7 +195,7 @@ public class UIInput : MonoBehaviour
 
             if (context.performed)
             {
-                if (g.GetComponent<SliderStateManager>() == null)
+                if (g.GetComponent<Slider>() == null && g.GetComponent<InputField>() == null)
                 {
                     uI.UIActivated = true;
                 }
@@ -213,7 +210,7 @@ public class UIInput : MonoBehaviour
             }
             if (context.canceled)
             {
-                if (g.GetComponent<SliderStateManager>() == null)
+                if (g.GetComponent<SliderStateManager>() == null && g.GetComponent<InputFieldStateManager>() == null)
                 {
                     uI.UIActivated = false;
                 }

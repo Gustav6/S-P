@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
-  m_Name: TestStatReward2
-  m_EditorClassIdentifier: Assembly-CSharp::StatReward
-  RewardName: Reeward
+  m_Script: {fileID: 11500000, guid: 5636dff09e1360347ab761647948eb96, type: 3}
+  m_Name: SR_Hasty
+  m_EditorClassIdentifier: 
+  RewardName: Hasty
   WaveUnlocked: 0
   StatModifier:
-    AttackSpeed: 1
-    DamageModifier: 1
+    AttackSpeed: 1.5
+    DamageModifier: 1.5
     DamageResistanceModifier: 1
-    KnockbackModifier: 1
+    KnockbackModifier: 1.5
     KnockbackResitanceModifier: 1
-    MovementSpeedModifier: 2
+    MovementSpeedModifier: 1

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Enemy : MonoBehaviour, IDamageable
 {
@@ -19,7 +20,11 @@ public class Enemy : MonoBehaviour, IDamageable
     [HideInInspector]
     public EnemyAttack _enemyAttack;
 
+    //[SerializeField] private GameObject grid;
     private IDamageable _thisDamagable;
+    private Tilemap _tilemap;
+    private Dictionary<Vector2Int, TileBase> _tiles;
+    private BoxCollider2D _thisCollider;
 
     public float KnockbackPercent { get; set; }
 
@@ -30,8 +35,11 @@ public class Enemy : MonoBehaviour, IDamageable
         _attackController = GetComponent<EnemyAttackController>();
         _enemyAttack = GetComponent<EnemyAttack>();
 
-        // Check if this works or if GetComponent is needed.
         _thisDamagable = this;
+
+        /*_tilemap = grid.GetComponentInChildren<Tilemap>();
+        _tiles = IDamageable.PopulateTilesDictonary(_tilemap);
+        _thisCollider = GetComponent<BoxCollider2D>();*/
     }
 
     private void DestroyGameObject()
@@ -50,7 +58,7 @@ public class Enemy : MonoBehaviour, IDamageable
         _attackController.EnterMovement();
         _enemyAttack.CanAttack(true);
 
-        //_thisDamagable.CheckDeath();
+        _thisDamagable.CheckDeath(_tilemap, _tiles, transform.position, _thisCollider.bounds.size);
     }
 
     private IEnumerable<Vector2> GetEnemyEnemyVelocity(Vector2 knockbackVector, float multiplier, float stun)

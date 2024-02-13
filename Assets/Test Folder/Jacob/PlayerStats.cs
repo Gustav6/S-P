@@ -25,8 +25,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _headRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
 
         _playerCollider = GetComponent<Collider2D>();
-
-        _thisDamagable = GetComponent<IDamageable>();
+        _thisDamagable = this;
 
         _initialHead = _headRenderer.sprite;
     }
@@ -35,8 +34,9 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     #region Saved Data
     private PlayerData _data;
-    StatBlock _mainStatBlock = new(1, 1, 1, 1, 1, 1);
-    public WeaponSO CurrentWeapon;
+    // Remove the use of constructor later.
+    StatBlock _mainStatBlock;
+    public WeaponSO CurrentWeapon; // Set to starting weapon.
     #endregion
 
     StatBlock _weaponStatBlock = new(1, 1, 1, 1, 1, 1);
@@ -63,7 +63,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private void Start()
     {
-        //_data = SaveSystem.Instance.LoadGameSave();
+        _data = SaveSystem.Instance.LoadGameSave();
+        SetLocalDataToSave(_data);
 
         _tiles = IDamageable.PopulateTilesDictonary(tilemap);
 
@@ -74,10 +75,17 @@ public class PlayerStats : MonoBehaviour, IDamageable
     // Seems like you can't access methods with default behavior in interface, from class implementing that interface.
     //_thisDamagable.CheckDeath(tilemap, _tiles, transform.position, _playerCollider.bounds.size);
 
+    private void Update()
+    {
+        _thisDamagable.CheckDeath(tilemap, _tiles, transform.position, _playerCollider.bounds.size);
+    }
+
     public void SetLocalDataToSave(PlayerData data)
     {
         _mainStatBlock = data.MainStatBlock;
-        CurrentWeapon = data.CurrentWeapon;
+        
+        if (data.CurrentWeapon != null)
+            CurrentWeapon = data.CurrentWeapon;
 
         // Set other stuff based on above values.
     }

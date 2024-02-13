@@ -90,7 +90,7 @@ public class ButtonPressedState : UIBaseState
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (canTransition)
+        if (canTransition && !manager.UIActivated)
         {
             referenceManager.SwitchState(manager.deselectedState);
         }
@@ -98,27 +98,8 @@ public class ButtonPressedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        //if (buttonInstance.transitionToPrefab)
-        //{
-        //    UIManager.instance.EnableTransitioning();
-
-        //    buttonInstance.StartPrefabTransition();
-        //}
-
-        //if (buttonInstance.transitionToScene)
-        //{
-        //    UIManager.instance.EnableTransitioning();
-
-        //    buttonInstance.StartSceneTransition();
-        //}
-
         UIManager.instance.EnableTransitioning();
         buttonInstance.ActiveSelectedfunction();
-
-        //if (buttonInstance.quit)
-        //{
-        //    buttonInstance.QuitGame();
-        //}
     }
 }
 #endregion

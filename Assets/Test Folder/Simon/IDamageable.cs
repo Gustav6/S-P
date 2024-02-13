@@ -51,7 +51,6 @@ public interface IDamageable
         }
         catch
         {
-            Debug.Log("Outside of bounds.");
             Die();
         }
     }

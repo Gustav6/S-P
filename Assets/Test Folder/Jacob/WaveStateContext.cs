@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class WaveStateContext
 {
-	public WaveStateContext(WaveStateMachine stateMachine, Transform spawnPoints)
+	public WaveStateContext(WaveStateMachine stateMachine, Transform spawnPoints, Transform respawnPoint)
 	{
         WaveNumber = 1;
         StateMachine = stateMachine;
         SpawnPointParent = spawnPoints;
+        RespawnPoint = respawnPoint;
 	}
 
 	// Creation State
@@ -20,6 +21,8 @@ public class WaveStateContext
 
     public Transform SpawnPointParent { get; private set; }
 
+    public Transform RespawnPoint { get; private set; }
+
     public void SetEnemiesToSpawn(List<EnemyPreset> enemiesList)
     {
         EnemiesToSpawn = enemiesList.ToArray();
@@ -30,9 +33,13 @@ public class WaveStateContext
         SpawnPointParent = spawnPointsParent;
     }
 
+    public void SetRespawnPoint(Transform respawnPoint)
+    {
+        RespawnPoint = respawnPoint;
+    }
+
     public void NextWave()
 	{
-        Debug.Log("CALLING NEXTWAVE");
         EnemiesToSpawn = null;
         WaveNumber++;
 	}

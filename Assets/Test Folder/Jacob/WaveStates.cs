@@ -4,21 +4,25 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Tilemaps;
 
 public class WaveCreationState : BaseWaveState
 {
 	readonly WaveStateContext _context;
 	readonly EnemyPreset[] _enemyAssortment;
 
-    public WaveCreationState(WaveStateContext context, WaveStateMachine.WaveState stateKey, EnemyPreset[] enemyAssortment) : base(context, stateKey)
+    WaveInfoPopup _waveInfoPopup;
+
+    public WaveCreationState(WaveStateContext context, WaveStateMachine.WaveState stateKey, EnemyPreset[] enemyAssortment, WaveInfoPopup waveInfoPopup) : base(context, stateKey)
 	{
 		_context = context;
         _enemyAssortment = enemyAssortment;
+        _waveInfoPopup = waveInfoPopup;
 	}
 
 	public override void EnterState()
 	{
-        _context.SetEnemiesToSpawn(GetEnemies(50, WaveStateMachine.WaveType.Balanced));
+        _context.SetEnemiesToSpawn(GetEnemies(50, WaveStateMachine.WaveType.Boss)); // (WaveStateMachine.WaveType)Random.Range(0, 6)
         _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.Reward);
 	}
 
@@ -44,6 +48,7 @@ public class WaveCreationState : BaseWaveState
 
         int remainingBudget = totalBudget;
 
+        // Generating enemy list
         switch (waveType)
 {
             case WaveStateMachine.WaveType.Random:
@@ -217,6 +222,40 @@ public class WaveCreationState : BaseWaveState
                 break;
         }
 
+        // Displaying wave info
+        switch (waveType)
+        {
+            case WaveStateMachine.WaveType.Random:
+                _waveInfoPopup.SetText("Random Wave", "All foes are chosen at random, expect the unexpected.");
+                break;
+
+            case WaveStateMachine.WaveType.Balanced:
+                _waveInfoPopup.SetText("Balanced Wave", "An equal balance between weak and strong foes.");
+                break;
+
+            case WaveStateMachine.WaveType.Light:
+                _waveInfoPopup.SetText("Light Wave", "The enemies strength lies in their numbers, expect a large amount of weaker foes.");
+                break;
+
+            case WaveStateMachine.WaveType.Heavy:
+                _waveInfoPopup.SetText("Heavy Wave", "Prepare to brawl with an array of larger foes, don't get careless.");
+                break;
+
+            case WaveStateMachine.WaveType.Swarm:
+                _waveInfoPopup.SetText("Swarm Wave", "Massive hordes of weaker enemies incoming, expect to be overwhelmed.");
+                break;
+
+            case WaveStateMachine.WaveType.Boss:
+                _waveInfoPopup.SetText("Boss Wave", "ooga booga big boss incoming!!");
+                break;
+
+            default:
+                _waveInfoPopup.SetText("Fuck you wave", "This wave is not supposed to exist, get out of here.");
+                break;
+        }
+
+        _waveInfoPopup.Enable();
+
         return finalEnemyList;
     }
 }
@@ -388,15 +427,18 @@ public class WaveIntermissionState : BaseWaveState
 {
     WaveStateContext _context;
     Animator _countdownAnim;
+    WaveInfoPopup _waveInfoPopup;
 
-    public WaveIntermissionState(WaveStateContext context, WaveStateMachine.WaveState stateKey, Animator countDownAnim) : base(context, stateKey)
+    public WaveIntermissionState(WaveStateContext context, WaveStateMachine.WaveState stateKey, Animator countDownAnim, WaveInfoPopup waveInfoPopup) : base(context, stateKey)
 	{
 		_context = context;
         _countdownAnim = countDownAnim;
+        _waveInfoPopup = waveInfoPopup;
 	}
 
     public override void EnterState()
     {
+        _waveInfoPopup.Disable();
         _countdownAnim.Play("Countdown");
     }
 
@@ -617,6 +659,9 @@ public class StageSwapState : BaseWaveState
 
     Transform _rewardParent;
 
+    Vector2 _startPos;
+    Transform _armCenter;
+
     public StageSwapState(WaveStateContext context, WaveStateMachine.WaveState stateKey, Animator armAnim, IslandTransition[] islandPrefabs, IslandTransition currentIsland, Transform gridTransform, WaveRewardInteractable[] statRewardInteractables, WaveRewardInteractable[] weaponRewardInteractables) : base(context, stateKey)
     {
         _context = context;
@@ -626,12 +671,16 @@ public class StageSwapState : BaseWaveState
         _gridTransform = gridTransform;
         _statRewardInteractables = statRewardInteractables;
         _weaponRewardInteractables = weaponRewardInteractables;
+
+        _armCenter = armAnim.transform.GetChild(0);
     }
 
     public override void EnterState()
     {
+        _timer = 0;
         _isSwapping = false;
         TransitionManager.Instance.ApproachPlayer();
+        _startPos = _armCenter.position;
     }
 
     public override void ExitState()
@@ -659,6 +708,9 @@ public class StageSwapState : BaseWaveState
         _rewardParent = island.transform.GetChild(0);
 
         _context.SetSpawnPointsParent(island.transform.GetChild(1));
+        _context.SetRespawnPoint(island.transform.GetChild(2));
+
+        PlayerStats.Instance.UpdateTilemap(island.GetComponent<Tilemap>());
     }
 
     public override void UpdateState()
@@ -678,8 +730,20 @@ public class StageSwapState : BaseWaveState
                 for (int i = 2; i < 5; i++)
                     _statRewardInteractables[i - 2].transform.position = _rewardParent.GetChild(i).position;
 
-                TransitionManager.Instance.DropPlayer();
+                _timer = 0;
                 _isSwapping = true;
+                TransitionManager.Instance.DropPlayer();
+            }
+        }
+        else if (_isSwapping)
+        {
+            _timer += Time.deltaTime;
+
+            _armCenter.position = Vector2.Lerp(_startPos, _context.RespawnPoint.position, _timer / 0.3f);
+
+            if (_timer >= 0.3f)
+            {
+                _isSwapping = false;
             }
         }
 

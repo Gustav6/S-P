@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: 1
-  isDestroyed: 0
 --- !u!1001 &529380799501875856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -134,7 +133,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6550605332572765445, guid: e6a596fe58081cf499530a5f3927e991, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7238473506134070951, guid: e6a596fe58081cf499530a5f3927e991, type: 3}
       propertyPath: position.x
@@ -204,11 +203,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5312909321379644743, guid: 37f6f8cd6ac1b9e4791eb8bdd70c5ce7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3839.7446
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5312909321379644743, guid: 37f6f8cd6ac1b9e4791eb8bdd70c5ce7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 271
       objectReference: {fileID: 0}
     - target: {fileID: 5312909321379644743, guid: 37f6f8cd6ac1b9e4791eb8bdd70c5ce7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -256,7 +255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7121983987623724198, guid: 37f6f8cd6ac1b9e4791eb8bdd70c5ce7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7121983987623724198, guid: 37f6f8cd6ac1b9e4791eb8bdd70c5ce7, type: 3}
       propertyPath: m_TagString

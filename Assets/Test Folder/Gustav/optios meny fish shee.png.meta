@@ -301,9 +301,9 @@ TextureImporter:
       name: optios meny fish shee_0
       rect:
         serializedVersion: 2
-        x: 1120
+        x: 1020
         y: 2380
-        width: 799
+        width: 900
         height: 850
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -322,9 +322,9 @@ TextureImporter:
       name: optios meny fish shee_1
       rect:
         serializedVersion: 2
-        x: 3040
+        x: 2940
         y: 2380
-        width: 799
+        width: 900
         height: 850
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -343,9 +343,9 @@ TextureImporter:
       name: optios meny fish shee_2
       rect:
         serializedVersion: 2
-        x: 1120
+        x: 1020
         y: 1300
-        width: 799
+        width: 900
         height: 850
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -364,9 +364,9 @@ TextureImporter:
       name: optios meny fish shee_3
       rect:
         serializedVersion: 2
-        x: 3040
+        x: 2940
         y: 1300
-        width: 799
+        width: 900
         height: 850
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -385,9 +385,9 @@ TextureImporter:
       name: optios meny fish shee_4
       rect:
         serializedVersion: 2
-        x: 1120
+        x: 1020
         y: 220
-        width: 799
+        width: 900
         height: 850
       alignment: 0
       pivot: {x: 0.5, y: 0.5}

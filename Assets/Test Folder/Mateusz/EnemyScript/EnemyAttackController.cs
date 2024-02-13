@@ -55,9 +55,6 @@ public class EnemyAttackController : MonoBehaviour
 
     public void EnemyHit()
     {
-        if (go != null)
-            Destroy(go);
-
         _anim.SetBool("IsHit", true);
     }
 
@@ -68,7 +65,8 @@ public class EnemyAttackController : MonoBehaviour
 
     public void DespawnHitbox()
     {
-        Destroy(go);
+        if (go != null)
+            Destroy(go);
     }
 
     IEnumerator SwitchColor()

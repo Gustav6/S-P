@@ -10,7 +10,6 @@ public class PlayerData
     public PlayerData()
     {
         MainStatBlock = new StatBlock(1, 1, 1, 1, 1, 1);
-        // TODO: Add basic weapon that the player will spawn with.
-        //CurrentWeapon = 
+        CurrentWeapon = null;
     }
 }

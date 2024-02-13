@@ -9,6 +9,10 @@ public class IslandTransition : MonoBehaviour
 
     float timerMax = 1;
 
+    public void Start()
+    {
+        SwapIsland();
+    }
     public void SwapIsland()
     {
         StartCoroutine(MoveIsland());

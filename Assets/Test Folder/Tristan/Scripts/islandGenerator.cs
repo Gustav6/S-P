@@ -8,11 +8,16 @@ public class IslandGenerator : MonoBehaviour
 
     public IslandTransition previousIsland;
 
+    public void Start()
+    {
+        GenerateIsland();
+    }
+
     public void GenerateIsland()
     {
         GameObject randomIsland = islandPrefabs[Random.Range(0, islandPrefabs.Length)];
         
-        Transform island = Instantiate(randomIsland, new Vector3(-18, 0, 0), Quaternion.identity,transform).transform;
+        Transform island = Instantiate(randomIsland, new Vector3(-18, 0, 0), Quaternion.identity, transform).transform;
         island.position = new Vector3(-18, 0, 0);
 
         IslandTransition transition = island.GetComponent<IslandTransition>();

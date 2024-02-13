@@ -9,7 +9,6 @@ public class EnemyAttackController : MonoBehaviour
 
     GameObject go;
 
-
     SpriteRenderer _sr;
     Color originalColor;
 

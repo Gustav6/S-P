@@ -19,7 +19,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [HideInInspector]
     public EnemyAttack _enemyAttack;
 
-    
+    private IDamageable _thisDamagable;
 
     public float KnockbackPercent { get; set; }
 
@@ -29,6 +29,9 @@ public class Enemy : MonoBehaviour, IDamageable
         _enemyAI = GetComponent<EnemyAI>();
         _attackController = GetComponent<EnemyAttackController>();
         _enemyAttack = GetComponent<EnemyAttack>();
+
+        // Check if this works or if GetComponent is needed.
+        _thisDamagable = this;
     }
 
     private void DestroyGameObject()
@@ -46,6 +49,8 @@ public class Enemy : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(time);
         _attackController.EnterMovement();
         _enemyAttack.CanAttack(true);
+
+        //_thisDamagable.CheckDeath();
     }
 
     private IEnumerable<Vector2> GetEnemyEnemyVelocity(Vector2 knockbackVector, float multiplier, float stun)
@@ -71,5 +76,10 @@ public class Enemy : MonoBehaviour, IDamageable
             _rb.velocity = velocity;
             yield return null;
         }
+    }
+
+    public void Die()
+    {
+        Debug.Log("Enemy dead");
     }
 }

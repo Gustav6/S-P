@@ -51,6 +51,11 @@ public class EnemyAttack : MonoBehaviour
         if (!canAttack)
             return;
 
+        if (isAttacking && attackReady)
+        {
+            isAttacking = false;
+        }
+
         if (!DistanceToTarget())
             _enemyAttackController.EnterMovement();
         else
@@ -66,6 +71,7 @@ public class EnemyAttack : MonoBehaviour
             attackCooldown = 0;
             hasAttacked = false;
             attackReady = false;
+            _enemyAttackController.DespawnHitbox();
         }
 
         if (attackCooldown >= maxCooldown)

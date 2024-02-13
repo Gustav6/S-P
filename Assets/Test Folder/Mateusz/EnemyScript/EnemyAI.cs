@@ -38,7 +38,6 @@ public class EnemyAI : MonoBehaviour
 
         InvokeRepeating("UpdatePath", 0f, .2f);
     }
-
     
     void UpdatePath()
     {
@@ -61,9 +60,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-
-
-     void Update()
+    void Update()
     {
         if (!CanMove)
         {
@@ -75,6 +72,7 @@ public class EnemyAI : MonoBehaviour
 
         if (path == null)
             return;
+
         if (currentWayPoint >= path.vectorPath.Count)
         {
             reachedEndOfPath = true;
@@ -84,18 +82,16 @@ public class EnemyAI : MonoBehaviour
         {
             reachedEndOfPath = false;
         }
-                 
 
         Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
         Vector2 pathDirection = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
-
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);    
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         angle *= Mathf.Sign(transform.localScale.x);
         pivot.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
 
-        rb.velocity = direction * speed;
+        rb.velocity = pathDirection * speed;
 
         if (distance < nextWayPointDistance)
         {

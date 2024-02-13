@@ -48,7 +48,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     private Sprite _initialHead;
     [SerializeField] private Sprite angryHead;
 
-    [SerializeField] private Tilemap tilemap;
+    [SerializeField] internal Tilemap tilemap;
     private Dictionary<Vector2Int, TileBase> _tiles;
     private Collider2D _playerCollider;
     private IDamageable _thisDamagable;
@@ -77,7 +77,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        _thisDamagable.CheckDeath(tilemap, _tiles, transform.position, _playerCollider.bounds.size);
+        //_thisDamagable.CheckDeath(tilemap, _tiles, _playerCollider);
     }
 
     public void SetLocalDataToSave(PlayerData data)

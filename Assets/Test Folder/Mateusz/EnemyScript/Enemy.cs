@@ -20,16 +20,17 @@ public class Enemy : MonoBehaviour, IDamageable
     [HideInInspector]
     public EnemyAttack _enemyAttack;
 
-    //[SerializeField] private GameObject grid;
     private IDamageable _thisDamagable;
     private Tilemap _tilemap;
     private Dictionary<Vector2Int, TileBase> _tiles;
-    private BoxCollider2D _thisCollider;
+    private BoxCollider2D _thisFeetCollider;
 
     public float KnockbackPercent { get; set; }
 
     private void Awake()
     {
+        // TODO: Fix enemy outside of tilemap.
+
         _rb = GetComponent<Rigidbody2D>();
         _enemyAI = GetComponent<EnemyAI>();
         _attackController = GetComponent<EnemyAttackController>();
@@ -37,14 +38,13 @@ public class Enemy : MonoBehaviour, IDamageable
 
         _thisDamagable = this;
 
-        /*_tilemap = grid.GetComponentInChildren<Tilemap>();
-        _tiles = IDamageable.PopulateTilesDictonary(_tilemap);
-        _thisCollider = GetComponent<BoxCollider2D>();*/
+        _thisFeetCollider = GetComponentsInChildren<BoxCollider2D>()[1];
     }
 
-    private void DestroyGameObject()
+    private void Start()
     {
-        Destroy(this.gameObject);
+        _tilemap = PlayerStats.Instance.tilemap;
+        _tiles = IDamageable.PopulateTilesDictonary(_tilemap);
     }
 
     public virtual void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
@@ -58,7 +58,7 @@ public class Enemy : MonoBehaviour, IDamageable
         _attackController.EnterMovement();
         _enemyAttack.CanAttack(true);
 
-        _thisDamagable.CheckDeath(_tilemap, _tiles, transform.position, _thisCollider.bounds.size);
+        _thisDamagable.CheckDeath(_tilemap, _tiles, _thisFeetCollider);
     }
 
     private IEnumerable<Vector2> GetEnemyEnemyVelocity(Vector2 knockbackVector, float multiplier, float stun)
@@ -88,6 +88,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        Debug.Log("Enemy dead");
+        Destroy(gameObject);
     }
 }

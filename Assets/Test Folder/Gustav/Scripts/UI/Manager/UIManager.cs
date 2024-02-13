@@ -163,10 +163,6 @@ public class UIManager : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(Transitioning);
-        Debug.Log(ListOfUIObjects.Count);
-        Debug.Log(CurrentUIPrefab);
-
         TransitionSystem.Update();
 
         if (KeyOrControlActive)
@@ -296,51 +292,52 @@ public class UIManager : MonoBehaviour
         return false;
     }
 
-    private void InstantiateNewPrefab()
+    public void InstantiateNewPrefab()
     {
         Transform parent = gameObject.transform;
 
-        if (prefabToSpawn.GetComponent<ActiveSettingManager>() != null)
+        if (prefabToSpawn != null)
         {
-            parent = GetComponentInChildren<ActiveMenuManager>().transform;
-        }
-
-        DestroyUI(CurrentUIPrefab);
-
-        Vector3 spawnLocation = GiveDestination(GetDirection(prefabToSpawn));
-
-        InstantiateNewUIPrefab(prefabToSpawn, parent, Vector3.one, spawnLocation);
-        MoveUIToStart(1, DisableTransitioning);
-        prefabToSpawn = null;
-
-        List<GameObject> list = new();
-
-        foreach (UI uI in GetComponentsInChildren<UI>())
-        {
-            if (!uI.IsDestroyed)
+            if (prefabToSpawn.GetComponent<ActiveSettingManager>() != null)
             {
-                list.Add(uI.gameObject);
+                parent = GetComponentInChildren<ActiveMenuManager>().transform;
             }
-        }
 
-        LoadUI(list);
+            DestroyUI(CurrentUIPrefab);
+
+            Vector3 spawnLocation = GiveDestination(GetDirection(prefabToSpawn));
+
+            InstantiateNewUIPrefab(prefabToSpawn, parent, Vector3.one, spawnLocation);
+            MoveUIToStart(1, DisableTransitioning);
+            prefabToSpawn = null;
+
+            List<GameObject> list = new();
+
+            foreach (UI uI in GetComponentsInChildren<UI>())
+            {
+                if (!uI.IsDestroyed)
+                {
+                    list.Add(uI.gameObject);
+                }
+            }
+
+            LoadUI(list);
+        }
     }
 
     public void MoveUIToStart(float time, ExecuteOnCompletion actions)
     {
-        Debug.Log(CurrentUIPrefab);
-
         Vector3 destination = GiveDestination(GetDirection(CurrentUIPrefab)) * -1;
 
         MoveGameObject(CurrentUIPrefab, time, destination, actions, 1, 1.2f);
     }
 
-    public void MoveUIThenRemove(float time, ExecuteOnCompletion actions, float windUp, float overShoot)
+    public void MoveUIThenRemove(float time, GameObject prefab, ExecuteOnCompletion actions, float windUp, float overShoot)
     {
+        prefabToSpawn = prefab;
+
         if (prefabToSpawn != null)
         {
-            actions += InstantiateNewPrefab;
-
             if (prefabToSpawn.GetComponent<ActiveSettingManager>() != null)
             {
                 CurrentUIPrefab = GetComponentInChildren<ActiveSettingManager>().gameObject;

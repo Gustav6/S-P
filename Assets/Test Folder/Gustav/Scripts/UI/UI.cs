@@ -5,6 +5,7 @@ using UnityEngine;
 
 public abstract class UI : MonoBehaviour
 {
+    [Header("UI variables")]
     public Vector2 position;
     public bool hovering;
 

@@ -98,24 +98,27 @@ public class ButtonPressedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        if (buttonInstance.transitionToPrefab)
-        {
-            UIManager.instance.EnableTransitioning();
+        //if (buttonInstance.transitionToPrefab)
+        //{
+        //    UIManager.instance.EnableTransitioning();
 
-            buttonInstance.StartPrefabTransition();
-        }
+        //    buttonInstance.StartPrefabTransition();
+        //}
 
-        if (buttonInstance.transitionToScene)
-        {
-            UIManager.instance.EnableTransitioning();
+        //if (buttonInstance.transitionToScene)
+        //{
+        //    UIManager.instance.EnableTransitioning();
 
-            buttonInstance.StartSceneTransition();
-        }
+        //    buttonInstance.StartSceneTransition();
+        //}
 
-        if (buttonInstance.quit)
-        {
-            buttonInstance.QuitGame();
-        }
+        UIManager.instance.EnableTransitioning();
+        buttonInstance.ActiveSelectedfunction();
+
+        //if (buttonInstance.quit)
+        //{
+        //    buttonInstance.QuitGame();
+        //}
     }
 }
 #endregion

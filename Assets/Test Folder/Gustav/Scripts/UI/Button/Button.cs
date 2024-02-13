@@ -8,15 +8,15 @@ using static Transition;
 
 public class Button : UI
 {
+    [Header("Button variables")]
     private ButtonStateManager ButtonStateManager { get; set; }
+
+    [SerializeField] private List<Functions> selectedFunctions = new();
+    private Dictionary<Functions, System.Action> functionLookup;
 
     [Range(0.1f, 5)] public float transitionDuration;
 
-    public bool transitionToScene;
-    public NewScene NewScene;
-
-    public bool transitionToPrefab;
-    public bool moveTransition;
+    public ActiveScene NewScene;
 
     [Range(-2, 0)] public float windUp;
     [Range(0, 2)] public float overShoot;
@@ -24,7 +24,18 @@ public class Button : UI
     [Header("Drag in the prefab here")]
     public GameObject prefabToSpawn;
 
-    public bool quit;
+    private void Awake()
+    {
+        functionLookup = new Dictionary<Functions, System.Action>()
+        {
+            { Functions.SwitchScene, SceneTransition },
+            { Functions.RemovePrefab, RemovePrefab },
+            { Functions.SpawnPrefab, null },
+            { Functions.QuitGame, Application.Quit }
+        };
+    }
+
+    private ExecuteOnCompletion execute = null;
 
     public override void Start()
     {
@@ -42,38 +53,47 @@ public class Button : UI
         base.Update();
     }
 
-    public void StartSceneTransition()
+    private void SceneTransition()
     {
-        ExecuteOnCompletion execute = null;
-
-        StartPrefabTransition();
-
         execute += SwitchScene;
 
         PanelManager.FadeOut(transitionDuration, new Color(0, 0, 0, 1), execute);
-        Debug.Log("Change Scene");
     }
 
-    public void StartPrefabTransition()
+    private void RemovePrefab()
     {
-        UIManager.instance.prefabToSpawn = prefabToSpawn;
-        UIManager.instance.MoveUIThenRemove(transitionDuration, null, windUp, overShoot);
-        Debug.Log("Move In Prefab");
-    }
+        if (selectedFunctions.Contains(Functions.SpawnPrefab))
+        {
+            execute += UIManager.instance.InstantiateNewPrefab;
+        }
 
-    public void QuitGame()
-    {
-        Application.Quit();
+        UIManager.instance.MoveUIThenRemove(transitionDuration, prefabToSpawn, execute, windUp, overShoot);
     }
 
     private void SwitchScene()
     {
         SceneManager.LoadScene((int)NewScene);
     }
+
+    public void ActiveSelectedfunction()
+    {
+        for (int i = 0; i < selectedFunctions.Count; i++)
+        {
+            functionLookup[selectedFunctions[i]]?.Invoke();
+        }
+    }
+
+    private enum Functions
+    {
+        SwitchScene,
+        RemovePrefab,
+        SpawnPrefab,
+        QuitGame,
+    }
 }
 
-public enum NewScene
+public enum ActiveScene
 {
+    MainMenu,
     Game,
-    Menu,
 }

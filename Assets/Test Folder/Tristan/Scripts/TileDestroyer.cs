@@ -115,9 +115,15 @@ public class TileDestroyer : MonoBehaviour
                         tilemap.SetTile(nTilePos, null);
                         break;
                     case Tile_Type.GrassCurveBotRight:
-                        tilemap.SetTile(nTilePos, null);
+                        tilemap.SetTile(nTilePos, GrassBotMid);
                         break;
                     case Tile_Type.GrassCurveBotLeft:
+                        tilemap.SetTile(nTilePos, GrassBotMid);
+                        break;
+                    case Tile_Type.GrassMidLeft:
+                        tilemap.SetTile(nTilePos, null);
+                        break;
+                    case Tile_Type.GrassMidRight:
                         tilemap.SetTile(nTilePos, null);
                         break;
                 }
@@ -158,6 +164,12 @@ public class TileDestroyer : MonoBehaviour
                     case Tile_Type.GrassCurveBotLeft:
                         tilemap.SetTile(wTilePos, null);
                         break;
+                    case Tile_Type.GrassMidLeft:
+                        tilemap.SetTile(wTilePos, null);
+                        break;
+                    case Tile_Type.GrassMidRight:
+                        tilemap.SetTile(wTilePos, GrassMidRight);
+                        break;
                 }
                 break;
             case Tile_Location.S:
@@ -185,15 +197,21 @@ public class TileDestroyer : MonoBehaviour
                         tilemap.SetTile(sTilePos, GrassTopMid);
                         break;
                     case Tile_Type.GrassCurveTopRight:
-                        tilemap.SetTile(sTilePos, null);
+                        tilemap.SetTile(sTilePos, GrassTopMid);
                         break;
                     case Tile_Type.GrassCurveTopLeft:
-                        tilemap.SetTile(sTilePos, null);
+                        tilemap.SetTile(sTilePos, GrassTopMid);
                         break;
                     case Tile_Type.GrassCurveBotRight:
                         tilemap.SetTile(sTilePos, null);
                         break;
                     case Tile_Type.GrassCurveBotLeft:
+                        tilemap.SetTile(sTilePos, null);
+                        break;
+                    case Tile_Type.GrassMidLeft:
+                        tilemap.SetTile(sTilePos, null);
+                        break;
+                    case Tile_Type.GrassMidRight:
                         tilemap.SetTile(sTilePos, null);
                         break;
                 }
@@ -234,13 +252,19 @@ public class TileDestroyer : MonoBehaviour
                     case Tile_Type.GrassCurveBotLeft:
                         tilemap.SetTile(eTilePos, null);
                         break;
+                    case Tile_Type.GrassMidLeft:
+                        tilemap.SetTile(eTilePos, GrassMidLeft);
+                        break;
+                    case Tile_Type.GrassMidRight:
+                        tilemap.SetTile(eTilePos, null);
+                        break;
                 }
                 break;
             case Tile_Location.NE:
                 switch (localTileTypes[4])
                 {
                     case Tile_Type.GrassTopMid:
-                        tilemap.SetTile(neTilePos, null);
+                        tilemap.SetTile(neTilePos, GrassTopLeft);
                         break;
                     case Tile_Type.GrassTopRight:
                         tilemap.SetTile(neTilePos, null);
@@ -264,12 +288,18 @@ public class TileDestroyer : MonoBehaviour
                         tilemap.SetTile(neTilePos, null);
                         break;
                     case Tile_Type.GrassCurveTopLeft:
-                        tilemap.SetTile(neTilePos, null);
+                        tilemap.SetTile(neTilePos, GrassMidLeft);
                         break;
                     case Tile_Type.GrassCurveBotRight:
-                        tilemap.SetTile(neTilePos, null);
+                        tilemap.SetTile(neTilePos, GrassBotMid);
                         break;
                     case Tile_Type.GrassCurveBotLeft:
+                        tilemap.SetTile(neTilePos, GrassBotMid);
+                        break;
+                    case Tile_Type.GrassMidLeft:
+                        tilemap.SetTile(neTilePos, GrassBotMid);
+                        break;
+                    case Tile_Type.GrassMidRight:
                         tilemap.SetTile(neTilePos, null);
                         break;
                 }
@@ -278,7 +308,7 @@ public class TileDestroyer : MonoBehaviour
                 switch (localTileTypes[5])
                 {
                     case Tile_Type.GrassTopMid:
-                        tilemap.SetTile(nwTilePos, null);
+                        tilemap.SetTile(nwTilePos, GrassTopRight);
                         break;
                     case Tile_Type.GrassTopRight:
                         tilemap.SetTile(nwTilePos, null);
@@ -299,16 +329,22 @@ public class TileDestroyer : MonoBehaviour
                         tilemap.SetTile(nwTilePos, GrassCurveBotRight);
                         break;
                     case Tile_Type.GrassCurveTopRight:
-                        tilemap.SetTile(nwTilePos, GrassCurveTopRight);
+                        tilemap.SetTile(nwTilePos, GrassMidRight);
                         break;
                     case Tile_Type.GrassCurveTopLeft:
                         tilemap.SetTile(nwTilePos, null);
                         break;
                     case Tile_Type.GrassCurveBotRight:
-                        tilemap.SetTile(nwTilePos, GrassCurveBotRight);
+                        tilemap.SetTile(nwTilePos, GrassBotMid);
                         break;
                     case Tile_Type.GrassCurveBotLeft:
+                        tilemap.SetTile(nwTilePos, GrassBotMid);
+                        break;
+                    case Tile_Type.GrassMidLeft:
                         tilemap.SetTile(nwTilePos, null);
+                        break;
+                    case Tile_Type.GrassMidRight:
+                        tilemap.SetTile(nwTilePos, GrassMidRight);
                         break;
                 }
                 break;
@@ -337,16 +373,22 @@ public class TileDestroyer : MonoBehaviour
                         tilemap.SetTile(swTilePos, GrassCurveTopRight);
                         break;
                     case Tile_Type.GrassCurveTopRight:
-                        tilemap.SetTile(swTilePos, GrassCurveTopRight);
+                        tilemap.SetTile(swTilePos, GrassTopMid);
                         break;
                     case Tile_Type.GrassCurveTopLeft:
-                        tilemap.SetTile(swTilePos, null);
+                        tilemap.SetTile(swTilePos, GrassTopMid);
                         break;
                     case Tile_Type.GrassCurveBotRight:
                         tilemap.SetTile(swTilePos, null);
                         break;
                     case Tile_Type.GrassCurveBotLeft:
                         tilemap.SetTile(swTilePos, null);
+                        break;
+                    case Tile_Type.GrassMidLeft:
+                        tilemap.SetTile(swTilePos, null);
+                        break;
+                    case Tile_Type.GrassMidRight:
+                        tilemap.SetTile(swTilePos, GrassMidRight);
                         break;
                 }
                 break;
@@ -375,15 +417,21 @@ public class TileDestroyer : MonoBehaviour
                         tilemap.SetTile(seTilePos, GrassCurveTopLeft);
                         break;
                     case Tile_Type.GrassCurveTopRight:
-                        tilemap.SetTile(seTilePos, null);
+                        tilemap.SetTile(seTilePos, GrassTopMid);
                         break;
                     case Tile_Type.GrassCurveTopLeft:
-                        tilemap.SetTile(seTilePos, GrassCurveTopLeft);
+                        tilemap.SetTile(seTilePos, GrassTopMid);
                         break;
                     case Tile_Type.GrassCurveBotRight:
                         tilemap.SetTile(seTilePos, null);
                         break;
                     case Tile_Type.GrassCurveBotLeft:
+                        tilemap.SetTile(seTilePos, null);
+                        break;
+                    case Tile_Type.GrassMidLeft:
+                        tilemap.SetTile(seTilePos, GrassMidLeft);
+                        break;
+                    case Tile_Type.GrassMidRight:
                         tilemap.SetTile(seTilePos, null);
                         break;
                 }

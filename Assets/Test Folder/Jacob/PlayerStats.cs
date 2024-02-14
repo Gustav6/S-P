@@ -45,7 +45,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     private PlayerMovement _playerMovement;
 
     [SerializeField] private WaveStateMachine _waveStateMachine;
-    [SerializeField] private GameObject _gameOverGameObject;
+    [SerializeField] private GameObject _gameOverGameObject, _canvas;
 
     private SpriteRenderer _headRenderer;
     private Sprite _initialHead;
@@ -216,14 +216,16 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        // TODO: Play splash animation and sound perhaps.
+
         if (_waveStateMachine.CurrentState != _waveStateMachine.States[WaveStateMachine.WaveState.WaveInProgress])
         {
-            Debug.Log("Debug.Cock ahah");
+            transform.position = Vector2.zero;
             return;
         }
 
-        //Instantiate(_gameOverGameObject, Vector2.zero, Quaternion.identity);
-        //gameObject.SetActive(false);
+        _waveStateMachine.TransitionToState(WaveStateMachine.WaveState.WaveLoss);
+        gameObject.SetActive(false);
     }
     #endregion
 }

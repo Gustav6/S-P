@@ -17,9 +17,9 @@ public class EnemyAttack : MonoBehaviour
 
     [SerializeField] private bool hasAttacked;
     [SerializeField] private bool attackReady;
-   [SerializeField] private bool isAttacking;
+    [SerializeField] private bool isAttacking;
 
-    private bool canAttack = true;
+    internal bool canAttack = true;
 
     [SerializeField] internal GameObject hitbox, hitboxSpawn;
 

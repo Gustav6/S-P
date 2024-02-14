@@ -547,6 +547,9 @@ public class WaveInProgressState : BaseWaveState
             }
 
             yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
+            if (!_context.CanSpawnEnemies)
+                yield break;
+
             SpawnEnemy(enemiesToSpawn[i]);
             _enemyValueAlive += enemiesToSpawn[i].Cost;
         }
@@ -562,6 +565,8 @@ public class WaveInProgressState : BaseWaveState
         enemyLifeStatus.Value = enemyPreset.Cost;
 
         _context.StateMachine.StartCoroutine(AnimateEnemySpawn(enemy.transform, randomSpawnPoint));
+
+        _context.SpawnedEnemies.Add(enemy.GetComponent<Enemy>());
 
         // Enable enemy AI.
     }
@@ -762,21 +767,36 @@ public class WaveLossState : BaseWaveState
 {
     WaveStateContext _context;
 
-    private GameObject _gameOver;
+    private GameObject _gameOverObject;
 
-    public WaveLossState(WaveStateContext context, WaveStateMachine.WaveState stateKey) : base(context, stateKey)
+    public WaveLossState(WaveStateContext context, WaveStateMachine.WaveState stateKey, GameObject gameOver) : base(context, stateKey)
     {
         _context = context;
+        _gameOverObject = gameOver;
     }
 
     public override void EnterState()
     {
+        _gameOverObject.SetActive(true);
 
+        _context.CanSpawnEnemies = false;
+
+        foreach(Enemy enemy in _context.SpawnedEnemies)
+        {
+            if (enemy == null)
+                continue;
+
+            enemy._enemyAttack.canAttack = false;
+
+            enemy._attackController.LeaveAttack();
+            enemy._attackController.LeaveMovement(true);
+        }
     }
 
     public override void ExitState()
     {
-
+        _gameOverObject.SetActive(false);
+        // TODO: Play animation to remove Gameover Prefab.
     }
 
     public override WaveStateMachine.WaveState GetNextState()

@@ -56,6 +56,8 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 
 	[SerializeField] WaveInfoPopup _waveInfoPopup;
 
+	[SerializeField] GameObject _gameOverUIObject;
+
 	private void Awake()
 	{
 		_context = new(this, _spawnPointsParent, _respawnPoint);
@@ -71,7 +73,7 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 		States.Add(WaveState.WaveInProgress, new WaveInProgressState(_context, WaveState.WaveInProgress, _waveProgressFill, _fishTransform, _progressBarAnim, _verticalSpawnCurve));
 		States.Add(WaveState.WaveCleared, new WaveClearState(_context, WaveState.WaveCleared, _clearMessages, _messageText, _waveClearAnim));
 		States.Add(WaveState.StageSwap, new StageSwapState(_context, WaveState.StageSwap, _armAnim, _islandPrefabs, _currentIsland, _gridTransform, _statRewardInteractables, _weaponRewardInteractables));
-		States.Add(WaveState.WaveLoss, new WaveLossState(_context, WaveState.WaveLoss));
+		States.Add(WaveState.WaveLoss, new WaveLossState(_context, WaveState.WaveLoss, _gameOverUIObject));
 
 		CurrentState = States[WaveState.WaveCreation];
 	}

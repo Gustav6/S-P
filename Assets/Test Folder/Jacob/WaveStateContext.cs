@@ -10,6 +10,7 @@ public class WaveStateContext
         StateMachine = stateMachine;
         SpawnPointParent = spawnPoints;
         RespawnPoint = respawnPoint;
+        SpawnedEnemies = new List<Enemy>();
 	}
 
 	// Creation State
@@ -23,9 +24,14 @@ public class WaveStateContext
 
     public Transform RespawnPoint { get; private set; }
 
+    public List<Enemy> SpawnedEnemies { get; private set; }
+    
+    public bool CanSpawnEnemies { get; set; }
+
     public void SetEnemiesToSpawn(List<EnemyPreset> enemiesList)
     {
         EnemiesToSpawn = enemiesList.ToArray();
+        CanSpawnEnemies = true;
     }
 
     public void SetSpawnPointsParent(Transform spawnPointsParent)

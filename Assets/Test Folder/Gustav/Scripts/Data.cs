@@ -30,6 +30,8 @@ public class Data
             toggleTypes[i] = (ToggleType)i;
             toggleValues[i] = true;
         }
+
+        SkipTutorial = false;
         #endregion
     }
 
@@ -43,4 +45,6 @@ public class Data
     public string[] leadBoardNames;
     public int[] leaderBoardScore;
     #endregion
+
+    public bool SkipTutorial;
 }

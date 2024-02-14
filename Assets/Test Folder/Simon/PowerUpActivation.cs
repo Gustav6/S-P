@@ -9,7 +9,7 @@ public class PowerUpActivation : MonoBehaviour
 
     private PlayerStats playerStat;
 
-    private float _time, _multipler = 1;
+    //private float _time, _multipler = 1;
 
     private void Start()
     {

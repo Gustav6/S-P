@@ -1,15 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
     public GameObject[] popUps;
     private int popUpIndex;
-    bool skipTutorial = false;
+    bool skipTutorial;
+    float timer;
+    float timerMax = 2;
+
+    Data ThisData;
+
+    private void Start()
+    {
+        ThisData = SaveSystem.Instance.LoadData();
+        //skipTutorial = ThisData.SkipTutorial;
+    }
 
     void Update()
     {
+        timer = Time.deltaTime;
         for (int i = 0; i < popUps.Length; i++)
         {
             if (i == popUpIndex) {
@@ -20,8 +32,38 @@ public class TutorialManager : MonoBehaviour
             }
         }
         // Update this later
-        if (Input.GetKeyDown(KeyCode.E)) {
-            popUpIndex++;
+        if (skipTutorial == false)
+        {
+            if (popUpIndex == 0)
+            {
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
+                    popUpIndex++;
+            }
+            else if (popUpIndex == 1)
+            {
+                // Check if player has picked up
+                if (Input.GetKeyDown(KeyCode.F))
+                    popUpIndex++;
+            }
+            else if (popUpIndex == 2)
+            {
+                if (Input.GetButtonDown("Fire1"))
+                    popUpIndex++;
+            }
+            else if (popUpIndex == 3)
+            {
+                while(timer <= timerMax)
+                {
+                    //ThisData.SkipTutorial = true;
+                    SaveSystem.Instance.SaveData(ThisData);
+                    //Start wave
+                }
+                popUpIndex++;
+            }
+        }
+        else
+        {
+
         }
     }
 }

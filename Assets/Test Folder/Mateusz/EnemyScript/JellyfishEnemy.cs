@@ -10,7 +10,7 @@ public class JellyfishEnemy : Enemy
             return;
 
         _enemyAttack.CanAttack(false);
-        _attackController.LeaveMovement();
+        _attackController.LeaveMovement(false);
         _attackController.EnemyHit();
 
         Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized;

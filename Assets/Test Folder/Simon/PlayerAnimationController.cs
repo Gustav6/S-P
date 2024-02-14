@@ -38,7 +38,7 @@ public class PlayerAnimationController : MonoBehaviour
         EquipmentManager.Instance.ToggleHit(false);
 
         weaponAnimator.SetTrigger("PlayHit");
-        weaponAnimator.SetFloat("s", PlayerStats.Instance.CurrentWeapon.AnimationSpeed);
+        weaponAnimator.SetFloat("s", PlayerStats.Instance.CurrentWeapon.AnimationSpeed * PlayerStats.Instance.GetStat(StatType.AttackSpeed));
 
         float impulseMultiplier = PlayerStats.Instance.CurrentWeapon.ImpulseMultiplier;
         float impulseTime = PlayerStats.Instance.CurrentWeapon.ImpulseEffectTime;
@@ -62,7 +62,7 @@ public class PlayerAnimationController : MonoBehaviour
         {
             _animationReadyToReset = true;
             weaponAnimator.SetTrigger("PlayReturn");
-            weaponAnimator.SetFloat("s", PlayerStats.Instance.CurrentWeapon.ResetMultiplier);
+            weaponAnimator.SetFloat("s", PlayerStats.Instance.CurrentWeapon.ResetMultiplier * PlayerStats.Instance.GetStat(StatType.AttackSpeed));
             return;
         }
 
@@ -75,7 +75,7 @@ public class PlayerAnimationController : MonoBehaviour
         if (PlayerStats.Instance.CurrentWeapon.IsWeaponResetable)
         {
             _animationReadyToReset = false;
-            weaponAnimator.SetFloat("s", PlayerStats.Instance.CurrentWeapon.AnimationSpeed);
+            weaponAnimator.SetFloat("s", PlayerStats.Instance.CurrentWeapon.AnimationSpeed * PlayerStats.Instance.GetStat(StatType.AttackSpeed));
         }
     }
 

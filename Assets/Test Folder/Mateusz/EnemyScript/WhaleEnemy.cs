@@ -11,7 +11,7 @@ public class WhaleEnemy : Enemy
             return;
 
         _enemyAttack.CanAttack(false);
-        _attackController.LeaveMovement();
+        _attackController.LeaveMovement(false);
         _attackController.EnemyHit();
         _attackController.GroundEnemyHit();
         

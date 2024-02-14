@@ -29,10 +29,10 @@ public class EnemyAttackController : MonoBehaviour
         _anim.SetBool("IsHit", false);
     }
 
-    public void LeaveMovement()
+    public void LeaveMovement(bool isNotGettingHit)
     {
         _enemy._enemyAI.CanMove = false;
-        _enemy._enemyAI.IsNotGettingHit = false;
+        _enemy._enemyAI.IsNotGettingHit = isNotGettingHit;
         _anim.SetBool("IsMoving", false);
     }
 
@@ -71,10 +71,8 @@ public class EnemyAttackController : MonoBehaviour
 
     IEnumerator SwitchColor()
     {
-        Debug.Log("bye bye");
         _sr.color =  new Color(1, 0.00028f, 0.0028f);
         yield return new WaitForSeconds(0.2f);
         _sr.color = originalColor;
-        
     }
 }

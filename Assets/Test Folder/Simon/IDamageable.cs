@@ -29,10 +29,12 @@ public interface IDamageable
 
     public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration);
 
-    public void CheckDeath(Tilemap tilemap, Dictionary<Vector2Int, TileBase> tiles, Vector2 position, Vector2 size)
+    public void CheckDeath(Tilemap tilemap, Dictionary<Vector2Int, TileBase> tiles, Collider2D collider)
     {
-        // Add 0.37 to account for grid offset.
-        Vector2 center = tilemap.CellToWorld(new Vector3Int(0, 0)) + Vector3.up * 0.37f;
+        Vector2 position = collider.bounds.center;
+        Vector2 size = collider.bounds.size;
+
+        Vector2 center = tilemap.CellToWorld(new Vector3Int(0, 0)) + Vector3.up * 0.37f; // Add 0.37 to account for grid offset.
         Vector2 direction = position - center;
         direction = new Vector2(Mathf.Sign(direction.x), Mathf.Sign(direction.y));
 

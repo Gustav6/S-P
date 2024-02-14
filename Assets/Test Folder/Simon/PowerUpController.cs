@@ -27,7 +27,7 @@ public class PowerUpController : MonoBehaviour
 
         if (type == PowerUpTypes.Anything)
         {
-            int index = UnityEngine.Random.Range(0, (int)PowerUpTypes.Anything - 1);
+            int index = UnityEngine.Random.Range(0, (int)PowerUpTypes.Anything);
             newSpawn = Instantiate(powerUpPrefab, spawnPosition, Quaternion.identity);
 
             try
@@ -60,5 +60,7 @@ public class PowerUpController : MonoBehaviour
 public enum PowerUpTypes
 {
     Dash,
+    Haste,
+    Tank,
     Anything
 }

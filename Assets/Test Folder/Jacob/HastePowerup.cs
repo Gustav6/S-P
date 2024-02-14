@@ -7,11 +7,12 @@ public class HastePowerup : PowerUp
     public override void UsePowerUp()
     {
         PlayerStats.Instance.ActivateAbilityStats(new StatBlock(1.25f, 1, 1, 1, 1, 1.25f));
-        Invoke(nameof(RemoveStats), 10f);
+        Invoke(nameof(OnDeactivatePowerUp), 10f);
     }
 
-    void RemoveStats()
+    public override void OnDeactivatePowerUp()
     {
         PlayerStats.Instance.DeActivateAbilityStats();
+        PlayerStats.Instance.ClearEquippedAbility();
     }
 }

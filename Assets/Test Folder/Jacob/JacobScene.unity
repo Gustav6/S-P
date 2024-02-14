@@ -374,6 +374,50 @@ Transform:
   - {fileID: 729724776}
   m_Father: {fileID: 948347490}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &82158645
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 82158647}
+  - component: {fileID: 82158646}
+  m_Layer: 0
+  m_Name: SaveSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &82158646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82158645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bae75dd0922b274f91aeaa9ab306fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &82158647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82158645}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.1896102, y: -0.031094871, z: -2.7572203}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &113013796 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3225158508766823017, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
@@ -14373,10 +14417,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1146938536}
     m_Modifications:
-    - target: {fileID: 245303469323110146, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3438687588386700965, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -15290,12 +15330,12 @@ MonoBehaviour:
   - {fileID: 196112677}
   - {fileID: 989311540}
   _statRewardPool:
-  - {fileID: 11400000, guid: b4d8619fedecfe24798ee43367deb43e, type: 2}
-  - {fileID: 11400000, guid: a41dc7a0e9e44644789b8b9ad997b643, type: 2}
-  - {fileID: 11400000, guid: 0658aeefdeee8be46ad1926c241c8cda, type: 2}
+  - {fileID: 11400000, guid: e21c7c548d4a2c9479481de1be299199, type: 2}
+  - {fileID: 11400000, guid: a158583683e12714f9f5735332b47934, type: 2}
+  - {fileID: 11400000, guid: 10bb9e3453d58da4990ebaa31541a3cb, type: 2}
   _weaponRewardPool:
-  - {fileID: 11400000, guid: 8e4b1b3ef8487c84eba6d5ed13779189, type: 2}
-  - {fileID: 11400000, guid: 15dc3851378b9784ba3a1b76dac21e43, type: 2}
+  - {fileID: 11400000, guid: cc5a58de7c50b01489d30e23d7a112b6, type: 2}
+  - {fileID: 11400000, guid: 6a38e243318a380488b617c9978768cc, type: 2}
   _dropCurve:
     serializedVersion: 2
     m_Curve:
@@ -15397,7 +15437,7 @@ MonoBehaviour:
   - Loading...
   - wow!
   - We making it off the island with this one.
-  - "#&\xA3@ those fish!!"
+  - Fuck those fish!!
   _messageText: {fileID: 41028103}
   _waveClearAnim: {fileID: 603107909}
   _islandGenerator: {fileID: 0}
@@ -27911,3 +27951,4 @@ SceneRoots:
   - {fileID: 773047904}
   - {fileID: 179709973}
   - {fileID: 430376467}
+  - {fileID: 82158647}

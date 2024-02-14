@@ -34,18 +34,26 @@ public class PowerUpActivation : MonoBehaviour
         if (!triggerInfo.CompareTag("Player"))
             return;
 
+        PowerUp previousPowerUp = playerStat.GetComponent<PowerUp>();
+
+        if (previousPowerUp != null)
+            previousPowerUp.OnDeactivatePowerUp();
+
         switch (thisType)
         {
             default:
             case PowerUpTypes.Anything:
             case PowerUpTypes.Dash:
-                if (playerStat.GetComponent<Dash>() == null)
-                    playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<Dash>());
-                else
-                {
-                    Debug.Log("Ability already equipped");
-                }
-                
+                playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<Dash>());
+
+                break;
+            case PowerUpTypes.Haste:
+                playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<HastePowerup>());
+
+                break;
+            case PowerUpTypes.Tank:
+                playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<ScalePowerup>());
+
                 break;
         }
 

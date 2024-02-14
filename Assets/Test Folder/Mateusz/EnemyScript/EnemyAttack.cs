@@ -60,7 +60,7 @@ public class EnemyAttack : MonoBehaviour
             _enemyAttackController.EnterMovement();
         else
         {
-            _enemyAttackController.LeaveMovement();
+            _enemyAttackController.LeaveMovement(true);
         }
 
         if (!isAttacking && attackReady)
@@ -79,6 +79,7 @@ public class EnemyAttack : MonoBehaviour
         }
         else
         {
+            attackReady = false;
             attackCooldown += Time.deltaTime;
         }
     }
@@ -95,7 +96,7 @@ public class EnemyAttack : MonoBehaviour
     {
         attackReady = false;
         _enemyAttackController.EnterAttackState();
-        _enemy._attackController.LeaveMovement();
+        _enemy._attackController.LeaveMovement(true);
         isAttacking = true;
     }
 

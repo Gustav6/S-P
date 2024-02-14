@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveMenuManager : MonoBehaviour
+public class ActiveMenuManager : ActiveBaseManager
 {
     public GameObject[] objects;
     public List<GameObject> gameObjects;
-    public PrefabMoveDirection moveDirection;
     public bool enableBlurOnInstantiate;
 
-    public void Start()
+    public override void Start()
     {
         if (objects != null)
         {
@@ -42,11 +41,4 @@ public class ActiveMenuManager : MonoBehaviour
             Destroy(gameObjects[i]);
         }
     }
-}
-
-public enum PrefabMoveDirection
-{
-    Left, 
-    Right,
-    None
 }

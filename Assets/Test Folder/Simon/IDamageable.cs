@@ -24,6 +24,7 @@ public interface IDamageable
 
     public void TakeDamage(float damageAmount)
     {
+        AudioManager.Instance.Play("Hurt");
         KnockbackPercent += damageAmount;
     }
 

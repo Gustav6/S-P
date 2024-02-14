@@ -92,6 +92,7 @@ public class Enemy : MonoBehaviour, IDamageable
             EquipmentManager.Instance.OnSpawnPowerUp(transform.position, 100, PowerUpTypes.Anything);
         }
 
+        AudioManager.Instance.Play("WaterSplash");
         Destroy(gameObject);
     }
 }

@@ -147,6 +147,8 @@ public class UIManager : MonoBehaviour
         else
             Destroy(this);
 
+        ResolutionScaling = GetComponentInParent<Canvas>().scaleFactor;
+
         CameraInstance = GameObject.FindGameObjectWithTag("MainCamera");
 
         CurrentUIPrefab = GameObject.FindGameObjectWithTag("UIPrefab");
@@ -154,11 +156,6 @@ public class UIManager : MonoBehaviour
         ListOfUIObjects = new();
 
         LoadUI();
-    }
-
-    void Start()
-    {
-        ResolutionScaling = GetComponentInParent<Canvas>().scaleFactor;
     }
 
     void Update()
@@ -250,7 +247,7 @@ public class UIManager : MonoBehaviour
     {
         CurrentUIPrefab = Instantiate(prefab);
         CurrentUIPrefab.transform.SetParent(parentObject);
-        CurrentUIPrefab.transform.localScale = Vector3.one;
+        CurrentUIPrefab.transform.localScale = scale;
         CurrentUIPrefab.transform.localPosition = offset;
 
         ActiveMenuManager activePrefab = prefab.GetComponent<ActiveMenuManager>();
@@ -292,7 +289,7 @@ public class UIManager : MonoBehaviour
         return false;
     }
 
-    public void InstantiateNewPrefab()
+    public void TempInstantiateNewPrefab()
     {
         Transform parent = gameObject.transform;
 
@@ -305,10 +302,10 @@ public class UIManager : MonoBehaviour
 
             DestroyUI(CurrentUIPrefab);
 
-            Vector3 spawnLocation = GiveDestination(GetDirection(prefabToSpawn));
+            Vector3 spawnLocation = GiveDestination(GetInstantiateDirection(prefabToSpawn));
 
             InstantiateNewUIPrefab(prefabToSpawn, parent, Vector3.one, spawnLocation);
-            MoveUIToStart(1, DisableTransitioning);
+            MoveUIToStart(1, prefabToSpawn, DisableTransitioning);
             prefabToSpawn = null;
 
             List<GameObject> list = new();
@@ -325,11 +322,13 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void MoveUIToStart(float time, ExecuteOnCompletion actions)
+    public void MoveUIToStart(float time, GameObject g, ExecuteOnCompletion actions)
     {
-        Vector3 destination = GiveDestination(GetDirection(CurrentUIPrefab)) * -1;
+        //Vector3 destination = GiveDestination(GetInstantiateDirection(g)) * -1;
 
-        MoveGameObject(CurrentUIPrefab, time, destination, actions, 1, 1.2f);
+        Vector3 destination = new(Screen.width / 2, Screen.height / 2, 0);
+
+        MoveGameObject(g, time, destination, actions, 0, 0);
     }
 
     public void MoveUIThenRemove(float time, GameObject prefab, ExecuteOnCompletion actions, float windUp, float overShoot)
@@ -348,43 +347,65 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        Vector3 destination = GiveDestination(GetDirection(CurrentUIPrefab));
+        Vector3 destination = GiveDestination(GetRemoveDirection(CurrentUIPrefab)) * -1;
 
         MoveGameObject(CurrentUIPrefab, time, destination, actions, windUp, overShoot);
     }
 
     private void MoveGameObject(GameObject g, float time, Vector3 destination, ExecuteOnCompletion execute = null, float windUp = 0, float overShoot = 0)
     {
-        TransitionType type = TransitionType.NormalizedBezier3;
-        TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, type, true, windUp, overShoot, execute));
+        TransitionType type = TransitionType.SmoothStop2;
+        TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, type, false, windUp, overShoot, execute));
     }
 
     public Vector3 GiveDestination(PrefabMoveDirection direction)
     {
-        if (direction == PrefabMoveDirection.Left)
+        Vector3 temp = Vector3.zero;
+
+        switch (direction)
         {
-            return new(-Screen.width, 0, 0);
-        }
-        else if (direction == PrefabMoveDirection.Right)
-        {
-            return new(Screen.width, 0, 0);
+            case PrefabMoveDirection.Left:
+                temp = new(Screen.width / ResolutionScaling, 0, 0);
+                break;
+            case PrefabMoveDirection.Right:
+                temp = new(-Screen.width / ResolutionScaling, 0, 0);
+                break;
+            case PrefabMoveDirection.Up:
+                temp = new(0, -Screen.height / ResolutionScaling, 0);
+                break;
+            case PrefabMoveDirection.Down:
+                temp = new(0, Screen.height / ResolutionScaling);
+                break;
+            default:
+                break;
         }
 
-        return Vector3.zero;
+        return temp;
     }
 
-    private PrefabMoveDirection GetDirection(GameObject g)
+    private PrefabMoveDirection GetInstantiateDirection(GameObject g)
     {
-        if (g.GetComponent<ActiveMenuManager>() != null)
+        try
         {
-            return PrefabMoveDirection.Left;
+            return g.GetComponent<ActiveBaseManager>().moveTowardsOnStart;
         }
-        else if (g.GetComponent<ActiveSettingManager>() != null)
+        catch (NullReferenceException)
         {
-            return PrefabMoveDirection.Right;
+            Debug.Log("Cant get move direction");
+            throw;
         }
-
-        return PrefabMoveDirection.None;
+    }
+    private PrefabMoveDirection GetRemoveDirection(GameObject g)
+    {
+        try
+        {
+            return g.GetComponent<ActiveBaseManager>().moveTowardsOnRemove;
+        }
+        catch (NullReferenceException)
+        {
+            Debug.Log("Cant get move direction");
+            throw;
+        }
     }
 
     public void DestroyUI(GameObject g)

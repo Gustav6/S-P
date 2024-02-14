@@ -64,7 +64,7 @@ public class Button : UI
     {
         if (selectedFunctions.Contains(Functions.SpawnPrefab))
         {
-            execute += UIManager.instance.InstantiateNewPrefab;
+            execute += UIManager.instance.TempInstantiateNewPrefab;
         }
 
         UIManager.instance.MoveUIThenRemove(transitionDuration, prefabToSpawn, execute, windUp, overShoot);

@@ -23,5 +23,5 @@ MonoBehaviour:
   hitbox: {fileID: 4724571836604968063, guid: 6ad4fcf6ca403f24fa138a65cf36d4a4, type: 3}
   weaponFlashSprite: {fileID: 5229747728011372442, guid: 4d61f8196e931234ba2c59d4db879e86, type: 3}
   particleSystem: {fileID: 1567073594253252592, guid: a03547f8df435af4b914589d0b209a2d, type: 3}
-  isWeaponAnimationResetable: 0
+  isWeaponAnimationResetable: 1
   resetMultiplier: 3

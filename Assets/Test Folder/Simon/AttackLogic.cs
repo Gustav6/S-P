@@ -39,7 +39,7 @@ public class AttackLogic : MonoBehaviour
     public void DespawnHitbox()
     {
         if (_hitbox != null)
-            Destroy(_hitbox.gameObject);
+            Destroy(_hitbox);
     }
 
     public void AnimationFinished()

@@ -544,7 +544,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3233014378351005024, guid: 2e8571fa90db7fe4caaef84f3de62ddd, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -993,7 +993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &423807937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1283,6 +1283,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentWeapon: {fileID: 11400000, guid: 95b744dc794b44f429292791b805445b, type: 2}
+  _waveStateMachine: {fileID: 0}
+  _gameOverGameObject: {fileID: 0}
+  _canvas: {fileID: 0}
   angryHead: {fileID: -8409191195015169317, guid: 665e88e68ec018740934e2027c18b6ba, type: 3}
   dashSprite: {fileID: 7110878671101974141, guid: 89f2d449051b6ac48b4dd27b529ff1f9, type: 3}
   tilemap: {fileID: 2050020650}
@@ -1674,7 +1677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4679903948476763591, guid: 27e970ab1f6dfb6419d4ad61f3d4859a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5338893349620910107, guid: 27e970ab1f6dfb6419d4ad61f3d4859a, type: 3}
       propertyPath: m_LocalPosition.x

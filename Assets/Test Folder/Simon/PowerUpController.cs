@@ -8,7 +8,7 @@ public class PowerUpController : MonoBehaviour
     [SerializeField] private PowerUpActivation powerUpPrefab;
     [SerializeField] private AnimationCurve _verticalCurve;
 
-    public Transform[] SpawnPoints;
+    public Transform SpawnPointsParent;
 
     private void Start()
     {
@@ -58,12 +58,20 @@ public class PowerUpController : MonoBehaviour
 
         KeyValuePair<Transform, float> closestSpawnPoint = new(null, 1000);
 
-        for (int i = 0; i < SpawnPoints.Length; i++)
+        List<Transform> spawnPoints = new();
+
+        foreach (Transform g in SpawnPointsParent.transform)
+        {  // This will only find direct children
+            Transform t = g.gameObject.GetComponent<Transform>();
+            spawnPoints.Add(t);
+        }
+
+        for (int i = 0; i < spawnPoints.Count; i++)
         {
-            float distance = (spawnPosition - (Vector2)SpawnPoints[i].GetChild(1).position).magnitude;
+            float distance = (spawnPosition - (Vector2)spawnPoints[i].GetChild(1).position).magnitude;
 
             if (distance < closestSpawnPoint.Value)
-                closestSpawnPoint = new(SpawnPoints[i], distance);
+                closestSpawnPoint = new(spawnPoints[i], distance);
         }
 
         StartCoroutine(AnimatePowerUpSpawn(newSpawn, spawnPosition, closestSpawnPoint.Key.GetChild(1).position));

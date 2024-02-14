@@ -102,8 +102,8 @@ public class EquipmentManager : MonoBehaviour
         CanSpawnPowerUps = canSpawn;
     }
 
-    public void SetPowerUpSpawnPoints(Transform[] points)
+    public void SetPowerUpSpawnPoints(Transform pointsParent)
     {
-        GetComponent<PowerUpController>().SpawnPoints = points;
+        GetComponent<PowerUpController>().SpawnPointsParent = pointsParent;
     }
 }

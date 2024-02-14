@@ -29,8 +29,6 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void Awake()
     {
-        // TODO: Fix enemy outside of tilemap.
-
         _rb = GetComponent<Rigidbody2D>();
         _enemyAI = GetComponent<EnemyAI>();
         _attackController = GetComponent<EnemyAttackController>();

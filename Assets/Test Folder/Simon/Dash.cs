@@ -14,7 +14,7 @@ public class Dash : PowerUp
 
     private Color _invincibleColor = new Color(0.6f, 0.7f, 0.7f);
 
-    private float _dashTime = 0.5f;
+    private readonly float _dashTime = 0.5f;
 
     private void Awake()
     {
@@ -32,7 +32,6 @@ public class Dash : PowerUp
     {
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
-        // TODO: Add a little animation on the hud or something when the button is pressed to show that the player is trying to use powerup.
         if (direction == Vector2.zero)
             return;
 

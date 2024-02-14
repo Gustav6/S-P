@@ -77,7 +77,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private void Update()
     {
-        //_thisDamagable.CheckDeath(tilemap, _tiles, _playerCollider);
+        _thisDamagable.CheckDeath(tilemap, _tiles, _playerCollider);
     }
 
     public void SetLocalDataToSave(PlayerData data)
@@ -213,6 +213,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void Die()
     {
+        
         Debug.Log("Player dead baby");
     }
     #endregion

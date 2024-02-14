@@ -54,13 +54,11 @@ public class AttackLogic : MonoBehaviour
             yield break;
 
         player.ToggleMovementLock();
-
         rb.AddForce(targetDirection * forceAmount, ForceMode2D.Impulse);
 
         yield return new WaitForSeconds(forceActiveTime);
 
         rb.velocity = Vector2.zero;
-
         player.ToggleMovementLock();
     }
 }

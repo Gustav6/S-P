@@ -2228,8 +2228,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb3cc3f7af2f614d990c647cac69186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 0}
-  sounds: []
+  audioMixer: {fileID: 24300002, guid: cd9da5f47f6c67242a5fe8c50a0c7c81, type: 2}
+  sounds:
+  - Name: Hurt
+    Clip: {fileID: 8300000, guid: 8b4251d9a7016ab48b2a8d15ff827e04, type: 3}
+    Volume: 0.75
+    Pitch: 1
+    RandomizePitch: 0.25
+    Loop: 0
+    Source: {fileID: 0}
 --- !u!4 &773047904
 Transform:
   m_ObjectHideFlags: 0
@@ -13651,7 +13658,7 @@ Animator:
   m_GameObject: {fileID: 958196899}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 74a213d23c6632245ba91b262dd341ed, type: 2}
+  m_Controller: {fileID: 22100000, guid: c329182c0e932584dbc17b692744f1b1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -13801,7 +13808,7 @@ Transform:
   m_GameObject: {fileID: 958196899}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.5, y: 0.125, z: 0}
+  m_LocalPosition: {x: -0.773, y: 0.466, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -13864,7 +13871,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentWeapon: {fileID: 11400000, guid: cbbf78b4dbb50f74db9f93c0dc5a2037, type: 2}
+  _waveStateMachine: {fileID: 0}
+  _gameOverGameObject: {fileID: 0}
   angryHead: {fileID: -8409191195015169317, guid: 665e88e68ec018740934e2027c18b6ba, type: 3}
+  dashSprite: {fileID: 0}
   tilemap: {fileID: 2051934469}
   _diStrength: 0.25
 --- !u!1 &989311537

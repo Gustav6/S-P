@@ -141,6 +141,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         _headRenderer.sprite = angryHead;
         KnockbackPercent += damageAmount / GetStat(StatType.DamageResistance);
+        AudioManager.Instance.Play("Hurt");
     }
 
     /// <summary>

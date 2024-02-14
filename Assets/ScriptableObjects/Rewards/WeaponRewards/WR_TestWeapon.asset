@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d06b72b9e22196459ebaa460dc3f602, type: 3}
-  m_Name: WR_BaseballBat
+  m_Name: WR_TestWeapon
   m_EditorClassIdentifier: 
-  RewardName: Baseball Bat
+  RewardName: Baguette
   WaveUnlocked: 0
-  ContainedWeapon: {fileID: 11400000, guid: 95b744dc794b44f429292791b805445b, type: 2}
-  RewardSprite: {fileID: 21300000, guid: 02e23ff8c971dda4c82505cac7670533, type: 3}
+  ContainedWeapon: {fileID: 11400000, guid: aa8e512fae2c0824ea3d754466753bf0, type: 2}
+  RewardSprite: {fileID: -1692451804227615028, guid: 962da15309302a246817c52372453c02, type: 3}

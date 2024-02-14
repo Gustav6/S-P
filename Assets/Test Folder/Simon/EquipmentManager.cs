@@ -27,6 +27,8 @@ public class EquipmentManager : MonoBehaviour
     /// PowerUpTypes describes what type of powerup should spawn, the last element, Anything, randomly picks between all powerups.
     /// </summary>
     public Action<Vector2, float, PowerUpTypes> OnSpawnPowerUp { get; set; }
+    
+    public Action PlayerTookDamage { get; set; }
 
     private int _hitStopRequests;
 

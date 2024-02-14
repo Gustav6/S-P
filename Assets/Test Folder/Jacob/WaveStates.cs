@@ -800,7 +800,7 @@ public class WaveLossState : BaseWaveState
             if (enemy == null)
                 continue;
 
-            enemy._enemyAttack.canAttack = false;
+            enemy._enemyAttack.CanAttack(false);
 
             enemy._attackController.LeaveAttack();
             enemy._attackController.LeaveMovement(true);

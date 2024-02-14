@@ -44,8 +44,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private PlayerMovement _playerMovement;
 
-    [SerializeField] private WaveStateMachine _waveStateMachine;
-    [SerializeField] private GameObject _gameOverGameObject, _canvas;
+    [SerializeField] internal WaveStateMachine waveStateMachine;
+    [SerializeField] private GameObject _gameOverGameObject;
 
     private SpriteRenderer _headRenderer;
     private Sprite _initialHead;
@@ -141,6 +141,9 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         _headRenderer.sprite = angryHead;
         KnockbackPercent += damageAmount / GetStat(StatType.DamageResistance);
+
+        EquipmentManager.Instance.PlayerTookDamage?.Invoke();
+
         AudioManager.Instance.Play("Hurt");
     }
 
@@ -218,13 +221,13 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         // TODO: Play splash animation and sound perhaps.
 
-        if (_waveStateMachine.CurrentState != _waveStateMachine.States[WaveStateMachine.WaveState.WaveInProgress])
+        if (waveStateMachine.CurrentState != waveStateMachine.States[WaveStateMachine.WaveState.WaveInProgress])
         {
             transform.position = Vector2.zero;
             return;
         }
 
-        _waveStateMachine.TransitionToState(WaveStateMachine.WaveState.WaveLoss);
+        waveStateMachine.TransitionToState(WaveStateMachine.WaveState.WaveLoss);
         gameObject.SetActive(false);
     }
     #endregion

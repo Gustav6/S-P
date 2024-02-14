@@ -25,6 +25,8 @@ public class Enemy : MonoBehaviour, IDamageable
     private Dictionary<Vector2Int, TileBase> _tiles;
     private BoxCollider2D _thisFeetCollider;
 
+    internal WaveStateMachine waveMachine;
+
     public float KnockbackPercent { get; set; }
 
     private void Awake()
@@ -43,6 +45,8 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         _tilemap = PlayerStats.Instance.tilemap;
         _tiles = IDamageable.PopulateTilesDictonary(_tilemap);
+
+        waveMachine = PlayerStats.Instance.waveStateMachine;
     }
 
     public virtual void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)

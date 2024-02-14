@@ -19,13 +19,20 @@ public class EnemyAttack : MonoBehaviour
     [SerializeField] private bool attackReady;
     [SerializeField] private bool isAttacking;
 
-    internal bool canAttack = true;
+    public bool CanEnemyAttack { get; private set; }
 
     [SerializeField] internal GameObject hitbox, hitboxSpawn;
 
     private void Awake()
     {
         _enemy = GetComponent<Enemy>();
+
+        if (_enemy.waveMachine.CurrentState != _enemy.waveMachine.States[WaveStateMachine.WaveState.WaveLoss])
+            CanAttack(true);
+        else
+        {
+            CanAttack(false);
+        }
     }
 
     private void Start()
@@ -36,7 +43,7 @@ public class EnemyAttack : MonoBehaviour
 
     public void CanAttack(bool shouldEnemyAttack)
     {
-        canAttack = shouldEnemyAttack;
+        CanEnemyAttack = shouldEnemyAttack;
     }
 
     public bool DistanceToTarget()
@@ -48,7 +55,7 @@ public class EnemyAttack : MonoBehaviour
 
     void Update()
     {
-        if (!canAttack)
+        if (!CanEnemyAttack)
             return;
 
         if (isAttacking && attackReady)

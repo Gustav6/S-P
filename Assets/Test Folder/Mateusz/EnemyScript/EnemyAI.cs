@@ -34,7 +34,14 @@ public class EnemyAI : MonoBehaviour
 
         target = PlayerStats.Instance.transform;
 
-        CanMove = true;
+        Enemy enemy = GetComponent<Enemy>();
+
+        if (enemy.waveMachine.CurrentState != enemy.waveMachine.States[WaveStateMachine.WaveState.WaveLoss])
+            CanMove = true;
+        else
+        {
+            CanMove = false;
+        }
 
         InvokeRepeating("UpdatePath", 0f, .2f);
     }
@@ -42,7 +49,10 @@ public class EnemyAI : MonoBehaviour
     void UpdatePath()
     {
         if (!CanMove)
+        {
+            seeker.CancelCurrentPathRequest(false);
             return;
+        }
 
         if (seeker.IsDone())
         {
@@ -52,7 +62,6 @@ public class EnemyAI : MonoBehaviour
 
     void OnPathComplete(Path p)
     {
-        
         if (!p.error)
         {
             path = p;

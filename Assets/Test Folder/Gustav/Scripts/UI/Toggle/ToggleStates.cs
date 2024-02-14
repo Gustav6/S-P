@@ -13,9 +13,9 @@ public class ToggleDeselectedState : UIBaseState
     {
         manager = (ToggleStateManager)referenceManager;
 
-        manager.DefaultDeselectTransition(timeItTakes, manager.pointers, null, manager.outLineImage, manager.text);
+        manager.DefaultDeselectTransition(timeItTakes, manager.pointers, null, manager.outLineImage, null);
 
-        TransitionSystem.AddColorTransition(new ColorTransition(manager.movingPartImage, newMovingPartColor, timeItTakes, TransitionType.SmoothStart2));
+        //TransitionSystem.AddColorTransition(new ColorTransition(manager.movingPartImage, newMovingPartColor, timeItTakes, TransitionType.SmoothStart2));
     }
 
     public override void UpdateState(BaseStateManager referenceManager)
@@ -44,9 +44,9 @@ public class ToggleSelectedState : UIBaseState
 
         if (!UIManager.instance.Transitioning)
         {
-            manager.DefaultSelectTransition(timeItTakes, manager.pointers, null, manager.outLineImage, manager.text);
+            manager.DefaultSelectTransition(timeItTakes, manager.pointers, null, manager.outLineImage, null);
 
-            TransitionSystem.AddColorTransition(new ColorTransition(manager.movingPartImage, newMovingPartColor, timeItTakes, TransitionType.SmoothStart2));
+            //TransitionSystem.AddColorTransition(new ColorTransition(manager.movingPartImage, newMovingPartColor, timeItTakes, TransitionType.SmoothStart2));
         }
         else
         {
@@ -105,14 +105,12 @@ public class TogglePressedState : UIBaseState
             Vector3 destination = new(manager.movingPartOffset * -1 * UIManager.instance.ResolutionScaling, 0, 0);
             destination += manager.outLine.position;
             TransitionSystem.AddMoveTransition(new MoveTransition(manager.movingPart, destination, transitionTime, TransitionType.SmoothStop3));
-            TransitionSystem.AddColorTransition(new ColorTransition(manager.toggleImage, toggle.onColor, transitionTime, TransitionType.SmoothStop2));
         }
         else
         {
             Vector3 destination = new(manager.movingPartOffset * UIManager.instance.ResolutionScaling, 0, 0);
             destination += manager.outLine.position;
             TransitionSystem.AddMoveTransition(new MoveTransition(manager.movingPart, destination, transitionTime, TransitionType.SmoothStop3));
-            TransitionSystem.AddColorTransition(new ColorTransition(manager.toggleImage, toggle.offColor, transitionTime, TransitionType.SmoothStop2));
         }
 
         manager.UIActivated = false;

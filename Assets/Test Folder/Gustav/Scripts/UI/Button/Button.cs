@@ -8,9 +8,9 @@ using static Transition;
 
 public class Button : UI
 {
-    [Header("Button variables")]
     private ButtonStateManager ButtonStateManager { get; set; }
 
+    [Header("Button variables")]
     [SerializeField] private List<Functions> selectedFunctions = new();
     private Dictionary<Functions, System.Action> functionLookup;
 

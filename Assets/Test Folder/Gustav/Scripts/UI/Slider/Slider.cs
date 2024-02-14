@@ -6,6 +6,7 @@ public class Slider : UI
 {
     private SliderStateManager SliderStateManager { get; set; }
 
+    [Header("Slider variables")]
     public SliderType sliderType;
 
     public override void Start()

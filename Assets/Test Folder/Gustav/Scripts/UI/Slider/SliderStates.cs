@@ -36,7 +36,6 @@ public class SliderSelectedState : UIBaseState
 
     private readonly float timeItTakes = 0.15f;
 
-    private Vector3 newScale = new(1.1f, 1.1f, 1);
     private Color newSliderColor = new(1, 1, 1, 1);
 
     public override void EnterState(BaseStateManager referenceManager)
@@ -48,7 +47,7 @@ public class SliderSelectedState : UIBaseState
         {
             manager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outLineImage, manager.text);
 
-            TransitionSystem.AddColorTransition(new ColorTransition(manager.sliderImage, newSliderColor, timeItTakes, TransitionType.SmoothStart2));
+            //TransitionSystem.AddColorTransition(new ColorTransition(manager.sliderImage, newSliderColor, timeItTakes, TransitionType.SmoothStart2));
         }
         else
         {

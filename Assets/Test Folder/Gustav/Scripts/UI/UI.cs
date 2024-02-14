@@ -9,6 +9,17 @@ public abstract class UI : MonoBehaviour
     public Vector2 position;
     public bool hovering;
 
+    [Header("UI selected color")]
+    public Color outlineSelected;
+    public Color textSelected;
+
+    [Header("UI deselected color")]
+    public Color outlineDeselectd;
+    public Color textDeselected;
+
+    [Header("UI selected scale")]
+    public Vector3 selectedScale;
+
     public bool IsDestroyed { get; set; }
 
     public virtual void Start()

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class ActiveMenuManager : ActiveBaseManager
 {
+    [Header("Objects will Instantiate")]
     public GameObject[] objects;
-    public List<GameObject> gameObjects;
-    public bool enableBlurOnInstantiate;
+    public List<GameObject> instantiatedObjects;
+    public bool enableBlur;
 
     public override void Start()
     {
@@ -15,7 +16,7 @@ public class ActiveMenuManager : ActiveBaseManager
             for (int i = 0; i < objects.Length; i++)
             {
                 GameObject g = Instantiate(objects[i], GetComponentInParent<UIManager>().transform);
-                gameObjects.Add(g);
+                instantiatedObjects.Add(g);
             }
         }
     }
@@ -36,9 +37,9 @@ public class ActiveMenuManager : ActiveBaseManager
 
     public void OnDestroy()
     {
-        for (int i = 0; i < gameObjects.Count; i++)
+        for (int i = 0; i < instantiatedObjects.Count; i++)
         {
-            Destroy(gameObjects[i]);
+            Destroy(instantiatedObjects[i]);
         }
     }
 }

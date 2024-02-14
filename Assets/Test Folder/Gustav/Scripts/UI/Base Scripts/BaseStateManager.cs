@@ -82,19 +82,19 @@ public abstract class BaseStateManager : MonoBehaviour
     {
         if (!ScalePairs.ContainsKey("CurrentObjectSelected"))
         {
-            ScalePairs.Add("CurrentObjectSelected", new Vector3(1.025f, 1.025f, 1));
+            ScalePairs.Add("CurrentObjectSelected", UIInstance.selectedScale);
         }
 
         if (!ColorPairs.ContainsKey("OutlineSelected") && !ColorPairs.ContainsKey("TextSelected"))
         {
-            ColorPairs.Add("OutlineSelected", new Color(0, 0, 0, 1));
-            ColorPairs.Add("TextSelected", new Color(1, 1, 0, 0.8f));
+            ColorPairs.Add("OutlineSelected", UIInstance.outlineSelected);
+            ColorPairs.Add("TextSelected", UIInstance.textSelected);
         }
 
         if (!ColorPairs.ContainsKey("OutlineDeSelected") && !ColorPairs.ContainsKey("TextDeSelected"))
         {
-            ColorPairs.Add("OutlineDeSelected", new Color(0, 0, 0, 0.5f));
-            ColorPairs.Add("TextDeSelected", new Color(1, 1, 1, 0.5f));
+            ColorPairs.Add("OutlineDeSelected", UIInstance.outlineDeselectd);
+            ColorPairs.Add("TextDeSelected", UIInstance.textDeselected);
         }
     }
 }

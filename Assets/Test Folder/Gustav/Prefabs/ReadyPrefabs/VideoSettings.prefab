@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3503843533985484711}
   - component: {fileID: 7640589881970764690}
+  - component: {fileID: 5144763402206728921}
   m_Layer: 5
   m_Name: VideoSettings
   m_TagString: ActiveSettingPrefab
@@ -35,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 2879.9634, y: -8099.969}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7640589881970764690
@@ -50,7 +51,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd512ffd0872f84bb2ef18bba86100a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveDirection: 1
+  moveTowardsOnStart: 3
+  moveTowardsOnRemove: 2
+--- !u!114 &5144763402206728921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055519291901798772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22059464a44da74caa067109b7cfc29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 0}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  fadeInTime: 1.5
+  fadeIn: 0
+  moveIn: 1
+  moveInTime: 1
 --- !u!1001 &529380799501875856
 PrefabInstance:
   m_ObjectHideFlags: 0

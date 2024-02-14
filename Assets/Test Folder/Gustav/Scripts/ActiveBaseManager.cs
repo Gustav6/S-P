@@ -25,4 +25,5 @@ public enum PrefabMoveDirection
     Right,
     Up,
     Down,
+    None,
 }

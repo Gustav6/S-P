@@ -295,12 +295,23 @@ public class UIManager : MonoBehaviour
 
         if (prefabToSpawn != null)
         {
-            if (prefabToSpawn.GetComponent<ActiveSettingManager>() != null)
+            if (prefabToSpawn.GetComponent<ActiveMenuManager>() != null)
             {
-                parent = GetComponentInChildren<ActiveMenuManager>().transform;
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    if (transform.GetChild(i).GetComponent<ActiveBaseManager>() != null)
+                    {
+                        DestroyUI(transform.GetChild(i).gameObject);
+                    }
+                }
             }
-
-            DestroyUI(CurrentUIPrefab);
+            else
+            {
+                if (CurrentUIPrefab != null)
+                {
+                    DestroyUI(CurrentUIPrefab);
+                }
+            }
 
             Vector3 spawnLocation = GiveDestination(GetInstantiateDirection(prefabToSpawn));
 
@@ -326,7 +337,9 @@ public class UIManager : MonoBehaviour
     {
         //Vector3 destination = GiveDestination(GetInstantiateDirection(g)) * -1;
 
-        Vector3 destination = new(Screen.width / 2, Screen.height / 2, 0);
+        //Vector3 destination = new(Screen.width / 2, Screen.height / 2, 0);
+
+        Vector3 destination = GiveDestination(GetInstantiateDirection(g)) * -1;
 
         MoveGameObject(g, time, destination, actions, 0, 0);
     }
@@ -334,6 +347,8 @@ public class UIManager : MonoBehaviour
     public void MoveUIThenRemove(float time, GameObject prefab, ExecuteOnCompletion actions, float windUp, float overShoot)
     {
         prefabToSpawn = prefab;
+
+        List<GameObject> willRemove = new();
 
         if (prefabToSpawn != null)
         {
@@ -344,18 +359,38 @@ public class UIManager : MonoBehaviour
             else if (prefabToSpawn.GetComponent<ActiveMenuManager>() != null)
             {
                 CurrentUIPrefab = GetComponentInChildren<ActiveMenuManager>().gameObject;
+
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    if (transform.GetChild(i).GetComponent<ActiveBaseManager>() != null)
+                    {
+                        willRemove.Add(transform.GetChild(i).gameObject);
+                    }
+                }
             }
         }
 
-        Vector3 destination = GiveDestination(GetRemoveDirection(CurrentUIPrefab)) * -1;
+        if (willRemove.Count > 1)
+        {
+            for (int i = 0; i < willRemove.Count; i++)
+            {
+                Vector3 destination = GiveDestination(GetRemoveDirection(willRemove[i])) * -1;
 
-        MoveGameObject(CurrentUIPrefab, time, destination, actions, windUp, overShoot);
+                MoveGameObject(willRemove[i], time, destination, actions, windUp, overShoot);
+            }
+        }
+        else
+        {
+            Vector3 destination = GiveDestination(GetRemoveDirection(CurrentUIPrefab)) * -1;
+
+            MoveGameObject(CurrentUIPrefab, time, destination, actions, windUp, overShoot);
+        }
     }
 
     private void MoveGameObject(GameObject g, float time, Vector3 destination, ExecuteOnCompletion execute = null, float windUp = 0, float overShoot = 0)
     {
         TransitionType type = TransitionType.SmoothStop2;
-        TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, type, false, windUp, overShoot, execute));
+        TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, type, true, windUp, overShoot, execute));
     }
 
     public Vector3 GiveDestination(PrefabMoveDirection direction)

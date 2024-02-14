@@ -29,23 +29,57 @@ public class PowerUpActivation : MonoBehaviour
         transform.position = new Vector2(transform.position.x, TransitionSystem.SmoothStop3(_time));
     }
 
+
+    // TODO: Deactivate other powerups.
     private void OnTriggerEnter2D(Collider2D triggerInfo)
     {
         if (!triggerInfo.CompareTag("Player"))
             return;
+
+        PowerUp previousPowerUp = playerStat.GetComponent<PowerUp>();
+
+        if (previousPowerUp != null)
+            playerStat.ClearEquippedAbility();
 
         switch (thisType)
         {
             default:
             case PowerUpTypes.Anything:
             case PowerUpTypes.Dash:
-                if (playerStat.GetComponent<Dash>() == null)
-                    playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<Dash>());
-                else
+                try
                 {
-                    Debug.Log("Ability already equipped");
+                    Destroy(previousPowerUp);
+                    playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<Dash>());
+                }
+                catch
+                {
+                    playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<Dash>());
                 }
                 
+                break;
+            case PowerUpTypes.Haste:
+                try
+                {
+                    Destroy(previousPowerUp);
+                    playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<HastePowerup>());
+                }
+                catch
+                {
+                    playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<HastePowerup>());
+                }
+
+                break;
+            case PowerUpTypes.Tank:
+                try
+                {
+                    Destroy(previousPowerUp);
+                    playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<ScalePowerup>());
+                }
+                catch
+                {
+                    playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<ScalePowerup>());
+                }
+
                 break;
         }
 

@@ -13,5 +13,6 @@ public class HastePowerup : PowerUp
     void RemoveStats()
     {
         PlayerStats.Instance.DeActivateAbilityStats();
+        PlayerStats.Instance.ClearEquippedAbility();
     }
 }

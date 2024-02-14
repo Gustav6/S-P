@@ -34,5 +34,6 @@ public class ScalePowerup : PowerUp
         }
 
         PlayerStats.Instance.DeActivateAbilityStats();
+        PlayerStats.Instance.ClearEquippedAbility();
     }
 }

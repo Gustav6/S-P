@@ -44,6 +44,9 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private PlayerMovement _playerMovement;
 
+    [SerializeField] private WaveStateMachine _waveStateMachine;
+    [SerializeField] private GameObject _gameOverGameObject;
+
     private SpriteRenderer _headRenderer;
     private Sprite _initialHead;
     [SerializeField] private Sprite angryHead;
@@ -72,9 +75,6 @@ public class PlayerStats : MonoBehaviour, IDamageable
         // Call this when you want to change the player weapon n stuff.
         EquipmentManager.Instance.SwitchWeapon(CurrentWeapon);
     }
-
-    // Seems like you can't access methods with default behavior in interface, from class implementing that interface.
-    //_thisDamagable.CheckDeath(tilemap, _tiles, transform.position, _playerCollider.bounds.size);
 
     private void Update()
     {
@@ -215,8 +215,14 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        
-        Debug.Log("Player dead baby");
+        if (_waveStateMachine.CurrentState != _waveStateMachine.States[WaveStateMachine.WaveState.WaveInProgress])
+        {
+            Debug.Log("Debug.Cock ahah");
+            return;
+        }
+
+        //Instantiate(_gameOverGameObject, Vector2.zero, Quaternion.identity);
+        //gameObject.SetActive(false);
     }
     #endregion
 }

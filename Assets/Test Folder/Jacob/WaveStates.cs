@@ -771,7 +771,7 @@ public class WaveLossState : BaseWaveState
 
     public override void EnterState()
     {
-        
+
     }
 
     public override void ExitState()

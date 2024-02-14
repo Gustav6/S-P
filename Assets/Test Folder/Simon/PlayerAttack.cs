@@ -30,6 +30,9 @@ public class PlayerAttack : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F) && _player.currentPowerUp != null)
             _player.currentPowerUp.UsePowerUp();
+
+        if (Input.GetKeyDown(KeyCode.J))
+            EquipmentManager.Instance.OnSpawnPowerUp(Vector2.zero, 100, PowerUpTypes.Dash);
     }
 
     private void TurnToMouse()

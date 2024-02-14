@@ -46,6 +46,9 @@ public class Dash : PowerUp
 
         int rendererIndex = 0;
 
+        GameObject hitbox = Instantiate(PlayerStats.Instance.CurrentWeapon.Hitbox, transform);
+        hitbox.transform.localPosition = Vector2.zero;
+
         foreach (SpriteRenderer sr in _sr)
         {
             _initialColor[rendererIndex] = sr.color;
@@ -60,6 +63,8 @@ public class Dash : PowerUp
         {
             _sr[i].color = _initialColor[i];
         }
+
+        Destroy(hitbox);
 
         OnDeactivatePowerUp();
     }

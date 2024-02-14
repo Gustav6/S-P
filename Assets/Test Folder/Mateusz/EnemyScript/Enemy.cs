@@ -86,8 +86,11 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        if (PlayerStats.Instance.currentPowerUp == null)
+        if (EquipmentManager.Instance.CanSpawnPowerUps)
+        {
+            EquipmentManager.Instance.SetPowerUpCanSpawn(false);
             EquipmentManager.Instance.OnSpawnPowerUp(transform.position, 100, PowerUpTypes.Anything);
+        }
 
         Destroy(gameObject);
     }

@@ -16,7 +16,7 @@ public class WhaleEnemy : Enemy
         _attackController.GroundEnemyHit();
         
         
-        Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized;
+        Vector2 knockbackVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - sourcePosition).normalized;
         float multiplier = (2 + (KnockbackPercent / 100)) * knockbackMultiplier;
 
         StartCoroutine(SetEnemyVelocity(knockbackVector, multiplier, stunDuration));

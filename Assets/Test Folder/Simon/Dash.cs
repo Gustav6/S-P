@@ -62,6 +62,11 @@ public class Dash : PowerUp
             _sr[i].color = _initialColor[i];
         }
 
+        OnDeactivatePowerUp();
+    }
+
+    public override void OnDeactivatePowerUp()
+    {
         _playerHitbox.enabled = true;
         PlayerStats.Instance.ClearEquippedAbility();
     }

@@ -33,6 +33,13 @@ public class ScalePowerup : PowerUp
             transform.localScale = Vector2.Lerp(Vector2.one * 1.25f, Vector2.one, time / 0.25f);
         }
 
+        OnDeactivatePowerUp();
+    }
+
+    public override void OnDeactivatePowerUp()
+    {
+        transform.localScale = Vector2.one;
+
         PlayerStats.Instance.DeActivateAbilityStats();
         PlayerStats.Instance.ClearEquippedAbility();
     }

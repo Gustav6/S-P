@@ -16,6 +16,8 @@ public class EquipmentManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        SetPowerUpCanSpawn(true);
     }
     #endregion
 
@@ -27,6 +29,8 @@ public class EquipmentManager : MonoBehaviour
     public Action<Vector2, float, PowerUpTypes> OnSpawnPowerUp { get; set; }
 
     private int _hitStopRequests;
+
+    public bool CanSpawnPowerUps { get; private set; }
 
     /// <summary>
     /// Switches the CurrentWeapon for the player.
@@ -91,6 +95,11 @@ public class EquipmentManager : MonoBehaviour
             _hitStopRequests = 0;
 
         return _hitStopRequests == 0;
+    }
+
+    public void SetPowerUpCanSpawn(bool canSpawn)
+    {
+        CanSpawnPowerUps = canSpawn;
     }
 
     public void SetPowerUpSpawnPoints(Transform[] points)

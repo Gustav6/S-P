@@ -155,6 +155,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
             return;
         }
 
+        EquipmentManager.Instance.ToggleHit(false);
+
         _playerMovement.isGrounded = false;
         _isImmune = true;
 
@@ -162,15 +164,41 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         Vector2 input = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
-        float multiplier = (2 + (KnockbackPercent / 100)) * knockbackMultiplier;
+        float multiplier = (1 + (KnockbackPercent / 100)) * knockbackMultiplier;
+        multiplier = multiplier < 3 ? 3 : multiplier;
 
         Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized * multiplier;
 
         Vector2 diVector = input * (knockbackVector.magnitude * _diStrength);
 
-        _playerMovement.rb.AddForce((knockbackVector + diVector) / GetStat(StatType.KnockbackResistance), ForceMode2D.Impulse);
+        StartCoroutine(SetPlayerVelocityOverTime((knockbackVector + diVector) / GetStat(StatType.KnockbackResistance), stunDuration));
+    }
+    
+    internal IEnumerator SetPlayerVelocityOverTime(Vector2 knockbackVector, float stunDuration)
+    {
+        foreach (Vector2 velocity in GetVelocity(knockbackVector, stunDuration))
+        {
+            _playerMovement.rb.velocity = velocity;
+            yield return null;
+        }
 
-        Invoke(nameof(ResetKB), stunDuration);
+        ResetKB();
+    }
+
+    private IEnumerable<Vector2> GetVelocity(Vector2 knockbackVector, float stun)
+    {
+        Vector2 returningVector;
+
+        float t = 0;
+
+        while (t <= stun)
+        {
+            returningVector = knockbackVector - (knockbackVector * (t / stun));
+
+            yield return returningVector;
+
+            t += Time.deltaTime;
+        }
     }
 
     void ResetKB()
@@ -179,6 +207,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _playerMovement.isGrounded = true;
         _isImmune = false;
         _playerCollider.enabled = true;
+
+        EquipmentManager.Instance.ToggleHit(true);
     }
 
     public void Die()

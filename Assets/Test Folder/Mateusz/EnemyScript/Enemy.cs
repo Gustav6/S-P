@@ -39,14 +39,14 @@ public class Enemy : MonoBehaviour, IDamageable
         _thisDamagable = this;
 
         _thisFeetCollider = GetComponentsInChildren<BoxCollider2D>()[1];
+
+        waveMachine = PlayerStats.Instance.waveStateMachine;
     }
 
     private void Start()
     {
         _tilemap = PlayerStats.Instance.tilemap;
         _tiles = IDamageable.PopulateTilesDictonary(_tilemap);
-
-        waveMachine = PlayerStats.Instance.waveStateMachine;
     }
 
     public virtual void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)

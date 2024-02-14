@@ -26,6 +26,12 @@ public class EnemyAttack : MonoBehaviour
     private void Awake()
     {
         _enemy = GetComponent<Enemy>();
+    }
+
+    private void Start()
+    {
+        _enemyAttackController = _enemy._attackController;
+        _player = PlayerStats.Instance.transform;
 
         if (_enemy.waveMachine.CurrentState != _enemy.waveMachine.States[WaveStateMachine.WaveState.WaveLoss])
             CanAttack(true);
@@ -33,12 +39,6 @@ public class EnemyAttack : MonoBehaviour
         {
             CanAttack(false);
         }
-    }
-
-    private void Start()
-    {
-        _enemyAttackController = _enemy._attackController;
-        _player = PlayerStats.Instance.transform;
     }
 
     public void CanAttack(bool shouldEnemyAttack)

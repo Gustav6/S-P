@@ -10,9 +10,7 @@ public class Dash : PowerUp
     private BoxCollider2D _playerHitbox;
 
     private List<SpriteRenderer> _sr;
-    private Color[] _initialColor;
-
-    private Color _invincibleColor = new Color(0.6f, 0.7f, 0.7f);
+    private SpriteRenderer _bodySr;
 
     private readonly float _dashTime = 0.5f;
 
@@ -24,8 +22,7 @@ public class Dash : PowerUp
 
         _sr = GetComponentsInChildren<SpriteRenderer>().ToList();
         _sr.RemoveAt(4); // 4 = Weapon flash sprite.
-
-        _initialColor = new Color[_sr.Count];
+        _bodySr = _sr[0];
     }
 
     public override void UsePowerUp()
@@ -44,28 +41,29 @@ public class Dash : PowerUp
     {
         _playerHitbox.enabled = false;
 
-        int rendererIndex = 0;
+        Sprite startSprite = _bodySr.sprite;
 
         GameObject hitbox = Instantiate(PlayerStats.Instance.CurrentWeapon.Hitbox, transform);
         hitbox.transform.localPosition = Vector2.zero;
 
         foreach (SpriteRenderer sr in _sr)
         {
-            _initialColor[rendererIndex] = sr.color;
-            rendererIndex++;
-
-            sr.color = _invincibleColor;
+            sr.enabled = false;
         }
+
+        _bodySr.enabled = true;
+        _bodySr.sprite = PlayerStats.Instance.dashSprite;
 
         yield return new WaitForSeconds(_dashTime);
 
-        for (int i = 0; i < rendererIndex; i++)
+        foreach (SpriteRenderer sr in _sr)
         {
-            _sr[i].color = _initialColor[i];
+            sr.enabled = true;
         }
 
-        Destroy(hitbox);
+        _bodySr.sprite = startSprite;
 
+        Destroy(hitbox);
         OnDeactivatePowerUp();
     }
 

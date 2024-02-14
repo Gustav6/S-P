@@ -47,6 +47,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     private SpriteRenderer _headRenderer;
     private Sprite _initialHead;
     [SerializeField] private Sprite angryHead;
+    [SerializeField] internal Sprite dashSprite;
 
     [SerializeField] internal Tilemap tilemap;
     private Dictionary<Vector2Int, TileBase> _tiles;

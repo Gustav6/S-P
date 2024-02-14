@@ -762,6 +762,8 @@ public class WaveLossState : BaseWaveState
 {
     WaveStateContext _context;
 
+    private GameObject _gameOver;
+
     public WaveLossState(WaveStateContext context, WaveStateMachine.WaveState stateKey) : base(context, stateKey)
     {
         _context = context;
@@ -769,7 +771,7 @@ public class WaveLossState : BaseWaveState
 
     public override void EnterState()
     {
-
+        
     }
 
     public override void ExitState()

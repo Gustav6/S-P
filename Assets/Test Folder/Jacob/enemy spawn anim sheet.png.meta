@@ -1,0 +1,355 @@
+fileFormatVersion: 2
+guid: 664fdc61c3da5f942aa6fc1377fe6e1d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8453687109819941720
+    second: enemy spawn anim sheet_0
+  - first:
+      213: -7704093814303341011
+    second: enemy spawn anim sheet_1
+  - first:
+      213: -5089335070168774836
+    second: enemy spawn anim sheet_2
+  - first:
+      213: -4929123686588149429
+    second: enemy spawn anim sheet_3
+  - first:
+      213: 8682585883015284435
+    second: enemy spawn anim sheet_4
+  - first:
+      213: 3458340944620413335
+    second: enemy spawn anim sheet_5
+  - first:
+      213: -6377590929394710627
+    second: enemy spawn anim sheet_6
+  - first:
+      213: -5303556235860576919
+    second: enemy spawn anim sheet_7
+  - first:
+      213: 4893779627787529640
+    second: enemy spawn anim sheet_8
+  - first:
+      213: -8881732089379583626
+    second: enemy spawn anim sheet_9
+  - first:
+      213: -112386156335086717
+    second: enemy spawn anim sheet_10
+  - first:
+      213: -5297576055630092429
+    second: enemy spawn anim sheet_11
+  - first:
+      213: 6905692790668251397
+    second: enemy spawn anim sheet_12
+  - first:
+      213: -3674887779110261300
+    second: enemy spawn anim sheet_13
+  - first:
+      213: 7606326068141736607
+    second: enemy spawn anim sheet_14
+  - first:
+      213: -9058778368644181659
+    second: enemy spawn anim sheet_15
+  - first:
+      213: -8418879114531141863
+    second: enemy spawn anim sheet_16
+  - first:
+      213: -2839057335274072751
+    second: enemy spawn anim sheet_17
+  - first:
+      213: 3941327428829225756
+    second: enemy spawn anim sheet_18
+  - first:
+      213: 9198660109983763312
+    second: enemy spawn anim sheet_19
+  - first:
+      213: -1897982913967224644
+    second: enemy spawn anim sheet_20
+  - first:
+      213: -4229033521477228924
+    second: enemy spawn anim sheet_21
+  - first:
+      213: 3181945066179078243
+    second: enemy spawn anim sheet_22
+  - first:
+      213: -328233964327664920
+    second: enemy spawn anim sheet_23
+  - first:
+      213: -8944428133030514376
+    second: enemy spawn anim sheet_24
+  - first:
+      213: 8780606150411700370
+    second: enemy spawn anim sheet_25
+  - first:
+      213: -6992590838605850344
+    second: enemy spawn anim sheet_26
+  - first:
+      213: -6891862771271962795
+    second: enemy spawn anim sheet_27
+  - first:
+      213: 9169959656984338141
+    second: enemy spawn anim sheet_28
+  - first:
+      213: 2032530262753975883
+    second: enemy spawn anim sheet_29
+  - first:
+      213: 2620041716474833530
+    second: enemy spawn anim sheet_30
+  - first:
+      213: 3806028810451628668
+    second: enemy spawn anim sheet_31
+  - first:
+      213: 6107956313397167077
+    second: enemy spawn anim sheet_32
+  - first:
+      213: 1523038713037948555
+    second: enemy spawn anim sheet_33
+  - first:
+      213: -5813143045851505427
+    second: enemy spawn anim sheet_34
+  - first:
+      213: 2258589497553484374
+    second: enemy spawn anim sheet_35
+  - first:
+      213: -3925701754168308374
+    second: enemy spawn anim sheet_36
+  - first:
+      213: 3318576838147583731
+    second: enemy spawn anim sheet_37
+  - first:
+      213: -4804916888663546292
+    second: enemy spawn anim sheet_38
+  - first:
+      213: -5322150536907554700
+    second: enemy spawn anim sheet_39
+  - first:
+      213: -1718479859211266312
+    second: enemy spawn anim sheet_40
+  - first:
+      213: 3957865294022046705
+    second: enemy spawn anim sheet_41
+  - first:
+      213: 2065717969168965504
+    second: enemy spawn anim sheet_42
+  - first:
+      213: -3644802385727215745
+    second: enemy spawn anim sheet_43
+  - first:
+      213: -106935381402761062
+    second: enemy spawn anim sheet_44
+  - first:
+      213: -3962618701132258135
+    second: enemy spawn anim sheet_45
+  - first:
+      213: -3714093327681203695
+    second: enemy spawn anim sheet_46
+  - first:
+      213: 8264698112404704624
+    second: enemy spawn anim sheet_47
+  - first:
+      213: -1671126729492428921
+    second: enemy spawn anim sheet_48
+  - first:
+      213: 5837908255505950243
+    second: enemy spawn anim sheet_49
+  - first:
+      213: -7136231441902195521
+    second: enemy spawn anim sheet_50
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: enemy spawn anim sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1356
+        width: 1397
+        height: 1355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22c164ccce2b14441b9ad4a88a1d9c5e
+      internalID: 1150308619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy spawn anim sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 1356
+        width: 1397
+        height: 1355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e19ecf10ca698b340bfd01f337ab431c
+      internalID: -357650151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy spawn anim sheet_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1
+        width: 1397
+        height: 1355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0afac4f2756189e43bc9a66135aa7ab6
+      internalID: -498809461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: enemy spawn anim sheet_3
+      rect:
+        serializedVersion: 2
+        x: 1397
+        y: 1
+        width: 1397
+        height: 1355
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16ca5bd59bde4fb4c973bdc5d48f91ce
+      internalID: 149003317
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 246f6b391a035454d8555ed7dd1deba1
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      enemy spawn anim sheet_0: 1150308619
+      enemy spawn anim sheet_1: -357650151
+      enemy spawn anim sheet_2: -498809461
+      enemy spawn anim sheet_3: 149003317
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

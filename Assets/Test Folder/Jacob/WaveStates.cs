@@ -479,17 +479,21 @@ public class WaveInProgressState : BaseWaveState
 
     readonly AnimationCurve _verticalSpawnCurve;
 
+    readonly Transform _waterPoolPrefab;
+
     public WaveInProgressState(WaveStateContext context, WaveStateMachine.WaveState stateKey,
                                Image waveProgressFill,
                                RectTransform fishTransform,
                                Animator progressBarAnim,
-                               AnimationCurve verticalSpawnCurve) : base(context, stateKey)
+                               AnimationCurve verticalSpawnCurve,
+                               Transform waterPoolPrefab) : base(context, stateKey)
 	{
 		_context = context;
         _waveProgressFill = waveProgressFill;
         _fishTransform = fishTransform;
         _progressBarAnim = progressBarAnim;
         _verticalSpawnCurve = verticalSpawnCurve;
+        _waterPoolPrefab = waterPoolPrefab;
 	}
 
 	public override void EnterState()
@@ -563,6 +567,7 @@ public class WaveInProgressState : BaseWaveState
         EnemyLifeStatus enemyLifeStatus = enemy.AddComponent<EnemyLifeStatus>();
         enemyLifeStatus.OnDeathCallback += EnemyDied;
         enemyLifeStatus.Value = enemyPreset.Cost;
+        enemy.SetActive(false);
 
         _context.StateMachine.StartCoroutine(AnimateEnemySpawn(enemy.transform, randomSpawnPoint));
 
@@ -589,18 +594,27 @@ public class WaveInProgressState : BaseWaveState
 
         parentTransform.position = startPos;
 
+        Transform waterPool = Object.Instantiate(_waterPoolPrefab, startPos, Quaternion.identity);
+        waterPool.localScale = new Vector2(waterPool.localScale.x * Mathf.Sign(endPos.x - waterPool.transform.position.x), waterPool.localScale.y);
+
+        // Waits for a bit while it's just the whirlpool
+        yield return new WaitForSeconds(0.9f);
+
         float time = 0;
 
-        while (time <= 1.25f)
+        while (time <= 1f)
         {
             yield return null;
             time += Time.deltaTime;
-            parentTransform.position = Vector2.Lerp(startPos, endPos, time / 1.25f);
-            enemy.localPosition = new Vector2(0, Mathf.Lerp(0, 1.5f, _verticalSpawnCurve.Evaluate(time / 1.25f)));
+            parentTransform.position = Vector2.Lerp(startPos, endPos, time);
+            enemy.localPosition = new Vector2(0, Mathf.Lerp(0, 1.5f, _verticalSpawnCurve.Evaluate(time)));
+            waterPool.position = enemy.position;
         }
 
+        enemy.gameObject.SetActive(true);
         enemy.SetParent(null);
-		Object.Destroy(parentTransform.gameObject);
+        Object.Destroy(parentTransform.gameObject, 0.25f);
+        Object.Destroy(waterPool.gameObject, 0.25f);
     }
 }
 

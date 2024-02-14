@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class PowerUpController : MonoBehaviour
 {
-    [SerializeField] private GameObject powerUpPrefab;
+    [SerializeField] private PowerUpActivation powerUpPrefab;
+    [SerializeField] private AnimationCurve _verticalCurve;
+
+    public Transform[] SpawnPoints;
 
     private void Start()
     {
@@ -23,7 +26,7 @@ public class PowerUpController : MonoBehaviour
         if (rng > chance || chance == 0)
             return;
 
-        GameObject newSpawn;
+        PowerUpActivation newSpawn;
 
         if (type == PowerUpTypes.Anything)
         {
@@ -32,7 +35,7 @@ public class PowerUpController : MonoBehaviour
 
             try
             {
-                newSpawn.GetComponent<PowerUpActivation>().thisType = (PowerUpTypes)index;
+                newSpawn.thisType = (PowerUpTypes)index;
             }
             catch
             {
@@ -45,7 +48,7 @@ public class PowerUpController : MonoBehaviour
 
             try
             {
-                newSpawn.GetComponent<PowerUpActivation>().thisType = type;
+                newSpawn.thisType = type;
             }
             catch
             {
@@ -53,7 +56,44 @@ public class PowerUpController : MonoBehaviour
             }
         }
 
+        KeyValuePair<Transform, float> closestSpawnPoint = new(null, 1000);
+
+        for (int i = 0; i < SpawnPoints.Length; i++)
+        {
+            float distance = (spawnPosition - (Vector2)SpawnPoints[i].GetChild(1).position).magnitude;
+
+            if (distance < closestSpawnPoint.Value)
+                closestSpawnPoint = new(SpawnPoints[i], distance);
+        }
+
+        StartCoroutine(AnimatePowerUpSpawn(newSpawn, spawnPosition, closestSpawnPoint.Key.GetChild(1).position));
+
         //newSpawn.GetComponent<PowerUp>().powerUpSprite;
+    }
+
+    // Property of Jacob
+    IEnumerator AnimatePowerUpSpawn(PowerUpActivation powerUp, Vector2 startPos, Vector2 endPos)
+    {
+        powerUp.enabled = false;
+        Transform parentTransform = new GameObject().transform;
+        powerUp.transform.position = parentTransform.position;
+        powerUp.transform.SetParent(parentTransform);
+
+        parentTransform.position = startPos;
+
+        float time = 0;
+
+        while (time <= 1.25f)
+        {
+            yield return null;
+            time += Time.deltaTime;
+            parentTransform.position = Vector2.Lerp(startPos, endPos, time / 1.25f);
+            powerUp.transform.localPosition = new Vector2(0, Mathf.Lerp(0, 1.5f, _verticalCurve.Evaluate(time / 1.25f)));
+        }
+
+        powerUp.transform.SetParent(null);
+        powerUp.enabled = true;
+        Destroy(parentTransform.gameObject);
     }
 }
 

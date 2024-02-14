@@ -709,6 +709,7 @@ public class StageSwapState : BaseWaveState
 
         _context.SetSpawnPointsParent(island.transform.GetChild(1));
         _context.SetRespawnPoint(island.transform.GetChild(2));
+        EquipmentManager.Instance.SetPowerUpSpawnPoints(_context.SpawnPointParent.GetComponentsInChildren<Transform>());
 
         PlayerStats.Instance.UpdateTilemap(island.GetComponent<Tilemap>());
     }

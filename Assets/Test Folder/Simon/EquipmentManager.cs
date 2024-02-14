@@ -92,4 +92,9 @@ public class EquipmentManager : MonoBehaviour
 
         return _hitStopRequests == 0;
     }
+
+    public void SetPowerUpSpawnPoints(Transform[] points)
+    {
+        GetComponent<PowerUpController>().SpawnPoints = points;
+    }
 }

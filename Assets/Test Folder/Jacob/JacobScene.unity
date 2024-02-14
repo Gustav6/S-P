@@ -178,8 +178,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '[ Insert neat little message here ]'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -1749147304458713139, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
+  m_sharedMaterial: {fileID: -4788973053161026842, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -529,6 +529,7 @@ GameObject:
   m_Component:
   - component: {fileID: 144478172}
   - component: {fileID: 144478173}
+  - component: {fileID: 144478174}
   m_Layer: 0
   m_Name: EquipmentManager
   m_TagString: Untagged
@@ -563,6 +564,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6138fef475b2d4d8c70739ba001e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &144478174
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 144478170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172ef22f3d537e0468e9d77a87ea5fe6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpPrefab: {fileID: 8287390525886274493, guid: 2866aecfd7238e440985ff8144094d9d, type: 3}
+  _verticalCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 4.812898
+      outSlope: 4.812898
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.051213175
+    - serializedVersion: 3
+      time: 0.5
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -3.98355
+      outSlope: -3.98355
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.069429636
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  SpawnPoints:
+  - {fileID: 275433580}
+  - {fileID: 1822703045}
+  - {fileID: 1798044112}
+  - {fileID: 1199737547}
+  - {fileID: 1672254382}
+  - {fileID: 1731588477}
+  - {fileID: 318530946}
+  - {fileID: 1087192753}
+  - {fileID: 1896675608}
+  - {fileID: 891460121}
 --- !u!1 &153870810
 GameObject:
   m_ObjectHideFlags: 0
@@ -907,8 +965,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Light Wave
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -1749147304458713139, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
+  m_sharedMaterial: {fileID: -4788973053161026842, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1059,6 +1117,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 248734936}
   m_CullTransparentMesh: 1
+--- !u!4 &275433580 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 884839575809145932, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  m_PrefabInstance: {fileID: 1212505827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &318502796
 GameObject:
   m_ObjectHideFlags: 0
@@ -1173,6 +1236,11 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!4 &318530946 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 486267846494514727, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  m_PrefabInstance: {fileID: 1212505827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &327550914
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,8 +1721,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Wave Cleared!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -1749147304458713139, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
+  m_sharedMaterial: {fileID: -4788973053161026842, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13305,6 +13373,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _textPopup: {fileID: 1503648644820522570, guid: c5e681d3b82095d4fb0a3af577a6d92b, type: 3}
+--- !u!4 &891460121 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 311267639701294575, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  m_PrefabInstance: {fileID: 1212505827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &911536966
 GameObject:
   m_ObjectHideFlags: 0
@@ -13433,8 +13506,8 @@ MonoBehaviour:
   m_text: The enemies strength lies in their numbers, expect a large amount of weaker
     foes.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -1749147304458713139, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
+  m_sharedMaterial: {fileID: -4788973053161026842, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13561,7 +13634,7 @@ GameObject:
   - component: {fileID: 958196901}
   - component: {fileID: 958196900}
   - component: {fileID: 958196912}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -14364,6 +14437,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1087192753 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6261488180814810622, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  m_PrefabInstance: {fileID: 1212505827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1146938534
 GameObject:
   m_ObjectHideFlags: 0
@@ -14409,6 +14487,11 @@ Transform:
   - {fileID: 1212505828}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1199737547 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7379101121298449355, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  m_PrefabInstance: {fileID: 1212505827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1212505827
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27235,6 +27318,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!4 &1672254382 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5967520384716174084, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  m_PrefabInstance: {fileID: 1212505827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1685277661
 GameObject:
   m_ObjectHideFlags: 0
@@ -27374,6 +27462,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1721727722}
   m_CullTransparentMesh: 1
+--- !u!4 &1731588477 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2365914514874765484, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  m_PrefabInstance: {fileID: 1212505827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1731991215
 GameObject:
   m_ObjectHideFlags: 0
@@ -27632,6 +27725,16 @@ Transform:
   - {fileID: 1378159253}
   m_Father: {fileID: 43984097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1798044112 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1202203570773155811, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  m_PrefabInstance: {fileID: 1212505827}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1822703045 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1253261064684193014, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  m_PrefabInstance: {fileID: 1212505827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1854765024
 GameObject:
   m_ObjectHideFlags: 0
@@ -27664,6 +27767,11 @@ Transform:
   - {fileID: 1731991216}
   m_Father: {fileID: 1063753058}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1896675608 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1772447598478530443, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  m_PrefabInstance: {fileID: 1212505827}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1921650074
 GameObject:
   m_ObjectHideFlags: 0

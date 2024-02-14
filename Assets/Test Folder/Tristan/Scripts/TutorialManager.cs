@@ -20,7 +20,7 @@ public class TutorialManager : MonoBehaviour
             }
         }
         // Update this later
-        if (Input.GetKeyDown(KeyCode.F)) {
+        if (Input.GetKeyDown(KeyCode.E)) {
             popUpIndex++;
         }
     }

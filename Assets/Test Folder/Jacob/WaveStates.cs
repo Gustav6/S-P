@@ -599,6 +599,7 @@ public class WaveInProgressState : BaseWaveState
     }
 }
 
+
 public class WaveClearState : BaseWaveState
 {
     WaveStateContext _context;
@@ -640,6 +641,7 @@ public class WaveClearState : BaseWaveState
         }
     }
 }
+
 
 public class StageSwapState : BaseWaveState
 {
@@ -752,5 +754,36 @@ public class StageSwapState : BaseWaveState
         {
             _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.WaveCreation);
         }
+    }
+}
+
+
+public class WaveLossState : BaseWaveState
+{
+    WaveStateContext _context;
+
+    public WaveLossState(WaveStateContext context, WaveStateMachine.WaveState stateKey) : base(context, stateKey)
+    {
+        _context = context;
+    }
+
+    public override void EnterState()
+    {
+
+    }
+
+    public override void ExitState()
+    {
+
+    }
+
+    public override WaveStateMachine.WaveState GetNextState()
+    {
+        return StateKey;
+    }
+
+    public override void UpdateState()
+    {
+
     }
 }

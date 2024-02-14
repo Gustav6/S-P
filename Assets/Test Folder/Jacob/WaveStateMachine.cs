@@ -14,7 +14,8 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 		Reward,
 		Intermission,
 		WaveInProgress,
-		WaveCleared
+		WaveCleared,
+		WaveLoss
 	}
 
 	public enum WaveType
@@ -70,6 +71,7 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 		States.Add(WaveState.WaveInProgress, new WaveInProgressState(_context, WaveState.WaveInProgress, _waveProgressFill, _fishTransform, _progressBarAnim, _verticalSpawnCurve));
 		States.Add(WaveState.WaveCleared, new WaveClearState(_context, WaveState.WaveCleared, _clearMessages, _messageText, _waveClearAnim));
 		States.Add(WaveState.StageSwap, new StageSwapState(_context, WaveState.StageSwap, _armAnim, _islandPrefabs, _currentIsland, _gridTransform, _statRewardInteractables, _weaponRewardInteractables));
+		States.Add(WaveState.WaveLoss, new WaveLossState(_context, WaveState.WaveLoss));
 
 		CurrentState = States[WaveState.WaveCreation];
 	}

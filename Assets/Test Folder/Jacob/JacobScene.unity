@@ -1231,6 +1231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 327550915}
   - component: {fileID: 327550916}
+  - component: {fileID: 327550917}
   m_Layer: 5
   m_Name: Countdown
   m_TagString: Untagged
@@ -1283,6 +1284,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &327550917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 327550914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7cfe2e5175eedd4d9914468f7b991d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &430376465
 GameObject:
   m_ObjectHideFlags: 0
@@ -2229,6 +2242,34 @@ MonoBehaviour:
     Volume: 0.65
     Pitch: 1
     RandomizePitch: 0.25
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Count3
+    Clip: {fileID: 8300000, guid: f6501c41ecbc88f4fb2f93fcaf6be4ca, type: 3}
+    Volume: 0.65
+    Pitch: 1
+    RandomizePitch: 0
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Count2
+    Clip: {fileID: 8300000, guid: 626d50c5712892146924392fa302050d, type: 3}
+    Volume: 0.65
+    Pitch: 1
+    RandomizePitch: 0
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Count1
+    Clip: {fileID: 8300000, guid: 09941a257b726cc4cade5a480e10ba0b, type: 3}
+    Volume: 0.65
+    Pitch: 1
+    RandomizePitch: 0
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: CountGo
+    Clip: {fileID: 8300000, guid: 47a958a6f9a367845a62d9f90bf1ddc7, type: 3}
+    Volume: 0.65
+    Pitch: 1
+    RandomizePitch: 0
     Loop: 0
     Source: {fileID: 0}
 --- !u!4 &773047904

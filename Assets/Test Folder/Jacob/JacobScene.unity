@@ -13949,7 +13949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bcfb6af4188cd24293b9d94df5c8903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentWeapon: {fileID: 11400000, guid: 4cf4376c0a7881a4bb8564451a15f752, type: 2}
+  CurrentWeapon: {fileID: 11400000, guid: aa8e512fae2c0824ea3d754466753bf0, type: 2}
   waveStateMachine: {fileID: 1553995191}
   _gameOverGameObject: {fileID: 0}
   _angryHead: {fileID: -8409191195015169317, guid: 665e88e68ec018740934e2027c18b6ba, type: 3}
@@ -15542,7 +15542,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 617924119179b3744a3f29cacf400db5, type: 2}
   - {fileID: 11400000, guid: 04a5bde66efb1ba49a5263a4fcbb7c51, type: 2}
   - {fileID: 11400000, guid: 146d8a9233a695b4ab63ae416acd57d7, type: 2}
-  - {fileID: 11400000, guid: 7a0221a85017eb3488b845791444418f, type: 2}
   _dropCurve:
     serializedVersion: 2
     m_Curve:
@@ -15651,6 +15650,7 @@ MonoBehaviour:
   _islandGenerator: {fileID: 0}
   _islandPrefabs:
   - {fileID: 2219014881077572896, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
+  - {fileID: 8876761688983302919, guid: 72382b25bfb0c5545b2e11a98b548dd4, type: 3}
   _currentIsland: {fileID: 2051934466}
   _gridTransform: {fileID: 1146938536}
   _respawnPoint: {fileID: 1212505829}

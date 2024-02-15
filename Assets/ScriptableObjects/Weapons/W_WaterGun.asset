@@ -20,7 +20,7 @@ MonoBehaviour:
   weaponImpulseMultiplier: -3
   weaponImpulseTime: 0.075
   rangedWeaponSpeed: 0.75
-  hitbox: {fileID: 4724571836604968063, guid: 6ad4fcf6ca403f24fa138a65cf36d4a4, type: 3}
+  hitbox: {fileID: 288263448704326756, guid: 8ecb55dc559b91c4dab7831ee9f81478, type: 3}
   weaponFlashSprite: {fileID: 21300000, guid: 1574f279875daae4fa6efb4b9a8e7a82, type: 3}
   particleSystem: {fileID: 1567073594253252592, guid: a03547f8df435af4b914589d0b209a2d, type: 3}
   isWeaponAnimationResetable: 1

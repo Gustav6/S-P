@@ -107,4 +107,12 @@ public class Enemy : MonoBehaviour, IDamageable
         AudioManager.Instance.Play("WaterSplash");
         Destroy(gameObject);
     }
+    
+    IEnumerator BomberExplosion()
+    {
+        AudioManager.Instance.Play("Explosion");
+        yield return new WaitForSeconds(0.2f);
+        Destroy(gameObject);
+    }
+
 }

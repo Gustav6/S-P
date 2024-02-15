@@ -55,7 +55,9 @@ public class EnemyAttackController : MonoBehaviour
 
     public void EnemyHit()
     {
+        Debug.Log("Is Hit");
         _anim.SetBool("IsHit", true);
+        _anim.SetBool("IsAttacking", false);
     }
 
     public void GroundEnemyHit()

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using TMPro;
+using System.Runtime.CompilerServices;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour, IDamageable
 {
@@ -75,6 +77,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public float KnockbackPercent { get; set; }
 
     public PowerUp currentPowerUp { get; private set; }
+    [SerializeField] private Image _powerUpHudElement;
 
     public int Score { get; private set; }
 
@@ -98,6 +101,17 @@ public class PlayerStats : MonoBehaviour, IDamageable
     private void Update()
     {
         _thisDamagable.CheckDeath(tilemap, _tiles, _playerCollider);
+        
+        if (currentPowerUp != null)
+        {
+            _powerUpHudElement.color = new Color(1, 1, 1, 1);
+            _powerUpHudElement.sprite = currentPowerUp.powerUpSprite;
+        }
+        else
+        {
+            _powerUpHudElement.color = new Color(1, 1, 1, 0);
+            _powerUpHudElement.sprite = null;
+        }
 
         _currentDamageDisplay = Mathf.Lerp(_currentDamageDisplay, _desiredDamageDisplay, Time.deltaTime * 10);
         _damageDisplayText.text = ((int)_currentDamageDisplay).ToString() + "%";

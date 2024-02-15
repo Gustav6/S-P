@@ -25,6 +25,11 @@ public class Dash : PowerUp
         _bodySr = _sr[0];
     }
 
+    private void Start()
+    {
+        powerUpSprite = EquipmentManager.Instance.ReturnPowerupSprite(PowerUpTypes.Dash);
+    }
+
     public override void UsePowerUp()
     {
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;

@@ -6,7 +6,12 @@ public class HealPowerup : PowerUp
 {
 	bool _isUsingPowerup = false;
 
-	public override void OnDeactivatePowerUp()
+    private void Start()
+    {
+		powerUpSprite = EquipmentManager.Instance.ReturnPowerupSprite(PowerUpTypes.Heal);
+    }
+
+    public override void OnDeactivatePowerUp()
 	{
 		PlayerStats.Instance.DeActivateAbilityStats();
 		PlayerStats.Instance.ClearEquippedAbility();

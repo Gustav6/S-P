@@ -1,3 +1,4 @@
+using NUnit.Framework.Constraints;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,6 +31,9 @@ public class EquipmentManager : MonoBehaviour
     
     public Action PlayerTookDamage { get; set; }
 
+    [Tooltip("0 = Dash, 1 = Haste, 2 = Tank")]
+    [SerializeField] private List<Sprite> _powerupSprites = new List<Sprite>();
+
     private bool _canPlayerAttack = true;
 
     public bool CanSpawnPowerUps { get; private set; }
@@ -61,10 +65,6 @@ public class EquipmentManager : MonoBehaviour
         }
 
         PlayerStats.Instance.CurrentWeapon = newWeapon;
-
-        // If either of these are null, the controller is not of a player but rather an enemy, which only need the weapon stats not the visual elements.
-        if (weaponSpriteRenderer == null || flashSpriteRenderer == null || swingEffect == null)
-            return;
 
         controller.weaponAnimator.SetFloat("s", newWeapon.AnimationSpeed);
         controller.weaponAnimator.runtimeAnimatorController = newWeapon.AnimatorOverride;
@@ -114,5 +114,10 @@ public class EquipmentManager : MonoBehaviour
     public void SetPowerUpSpawnPoints(Transform pointsParent)
     {
         GetComponent<PowerUpController>().SpawnPointsParent = pointsParent;
+    }
+
+    public Sprite ReturnPowerupSprite(PowerUpTypes powerup)
+    {
+        return _powerupSprites[(int)powerup];
     }
 }

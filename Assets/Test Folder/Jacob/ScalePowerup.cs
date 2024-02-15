@@ -6,6 +6,11 @@ public class ScalePowerup : PowerUp
 {
     bool _isUsingPowerup = false;
 
+    private void Start()
+    {
+        powerUpSprite = EquipmentManager.Instance.ReturnPowerupSprite(PowerUpTypes.Tank);
+    }
+
     public override void UsePowerUp()
     {
         if (_isUsingPowerup)

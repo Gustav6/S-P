@@ -672,6 +672,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7dc06e24c79fa6745ad77ccab28ed6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _waterSplashSystem: {fileID: 6626003673690584255, guid: 657e64dcdab761347a608c3eaa291ea8, type: 3}
 --- !u!4 &179709973
 Transform:
   m_ObjectHideFlags: 0
@@ -13927,7 +13928,8 @@ MonoBehaviour:
   CurrentWeapon: {fileID: 11400000, guid: cbbf78b4dbb50f74db9f93c0dc5a2037, type: 2}
   waveStateMachine: {fileID: 1553995191}
   _gameOverGameObject: {fileID: 0}
-  angryHead: {fileID: -8409191195015169317, guid: 665e88e68ec018740934e2027c18b6ba, type: 3}
+  _angryHead: {fileID: 0}
+  _playerKnockbackSprite: {fileID: 0}
   dashSprite: {fileID: 0}
   tilemap: {fileID: 2051934469}
   _diStrength: 0.25
@@ -13963,7 +13965,6 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   _maxDamagePercent: 300
-  Score: 0
 --- !u!1 &989311537
 GameObject:
   m_ObjectHideFlags: 0
@@ -15619,6 +15620,7 @@ MonoBehaviour:
   - wow!
   - We making it off the island with this one.
   - Fuck those fish!!
+  - '*dolphin noises*'
   _messageText: {fileID: 41028103}
   _waveClearAnim: {fileID: 603107909}
   _islandGenerator: {fileID: 0}

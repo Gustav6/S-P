@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
+using UnityEngine.UIElements;
 
 public class ParticleManager : MonoBehaviour
 {
@@ -23,10 +25,18 @@ public class ParticleManager : MonoBehaviour
 
     #endregion
 
+    [SerializeField] ParticleSystem _waterSplashSystem;
+
     public void SpawnParticle(ParticleSystem system, Vector3 position)
     {
-        GameObject obj = Instantiate(system, position + transform.position, Quaternion.identity, transform).gameObject;
+        GameObject obj = Instantiate(system, position, Quaternion.identity, transform).gameObject;
 
         Destroy(obj, system.main.duration);
+}
+    public void SpawnWaterSplash(Vector3 position)
+    {
+        GameObject obj = Instantiate(_waterSplashSystem, position, Quaternion.identity, transform).gameObject;
+
+        Destroy(obj, _waterSplashSystem.main.duration);
     }
 }

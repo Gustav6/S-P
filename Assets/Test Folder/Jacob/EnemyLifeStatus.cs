@@ -14,6 +14,7 @@ public class EnemyLifeStatus : MonoBehaviour
 		OnDeathCallback.Invoke(Value);
 		PlayerStats.Instance.AddScore(Value * 10);
 		PopupManager.Instance.SpawnText("+" + (Value * 10).ToString(), transform.position, 1.75f);
+		ParticleManager.Instance.SpawnWaterSplash(transform.position);	
 	}
 
 	private void OnMouseDown()

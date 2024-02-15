@@ -71,6 +71,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     bool _isInvulnerable = false;
 
     [SerializeField] float _maxDamagePercent = 300f;
+    [SerializeField] ParticleSystem _healParticlesPrefab;
     public float KnockbackPercent { get; set; }
 
     public PowerUp currentPowerUp { get; private set; }
@@ -176,6 +177,17 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         SetDamageDisplay();
     }
+
+    public void HealDamage(float healAmount)
+	{
+        KnockbackPercent -= healAmount;
+
+        if (KnockbackPercent < 0)
+            KnockbackPercent = 0;
+
+        ParticleManager.Instance.SpawnParticle(_healParticlesPrefab, transform.position, transform);
+        SetDamageDisplay();
+	}
 
     void SetDamageDisplay()
     {

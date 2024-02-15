@@ -32,7 +32,15 @@ public class ParticleManager : MonoBehaviour
         GameObject obj = Instantiate(system, position, Quaternion.identity, transform).gameObject;
 
         Destroy(obj, system.main.duration);
-}
+    }
+
+    public void SpawnParticle(ParticleSystem system, Vector3 position, Transform parent)
+    {
+        GameObject obj = Instantiate(system, position, Quaternion.identity, parent).gameObject;
+
+        Destroy(obj, system.main.duration);
+    }
+
     public void SpawnWaterSplash(Vector3 position)
     {
         GameObject obj = Instantiate(_waterSplashSystem, position, Quaternion.identity, transform).gameObject;

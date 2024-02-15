@@ -111,5 +111,6 @@ public enum PowerUpTypes
     Dash,
     Haste,
     Tank,
+    Heal,
     Anything
 }

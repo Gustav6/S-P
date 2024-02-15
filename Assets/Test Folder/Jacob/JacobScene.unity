@@ -13834,6 +13834,7 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   _maxDamagePercent: 300
+  _healParticlesPrefab: {fileID: 8860623131104852182, guid: 22cf678a65815d448b1bc67fdb61b004, type: 3}
 --- !u!1 &989311537
 GameObject:
   m_ObjectHideFlags: 0

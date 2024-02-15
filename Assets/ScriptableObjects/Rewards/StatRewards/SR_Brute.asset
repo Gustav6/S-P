@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5636dff09e1360347ab761647948eb96, type: 3}
   m_Name: SR_Brute
   m_EditorClassIdentifier: 
-  RewardName: 
+  RewardName: Brute
   WaveUnlocked: 3
   StatModifier:
     AttackSpeed: 1

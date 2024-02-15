@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Tilemaps;
+using Unity.VisualScripting;
 
 public class WaveCreationState : BaseWaveState
 {
@@ -22,7 +23,7 @@ public class WaveCreationState : BaseWaveState
 
 	public override void EnterState()
 	{
-        _context.SetEnemiesToSpawn(GetEnemies(50, (WaveStateMachine.WaveType)Random.Range(0, 6)));
+        _context.SetEnemiesToSpawn(GetEnemies((int)(_context.WaveNumber / 2f * 50f + (_context.WaveNumber * 5f)), (WaveStateMachine.WaveType)Random.Range(0, 6)));
         _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.Reward);
 	}
 
@@ -273,7 +274,9 @@ public class WaveRewardState : BaseWaveState
                            WaveReward[] statRewardPool,
                            WaveReward[] weaponRewardPool,
                            AnimationCurve dropCurve,
-                           AnimationCurve ascensionCurve) : base(context, stateKey)
+                           AnimationCurve ascensionCurve,
+                           int statRewardIncrement,
+                           int weaponRewardIncrement) : base(context, stateKey)
     {
         _context = context;
         _statRewardInteractables = statRewardInteractables;
@@ -282,6 +285,8 @@ public class WaveRewardState : BaseWaveState
         _weaponRewardPool = weaponRewardPool;
         _dropCurve = dropCurve;
         _ascensionCurve = ascensionCurve;
+        _statRewardIncrement = statRewardIncrement;
+        _weaponRewardIncrement = weaponRewardIncrement;
     }
 
     WaveRewardInteractable[] _statRewardInteractables;
@@ -293,13 +298,21 @@ public class WaveRewardState : BaseWaveState
     AnimationCurve _dropCurve;
     AnimationCurve _ascensionCurve;
 
+    int _statRewardIncrement, _weaponRewardIncrement;
+
     public override void EnterState()
     {
-        GenerateRewards(_statRewardPool, _statRewardInteractables);
-        GenerateRewards(_weaponRewardPool, _weaponRewardInteractables);
+        if (((_context.WaveNumber - 1) % _statRewardIncrement) == 0 || (_context.WaveNumber - 1) == 0)
+        {
+            GenerateRewards(_statRewardPool, _statRewardInteractables);
+            EnableStatRewardInteractables();
+        }
 
-        EnableStatRewardInteractables();
-        EnableWeaponRewardInteractables();
+        if (((_context.WaveNumber - 1) % _weaponRewardIncrement) == 0 || (_context.WaveNumber - 1) == 0)
+        {
+            GenerateRewards(_weaponRewardPool, _weaponRewardInteractables);
+            EnableWeaponRewardInteractables();
+        }
     }
 
 	public override void ExitState()
@@ -673,6 +686,7 @@ public class StageSwapState : BaseWaveState
 
     float _timer;
     bool _isSwapping;
+    bool _cancel;
 
     IslandTransition[] _islandPrefabs;
     IslandTransition _previousIsland;
@@ -686,7 +700,16 @@ public class StageSwapState : BaseWaveState
     Vector2 _startPos;
     Transform _armCenter;
 
-    public StageSwapState(WaveStateContext context, WaveStateMachine.WaveState stateKey, Animator armAnim, IslandTransition[] islandPrefabs, IslandTransition currentIsland, Transform gridTransform, WaveRewardInteractable[] statRewardInteractables, WaveRewardInteractable[] weaponRewardInteractables) : base(context, stateKey)
+    int _stageSwapIncrement;
+
+    public StageSwapState(WaveStateContext context, WaveStateMachine.WaveState stateKey, 
+                          Animator armAnim, 
+                          IslandTransition[] islandPrefabs, 
+                          IslandTransition currentIsland, 
+                          Transform gridTransform, 
+                          WaveRewardInteractable[] statRewardInteractables, 
+                          WaveRewardInteractable[] weaponRewardInteractables, 
+                          int stageSwapIncrement) : base(context, stateKey)
     {
         _context = context;
         _armAnim = armAnim;
@@ -695,21 +718,31 @@ public class StageSwapState : BaseWaveState
         _gridTransform = gridTransform;
         _statRewardInteractables = statRewardInteractables;
         _weaponRewardInteractables = weaponRewardInteractables;
+        _stageSwapIncrement = stageSwapIncrement;
 
         _armCenter = armAnim.transform.GetChild(0);
     }
 
     public override void EnterState()
     {
+        if ((_context.WaveNumber % _stageSwapIncrement) != 0)
+		{
+            _cancel = true;
+            _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.WaveCreation);
+            return;
+        }
+
+        _cancel = false;
         _timer = 0;
         _isSwapping = false;
         TransitionManager.Instance.ApproachPlayer();
         _startPos = _armCenter.position;
+        PlayerStats.Instance.ToggleInvulnerability(true);
     }
 
     public override void ExitState()
     {
-
+        PlayerStats.Instance.ToggleInvulnerability(false);
     }
 
     public override WaveStateMachine.WaveState GetNextState()
@@ -740,6 +773,9 @@ public class StageSwapState : BaseWaveState
 
     public override void UpdateState()
     {
+        if (_cancel)
+            return;
+
         if (!_isSwapping && _armAnim.GetCurrentAnimatorStateInfo(0).IsName("ArmPickUp"))
         {
             if (_timer == 0)

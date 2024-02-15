@@ -68,6 +68,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     float _desiredDamageDisplay;
 
     bool _isImmune = false;
+    bool _isInvulnerable = false;
 
     [SerializeField] float _maxDamagePercent = 300f;
     public float KnockbackPercent { get; set; }
@@ -75,6 +76,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public PowerUp currentPowerUp { get; private set; }
 
     public int Score { get; private set; }
+
 
     public void AddScore(int amount)
     {
@@ -294,7 +296,11 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public void Die()
     {
-        // TODO: Play splash animation and sound perhaps.
+        if (_isInvulnerable)
+            return;
+
+        ParticleManager.Instance.SpawnWaterSplash(transform.position);
+        AudioManager.Instance.PlaySound("WaterSplash");
 
         if (waveStateMachine.CurrentState != waveStateMachine.States[WaveStateMachine.WaveState.WaveInProgress])
         {
@@ -305,5 +311,11 @@ public class PlayerStats : MonoBehaviour, IDamageable
         waveStateMachine.TransitionToState(WaveStateMachine.WaveState.WaveLoss);
         gameObject.SetActive(false);
     }
+
+    public void ToggleInvulnerability(bool value)
+	{
+        _isInvulnerable = value;
+    }
+
     #endregion
 }

@@ -47,9 +47,9 @@ public class PlayerMovement : MonoBehaviour
 			rb.velocity = input.normalized * _movementSpeed * PlayerStats.Instance.GetStat(StatType.MovementSpeed);
 	}
 
-	public void ToggleMovementLock()
+	public void ToggleMovementLock(bool value)
 	{
-		MovementLocked = !MovementLocked;
+		MovementLocked = value;
 		rb.velocity = Vector2.zero;
 	}
 }

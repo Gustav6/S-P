@@ -33,16 +33,11 @@ public class TransitionManager : MonoBehaviour
 
 	Animator _anim;
 
-    private void Start()
-    {
-		//Invoke(nameof(ApproachPlayer), 4);
-    }
-
     public void ApproachPlayer()
     {
-		_armTransform.position = new Vector3(_playerTransform.position.x, _playerTransform.position.y, 0);
+		_armTransform.position = _playerTransform.position;
 		_anim.Play("ArmApproach");
-		_playerMovement.ToggleMovementLock();
+		_playerMovement.ToggleMovementLock(true);
     }
 
 	public void PickUpPlayer()
@@ -59,7 +54,7 @@ public class TransitionManager : MonoBehaviour
 
 	public void UnParentPlayer()
 	{
-		_playerMovement.ToggleMovementLock();
+		_playerMovement.ToggleMovementLock(false);
 		_playerTransform.parent = null;
     }
 }

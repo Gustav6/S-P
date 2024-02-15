@@ -47,7 +47,6 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 	[SerializeField] TMP_Text _messageText;
 	[SerializeField] Animator _waveClearAnim;
 
-	[SerializeField] IslandGenerator _islandGenerator;
 	[SerializeField] IslandTransition[] _islandPrefabs;
 	[SerializeField] IslandTransition _currentIsland;
 	[SerializeField] Transform _gridTransform;
@@ -60,6 +59,8 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 
 	[SerializeField] Transform _waterPoolPrefab;
 
+	[SerializeField] int _weaponRewardIncrement, _statRewardIncrement, _stageSwapIncrement;
+
 	private void Awake()
 	{
 		_context = new(this, _spawnPointsParent, _respawnPoint);
@@ -70,11 +71,11 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 	void InitializeStates()
 	{
 		States.Add(WaveState.WaveCreation, new WaveCreationState(_context, WaveState.WaveCreation, _enemyAssortment, _waveInfoPopup));
-		States.Add(WaveState.Reward, new WaveRewardState(_context, WaveState.Reward, _statRewardInteractables, _weaponRewardInteractables, _statRewardPool, _weaponRewardPool, _dropCurve, _ascensionCurve));
+		States.Add(WaveState.Reward, new WaveRewardState(_context, WaveState.Reward, _statRewardInteractables, _weaponRewardInteractables, _statRewardPool, _weaponRewardPool, _dropCurve, _ascensionCurve, _statRewardIncrement, _weaponRewardIncrement));
 		States.Add(WaveState.Intermission, new WaveIntermissionState(_context, WaveState.Intermission, _countDownAnim, _waveInfoPopup));
 		States.Add(WaveState.WaveInProgress, new WaveInProgressState(_context, WaveState.WaveInProgress, _waveProgressFill, _fishTransform, _progressBarAnim, _verticalSpawnCurve, _waterPoolPrefab));
 		States.Add(WaveState.WaveCleared, new WaveClearState(_context, WaveState.WaveCleared, _clearMessages, _messageText, _waveClearAnim));
-		States.Add(WaveState.StageSwap, new StageSwapState(_context, WaveState.StageSwap, _armAnim, _islandPrefabs, _currentIsland, _gridTransform, _statRewardInteractables, _weaponRewardInteractables));
+		States.Add(WaveState.StageSwap, new StageSwapState(_context, WaveState.StageSwap, _armAnim, _islandPrefabs, _currentIsland, _gridTransform, _statRewardInteractables, _weaponRewardInteractables, _stageSwapIncrement));
 		States.Add(WaveState.WaveLoss, new WaveLossState(_context, WaveState.WaveLoss, _gameOverUIObject));
 
 		CurrentState = States[WaveState.WaveCreation];

@@ -6,7 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Test Folder/Gustav/Scenes/Test.unity
-    guid: b75a09cc7d38ba847b5df8aea480ddb9
+    path: Assets/Test Folder/Gustav/Scenes/Menu.unity
+    guid: f464ddc4b2396634abbc29d52afcee39
+  - enabled: 1
+    path: Assets/Test Folder/Jacob/JacobScene.unity
+    guid: 9ac99e7ac86c77840afedc606e419cbf
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

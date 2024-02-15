@@ -14,7 +14,7 @@ public class ButtonDeselectedState : UIBaseState
     {
         manager = (ButtonStateManager)referenceManager;
 
-        if (UIInput.PauseGameObjectInstance != null)
+        if (UIManager.Instance.GetComponentInChildren<PauseManager>() != null)
         {
             if (UIInput.PauseTransitionFinished)
             {
@@ -29,7 +29,17 @@ public class ButtonDeselectedState : UIBaseState
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        CheckIfSelected(referenceManager, manager.selectedState);
+        if (UIManager.Instance.GetComponentInChildren<PauseManager>() != null)
+        {
+            if (UIInput.PauseTransitionFinished)
+            {
+                CheckIfSelected(referenceManager, manager.selectedState);
+            }
+        }
+        else
+        {
+            CheckIfSelected(referenceManager, manager.selectedState);
+        }
     }
 
     public override void ExitState(BaseStateManager referenceManager)

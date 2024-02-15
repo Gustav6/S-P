@@ -42,12 +42,12 @@ public class TutorialManager : MonoBehaviour
             else if (popUpIndex == 1)
             {
                 // Check if player has picked up
-                if (Input.GetKeyDown(KeyCode.F))
+                if (Input.GetButtonDown("Fire1"))
                     popUpIndex++;
             }
             else if (popUpIndex == 2)
             {
-                if (Input.GetButtonDown("Fire1"))
+                if (Input.GetKeyDown(KeyCode.F))
                     popUpIndex++;
             }
             else if (popUpIndex == 3)

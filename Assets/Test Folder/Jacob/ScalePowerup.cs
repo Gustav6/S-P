@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class ScalePowerup : PowerUp
 {
+    bool _isUsingPowerup = false;
+
     public override void UsePowerUp()
     {
+        if (_isUsingPowerup)
+            return;
+
+        _isUsingPowerup = true;
         StartCoroutine(Scale());
     }
 

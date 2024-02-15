@@ -15614,9 +15614,16 @@ MonoBehaviour:
   - {fileID: 196112677}
   - {fileID: 989311540}
   _statRewardPool:
-  - {fileID: 11400000, guid: e21c7c548d4a2c9479481de1be299199, type: 2}
-  - {fileID: 11400000, guid: a158583683e12714f9f5735332b47934, type: 2}
-  - {fileID: 11400000, guid: 10bb9e3453d58da4990ebaa31541a3cb, type: 2}
+  - {fileID: 11400000, guid: 5eed5a98603ddb046806ab45224b26e6, type: 2}
+  - {fileID: 11400000, guid: 619510dbb569de742b479b20ae16869e, type: 2}
+  - {fileID: 11400000, guid: 1d55bc0cde338b2498c5cfebd13e791b, type: 2}
+  - {fileID: 11400000, guid: d123038a482fde040b5d254bec907676, type: 2}
+  - {fileID: 11400000, guid: 94908574bbec0e9498482fc4bc8dbece, type: 2}
+  - {fileID: 11400000, guid: a23675c9bfb95854b9cb01bd894266bf, type: 2}
+  - {fileID: 11400000, guid: 62bd2e05132b2d940bfb0a1ced85c814, type: 2}
+  - {fileID: 11400000, guid: d48921e3d55c4a64d9789ccd91a034f1, type: 2}
+  - {fileID: 11400000, guid: 43532bcf171113842ba16be9d953c4d4, type: 2}
+  - {fileID: 11400000, guid: d5fe43409f3b7374fa1fccca52d5d377, type: 2}
   _weaponRewardPool:
   - {fileID: 11400000, guid: cc5a58de7c50b01489d30e23d7a112b6, type: 2}
   - {fileID: 11400000, guid: 6a38e243318a380488b617c9978768cc, type: 2}

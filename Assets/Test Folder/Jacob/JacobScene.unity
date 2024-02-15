@@ -2132,7 +2132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb3cc3f7af2f614d990c647cac69186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24300002, guid: cd9da5f47f6c67242a5fe8c50a0c7c81, type: 2}
+  audioMixer: {fileID: -6582705752811300379, guid: cd9da5f47f6c67242a5fe8c50a0c7c81, type: 2}
   sounds:
   - Name: Hurt
     Clip: {fileID: 8300000, guid: 8b4251d9a7016ab48b2a8d15ff827e04, type: 3}

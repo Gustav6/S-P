@@ -10,9 +10,11 @@ public class AudioManager : MonoBehaviour
     // Singleton
     public static AudioManager Instance;
 
-    [SerializeField] AudioMixerGroup audioMixer;
+    [SerializeField] AudioMixerGroup _sfxMixer;
+    [SerializeField] AudioMixerGroup _musicMixer;
 
-    [SerializeField] Sound[] sounds;
+    [SerializeField] Sound[] _sounds;
+    [SerializeField] Sound[] _music;
 
     void Awake()
     {
@@ -28,10 +30,20 @@ public class AudioManager : MonoBehaviour
 
         #endregion
 
-        foreach (Sound s in sounds)
+        foreach (Sound s in _sounds)
         {
             s.Source = gameObject.AddComponent<AudioSource>();
-            s.Source.outputAudioMixerGroup = audioMixer;
+            s.Source.outputAudioMixerGroup = _sfxMixer;
+            s.Source.clip = s.Clip;
+            s.Source.volume = s.Volume;
+            s.Source.pitch = s.Pitch;
+            s.Source.loop = s.Loop;
+        }
+
+        foreach (Sound s in _music)
+        {
+            s.Source = gameObject.AddComponent<AudioSource>();
+            s.Source.outputAudioMixerGroup = _musicMixer;
             s.Source.clip = s.Clip;
             s.Source.volume = s.Volume;
             s.Source.pitch = s.Pitch;
@@ -39,9 +51,9 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void Play(string name)
+    public void PlaySound(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.Name == name);
+        Sound s = Array.Find(_sounds, sound => sound.Name == name);
 
         if (s == null)
         {
@@ -56,13 +68,43 @@ public class AudioManager : MonoBehaviour
             s.Source.Play();
     }
 
-    public void Stop(string name)
+    public void StopSound(string name)
     {
-        Sound s = Array.Find(sounds, sound => sound.Name == name);
+        Sound s = Array.Find(_sounds, sound => sound.Name == name);
 
         if (s == null)
         {
             Debug.LogWarning("Sound: " + name + " not found!");
+            return;
+        }
+
+        s.Source.Stop();
+    }
+
+    public void PlayMusic(string name)
+    {
+        Sound s = Array.Find(_music, sound => sound.Name == name);
+
+        if (s == null)
+        {
+            Debug.LogWarning("Music: " + name + " not found!");
+            return;
+        }
+
+        if (s.RandomizePitch > 0)
+            s.Source.pitch = UnityEngine.Random.Range(s.Pitch - s.RandomizePitch, s.Pitch + s.RandomizePitch);
+
+        if (!s.Source.isPlaying)
+            s.Source.Play();
+    }
+
+    public void StopMusic(string name)
+    {
+        Sound s = Array.Find(_music, sound => sound.Name == name);
+
+        if (s == null)
+        {
+            Debug.LogWarning("Music: " + name + " not found!");
             return;
         }
 

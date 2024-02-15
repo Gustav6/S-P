@@ -57,7 +57,7 @@ public class Enemy : MonoBehaviour, IDamageable
     // Temporary for debugging purposes, remove before building
     public void TakeDamage(float damageAmount)
     {
-        AudioManager.Instance.Play("Hurt");
+        AudioManager.Instance.PlaySound("Hurt");
         KnockbackPercent += damageAmount;
         PopupManager.Instance.SpawnText(KnockbackPercent.ToString(), transform.position, 1.5f);
     }
@@ -104,7 +104,7 @@ public class Enemy : MonoBehaviour, IDamageable
             EquipmentManager.Instance.OnSpawnPowerUp(transform.position, 100, PowerUpTypes.Anything);
         }
 
-        AudioManager.Instance.Play("WaterSplash");
+        AudioManager.Instance.PlaySound("WaterSplash");
         Destroy(gameObject);
     }
 }

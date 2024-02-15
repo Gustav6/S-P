@@ -170,7 +170,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         EquipmentManager.Instance.PlayerTookDamage?.Invoke();
 
-        AudioManager.Instance.Play("Hurt");
+        AudioManager.Instance.PlaySound("Hurt");
 
         SetDamageDisplay();
     }

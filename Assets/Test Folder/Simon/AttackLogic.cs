@@ -14,7 +14,7 @@ public class AttackLogic : MonoBehaviour
     {
         DespawnHitbox();
 
-        AudioManager.Instance.Play("Swing");
+        AudioManager.Instance.PlaySound("Swing");
         CameraController.instance.Shake(0.3f, 0.2f);
 
         _hitbox = Instantiate(PlayerStats.Instance.CurrentWeapon.Hitbox, weaponSpawnParent);

@@ -4,6 +4,6 @@ public class CountDownAudioPlayer : MonoBehaviour
 {
     public void PlaySFX(string sound)
 	{
-		AudioManager.Instance.Play(sound);
+		AudioManager.Instance.PlaySound(sound);
 	}
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using TMPro;
 
 public class PlayerStats : MonoBehaviour, IDamageable
 {
@@ -58,9 +59,14 @@ public class PlayerStats : MonoBehaviour, IDamageable
     private IDamageable _thisDamagable;
 
     [SerializeField] float _diStrength = 0.25f; // DI stands for direction input, used to reduce or enhance knockback when counteracting it with movement input.
+    [SerializeField] TMP_Text _damageDisplayText;
+    [SerializeField] Gradient _damageGradient;
+    float _currentDamageDisplay;
+    float _desiredDamageDisplay;
 
     bool _isImmune = false;
 
+    [SerializeField] float _maxDamagePercent = 300f;
     public float KnockbackPercent { get; set; }
 
     public PowerUp currentPowerUp { get; private set; }
@@ -79,6 +85,13 @@ public class PlayerStats : MonoBehaviour, IDamageable
     private void Update()
     {
         _thisDamagable.CheckDeath(tilemap, _tiles, _playerCollider);
+
+        _currentDamageDisplay = Mathf.Lerp(_currentDamageDisplay, _desiredDamageDisplay, Time.deltaTime * 10);
+        _damageDisplayText.text = ((int)_currentDamageDisplay).ToString() + "%";
+        _damageDisplayText.color = _damageGradient.Evaluate(_currentDamageDisplay / _maxDamagePercent);
+
+        if (_currentDamageDisplay >= 299 && KnockbackPercent == 300)
+            _damageDisplayText.text = "300%";
     }
 
     public void SetLocalDataToSave(PlayerData data)
@@ -142,9 +155,20 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _headRenderer.sprite = angryHead;
         KnockbackPercent += damageAmount / GetStat(StatType.DamageResistance);
 
+        // Damage Cap
+        if (KnockbackPercent > _maxDamagePercent)
+            KnockbackPercent = _maxDamagePercent;
+
         EquipmentManager.Instance.PlayerTookDamage?.Invoke();
 
         AudioManager.Instance.Play("Hurt");
+
+        SetDamageDisplay();
+    }
+
+    void SetDamageDisplay()
+    {
+        _desiredDamageDisplay = KnockbackPercent;
     }
 
     /// <summary>

@@ -71,6 +71,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public PowerUp currentPowerUp { get; private set; }
 
+    public int Score;
+
     private void Start()
     {
         _data = SaveSystem.Instance.LoadGameSave();

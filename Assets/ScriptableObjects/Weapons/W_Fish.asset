@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponAnimationToUse: {fileID: 22100000, guid: c329182c0e932584dbc17b692744f1b1, type: 2}
   weaponSprite: {fileID: 21300000, guid: 3200a770e90d1334dbb070f5e09d1c0a, type: 3}
-  animationSpeedMultiplier: 1
-  damage: 1
-  knockbackMultiplier: 1
+  animationSpeedMultiplier: 1.65
+  damage: 10
+  knockbackMultiplier: 1.1
   weaponImpulseMultiplier: 7
-  weaponImpulseTime: 0.075
+  weaponImpulseTime: 0
   rangedWeaponSpeed: 0
   hitbox: {fileID: 4724571836604968063, guid: 6ad4fcf6ca403f24fa138a65cf36d4a4, type: 3}
   weaponFlashSprite: {fileID: -7978083749908223333, guid: e391f5039968edc479031973dcc73d92, type: 3}

@@ -54,6 +54,14 @@ public class Enemy : MonoBehaviour, IDamageable
         StartCoroutine(GiveEnemyMovement(stunDuration));
     }
 
+    // Temporary for debugging purposes, remove before building
+    public void TakeDamage(float damageAmount)
+    {
+        AudioManager.Instance.Play("Hurt");
+        KnockbackPercent += damageAmount;
+        PopupManager.Instance.SpawnText(KnockbackPercent.ToString(), transform.position, 1.5f);
+    }
+
     internal IEnumerator GiveEnemyMovement(float time)
     {
         yield return new WaitForSeconds(time);

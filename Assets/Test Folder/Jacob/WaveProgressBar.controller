@@ -110,7 +110,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: ProgressBarDeActivate
-  m_Speed: -1
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
   m_StateMachineBehaviours: []
@@ -122,7 +122,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: cfc9fa763aabb8c4b8d67a779151b106, type: 2}
+  m_Motion: {fileID: 7400000, guid: ce0b34b40ab335d4bbceb470bcdb7920, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

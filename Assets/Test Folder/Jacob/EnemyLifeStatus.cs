@@ -12,8 +12,8 @@ public class EnemyLifeStatus : MonoBehaviour
 	private void OnDestroy()
 	{
 		OnDeathCallback.Invoke(Value);
-		PlayerStats.Instance.Score += Value * 10;
-		PopupManager.Instance.SpawnText((Value * 10).ToString(), transform.position, 1.75f);
+		PlayerStats.Instance.AddScore(Value * 10);
+		PopupManager.Instance.SpawnText("+" + (Value * 10).ToString(), transform.position, 1.75f);
 	}
 
 	private void OnMouseDown()

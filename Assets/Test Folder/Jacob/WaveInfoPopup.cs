@@ -10,7 +10,7 @@ public class WaveInfoPopup : MonoBehaviour
 
     private void Awake()
     {
-        _textElements = GetComponentsInChildren<TMP_Text>();
+        _textElements = GetComponentsInChildren<TMP_Text>(true);
         _anim = GetComponent<Animator>();
     }
 

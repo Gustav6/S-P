@@ -74,7 +74,12 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public PowerUp currentPowerUp { get; private set; }
 
-    public int Score;
+    public int Score { get; private set; }
+
+    public void AddScore(int amount)
+    {
+        Score += amount;
+    }
 
     private void Start()
     {

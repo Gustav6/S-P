@@ -10,8 +10,21 @@ using UnityEngine.SceneManagement;
 
 public class UIInput : MonoBehaviour
 {
-    private bool hasRemovedPauseMenu = true;
-    private GameObject pauseGameObjectInstance;
+    public static bool PauseTransitionFinished { get; set; }
+    public static bool PauseMenuActive { get; set; }
+
+    public static GameObject PauseGameObjectInstance { get; set; }
+
+    private void Start()
+    {
+        PauseTransitionFinished = true;
+
+        if (UIManager.Instance.GetComponentInChildren<PauseManager>() != null)
+        {
+            PauseGameObjectInstance = UIManager.Instance.GetComponentInChildren<PauseManager>().transform.parent.gameObject;
+            PauseGameObjectInstance.SetActive(false);
+        }
+    }
 
     public void Pause(InputAction.CallbackContext context)
     {
@@ -19,8 +32,9 @@ public class UIInput : MonoBehaviour
         {
             UIManager.Instance.Paused = !UIManager.Instance.Paused;
 
-            if (UIManager.Instance.Paused && hasRemovedPauseMenu)
+            if (UIManager.Instance.Paused && !PauseMenuActive)
             {
+                PauseTransitionFinished = false;
                 OnPause();
 
                 //Scene scene = SceneManager.GetActiveScene();
@@ -33,7 +47,7 @@ public class UIInput : MonoBehaviour
                 //    }
                 //}
             }
-            else if (!UIManager.Instance.Paused && !hasRemovedPauseMenu)
+            else if (!UIManager.Instance.Paused && PauseMenuActive)
             {
                 //manager.pausePrefab.GetComponent<ActiveMenuManager>().DisableBlur(UIManager.instance.CameraInstance.GetComponent<Blur>());
                 OnUnPause();
@@ -43,45 +57,17 @@ public class UIInput : MonoBehaviour
 
     private void OnPause()
     {
-        UIManager.Instance.InstantiateNewUIPrefab(UIManager.Instance.pausePrefab, GetComponent<UIManager>().transform, Vector3.one, Vector3.zero);
+        PauseGameObjectInstance.SetActive(true);
 
-        pauseGameObjectInstance = UIManager.Instance.CurrentUIPrefab;
-
-        hasRemovedPauseMenu = false;
+        PauseMenuActive = true;
     }
 
     private void OnUnPause()
     {
-        //Transition.ExecuteOnCompletion execute = null;
-
-        //execute += ExecuteAfterMovingRemovingPauseMenu;
-
-        //pauseGameObjectInstance.GetComponent<OnLoad>().MoveAway(pauseGameObjectInstance, 1, execute);
-
-        //Vector3 destination = new(-Screen.width / 2, 0);
-
-        //TransitionSystem.AddMoveTransition(new MoveTransition(pauseGameObjectInstance.transform, destination, 0.5f, TransitionType.SmoothStop2, false, 0, 0, execute));
-    }
-
-    private void ExecuteAfterMovingAddedPauseMenu()
-    {
-        List<GameObject> list = new();
-
-        foreach (UI uI in GetComponentsInChildren<UI>())
+        if (GetComponentInChildren<PauseManager>() != null)
         {
-            if (!uI.IsDestroyed)
-            {
-                list.Add(uI.gameObject);
-            }
+            GetComponentInChildren<PauseManager>().anim.SetTrigger("UnPaused");
         }
-
-        UIManager.Instance.LoadUI(list);
-    }
-    private void ExecuteAfterMovingRemovingPauseMenu()
-    {
-        Destroy(UIManager.Instance.GetComponentInChildren<ActiveBaseManager>());
-        UIManager.Instance.ResetListOfUIObjects();
-        hasRemovedPauseMenu = true;
     }
 
     public void Navigate(InputAction.CallbackContext context)

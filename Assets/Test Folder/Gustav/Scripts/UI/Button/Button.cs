@@ -24,7 +24,7 @@ public class Button : UI
     [Header("Drag in the prefab here")]
     public GameObject prefabToSpawn;
 
-    private void Awake()
+    public override void Start()
     {
         functionLookup = new Dictionary<Functions, System.Action>()
         {
@@ -34,10 +34,7 @@ public class Button : UI
             { Functions.QuitGame, Application.Quit },
             { Functions.SwipeTransition, PlaySwipeTransition }
         };
-    }
 
-    public override void Start()
-    {
         ButtonStateManager = GetComponent<ButtonStateManager>();
 
         LoadFunction(ButtonStateManager);
@@ -96,7 +93,8 @@ public class Button : UI
 
     private void RevealNewPrefab()
     {
-        PanelManager.Instance.OnLoadInstance.MoveAway(PanelManager.Instance.gameObject, transitionDuration, null);
+        ExecuteOnCompletion execute = UIManager.Instance.DisableTransitioning;
+        PanelManager.Instance.OnLoadInstance.MoveAway(PanelManager.Instance.gameObject, transitionDuration, execute);
     }
 
     private enum Functions

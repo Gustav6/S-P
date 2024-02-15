@@ -12,7 +12,7 @@ public class InputFieldDeselectedState : UIBaseState
     {
         manager = (InputFieldStateManager)referenceManager;
 
-        manager.DefaultDeselectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, manager.text);
+        manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, manager.text);
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
@@ -38,7 +38,7 @@ public class InputFieldSelectedState : UIBaseState
             manager = (InputFieldStateManager)referenceManager;
 
             referenceManager.StartCoroutine(WaitCoroutine(timeItTakes));
-            manager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, null);
+            manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, null);
 
             TransitionSystem.AddColorTransition(new ColorTransition(manager.text, textColor, timeItTakes, TransitionType.SmoothStop2));
         }

@@ -15,7 +15,7 @@ public class SliderDeselectedState : UIBaseState
         manager = (SliderStateManager)referenceManager;
         sliderInstance = (Slider)referenceManager.UIInstance;
 
-        manager.DefaultDeselectTransition(timeItTakes, manager.pointers, manager.transform, manager.outLineImage, manager.text);
+        manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outLineImage, manager.text);
 
         TransitionSystem.AddColorTransition(new ColorTransition(manager.sliderImage, newSliderColor, timeItTakes, TransitionType.SmoothStart2));
     }
@@ -43,7 +43,7 @@ public class SliderSelectedState : UIBaseState
 
         if (!UIManager.Instance.Transitioning)
         {
-            manager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outLineImage, manager.text);
+            manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outLineImage, manager.text);
         }
         else
         {

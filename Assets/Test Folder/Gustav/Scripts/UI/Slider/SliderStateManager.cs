@@ -15,7 +15,6 @@ public class SliderStateManager : BaseStateManager
     [HideInInspector] public Image sliderImage;
     [HideInInspector] public TextMeshProUGUI text;
     [HideInInspector] public RectTransform sliderPosition;
-    [HideInInspector] public GameObject pointers;
 
     [HideInInspector] public float slidersOffset;
     [HideInInspector] public float maxMoveValue;
@@ -31,7 +30,7 @@ public class SliderStateManager : BaseStateManager
         sliderPosition = transform.GetChild(1).GetComponent<RectTransform>();
         maxMoveValue = Mathf.Abs(sliderPosition.localPosition.x);
         text = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        pointers = transform.GetChild(3).GetComponent<Transform>().gameObject;
+        Pointers = transform.GetChild(3).GetComponent<Transform>().gameObject;
         slidersOffset = sliderPosition.localPosition.x;
 
         SetStartPositionToValue();

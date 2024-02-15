@@ -13,7 +13,6 @@ public class ToggleStateManager : BaseStateManager
     [HideInInspector] public Image outLineImage;
     [HideInInspector] public RectTransform movingPart;
     [HideInInspector] public RectTransform outLine;
-    [HideInInspector] public GameObject pointers;
 
     public float movingPartOffset;
 
@@ -24,7 +23,7 @@ public class ToggleStateManager : BaseStateManager
         outLineImage = transform.GetChild(0).GetComponent<Image>();
         outLine = transform.GetChild(0).GetComponent<RectTransform>();
         movingPart = transform.GetChild(1).GetComponent<RectTransform>();
-        pointers = transform.GetChild(2).GetComponent<Transform>().gameObject;
+        Pointers = transform.GetChild(2).GetComponent<Transform>().gameObject;
         movingPartOffset = movingPart.localPosition.x;
 
         SetState();

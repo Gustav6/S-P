@@ -13,14 +13,13 @@ public class ButtonStateManager : BaseStateManager
 
     [HideInInspector] public Image outlineImage;
     [HideInInspector] public TextMeshProUGUI text;
-    [HideInInspector] public GameObject pointers;
 
     public override void OnStart()
     {
         base.OnStart();
 
         outlineImage = UIInstance.GetComponentInChildren<Image>();
-        pointers = UIInstance.transform.GetChild(2).GetComponent<Transform>().gameObject;
+        Pointers = UIInstance.transform.GetChild(2).GetComponent<Transform>().gameObject;
         text = UIInstance.GetComponentInChildren<TextMeshProUGUI>();
 
         CurrentState = deselectedState;

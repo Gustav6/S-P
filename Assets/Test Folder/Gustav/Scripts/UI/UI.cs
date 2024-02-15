@@ -24,7 +24,7 @@ public abstract class UI : MonoBehaviour
 
     public virtual void Start()
     {
-        IsDestroyed = false;
+
     }
 
     public virtual void Update()

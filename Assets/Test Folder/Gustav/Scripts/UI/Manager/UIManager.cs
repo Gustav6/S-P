@@ -10,7 +10,6 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System;
 using static Transition;
-using UnityEditor.PackageManager.UI;
 
 public class UIManager : MonoBehaviour
 {
@@ -164,6 +163,8 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(Transitioning);
+
         TransitionSystem.Update();
 
         if (KeyOrControlActive)
@@ -254,7 +255,7 @@ public class UIManager : MonoBehaviour
         CurrentUIPrefab.transform.localScale = scale;
         CurrentUIPrefab.transform.localPosition = offset;
 
-        ActiveMenuManager activePrefab = prefab.GetComponent<ActiveMenuManager>();
+        //ActiveMenuManager activePrefab = prefab.GetComponent<ActiveMenuManager>();
 
         //if (activePrefab.enableBlurOnInstantiate)
         //{
@@ -361,17 +362,24 @@ public class UIManager : MonoBehaviour
 
         if (_prefabToSpawn.GetComponent<ActiveMenuManager>() != null)
         {
-            for (int i = 0; i < transform.childCount; i++)
+            foreach (ActiveBaseManager active in GetComponentsInChildren<ActiveBaseManager>())
             {
-                if (transform.GetChild(i).GetComponent<ActiveBaseManager>() != null)
-                {
-                    temp.Add(transform.GetChild(i).gameObject);
+                Vector3 destination = GiveDestination(GetRemoveDirection(active.gameObject));
 
-                    Vector3 destination = GiveDestination(GetRemoveDirection(transform.GetChild(i).gameObject));
-
-                    MoveGameObject(transform.GetChild(i).gameObject, time, destination, actions, windUp, overShoot);
-                }
+                MoveGameObject(active.gameObject, time, destination, actions, windUp, overShoot);
             }
+
+            //for (int i = 0; i < transform.GetComponentsInChildren<ActiveBaseManager>().Length; i++)
+            //{
+            //    if (transform.GetChild(i).GetComponent<ActiveBaseManager>() != null)
+            //    {
+            //        temp.Add(transform.GetChild(i).GetComponent<ActiveBaseManager>().gameObject);
+
+            //        Vector3 destination = GiveDestination(GetRemoveDirection(transform.GetChild(i).GetComponent<ActiveBaseManager>().gameObject));
+
+            //        MoveGameObject(transform.GetChild(i).gameObject, time, destination, actions, windUp, overShoot);
+            //    }
+            //}
         }
         else if (_prefabToSpawn.GetComponent<ActiveSettingManager>() != null) 
         {

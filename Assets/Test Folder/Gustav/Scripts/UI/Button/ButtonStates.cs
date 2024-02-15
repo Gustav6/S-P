@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 #region Button Deselected State
@@ -13,7 +14,17 @@ public class ButtonDeselectedState : UIBaseState
     {
         manager = (ButtonStateManager)referenceManager;
 
-        manager.DefaultDeselectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, manager.text);
+        if (UIInput.PauseGameObjectInstance != null)
+        {
+            if (UIInput.PauseTransitionFinished)
+            {
+                manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, manager.text);
+            }
+        }
+        else
+        {
+            manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, manager.text);
+        }
     }
 
     public override void UpdateState(BaseStateManager referenceManager)
@@ -41,7 +52,7 @@ public class ButtonSelectedState : UIBaseState
         if (!UIManager.Instance.Transitioning)
         {
             manager.StartCoroutine(WaitCoroutine(timeItTakes));
-            manager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, manager.text);
+            manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, manager.text);
         }
         else
         {

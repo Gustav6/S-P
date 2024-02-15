@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      FryingPanIcon_0: -7714727748090963735
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

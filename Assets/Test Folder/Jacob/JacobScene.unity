@@ -178,8 +178,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: '[ Insert neat little message here ]'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
-  m_sharedMaterial: {fileID: -4788973053161026842, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -955,8 +955,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Light Wave
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
-  m_sharedMaterial: {fileID: -4788973053161026842, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1714,8 +1714,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Wave Cleared!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
-  m_sharedMaterial: {fileID: -4788973053161026842, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13543,8 +13543,8 @@ MonoBehaviour:
   m_text: The enemies strength lies in their numbers, expect a large amount of weaker
     foes.
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
-  m_sharedMaterial: {fileID: -4788973053161026842, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13901,9 +13901,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentWeapon: {fileID: 11400000, guid: cbbf78b4dbb50f74db9f93c0dc5a2037, type: 2}
-  _waveStateMachine: {fileID: 0}
+  waveStateMachine: {fileID: 1553995191}
   _gameOverGameObject: {fileID: 0}
-  _canvas: {fileID: 0}
   angryHead: {fileID: -8409191195015169317, guid: 665e88e68ec018740934e2027c18b6ba, type: 3}
   dashSprite: {fileID: 0}
   tilemap: {fileID: 2051934469}

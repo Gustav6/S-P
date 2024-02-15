@@ -142,8 +142,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Weapon
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
-  m_sharedMaterial: {fileID: -4788973053161026842, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -278,8 +278,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
-  m_sharedMaterial: {fileID: -4788973053161026842, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -493,8 +493,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lumbago
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
-  m_sharedMaterial: {fileID: -4788973053161026842, guid: 4ed9624d3388f604e8df928706b8152f, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

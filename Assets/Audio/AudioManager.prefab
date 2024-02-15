@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2757393025007565610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9179524054161225255}
+  - component: {fileID: 8106343436912267046}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9179524054161225255
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757393025007565610}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.6418262, y: 1.6369122, z: 5.2787285}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8106343436912267046
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2757393025007565610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb3cc3f7af2f614d990c647cac69186, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sfxMixer: {fileID: -6582705752811300379, guid: cd9da5f47f6c67242a5fe8c50a0c7c81, type: 2}
+  _musicMixer: {fileID: 4863047475692241773, guid: cd9da5f47f6c67242a5fe8c50a0c7c81, type: 2}
+  _sounds:
+  - Name: Swing
+    Clip: {fileID: 8300000, guid: 65b6a185d67534b498e0738419d37444, type: 3}
+    Volume: 0.35
+    Pitch: 1
+    RandomizePitch: 0.25
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: WaterSplash
+    Clip: {fileID: 8300000, guid: d7b370cdd5512564bb878f544a290854, type: 3}
+    Volume: 0.65
+    Pitch: 1
+    RandomizePitch: 0.15
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Hurt
+    Clip: {fileID: 8300000, guid: 8b4251d9a7016ab48b2a8d15ff827e04, type: 3}
+    Volume: 0.65
+    Pitch: 1
+    RandomizePitch: 0.25
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Count1
+    Clip: {fileID: 8300000, guid: f6501c41ecbc88f4fb2f93fcaf6be4ca, type: 3}
+    Volume: 0.65
+    Pitch: 1
+    RandomizePitch: 0
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Count2
+    Clip: {fileID: 8300000, guid: 626d50c5712892146924392fa302050d, type: 3}
+    Volume: 0.65
+    Pitch: 1
+    RandomizePitch: 0
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Count3
+    Clip: {fileID: 8300000, guid: 09941a257b726cc4cade5a480e10ba0b, type: 3}
+    Volume: 0.65
+    Pitch: 1
+    RandomizePitch: 0
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: CountGo
+    Clip: {fileID: 8300000, guid: 47a958a6f9a367845a62d9f90bf1ddc7, type: 3}
+    Volume: 0.65
+    Pitch: 1
+    RandomizePitch: 0
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Click
+    Clip: {fileID: 8300000, guid: d456ceb155096f84ba07be4d87dd1591, type: 3}
+    Volume: 0.65
+    Pitch: 1
+    RandomizePitch: 0.25
+    Loop: 0
+    Source: {fileID: 0}
+  - Name: Hover
+    Clip: {fileID: 8300000, guid: 40bbbd4f251d72f4a9146eeebcc1b50e, type: 3}
+    Volume: 0.65
+    Pitch: 1
+    RandomizePitch: 0.25
+    Loop: 0
+    Source: {fileID: 0}
+  _music: []

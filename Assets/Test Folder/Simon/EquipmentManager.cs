@@ -30,7 +30,7 @@ public class EquipmentManager : MonoBehaviour
     
     public Action PlayerTookDamage { get; set; }
 
-    private int _hitStopRequests;
+    private bool _canPlayerAttack = true;
 
     public bool CanSpawnPowerUps { get; private set; }
 
@@ -82,10 +82,7 @@ public class EquipmentManager : MonoBehaviour
     /// <param name="canHit">True sends a request to enable, false sends a request to disable.</param>
     public void ToggleHit(bool canHit)
     {
-        if (canHit)
-            _hitStopRequests--;
-        else
-            _hitStopRequests++;
+        _canPlayerAttack = canHit;
     }
 
     /// <summary>
@@ -93,10 +90,7 @@ public class EquipmentManager : MonoBehaviour
     /// </summary>
     public bool CanHit()
     {
-        if (_hitStopRequests < 0)
-            _hitStopRequests = 0;
-
-        return _hitStopRequests == 0;
+        return _canPlayerAttack;
     }
 
     public void SetPowerUpCanSpawn(bool canSpawn)

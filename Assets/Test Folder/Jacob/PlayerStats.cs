@@ -23,12 +23,14 @@ public class PlayerStats : MonoBehaviour, IDamageable
         }
 
         _playerMovement = GetComponent<PlayerMovement>();
-        _headRenderer = GetComponentsInChildren<SpriteRenderer>()[1];
+        _allSrsOnPlayer = GetComponentsInChildren<SpriteRenderer>();
+        _headRenderer = _allSrsOnPlayer[1];
 
         _playerCollider = GetComponent<Collider2D>();
         _thisDamagable = this;
 
         _initialHead = _headRenderer.sprite;
+        _initialBody = _allSrsOnPlayer[0].sprite;
     }
 
     #endregion
@@ -49,8 +51,9 @@ public class PlayerStats : MonoBehaviour, IDamageable
     [SerializeField] private GameObject _gameOverGameObject;
 
     private SpriteRenderer _headRenderer;
-    private Sprite _initialHead;
-    [SerializeField] private Sprite angryHead;
+    private SpriteRenderer[] _allSrsOnPlayer;
+    private Sprite _initialHead, _initialBody;
+    [SerializeField] private Sprite _angryHead, _playerKnockbackSprite;
     [SerializeField] internal Sprite dashSprite;
 
     [SerializeField] internal Tilemap tilemap;
@@ -152,7 +155,6 @@ public class PlayerStats : MonoBehaviour, IDamageable
     #region Damage and Knockback
     public void TakeDamage(float damageAmount)
     {
-        _headRenderer.sprite = angryHead;
         KnockbackPercent += damageAmount / GetStat(StatType.DamageResistance);
 
         // Damage Cap
@@ -185,7 +187,12 @@ public class PlayerStats : MonoBehaviour, IDamageable
             return;
         }
 
-        EquipmentManager.Instance.ToggleHit(false);
+        if (EquipmentManager.Instance.CanHit())
+            EquipmentManager.Instance.ToggleHit(false);
+        else
+        {
+            EquipmentManager.Instance.ToggleHit(true);
+        }
 
         _playerMovement.isGrounded = false;
         _isImmune = true;
@@ -199,11 +206,41 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         Vector2 knockbackVector = ((Vector2)transform.position - sourcePosition).normalized * multiplier;
 
+        if (knockbackVector.magnitude >= 3.5f)
+            PlayKnockbackSprite();
+        else
+        {
+            _headRenderer.sprite = _angryHead;
+        }
+
         Vector2 diVector = input * (knockbackVector.magnitude * _diStrength);
 
         StartCoroutine(SetPlayerVelocityOverTime((knockbackVector + diVector) / GetStat(StatType.KnockbackResistance), stunDuration));
     }
     
+    private void PlayKnockbackSprite()
+    {
+        for (int i = 0; i < _allSrsOnPlayer.Length; i++)
+        {
+            if (i == 0)
+                continue;
+
+            _allSrsOnPlayer[i].enabled = false;
+        }
+
+        _allSrsOnPlayer[0].sprite = _playerKnockbackSprite;
+    }
+
+    private void ResetKnockbackSprite()
+    {
+        foreach (SpriteRenderer sr in _allSrsOnPlayer)
+        {
+            sr.enabled = true;
+        }
+
+        _allSrsOnPlayer[0].sprite = _initialBody;
+    }
+
     internal IEnumerator SetPlayerVelocityOverTime(Vector2 knockbackVector, float stunDuration)
     {
         foreach (Vector2 velocity in GetVelocity(knockbackVector, stunDuration))
@@ -212,6 +249,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
             yield return null;
         }
 
+        ResetKnockbackSprite();
         ResetKB();
     }
 

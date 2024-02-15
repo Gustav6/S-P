@@ -12,6 +12,8 @@ public class AttackLogic : MonoBehaviour
 
     public void SpawnHitbox()
     {
+        DespawnHitbox();
+
         AudioManager.Instance.Play("Swing");
         CameraController.instance.Shake(0.3f, 0.2f);
 
@@ -45,6 +47,8 @@ public class AttackLogic : MonoBehaviour
     public void AnimationFinished()
     {
         // TODO: Play SFX to show player can swing weapon again.
+
+        DespawnHitbox();
 
         animationComplete?.Invoke();
     }

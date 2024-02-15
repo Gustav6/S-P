@@ -13907,9 +13907,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bcfb6af4188cd24293b9d94df5c8903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentWeapon: {fileID: 11400000, guid: aa8e512fae2c0824ea3d754466753bf0, type: 2}
+  CurrentWeapon: {fileID: 11400000, guid: 4cf4376c0a7881a4bb8564451a15f752, type: 2}
   waveStateMachine: {fileID: 1553995191}
-  _gameOverGameObject: {fileID: 0}
+  _gameOverGameObject: {fileID: 1068145454}
   _angryHead: {fileID: -8409191195015169317, guid: 665e88e68ec018740934e2027c18b6ba, type: 3}
   _playerKnockbackSprite: {fileID: -3506577617139520387, guid: 62a050aefbb9094499826a4a3d065002, type: 3}
   dashSprite: {fileID: 7110878671101974141, guid: 89f2d449051b6ac48b4dd27b529ff1f9, type: 3}
@@ -14479,6 +14479,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1068145454 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3436001664701962289, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+  m_PrefabInstance: {fileID: 1507176300}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1068145455 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3926876728030735410, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
@@ -15352,6 +15357,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameOver
       objectReference: {fileID: 0}
+    - target: {fileID: 3436001664701962289, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3926876728030735410, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -15438,7 +15447,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4666405518097127181, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
       propertyPath: transitionDuration
-      value: 0.7
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4666405518097127181, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
       propertyPath: selectedFunctions.Array.size
@@ -15822,7 +15831,7 @@ MonoBehaviour:
   _gridTransform: {fileID: 1146938536}
   _respawnPoint: {fileID: 1212505829}
   _waveInfoPopup: {fileID: 1059721863}
-  _gameOverUIObject: {fileID: 0}
+  _gameOverUIObject: {fileID: 1068145454}
   _waterPoolPrefab: {fileID: 9199059247923447511, guid: 8b4c0bc36884491478c0c3446bd6da09, type: 3}
   _weaponRewardIncrement: 3
   _statRewardIncrement: 1

@@ -19,7 +19,14 @@ public class HitboxTrigger : MonoBehaviour
         if (damageable == null)
             return;
 
-        if (_thisController == null)
+        if (_thisController != null)
+        {
+            if (collision.CompareTag(_thisController.tag))
+                return;
+
+            Attack(damageable, _thisController.Damage, _thisController.KnockbackMultiplier, _thisController.transform.position);
+        }
+        else if (transform.parent != null)
         {
             if (collision.CompareTag(transform.parent.tag))
                 return;
@@ -29,10 +36,11 @@ public class HitboxTrigger : MonoBehaviour
         }
         else
         {
-            if (collision.CompareTag(_thisController.tag))
+            if (collision.CompareTag(tag))
                 return;
 
-            Attack(damageable, _thisController.Damage, _thisController.KnockbackMultiplier, _thisController.transform.position);
+            Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage * PlayerStats.Instance.GetStat(StatType.DamageDealt),
+                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), transform.position);
         }
     }
 

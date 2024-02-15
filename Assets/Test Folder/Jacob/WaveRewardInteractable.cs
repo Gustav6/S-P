@@ -71,7 +71,7 @@ public class WaveRewardInteractable : Interactable
 				if (signPrefix == "-")
 					text.color = _redColor;
 
-				text.text = signPrefix + " " + Mathf.Abs((currentModifier * 100)).ToString() + "%\n" + currentReward.StatModifier.GetValue(i).Key.ToString();
+				text.text = signPrefix + " " + Mathf.Abs(Mathf.RoundToInt(currentModifier * 100)).ToString() + "%\n" + currentReward.StatModifier.GetValue(i).Key.ToString();
 				textIndex++;
 			}
 			else if (textIndex <= 4)

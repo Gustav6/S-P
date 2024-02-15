@@ -40,7 +40,7 @@ public class TransitionManager : MonoBehaviour
 
     public void ApproachPlayer()
     {
-		_armTransform.position = _playerTransform.position;
+		_armTransform.position = (Vector2)_playerTransform.position;
 		_anim.Play("ArmApproach");
 		_playerMovement.ToggleMovementLock();
     }

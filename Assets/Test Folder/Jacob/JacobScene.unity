@@ -857,7 +857,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 1044948535
-  m_SortingOrder: 2
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &240784009
 MonoBehaviour:
@@ -1775,7 +1775,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 1044948535
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!1 &729316593
 GameObject:
@@ -2015,6 +2015,7 @@ GameObject:
   - component: {fileID: 737735712}
   - component: {fileID: 737735714}
   - component: {fileID: 737735713}
+  - component: {fileID: 737735715}
   m_Layer: 5
   m_Name: Ball
   m_TagString: Untagged
@@ -2079,6 +2080,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 737735711}
   m_CullTransparentMesh: 1
+--- !u!223 &737735715
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 737735711}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 1044948535
+  m_SortingOrder: 4
+  m_TargetDisplay: 0
 --- !u!1 &773047902
 GameObject:
   m_ObjectHideFlags: 0
@@ -13928,9 +13952,9 @@ MonoBehaviour:
   CurrentWeapon: {fileID: 11400000, guid: cbbf78b4dbb50f74db9f93c0dc5a2037, type: 2}
   waveStateMachine: {fileID: 1553995191}
   _gameOverGameObject: {fileID: 0}
-  _angryHead: {fileID: 0}
-  _playerKnockbackSprite: {fileID: 0}
-  dashSprite: {fileID: 0}
+  _angryHead: {fileID: -8409191195015169317, guid: 665e88e68ec018740934e2027c18b6ba, type: 3}
+  _playerKnockbackSprite: {fileID: -3506577617139520387, guid: 62a050aefbb9094499826a4a3d065002, type: 3}
+  dashSprite: {fileID: 7110878671101974141, guid: 89f2d449051b6ac48b4dd27b529ff1f9, type: 3}
   tilemap: {fileID: 2051934469}
   _diStrength: 0.25
   _damageDisplayText: {fileID: 898364534}
@@ -27721,6 +27745,7 @@ GameObject:
   - component: {fileID: 1792453107}
   - component: {fileID: 1792453109}
   - component: {fileID: 1792453108}
+  - component: {fileID: 1792453110}
   m_Layer: 5
   m_Name: Background
   m_TagString: Untagged
@@ -27785,6 +27810,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1792453106}
   m_CullTransparentMesh: 1
+--- !u!223 &1792453110
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1792453106}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 1
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 2
+  m_TargetDisplay: 0
 --- !u!1 &1793610424
 GameObject:
   m_ObjectHideFlags: 0
@@ -28042,7 +28090,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 1044948535
-  m_SortingOrder: 2
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &2065704073
 MonoBehaviour:

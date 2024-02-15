@@ -331,7 +331,7 @@ public class WaveRewardState : BaseWaveState
         {
             int randomIndex = Random.Range(0, rewardPool.Length);
 
-            while (generatedRewardIndexes.Contains(randomIndex))
+            while (generatedRewardIndexes.Contains(randomIndex) || rewardPool[randomIndex].WaveUnlocked > _context.WaveNumber)
                 randomIndex = Random.Range(0, rewardPool.Length);
 
             generatedRewardIndexes.Add(randomIndex);

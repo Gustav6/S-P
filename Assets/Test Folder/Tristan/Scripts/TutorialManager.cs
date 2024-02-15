@@ -21,7 +21,6 @@ public class TutorialManager : MonoBehaviour
 
     void Update()
     {
-        timer = Time.deltaTime;
         for (int i = 0; i < popUps.Length; i++)
         {
             if (i == popUpIndex) {
@@ -52,13 +51,14 @@ public class TutorialManager : MonoBehaviour
             }
             else if (popUpIndex == 3)
             {
-                while(timer <= timerMax)
+                timer += Time.deltaTime;
+                if (timer >= timerMax)
                 {
+                    popUpIndex++;
                     //ThisData.SkipTutorial = true;
                     SaveSystem.Instance.SaveData(ThisData);
-                    //Start wave
+                    //Wave Starts
                 }
-                popUpIndex++;
             }
         }
         else

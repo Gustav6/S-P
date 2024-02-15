@@ -9,10 +9,11 @@ public class JellyfishEnemy : Enemy
         if (knockbackMultiplier == 0)
             return;
 
+        _attackController.EnemyHit();
         _enemyAttack.CanAttack(false);
         _attackController.LeaveMovement(false);
-        _attackController.EnemyHit();
-
+        
+        
         Vector2 knockbackVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - sourcePosition).normalized;
         float multiplier = (10 + (KnockbackPercent / 100)) * knockbackMultiplier;
 

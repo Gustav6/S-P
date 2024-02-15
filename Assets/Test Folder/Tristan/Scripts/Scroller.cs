@@ -13,8 +13,7 @@ public class Scroller : MonoBehaviour
 
         transform.localPosition = new Vector3(startPos, 0, 0);
 
-        if (transform.localPosition.x >= 23.41f)
-        {
+        if (transform.localPosition.x >= 23.41f) {
             transform.localPosition = new Vector3(-23.41f, 0,0);
         }
     }

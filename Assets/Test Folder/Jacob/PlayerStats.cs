@@ -180,6 +180,12 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _desiredDamageDisplay = KnockbackPercent;
     }
 
+    public void ResetDamage()
+    {
+        KnockbackPercent = 0;
+        SetDamageDisplay();
+    }
+
     /// <summary>
     /// Applies knockback to player and prevents them from moving for a specified time.
     /// </summary>

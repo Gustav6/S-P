@@ -34,6 +34,8 @@ public class EquipmentManager : MonoBehaviour
 
     public bool CanSpawnPowerUps { get; private set; }
 
+    GameObject _spawnedPowerup;
+
     /// <summary>
     /// Switches the CurrentWeapon for the player.
     /// </summary>
@@ -83,6 +85,17 @@ public class EquipmentManager : MonoBehaviour
     public void ToggleHit(bool canHit)
     {
         _canPlayerAttack = canHit;
+    }
+
+    public void PowerUpSpawned(GameObject powerUpObject)
+    {
+        _spawnedPowerup = powerUpObject;
+    }
+
+    public void DestroySpawnedPowerUp()
+    {
+        if (_spawnedPowerup != null)
+            Destroy(_spawnedPowerup);
     }
 
     /// <summary>

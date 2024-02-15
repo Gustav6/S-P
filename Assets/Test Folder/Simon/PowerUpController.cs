@@ -75,6 +75,7 @@ public class PowerUpController : MonoBehaviour
         }
 
         StartCoroutine(AnimatePowerUpSpawn(newSpawn, spawnPosition, closestSpawnPoint.Key.GetChild(1).position));
+        EquipmentManager.Instance.PowerUpSpawned(newSpawn.gameObject);
 
         //newSpawn.GetComponent<PowerUp>().powerUpSprite;
     }

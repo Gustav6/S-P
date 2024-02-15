@@ -639,6 +639,9 @@ public class WaveClearState : BaseWaveState
     {
         _messageText.text = _messages[Random.Range(0, _messages.Length)];
         _animator.Play("WaveClear");
+        PlayerStats.Instance.ResetDamage();
+        PlayerStats.Instance.ClearEquippedAbility();
+        EquipmentManager.Instance.DestroySpawnedPowerUp();
 
     }
 

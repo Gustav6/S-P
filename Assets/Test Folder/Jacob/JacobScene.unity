@@ -13949,7 +13949,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bcfb6af4188cd24293b9d94df5c8903, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentWeapon: {fileID: 11400000, guid: cbbf78b4dbb50f74db9f93c0dc5a2037, type: 2}
+  CurrentWeapon: {fileID: 11400000, guid: 4cf4376c0a7881a4bb8564451a15f752, type: 2}
   waveStateMachine: {fileID: 1553995191}
   _gameOverGameObject: {fileID: 0}
   _angryHead: {fileID: -8409191195015169317, guid: 665e88e68ec018740934e2027c18b6ba, type: 3}
@@ -14872,7 +14872,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 554, y: 1591}
+  m_AnchoredPosition: {x: 554, y: 1576.2914}
   m_SizeDelta: {x: 2010.87, y: 956.51}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1355633974
@@ -15512,11 +15512,11 @@ MonoBehaviour:
   _enemyAssortment:
   - EnemyName: Shrimp
     EnemyPrefab: {fileID: 4679903948476763591, guid: 27e970ab1f6dfb6419d4ad61f3d4859a, type: 3}
-    Cost: 2
+    Cost: 3
     WaveUnlocked: 0
   - EnemyName: Whale
     EnemyPrefab: {fileID: 3233014378351005024, guid: 2e8571fa90db7fe4caaef84f3de62ddd, type: 3}
-    Cost: 10
+    Cost: 8
     WaveUnlocked: 0
   _statRewardInteractables:
   - {fileID: 1503581182}
@@ -15542,6 +15542,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 617924119179b3744a3f29cacf400db5, type: 2}
   - {fileID: 11400000, guid: 04a5bde66efb1ba49a5263a4fcbb7c51, type: 2}
   - {fileID: 11400000, guid: 146d8a9233a695b4ab63ae416acd57d7, type: 2}
+  - {fileID: 11400000, guid: 7a0221a85017eb3488b845791444418f, type: 2}
   _dropCurve:
     serializedVersion: 2
     m_Curve:
@@ -15781,7 +15782,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.75, y: 1.75, z: 1}
+  m_LocalScale: {x: 2.25, y: 2.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1617123887}
@@ -27271,7 +27272,7 @@ RectTransform:
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 2, y: 17}
   m_SizeDelta: {x: 100, y: 100}
-  m_Pivot: {x: 0.5, y: 0.6470867}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1653297119
 GameObject:
   m_ObjectHideFlags: 0

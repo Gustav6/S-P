@@ -110,7 +110,7 @@ public class Enemy : MonoBehaviour, IDamageable
     
     IEnumerator BomberExplosion()
     {
-        AudioManager.Instance.Play("Explosion");
+        AudioManager.Instance.PlaySound("Explosion");
         yield return new WaitForSeconds(0.2f);
         Destroy(gameObject);
     }

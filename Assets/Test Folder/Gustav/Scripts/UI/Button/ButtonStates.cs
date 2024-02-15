@@ -44,7 +44,7 @@ public class ButtonDeselectedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        manager.AudioManagerInstance.PlaySound(AudioType.SelectSound);
+
     }
 }
 #endregion

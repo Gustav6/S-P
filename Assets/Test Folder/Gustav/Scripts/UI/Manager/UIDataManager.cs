@@ -2,15 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class UIDataManager : MonoBehaviour
 {
+    public static UIDataManager instance = null;
+
     public Dictionary<SliderType, float> sliderValues = new();
     public Dictionary<ToggleType, bool> toggleValues = new();
-    public Dictionary<string, int> leaderBoard = new();
-    public Data Currentdata { get; private set; }
-
-    public static UIDataManager instance = null;
+    public Dictionary<string, int> scoreLeaderBoard = new();
+    public Dictionary<string, int> waveLeaderBoard = new();
+    public Data CurrentData { get; private set; }
 
     void Awake()
     {
@@ -21,52 +23,80 @@ public class UIDataManager : MonoBehaviour
         }
         else
             Destroy(gameObject);
-    }
 
-    public void Start()
-    {
         SetValues();
     }
 
     public void SetValues()
     {
         // Load saved settings
-        Currentdata = SaveSystem.Instance.LoadData();
+        CurrentData = SaveSystem.Instance.LoadData();
 
-        for (int i = 0; i < Currentdata.sliderTypes.Length; i++)
+        for (int i = 0; i < CurrentData.sliderTypes.Length; i++)
         {
-            if (!sliderValues.ContainsKey(Currentdata.sliderTypes[i]))
+            if (!sliderValues.ContainsKey(CurrentData.sliderTypes[i]))
             {
-                sliderValues.Add(Currentdata.sliderTypes[i], Currentdata.sliderValues[i]);
+                sliderValues.Add(CurrentData.sliderTypes[i], CurrentData.sliderValues[i]);
             }
             else
             {
-                sliderValues[Currentdata.sliderTypes[i]] = Currentdata.sliderValues[i];
+                sliderValues[CurrentData.sliderTypes[i]] = CurrentData.sliderValues[i];
             }
         }
 
-        for (int i = 0; i < Currentdata.toggleTypes.Length; i++)
+        for (int i = 0; i < CurrentData.toggleTypes.Length; i++)
         {
-            if (!toggleValues.ContainsKey(Currentdata.toggleTypes[i]))
+            if (!toggleValues.ContainsKey(CurrentData.toggleTypes[i]))
             {
-                toggleValues.Add(Currentdata.toggleTypes[i], Currentdata.toggleValues[i]);
+                toggleValues.Add(CurrentData.toggleTypes[i], CurrentData.toggleValues[i]);
             }
             else
             {
-                toggleValues[Currentdata.toggleTypes[i]] = Currentdata.toggleValues[i];
+                toggleValues[CurrentData.toggleTypes[i]] = CurrentData.toggleValues[i];
             }
         }
 
-        for (int i = 0; i < Currentdata.leadBoardNames.Length; i++)
+        for (int i = 0; i < CurrentData.scoreLeadBoardNames.Length; i++)
         {
-            if (Currentdata.leadBoardNames[i] != null && !leaderBoard.ContainsKey(Currentdata.leadBoardNames[i]))
+            if (CurrentData.scoreLeadBoardNames[i] != null)
             {
-                leaderBoard.Add(Currentdata.leadBoardNames[i], Currentdata.leaderBoardScore[i]);
+                scoreLeaderBoard.TryAdd(CurrentData.scoreLeadBoardNames[i], CurrentData.scoreLeaderBoardValues[i]);
             }
-            else if (Currentdata.leadBoardNames[i] != null && leaderBoard.ContainsKey(Currentdata.leadBoardNames[i]))
+            else
             {
-                leaderBoard[Currentdata.leadBoardNames[i]] = Currentdata.leaderBoardScore[i];
+                scoreLeaderBoard.Add("" + i, 0);
             }
+            //scoreLeaderBoard[CurrentData.scoreLeadBoardNames[i]] = CurrentData.scoreLeaderBoardValues[i];
+            //if (CurrentData.scoreLeadBoardNames[i] != null && !scoreLeaderBoard.ContainsKey(CurrentData.scoreLeadBoardNames[i]))
+            //{
+            //    scoreLeaderBoard.Add(CurrentData.scoreLeadBoardNames[i], CurrentData.scoreLeaderBoardValues[i]);
+            //}
+            //else if (CurrentData.scoreLeadBoardNames[i] != null && scoreLeaderBoard.ContainsKey(CurrentData.scoreLeadBoardNames[i]))
+            //{
+            //    scoreLeaderBoard[CurrentData.scoreLeadBoardNames[i]] = CurrentData.scoreLeaderBoardValues[i];
+            //}
+        }
+
+        for (int i = 0; i < CurrentData.waveLeadBoardNames.Length; i++)
+        {
+            if (CurrentData.waveLeadBoardNames[i] != "")
+            {
+                waveLeaderBoard.TryAdd(CurrentData.waveLeadBoardNames[i], CurrentData.waveLeaderBoardValues[i]);
+            }
+            else
+            {
+                waveLeaderBoard.Add("" + i, 0);
+            }
+
+            //waveLeaderBoard[CurrentData.waveLeadBoardNames[i]] = CurrentData.waveLeaderBoardValues[i];
+            //if (CurrentData.waveLeadBoardNames[i] != null && !waveLeaderBoard.ContainsKey(CurrentData.waveLeadBoardNames[i]))
+            //{
+            //    waveLeaderBoard.Add(CurrentData.waveLeadBoardNames[i], CurrentData.waveLeaderBoardValues[i]);
+            //}
+            //else if (CurrentData.waveLeadBoardNames[i] != null && waveLeaderBoard.ContainsKey(CurrentData.waveLeadBoardNames[i]))
+            //{
+            //    waveLeaderBoard[CurrentData.waveLeadBoardNames[i]] = CurrentData.waveLeaderBoardValues[i];
+            //}
         }
     }
 }

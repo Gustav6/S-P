@@ -1,28 +1,10 @@
 fileFormatVersion: 2
-guid: 4444feb5587288541a7eaded5e2a2059
+guid: 43d9d6609c74ff04a8aa37941f668c56
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5196499636779393091
-    second: slider and button and other_0
-  - first:
-      213: 7744674666813620232
-    second: slider and button and other_1
-  - first:
-      213: -5025891648618877521
-    second: slider and button and other_2
-  - first:
-      213: -5874239423162580039
-    second: slider and button and other_3
-  - first:
-      213: -7981619773881659055
-    second: slider and button and other_4
-  - first:
-      213: 1187655670135621318
-    second: slider and button and other_5
-  - first:
-      213: -885413714963659023
-    second: slider and button and other_6
+      213: 7635719730894603734
+    second: slider and button and other (1)_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -118,22 +100,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: slider and button and other_5
+      name: slider and button and other (1)_0
       rect:
         serializedVersion: 2
-        x: 265
-        y: 196
-        width: 773
-        height: 125
+        x: 0
+        y: 0
+        width: 1920
+        height: 1080
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6c689ed1a866b7010800000000000000
-      internalID: 1187655670135621318
+      spriteID: 6d50a64b3a687f960800000000000000
+      internalID: 7635719730894603734
       vertices: []
       indices: 
       edges: []
@@ -141,7 +123,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e748fb9452fc3c640b14a027eb107161
+    spriteID: b2935a6e193251c469320b11d57c7df0
     internalID: 0
     vertices: []
     indices: 
@@ -149,13 +131,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      slider and button and other_0: 5196499636779393091
-      slider and button and other_1: 7744674666813620232
-      slider and button and other_2: -5025891648618877521
-      slider and button and other_3: -5874239423162580039
-      slider and button and other_4: -7981619773881659055
-      slider and button and other_5: 1187655670135621318
-      slider and button and other_6: -885413714963659023
+      slider and button and other (1)_0: 7635719730894603734
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

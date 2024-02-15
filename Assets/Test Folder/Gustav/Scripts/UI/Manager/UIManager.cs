@@ -163,8 +163,6 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Transitioning);
-
         TransitionSystem.Update();
 
         if (KeyOrControlActive)
@@ -186,7 +184,7 @@ public class UIManager : MonoBehaviour
         return null;
     }
 
-    public void LoadUI(List<GameObject> list = null)
+    public void LoadUI()
     {
         #region Reset variables
         maxXPos = 0;
@@ -194,40 +192,30 @@ public class UIManager : MonoBehaviour
         ResetListOfUIObjects();
         #endregion
 
-        if (list != null)
-        {
-            FindEveryInteractableUI(list);
-        }
-        else
-        {
-            FindEveryInteractableUI(new List<GameObject>(GameObject.FindGameObjectsWithTag("InteractableUI")));
-        }
+        FindEveryInteractableUI();
     }
 
-    public void FindEveryInteractableUI(List<GameObject> list)
+    public void FindEveryInteractableUI()
     {
         // Note that if there is no start position (0, 0) bugs will appear.
         #region Find objects with script UI and max X & Y value
-        foreach (GameObject interactableUI in list)
+        foreach (UI interactableUI in GetComponentsInChildren<UI>())
         {
-            if (!interactableUI.GetComponent<UI>().IsDestroyed)
+            if (!interactableUI.IsDestroyed)
             {
-                if (interactableUI.GetComponent<UI>().position == Vector2.zero)
+                CurrentUISelected = new Vector2(0, 0);
+
+                if (interactableUI.position.y > maxYPos)
                 {
-                    CurrentUISelected = interactableUI.GetComponent<UI>().position;
+                    maxYPos = interactableUI.position.y;
                 }
 
-                if (interactableUI.GetComponent<UI>().position.y > maxYPos)
+                if (interactableUI.position.x > maxXPos)
                 {
-                    maxYPos = interactableUI.GetComponent<UI>().position.y;
+                    maxXPos = interactableUI.position.x;
                 }
 
-                if (interactableUI.GetComponent<UI>().position.x > maxXPos)
-                {
-                    maxXPos = interactableUI.GetComponent<UI>().position.x;
-                }
-
-                ListOfUIObjects.Add(interactableUI);
+                ListOfUIObjects.Add(interactableUI.gameObject);
             }
         }
         #endregion
@@ -300,23 +288,7 @@ public class UIManager : MonoBehaviour
 
         if (prefabToSpawn != null)
         {
-            if (prefabToSpawn.GetComponent<ActiveMenuManager>() != null)
-            {
-                for (int i = 0; i < transform.childCount; i++)
-                {
-                    if (transform.GetChild(i).GetComponent<ActiveBaseManager>() != null)
-                    {
-                        DestroyUI(transform.GetChild(i).gameObject);
-                    }
-                }
-            }
-            else
-            {
-                if (CurrentUIPrefab != null)
-                {
-                    DestroyUI(CurrentUIPrefab);
-                }
-            }
+            DestroyUI();
 
             Vector3 spawnLocation = GiveDestination(GetInstantiateDirection(prefabToSpawn));
 
@@ -324,17 +296,7 @@ public class UIManager : MonoBehaviour
             MoveUIToStart(1, prefabToSpawn, DisableTransitioning);
             prefabToSpawn = null;
 
-            List<GameObject> list = new();
-
-            foreach (UI uI in GetComponentsInChildren<UI>())
-            {
-                if (!uI.IsDestroyed)
-                {
-                    list.Add(uI.gameObject);
-                }
-            }
-
-            LoadUI(list);
+            LoadUI();
         }
     }
 
@@ -345,10 +307,6 @@ public class UIManager : MonoBehaviour
 
     public void MoveUIToStart(float time, GameObject willMove, ExecuteOnCompletion actions)
     {
-        //Vector3 destination = GiveDestination(GetInstantiateDirection(g)) * -1;
-
-        //Vector3 destination = new(Screen.width / 2, Screen.height / 2, 0);
-
         Vector3 destination = GiveDestination(GetInstantiateDirection(willMove));
 
         MoveGameObject(willMove, time, destination, actions, 0, 0);
@@ -368,18 +326,6 @@ public class UIManager : MonoBehaviour
 
                 MoveGameObject(active.gameObject, time, destination, actions, windUp, overShoot);
             }
-
-            //for (int i = 0; i < transform.GetComponentsInChildren<ActiveBaseManager>().Length; i++)
-            //{
-            //    if (transform.GetChild(i).GetComponent<ActiveBaseManager>() != null)
-            //    {
-            //        temp.Add(transform.GetChild(i).GetComponent<ActiveBaseManager>().gameObject);
-
-            //        Vector3 destination = GiveDestination(GetRemoveDirection(transform.GetChild(i).GetComponent<ActiveBaseManager>().gameObject));
-
-            //        MoveGameObject(transform.GetChild(i).gameObject, time, destination, actions, windUp, overShoot);
-            //    }
-            //}
         }
         else if (_prefabToSpawn.GetComponent<ActiveSettingManager>() != null) 
         {
@@ -393,36 +339,6 @@ public class UIManager : MonoBehaviour
                 CurrentUIPrefab = g;
             }
         }
-
-
-        //List<GameObject> willRemove = new();
-
-        //if (uIPrefab.GetComponent<ActiveMenuManager>() != null)
-        //{
-        //    for (int i = 0; i < transform.childCount; i++)
-        //    {
-        //        if (transform.GetChild(i).GetComponent<ActiveBaseManager>() != null)
-        //        {
-        //            willRemove.Add(transform.GetChild(i).gameObject);
-        //        }
-        //    }
-        //}
-
-        //if (willRemove.Count > 1)
-        //{
-        //    for (int i = 0; i < willRemove.Count; i++)
-        //    {
-        //        Vector3 destination = GiveDestination(GetRemoveDirection(willRemove[i])) * -1;
-
-        //        MoveGameObject(willRemove[i], time, destination, actions, windUp, overShoot);
-        //    }
-        //}
-        //else
-        //{
-        //    Vector3 destination = GiveDestination(GetRemoveDirection(uIPrefab)) * -1;
-
-        //    MoveGameObject(uIPrefab, time, destination, actions, windUp, overShoot);
-        //}
     }
 
     private void MoveGameObject(GameObject g, float time, Vector3 destination, ExecuteOnCompletion execute = null, float windUp = 0, float overShoot = 0)
@@ -497,13 +413,28 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void DestroyUI(GameObject g)
+    public void DestroyUI()
     {
-        foreach (UI uI in g.GetComponentsInChildren<UI>())
+        if (prefabToSpawn.GetComponent<ActiveMenuManager>() != null)
         {
-            uI.IsDestroyed = true;
-        }
+            foreach (UI uI in GetComponentsInChildren<UI>())
+            {
+                uI.IsDestroyed = true;
+            }
 
-        Destroy(g);
+            foreach (ActiveBaseManager active in GetComponentsInChildren<ActiveBaseManager>())
+            {
+                Destroy(active.gameObject);
+            }
+        }
+        else
+        {
+            foreach (UI uI in CurrentUIPrefab.GetComponentsInChildren<UI>())
+            {
+                uI.IsDestroyed = true;
+            }
+
+            Destroy(CurrentUIPrefab);
+        }
     }
 }

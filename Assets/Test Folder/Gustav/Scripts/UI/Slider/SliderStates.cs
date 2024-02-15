@@ -5,7 +5,6 @@ using UnityEngine;
 public class SliderDeselectedState : UIBaseState
 {
     private SliderStateManager manager;
-    private Slider sliderInstance;
 
     private readonly float timeItTakes = 0.2f;
     private readonly Color newSliderColor = new(1, 1, 1, 0.9f);
@@ -13,7 +12,6 @@ public class SliderDeselectedState : UIBaseState
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (SliderStateManager)referenceManager;
-        sliderInstance = (Slider)referenceManager.UIInstance;
 
         manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outLineImage, manager.text);
 
@@ -26,20 +24,18 @@ public class SliderDeselectedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        manager.AudioManagerInstance.PlaySound(AudioType.SelectSound);
+
     }
 }
 public class SliderSelectedState : UIBaseState
 {
     private SliderStateManager manager;
-    private Slider sliderInstance;
 
     private readonly float timeItTakes = 0.15f;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (SliderStateManager)referenceManager;
-        sliderInstance = (Slider)referenceManager.UIInstance;
 
         if (!UIManager.Instance.Transitioning)
         {

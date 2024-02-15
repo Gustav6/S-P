@@ -10,7 +10,6 @@ public abstract class BaseStateManager : MonoBehaviour
     public Dictionary<string, Color> ColorPairs { get; private set; }
     public Dictionary<string, Vector3> ScalePairs { get; private set; }
     public UIBaseState CurrentState { get; set; }
-    public TestAudioManager AudioManagerInstance { get; private set; }
     public GameObject Pointers { get; protected set; }
     public bool UIActivated { get; set; }
 
@@ -18,8 +17,6 @@ public abstract class BaseStateManager : MonoBehaviour
     {
         ColorPairs = new Dictionary<string, Color>();
         ScalePairs = new Dictionary<string, Vector3>();
-
-        AudioManagerInstance = UIInstance.GetComponentInParent<TestAudioManager>();
 
         SetDictionaries();
     }

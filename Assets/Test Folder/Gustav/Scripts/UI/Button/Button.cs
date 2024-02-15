@@ -32,7 +32,7 @@ public class Button : UI
             { Functions.RemovePrefab, RemovePrefab },
             { Functions.SpawnPrefab, null },
             { Functions.QuitGame, Application.Quit },
-            { Functions.SwipeTransition, PlaySwipeTransition }
+            { Functions.Transition, PlayTransition }
         };
 
         ButtonStateManager = GetComponent<ButtonStateManager>();
@@ -53,7 +53,7 @@ public class Button : UI
     {
         ExecuteOnCompletion execute = SwitchScene;
 
-        PanelManager.FadeOut(transitionDuration, new Color(0, 0, 0, 1), execute);
+        Cover(execute);
     }
 
     private void RemovePrefab()
@@ -96,20 +96,28 @@ public class Button : UI
         }
     }
 
-    public void PlaySwipeTransition()
+    public void PlayTransition()
     {
-        if (PanelManager.Instance != null)
+        if (CoverManager.Instance != null)
         {
-            ExecuteOnCompletion execute = RevealNewPrefab;
+            ExecuteOnCompletion execute = UnCover;
 
-            PanelManager.Instance.OnLoadInstance.MoveAway(PanelManager.Instance.gameObject, transitionDuration, execute);
+            UIManager.Instance.EnableTransitioning();
+
+            Cover(execute);
         }
     }
 
-    private void RevealNewPrefab()
+    private void Cover(ExecuteOnCompletion execute)
+    {
+        CoverManager.Instance.Cover(transitionDuration, execute);
+    }
+
+    private void UnCover()
     {
         ExecuteOnCompletion execute = UIManager.Instance.DisableTransitioning;
-        PanelManager.Instance.OnLoadInstance.MoveAway(PanelManager.Instance.gameObject, transitionDuration, execute);
+
+        CoverManager.Instance.UnCover(transitionDuration, execute);
     }
 
     private enum Functions
@@ -118,7 +126,7 @@ public class Button : UI
         RemovePrefab,
         SpawnPrefab,
         QuitGame,
-        SwipeTransition,
+        Transition,
     }
 }
 

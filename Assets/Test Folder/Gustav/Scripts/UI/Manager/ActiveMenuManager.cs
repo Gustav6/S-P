@@ -17,6 +17,11 @@ public class ActiveMenuManager : ActiveBaseManager
             {
                 GameObject g = Instantiate(objects[i], GetComponentInParent<UIManager>().transform);
                 instantiatedObjects.Add(g);
+
+                if (g.GetComponent<ActiveSettingManager>() != null || g.GetComponent<ActiveMenuManager>() != null)
+                {
+                    UIManager.Instance.LoadUI();
+                }
             }
         }
     }

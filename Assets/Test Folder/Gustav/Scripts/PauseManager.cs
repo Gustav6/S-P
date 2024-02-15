@@ -16,6 +16,9 @@ public class PauseManager : MonoBehaviour
 
     public void Start()
     {
+        UIInput.PauseGameObjectInstance = transform.parent.gameObject;
+        transform.parent.localPosition = Vector3.zero;
+
         foreach (BaseStateManager uI in GetComponentsInChildren<BaseStateManager>())
         {
             if (uI.Pointers != null)
@@ -32,18 +35,6 @@ public class PauseManager : MonoBehaviour
         {
             text[i].color = startingColor;
         }
-    }
-
-    public void InstantiateVisuals()
-    {
-        List<GameObject> list = new();
-
-        foreach (UI uI in GetComponentsInChildren<UI>())
-        {
-            list.Add(uI.gameObject);
-        }
-
-        UIManager.Instance.LoadUI(list);
     }
 
     public void DestroyVisual()
@@ -64,17 +55,7 @@ public class PauseManager : MonoBehaviour
             TransitionSystem.AddColorTransition(new ColorTransition(text[i], newColor, 0.2f, TransitionType.SmoothStop2));
         }
 
-        List<GameObject> list = new();
-
-        foreach (UI uI in GetComponentsInChildren<UI>())
-        {
-            if (!uI.IsDestroyed)
-            {
-                list.Add(uI.gameObject);
-            }
-        }
-
-        UIManager.Instance.LoadUI(list);
+        UIManager.Instance.LoadUI();
     }
     public void FadeOut()
     {
@@ -92,11 +73,9 @@ public class PauseManager : MonoBehaviour
 
     public void MoveAway()
     {
-        Transition.ExecuteOnCompletion execute = null;
+        Transition.ExecuteOnCompletion execute = ExecuteAfterMovingRemovingPauseMenu;
 
-        execute += ExecuteAfterMovingRemovingPauseMenu;
-
-        UIInput.PauseGameObjectInstance.GetComponent<OnLoad>().MoveAway(UIInput.PauseGameObjectInstance, 1, execute);
+        GetComponentInParent<OnLoad>().MoveAway(transform.parent.gameObject, 0.5f, execute);
 
         //Vector3 destination = new(Screen.width, 0);
 
@@ -104,10 +83,10 @@ public class PauseManager : MonoBehaviour
 
         //TransitionSystem.AddMoveTransition(new MoveTransition(t, destination, 0.5f, TransitionType.SmoothStop2, transform, 0, 0, execute));
     }
-    private void ExecuteAfterMovingRemovingPauseMenu()  
+    private void ExecuteAfterMovingRemovingPauseMenu()
     {
-        UIInput.PauseGameObjectInstance.transform.localPosition = Vector3.zero;
-        UIInput.PauseGameObjectInstance.SetActive(false);
+        transform.parent.localPosition = Vector3.zero;
+        transform.parent.gameObject.SetActive(false);
         UIInput.PauseMenuActive = false;
         UIManager.Instance.DisableTransitioning();
     }

@@ -24,22 +24,25 @@ public abstract class UI : MonoBehaviour
 
     public virtual void Start()
     {
-
+        IsDestroyed = false;
     }
 
     public virtual void Update()
     {
-        if (UIManager.Instance.Hovering(gameObject))
+        if (!IsDestroyed)
         {
-            hovering = true;
-            if (UIManager.Instance != null)
+            if (UIManager.Instance.Hovering(gameObject))
             {
-                UIManager.Instance.CurrentUISelected = position;
+                hovering = true;
+                if (UIManager.Instance != null)
+                {
+                    UIManager.Instance.CurrentUISelected = position;
+                }
             }
-        }
-        else
-        {
-            hovering = false;
+            else
+            {
+                hovering = false;
+            }
         }
     }
 
@@ -47,13 +50,9 @@ public abstract class UI : MonoBehaviour
     {
         manager.UIInstance = this;
 
-        try
+        if (manager.UIInstance != null)
         {
             manager.OnStart();
-        }
-        catch (NullReferenceException)
-        {
-            Debug.Log("No state manager found");
         }
     }
 

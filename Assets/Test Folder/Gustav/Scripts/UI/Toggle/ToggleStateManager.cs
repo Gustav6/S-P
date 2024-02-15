@@ -13,20 +13,40 @@ public class ToggleStateManager : BaseStateManager
     [HideInInspector] public Image outLineImage;
     [HideInInspector] public RectTransform movingPart;
     [HideInInspector] public RectTransform outLine;
+    [HideInInspector] public TextMeshProUGUI textForV2;
+    [HideInInspector] public GameObject checkMark;
 
     public float movingPartOffset;
+
+    private Toggle referenceScript;
 
     public override void OnStart()
     {
         base.OnStart();
 
+        referenceScript = (Toggle)UIInstance;
+
         outLineImage = transform.GetChild(0).GetComponent<Image>();
         outLine = transform.GetChild(0).GetComponent<RectTransform>();
-        movingPart = transform.GetChild(1).GetComponent<RectTransform>();
-        Pointers = transform.GetChild(2).GetComponent<Transform>().gameObject;
-        movingPartOffset = movingPart.localPosition.x;
 
-        SetState();
+        if (referenceScript.version == ToggleVersion.Version1)
+        {
+            movingPart = transform.GetChild(1).GetComponent<RectTransform>();
+            movingPartOffset = movingPart.localPosition.x;
+        }
+        else if (referenceScript.version == ToggleVersion.Version2)
+        {
+            textForV2 = transform.GetChild(1).GetComponent<TextMeshProUGUI>();
+            checkMark = transform.GetChild(3).gameObject;
+            referenceScript.toggleOn = true;
+        }
+
+        Pointers = transform.GetChild(2).GetComponent<Transform>().gameObject;
+
+        if (referenceScript.version == ToggleVersion.Version1)
+        {
+            SetState();
+        }
 
         CurrentState = deselectedState;
 

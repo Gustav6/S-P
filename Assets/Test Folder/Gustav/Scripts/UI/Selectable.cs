@@ -17,28 +17,44 @@ public class Selectable : UI
     [SerializeField] private float imageDeselectedAlpha;
     [SerializeField] private Color textDeselectedColor;
 
-    private bool hasRunDeslected;
+    private bool hasRunDeselected;
 
     public override void Start()
     {
+        Deselect();
+
         base.Start();
     }
 
     public override void Update()
     {
-        if (hovering && hasRunDeslected)
+        if (UIManager.Instance.KeyOrControlActive)
         {
-            OnSelect();
+            if (UIManager.Instance.CurrentUISelected == position && hasRunDeselected)
+            {
+                Select();
+            }
+            else if (UIManager.Instance.CurrentUISelected != position && !hasRunDeselected)
+            {
+                Deselect();
+            }
         }
-        else if (!hovering && !hasRunDeslected)
+        else
         {
-            OnDeselect();
+            if (hovering && hasRunDeselected)
+            {
+                Select();
+            }
+            else if (!hovering && !hasRunDeselected)
+            {
+                Deselect();
+            }
         }
 
         base.Update();
     }
 
-    public void OnSelect()
+    public void Select()
     {
         for (int i = 0; i < images.Count; i++)
         {
@@ -57,10 +73,10 @@ public class Selectable : UI
 
         TransitionSystem.AddScaleTransition(new ScaleTransition(transform, scale, 0.2f, TransitionType.SmoothStop2));
 
-        hasRunDeslected = false;
+        hasRunDeselected = false;
     }
 
-    public void OnDeselect()
+    public void Deselect()
     {
         for (int i = 0; i < images.Count; i++)
         {
@@ -79,6 +95,6 @@ public class Selectable : UI
 
         TransitionSystem.AddScaleTransition(new ScaleTransition(transform, scale, 0.2f, TransitionType.SmoothStop2));
 
-        hasRunDeslected = true;
+        hasRunDeselected = true;
     }
 }

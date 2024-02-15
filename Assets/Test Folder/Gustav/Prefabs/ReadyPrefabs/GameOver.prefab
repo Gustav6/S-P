@@ -363,8 +363,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32755a2ba3654da46957b2a7f2dd7016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTowardsOnInstantiate: 3
-  moveTowardsOnDestroy: 2
   objects: []
   instantiatedObjects: []
   enableBlur: 0
@@ -380,12 +378,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22059464a44da74caa067109b7cfc29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 0}
+  images: []
+  fadeIn: 0
   color: {r: 0, g: 0, b: 0, a: 0}
   fadeInTime: 1.5
-  fadeIn: 0
   moveIn: 1
   moveInTime: 1
+  moveTowardsOnInstantiate: 0
+  moveTowardsOnDestroy: 0
+  scaleIn: 0
+  scaleInTime: 1
+  scaleInResetTime: 1
+  startingScale: {x: 0, y: 0, z: 0}
 --- !u!1 &8500214739350175067
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,13 +565,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6776574943263549923, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: m_Size.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776574943263549923, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: m_Size.y
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 7292290588515505781, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_text
       value: RESTART GAME
       objectReference: {fileID: 0}
     - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: NewScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: position.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: selectedFunctions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: 'selectedFunctions.Array.data[0]'
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8732738409933366688, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_Name
@@ -681,19 +705,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4628112038256163891, guid: 55dc8d5cee1799e4c8e75b8301b9997b, type: 3}
       propertyPath: m_Color.b
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4628112038256163891, guid: 55dc8d5cee1799e4c8e75b8301b9997b, type: 3}
       propertyPath: m_Color.g
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4628112038256163891, guid: 55dc8d5cee1799e4c8e75b8301b9997b, type: 3}
       propertyPath: m_Color.r
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6528570366995173194, guid: 55dc8d5cee1799e4c8e75b8301b9997b, type: 3}
       propertyPath: position.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6528570366995173194, guid: 55dc8d5cee1799e4c8e75b8301b9997b, type: 3}
+      propertyPath: selectedScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6528570366995173194, guid: 55dc8d5cee1799e4c8e75b8301b9997b, type: 3}
+      propertyPath: selectedScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6528570366995173194, guid: 55dc8d5cee1799e4c8e75b8301b9997b, type: 3}
+      propertyPath: selectedScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6528570366995173194, guid: 55dc8d5cee1799e4c8e75b8301b9997b, type: 3}
       propertyPath: maxAmountOfLetters
@@ -809,9 +845,37 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6776574943263549923, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: m_Size.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6776574943263549923, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: m_Size.y
+      value: 75
+      objectReference: {fileID: 0}
     - target: {fileID: 7292290588515505781, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_text
       value: BACK TO MENU
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: prefabToSpawn
+      value: 
+      objectReference: {fileID: 3381804027909635715, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: selectedFunctions.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: 'selectedFunctions.Array.data[0]'
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: 'selectedFunctions.Array.data[1]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8400108020923393028, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
+      propertyPath: 'selectedFunctions.Array.data[2]'
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8732738409933366688, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_Name

@@ -5,14 +5,23 @@ using UnityEngine;
 public class ToggleDeselectedState : UIBaseState
 {
     private ToggleStateManager manager;
+    private Toggle toggleInstance;
 
     private readonly float timeItTakes = 0.25f;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (ToggleStateManager)referenceManager;
+        toggleInstance = (Toggle)referenceManager.UIInstance;
 
-        manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, null, manager.outLineImage, null);
+        if (toggleInstance.version == ToggleVersion.Version1)
+        {
+            manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, null, manager.outLineImage, null);
+        }
+        else if (toggleInstance.version == ToggleVersion.Version2)
+        {
+            manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, null, manager.outLineImage, manager.textForV2);
+        }
     }
 
     public override void UpdateState(BaseStateManager referenceManager)
@@ -22,7 +31,7 @@ public class ToggleDeselectedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        manager.AudioManagerInstance.PlaySound(AudioType.SelectSound);
+
     }
 }
 
@@ -40,7 +49,14 @@ public class ToggleSelectedState : UIBaseState
 
         if (!UIManager.Instance.Transitioning)
         {
-            manager.DefaultSelectTransition(timeItTakes, manager.Pointers, null, manager.outLineImage, null);
+            if (toggleInstance.version == ToggleVersion.Version1)
+            {
+                manager.DefaultSelectTransition(timeItTakes, manager.Pointers, null, manager.outLineImage, null);
+            }
+            else if (toggleInstance.version == ToggleVersion.Version2)
+            {
+                manager.DefaultSelectTransition(timeItTakes, manager.Pointers, null, manager.outLineImage, manager.textForV2);
+            }
         }
         else
         {
@@ -74,13 +90,25 @@ public class TogglePressedState : UIBaseState
         manager = (ToggleStateManager)referenceManager;
         toggleInstance = (Toggle)referenceManager.UIInstance;
 
+        if (toggleInstance.version == ToggleVersion.Version1)
+        {
+            manager.StartCoroutine(WaitCoroutine(toggleInstance.transitionTime));
+        }
+
         TransitionFromOnOff(toggleInstance, manager, toggleInstance.transitionTime);
-        manager.StartCoroutine(WaitCoroutine(toggleInstance.transitionTime));
     }
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (canTransition)
+        if (toggleInstance.version == ToggleVersion.Version1)
+        {
+            if (canTransition)
+            {
+                CheckIfDeselected(manager, manager.deselectedState);
+                CheckIfSelected(manager, manager.selectedState);
+            }
+        }
+        else if (toggleInstance.version == ToggleVersion.Version2)
         {
             CheckIfDeselected(manager, manager.deselectedState);
             CheckIfSelected(manager, manager.selectedState);
@@ -89,20 +117,41 @@ public class TogglePressedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        toggleInstance.SaveToDataManager(UIDataManager.instance, toggleInstance.toggleOn, toggleInstance.toggleType);
+        if (toggleInstance.version == ToggleVersion.Version1)
+        {
+            toggleInstance.SaveToDataManager(UIDataManager.instance, toggleInstance.toggleOn, toggleInstance.toggleType);
+        }
+        else if (toggleInstance.version == ToggleVersion.Version2)
+        {
+            toggleInstance.ActivateSelectedFunctions();
+        }
     }
 
     public void TransitionFromOnOff(Toggle toggle, ToggleStateManager manager, float transitionTime)
     {
-        if (toggle.toggleOn)
+        if (toggleInstance.version == ToggleVersion.Version1)
         {
-            Vector3 destination = new(manager.movingPartOffset * -2 * UIManager.Instance.ResolutionScaling, 0, 0);
-            TransitionSystem.AddMoveTransition(new MoveTransition(manager.movingPart, destination, transitionTime, TransitionType.SmoothStop3, true));
+            if (toggle.toggleOn)
+            {
+                Vector3 destination = new(manager.movingPartOffset * -2 * UIManager.Instance.ResolutionScaling, 0, 0);
+                TransitionSystem.AddMoveTransition(new MoveTransition(manager.movingPart, destination, transitionTime, TransitionType.SmoothStop3, true));
+            }
+            else
+            {
+                Vector3 destination = new(manager.movingPartOffset * 2 * UIManager.Instance.ResolutionScaling, 0, 0);
+                TransitionSystem.AddMoveTransition(new MoveTransition(manager.movingPart, destination, transitionTime, TransitionType.SmoothStop3, true));
+            }
         }
-        else
+        else if (toggleInstance.version == ToggleVersion.Version2)
         {
-            Vector3 destination = new(manager.movingPartOffset * 2 * UIManager.Instance.ResolutionScaling, 0, 0);
-            TransitionSystem.AddMoveTransition(new MoveTransition(manager.movingPart, destination, transitionTime, TransitionType.SmoothStop3, true));
+            if (toggle.toggleOn)
+            {
+                manager.checkMark.SetActive(true);
+            }
+            else
+            {
+                manager.checkMark.SetActive(false);
+            }
         }
 
         manager.UIActivated = false;

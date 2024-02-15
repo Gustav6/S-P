@@ -14,8 +14,11 @@ public class Data
         toggleTypes = new ToggleType[Enum.GetValues(typeof(ToggleType)).Length];
         toggleValues = new bool[Enum.GetValues(typeof(ToggleType)).Length];
 
-        leadBoardNames = new string[10];
-        leaderBoardScore = new int[10];
+        scoreLeadBoardNames = new string[5];
+        scoreLeaderBoardValues = new int[5];
+
+        waveLeadBoardNames = new string[5];
+        waveLeaderBoardValues = new int[5];
         #endregion
 
         #region Set default values
@@ -42,8 +45,11 @@ public class Data
     public ToggleType[] toggleTypes;
     public bool[] toggleValues;
 
-    public string[] leadBoardNames;
-    public int[] leaderBoardScore;
+    public string[] scoreLeadBoardNames;
+    public int[] scoreLeaderBoardValues;
+
+    public string[] waveLeadBoardNames;
+    public int[] waveLeaderBoardValues;
     #endregion
 
     public bool SkipTutorial;

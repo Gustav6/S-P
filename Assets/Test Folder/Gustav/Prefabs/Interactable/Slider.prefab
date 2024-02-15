@@ -332,6 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c6bb8b49046974bbd7a70cebab206c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scale: 0
+  move: 1
   speed: 12
   magnitude: 2
   left: {fileID: 0}
@@ -465,9 +467,9 @@ MonoBehaviour:
   hovering: 0
   outlineSelected: {r: 1, g: 1, b: 1, a: 1}
   textSelected: {r: 1, g: 0.9166666, b: 0, a: 1}
-  outlineDeselectd: {r: 1, g: 1, b: 1, a: 0.8509804}
-  textDeselected: {r: 1, g: 1, b: 1, a: 0.8509804}
-  selectedScale: {x: 1.1, y: 1.1, z: 1}
+  outlineDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
+  textDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
+  selectedScale: {x: 1.05, y: 1.05, z: 1}
   sliderType: 0
 --- !u!114 &1703430521525398762
 MonoBehaviour:
@@ -534,7 +536,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 520, y: 70}
+  m_Size: {x: 530, y: 70}
   m_EdgeRadius: 0
 --- !u!1 &8724796367577431630
 GameObject:

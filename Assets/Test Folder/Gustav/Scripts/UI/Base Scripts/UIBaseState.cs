@@ -12,9 +12,9 @@ public abstract class UIBaseState
 
     protected void CheckIfSelected(BaseStateManager referenceManager, UIBaseState state)
     {
-        if (UIManager.instance.KeyOrControlActive)
+        if (UIManager.Instance.KeyOrControlActive)
         {
-            if (UIManager.instance.CurrentUISelected == referenceManager.UIInstance.position)
+            if (UIManager.Instance.CurrentUISelected == referenceManager.UIInstance.position)
             {
                 referenceManager.SwitchState(state);
             }
@@ -30,9 +30,9 @@ public abstract class UIBaseState
 
     protected void CheckIfDeselected(BaseStateManager referenceManager, UIBaseState state)
     {
-        if (UIManager.instance.KeyOrControlActive)
+        if (UIManager.Instance.KeyOrControlActive)
         {
-            if (UIManager.instance.CurrentUISelected != referenceManager.UIInstance.position)
+            if (UIManager.Instance.CurrentUISelected != referenceManager.UIInstance.position)
             {
                 referenceManager.SwitchState(state);
             }

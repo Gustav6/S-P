@@ -8,7 +8,7 @@ public class SliderDeselectedState : UIBaseState
     private Slider sliderInstance;
 
     private readonly float timeItTakes = 0.2f;
-    Color newInterPartColor = new(1, 1, 1, 0.5f);
+    private readonly Color newSliderColor = new(1, 1, 1, 0.9f);
 
     public override void EnterState(BaseStateManager referenceManager)
     {
@@ -17,7 +17,7 @@ public class SliderDeselectedState : UIBaseState
 
         manager.DefaultDeselectTransition(timeItTakes, manager.pointers, manager.transform, manager.outLineImage, manager.text);
 
-        TransitionSystem.AddColorTransition(new ColorTransition(manager.sliderImage, newInterPartColor, timeItTakes, TransitionType.SmoothStart2));
+        TransitionSystem.AddColorTransition(new ColorTransition(manager.sliderImage, newSliderColor, timeItTakes, TransitionType.SmoothStart2));
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
@@ -36,18 +36,14 @@ public class SliderSelectedState : UIBaseState
 
     private readonly float timeItTakes = 0.15f;
 
-    private Color newSliderColor = new(1, 1, 1, 1);
-
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (SliderStateManager)referenceManager;
         sliderInstance = (Slider)referenceManager.UIInstance;
 
-        if (!UIManager.instance.Transitioning)
+        if (!UIManager.Instance.Transitioning)
         {
             manager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outLineImage, manager.text);
-
-            //TransitionSystem.AddColorTransition(new ColorTransition(manager.sliderImage, newSliderColor, timeItTakes, TransitionType.SmoothStart2));
         }
         else
         {
@@ -76,7 +72,7 @@ public class SliderPressedState : UIBaseState
     private Slider sliderInstance;
 
     readonly float timeItTakes = 0.15f;
-    Color newSlidingPartColor = new(1, 1, 0, 1);
+    private readonly Color newSliderColor = new(1, 1, 1, 1);
     Color originalColor;
 
     public override void EnterState(BaseStateManager referenceManager)
@@ -85,12 +81,12 @@ public class SliderPressedState : UIBaseState
         sliderInstance = (Slider)referenceManager.UIInstance;
 
         originalColor = manager.sliderImage.color;
-        TransitionSystem.AddColorTransition(new ColorTransition(manager.sliderImage, newSlidingPartColor, timeItTakes, TransitionType.SmoothStop2));
-        UIManager.instance.ChangingSlider = true;
+        TransitionSystem.AddColorTransition(new ColorTransition(manager.sliderImage, newSliderColor, timeItTakes, TransitionType.SmoothStop2));
+        UIManager.Instance.ChangingSlider = true;
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (UIManager.instance.KeyOrControlActive)
+        if (UIManager.Instance.KeyOrControlActive)
         {
             if (manager.moveDirection != 0)
             {
@@ -101,7 +97,7 @@ public class SliderPressedState : UIBaseState
         {
             if (referenceManager.UIInstance.hovering && manager.UIActivated)
             {
-                MoveTowardsMouse(manager, UIManager.instance.MousePosition.x);
+                MoveTowardsMouse(manager, UIManager.Instance.MousePosition.x);
             }
 
             if (!referenceManager.UIInstance.hovering)
@@ -121,7 +117,7 @@ public class SliderPressedState : UIBaseState
     {
         ApplyValues(manager);
         ResetButtonValue(manager);
-        UIManager.instance.ChangingSlider = false;
+        UIManager.Instance.ChangingSlider = false;
     }
     private void ApplyValues(SliderStateManager slider)
     {
@@ -135,28 +131,32 @@ public class SliderPressedState : UIBaseState
 
     private void MoveTowardsMouse(SliderStateManager slider, float mouseX)
     {
-        float scaling = UIManager.instance.ResolutionScaling;
+        float scaling = UIManager.Instance.ResolutionScaling;
 
         if (slider.sliderPosition.localPosition.x * scaling > -slider.maxMoveValue * scaling || slider.sliderPosition.localPosition.x * scaling < slider.maxMoveValue * scaling)
         {
-            Vector3 des = new(mouseX, slider.sliderPosition.position.y, slider.sliderPosition.position.z);
+            Vector3 mousePosition = new(mouseX, slider.sliderPosition.position.y, slider.sliderPosition.position.z);
 
-            if (des.x > slider.maxMoveValue * scaling + slider.outLineImage.transform.position.x)
+            if (mousePosition.x >= (slider.maxMoveValue * scaling) + slider.outLinePosition.position.x)
             {
-                des.x = (slider.maxMoveValue * scaling) + slider.outLineImage.transform.position.x;
+                Vector3 destination = new(slider.maxMoveValue, 0, 0);
+                slider.sliderPosition.localPosition = destination;
             }
-            else if (des.x < -slider.maxMoveValue * scaling + slider.outLineImage.transform.position.x)
+            else if (mousePosition.x <= (-slider.maxMoveValue * scaling) + slider.outLinePosition.position.x)
             {
-                des.x = (-slider.maxMoveValue * scaling) + slider.outLineImage.transform.position.x;
+                Vector3 destination = new(-slider.maxMoveValue, 0, 0);
+                slider.sliderPosition.localPosition = destination;
             }
-
-            slider.sliderPosition.position = des;
+            else
+            {
+                slider.sliderPosition.position = mousePosition;
+            }
         }
     }
 
     public void MoveWithButton(SliderStateManager slider)
     {
-        float scaling = UIManager.instance.ResolutionScaling;
+        float scaling = UIManager.Instance.ResolutionScaling;
         float moveAmount = slider.maxMoveValue / (100 * scaling);
         Vector3 limit = new(slider.maxMoveValue, 0, 0);
 
@@ -170,7 +170,9 @@ public class SliderPressedState : UIBaseState
         {
             slider.sliderPosition.localPosition = -limit;
         }
-
-        slider.sliderPosition.localPosition += des;
+        else
+        {
+            slider.sliderPosition.localPosition += des;
+        }
     }
 }

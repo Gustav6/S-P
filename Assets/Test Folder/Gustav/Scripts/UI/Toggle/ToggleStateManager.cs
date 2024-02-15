@@ -11,7 +11,6 @@ public class ToggleStateManager : BaseStateManager
     public TogglePressedState pressedState = new();
 
     [HideInInspector] public Image outLineImage;
-    [HideInInspector] public Image movingPartImage;
     [HideInInspector] public RectTransform movingPart;
     [HideInInspector] public RectTransform outLine;
     [HideInInspector] public GameObject pointers;
@@ -25,7 +24,6 @@ public class ToggleStateManager : BaseStateManager
         outLineImage = transform.GetChild(0).GetComponent<Image>();
         outLine = transform.GetChild(0).GetComponent<RectTransform>();
         movingPart = transform.GetChild(1).GetComponent<RectTransform>();
-        movingPartImage = transform.GetChild(1).GetComponent<Image>();
         pointers = transform.GetChild(2).GetComponent<Transform>().gameObject;
         movingPartOffset = movingPart.localPosition.x;
 

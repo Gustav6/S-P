@@ -266,6 +266,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   hovering: 0
+  outlineSelected: {r: 0, g: 0, b: 0, a: 0}
+  textSelected: {r: 0, g: 0, b: 0, a: 0}
+  outlineDeselected: {r: 0, g: 0, b: 0, a: 0}
+  textDeselected: {r: 0, g: 0, b: 0, a: 0}
+  selectedScale: {x: 0, y: 0, z: 0}
   maxAmountOfLetters: 0
 --- !u!114 &8895922865408577549
 MonoBehaviour:
@@ -374,6 +379,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c6bb8b49046974bbd7a70cebab206c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scale: 0
+  move: 1
   speed: 12
   magnitude: 2
   left: {fileID: 0}

@@ -121,6 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4c6bb8b49046974bbd7a70cebab206c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scale: 0
+  move: 1
   speed: 12
   magnitude: 2
   left: {fileID: 0}
@@ -403,7 +405,7 @@ MonoBehaviour:
   hovering: 0
   outlineSelected: {r: 1, g: 1, b: 1, a: 1}
   textSelected: {r: 0, g: 0, b: 0, a: 0}
-  outlineDeselectd: {r: 1, g: 1, b: 1, a: 0.8509804}
+  outlineDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
   textDeselected: {r: 0, g: 0, b: 0, a: 0}
   selectedScale: {x: 1.1, y: 1.1, z: 1}
   toggleType: 0
@@ -422,7 +424,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outLineImage: {fileID: 0}
-  movingPartImage: {fileID: 0}
   movingPart: {fileID: 0}
   outLine: {fileID: 0}
   pointers: {fileID: 0}

@@ -363,11 +363,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32755a2ba3654da46957b2a7f2dd7016, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveTowardsOnStart: 2
-  moveTowardsOnRemove: 3
+  moveTowardsOnInstantiate: 3
+  moveTowardsOnDestroy: 2
   objects: []
-  gameObjects: []
-  enableBlurOnInstantiate: 0
+  instantiatedObjects: []
+  enableBlur: 0
 --- !u!114 &4565516853449587500
 MonoBehaviour:
   m_ObjectHideFlags: 0

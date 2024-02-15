@@ -14,7 +14,7 @@ public abstract class UI : MonoBehaviour
     public Color textSelected;
 
     [Header("UI deselected color")]
-    public Color outlineDeselectd;
+    public Color outlineDeselected;
     public Color textDeselected;
 
     [Header("UI selected scale")]
@@ -29,12 +29,12 @@ public abstract class UI : MonoBehaviour
 
     public virtual void Update()
     {
-        if (UIManager.instance.Hovering(gameObject))
+        if (UIManager.Instance.Hovering(gameObject))
         {
             hovering = true;
-            if (UIManager.instance != null)
+            if (UIManager.Instance != null)
             {
-                UIManager.instance.CurrentUISelected = position;
+                UIManager.Instance.CurrentUISelected = position;
             }
         }
         else

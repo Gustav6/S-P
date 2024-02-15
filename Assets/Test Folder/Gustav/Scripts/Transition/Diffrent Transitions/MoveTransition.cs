@@ -8,10 +8,12 @@ public class MoveTransition : Transition
     public Vector3 target;
     public float windUp;
     public float overShoot;
+
     private readonly TransitionType? transitionType;
     private readonly TransitionType? transitionStart;
     private readonly TransitionType? transitionEnding;
     private readonly bool baseTargetFromObject;
+    private Vector3 referenceStartingPosition;
 
     public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionType type, bool fromObject = false, float _windUp = 0, float _overShoot = 0, ExecuteOnCompletion execute = null)
     {
@@ -24,6 +26,7 @@ public class MoveTransition : Transition
         executeOnCompletion += execute;
         windUp = _windUp;
         overShoot = _overShoot;
+        referenceStartingPosition = t.localPosition;
     }
 
     public MoveTransition(Transform t, Vector3 _target, float totalTime, TransitionType tStart, TransitionType tEnding, bool fromObject = false, ExecuteOnCompletion execute = null)
@@ -36,6 +39,7 @@ public class MoveTransition : Transition
         transitionEnding = tEnding;
         baseTargetFromObject = fromObject;
         executeOnCompletion += execute;
+        referenceStartingPosition = t.localPosition;
     }
 
     public override void Start()
@@ -131,5 +135,12 @@ public class MoveTransition : Transition
         }
 
         base.Update();
+    }
+
+    public override void SafetyNet()
+    {
+        Vector3 finalPosition = referenceStartingPosition + (target / UIManager.Instance.ResolutionScaling);
+        transform.localPosition = finalPosition;
+        base.SafetyNet();
     }
 }

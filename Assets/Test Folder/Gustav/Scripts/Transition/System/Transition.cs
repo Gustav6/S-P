@@ -30,4 +30,9 @@ public class Transition
             }
         }
     }
+
+    public virtual void SafetyNet()
+    {
+
+    }
 }

@@ -38,7 +38,7 @@ public class ButtonSelectedState : UIBaseState
     {
         manager = (ButtonStateManager)referenceManager;
 
-        if (!UIManager.instance.Transitioning)
+        if (!UIManager.Instance.Transitioning)
         {
             manager.StartCoroutine(WaitCoroutine(timeItTakes));
             manager.DefaultSelectTransition(timeItTakes, manager.pointers, manager.transform, manager.outlineImage, manager.text);
@@ -98,8 +98,8 @@ public class ButtonPressedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        UIManager.instance.EnableTransitioning();
-        buttonInstance.ActiveSelectedfunction();
+        UIManager.Instance.EnableTransitioning();
+        buttonInstance.ActivateSelectedFunctions();
     }
 }
 #endregion

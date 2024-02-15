@@ -31,11 +31,10 @@ public class Button : UI
             { Functions.SwitchScene, SceneTransition },
             { Functions.RemovePrefab, RemovePrefab },
             { Functions.SpawnPrefab, null },
-            { Functions.QuitGame, Application.Quit }
+            { Functions.QuitGame, Application.Quit },
+            { Functions.SwipeTransition, PlaySwipeTransition }
         };
     }
-
-    private ExecuteOnCompletion execute = null;
 
     public override void Start()
     {
@@ -55,19 +54,21 @@ public class Button : UI
 
     private void SceneTransition()
     {
-        execute += SwitchScene;
+        ExecuteOnCompletion execute = SwitchScene;
 
         PanelManager.FadeOut(transitionDuration, new Color(0, 0, 0, 1), execute);
     }
 
     private void RemovePrefab()
     {
+        ExecuteOnCompletion execute = null;
+
         if (selectedFunctions.Contains(Functions.SpawnPrefab))
         {
-            execute += UIManager.instance.TempInstantiateNewPrefab;
+            execute += UIManager.Instance.TempInstantiateNewPrefab;
         }
 
-        UIManager.instance.MoveUIThenRemove(transitionDuration, prefabToSpawn, execute, windUp, overShoot);
+        UIManager.Instance.MoveUIThenRemove(transitionDuration, prefabToSpawn, execute);
     }
 
     private void SwitchScene()
@@ -75,12 +76,27 @@ public class Button : UI
         SceneManager.LoadScene((int)NewScene);
     }
 
-    public void ActiveSelectedfunction()
+    public void ActivateSelectedFunctions()
     {
         for (int i = 0; i < selectedFunctions.Count; i++)
         {
             functionLookup[selectedFunctions[i]]?.Invoke();
         }
+    }
+
+    public void PlaySwipeTransition()
+    {
+        if (PanelManager.Instance != null)
+        {
+            ExecuteOnCompletion execute = RevealNewPrefab;
+
+            PanelManager.Instance.OnLoadInstance.MoveAway(PanelManager.Instance.gameObject, transitionDuration, execute);
+        }
+    }
+
+    private void RevealNewPrefab()
+    {
+        PanelManager.Instance.OnLoadInstance.MoveAway(PanelManager.Instance.gameObject, transitionDuration, null);
     }
 
     private enum Functions
@@ -89,6 +105,7 @@ public class Button : UI
         RemovePrefab,
         SpawnPrefab,
         QuitGame,
+        SwipeTransition,
     }
 }
 

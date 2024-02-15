@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1481130536913447757}
   - component: {fileID: 6225560688937548918}
   - component: {fileID: 291636484628449971}
+  - component: {fileID: 170010911457706234}
   m_Layer: 5
   m_Name: Logo
   m_TagString: Untagged
@@ -89,6 +90,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 6225560688937548918}
-  color: {r: 0.6150943, g: 0.6150943, b: 0.6150943, a: 1}
-  time: 1.5
   fadeIn: 1
+  color: {r: 0.6150943, g: 0.6150943, b: 0.6150943, a: 1}
+  fadeInTime: 1
+  moveIn: 0
+  moveInTime: 1
+  moveTowardsOnInstantiate: 0
+  moveTowardsOnDestroy: 0
+  scaleIn: 0
+  scaleInTime: 1
+  scaleInResetTime: 1
+  newScale: {x: 0, y: 0, z: 0}
+--- !u!114 &170010911457706234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8121875313926193308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4c6bb8b49046974bbd7a70cebab206c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 1
+  move: 0
+  speed: 2
+  magnitude: 0.0125
+  offset: 1
+  left: {fileID: 0}
+  right: {fileID: 0}

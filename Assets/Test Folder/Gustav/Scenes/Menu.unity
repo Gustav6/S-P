@@ -543,14 +543,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 519030760}
     m_Modifications:
-    - target: {fileID: 2012340199567343086, guid: df738c3cef1fced4a87102877decaae5, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 4938182713244235289, guid: df738c3cef1fced4a87102877decaae5, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 175
-      objectReference: {fileID: 0}
     - target: {fileID: 6128976556278935385, guid: df738c3cef1fced4a87102877decaae5, type: 3}
       propertyPath: m_Name
       value: SettingsMenuPrefab
@@ -839,7 +831,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1327179314
 RectTransform:
   m_ObjectHideFlags: 0
@@ -849,7 +841,7 @@ RectTransform:
   m_GameObject: {fileID: 1327179313}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1262233931}
@@ -879,8 +871,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -922,11 +914,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 1327179315}
+  fadeIn: 0
   color: {r: 0, g: 0, b: 0, a: 0}
-  fadeInTime: 1.5
-  fadeIn: 1
-  moveIn: 0
-  moveInTime: 1
+  fadeInTime: 2
+  moveIn: 1
+  moveInTime: 2
+  moveTowardsOnInstantiate: 2
+  moveTowardsOnDestroy: 3
+  scaleIn: 0
+  scaleInTime: 1
+  scaleInResetTime: 1
+  newScale: {x: 0, y: 0, z: 0}
 --- !u!1 &1610556613
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,10 +990,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 519030760}
     m_Modifications:
-    - target: {fileID: 438504448196318729, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
-      propertyPath: moveTowardsOnRemove
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3381804027909635715, guid: 12d663dd8e8a48f44b8d78f320d740e9, type: 3}
       propertyPath: m_Name
       value: MainMenuPrefab

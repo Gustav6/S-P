@@ -7,9 +7,17 @@ using UnityEngine.UI;
 public class PanelManager : MonoBehaviour
 {
     private static Image panelImage;
+    public OnLoad OnLoadInstance { get; private set; }
+    public static PanelManager Instance { get; private set; }
 
     void Awake()
     {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(this);
+
+        OnLoadInstance = GetComponent<OnLoad>();
         panelImage = GetComponent<Image>();
     }
 

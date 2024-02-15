@@ -10,21 +10,16 @@ using UnityEngine.SceneManagement;
 
 public class UIInput : MonoBehaviour
 {
-    private UIManager manager;
     private bool hasRemovedPauseMenu = true;
-
-    public void Start()
-    {
-        manager = GetComponent<UIManager>();
-    }
+    private GameObject pauseGameObjectInstance;
 
     public void Pause(InputAction.CallbackContext context)
     {
-        if (context.performed && !UIManager.instance.Transitioning)
+        if (context.performed && !UIManager.Instance.Transitioning)
         {
-            UIManager.instance.Paused = !UIManager.instance.Paused;
+            UIManager.Instance.Paused = !UIManager.Instance.Paused;
 
-            if (UIManager.instance.Paused && hasRemovedPauseMenu)
+            if (UIManager.Instance.Paused && hasRemovedPauseMenu)
             {
                 OnPause();
 
@@ -38,7 +33,7 @@ public class UIInput : MonoBehaviour
                 //    }
                 //}
             }
-            else if (!UIManager.instance.Paused && !hasRemovedPauseMenu)
+            else if (!UIManager.Instance.Paused && !hasRemovedPauseMenu)
             {
                 //manager.pausePrefab.GetComponent<ActiveMenuManager>().DisableBlur(UIManager.instance.CameraInstance.GetComponent<Blur>());
                 OnUnPause();
@@ -48,32 +43,24 @@ public class UIInput : MonoBehaviour
 
     private void OnPause()
     {
-        Transition.ExecuteOnCompletion execute = null;
+        UIManager.Instance.InstantiateNewUIPrefab(UIManager.Instance.pausePrefab, GetComponent<UIManager>().transform, Vector3.one, Vector3.zero);
 
-        Vector3 spawnLocation = UIManager.instance.GiveDestination(PrefabMoveDirection.Right);
+        pauseGameObjectInstance = UIManager.Instance.CurrentUIPrefab;
 
         hasRemovedPauseMenu = false;
-
-        execute += ExecuteAfterMovingAddedPauseMenu;
-
-        UIManager.instance.InstantiateNewUIPrefab(manager.pausePrefab, GetComponent<UIManager>().transform, Vector3.one, -spawnLocation);
-
-        Vector3 destionation = new(Screen.width / 2, 0);
-        destionation.y += UIManager.instance.CurrentUIPrefab.transform.position.y;
-
-        TransitionSystem.AddMoveTransition(new MoveTransition(UIManager.instance.CurrentUIPrefab.transform, destionation, 0.75f, TransitionType.SmoothStop2, false, 0, 0, execute));
     }
 
     private void OnUnPause()
     {
-        Transition.ExecuteOnCompletion execute = null;
+        //Transition.ExecuteOnCompletion execute = null;
 
-        execute += ExecuteAfterMovingRemovingPauseMenu;
+        //execute += ExecuteAfterMovingRemovingPauseMenu;
 
-        Vector3 destionation = new(-Screen.width / 2, 0);
-        destionation.y += UIManager.instance.CurrentUIPrefab.transform.position.y;
+        //pauseGameObjectInstance.GetComponent<OnLoad>().MoveAway(pauseGameObjectInstance, 1, execute);
 
-        TransitionSystem.AddMoveTransition(new MoveTransition(UIManager.instance.CurrentUIPrefab.transform, destionation, 0.5f, TransitionType.SmoothStop2, false, 0, 0, execute));
+        //Vector3 destination = new(-Screen.width / 2, 0);
+
+        //TransitionSystem.AddMoveTransition(new MoveTransition(pauseGameObjectInstance.transform, destination, 0.5f, TransitionType.SmoothStop2, false, 0, 0, execute));
     }
 
     private void ExecuteAfterMovingAddedPauseMenu()
@@ -88,12 +75,12 @@ public class UIInput : MonoBehaviour
             }
         }
 
-        UIManager.instance.LoadUI(list);
+        UIManager.Instance.LoadUI(list);
     }
     private void ExecuteAfterMovingRemovingPauseMenu()
     {
-        Destroy(UIManager.instance.CurrentUIPrefab);
-        UIManager.instance.ResetListOfUIObjects();
+        Destroy(UIManager.Instance.GetComponentInChildren<ActiveBaseManager>());
+        UIManager.Instance.ResetListOfUIObjects();
         hasRemovedPauseMenu = true;
     }
 
@@ -103,7 +90,7 @@ public class UIInput : MonoBehaviour
         {
             if (context.performed)
             {
-                GameObject g = manager.CheckForInteractableUI(manager.CurrentUISelected);
+                GameObject g = UIManager.Instance.CheckForInteractableUI(UIManager.Instance.CurrentUISelected);
 
                 if (g.GetComponent<SliderStateManager>() != null || g.GetComponent<InputFieldStateManager>() != null)
                 {
@@ -113,37 +100,37 @@ public class UIInput : MonoBehaviour
                     }
                 }
 
-                if (!manager.KeyOrControlActive)
+                if (!UIManager.Instance.KeyOrControlActive)
                 {
-                    manager.KeyOrControlActive = true;
+                    UIManager.Instance.KeyOrControlActive = true;
                     return;
                 }
 
                 #region Change selected UI object
-                Vector2 temp = manager.CurrentUISelected;
+                Vector2 temp = UIManager.Instance.CurrentUISelected;
 
                 if (context.ReadValue<Vector2>().y > 0)
                 {
                     temp.y--;
-                    manager.CurrentUISelected = temp;
+                    UIManager.Instance.CurrentUISelected = temp;
                 }
 
                 if (context.ReadValue<Vector2>().y < 0)
                 {
                     temp.y++;
-                    manager.CurrentUISelected = temp;
+                    UIManager.Instance.CurrentUISelected = temp;
                 }
 
                 if (context.ReadValue<Vector2>().x < 0)
                 {
                     temp.x--;
-                    manager.CurrentUISelected = temp;
+                    UIManager.Instance.CurrentUISelected = temp;
                 }
 
                 if (context.ReadValue<Vector2>().x > 0)
                 {
                     temp.x++;
-                    manager.CurrentUISelected = temp;
+                    UIManager.Instance.CurrentUISelected = temp;
                 }
                 #endregion
             }
@@ -157,15 +144,15 @@ public class UIInput : MonoBehaviour
             SliderStateManager sm;
             GameObject g;
 
-            if (manager.CheckForInteractableUI(manager.CurrentUISelected) != null)
+            if (UIManager.Instance.CheckForInteractableUI(UIManager.Instance.CurrentUISelected) != null)
             {
-                g = manager.CheckForInteractableUI(manager.CurrentUISelected);
+                g = UIManager.Instance.CheckForInteractableUI(UIManager.Instance.CurrentUISelected);
 
                 if (g.GetComponent<SliderStateManager>() != null)
                 {
                     sm = g.GetComponent<SliderStateManager>();
 
-                    if (manager.ChangingSlider)
+                    if (UIManager.Instance.ChangingSlider)
                     {
                         if (context.ReadValue<float>() < 0)
                         {
@@ -190,7 +177,7 @@ public class UIInput : MonoBehaviour
     {
         if (CanInteractWithUI())
         {
-            GameObject g = manager.CheckForInteractableUI(manager.CurrentUISelected);
+            GameObject g = UIManager.Instance.CheckForInteractableUI(UIManager.Instance.CurrentUISelected);
             BaseStateManager uI = g.GetComponent<BaseStateManager>();
 
             if (context.performed)
@@ -220,16 +207,16 @@ public class UIInput : MonoBehaviour
 
     public void PointerPosition(InputAction.CallbackContext context)
     {
-        manager.MousePosition = context.ReadValue<Vector2>();
+        UIManager.Instance.MousePosition = context.ReadValue<Vector2>();
     }
 
     public void ClickOnGameObject(InputAction.CallbackContext context)
     {
-        if (CanInteractWithUI() && !manager.KeyOrControlActive)
+        if (CanInteractWithUI() && !UIManager.Instance.KeyOrControlActive)
         {
-            BaseStateManager stateManager = manager.CheckForInteractableUI(manager.CurrentUISelected).GetComponent<BaseStateManager>();
+            BaseStateManager stateManager = UIManager.Instance.CheckForInteractableUI(UIManager.Instance.CurrentUISelected).GetComponent<BaseStateManager>();
 
-            if (UIManager.instance.Hovering(stateManager.UIInstance.gameObject))
+            if (UIManager.Instance.Hovering(stateManager.UIInstance.gameObject))
             {
                 if (context.performed)
                 {
@@ -246,7 +233,7 @@ public class UIInput : MonoBehaviour
 
     public bool CanInteractWithUI()
     {
-        if (UIManager.instance.ListOfUIObjects.Count > 0 && !UIManager.instance.Transitioning)
+        if (UIManager.Instance.ListOfUIObjects.Count > 0 && !UIManager.Instance.Transitioning)
         {
             return true;
         }

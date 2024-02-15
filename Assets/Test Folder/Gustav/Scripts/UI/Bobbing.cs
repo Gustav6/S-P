@@ -6,8 +6,12 @@ using UnityEngine;
 
 public class Bobbing : MonoBehaviour
 {
+    [SerializeField] private bool scale;
+    [SerializeField] private bool move;
+
     [SerializeField] private float speed;
     [SerializeField] private float magnitude;
+    [SerializeField] private float offset;
 
     public GameObject left;
     public GameObject right;
@@ -17,16 +21,26 @@ public class Bobbing : MonoBehaviour
 
     public void Start()
     {
-        left = transform.GetChild(0).gameObject;
-        right = transform.GetChild(1).gameObject;
+        if (move)
+        {
+            left = transform.GetChild(0).gameObject;
+            right = transform.GetChild(1).gameObject;
 
-        xOffsetLeft = left.transform.localPosition.x;
-        xOffsetRight = right.transform.localPosition.x;
+            xOffsetLeft = left.transform.localPosition.x;
+            xOffsetRight = right.transform.localPosition.x;
+        }
     }
 
     void Update()
     {
-        BobLeftToRight();
+        if (scale)
+        {
+            Scale();
+        }
+        else if (move)
+        {
+            BobLeftToRight();
+        }
     }
 
     public void BobLeftToRight()
@@ -35,6 +49,12 @@ public class Bobbing : MonoBehaviour
         Vector3 tempRight = new(SinCurve() + xOffsetRight, 0);
         left.transform.localPosition = tempLeft;
         right.transform.localPosition = tempRight;
+    }
+
+    public void Scale()
+    {
+        Vector3 scale = new(SinCurve() + offset, SinCurve() + offset);
+        transform.localScale = scale;
     }
 
     public float SinCurve()

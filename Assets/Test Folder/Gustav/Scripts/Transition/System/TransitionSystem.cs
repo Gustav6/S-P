@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class TransitionSystem
@@ -18,6 +19,7 @@ public static class TransitionSystem
         {
             if (transitions[i].isRemoved)
             {
+                transitions[i].SafetyNet();
                 transitions[i].executeOnCompletion?.Invoke();
                 transitions.RemoveAt(i);
             }
@@ -27,18 +29,22 @@ public static class TransitionSystem
     public static void AddMoveTransition(MoveTransition moveTransition)
     {
         transitions.Add(moveTransition);
+        moveTransition.Start();
     }
     public static void AddScaleTransition(ScaleTransition scaleTransition)
     {
         transitions.Add(scaleTransition);
+        scaleTransition.Start();
     }
     public static void AddColorTransition(ColorTransition colorTransition)
     {
         transitions.Add(colorTransition);
+        colorTransition.Start();
     }
     public static void AddRotationTransition(RotationTransition rotationTransition)
     {
         transitions.Add(rotationTransition);
+        rotationTransition.Start();
     }
 
     public static float BounceClampTop(float t)

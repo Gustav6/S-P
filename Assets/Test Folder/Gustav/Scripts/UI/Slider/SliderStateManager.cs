@@ -26,9 +26,9 @@ public class SliderStateManager : BaseStateManager
         base.OnStart();
 
         outLineImage = transform.GetChild(0).GetComponent<Image>();
+        outLinePosition = transform.GetChild(0).GetComponent<RectTransform>();
         sliderImage = transform.GetChild(1).GetComponent<Image>();
         sliderPosition = transform.GetChild(1).GetComponent<RectTransform>();
-        outLinePosition = transform.GetChild(0).GetComponent<RectTransform>();
         maxMoveValue = Mathf.Abs(sliderPosition.localPosition.x);
         text = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
         pointers = transform.GetChild(3).GetComponent<Transform>().gameObject;
@@ -48,9 +48,9 @@ public class SliderStateManager : BaseStateManager
 
     public float TotalSlidingPercentage()
     {
-        float maxMove = Mathf.Abs(maxMoveValue * 2) * UIManager.instance.ResolutionScaling;
+        float maxMove = Mathf.Abs(maxMoveValue * 2) * UIManager.Instance.ResolutionScaling;
 
-        float percentage = ((sliderPosition.localPosition.x + Mathf.Abs(slidersOffset)) / maxMove) * UIManager.instance.ResolutionScaling;
+        float percentage = ((sliderPosition.localPosition.x + Mathf.Abs(slidersOffset)) / maxMove) * UIManager.Instance.ResolutionScaling;
 
         if (percentage > 0.99f)
         {

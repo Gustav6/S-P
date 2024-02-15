@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class ActiveBaseManager : MonoBehaviour
 {
-    public PrefabMoveDirection moveTowardsOnStart;
-    public PrefabMoveDirection moveTowardsOnRemove;
-
     public virtual void Start()
     {
-        
+
     }
 
     // Update is called once per frame

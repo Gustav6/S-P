@@ -261,6 +261,7 @@ MonoBehaviour:
   move: 1
   speed: 12
   magnitude: 2
+  offset: 0
   left: {fileID: 0}
   right: {fileID: 0}
 --- !u!1 &4187804337531870304
@@ -412,7 +413,7 @@ MonoBehaviour:
   textSelected: {r: 1, g: 0.9166666, b: 0, a: 1}
   outlineDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
   textDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
-  selectedScale: {x: 1.1, y: 1.1, z: 1.1}
+  selectedScale: {x: 1.05, y: 1.05, z: 1}
   selectedFunctions: 
   transitionDuration: 0
   NewScene: 0

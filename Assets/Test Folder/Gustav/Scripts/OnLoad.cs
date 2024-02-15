@@ -1,10 +1,13 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class OnLoad : MonoBehaviour
 {
     [Header("Drag image here")]
-    public Image image;
+    public List<Image> images = new();
 
     [Header("Fade in in variables")]
     public bool fadeIn;
@@ -13,7 +16,6 @@ public class OnLoad : MonoBehaviour
 
     [Header("Move in variables")]
     public bool moveIn;
-    public bool baseDestinationFromScreen;
     public float moveInTime = 1;
     public PrefabMoveDirection moveTowardsOnInstantiate;
     public PrefabMoveDirection moveTowardsOnDestroy;
@@ -26,7 +28,7 @@ public class OnLoad : MonoBehaviour
     public bool scaleIn;
     public float scaleInTime = 1;
     public float scaleInResetTime = 1;
-    public Vector3 newScale;
+    public Vector3 startingScale;
 
 
     public void Start()
@@ -36,13 +38,27 @@ public class OnLoad : MonoBehaviour
 
         if (fadeIn)
         {
-            Fade(image, fadeInTime, color);
+            for (int i = 0; i < images.Count; i++)
+            {
+                Fade(images[i], fadeInTime, color);
+            }
         }
-        else if (moveIn)
+        if (moveIn)
         {
-            MoveIn(execute, moveInTime);
+            if (instance.GetComponent<PanelManager>() != null)
+            {
+                UIManager.Instance.EnableTransitioning();
+
+                execute += UIManager.Instance.DisableTransitioning;
+
+                UIManager.Instance.MoveUIToStart(moveInTime, instance, execute);
+            }
+            else
+            {
+                MoveIn(execute, moveInTime);
+            }
         }
-        else if (scaleIn)
+        if (scaleIn)
         {
             Scale();
         }
@@ -54,21 +70,10 @@ public class OnLoad : MonoBehaviour
 
         execute += UIManager.Instance.DisableTransitioning;
 
-        if (GetComponent<ActiveBaseManager>() != null)
-        {
-            if (baseDestinationFromScreen)
-            {
-                Vector3 startingPosition = UIManager.Instance.GiveDestination(moveTowardsOnInstantiate) * -1;
-                instance.transform.position += startingPosition;
-            }
-            else
-            {
-                Vector3 startingPosition = UIManager.Instance.GiveDestination(moveTowardsOnInstantiate) * -1;
-                startingPosition.x += Screen.width / 2;
-                startingPosition.y += Screen.height / 2;
-                instance.transform.position = startingPosition;
-            }
-        }
+        Vector3 startingPosition = UIManager.Instance.GiveDestination(moveTowardsOnInstantiate) * -1;
+        startingPosition.x += Screen.width / 2;
+        startingPosition.y += Screen.height / 2;
+        instance.transform.position = startingPosition;
 
         UIManager.Instance.MoveUIToStart(time, instance, execute);
     }
@@ -76,8 +81,6 @@ public class OnLoad : MonoBehaviour
     public void MoveAway(GameObject g, float time, Transition.ExecuteOnCompletion execute)
     {
         UIManager.Instance.EnableTransitioning();
-
-        execute += UIManager.Instance.DisableTransitioning;
 
         Vector3 destination = Vector3.zero;
 
@@ -113,7 +116,7 @@ public class OnLoad : MonoBehaviour
     {
         Transition.ExecuteOnCompletion execute = ResetScale;
 
-        TransitionSystem.AddScaleTransition(new ScaleTransition(transform, newScale, scaleInTime, TransitionType.SmoothStop2, execute));
+        TransitionSystem.AddScaleTransition(new ScaleTransition(transform, startingScale, scaleInTime, TransitionType.SmoothStop2, execute));
     }
 
     public void ResetScale()

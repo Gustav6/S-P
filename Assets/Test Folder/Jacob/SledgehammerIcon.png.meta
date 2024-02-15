@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SledgehammerIcon_0: -6951956379418105232
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

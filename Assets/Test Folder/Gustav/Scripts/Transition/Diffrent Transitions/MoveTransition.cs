@@ -139,8 +139,11 @@ public class MoveTransition : Transition
 
     public override void SafetyNet()
     {
-        Vector3 finalPosition = referenceStartingPosition + (target / UIManager.Instance.ResolutionScaling);
-        transform.localPosition = finalPosition;
-        base.SafetyNet();
+        if (transform != null)
+        {
+            Vector3 finalPosition = referenceStartingPosition + (target / UIManager.Instance.ResolutionScaling);
+            transform.localPosition = finalPosition;
+            base.SafetyNet();
+        }
     }
 }

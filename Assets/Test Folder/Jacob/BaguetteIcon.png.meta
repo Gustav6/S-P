@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BaguetteIcon_0: -4383923719173538831
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

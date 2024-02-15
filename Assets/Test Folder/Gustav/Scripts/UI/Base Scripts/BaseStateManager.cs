@@ -11,6 +11,7 @@ public abstract class BaseStateManager : MonoBehaviour
     public Dictionary<string, Vector3> ScalePairs { get; private set; }
     public UIBaseState CurrentState { get; set; }
     public TestAudioManager AudioManagerInstance { get; private set; }
+    public GameObject Pointers { get; protected set; }
     public bool UIActivated { get; set; }
 
     public virtual void OnStart()

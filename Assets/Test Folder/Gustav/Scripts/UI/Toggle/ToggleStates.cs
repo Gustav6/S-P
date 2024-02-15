@@ -12,7 +12,7 @@ public class ToggleDeselectedState : UIBaseState
     {
         manager = (ToggleStateManager)referenceManager;
 
-        manager.DefaultDeselectTransition(timeItTakes, manager.pointers, null, manager.outLineImage, null);
+        manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, null, manager.outLineImage, null);
     }
 
     public override void UpdateState(BaseStateManager referenceManager)
@@ -40,7 +40,7 @@ public class ToggleSelectedState : UIBaseState
 
         if (!UIManager.Instance.Transitioning)
         {
-            manager.DefaultSelectTransition(timeItTakes, manager.pointers, null, manager.outLineImage, null);
+            manager.DefaultSelectTransition(timeItTakes, manager.Pointers, null, manager.outLineImage, null);
         }
         else
         {

@@ -65,7 +65,22 @@ public class Button : UI
             execute += UIManager.Instance.TempInstantiateNewPrefab;
         }
 
-        UIManager.Instance.MoveUIThenRemove(transitionDuration, prefabToSpawn, execute);
+        if (prefabToSpawn != null)
+        {
+            UIManager.Instance.MoveUIThenRemove(transitionDuration, prefabToSpawn, execute);
+        }
+        else
+        {
+            foreach (BaseStateManager active in UIManager.Instance.GetComponentsInChildren<BaseStateManager>())
+            {
+                if (active.GetComponent<OnLoad>() != null)
+                {
+                    PrefabMoveDirection direction = active.GetComponent<OnLoad>().moveTowardsOnDestroy;
+                    Vector3 destination = UIManager.Instance.GiveDestination(direction);
+                    UIManager.Instance.MoveUITowardsDestination(active.gameObject, transitionDuration, destination, null);
+                }
+            }
+        }
     }
 
     private void SwitchScene()

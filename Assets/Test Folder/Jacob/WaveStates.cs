@@ -6,6 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.Tilemaps;
 using Unity.VisualScripting;
+using System.Linq;
+using System;
 
 public class WaveCreationState : BaseWaveState
 {
@@ -23,7 +25,7 @@ public class WaveCreationState : BaseWaveState
 
 	public override void EnterState()
 	{
-        _context.SetEnemiesToSpawn(GetEnemies((int)(_context.WaveNumber / 2f * 50f + (_context.WaveNumber * 5f)), (WaveStateMachine.WaveType)Random.Range(0, 6)));
+        _context.SetEnemiesToSpawn(GetEnemies((int)(_context.WaveNumber / 2f * 50f + (_context.WaveNumber * 5f)), (WaveStateMachine.WaveType)UnityEngine.Random.Range(5, 6)));
         _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.Reward);
 	}
 
@@ -55,7 +57,7 @@ public class WaveCreationState : BaseWaveState
             case WaveStateMachine.WaveType.Random:
                 for (; ; )
                 {
-                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
+                    int randomEnemyID = UnityEngine.Random.Range(0, _enemyAssortment.Length);
 
                     if (_context.WaveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
                         continue;
@@ -74,7 +76,7 @@ public class WaveCreationState : BaseWaveState
                 for (; ; )
                 {
                     // Get random enemy
-                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
+                    int randomEnemyID = UnityEngine.Random.Range(0, _enemyAssortment.Length);
 
                     if (_context.WaveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
                         continue;
@@ -111,7 +113,7 @@ public class WaveCreationState : BaseWaveState
                 for (; ; )
                 {
                     // Get random enemy
-                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
+                    int randomEnemyID = UnityEngine.Random.Range(0, _enemyAssortment.Length);
 
                     if (_context.WaveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
                         continue;
@@ -149,7 +151,7 @@ public class WaveCreationState : BaseWaveState
                 for (; ; )
                 {
                     // Get random enemy
-                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
+                    int randomEnemyID = UnityEngine.Random.Range(0, _enemyAssortment.Length);
 
                     if (_context.WaveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
                         continue;
@@ -188,7 +190,7 @@ public class WaveCreationState : BaseWaveState
                 for (; ; )
                 {
                     // Get random enemy
-                    int randomEnemyID = Random.Range(0, _enemyAssortment.Length);
+                    int randomEnemyID = UnityEngine.Random.Range(0, _enemyAssortment.Length);
 
                     if (_context.WaveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
                         continue;
@@ -257,7 +259,8 @@ public class WaveCreationState : BaseWaveState
 
         _waveInfoPopup.Enable();
 
-        return finalEnemyList;
+        System.Random random = new System.Random();
+        return finalEnemyList.ToArray().OrderBy(x => random.Next()).ToList();
     }
 }
 
@@ -346,10 +349,10 @@ public class WaveRewardState : BaseWaveState
 
         for (int i = 0; i < interactables.Length; i++)
         {
-            int randomIndex = Random.Range(0, rewardPool.Length);
+            int randomIndex = UnityEngine.Random.Range(0, rewardPool.Length);
 
-            while (generatedRewardIndexes.Contains(randomIndex) || rewardPool[randomIndex].WaveUnlocked > _context.WaveNumber)
-                randomIndex = Random.Range(0, rewardPool.Length);
+            while (generatedRewardIndexes.Contains(randomIndex) || _context.WaveNumber < rewardPool[randomIndex].WaveUnlocked)
+                randomIndex = UnityEngine.Random.Range(0, rewardPool.Length);
 
             generatedRewardIndexes.Add(randomIndex);
 
@@ -363,7 +366,7 @@ public class WaveRewardState : BaseWaveState
     {
         _tutorialManager.OnStatPickup();
         for (int i = 0; i < _statRewardInteractables.Length; i++)
-            _context.StateMachine.StartCoroutine(AscendReward(_statRewardInteractables[i], Random.Range(0, 0.4f)));
+            _context.StateMachine.StartCoroutine(AscendReward(_statRewardInteractables[i], UnityEngine.Random.Range(0, 0.4f)));
 
         _statRewardsDisabled = true;
     }
@@ -371,7 +374,7 @@ public class WaveRewardState : BaseWaveState
     void EnableStatRewardInteractables()
     {
         for (int i = 0; i < _statRewardInteractables.Length; i++)
-            _context.StateMachine.StartCoroutine(DropReward(_statRewardInteractables[i], Random.Range(0, 0.4f)));
+            _context.StateMachine.StartCoroutine(DropReward(_statRewardInteractables[i], UnityEngine.Random.Range(0, 0.4f)));
 
         _statRewardsDisabled = false;
     }
@@ -380,7 +383,7 @@ public class WaveRewardState : BaseWaveState
     {
         _tutorialManager.OnWeaponPickup();
         for (int i = 0; i < _weaponRewardInteractables.Length; i++)
-            _context.StateMachine.StartCoroutine(AscendReward(_weaponRewardInteractables[i], Random.Range(0, 0.4f)));
+            _context.StateMachine.StartCoroutine(AscendReward(_weaponRewardInteractables[i], UnityEngine.Random.Range(0, 0.4f)));
 
         _weaponRewardsDisabled = true;
     }
@@ -388,7 +391,7 @@ public class WaveRewardState : BaseWaveState
     void EnableWeaponRewardInteractables()
     {
         for (int i = 0; i < _weaponRewardInteractables.Length; i++)
-            _context.StateMachine.StartCoroutine(DropReward(_weaponRewardInteractables[i], Random.Range(0, 0.4f)));
+            _context.StateMachine.StartCoroutine(DropReward(_weaponRewardInteractables[i], UnityEngine.Random.Range(0, 0.4f)));
 
         _weaponRewardsDisabled = false;
     }
@@ -569,7 +572,7 @@ public class WaveInProgressState : BaseWaveState
                 continue;
             }
 
-            yield return new WaitForSeconds(Random.Range(0.5f, 1.5f));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0.5f, 1.5f));
             if (!_context.CanSpawnEnemies)
                 yield break;
 
@@ -580,9 +583,9 @@ public class WaveInProgressState : BaseWaveState
 
     void SpawnEnemy(EnemyPreset enemyPreset)
     {
-        Transform randomSpawnPoint = _context.SpawnPointParent.GetChild(Random.Range(0, _context.SpawnPointParent.childCount));
+        Transform randomSpawnPoint = _context.SpawnPointParent.GetChild(UnityEngine.Random.Range(0, _context.SpawnPointParent.childCount));
 
-        GameObject enemy = Object.Instantiate(enemyPreset.EnemyPrefab);
+        GameObject enemy = UnityEngine.Object.Instantiate(enemyPreset.EnemyPrefab);
         EnemyLifeStatus enemyLifeStatus = enemy.AddComponent<EnemyLifeStatus>();
         enemyLifeStatus.OnDeathCallback += EnemyDied;
         enemyLifeStatus.Value = enemyPreset.Cost;
@@ -613,7 +616,7 @@ public class WaveInProgressState : BaseWaveState
 
         parentTransform.position = startPos;
 
-        Transform waterPool = Object.Instantiate(_waterPoolPrefab, startPos, Quaternion.identity);
+        Transform waterPool = UnityEngine.Object.Instantiate(_waterPoolPrefab, startPos, Quaternion.identity);
         waterPool.localScale = new Vector2(waterPool.localScale.x * Mathf.Sign(endPos.x - waterPool.transform.position.x), waterPool.localScale.y);
 
         // Waits for a bit while it's just the whirlpool
@@ -632,8 +635,8 @@ public class WaveInProgressState : BaseWaveState
 
         enemy.gameObject.SetActive(true);
         enemy.SetParent(null);
-        Object.Destroy(parentTransform.gameObject, 0.25f);
-        Object.Destroy(waterPool.gameObject, 0.25f);
+        UnityEngine.Object.Destroy(parentTransform.gameObject, 0.25f);
+        UnityEngine.Object.Destroy(waterPool.gameObject, 0.25f);
     }
 }
 
@@ -656,7 +659,7 @@ public class WaveClearState : BaseWaveState
 
     public override void EnterState()
     {
-        _messageText.text = _messages[Random.Range(0, _messages.Length)];
+        _messageText.text = _messages[UnityEngine.Random.Range(0, _messages.Length)];
         _animator.Play("WaveClear");
         PlayerStats.Instance.ResetDamage();
         PlayerStats.Instance.ClearEquippedAbility();
@@ -708,6 +711,7 @@ public class StageSwapState : BaseWaveState
 
     int _stageSwapIncrement;
 
+
     public StageSwapState(WaveStateContext context, WaveStateMachine.WaveState stateKey, 
                           Animator armAnim, 
                           IslandTransition[] islandPrefabs, 
@@ -749,6 +753,7 @@ public class StageSwapState : BaseWaveState
     public override void ExitState()
     {
         PlayerStats.Instance.ToggleInvulnerability(false);
+        AstarPath.active.Scan();
     }
 
     public override WaveStateMachine.WaveState GetNextState()
@@ -759,9 +764,9 @@ public class StageSwapState : BaseWaveState
     // Property of Tristan
     public void GenerateIsland()
     {
-        IslandTransition randomIsland = _islandPrefabs[Random.Range(0, _islandPrefabs.Length)];
+        IslandTransition randomIsland = _islandPrefabs[UnityEngine.Random.Range(0, _islandPrefabs.Length)];
 
-        IslandTransition island = Object.Instantiate(randomIsland, new Vector3(-18, 0, 0), Quaternion.identity, _gridTransform);
+        IslandTransition island = UnityEngine.Object.Instantiate(randomIsland, new Vector3(-18, 0, 0), Quaternion.identity, _gridTransform);
         island.transform.position = new Vector3(-18, 0, 0);
 
         island.SwapIsland();

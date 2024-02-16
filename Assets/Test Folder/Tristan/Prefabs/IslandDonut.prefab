@@ -2518,7 +2518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8705828287305403717}
-  - component: {fileID: 3598523102668014416}
+  - component: {fileID: 5479586885068401701}
   m_Layer: 9
   m_Name: Hole
   m_TagString: Untagged
@@ -2535,14 +2535,14 @@ Transform:
   m_GameObject: {fileID: 7916793961609976703}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.49, y: 0.32, z: 0}
+  m_LocalPosition: {x: 0.49, y: 0.499, z: 0}
   m_LocalScale: {x: 12.825008, y: 6.340299, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2617490942271004347}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &3598523102668014416
-CapsuleCollider2D:
+--- !u!60 &5479586885068401701
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2576,8 +2576,29 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
-  m_Direction: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.13535191, y: 0.35488942}
+      - {x: -0.21859835, y: 0.2566725}
+      - {x: -0.21656708, y: -0.20649962}
+      - {x: -0.18453479, y: -0.38537848}
+      - {x: -0.10563142, y: -0.43916467}
+      - {x: 0.12821077, y: -0.42355394}
+      - {x: 0.18534425, y: -0.30525357}
+      - {x: 0.23335001, y: -0.29154247}
+      - {x: 0.24214, y: 0.21708225}
+      - {x: 0.18803833, y: 0.31535026}
+      - {x: 0.13086233, y: 0.36329693}
+  m_UseDelaunayMesh: 0
 --- !u!1 &8499856271675508695
 GameObject:
   m_ObjectHideFlags: 0

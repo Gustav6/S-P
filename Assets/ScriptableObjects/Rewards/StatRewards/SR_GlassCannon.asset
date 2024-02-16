@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SR_GlassCannon
   m_EditorClassIdentifier: 
   RewardName: Glass Cannon
-  WaveUnlocked: 0
+  WaveUnlocked: 5
   StatModifier:
     AttackSpeed: 1
     DamageModifier: 1.25

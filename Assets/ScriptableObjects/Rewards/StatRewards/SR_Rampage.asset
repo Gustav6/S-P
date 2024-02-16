@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SR_Rampage
   m_EditorClassIdentifier: 
   RewardName: Rampage
-  WaveUnlocked: 3
+  WaveUnlocked: 5
   StatModifier:
     AttackSpeed: 1.1
     DamageModifier: 1.1

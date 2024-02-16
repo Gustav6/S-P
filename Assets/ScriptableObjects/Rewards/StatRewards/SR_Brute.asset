@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SR_Brute
   m_EditorClassIdentifier: 
   RewardName: Brute
-  WaveUnlocked: 3
+  WaveUnlocked: 0
   StatModifier:
     AttackSpeed: 1
     DamageModifier: 1.15

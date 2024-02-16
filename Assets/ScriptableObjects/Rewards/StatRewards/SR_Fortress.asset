@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SR_Fortress
   m_EditorClassIdentifier: 
   RewardName: Fortress
-  WaveUnlocked: 3
+  WaveUnlocked: 5
   StatModifier:
     AttackSpeed: 1
     DamageModifier: 1

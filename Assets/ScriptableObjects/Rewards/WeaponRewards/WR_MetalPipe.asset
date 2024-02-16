@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d06b72b9e22196459ebaa460dc3f602, type: 3}
-  m_Name: WR_WaterGun
+  m_Name: WR_MetalPipe
   m_EditorClassIdentifier: 
-  RewardName: Water Gun
+  RewardName: Metal Pipe
   WaveUnlocked: 5
-  ContainedWeapon: {fileID: 11400000, guid: 4cf4376c0a7881a4bb8564451a15f752, type: 2}
-  RewardSprite: {fileID: 21300000, guid: 1574f279875daae4fa6efb4b9a8e7a82, type: 3}
+  ContainedWeapon: {fileID: 11400000, guid: 6e96ed472bf92654d802ac178534379b, type: 2}
+  RewardSprite: {fileID: 6545302980019263681, guid: aa84524fc831f1047a4986b6d4b37578, type: 3}

@@ -16615,6 +16615,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 617924119179b3744a3f29cacf400db5, type: 2}
   - {fileID: 11400000, guid: 04a5bde66efb1ba49a5263a4fcbb7c51, type: 2}
   - {fileID: 11400000, guid: 146d8a9233a695b4ab63ae416acd57d7, type: 2}
+  - {fileID: 11400000, guid: 48149513d61a39a439f8fc3c95045752, type: 2}
+  - {fileID: 11400000, guid: 7a0221a85017eb3488b845791444418f, type: 2}
+  - {fileID: 11400000, guid: f2f5a367ddee1d749be7456cd1d95d8c, type: 2}
   _dropCurve:
     serializedVersion: 2
     m_Curve:

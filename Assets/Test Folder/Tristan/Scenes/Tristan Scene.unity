@@ -207,7 +207,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1470848211}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &427962030
@@ -315,6 +316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a40ac7d17f763334bb28506ed78b8bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1
 --- !u!483693784 &1142539002
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -1834,6 +1836,68 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &1470848210
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 427962029}
+    m_Modifications:
+    - target: {fileID: 554228169952092947, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554228169952092947, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554228169952092947, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554228169952092947, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 554228169952092947, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554228169952092947, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554228169952092947, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554228169952092947, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554228169952092947, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 554228169952092947, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7160564799342619433, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+      propertyPath: m_Name
+      value: IslandFish
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+--- !u!4 &1470848211 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 554228169952092947, guid: 0e6305609f007da46b339f5b25967c3f, type: 3}
+  m_PrefabInstance: {fileID: 1470848210}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1588284639
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,15 +2019,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb3cc3f7af2f614d990c647cac69186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: -6582705752811300379, guid: cd9da5f47f6c67242a5fe8c50a0c7c81, type: 2}
-  sounds:
-  - Name: Ambiance
-    Clip: {fileID: 8300000, guid: 15e46ed961998234fb35209324889fa9, type: 3}
-    Volume: 1
-    Pitch: 1
-    RandomizePitch: 0
-    Loop: 1
-    Source: {fileID: 0}
+  _sfxMixer: {fileID: 0}
+  _musicMixer: {fileID: 0}
+  _sounds: []
+  _music: []
 --- !u!4 &1677239169
 Transform:
   m_ObjectHideFlags: 0
@@ -2025,6 +2084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a40ac7d17f763334bb28506ed78b8bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1
 --- !u!483693784 &1905910684
 TilemapRenderer:
   m_ObjectHideFlags: 0

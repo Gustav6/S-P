@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6d06b72b9e22196459ebaa460dc3f602, type: 3}
-  m_Name: WR_Fish
+  m_Name: WR_Shoe
   m_EditorClassIdentifier: 
-  RewardName: Little Brother
-  WaveUnlocked: 0
-  ContainedWeapon: {fileID: 11400000, guid: cd3ba98949bd2ef4c85cc687d1cfcc11, type: 2}
-  RewardSprite: {fileID: 6361611475456273693, guid: cbe1f6d449b42034d860c988f1b7ea35, type: 3}
+  RewardName: Shoe
+  WaveUnlocked: 3
+  ContainedWeapon: {fileID: 11400000, guid: 4775fba5bf2baa942b47938fbee0f0a8, type: 2}
+  RewardSprite: {fileID: 8848178071034689023, guid: ecd6215ddbe00cb47af2f7396f9f7985, type: 3}

@@ -20,7 +20,7 @@ public class PlayerAttack : MonoBehaviour
         if (EquipmentManager.Instance.CanHit())
             TurnToMouse();
 
-        if (Input.GetKey(KeyCode.Q) && EquipmentManager.Instance.CanHit())
+        if (Input.GetMouseButton(0) && EquipmentManager.Instance.CanHit())
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 targetDirection = (mousePosition - (Vector2)transform.position).normalized;
@@ -28,7 +28,7 @@ public class PlayerAttack : MonoBehaviour
             _attackController.PlayHitAnimation(targetDirection);
         }
 
-        if (Input.GetKeyDown(KeyCode.F) && _player.currentPowerUp != null)
+        if (Input.GetKeyDown(KeyCode.Space) && _player.currentPowerUp != null)
             _player.currentPowerUp.UsePowerUp();
     }
 

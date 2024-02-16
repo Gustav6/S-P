@@ -21,7 +21,10 @@ public class AudioManager : MonoBehaviour
         #region Singleton
 
         if (Instance == null)
+        {
+            DontDestroyOnLoad(gameObject);
             Instance = this;
+        }
         else
         {
             Debug.LogWarning("More than one instance of AudioManager found on " + gameObject + "!! Destroying object");

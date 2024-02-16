@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: cbe1f6d449b42034d860c988f1b7ea35
+guid: aa84524fc831f1047a4986b6d4b37578
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6361611475456273693
-    second: FishIcon_0
+      213: 6545302980019263681
+    second: MetalPipeIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: FishIcon_0
+      name: MetalPipeIcon_0
       rect:
         serializedVersion: 2
-        x: 52
-        y: 30
-        width: 333
-        height: 364
+        x: 48
+        y: 8
+        width: 337
+        height: 394
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d1dae918eebf84850800000000000000
-      internalID: 6361611475456273693
+      spriteID: 1c89a5fb16695da50800000000000000
+      internalID: 6545302980019263681
       vertices: []
       indices: 
       edges: []
@@ -123,15 +123,14 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 5e97eb03825dee720800000000000000
+    spriteID: 
     internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable:
-      FishIcon_0: 6361611475456273693
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -161,6 +161,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         if (currentPowerUp = null)
             return;
 
+        DeActivateAbilityStats();
         Destroy(GetComponent<PowerUp>());
         EquipmentManager.Instance.SetPowerUpCanSpawn(true);
         currentPowerUp = null;
@@ -228,12 +229,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
             return;
         }
 
-        if (EquipmentManager.Instance.CanHit())
-            EquipmentManager.Instance.ToggleHit(false);
-        else
-        {
-            EquipmentManager.Instance.ToggleHit(true);
-        }
+        EquipmentManager.Instance.ToggleHit(false);
 
         _playerMovement.isGrounded = false;
         _isImmune = true;

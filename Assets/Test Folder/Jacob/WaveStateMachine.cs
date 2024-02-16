@@ -61,6 +61,8 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 
 	[SerializeField] int _weaponRewardIncrement, _statRewardIncrement, _stageSwapIncrement;
 
+	[SerializeField] TutorialManager _tutorialManager;
+
 	private void Awake()
 	{
 		_context = new(this, _spawnPointsParent, _respawnPoint);
@@ -71,7 +73,7 @@ public class WaveStateMachine : StateManager<WaveStateMachine.WaveState>
 	void InitializeStates()
 	{
 		States.Add(WaveState.WaveCreation, new WaveCreationState(_context, WaveState.WaveCreation, _enemyAssortment, _waveInfoPopup));
-		States.Add(WaveState.Reward, new WaveRewardState(_context, WaveState.Reward, _statRewardInteractables, _weaponRewardInteractables, _statRewardPool, _weaponRewardPool, _dropCurve, _ascensionCurve, _statRewardIncrement, _weaponRewardIncrement));
+		States.Add(WaveState.Reward, new WaveRewardState(_context, WaveState.Reward, _statRewardInteractables, _weaponRewardInteractables, _statRewardPool, _weaponRewardPool, _dropCurve, _ascensionCurve, _statRewardIncrement, _weaponRewardIncrement, _tutorialManager));
 		States.Add(WaveState.Intermission, new WaveIntermissionState(_context, WaveState.Intermission, _countDownAnim, _waveInfoPopup));
 		States.Add(WaveState.WaveInProgress, new WaveInProgressState(_context, WaveState.WaveInProgress, _waveProgressFill, _fishTransform, _progressBarAnim, _verticalSpawnCurve, _waterPoolPrefab));
 		States.Add(WaveState.WaveCleared, new WaveClearState(_context, WaveState.WaveCleared, _clearMessages, _messageText, _waveClearAnim));

@@ -161,6 +161,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         if (currentPowerUp = null)
             return;
 
+        DeActivateAbilityStats();
         Destroy(GetComponent<PowerUp>());
         EquipmentManager.Instance.SetPowerUpCanSpawn(true);
         currentPowerUp = null;

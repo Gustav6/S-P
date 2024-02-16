@@ -17,8 +17,10 @@ public class EnemyLifeStatus : MonoBehaviour
 		ParticleManager.Instance.SpawnWaterSplash(transform.position);	
 	}
 
+	/* Debugging purposes, click to kill enemy
 	private void OnMouseDown()
 	{
 		Destroy(gameObject);
 	}
+	*/
 }

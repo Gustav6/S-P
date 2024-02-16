@@ -9,9 +9,12 @@ public class TutorialManager : MonoBehaviour
     private int popUpIndex;
     bool skipTutorial;
     float timer;
-    float timerMax = 2;
+    float timerMax = 6;
 
     Data ThisData;
+
+    bool hasWeapon = false;
+    bool hasStat = false;
 
     private void Start()
     {
@@ -30,14 +33,14 @@ public class TutorialManager : MonoBehaviour
             }
         }
         // Update this later
-        if (skipTutorial == false) {
+        if (!skipTutorial) {
             if (popUpIndex == 0) {
                 if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.D))
                     popUpIndex++;
             }
             else if (popUpIndex == 1) {
                 // Check if player has picked up
-                if (Input.GetButtonDown("Fire1"))
+                if (hasWeapon && Input.GetButtonDown("Fire1"))
                     popUpIndex++;
             }
             else if (popUpIndex == 2) {
@@ -54,7 +57,15 @@ public class TutorialManager : MonoBehaviour
                 }
             }
         }
-        else {
-        }
+    }
+
+    public void OnWeaponPickup()
+    {
+        hasWeapon = true;
+    }
+
+    public void OnStatPickup()
+    {
+        hasStat = true;
     }
 }

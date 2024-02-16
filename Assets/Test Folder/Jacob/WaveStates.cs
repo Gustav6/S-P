@@ -844,6 +844,8 @@ public class WaveLossState : BaseWaveState
             enemy._attackController.LeaveAttack();
             enemy._attackController.LeaveMovement(true);
         }
+
+        UIManager.Instance.LoadUI();
     }
 
     public override void ExitState()

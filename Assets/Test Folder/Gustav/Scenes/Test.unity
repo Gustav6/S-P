@@ -207,6 +207,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7433675666853063441, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
+      propertyPath: selectedFunctions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7433675666853063441, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
+      propertyPath: 'selectedFunctions.Array.data[0]'
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 9189982670187135639, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
       propertyPath: m_Name
       value: PauseMenuPrefab

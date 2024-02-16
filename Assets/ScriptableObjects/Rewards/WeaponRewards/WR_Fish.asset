@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d06b72b9e22196459ebaa460dc3f602, type: 3}
   m_Name: WR_Fish
   m_EditorClassIdentifier: 
-  RewardName: Fish
+  RewardName: Little Brother
   WaveUnlocked: 0
   ContainedWeapon: {fileID: 11400000, guid: cd3ba98949bd2ef4c85cc687d1cfcc11, type: 2}
   RewardSprite: {fileID: 6361611475456273693, guid: cbe1f6d449b42034d860c988f1b7ea35, type: 3}

@@ -276,7 +276,8 @@ public class WaveRewardState : BaseWaveState
                            AnimationCurve dropCurve,
                            AnimationCurve ascensionCurve,
                            int statRewardIncrement,
-                           int weaponRewardIncrement) : base(context, stateKey)
+                           int weaponRewardIncrement,
+                           TutorialManager tutorialManager) : base(context, stateKey)
     {
         _context = context;
         _statRewardInteractables = statRewardInteractables;
@@ -287,6 +288,7 @@ public class WaveRewardState : BaseWaveState
         _ascensionCurve = ascensionCurve;
         _statRewardIncrement = statRewardIncrement;
         _weaponRewardIncrement = weaponRewardIncrement;
+        _tutorialManager = tutorialManager;
     }
 
     WaveRewardInteractable[] _statRewardInteractables;
@@ -297,6 +299,8 @@ public class WaveRewardState : BaseWaveState
 
     AnimationCurve _dropCurve;
     AnimationCurve _ascensionCurve;
+
+    TutorialManager _tutorialManager;
 
     int _statRewardIncrement, _weaponRewardIncrement;
 
@@ -357,6 +361,7 @@ public class WaveRewardState : BaseWaveState
 
     void DisableStatRewardInteractables()
     {
+        _tutorialManager.OnStatPickup();
         for (int i = 0; i < _statRewardInteractables.Length; i++)
             _context.StateMachine.StartCoroutine(AscendReward(_statRewardInteractables[i], Random.Range(0, 0.4f)));
 
@@ -373,6 +378,7 @@ public class WaveRewardState : BaseWaveState
 
     void DisableWeaponRewardInteractables()
     {
+        _tutorialManager.OnWeaponPickup();
         for (int i = 0; i < _weaponRewardInteractables.Length; i++)
             _context.StateMachine.StartCoroutine(AscendReward(_weaponRewardInteractables[i], Random.Range(0, 0.4f)));
 

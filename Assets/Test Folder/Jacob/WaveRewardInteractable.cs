@@ -26,7 +26,7 @@ public class WaveRewardInteractable : Interactable
 		_containedReward = newReward;
 
 		CreateRewardPanel(newReward is StatReward);
-    }
+	}
 
 	void CreateRewardPanel(bool isStatReward)
 	{

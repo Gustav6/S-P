@@ -228,12 +228,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
             return;
         }
 
-        if (EquipmentManager.Instance.CanHit())
-            EquipmentManager.Instance.ToggleHit(false);
-        else
-        {
-            EquipmentManager.Instance.ToggleHit(true);
-        }
+        EquipmentManager.Instance.ToggleHit(false);
 
         _playerMovement.isGrounded = false;
         _isImmune = true;

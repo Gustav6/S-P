@@ -24,12 +24,12 @@ public class SaveSystem : MonoBehaviour
         #endregion
 
         // For testing.
-        playerStatsSaveFileDirectory = Application.dataPath + "/_Scripts/Save System/pSaveFile.json";
-        dataSaveFileDirectory = Application.dataPath + "/_Scripts/Save System/dSaveFile.json";
+        //playerStatsSaveFileDirectory = Application.dataPath + "/_Scripts/Save System/pSaveFile.json";
+        //dataSaveFileDirectory = Application.dataPath + "/_Scripts/Save System/dSaveFile.json";
 
         // For build.
-        //playerStatsSaveFileDirectory = Application.dataPath + "/pSaveFile.json";
-        //dataSaveFileDirectory = Application.dataPath + "/dSaveFile.json";
+        playerStatsSaveFileDirectory = Application.dataPath + "/pSaveFile.json";
+        dataSaveFileDirectory = Application.dataPath + "/dSaveFile.json";
     }
 
     /// <summary>

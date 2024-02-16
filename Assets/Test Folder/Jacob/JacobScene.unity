@@ -16618,6 +16618,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 48149513d61a39a439f8fc3c95045752, type: 2}
   - {fileID: 11400000, guid: 7a0221a85017eb3488b845791444418f, type: 2}
   - {fileID: 11400000, guid: f2f5a367ddee1d749be7456cd1d95d8c, type: 2}
+  - {fileID: 11400000, guid: 37f83bbb3c62f2b42a62afd435459c79, type: 2}
   _dropCurve:
     serializedVersion: 2
     m_Curve:
@@ -29745,15 +29746,15 @@ RectTransform:
   m_GameObject: {fileID: 2063885583}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.28, y: 1.28, z: 1.28}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 293233855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 851, y: -458.41}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 808, y: -420}
+  m_SizeDelta: {x: 240, y: 240}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2063885585
 MonoBehaviour:
@@ -29775,7 +29776,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -2978653956524333172, guid: f6469873daee13e439c3cc15b6c87258, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

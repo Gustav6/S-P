@@ -29,6 +29,9 @@ public class EquipmentManager : MonoBehaviour
     /// </summary>
     public Action<Vector2, float, PowerUpTypes> OnSpawnPowerUp { get; set; }
     
+    public Action OnPowerUpEquipped { get; set; }
+    public Action OnPowerUpUsed { get; set; }
+
     public Action PlayerTookDamage { get; set; }
 
     [Tooltip("0 = Dash, 1 = Haste, 2 = Tank")]

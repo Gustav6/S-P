@@ -32,6 +32,30 @@ public class SaveSystem : MonoBehaviour
         dataSaveFileDirectory = Application.dataPath + "/dSaveFile.json";
     }
 
+    bool a;
+
+    private void Update()
+    {
+        if (UIManager.Instance.Paused && !a)
+        {
+            a = true;
+            StartCoroutine(PauseEED());
+        }
+        else if (!UIManager.Instance.Paused)
+        {
+            a = false;
+            Time.timeScale = 1;
+        }
+
+    }
+
+    IEnumerator PauseEED()
+    {
+        yield return new WaitForSeconds(1f);
+
+        Time.timeScale = 0;
+    }
+
     /// <summary>
     /// Checks if a game save file has been created and loads it.
     /// If a save file has not been created, it will use the constructor of PlayerStats to load base values.

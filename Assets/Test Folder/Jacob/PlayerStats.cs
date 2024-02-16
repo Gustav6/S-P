@@ -318,12 +318,12 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     void ResetKB()
     {
+        EquipmentManager.Instance.ToggleHit(true);
+
         _headRenderer.sprite = _initialHead;
         _playerMovement.isGrounded = true;
         _isImmune = false;
         _playerCollider.enabled = true;
-
-        EquipmentManager.Instance.ToggleHit(true);
     }
 
     public void Die()

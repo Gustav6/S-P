@@ -31,7 +31,7 @@ public class PowerUpActivation : MonoBehaviour
         */
     }
 
-    private void OnTriggerEnter2D(Collider2D triggerInfo)
+    private void OnTriggerStay2D(Collider2D triggerInfo)
     {
         if (!triggerInfo.CompareTag("Player"))
             return;

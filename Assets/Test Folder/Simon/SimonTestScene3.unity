@@ -16324,6 +16324,7 @@ MonoBehaviour:
   _weaponRewardIncrement: 3
   _statRewardIncrement: 1
   _stageSwapIncrement: 5
+  _tutorialManager: {fileID: 0}
 --- !u!1 &1599309259
 GameObject:
   m_ObjectHideFlags: 0

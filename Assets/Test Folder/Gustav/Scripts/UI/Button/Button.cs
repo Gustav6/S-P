@@ -32,7 +32,8 @@ public class Button : UI
             { Functions.RemovePrefab, RemovePrefab },
             { Functions.SpawnPrefab, null },
             { Functions.QuitGame, Application.Quit },
-            { Functions.Transition, PlayTransition }
+            { Functions.Transition, PlayTransition },
+            { Functions.UnPause, UIManager.Instance.OnUnPause }
         };
 
         ButtonStateManager = GetComponent<ButtonStateManager>();
@@ -110,7 +111,10 @@ public class Button : UI
 
     private void Cover(ExecuteOnCompletion execute)
     {
-        CoverManager.Instance.Cover(transitionDuration, execute);
+        if (CoverManager.Instance != null)
+        {
+            CoverManager.Instance.Cover(transitionDuration, execute);
+        }
     }
 
     private void UnCover()
@@ -127,6 +131,7 @@ public class Button : UI
         SpawnPrefab,
         QuitGame,
         Transition,
+        UnPause,
     }
 }
 

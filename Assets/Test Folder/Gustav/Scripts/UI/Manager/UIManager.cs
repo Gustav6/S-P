@@ -281,6 +281,20 @@ public class UIManager : MonoBehaviour
 
         return false;
     }
+    public void OnPause()
+    {
+        UIInput.PauseGameObjectInstance.SetActive(true);
+
+        UIInput.PauseMenuActive = true;
+    }
+
+    public void OnUnPause()
+    {
+        if (GetComponentInChildren<PauseManager>() != null)
+        {
+            GetComponentInChildren<PauseManager>().anim.SetTrigger("UnPaused");
+        }
+    }
 
     public void TempInstantiateNewPrefab()
     {

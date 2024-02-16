@@ -35,7 +35,7 @@ public class UIInput : MonoBehaviour
             if (UIManager.Instance.Paused && !PauseMenuActive)
             {
                 PauseTransitionFinished = false;
-                OnPause();
+                UIManager.Instance.OnPause();
 
                 //Scene scene = SceneManager.GetActiveScene();
 
@@ -50,23 +50,8 @@ public class UIInput : MonoBehaviour
             else if (!UIManager.Instance.Paused && PauseMenuActive)
             {
                 //manager.pausePrefab.GetComponent<ActiveMenuManager>().DisableBlur(UIManager.instance.CameraInstance.GetComponent<Blur>());
-                OnUnPause();
+                UIManager.Instance.OnUnPause();
             }
-        }
-    }
-
-    private void OnPause()
-    {
-        PauseGameObjectInstance.SetActive(true);
-
-        PauseMenuActive = true;
-    }
-
-    private void OnUnPause()
-    {
-        if (GetComponentInChildren<PauseManager>() != null)
-        {
-            GetComponentInChildren<PauseManager>().anim.SetTrigger("UnPaused");
         }
     }
 

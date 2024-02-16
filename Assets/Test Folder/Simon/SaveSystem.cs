@@ -32,7 +32,7 @@ public class SaveSystem : MonoBehaviour
         dataSaveFileDirectory = Application.dataPath + "/dSaveFile.json";
     }
 
-    bool a;
+    /*bool a;
 
     private void Update()
     {
@@ -54,7 +54,7 @@ public class SaveSystem : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         Time.timeScale = 0;
-    }
+    }*/
 
     /// <summary>
     /// Checks if a game save file has been created and loads it.

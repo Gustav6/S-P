@@ -44,7 +44,7 @@ public class TutorialManager : MonoBehaviour
                     popUpIndex++;
             }
             else if (popUpIndex == 2) {
-                if (Input.GetKeyDown(KeyCode.F))
+                if (hasStat)
                     popUpIndex++;
             }
             else if (popUpIndex == 3) {

@@ -94,24 +94,21 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         _tiles = IDamageable.PopulateTilesDictonary(tilemap);
 
+        _powerUpHudElement.color = new Color(1, 1, 1, 0);
+
         // Call this when you want to change the player weapon n stuff.
         EquipmentManager.Instance.SwitchWeapon(CurrentWeapon);
+
+        if (EquipmentManager.Instance.OnPowerUpEquipped == null)
+            EquipmentManager.Instance.OnPowerUpEquipped = PowerupEquipped;
+
+        if (EquipmentManager.Instance.OnPowerUpUsed == null)
+            EquipmentManager.Instance.OnPowerUpUsed = PowerupUsed;
     }
 
     private void Update()
     {
         _thisDamagable.CheckDeath(tilemap, _tiles, _playerCollider);
-        
-        if (currentPowerUp != null)
-        {
-            _powerUpHudElement.color = new Color(1, 1, 1, 1);
-            _powerUpHudElement.sprite = currentPowerUp.powerUpSprite;
-        }
-        else
-        {
-            _powerUpHudElement.color = new Color(1, 1, 1, 0);
-            _powerUpHudElement.sprite = null;
-        }
 
         _currentDamageDisplay = Mathf.Lerp(_currentDamageDisplay, _desiredDamageDisplay, Time.deltaTime * 10);
         _damageDisplayText.text = ((int)_currentDamageDisplay).ToString() + "%";
@@ -163,6 +160,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         DeActivateAbilityStats();
         Destroy(GetComponent<PowerUp>());
+        PowerupUsed();
         EquipmentManager.Instance.SetPowerUpCanSpawn(true);
         currentPowerUp = null;
     }
@@ -175,6 +173,18 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void DeActivateAbilityStats()
     {
         _abilityStatBlock = new(1, 1, 1, 1, 1, 1);
+    }
+
+    private void PowerupEquipped()
+    {
+        _powerUpHudElement.color = new Color(1, 1, 1, 1);
+        _powerUpHudElement.sprite = currentPowerUp.powerUpSprite;
+    }
+
+    private void PowerupUsed()
+    {
+        _powerUpHudElement.color = new Color(1, 1, 1, 0);
+        _powerUpHudElement.sprite = null;
     }
 
     #region Damage and Knockback

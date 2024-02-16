@@ -9,10 +9,14 @@ public class HastePowerup : PowerUp
     private void Start()
     {
         powerUpSprite = EquipmentManager.Instance.ReturnPowerupSprite(PowerUpTypes.Haste);
+
+        EquipmentManager.Instance.OnPowerUpEquipped?.Invoke();
     }
 
     public override void UsePowerUp()
     {
+        EquipmentManager.Instance.OnPowerUpUsed?.Invoke();
+
         if (_isUsingPowerup)
             return;
 

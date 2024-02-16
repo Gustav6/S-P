@@ -12,7 +12,7 @@ public class HitboxTrigger : MonoBehaviour
         _thisController = GetComponentInParent<Enemy>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         var damageable = collision.GetComponent<IDamageable>();
 

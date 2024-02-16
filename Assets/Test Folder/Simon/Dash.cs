@@ -28,10 +28,14 @@ public class Dash : PowerUp
     private void Start()
     {
         powerUpSprite = EquipmentManager.Instance.ReturnPowerupSprite(PowerUpTypes.Dash);
+
+        EquipmentManager.Instance.OnPowerUpEquipped?.Invoke();
     }
 
     public override void UsePowerUp()
     {
+        EquipmentManager.Instance.OnPowerUpUsed?.Invoke();
+
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
         if (direction == Vector2.zero)

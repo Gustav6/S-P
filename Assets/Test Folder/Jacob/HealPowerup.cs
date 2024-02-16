@@ -9,7 +9,9 @@ public class HealPowerup : PowerUp
     private void Start()
     {
 		powerUpSprite = EquipmentManager.Instance.ReturnPowerupSprite(PowerUpTypes.Heal);
-    }
+
+		EquipmentManager.Instance.OnPowerUpEquipped?.Invoke();
+	}
 
     public override void OnDeactivatePowerUp()
 	{
@@ -19,6 +21,8 @@ public class HealPowerup : PowerUp
 
 	public override void UsePowerUp()
 	{
+		EquipmentManager.Instance.OnPowerUpUsed?.Invoke();
+
 		if (_isUsingPowerup)
 			return;
 

@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         AudioManager.Instance.PlaySound("Hurt");
         KnockbackPercent += damageAmount;
-        PopupManager.Instance.SpawnText(KnockbackPercent.ToString(), transform.position, 1.5f);
+        PopupManager.Instance.SpawnText(((int)KnockbackPercent).ToString(), transform.position, 1.5f);
     }
 
     internal IEnumerator GiveEnemyMovement(float time)

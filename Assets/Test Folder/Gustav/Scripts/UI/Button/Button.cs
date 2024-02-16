@@ -52,9 +52,16 @@ public class Button : UI
 
     private void SceneTransition()
     {
-        ExecuteOnCompletion execute = SwitchScene;
+        if (CoverManager.Instance != null)
+        {
+            ExecuteOnCompletion execute = SwitchScene;
 
-        Cover(execute);
+            Cover(execute);
+        }
+        else
+        {
+            SwitchScene();
+        }
     }
 
     private void RemovePrefab()

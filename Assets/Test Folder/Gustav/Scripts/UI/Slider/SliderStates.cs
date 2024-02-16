@@ -24,7 +24,10 @@ public class SliderDeselectedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound("Hover");
+        }
     }
 }
 public class SliderSelectedState : UIBaseState
@@ -73,6 +76,11 @@ public class SliderPressedState : UIBaseState
 
     public override void EnterState(BaseStateManager referenceManager)
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound("Click");
+        }
+
         manager = (SliderStateManager)referenceManager;
         sliderInstance = (Slider)referenceManager.UIInstance;
 

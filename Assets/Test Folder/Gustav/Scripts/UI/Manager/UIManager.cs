@@ -294,6 +294,8 @@ public class UIManager : MonoBehaviour
         {
             GetComponentInChildren<PauseManager>().anim.SetTrigger("UnPaused");
         }
+
+        UIManager.Instance.Paused = false;
     }
 
     public void TempInstantiateNewPrefab()

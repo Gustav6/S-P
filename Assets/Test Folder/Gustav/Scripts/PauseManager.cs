@@ -8,6 +8,8 @@ public class PauseManager : MonoBehaviour
 {
     public Animator anim;
 
+    public GameObject buttons;
+
     public List<Image> images = new();
     public List<TextMeshProUGUI> text = new();
 
@@ -37,13 +39,20 @@ public class PauseManager : MonoBehaviour
         }
     }
 
-    public void DestroyVisual()
+    public void EnableButtons()
     {
+        buttons.SetActive(true);
+    }
 
+    public void DisableButtons()
+    {
+        buttons.SetActive(false);
     }
 
     public void FadeIn()
     {
+        EnableButtons();
+
         UIInput.PauseTransitionFinished = true;
 
         for (int i = 0; i < images.Count; i++)

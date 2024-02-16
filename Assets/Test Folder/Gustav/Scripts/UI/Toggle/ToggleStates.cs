@@ -31,7 +31,10 @@ public class ToggleDeselectedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound("Hover");
+        }
     }
 }
 
@@ -87,6 +90,11 @@ public class TogglePressedState : UIBaseState
 
     public override void EnterState(BaseStateManager referenceManager)
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound("Click");
+        }
+
         manager = (ToggleStateManager)referenceManager;
         toggleInstance = (Toggle)referenceManager.UIInstance;
 

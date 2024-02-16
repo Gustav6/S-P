@@ -22,7 +22,10 @@ public class InputFieldDeselectedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound("Hover");
+        }
     }
 }
 public class InputFieldSelectedState : UIBaseState
@@ -75,6 +78,11 @@ public class InputFieldPressedState : UIBaseState
 
     public override void EnterState(BaseStateManager referenceManager)
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound("Click");
+        }
+
         manager = (InputFieldStateManager)referenceManager;
         inputFieldInstance = (InputField)referenceManager.UIInstance;
         TransitionSystem.AddColorTransition(new ColorTransition(manager.text, textColor, timeItTakes, TransitionType.SmoothStop2));

@@ -44,7 +44,10 @@ public class ButtonDeselectedState : UIBaseState
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound("Hover");
+        }
     }
 }
 #endregion
@@ -102,6 +105,11 @@ public class ButtonPressedState : UIBaseState
     {
         manager = (ButtonStateManager)referenceManager;
         buttonInstance = (Button)referenceManager.UIInstance;
+
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound("Click");
+        }
 
         TransitionSystem.AddScaleTransition(new ScaleTransition(manager.transform, newScale, timeItTakes, TransitionType.SmoothStop2));
         TransitionSystem.AddColorTransition(new ColorTransition(manager.outlineImage, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));

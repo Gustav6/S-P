@@ -56,6 +56,11 @@ public class Selectable : UI
 
     public void Select()
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySound("Hover");
+        }
+
         for (int i = 0; i < images.Count; i++)
         {
             Color temp = images[i].color;

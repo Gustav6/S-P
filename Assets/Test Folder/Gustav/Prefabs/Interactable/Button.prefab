@@ -408,6 +408,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   hovering: 0
+  isInteractable: 1
   outlineSelected: {r: 1, g: 1, b: 1, a: 1}
   textSelected: {r: 1, g: 0.9166666, b: 0, a: 1}
   outlineDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
@@ -416,9 +417,9 @@ MonoBehaviour:
   selectedFunctions: 
   transitionDuration: 0
   NewScene: 0
-  windUp: 0
-  overShoot: 0
-  prefabToSpawn: {fileID: 0}
+  playTransition: 0
+  prefabToEnable: {fileID: 0}
+  prefabToDisable: {fileID: 0}
 --- !u!61 &6776574943263549923
 BoxCollider2D:
   m_ObjectHideFlags: 0

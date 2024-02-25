@@ -10,38 +10,46 @@ public abstract class UIBaseState
     public abstract void UpdateState(BaseStateManager referenceManager);
     public abstract void ExitState(BaseStateManager referenceManager);
 
-    protected void CheckIfSelected(BaseStateManager referenceManager, UIBaseState state)
+    protected void CheckIfSelected(BaseStateManager referenceManager, UIBaseState selectedState)
     {
-        if (UIManager.Instance.KeyOrControlActive)
+        if (UIStateManager.Instance.KeyOrControlActive)
         {
-            if (UIManager.Instance.CurrentUISelected == referenceManager.UIInstance.position)
+            if (UIStateManager.Instance.CurrentUISelected == referenceManager.UIInstance.position)
             {
-                referenceManager.SwitchState(state);
+                referenceManager.SwitchState(selectedState);
             }
         }
         else
         {
             if (referenceManager.UIInstance.hovering)
             {
-                referenceManager.SwitchState(state);
+                referenceManager.SwitchState(selectedState);
             }
         }
     }
 
-    protected void CheckIfDeselected(BaseStateManager referenceManager, UIBaseState state)
+    protected void CheckIfDeselected(BaseStateManager referenceManager, UIBaseState deselectedState)
     {
-        if (UIManager.Instance.KeyOrControlActive)
+        if (UIStateManager.Instance != null)
         {
-            if (UIManager.Instance.CurrentUISelected != referenceManager.UIInstance.position)
+            if (UIStateManager.Instance.Transitioning)
             {
-                referenceManager.SwitchState(state);
+                referenceManager.SwitchState(deselectedState);
+            }
+        }
+
+        if (UIStateManager.Instance.KeyOrControlActive)
+        {
+            if (UIStateManager.Instance.CurrentUISelected != referenceManager.UIInstance.position)
+            {
+                referenceManager.SwitchState(deselectedState);
             }
         }
         else
         {
             if (!referenceManager.UIInstance.hovering)
             {
-                referenceManager.SwitchState(state);
+                referenceManager.SwitchState(deselectedState);
             }
         }
     }

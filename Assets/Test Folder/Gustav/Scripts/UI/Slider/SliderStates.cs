@@ -40,7 +40,7 @@ public class SliderSelectedState : UIBaseState
     {
         manager = (SliderStateManager)referenceManager;
 
-        if (!UIManager.Instance.Transitioning)
+        if (!UIStateManager.Instance.Transitioning)
         {
             manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outLineImage, manager.text);
         }
@@ -86,11 +86,11 @@ public class SliderPressedState : UIBaseState
 
         originalColor = manager.sliderImage.color;
         TransitionSystem.AddColorTransition(new ColorTransition(manager.sliderImage, newSliderColor, timeItTakes, TransitionType.SmoothStop2));
-        UIManager.Instance.ChangingSlider = true;
+        UIStateManager.Instance.ChangingSlider = true;
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (UIManager.Instance.KeyOrControlActive)
+        if (UIStateManager.Instance.KeyOrControlActive)
         {
             if (manager.moveDirection != 0)
             {
@@ -101,7 +101,7 @@ public class SliderPressedState : UIBaseState
         {
             if (referenceManager.UIInstance.hovering && manager.UIActivated)
             {
-                MoveTowardsMouse(manager, UIManager.Instance.MousePosition.x);
+                MoveTowardsMouse(manager, Input.mousePosition.x);
             }
 
             if (!referenceManager.UIInstance.hovering)
@@ -121,7 +121,7 @@ public class SliderPressedState : UIBaseState
     {
         ApplyValues(manager);
         ResetButtonValue(manager);
-        UIManager.Instance.ChangingSlider = false;
+        UIStateManager.Instance.ChangingSlider = false;
     }
     private void ApplyValues(SliderStateManager slider)
     {
@@ -135,7 +135,7 @@ public class SliderPressedState : UIBaseState
 
     private void MoveTowardsMouse(SliderStateManager slider, float mouseX)
     {
-        float scaling = UIManager.Instance.ResolutionScaling;
+        float scaling = UIStateManager.Instance.ResolutionScaling;
 
         if (slider.sliderPosition.localPosition.x * scaling > -slider.maxMoveValue * scaling || slider.sliderPosition.localPosition.x * scaling < slider.maxMoveValue * scaling)
         {
@@ -160,7 +160,7 @@ public class SliderPressedState : UIBaseState
 
     public void MoveWithButton(SliderStateManager slider)
     {
-        float scaling = UIManager.Instance.ResolutionScaling;
+        float scaling = UIStateManager.Instance.ResolutionScaling;
         float moveAmount = slider.maxMoveValue / (100 * scaling);
         Vector3 limit = new(slider.maxMoveValue, 0, 0);
 

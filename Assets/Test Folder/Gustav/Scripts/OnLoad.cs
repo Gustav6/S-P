@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Transition;
 
 public class OnLoad : MonoBehaviour
 {
@@ -17,12 +18,11 @@ public class OnLoad : MonoBehaviour
     [Header("Move in variables")]
     public bool moveIn;
     public float moveInTime = 1;
-    public PrefabMoveDirection moveTowardsOnInstantiate;
-    public PrefabMoveDirection moveTowardsOnDestroy;
+    public float moveOutTime = 1;
+    public PrefabMoveDirection moveTowardsOnEnable;
+    public PrefabMoveDirection moveTowardsOnDisable;
 
-    private Transition.ExecuteOnCompletion execute;
-    private PrefabMoveDirection tempDirection;
-    private GameObject instance;
+    public TransitionType transitionType = TransitionType.SmoothStop2;
 
     [Header("Scale in variables")]
     public bool scaleIn;
@@ -31,11 +31,8 @@ public class OnLoad : MonoBehaviour
     public Vector3 startingScale;
 
 
-    public void Start()
+    public void CallOnEnable(ExecuteOnCompletion execute)
     {
-        tempDirection = moveTowardsOnDestroy;
-        instance = gameObject;
-
         if (fadeIn)
         {
             for (int i = 0; i < images.Count; i++)
@@ -43,78 +40,44 @@ public class OnLoad : MonoBehaviour
                 Fade(images[i], fadeInTime, color);
             }
         }
+
         if (moveIn)
         {
-            if (instance.GetComponent<PanelManager>() != null)
-            {
-                UIManager.Instance.EnableTransitioning();
-
-                execute += UIManager.Instance.DisableTransitioning;
-
-                UIManager.Instance.MoveUIToStart(moveInTime, instance, execute);
-            }
-            else
-            {
-                MoveIn(execute, moveInTime);
-            }
+            MoveIn(moveInTime, execute);
         }
+
         if (scaleIn)
         {
-            Scale();
+            Scale(execute);
         }
     }
 
-    public void MoveIn(Transition.ExecuteOnCompletion execute, float time)
+    public void CallOnDisable(ExecuteOnCompletion execute)
     {
-        UIManager.Instance.EnableTransitioning();
+        if (moveTowardsOnDisable != PrefabMoveDirection.None)
+        {
+            MoveOut(moveOutTime, execute);
+        }
+    }
 
-        execute += UIManager.Instance.DisableTransitioning;
-
-        Vector3 startingPosition = UIManager.Instance.GiveDestination(moveTowardsOnInstantiate) * -1;
+    private void MoveIn(float time, ExecuteOnCompletion execute)
+    {
+        Vector3 startingPosition = GiveDestination(moveTowardsOnEnable) * -1;
         startingPosition.x += Screen.width / 2;
         startingPosition.y += Screen.height / 2;
-        instance.transform.position = startingPosition;
+        transform.position = startingPosition;
 
-        UIManager.Instance.MoveUIToStart(time, instance, execute);
+        MoveUI(time, moveTowardsOnEnable, execute);
     }
 
-    public void MoveAway(GameObject g, float time, Transition.ExecuteOnCompletion execute)
+    private void MoveOut(float time, ExecuteOnCompletion execute)
     {
-        UIManager.Instance.EnableTransitioning();
-
-        Vector3 destination = Vector3.zero;
-
-        if (g.transform.localPosition.y >= Screen.height || g.transform.localPosition.x >= Screen.width)
-        {
-            if (tempDirection == PrefabMoveDirection.Down || tempDirection == PrefabMoveDirection.Up)
-            {
-                tempDirection = PrefabMoveDirection.Down;
-            }
-            else
-            {
-                tempDirection = PrefabMoveDirection.Left;
-            }
-        }
-        else if (g.transform.localPosition.y <= -Screen.height || g.transform.localPosition.x <= -Screen.width)
-        {
-            if (tempDirection == PrefabMoveDirection.Up || tempDirection == PrefabMoveDirection.Down)
-            {
-                tempDirection = PrefabMoveDirection.Up;
-            }
-            else
-            {
-                tempDirection = PrefabMoveDirection.Right;
-            }
-        }
-
-        destination = UIManager.Instance.GiveDestination(tempDirection);
-
-        UIManager.Instance.MoveUITowardsDestination(g, time, destination, execute);
+        MoveUI(time, moveTowardsOnDisable, execute);
     }
 
-    public void Scale()
+    private void Scale(ExecuteOnCompletion execute)
     {
-        Transition.ExecuteOnCompletion execute = ResetScale;
+        execute += ResetScale;
 
         TransitionSystem.AddScaleTransition(new ScaleTransition(transform, startingScale, scaleInTime, TransitionType.SmoothStop2, execute));
     }
@@ -126,6 +89,44 @@ public class OnLoad : MonoBehaviour
 
     public void Fade(Image image, float fadeInTIme, Color newColor)
     {
+        image.color = new(0, 0, 0, 0);
         TransitionSystem.AddColorTransition(new ColorTransition(image, newColor, fadeInTIme, TransitionType.SmoothStart2));
+    }
+
+    private void MoveGameObject(GameObject g, float time, Vector3 destination, ExecuteOnCompletion execute = null)
+    {
+        TransitionSystem.AddMoveTransition(new MoveTransition(g.transform, destination, time, transitionType, true, 0, 0, execute));
+    }
+
+    public void MoveUI(float time, PrefabMoveDirection direction, ExecuteOnCompletion execute)
+    {
+        Vector3 destination = GiveDestination(direction);
+
+        MoveGameObject(gameObject, time, destination, execute);
+    }
+
+    public Vector3 GiveDestination(PrefabMoveDirection direction)
+    {
+        Vector3 temp = Vector3.zero;
+
+        switch (direction)
+        {
+            case PrefabMoveDirection.Left:
+                temp = new(-Screen.width, 0, 0);
+                break;
+            case PrefabMoveDirection.Right:
+                temp = new(Screen.width, 0, 0);
+                break;
+            case PrefabMoveDirection.Up:
+                temp = new(0, Screen.height, 0);
+                break;
+            case PrefabMoveDirection.Down:
+                temp = new(0, -Screen.height);
+                break;
+            default:
+                break;
+        }
+
+        return temp;
     }
 }

@@ -8,95 +8,79 @@ public class PauseManager : MonoBehaviour
 {
     public Animator anim;
 
-    public GameObject buttons;
+    public GameObject visuals;
 
-    public List<Image> images = new();
-    public List<TextMeshProUGUI> text = new();
+    public static bool Transitioning { get; private set; }
 
-    private Color startingColor = new(1, 1, 1, 0);
-    private Color newColor = new(1, 1, 1, 0.9f);
-
-    public void Start()
+    public void EnableVisuals()
     {
-        UIInput.PauseGameObjectInstance = transform.parent.gameObject;
-        transform.parent.localPosition = Vector3.zero;
+        visuals.SetActive(true);
+        LoadUIOnEnable(UIStateManager.Instance);
+    }
 
-        foreach (BaseStateManager uI in GetComponentsInChildren<BaseStateManager>())
+    public void DisableVisuals()
+    {
+        visuals.SetActive(false);
+    }
+
+    public void UnPauseGame()
+    {
+        Transitioning = true;
+
+        anim.SetTrigger("UnPause");
+    }
+
+    public void CallOnDisable()
+    {
+        OnLoad onLoad = GetComponentInParent<OnLoad>();
+
+        onLoad.CallOnDisable(ExecuteOnDisable);
+    }
+
+    private void ExecuteOnDisable()
+    {
+        transform.parent.localPosition = Vector3.zero;
+        if (UIStateManager.Instance.PrefabToDisable != null)
         {
-            if (uI.Pointers != null)
+            UIStateManager.Instance.DisableUIPrefab();
+        }
+        Transitioning = false;
+    }
+
+    public void LoadUIOnEnable(UIStateManager stateManager)
+    {
+        #region Reset variables
+        stateManager.maxXPos = 0;
+        stateManager.maxYPos = 0;
+        stateManager.ListOfUIObjects.Clear();
+        #endregion
+
+        FindEveryInteractableUI(stateManager);
+    }
+
+    private void FindEveryInteractableUI(UIStateManager stateManager)
+    {
+        // Note that if there is no start position (0, 0) bugs will appear.
+        #region Find objects with script UI and max X & Y value
+        foreach (UI interactableUI in stateManager.GetComponentsInChildren<UI>())
+        {
+            if (interactableUI.isInteractable)
             {
-                uI.Pointers.SetActive(false);
+                stateManager.CurrentUISelected = new Vector2(0, 0);
+
+                if (interactableUI.position.y > stateManager.maxYPos)
+                {
+                    stateManager.maxYPos = interactableUI.position.y;
+                }
+
+                if (interactableUI.position.x > stateManager.maxXPos)
+                {
+                    stateManager.maxXPos = interactableUI.position.x;
+                }
+
+                stateManager.ListOfUIObjects.Add(interactableUI.gameObject);
             }
         }
-
-        for (int i = 0; i < images.Count; i++)
-        {
-            images[i].color = startingColor;
-        }
-        for (int i = 0; i < text.Count; i++)
-        {
-            text[i].color = startingColor;
-        }
-    }
-
-    public void EnableButtons()
-    {
-        buttons.SetActive(true);
-    }
-
-    public void DisableButtons()
-    {
-        buttons.SetActive(false);
-    }
-
-    public void FadeIn()
-    {
-        EnableButtons();
-
-        UIInput.PauseTransitionFinished = true;
-
-        for (int i = 0; i < images.Count; i++)
-        {
-            TransitionSystem.AddColorTransition(new ColorTransition(images[i], newColor, 0.2f, TransitionType.SmoothStop2));
-        }
-        for (int i = 0; i < text.Count; i++)
-        {
-            TransitionSystem.AddColorTransition(new ColorTransition(text[i], newColor, 0.2f, TransitionType.SmoothStop2));
-        }
-
-        UIManager.Instance.LoadUI();
-    }
-    public void FadeOut()
-    {
-        UIInput.PauseTransitionFinished = true;
-
-        for (int i = 0; i < images.Count; i++)
-        {
-            TransitionSystem.AddColorTransition(new ColorTransition(images[i], startingColor, 0.2f, TransitionType.SmoothStop2));
-        }
-        for (int i = 0; i < text.Count; i++)
-        {
-            TransitionSystem.AddColorTransition(new ColorTransition(text[i], startingColor, 0.2f, TransitionType.SmoothStop2));
-        }
-    }
-
-    public void MoveAway()
-    {
-        Transition.ExecuteOnCompletion execute = ExecuteAfterMovingRemovingPauseMenu;
-
-        GetComponentInParent<OnLoad>().MoveAway(transform.parent.gameObject, 0.5f, execute);
-
-        //Vector3 destination = new(Screen.width, 0);
-
-        //Transform t = UIInput.PauseGameObjectInstance.transform;
-
-        //TransitionSystem.AddMoveTransition(new MoveTransition(t, destination, 0.5f, TransitionType.SmoothStop2, transform, 0, 0, execute));
-    }
-    private void ExecuteAfterMovingRemovingPauseMenu()
-    {
-        transform.parent.localPosition = Vector3.zero;
-        transform.parent.gameObject.SetActive(false);
-        UIInput.PauseMenuActive = false;
-        UIManager.Instance.DisableTransitioning();
+        #endregion
     }
 }

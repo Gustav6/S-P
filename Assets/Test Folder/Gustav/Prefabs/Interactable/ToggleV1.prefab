@@ -404,12 +404,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   hovering: 0
+  isInteractable: 1
   outlineSelected: {r: 1, g: 1, b: 1, a: 1}
   textSelected: {r: 0, g: 0, b: 0, a: 0}
   outlineDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
   textDeselected: {r: 0, g: 0, b: 0, a: 0}
   selectedScale: {x: 1.1, y: 1.1, z: 1}
+  selectedFunctions: 
   toggleType: 0
+  version: 0
   toggleOn: 0
   transitionTime: 0.3
 --- !u!114 &1393227582848674268
@@ -427,6 +430,8 @@ MonoBehaviour:
   outLineImage: {fileID: 0}
   movingPart: {fileID: 0}
   outLine: {fileID: 0}
+  textForV2: {fileID: 0}
+  checkMark: {fileID: 0}
   movingPartOffset: 0
 --- !u!61 &8959228491638266491
 BoxCollider2D:

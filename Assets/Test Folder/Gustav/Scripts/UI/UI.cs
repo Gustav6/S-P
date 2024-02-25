@@ -8,6 +8,7 @@ public abstract class UI : MonoBehaviour
     [Header("UI variables")]
     public Vector2 position;
     public bool hovering;
+    public bool isInteractable;
 
     [Header("UI selected color")]
     public Color outlineSelected;
@@ -20,29 +21,25 @@ public abstract class UI : MonoBehaviour
     [Header("UI selected scale")]
     public Vector3 selectedScale;
 
-    public bool IsDestroyed { get; set; }
-
     public virtual void Start()
     {
-        IsDestroyed = false;
+
     }
 
     public virtual void Update()
     {
-        if (!IsDestroyed)
+        if (GetComponent<Collider2D>().OverlapPoint(Input.mousePosition))
         {
-            if (UIManager.Instance.Hovering(gameObject))
+            hovering = true;
+
+            if (isInteractable)
             {
-                hovering = true;
-                if (UIManager.Instance != null)
-                {
-                    UIManager.Instance.CurrentUISelected = position;
-                }
+                UIStateManager.Instance.CurrentUISelected = position;
             }
-            else
-            {
-                hovering = false;
-            }
+        }
+        else if (hovering)
+        {
+            hovering = false;
         }
     }
 

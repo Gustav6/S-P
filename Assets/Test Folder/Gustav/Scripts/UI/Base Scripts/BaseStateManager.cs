@@ -23,10 +23,7 @@ public abstract class BaseStateManager : MonoBehaviour
 
     public virtual void OnUpdate()
     {
-        if (!UIManager.Instance.Transitioning)
-        {
-            CurrentState.UpdateState(this);
-        }
+        CurrentState.UpdateState(this);
     }
 
     public void SwitchState(UIBaseState state)
@@ -70,7 +67,7 @@ public abstract class BaseStateManager : MonoBehaviour
             TransitionSystem.AddColorTransition(new ColorTransition(tmp, ColorPairs["TextDeSelected"], time, TransitionType.SmoothStop2));
         }
 
-        if (!UIManager.Instance.Transitioning && t != null)
+        if (!UIStateManager.Instance.Transitioning && t != null)
         {
             TransitionSystem.AddScaleTransition(new ScaleTransition(t, Vector3.one, time, TransitionType.SmoothStart2));
         }

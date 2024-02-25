@@ -47,9 +47,9 @@ public class SliderStateManager : BaseStateManager
 
     public float TotalSlidingPercentage()
     {
-        float maxMove = Mathf.Abs(maxMoveValue * 2) * UIManager.Instance.ResolutionScaling;
+        float maxMove = Mathf.Abs(maxMoveValue * 2) * UIStateManager.Instance.ResolutionScaling;
 
-        float percentage = ((sliderPosition.localPosition.x + Mathf.Abs(slidersOffset)) / maxMove) * UIManager.Instance.ResolutionScaling;
+        float percentage = ((sliderPosition.localPosition.x + Mathf.Abs(slidersOffset)) / maxMove) * UIStateManager.Instance.ResolutionScaling;
 
         if (percentage > 0.99f)
         {

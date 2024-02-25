@@ -19,23 +19,18 @@ public class CoverManager : MonoBehaviour
             Instance = this;
         else
             Destroy(this);
-    }
 
-    void Start()
-    {
         topHalf = transform.GetChild(0);
         lowerHalf = transform.GetChild(1);
 
         originalPositionTop = topHalf.localPosition;
         originalPositionLower = lowerHalf.localPosition;
-
-        UnCover(1, null);
     }
 
     public void UnCover(float time, ExecuteOnCompletion execute)
     {
-        Vector3 topHalfDestination = originalPositionTop * UIManager.Instance.ResolutionScaling;
-        Vector3 lowerHalfDestination = originalPositionLower * UIManager.Instance.ResolutionScaling;
+        Vector3 topHalfDestination = originalPositionTop * UIStateManager.Instance.ResolutionScaling;
+        Vector3 lowerHalfDestination = originalPositionLower * UIStateManager.Instance.ResolutionScaling;
 
         topHalfDestination.y *= 2;
         lowerHalfDestination.y *= 2;
@@ -46,8 +41,8 @@ public class CoverManager : MonoBehaviour
 
     public void Cover(float time, ExecuteOnCompletion execute)
     {
-        Vector3 topHalfDestination = -originalPositionTop * UIManager.Instance.ResolutionScaling;
-        Vector3 lowerHalfDestination = -originalPositionLower * UIManager.Instance.ResolutionScaling;
+        Vector3 topHalfDestination = -originalPositionTop * UIStateManager.Instance.ResolutionScaling;
+        Vector3 lowerHalfDestination = -originalPositionLower * UIStateManager.Instance.ResolutionScaling;
 
         topHalfDestination.y *= 2;
         lowerHalfDestination.y *= 2;

@@ -14,27 +14,14 @@ public class ButtonDeselectedState : UIBaseState
     {
         manager = (ButtonStateManager)referenceManager;
 
-        if (UIManager.Instance.GetComponentInChildren<PauseManager>() != null)
-        {
-            if (UIInput.PauseTransitionFinished)
-            {
-                manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, manager.text);
-            }
-        }
-        else
-        {
-            manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, manager.text);
-        }
+        manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, manager.text);
     }
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (UIManager.Instance.GetComponentInChildren<PauseManager>() != null)
+        if (UIStateManager.Instance.GetComponentInChildren<PauseManager>() != null)
         {
-            if (UIInput.PauseTransitionFinished)
-            {
-                CheckIfSelected(referenceManager, manager.selectedState);
-            }
+            CheckIfSelected(referenceManager, manager.selectedState);
         }
         else
         {
@@ -62,7 +49,7 @@ public class ButtonSelectedState : UIBaseState
     {
         manager = (ButtonStateManager)referenceManager;
 
-        if (!UIManager.Instance.Transitioning)
+        if (!UIStateManager.Instance.Transitioning)
         {
             manager.StartCoroutine(WaitCoroutine(timeItTakes));
             manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, manager.text);
@@ -121,13 +108,12 @@ public class ButtonPressedState : UIBaseState
     {
         if (canTransition && !manager.UIActivated)
         {
-            referenceManager.SwitchState(manager.deselectedState);
+            referenceManager.SwitchState(manager.selectedState);
         }
     }
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        UIManager.Instance.EnableTransitioning();
         buttonInstance.ActivateSelectedFunctions();
     }
 }

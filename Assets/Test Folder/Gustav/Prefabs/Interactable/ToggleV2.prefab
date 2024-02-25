@@ -255,11 +255,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 1}
   hovering: 0
+  isInteractable: 1
   outlineSelected: {r: 1, g: 1, b: 1, a: 1}
   textSelected: {r: 1, g: 1, b: 0, a: 1}
   outlineDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
   textDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
   selectedScale: {x: 0, y: 0, z: 0}
+  selectedFunctions: 
   toggleType: 0
   version: 1
   toggleOn: 0

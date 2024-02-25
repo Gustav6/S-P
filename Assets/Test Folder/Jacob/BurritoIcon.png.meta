@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      BurritoIcon_0: 8535930466193072334
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

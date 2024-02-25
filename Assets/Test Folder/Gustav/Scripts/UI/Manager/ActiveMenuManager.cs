@@ -4,26 +4,11 @@ using UnityEngine;
 
 public class ActiveMenuManager : ActiveBaseManager
 {
-    [Header("Objects will Instantiate")]
-    public GameObject[] objects;
-    public List<GameObject> instantiatedObjects;
     public bool enableBlur;
 
     public override void Start()
     {
-        if (objects != null)
-        {
-            for (int i = 0; i < objects.Length; i++)
-            {
-                GameObject g = Instantiate(objects[i], GetComponentInParent<UIManager>().transform);
-                instantiatedObjects.Add(g);
-
-                if (g.GetComponent<ActiveSettingManager>() != null || g.GetComponent<ActiveMenuManager>() != null)
-                {
-                    UIManager.Instance.LoadUI();
-                }
-            }
-        }
+        base.Start();
     }
 
     public void EnableBlur(Blur blurScript)
@@ -38,13 +23,5 @@ public class ActiveMenuManager : ActiveBaseManager
         blurScript.radius = 0;
         blurScript.qualityIterations = 1;
         blurScript.filter = 0;
-    }
-
-    public void OnDestroy()
-    {
-        for (int i = 0; i < instantiatedObjects.Count; i++)
-        {
-            Destroy(instantiatedObjects[i]);
-        }
     }
 }

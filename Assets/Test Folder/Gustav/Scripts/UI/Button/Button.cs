@@ -17,23 +17,21 @@ public class Button : UI
     [Range(0.1f, 5)] public float transitionDuration;
 
     public ActiveScene NewScene;
-
-    [Range(-2, 0)] public float windUp;
-    [Range(0, 2)] public float overShoot;
+    public bool playTransition;
 
     [Header("Drag in the prefab here")]
-    public GameObject prefabToSpawn;
+    public GameObject prefabToEnable;
+    public GameObject prefabToDisable;
 
     public override void Start()
     {
         functionLookup = new Dictionary<Functions, System.Action>()
         {
             { Functions.SwitchScene, SceneTransition },
-            { Functions.RemovePrefab, RemovePrefab },
-            { Functions.SpawnPrefab, null },
+            { Functions.DisablePrefab, DisablePrefab },
+            { Functions.EnablePrefab, EnablePrefab },
             { Functions.QuitGame, Application.Quit },
-            { Functions.Transition, PlayTransition },
-            { Functions.UnPause, UIManager.Instance.OnUnPause }
+            { Functions.UnPause, UnPause }
         };
 
         ButtonStateManager = GetComponent<ButtonStateManager>();
@@ -50,70 +48,45 @@ public class Button : UI
         base.Update();
     }
 
+    private void UnPause()
+    {
+        UIStateManager.Instance.PauseMenuActive = false;
+    }
+
+    private void EnablePrefab()
+    {
+        if (prefabToEnable != UIStateManager.Instance.ActivePrefab)
+        {
+            UIStateManager.Instance.PrefabToEnable = prefabToEnable;
+        }
+    }
+
+    private void DisablePrefab()
+    {
+        if (prefabToEnable != UIStateManager.Instance.ActivePrefab)
+        {
+            UIStateManager.Instance.PrefabToDisable = prefabToDisable;
+            UIStateManager.Instance.PlayTransition = playTransition;
+        }
+    }
+
     private void SceneTransition()
     {
-        if (CoverManager.Instance != null)
+        if (CoverManager.Instance != null && playTransition)
         {
             ExecuteOnCompletion execute = SwitchScene;
 
             Cover(execute);
         }
-        else
+        else if (CoverManager.Instance == null || !playTransition)
         {
             SwitchScene();
-        }
-    }
-
-    private void RemovePrefab()
-    {
-        ExecuteOnCompletion execute = null;
-
-        if (selectedFunctions.Contains(Functions.SpawnPrefab))
-        {
-            execute += UIManager.Instance.TempInstantiateNewPrefab;
-        }
-
-        if (prefabToSpawn != null)
-        {
-            UIManager.Instance.MoveUIThenRemove(transitionDuration, prefabToSpawn, execute);
-        }
-        else
-        {
-            foreach (BaseStateManager active in UIManager.Instance.GetComponentsInChildren<BaseStateManager>())
-            {
-                if (active.GetComponent<OnLoad>() != null)
-                {
-                    PrefabMoveDirection direction = active.GetComponent<OnLoad>().moveTowardsOnDestroy;
-                    Vector3 destination = UIManager.Instance.GiveDestination(direction);
-                    UIManager.Instance.MoveUITowardsDestination(active.gameObject, transitionDuration, destination, null);
-                }
-            }
         }
     }
 
     private void SwitchScene()
     {
         SceneManager.LoadScene((int)NewScene);
-    }
-
-    public void ActivateSelectedFunctions()
-    {
-        for (int i = 0; i < selectedFunctions.Count; i++)
-        {
-            functionLookup[selectedFunctions[i]]?.Invoke();
-        }
-    }
-
-    public void PlayTransition()
-    {
-        if (CoverManager.Instance != null)
-        {
-            ExecuteOnCompletion execute = UnCover;
-
-            UIManager.Instance.EnableTransitioning();
-
-            Cover(execute);
-        }
     }
 
     private void Cover(ExecuteOnCompletion execute)
@@ -124,20 +97,20 @@ public class Button : UI
         }
     }
 
-    private void UnCover()
+    public void ActivateSelectedFunctions()
     {
-        ExecuteOnCompletion execute = UIManager.Instance.DisableTransitioning;
-
-        CoverManager.Instance.UnCover(transitionDuration, execute);
+        for (int i = 0; i < selectedFunctions.Count; i++)
+        {
+            functionLookup[selectedFunctions[i]]?.Invoke();
+        }
     }
 
     private enum Functions
     {
         SwitchScene,
-        RemovePrefab,
-        SpawnPrefab,
+        DisablePrefab,
+        EnablePrefab,
         QuitGame,
-        Transition,
         UnPause,
     }
 }

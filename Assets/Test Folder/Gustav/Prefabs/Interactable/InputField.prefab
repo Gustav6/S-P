@@ -266,6 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   position: {x: 0, y: 0}
   hovering: 0
+  isInteractable: 1
   outlineSelected: {r: 1, g: 1, b: 1, a: 1}
   textSelected: {r: 1, g: 1, b: 0, a: 1}
   outlineDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}

@@ -55,15 +55,6 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Point"",
-                    ""type"": ""Value"",
-                    ""id"": ""fe2bc24d-eb51-4277-a8bf-2543772273ec"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""Slider"",
                     ""type"": ""Value"",
                     ""id"": ""cca2120b-4333-44dc-adfd-871ee764d69e"",
@@ -194,39 +185,6 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""3c84937d-997e-44c2-91ad-d3662be933dd"",
-                    ""path"": ""<Mouse>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Point"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""7cec289e-22f1-414f-b333-ed7479f25564"",
-                    ""path"": ""<Pen>/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Point"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""e0a7f582-7a8c-42c1-a32a-d9ea9add1d42"",
-                    ""path"": ""<Touchscreen>/touch*/position"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Point"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
                     ""name"": ""1D Axis"",
                     ""id"": ""2a983bff-1309-4fa9-b129-323e443d7418"",
                     ""path"": ""1DAxis"",
@@ -280,7 +238,6 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
         m_UI_Submit = m_UI.FindAction("Submit", throwIfNotFound: true);
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
-        m_UI_Point = m_UI.FindAction("Point", throwIfNotFound: true);
         m_UI_Slider = m_UI.FindAction("Slider", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
     }
@@ -347,7 +304,6 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Navigate;
     private readonly InputAction m_UI_Submit;
     private readonly InputAction m_UI_Click;
-    private readonly InputAction m_UI_Point;
     private readonly InputAction m_UI_Slider;
     private readonly InputAction m_UI_Pause;
     public struct UIActions
@@ -357,7 +313,6 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
         public InputAction @Navigate => m_Wrapper.m_UI_Navigate;
         public InputAction @Submit => m_Wrapper.m_UI_Submit;
         public InputAction @Click => m_Wrapper.m_UI_Click;
-        public InputAction @Point => m_Wrapper.m_UI_Point;
         public InputAction @Slider => m_Wrapper.m_UI_Slider;
         public InputAction @Pause => m_Wrapper.m_UI_Pause;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
@@ -378,9 +333,6 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
             @Click.started += instance.OnClick;
             @Click.performed += instance.OnClick;
             @Click.canceled += instance.OnClick;
-            @Point.started += instance.OnPoint;
-            @Point.performed += instance.OnPoint;
-            @Point.canceled += instance.OnPoint;
             @Slider.started += instance.OnSlider;
             @Slider.performed += instance.OnSlider;
             @Slider.canceled += instance.OnSlider;
@@ -400,9 +352,6 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
             @Click.started -= instance.OnClick;
             @Click.performed -= instance.OnClick;
             @Click.canceled -= instance.OnClick;
-            @Point.started -= instance.OnPoint;
-            @Point.performed -= instance.OnPoint;
-            @Point.canceled -= instance.OnPoint;
             @Slider.started -= instance.OnSlider;
             @Slider.performed -= instance.OnSlider;
             @Slider.canceled -= instance.OnSlider;
@@ -431,7 +380,6 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
         void OnNavigate(InputAction.CallbackContext context);
         void OnSubmit(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
-        void OnPoint(InputAction.CallbackContext context);
         void OnSlider(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
     }

@@ -11,10 +11,11 @@ public class Selectable : UI
     [SerializeField] private List<TextMeshProUGUI> texts = new();
 
     [Header("Selected variables")]
+    [SerializeField] private Color imageSelectedColor;
     [SerializeField] private Color textSelectedColor;
 
     [Header("Deselected variables")]
-    [SerializeField] private float imageDeselectedAlpha;
+    [SerializeField] private Color imageDeselectedColor;
     [SerializeField] private Color textDeselectedColor;
 
     private bool hasRunDeselected;
@@ -28,13 +29,13 @@ public class Selectable : UI
 
     public override void Update()
     {
-        if (UIManager.Instance.KeyOrControlActive)
+        if (UIStateManager.Instance.KeyOrControlActive && isInteractable)
         {
-            if (UIManager.Instance.CurrentUISelected == position && hasRunDeselected)
+            if (UIStateManager.Instance.CurrentUISelected == position && hasRunDeselected)
             {
                 Select();
             }
-            else if (UIManager.Instance.CurrentUISelected != position && !hasRunDeselected)
+            else if (UIStateManager.Instance.CurrentUISelected != position && !hasRunDeselected)
             {
                 Deselect();
             }
@@ -63,10 +64,7 @@ public class Selectable : UI
 
         for (int i = 0; i < images.Count; i++)
         {
-            Color temp = images[i].color;
-            temp.a = 1;
-
-            TransitionSystem.AddColorTransition(new ColorTransition(images[i], temp, 0.2f, TransitionType.SmoothStop2));
+            TransitionSystem.AddColorTransition(new ColorTransition(images[i], imageSelectedColor, 0.2f, TransitionType.SmoothStop2));
         }
 
         for (int i = 0; i < texts.Count; i++)
@@ -85,10 +83,7 @@ public class Selectable : UI
     {
         for (int i = 0; i < images.Count; i++)
         {
-            Color temp = images[i].color;
-            temp.a = imageDeselectedAlpha;
-
-            TransitionSystem.AddColorTransition(new ColorTransition(images[i], temp, 0.2f, TransitionType.SmoothStop2));
+            TransitionSystem.AddColorTransition(new ColorTransition(images[i], imageDeselectedColor, 0.2f, TransitionType.SmoothStop2));
         }
 
         for (int i = 0; i < texts.Count; i++)

@@ -141,7 +141,7 @@ public class MoveTransition : Transition
     {
         if (transform != null)
         {
-            Vector3 finalPosition = referenceStartingPosition + (target / UIManager.Instance.ResolutionScaling);
+            Vector3 finalPosition = referenceStartingPosition + (target / UIStateManager.Instance.ResolutionScaling);
             transform.localPosition = finalPosition;
             base.SafetyNet();
         }

@@ -50,7 +50,7 @@ public class ToggleSelectedState : UIBaseState
         manager = (ToggleStateManager)referenceManager;
         toggleInstance = (Toggle)referenceManager.UIInstance;
 
-        if (!UIManager.Instance.Transitioning)
+        if (!UIStateManager.Instance.Transitioning)
         {
             if (toggleInstance.version == ToggleVersion.Version1)
             {
@@ -141,12 +141,12 @@ public class TogglePressedState : UIBaseState
         {
             if (toggle.toggleOn)
             {
-                Vector3 destination = new(manager.movingPartOffset * -2 * UIManager.Instance.ResolutionScaling, 0, 0);
+                Vector3 destination = new(manager.movingPartOffset * -2 * UIStateManager.Instance.ResolutionScaling, 0, 0);
                 TransitionSystem.AddMoveTransition(new MoveTransition(manager.movingPart, destination, transitionTime, TransitionType.SmoothStop3, true));
             }
             else
             {
-                Vector3 destination = new(manager.movingPartOffset * 2 * UIManager.Instance.ResolutionScaling, 0, 0);
+                Vector3 destination = new(manager.movingPartOffset * 2 * UIStateManager.Instance.ResolutionScaling, 0, 0);
                 TransitionSystem.AddMoveTransition(new MoveTransition(manager.movingPart, destination, transitionTime, TransitionType.SmoothStop3, true));
             }
         }

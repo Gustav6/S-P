@@ -6,11 +6,8 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Menu.unity
-    guid: 4e8f9d7578d0a5d4aacd8a02cd3db80a
-  - enabled: 0
-    path: Assets/Scenes/TheGame.unity
-    guid: 57f15b1d2b0b980428b22b0e69da525c
+    path: Assets/Test Folder/Gustav/Scenes/Menu 1.unity
+    guid: c0cce404882cea544a3601c0f07bbc0c
   - enabled: 1
     path: Assets/Scenes/JacobScene.unity
     guid: 11ba6906ec0825749b10649338c37639

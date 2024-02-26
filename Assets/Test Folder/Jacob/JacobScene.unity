@@ -1378,9 +1378,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 305582100}
-  - component: {fileID: 305582105}
   - component: {fileID: 305582104}
   - component: {fileID: 305582103}
+  - component: {fileID: 305582106}
   m_Layer: 5
   m_Name: InteractableUI
   m_TagString: UIManager
@@ -1486,22 +1486,6 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 305582104}
         m_TargetAssemblyTypeName: UIInput, Assembly-CSharp
-        m_MethodName: PointerPosition
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 1
-    m_ActionId: fe2bc24d-eb51-4277-a8bf-2543772273ec
-    m_ActionName: 'UI/Point[/Mouse/position,/Pen/position]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 305582104}
-        m_TargetAssemblyTypeName: UIInput, Assembly-CSharp
         m_MethodName: ChangeSlider
         m_Mode: 0
         m_Arguments:
@@ -1547,7 +1531,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95057c79320671e4db29a5c4cac52c2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &305582105
+--- !u!114 &305582106
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1556,11 +1540,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 305582099}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d14f015dd3bc6db4e89e8b4cb0e2da5c, type: 3}
+  m_Script: {fileID: 11500000, guid: 1d80f5210bd51294bad728b6b4e0e84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pausePrefab: {fileID: 0}
-  prefabToSpawn: {fileID: 0}
+  prefabWillEnableOnStart: {fileID: 0}
+  maxXPos: 0
+  maxYPos: 0
 --- !u!1 &327550914
 GameObject:
   m_ObjectHideFlags: 0

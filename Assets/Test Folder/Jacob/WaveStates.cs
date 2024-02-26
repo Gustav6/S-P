@@ -103,7 +103,7 @@ public class WaveCreationState : BaseWaveState
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
 
-                            if (remainingBudget < totalBudget * 0.1f)
+                            if (remainingBudget < totalBudget * 0.1f || remainingBudget < 3)
                                 break;
                         }
                     }
@@ -140,7 +140,7 @@ public class WaveCreationState : BaseWaveState
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
 
-                            if (remainingBudget < totalBudget * 0.1f)
+                            if (remainingBudget < totalBudget * 0.1f || remainingBudget < 3)
                                 break;
                         }
                     }
@@ -179,7 +179,7 @@ public class WaveCreationState : BaseWaveState
                             remainingBudget -= randomEnemyCost;
 
 
-                            if (remainingBudget < totalBudget * 0.1f)
+                            if (remainingBudget < totalBudget * 0.1f || remainingBudget < 3)
                                 break;
                         }
                     }

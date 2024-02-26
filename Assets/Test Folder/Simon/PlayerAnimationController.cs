@@ -16,7 +16,8 @@ public class PlayerAnimationController : MonoBehaviour
     private Coroutine _attackForceCoroutine;
 
     private bool _animationReadyToReset;
-    
+    internal bool inAnimation { get; private set; }
+
     private void Awake()
     {
         weaponAnimator = GetComponentInChildren<Animator>();
@@ -35,7 +36,7 @@ public class PlayerAnimationController : MonoBehaviour
     {
         // TODO: Play SFX.
 
-        EquipmentManager.Instance.ToggleHit(false);
+        inAnimation = true;
 
         weaponAnimator.SetTrigger("PlayHit");
         weaponAnimator.SetFloat("s", PlayerStats.Instance.CurrentWeapon.AnimationSpeed * PlayerStats.Instance.GetStat(StatType.AttackSpeed));
@@ -66,7 +67,7 @@ public class PlayerAnimationController : MonoBehaviour
             return;
         }
 
-        EquipmentManager.Instance.ToggleHit(true);
+        inAnimation = false;
 
         // If there's an entity whos weapon shouldn't flash, like common enemies, just leave the flash sprite null in WeaponSO.
         if (_flashSpriteRenderer.sprite != null)

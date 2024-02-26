@@ -17,10 +17,10 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (EquipmentManager.Instance.CanHit())
+        if (!_attackController.inAnimation)
             TurnToMouse();
 
-        if (Input.GetMouseButton(0) && EquipmentManager.Instance.CanHit())
+        if (Input.GetMouseButton(0) && !_attackController.inAnimation && EquipmentManager.Instance.CanHit())
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 targetDirection = (mousePosition - (Vector2)transform.position).normalized;

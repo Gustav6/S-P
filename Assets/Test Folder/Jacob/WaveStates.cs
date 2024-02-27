@@ -48,18 +48,14 @@ public class WaveCreationState : BaseWaveState
     {
         List<EnemyPreset> finalEnemyList = new();
 
-
         int remainingBudget = totalBudget;
 
         // Generating enemy list
         switch (waveType)
 {
             case WaveStateMachine.WaveType.Random:
-                for (int i = 0; i < 10000; i++)
+                for (;;)
                 {
-                    if (i == 9999)
-                        Debug.Log("FUCK");
-
                     if (remainingBudget < 3)
                         break;
 
@@ -76,11 +72,8 @@ public class WaveCreationState : BaseWaveState
                 break;
 
             case WaveStateMachine.WaveType.Light:
-                for (int i = 0; i < 10000; i++)
+                for (;;)
                 {
-                    if (i == 9999)
-                        Debug.Log("FUCK");
-
                     if (remainingBudget < 3)
                         break;
 
@@ -100,6 +93,11 @@ public class WaveCreationState : BaseWaveState
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
                         }
+                        else // If there are no enemies in the assortment worth less than 10% of the budget, we pick enemies at random
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
+                            remainingBudget -= randomEnemyCost;
+                        }
                     }
                     // Spend the rest on other enemies that cost more than 10% of the budget
                     else
@@ -109,15 +107,18 @@ public class WaveCreationState : BaseWaveState
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
                         }
+                        else // If there are no enemies in the assortment worth more than 10% of the budget, we pick enemies at random
+						{
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
+                            remainingBudget -= randomEnemyCost;
+                        }
                     }
                 }
                 break;
-            case WaveStateMachine.WaveType.Balanced:
-                for (int i = 0; i < 10000; i++)
-                {
-                    if (i == 9999)
-                        Debug.Log("FUCK");
 
+            case WaveStateMachine.WaveType.Balanced:
+                for (;;)
+                {
                     if (remainingBudget < 3)
                         break;
 
@@ -137,6 +138,11 @@ public class WaveCreationState : BaseWaveState
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
                         }
+                        else // If there are no enemies in the assortment worth less than 10% of the budget, we pick enemies at random
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
+                            remainingBudget -= randomEnemyCost;
+                        }
                     }
                     // Spend the rest on other enemies that cost more than 10% of the budget
                     else
@@ -146,16 +152,18 @@ public class WaveCreationState : BaseWaveState
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
                         }
+                        else // If there are no enemies in the assortment worth more than 10% of the budget, we pick enemies at random
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
+                            remainingBudget -= randomEnemyCost;
+                        }
                     }
                 }
                 break;
 
             case WaveStateMachine.WaveType.Heavy:
-                for (int i = 0; i < 1000; i++)
+                for (;;)
                 {
-                    if (i == 9999)
-                        Debug.Log("FUCK");
-
                     if (remainingBudget < 3)
                         break;
 
@@ -175,6 +183,11 @@ public class WaveCreationState : BaseWaveState
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
                         }
+                        else // If there are no enemies in the assortment less more than 10% of the budget, we pick enemies at random
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
+                            remainingBudget -= randomEnemyCost;
+                        }
                     }
                     // Spend the rest on other enemies that cost more than 10% of the budget
                     else
@@ -184,16 +197,18 @@ public class WaveCreationState : BaseWaveState
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
                         }
+                        else // If there are no enemies in the assortment worth more than 10% of the budget, we pick enemies at random
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
+                            remainingBudget -= randomEnemyCost;
+                        }
                     }
                 }
                 break;
 
             case WaveStateMachine.WaveType.Swarm:
-                for (int i = 0; i < 10000; i++)
+                for (;;)
                 {
-                    if (i == 9999)
-                        Debug.Log("FUCK");
-
                     if (remainingBudget < 3)
                         break;
 
@@ -209,6 +224,11 @@ public class WaveCreationState : BaseWaveState
                     if (remainingBudget >= 0)
                     {
                         if (randomEnemyCost <= totalBudget * 0.15f)
+                        {
+                            finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
+                            remainingBudget -= randomEnemyCost;
+                        }
+                        else // If there are no enemies in the assortment worth less than 15% of the budget, we pick enemies at random
                         {
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;

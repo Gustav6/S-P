@@ -55,8 +55,14 @@ public class WaveCreationState : BaseWaveState
         switch (waveType)
 {
             case WaveStateMachine.WaveType.Random:
-                for (; ; )
+                for (int i = 0; i < 10000; i++)
                 {
+                    if (i == 9999)
+                        Debug.Log("FUCK");
+
+                    if (remainingBudget < 3)
+                        break;
+
                     int randomEnemyID = UnityEngine.Random.Range(0, _enemyAssortment.Length);
 
                     if (_context.WaveNumber < _enemyAssortment[randomEnemyID].WaveUnlocked)
@@ -64,17 +70,20 @@ public class WaveCreationState : BaseWaveState
 
                     int randomEnemyCost = _enemyAssortment[randomEnemyID].Cost;
 
-                    if (remainingBudget < 3)
-                        break;
-
                     finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                     remainingBudget -= randomEnemyCost;
                 }
                 break;
 
             case WaveStateMachine.WaveType.Light:
-                for (; ; )
+                for (int i = 0; i < 10000; i++)
                 {
+                    if (i == 9999)
+                        Debug.Log("FUCK");
+
+                    if (remainingBudget < 3)
+                        break;
+
                     // Get random enemy
                     int randomEnemyID = UnityEngine.Random.Range(0, _enemyAssortment.Length);
 
@@ -90,9 +99,6 @@ public class WaveCreationState : BaseWaveState
                         {
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
-
-                            if (remainingBudget < 3)
-                                break;
                         }
                     }
                     // Spend the rest on other enemies that cost more than 10% of the budget
@@ -102,16 +108,19 @@ public class WaveCreationState : BaseWaveState
                         {
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
-
-                            if (remainingBudget < totalBudget * 0.1f || remainingBudget < 3)
-                                break;
                         }
                     }
                 }
                 break;
             case WaveStateMachine.WaveType.Balanced:
-                for (; ; )
+                for (int i = 0; i < 10000; i++)
                 {
+                    if (i == 9999)
+                        Debug.Log("FUCK");
+
+                    if (remainingBudget < 3)
+                        break;
+
                     // Get random enemy
                     int randomEnemyID = UnityEngine.Random.Range(0, _enemyAssortment.Length);
 
@@ -127,9 +136,6 @@ public class WaveCreationState : BaseWaveState
                         {
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
-
-                            if (remainingBudget < 3)
-                                break;
                         }
                     }
                     // Spend the rest on other enemies that cost more than 10% of the budget
@@ -139,17 +145,20 @@ public class WaveCreationState : BaseWaveState
                         {
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
-
-                            if (remainingBudget < totalBudget * 0.1f || remainingBudget < 3)
-                                break;
                         }
                     }
                 }
                 break;
 
             case WaveStateMachine.WaveType.Heavy:
-                for (; ; )
+                for (int i = 0; i < 1000; i++)
                 {
+                    if (i == 9999)
+                        Debug.Log("FUCK");
+
+                    if (remainingBudget < 3)
+                        break;
+
                     // Get random enemy
                     int randomEnemyID = UnityEngine.Random.Range(0, _enemyAssortment.Length);
 
@@ -165,9 +174,6 @@ public class WaveCreationState : BaseWaveState
                         {
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
-
-                            if (remainingBudget < 3)
-                                break;
                         }
                     }
                     // Spend the rest on other enemies that cost more than 10% of the budget
@@ -177,18 +183,20 @@ public class WaveCreationState : BaseWaveState
                         {
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
-
-
-                            if (remainingBudget < totalBudget * 0.1f || remainingBudget < 3)
-                                break;
                         }
                     }
                 }
                 break;
 
             case WaveStateMachine.WaveType.Swarm:
-                for (; ; )
+                for (int i = 0; i < 10000; i++)
                 {
+                    if (i == 9999)
+                        Debug.Log("FUCK");
+
+                    if (remainingBudget < 3)
+                        break;
+
                     // Get random enemy
                     int randomEnemyID = UnityEngine.Random.Range(0, _enemyAssortment.Length);
 
@@ -204,9 +212,6 @@ public class WaveCreationState : BaseWaveState
                         {
                             finalEnemyList.Add(_enemyAssortment[randomEnemyID]);
                             remainingBudget -= randomEnemyCost;
-
-                            if (remainingBudget < 3)
-                                break;
                         }
                     }
                 }

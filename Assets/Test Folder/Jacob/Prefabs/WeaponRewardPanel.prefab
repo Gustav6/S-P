@@ -143,7 +143,7 @@ MonoBehaviour:
   m_text: Weapon
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -4530712426691535282, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -4530712426691535282, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.12156863, g: 0.12156863, b: 0.12156863, a: 0.83137256}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.83137256}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -494,7 +494,7 @@ MonoBehaviour:
   m_text: Lumbago
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -4530712426691535282, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -647,7 +647,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &1381389330513392326
 MonoBehaviour:
   m_ObjectHideFlags: 0

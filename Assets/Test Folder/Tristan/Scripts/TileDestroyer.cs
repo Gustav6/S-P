@@ -33,7 +33,9 @@ public class TileDestroyer : MonoBehaviour
         grid = GetComponentInParent<Grid>();
     }
 
-    void Update() {
+    void Update()
+    {
+        tilemap = GetComponent<Tilemap>();
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonUp(0))
         {
@@ -81,6 +83,7 @@ public class TileDestroyer : MonoBehaviour
     }
 
     void UpdateTile(Tile_Location loc) {
+        Debug.Log("Updating");
         // Checks (almost) all possible cases and places the correct tile for said case
         switch (loc)
         {
@@ -121,10 +124,10 @@ public class TileDestroyer : MonoBehaviour
                         tilemap.SetTile(nTilePos, GrassBotMid);
                         break;
                     case Tile_Type.GrassMidLeft:
-                        tilemap.SetTile(nTilePos, null);
+                        tilemap.SetTile(nTilePos, GrassBotLeft);
                         break;
                     case Tile_Type.GrassMidRight:
-                        tilemap.SetTile(nTilePos, null);
+                        tilemap.SetTile(nTilePos, GrassBotRight);
                         break;
                 }
                 break;
@@ -132,7 +135,7 @@ public class TileDestroyer : MonoBehaviour
                 switch (localTileTypes[1])
                 {
                     case Tile_Type.GrassTopMid:
-                        tilemap.SetTile(wTilePos, null);
+                        tilemap.SetTile(wTilePos, GrassTopRight);
                         break;
                     case Tile_Type.GrassTopRight:
                         tilemap.SetTile(wTilePos, null);
@@ -141,7 +144,7 @@ public class TileDestroyer : MonoBehaviour
                         tilemap.SetTile(wTilePos, null);
                         break;
                     case Tile_Type.GrassBotMid:
-                        tilemap.SetTile(wTilePos, GrassBotMid);
+                        tilemap.SetTile(wTilePos, GrassBotRight);
                         break;
                     case Tile_Type.GrassBotRight:
                         tilemap.SetTile(wTilePos, GrassBotRight);
@@ -220,7 +223,7 @@ public class TileDestroyer : MonoBehaviour
                 switch (localTileTypes[3])
                 {
                     case Tile_Type.GrassTopMid:
-                        tilemap.SetTile(eTilePos, null);
+                        tilemap.SetTile(eTilePos, GrassTopLeft);
                         break;
                     case Tile_Type.GrassTopRight:
                         tilemap.SetTile(eTilePos, null);
@@ -229,7 +232,7 @@ public class TileDestroyer : MonoBehaviour
                         tilemap.SetTile(eTilePos, null);
                         break;
                     case Tile_Type.GrassBotMid:
-                        tilemap.SetTile(eTilePos, null);
+                        tilemap.SetTile(eTilePos, GrassBotLeft);
                         break;
                     case Tile_Type.GrassBotRight:
                         tilemap.SetTile(eTilePos, null);
@@ -440,12 +443,25 @@ public class TileDestroyer : MonoBehaviour
     }
 
     void SetLocalTiles() {
+        Debug.Log("Setting");
         foreach (Tile_Location loc in Tile_Location.GetValues(typeof(Tile_Location))) {
+            Debug.Log("Locating");
             UpdateTile(loc);
         }
+
+        
+        if (tilemap.GetComponent<TilemapRenderer>().mode == TilemapRenderer.Mode.Individual)
+        {
+            tilemap.GetComponent<TilemapRenderer>().mode = TilemapRenderer.Mode.Chunk;
+        }
+        else
+        {
+            tilemap.GetComponent<TilemapRenderer>().mode = TilemapRenderer.Mode.Individual;
+        } 
     }
 
     void DestroyTile(Vector3 worldPos, float dmg) {
+        Debug.Log("I'm in");
         tileHealth -= dmg;
         tilePos = grid.WorldToCell(worldPos);
         snappedTile = new Vector3Int(tilePos.x, tilePos.y, 0);
@@ -456,6 +472,7 @@ public class TileDestroyer : MonoBehaviour
             if (tilemap != null && tilemap.HasTile(snappedTile)) {
                 Debug.Log("It has it");
                 tilemap.SetTile(snappedTile, null);
+                tilemap.RefreshTile(snappedTile);
                 Debug.Log("It has been removed");
             }
             else {

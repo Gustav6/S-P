@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [SerializeField] Transform _directionIndicator;
+
     private PlayerAnimationController _attackController;
     private AimController _aimController;
     private PlayerStats _player;
@@ -35,6 +37,10 @@ public class PlayerAttack : MonoBehaviour
     private void TurnToMouse()
     {
         Vector2 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector2 targetDirection = (targetPosition - (Vector2)transform.position).normalized;
+        // If this is giving you an error, copy the DirectionIndicator object in JacobScene under Entities/Player and assign it to this script through the inspector.
+        _directionIndicator.eulerAngles = new Vector3(0, 0, Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90); 
 
         _aimController.FaceTarget(targetPosition);
     }

@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 public interface IDamageable
 {
     public float KnockbackPercent { get; set; }
+    public int ConsecutiveHits { get; set; }
 
     public static Dictionary<Vector2Int, TileBase> PopulateTilesDictonary(Tilemap tilemap)
     {
@@ -29,6 +30,13 @@ public interface IDamageable
     }
 
     public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration);
+
+    internal void CountHit()
+    {
+        ConsecutiveHits++;
+    }
+
+    internal IEnumerator ResetConsecutiveHits();
 
     public void CheckDeath(Tilemap tilemap, Dictionary<Vector2Int, TileBase> tiles, Collider2D collider)
     {

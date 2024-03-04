@@ -10,11 +10,12 @@ public class WhaleEnemy : Enemy
         if (knockbackMultiplier == 0)
             return;
 
+        shouldResetHits = false;
+
         _enemyAttack.CanAttack(false);
         _attackController.LeaveMovement(false);
         _attackController.EnemyHit();
         _attackController.GroundEnemyHit();
-        
         
         Vector2 knockbackVector = ((Vector2)Camera.main.ScreenToWorldPoint(Input.mousePosition) - sourcePosition).normalized;
         float multiplier = (2 + (KnockbackPercent / 100)) * knockbackMultiplier;

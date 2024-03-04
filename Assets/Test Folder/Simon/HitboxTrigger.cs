@@ -24,7 +24,7 @@ public class HitboxTrigger : MonoBehaviour
             if (collision.CompareTag(_thisController.tag))
                 return;
 
-            Attack(damageable, _thisController.Damage, _thisController.KnockbackMultiplier, _thisController.transform.position);
+            Attack(damageable, _thisController.Damage, _thisController.KnockbackMultiplier, _thisController.transform.position, CalculateStunTime(damageable.KnockbackPercent));
         }
         else if (transform.parent != null)
         {
@@ -32,7 +32,8 @@ public class HitboxTrigger : MonoBehaviour
                 return;
 
             Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage * PlayerStats.Instance.GetStat(StatType.DamageDealt),
-                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), transform.position);
+                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), transform.position,
+                   CalculateStunTime(damageable.KnockbackPercent, PlayerStats.Instance.CurrentWeapon.StunTime, damageable.ConsecutiveHits));
         }
         else
         {
@@ -40,15 +41,16 @@ public class HitboxTrigger : MonoBehaviour
                 return;
 
             Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage * PlayerStats.Instance.GetStat(StatType.DamageDealt),
-                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), transform.position);
+                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), transform.position,
+                   CalculateStunTime(damageable.KnockbackPercent, PlayerStats.Instance.CurrentWeapon.StunTime, damageable.ConsecutiveHits));
         }
     }
 
-    public void Attack(IDamageable damageable, float damage, float knockbackMultiplier, Vector2 sourcePosition)
+    public void Attack(IDamageable damageable, float damage, float knockbackMultiplier, Vector2 sourcePosition, float stunTime)
     {
         // TODO: Play SFX in take damage method.
         damageable.TakeDamage(damage);
-        damageable.TakeKnockback(sourcePosition, knockbackMultiplier, CalculateStunTime(damageable.KnockbackPercent));
+        damageable.TakeKnockback(sourcePosition, knockbackMultiplier, stunTime);
     }
 
     /// <summary>
@@ -60,6 +62,23 @@ public class HitboxTrigger : MonoBehaviour
     {
         float stunTime = currentKnockbackPercent / 250;
         stunTime = stunTime < 0.1f ? 0.1f : stunTime >= 0.5f ? 0.5f + ((stunTime - 0.5f) / 4) : stunTime;
+
+        return stunTime;
+    }
+
+    /// <summary>
+    /// Calculates how long an entity should be stunned for after getting hit, while having a base stun time and avoiding stun locking.
+    /// </summary>
+    /// <param name="currentKnockbackPercent">The knockback percent of the entity getting hit</param>
+    /// <returns></returns>
+    private float CalculateStunTime(float currentKnockbackPercent, float baseStunTime, int consecutiveHits)
+    {
+        float decreaseValuePerHit = 0.2f;
+
+        float stunTime = currentKnockbackPercent / 250;
+        stunTime = stunTime < 0.1f ? 0.1f : stunTime >= 0.5f ? 0.5f + ((stunTime - 0.5f) / 4) : stunTime;
+        stunTime = (stunTime / 2) + baseStunTime;
+        stunTime = stunTime - decreaseValuePerHit * consecutiveHits > 0 ? stunTime - decreaseValuePerHit * consecutiveHits : 0.1f;
 
         return stunTime;
     }

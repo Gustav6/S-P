@@ -28,6 +28,8 @@ public class Enemy : MonoBehaviour, IDamageable
     internal WaveStateMachine waveMachine;
 
     public float KnockbackPercent { get; set; }
+    public int ConsecutiveHits { get; set; }
+    internal bool shouldResetHits;
 
     private void Awake()
     {
@@ -59,6 +61,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         AudioManager.Instance.PlaySound("Hurt");
         KnockbackPercent += damageAmount;
+        _thisDamagable.CountHit();
         PopupManager.Instance.SpawnText(((int)KnockbackPercent).ToString(), transform.position, 1.5f);
     }
 
@@ -68,6 +71,8 @@ public class Enemy : MonoBehaviour, IDamageable
         _attackController.EnterMovement();
         _enemyAttack.CanAttack(true);
 
+        shouldResetHits = true;
+        StartCoroutine(_thisDamagable.ResetConsecutiveHits());
         _thisDamagable.CheckDeath(_tilemap, _tiles, _thisFeetCollider);
     }
 
@@ -115,4 +120,15 @@ public class Enemy : MonoBehaviour, IDamageable
         Destroy(gameObject);
     }
 
+    IEnumerator IDamageable.ResetConsecutiveHits()
+    {
+        yield return new WaitForSeconds(0.25f);
+
+        if (!shouldResetHits)
+            yield break;
+
+        Debug.Log("Reset!!!!");
+
+        ConsecutiveHits = 0;
+    }
 }

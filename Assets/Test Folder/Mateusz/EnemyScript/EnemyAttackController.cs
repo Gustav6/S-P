@@ -6,17 +6,21 @@ public class EnemyAttackController : MonoBehaviour
 {
     Animator _anim;
     Enemy _enemy;
+    Rigidbody2D _rb;
 
     GameObject go;
 
     SpriteRenderer _sr;
     Color originalColor;
 
+    public float jumpForce = 5f;
+
     private void Awake()
     {
         _anim = GetComponent<Animator>();
         _enemy = GetComponent<Enemy>();
         _sr = GetComponentInChildren<SpriteRenderer>();
+        _rb = GetComponent<Rigidbody2D>();
 
         originalColor = _sr.color;
     }
@@ -40,6 +44,7 @@ public class EnemyAttackController : MonoBehaviour
     {
         _anim.SetBool("IsAttacking", true);
         _anim.SetFloat("AnimSpeed", 1.5f);
+        _rb.AddForce
     }
 
     public void LeaveAttack()
@@ -57,7 +62,9 @@ public class EnemyAttackController : MonoBehaviour
     {
         Debug.Log("Is Hit");
         _anim.SetBool("IsHit", true);
+        
         _anim.SetBool("IsAttacking", false);
+
     }
 
     public void GroundEnemyHit()

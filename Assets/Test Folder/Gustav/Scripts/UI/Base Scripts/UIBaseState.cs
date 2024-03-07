@@ -12,18 +12,21 @@ public abstract class UIBaseState
 
     protected void CheckIfSelected(BaseStateManager referenceManager, UIBaseState selectedState)
     {
-        if (UIStateManager.Instance.KeyOrControlActive)
+        if (!UIStateManager.Instance.Transitioning)
         {
-            if (UIStateManager.Instance.CurrentUISelected == referenceManager.UIInstance.position)
+            if (UIStateManager.Instance.KeyOrControlActive)
             {
-                referenceManager.SwitchState(selectedState);
+                if (UIStateManager.Instance.CurrentUISelected == referenceManager.UIInstance.position)
+                {
+                    referenceManager.SwitchState(selectedState);
+                }
             }
-        }
-        else
-        {
-            if (referenceManager.UIInstance.hovering)
+            else
             {
-                referenceManager.SwitchState(selectedState);
+                if (referenceManager.UIInstance.hovering)
+                {
+                    referenceManager.SwitchState(selectedState);
+                }
             }
         }
     }

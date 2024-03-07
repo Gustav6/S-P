@@ -12,18 +12,28 @@ public class WavePlayerSlot : MonoBehaviour
 
     void Start()
     {
+        InputField.OnSave += InputField_OnSave;
+
         nameTag = transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
         value = transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();
 
         SetPlayerData();
     }
 
+    private void InputField_OnSave(object sender, System.EventArgs e)
+    {
+        SetPlayerData();
+    }
+
     public void SetPlayerData()
     {
-        if (UIDataManager.instance.waveLeaderBoard[(UIDataManager.instance.waveLeaderBoard.ElementAt(index)).Key] > 0)
+        if (UIDataManager.instance.wave[index] > 0)
         {
-            nameTag.text = UIDataManager.instance.waveLeaderBoard.ElementAt(index).Key;
-            value.text = UIDataManager.instance.waveLeaderBoard.ElementAt(index).Value.ToString();
+            string name = UIDataManager.instance.waveNames[index];
+            int wave = UIDataManager.instance.wave[index];
+
+            nameTag.text = name;
+            value.text = wave.ToString();
         }
         else
         {

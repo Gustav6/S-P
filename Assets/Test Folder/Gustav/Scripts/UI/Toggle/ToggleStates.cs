@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#region Deselected State
 public class ToggleDeselectedState : UIBaseState
 {
     private ToggleStateManager manager;
@@ -37,7 +38,9 @@ public class ToggleDeselectedState : UIBaseState
         }
     }
 }
+#endregion
 
+#region Selected State
 public class ToggleSelectedState : UIBaseState
 {
     private ToggleStateManager manager;
@@ -61,10 +64,6 @@ public class ToggleSelectedState : UIBaseState
                 manager.DefaultSelectTransition(timeItTakes, manager.Pointers, null, manager.outLineImage, manager.textForV2);
             }
         }
-        else
-        {
-            manager.SwitchState(manager.deselectedState);
-        }
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
@@ -82,7 +81,9 @@ public class ToggleSelectedState : UIBaseState
 
     }
 }
+#endregion
 
+#region Pressed State
 public class TogglePressedState : UIBaseState
 {
     private ToggleStateManager manager;
@@ -165,3 +166,4 @@ public class TogglePressedState : UIBaseState
         manager.UIActivated = false;
     }
 }
+#endregion

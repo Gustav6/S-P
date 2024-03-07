@@ -28,8 +28,6 @@ public class UIManagerUnLoadedState : UIManagerBaseState
         {
             stateManager.SwitchState(stateManager.ManagerTransitioningState);
         }
-
-        Debug.Log("UI MANAGER UNLOADED STATE");
     }
 
     public override void ExitState(UIStateManager stateManager)
@@ -85,7 +83,7 @@ public class UIManagerTransitioningState : UIManagerBaseState
 
     public override void UpdateState(UIStateManager stateManager)
     {
-        Debug.Log("UI MANAGER TRANSITIONING STATE");
+
     }
 
     public override void ExitState(UIStateManager stateManager)
@@ -159,8 +157,6 @@ public class UIManagerLoadedState : UIManagerBaseState
                 stateManager.SwitchState(stateManager.ManagerUnLoadedState);
             }
         }
-
-        Debug.Log("UI MANAGER LOADED STATE");
     }
 
     public override void ExitState(UIStateManager stateManager)

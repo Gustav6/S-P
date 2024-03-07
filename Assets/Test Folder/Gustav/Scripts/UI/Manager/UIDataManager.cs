@@ -10,8 +10,13 @@ public class UIDataManager : MonoBehaviour
 
     public Dictionary<SliderType, float> sliderValues = new();
     public Dictionary<ToggleType, bool> toggleValues = new();
-    public Dictionary<string, int> scoreLeaderBoard = new();
-    public Dictionary<string, int> waveLeaderBoard = new();
+
+    public int[] score;
+    public string[] scoreNames;
+
+    public int[] wave;
+    public string[] waveNames;
+
     public Data CurrentData { get; private set; }
 
     void Awake()
@@ -31,6 +36,11 @@ public class UIDataManager : MonoBehaviour
     {
         // Load saved settings
         CurrentData = SaveSystem.Instance.LoadData();
+
+        wave = new int[CurrentData.waveLeaderBoardValues.Length];
+        waveNames = new string[CurrentData.waveLeadBoardNames.Length];
+        score = new int[CurrentData.scoreLeaderBoardValues.Length];
+        scoreNames = new string[CurrentData.scoreLeadBoardNames.Length];
 
         for (int i = 0; i < CurrentData.sliderTypes.Length; i++)
         {
@@ -56,47 +66,32 @@ public class UIDataManager : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < CurrentData.scoreLeadBoardNames.Length; i++)
+        for (int i = 0; i < scoreNames.Length; i++)
         {
             if (CurrentData.scoreLeadBoardNames[i] != null)
             {
-                scoreLeaderBoard.TryAdd(CurrentData.scoreLeadBoardNames[i], CurrentData.scoreLeaderBoardValues[i]);
+                scoreNames[i] = CurrentData.scoreLeadBoardNames[i];
+                score[i] = CurrentData.scoreLeaderBoardValues[i];
             }
             else
             {
-                scoreLeaderBoard.Add("" + i, 0);
+                scoreNames[i] = "";
+                score[i] = 0;
             }
-            //scoreLeaderBoard[CurrentData.scoreLeadBoardNames[i]] = CurrentData.scoreLeaderBoardValues[i];
-            //if (CurrentData.scoreLeadBoardNames[i] != null && !scoreLeaderBoard.ContainsKey(CurrentData.scoreLeadBoardNames[i]))
-            //{
-            //    scoreLeaderBoard.Add(CurrentData.scoreLeadBoardNames[i], CurrentData.scoreLeaderBoardValues[i]);
-            //}
-            //else if (CurrentData.scoreLeadBoardNames[i] != null && scoreLeaderBoard.ContainsKey(CurrentData.scoreLeadBoardNames[i]))
-            //{
-            //    scoreLeaderBoard[CurrentData.scoreLeadBoardNames[i]] = CurrentData.scoreLeaderBoardValues[i];
-            //}
         }
 
-        for (int i = 0; i < CurrentData.waveLeadBoardNames.Length; i++)
+        for (int i = 0; i < waveNames.Length; i++)
         {
-            if (CurrentData.waveLeadBoardNames[i] != "")
+            if (CurrentData.waveLeadBoardNames[i] != null)
             {
-                waveLeaderBoard.TryAdd(CurrentData.waveLeadBoardNames[i], CurrentData.waveLeaderBoardValues[i]);
+                waveNames[i] = CurrentData.waveLeadBoardNames[i];
+                wave[i] = CurrentData.waveLeaderBoardValues[i];
             }
             else
             {
-                waveLeaderBoard.Add("" + i, 0);
+                waveNames[i] = "";
+                wave[i] = 0;
             }
-
-            //waveLeaderBoard[CurrentData.waveLeadBoardNames[i]] = CurrentData.waveLeaderBoardValues[i];
-            //if (CurrentData.waveLeadBoardNames[i] != null && !waveLeaderBoard.ContainsKey(CurrentData.waveLeadBoardNames[i]))
-            //{
-            //    waveLeaderBoard.Add(CurrentData.waveLeadBoardNames[i], CurrentData.waveLeaderBoardValues[i]);
-            //}
-            //else if (CurrentData.waveLeadBoardNames[i] != null && waveLeaderBoard.ContainsKey(CurrentData.waveLeadBoardNames[i]))
-            //{
-            //    waveLeaderBoard[CurrentData.waveLeadBoardNames[i]] = CurrentData.waveLeaderBoardValues[i];
-            //}
         }
     }
 }

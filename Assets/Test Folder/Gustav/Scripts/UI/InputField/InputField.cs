@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class InputField : UI
     public InputFieldStateManager InputFieldStateManager { get; private set; }
 
     [Range(1, 20)] public int maxAmountOfLetters;
+
+    public static event EventHandler OnSave;
 
     public override void Start()
     {
@@ -22,5 +25,10 @@ public class InputField : UI
         UpdateFunction(InputFieldStateManager);
 
         base.Update();
+    }
+
+    public void UpdateLeadboard()
+    {
+        OnSave?.Invoke(this, EventArgs.Empty);
     }
 }

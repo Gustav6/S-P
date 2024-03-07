@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -38,12 +39,11 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         if (!_attackController.inAnimation)
-            TurnToMouse();
+            TurnToTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
 
         if (_attackInputHeld && !_attackController.inAnimation && EquipmentManager.Instance.CanHit())
         {
-            Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Vector2 targetDirection = (mousePosition - (Vector2)transform.position).normalized;
+            Vector2 targetDirection = GetMouseDirection();
 
             _attackController.PlayHitAnimation(targetDirection);
         }
@@ -65,6 +65,19 @@ public class PlayerAttack : MonoBehaviour
             else if (!_powerupInputHeld && _gamepadInputImage.sprite != _buttonSprites[_buttonIndex + 1])
                 _gamepadInputImage.sprite = _buttonSprites[_buttonIndex + 1];
         }
+    }
+
+    private Vector2 GetMouseDirection()
+    {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 targetDirection = (mousePosition - (Vector2)transform.position).normalized;
+
+        return targetDirection;
+    }
+
+    private Vector2 GetJoystickDirection(Vector2 joyStickVector)
+    {
+        return (joyStickVector - (Vector2)transform.position).normalized;
     }
 
     void OnPowerUpUsed(InputAction.CallbackContext ctx)
@@ -90,16 +103,15 @@ public class PlayerAttack : MonoBehaviour
         _attackInputHeld = ctx.ReadValueAsButton();
     }
 
-    private void TurnToMouse()
+    private void TurnToTarget(Vector2 targetPosition)
     {
-        Vector2 targetPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
         Vector2 targetDirection = (targetPosition - (Vector2)transform.position).normalized;
         // If this is giving you an error, copy the DirectionIndicator object in JacobScene under Entities/Player and assign it to this script through the inspector.
         _directionIndicator.eulerAngles = new Vector3(0, 0, Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90); 
 
         _aimController.FaceTarget(targetPosition);
     }
+
     public void OnEnable()
     {
         _attackIA.Enable();

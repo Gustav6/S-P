@@ -465,6 +465,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd12a4bb1ff04f74f874beee6d6b1a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 
+  scoreNames: []
+  wave: 
+  waveNames: []
 --- !u!4 &113013796 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3225158508766823017, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
@@ -2172,7 +2176,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -4530712426691535282, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -4342694438242365024, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14525,7 +14529,7 @@ MonoBehaviour:
     foes.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -4530712426691535282, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -4342694438242365024, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14810,6 +14814,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a35deae7de1dc6d48ae6f7cbb7816a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _directionIndicator: {fileID: 0}
+  _attackIA:
+    m_Name: Attack IA
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: e5c586a7-fc5c-4f9f-98a8-fff00f12d1ae
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  _powerupIA:
+    m_Name: Powerup IA
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: f155bba1-95ef-47b4-b3b8-d921d1ef5e96
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  _kbInputImage: {fileID: 0}
+  _gamepadInputImage: {fileID: 0}
+  _buttonSprites: []
 --- !u!4 &958196907
 Transform:
   m_ObjectHideFlags: 0
@@ -14838,6 +14864,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bee386bcbb1a3b45a38e5a35ab0ca0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _movementIA:
+    m_Name: Movement IA
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 8d6740ea-e221-456d-9c21-60dbc3e729d6
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   _movementSpeed: 3
   _bigPoofParticle: {fileID: 7561094929466621037, guid: d22ecfe93ec6ceb47a2de2edd9a058f8, type: 3}
   _feetPosition: {fileID: 503529388}
@@ -14857,6 +14892,15 @@ MonoBehaviour:
   _interactableLayer:
     serializedVersion: 2
     m_Bits: 256
+  _interactIA:
+    m_Name: Interact IA
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 60a94db9-5ea4-4760-85ae-47f1916f3dae
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
 --- !u!114 &958196911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29555,6 +29599,7 @@ MonoBehaviour:
   - {fileID: 1684675585}
   - {fileID: 2041992978}
   - {fileID: 1059525875}
+  hasAttacked: 0
 --- !u!1 &1955724995
 GameObject:
   m_ObjectHideFlags: 0

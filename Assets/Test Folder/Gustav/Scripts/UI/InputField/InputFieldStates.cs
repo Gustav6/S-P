@@ -110,8 +110,8 @@ public class InputFieldPressedState : UIBaseState
                 {
                     Debug.Log("User entered: " + manager.text.text);
 
-                    int rnd1 = Random.Range(1, 1000);
-                    int rnd2 = Random.Range(1, 1000);
+                    int rnd1 = Random.Range(1, 10000);
+                    int rnd2 = Random.Range(1, 10);
 
                     AddNameToLeaderBoards(manager.text.text, rnd1, rnd2);
                     SaveLeaderBoard();
@@ -127,11 +127,6 @@ public class InputFieldPressedState : UIBaseState
             {
                 manager.text.text += c;
             }
-        }
-
-        if (Input.GetKeyUp(KeyCode.F2))
-        {
-            ClearLeaderboard();
         }
     }
 
@@ -215,29 +210,6 @@ public class InputFieldPressedState : UIBaseState
                 break;
             }
         }
-    }
-
-    public void ClearLeaderboard()
-    {
-        UIDataManager.instance.waveNames = new string[5];
-        UIDataManager.instance.scoreNames = new string[5];
-        UIDataManager.instance.wave = new int[5];
-        UIDataManager.instance.score = new int[5];
-
-        for (int i = 0; i < UIDataManager.instance.CurrentData.scoreLeadBoardNames.Length; i++)
-        {
-            UIDataManager.instance.CurrentData.scoreLeadBoardNames[i] = "";
-            UIDataManager.instance.CurrentData.scoreLeaderBoardValues[i] = 0;
-        }
-
-        for (int i = 0; i < UIDataManager.instance.CurrentData.waveLeadBoardNames.Length; i++)
-        {
-            UIDataManager.instance.CurrentData.waveLeadBoardNames[i] = "";
-            UIDataManager.instance.CurrentData.waveLeaderBoardValues[i] = 0;
-        }
-
-        SaveSystem.Instance.SaveData(UIDataManager.instance.CurrentData);
-        inputFieldInstance.UpdateLeadboard();
     }
 }
 #endregion

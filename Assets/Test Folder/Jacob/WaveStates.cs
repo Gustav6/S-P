@@ -865,7 +865,9 @@ public class WaveLossState : BaseWaveState
 
     public override void EnterState()
     {
-        _gameOverObject.SetActive(true);
+        //_gameOverObject.SetActive(true);
+
+        UIStateManager.Instance.PrefabToEnable = _gameOverObject;
 
         _context.CanSpawnEnemies = false;
 
@@ -883,7 +885,8 @@ public class WaveLossState : BaseWaveState
 
     public override void ExitState()
     {
-        _gameOverObject.SetActive(false);
+        UIStateManager.Instance.PrefabToDisable = _gameOverObject;
+        //_gameOverObject.SetActive(false);
         // TODO: Play animation to remove Gameover Prefab.
     }
 

@@ -465,6 +465,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd12a4bb1ff04f74f874beee6d6b1a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 
+  scoreNames: []
+  wave: 
+  waveNames: []
 --- !u!4 &113013796 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3225158508766823017, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
@@ -1439,6 +1443,22 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: 3656e81c-f67c-4cd8-adcc-83ca51cafea3
     m_ActionName: 'UI/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 305582104}
+        m_TargetAssemblyTypeName: UIInput, Assembly-CSharp
+        m_MethodName: Pointer
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 9e4cdac5-9f3e-43a6-9553-698ae7831eb0
+    m_ActionName: 'UI/Pointer[/Mouse/position]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -14810,6 +14830,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a35deae7de1dc6d48ae6f7cbb7816a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _directionIndicator: {fileID: 0}
 --- !u!4 &958196907
 Transform:
   m_ObjectHideFlags: 0
@@ -15030,6 +15051,18 @@ PrefabInstance:
     - target: {fileID: 3926876728030735410, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565516853449587500, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: moveIn
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565516853449587500, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: moveTowardsOnEnable
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565516853449587500, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: moveTowardsOnDisable
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4666405518097127181, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
       propertyPath: NewScene

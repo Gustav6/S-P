@@ -9,8 +9,6 @@ public class InputField : UI
 
     [Range(1, 20)] public int maxAmountOfLetters;
 
-    public static event EventHandler OnSave;
-
     public override void Start()
     {
         InputFieldStateManager = GetComponent<InputFieldStateManager>();
@@ -25,10 +23,5 @@ public class InputField : UI
         UpdateFunction(InputFieldStateManager);
 
         base.Update();
-    }
-
-    public void UpdateLeadboard()
-    {
-        OnSave?.Invoke(this, EventArgs.Empty);
     }
 }

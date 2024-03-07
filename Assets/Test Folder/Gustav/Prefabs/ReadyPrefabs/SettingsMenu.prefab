@@ -57,9 +57,10 @@ MonoBehaviour:
   fadeInTime: 1.5
   moveIn: 1
   moveInTime: 1
-  moveOutTime: 1
+  moveOutTime: 0.8
   moveTowardsOnEnable: 1
   moveTowardsOnDisable: 0
+  transitionType: 3
   scaleIn: 0
   scaleInTime: 1
   scaleInResetTime: 1
@@ -869,6 +870,10 @@ PrefabInstance:
       value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 5144763402206728921, guid: 5639d421d67f13c4ab358f3936296f5e, type: 3}
+      propertyPath: transitionType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144763402206728921, guid: 5639d421d67f13c4ab358f3936296f5e, type: 3}
       propertyPath: moveTowardsOnEnable
       value: 3
       objectReference: {fileID: 0}
@@ -902,6 +907,10 @@ PrefabInstance:
     - target: {fileID: 2840533290751648624, guid: 375039d89c1b54c4f83217f0d1eb8fd9, type: 3}
       propertyPath: moveOutTime
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2840533290751648624, guid: 375039d89c1b54c4f83217f0d1eb8fd9, type: 3}
+      propertyPath: transitionType
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2840533290751648624, guid: 375039d89c1b54c4f83217f0d1eb8fd9, type: 3}
       propertyPath: moveTowardsOnEnable

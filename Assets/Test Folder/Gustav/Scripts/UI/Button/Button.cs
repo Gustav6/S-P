@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -31,7 +32,8 @@ public class Button : UI
             { Functions.DisablePrefab, DisablePrefab },
             { Functions.EnablePrefab, EnablePrefab },
             { Functions.QuitGame, Application.Quit },
-            { Functions.UnPause, UnPause }
+            { Functions.UnPause, UnPause },
+            { Functions.ClearLeaderboard, ClearLeaderboard }
         };
 
         ButtonStateManager = GetComponent<ButtonStateManager>();
@@ -97,6 +99,29 @@ public class Button : UI
         }
     }
 
+    private void ClearLeaderboard()
+    {
+        UIDataManager.instance.waveNames = new string[5];
+        UIDataManager.instance.scoreNames = new string[5];
+        UIDataManager.instance.wave = new int[5];
+        UIDataManager.instance.score = new int[5];
+
+        for (int i = 0; i < UIDataManager.instance.CurrentData.scoreLeadBoardNames.Length; i++)
+        {
+            UIDataManager.instance.CurrentData.scoreLeadBoardNames[i] = "";
+            UIDataManager.instance.CurrentData.scoreLeaderBoardValues[i] = 0;
+        }
+
+        for (int i = 0; i < UIDataManager.instance.CurrentData.waveLeadBoardNames.Length; i++)
+        {
+            UIDataManager.instance.CurrentData.waveLeadBoardNames[i] = "";
+            UIDataManager.instance.CurrentData.waveLeaderBoardValues[i] = 0;
+        }
+
+        SaveSystem.Instance.SaveData(UIDataManager.instance.CurrentData);
+        UpdateLeadboard();
+    }
+
     public void ActivateSelectedFunctions()
     {
         for (int i = 0; i < selectedFunctions.Count; i++)
@@ -112,6 +137,7 @@ public class Button : UI
         EnablePrefab,
         QuitGame,
         UnPause,
+        ClearLeaderboard
     }
 }
 

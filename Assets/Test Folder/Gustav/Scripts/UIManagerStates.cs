@@ -24,10 +24,13 @@ public class UIManagerUnLoadedState : UIManagerBaseState
                 Debug.Log("Pause");
             }
         }
-        else if (stateManager.PrefabToEnable != null)
+
+        if (stateManager.PrefabToEnable != null)
         {
             stateManager.SwitchState(stateManager.ManagerTransitioningState);
         }
+
+        Debug.Log("Unloaded");
     }
 
     public override void ExitState(UIStateManager stateManager)
@@ -157,6 +160,8 @@ public class UIManagerLoadedState : UIManagerBaseState
                 stateManager.SwitchState(stateManager.ManagerUnLoadedState);
             }
         }
+
+        Debug.Log("Loaded");
     }
 
     public override void ExitState(UIStateManager stateManager)

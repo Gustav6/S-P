@@ -13,7 +13,7 @@ public class ScorePlayerSlot : MonoBehaviour
 
     void Start()
     {
-        InputField.OnSave += InputField_OnSave;
+        UI.OnSave += InputField_OnSave;
 
         nameTag = transform.GetChild(0).GetComponentInChildren<TextMeshProUGUI>();
         value = transform.GetChild(1).GetComponentInChildren<TextMeshProUGUI>();

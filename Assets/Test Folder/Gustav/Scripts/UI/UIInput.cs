@@ -144,6 +144,17 @@ public class UIInput : MonoBehaviour
         }
     }
 
+    public void Pointer(InputAction.CallbackContext context)
+    {
+        if (UIStateManager.Instance.KeyOrControlActive)
+        {
+            if (context.ReadValue<Vector2>() != Vector2.zero)
+            {
+                UIStateManager.Instance.KeyOrControlActive = false;
+            }
+        }
+    }
+
     public void ClickOnGameObject(InputAction.CallbackContext context)
     {
         if (UIIsLoaded() && CanInteractWithSelectedUI() && !UIStateManager.Instance.KeyOrControlActive)

@@ -53,11 +53,11 @@ MonoBehaviour:
   fadeIn: 0
   color: {r: 0, g: 0, b: 0, a: 0}
   fadeInTime: 1.5
-  moveIn: 1
+  moveIn: 0
   moveInTime: 1.2
   moveOutTime: 2
-  moveTowardsOnEnable: 1
-  moveTowardsOnDisable: 0
+  moveTowardsOnEnable: 4
+  moveTowardsOnDisable: 4
   transitionType: 3
   scaleIn: 0
   scaleInTime: 1
@@ -144,7 +144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4976460259830838166
 RectTransform:
   m_ObjectHideFlags: 0
@@ -368,16 +368,17 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   hovering: 0
   isInteractable: 0
-  outlineSelected: {r: 1, g: 1, b: 1, a: 0}
+  outlineSelected: {r: 0, g: 0, b: 0, a: 0}
   textSelected: {r: 0, g: 0, b: 0, a: 0}
-  outlineDeselected: {r: 0.62352943, g: 0.62352943, b: 0.62352943, a: 0}
+  outlineDeselected: {r: 0, g: 0, b: 0, a: 0}
   textDeselected: {r: 0, g: 0, b: 0, a: 0}
-  selectedScale: {x: 0, y: 0, z: 0}
+  selectedScale: {x: 1, y: 1, z: 1}
   images:
   - {fileID: 4737464585104590466}
   texts: []
+  imageSelectedColor: {r: 0.735849, g: 0.735849, b: 0.735849, a: 1}
   textSelectedColor: {r: 0, g: 0, b: 0, a: 0}
-  imageDeselectedAlpha: 0
+  imageDeselectedColor: {r: 0.6320754, g: 0.6320754, b: 0.6320754, a: 1}
   textDeselectedColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!61 &4295141773627062512
 BoxCollider2D:

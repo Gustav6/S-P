@@ -71,6 +71,15 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pointer"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""9e4cdac5-9f3e-43a6-9553-698ae7831eb0"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -227,6 +236,17 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""92ec67e6-9d94-4cab-b5df-0f6fb492035a"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pointer"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -240,6 +260,7 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
         m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
         m_UI_Slider = m_UI.FindAction("Slider", throwIfNotFound: true);
         m_UI_Pause = m_UI.FindAction("Pause", throwIfNotFound: true);
+        m_UI_Pointer = m_UI.FindAction("Pointer", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -306,6 +327,7 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
     private readonly InputAction m_UI_Click;
     private readonly InputAction m_UI_Slider;
     private readonly InputAction m_UI_Pause;
+    private readonly InputAction m_UI_Pointer;
     public struct UIActions
     {
         private @TestInputScript m_Wrapper;
@@ -315,6 +337,7 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
         public InputAction @Click => m_Wrapper.m_UI_Click;
         public InputAction @Slider => m_Wrapper.m_UI_Slider;
         public InputAction @Pause => m_Wrapper.m_UI_Pause;
+        public InputAction @Pointer => m_Wrapper.m_UI_Pointer;
         public InputActionMap Get() { return m_Wrapper.m_UI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -339,6 +362,9 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Pointer.started += instance.OnPointer;
+            @Pointer.performed += instance.OnPointer;
+            @Pointer.canceled += instance.OnPointer;
         }
 
         private void UnregisterCallbacks(IUIActions instance)
@@ -358,6 +384,9 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Pointer.started -= instance.OnPointer;
+            @Pointer.performed -= instance.OnPointer;
+            @Pointer.canceled -= instance.OnPointer;
         }
 
         public void RemoveCallbacks(IUIActions instance)
@@ -382,5 +411,6 @@ public partial class @TestInputScript: IInputActionCollection2, IDisposable
         void OnClick(InputAction.CallbackContext context);
         void OnSlider(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnPointer(InputAction.CallbackContext context);
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class UI : MonoBehaviour
@@ -21,6 +22,8 @@ public abstract class UI : MonoBehaviour
     [Header("UI selected scale")]
     public Vector3 selectedScale;
 
+    public static event EventHandler OnSave;
+
     public virtual void Start()
     {
 
@@ -28,18 +31,21 @@ public abstract class UI : MonoBehaviour
 
     public virtual void Update()
     {
-        if (GetComponent<Collider2D>().OverlapPoint(Input.mousePosition))
+        if (!UIStateManager.Instance.KeyOrControlActive)
         {
-            hovering = true;
-
-            if (isInteractable)
+            if (GetComponent<Collider2D>().OverlapPoint(Input.mousePosition))
             {
-                UIStateManager.Instance.CurrentUISelected = position;
+                hovering = true;
+
+                if (isInteractable)
+                {
+                    UIStateManager.Instance.CurrentUISelected = position;
+                }
             }
-        }
-        else if (hovering)
-        {
-            hovering = false;
+            else if (hovering)
+            {
+                hovering = false;
+            }
         }
     }
 
@@ -59,5 +65,10 @@ public abstract class UI : MonoBehaviour
         {
             manager.OnUpdate();
         }
+    }
+
+    public void UpdateLeadboard()
+    {
+        OnSave?.Invoke(this, EventArgs.Empty);
     }
 }

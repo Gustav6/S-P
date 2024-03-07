@@ -110,7 +110,10 @@ public class InputFieldPressedState : UIBaseState
                 {
                     Debug.Log("User entered: " + manager.text.text);
 
-                    AddNameToLeaderBoards(manager.text.text, Random.Range(1, 1000), Random.Range(1, 1000));
+                    int rnd1 = Random.Range(1, 1000);
+                    int rnd2 = Random.Range(1, 1000);
+
+                    AddNameToLeaderBoards(manager.text.text, rnd1, rnd2);
                     SaveLeaderBoard();
 
                     inputFieldInstance.UpdateLeadboard();
@@ -168,7 +171,7 @@ public class InputFieldPressedState : UIBaseState
         {
             int scoreOnCurrentIndex = UIDataManager.instance.score[i];
 
-            if (scoreOnCurrentIndex > currentScore)
+            if (scoreOnCurrentIndex < currentScore)
             {
                 string temp = UIDataManager.instance.scoreNames[i];
 
@@ -194,12 +197,12 @@ public class InputFieldPressedState : UIBaseState
         {
             int waveOnCurrentIndex = UIDataManager.instance.wave[i];
 
-            if (waveOnCurrentIndex > currentWave)
+            if (waveOnCurrentIndex < currentWave)
             {
                 string temp = UIDataManager.instance.waveNames[i];
 
                 UIDataManager.instance.waveNames[i] = currentName;
-                UIDataManager.instance.score[i] = currentWave;
+                UIDataManager.instance.wave[i] = currentWave;
 
                 currentName = temp;
                 currentWave = waveOnCurrentIndex;

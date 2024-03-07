@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#region Deselected State
 public class SliderDeselectedState : UIBaseState
 {
     private SliderStateManager manager;
@@ -30,6 +31,9 @@ public class SliderDeselectedState : UIBaseState
         }
     }
 }
+#endregion
+
+#region Selected State
 public class SliderSelectedState : UIBaseState
 {
     private SliderStateManager manager;
@@ -43,10 +47,6 @@ public class SliderSelectedState : UIBaseState
         if (!UIStateManager.Instance.Transitioning)
         {
             manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outLineImage, manager.text);
-        }
-        else
-        {
-            manager.SwitchState(manager.deselectedState);
         }
     }
     public override void UpdateState(BaseStateManager referenceManager)
@@ -64,7 +64,9 @@ public class SliderSelectedState : UIBaseState
 
     }
 }
+#endregion
 
+#region Pressed State
 public class SliderPressedState : UIBaseState
 {
     private SliderStateManager manager;
@@ -180,3 +182,4 @@ public class SliderPressedState : UIBaseState
         }
     }
 }
+#endregion

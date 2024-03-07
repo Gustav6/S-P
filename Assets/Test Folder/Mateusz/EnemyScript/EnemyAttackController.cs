@@ -44,7 +44,6 @@ public class EnemyAttackController : MonoBehaviour
     {
         _anim.SetBool("IsAttacking", true);
         _anim.SetFloat("AnimSpeed", 1.5f);
-        _rb.AddForce
     }
 
     public void LeaveAttack()

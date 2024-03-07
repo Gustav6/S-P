@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
+#region Deselected State
 public class InputFieldDeselectedState : UIBaseState
 {
     private InputFieldStateManager manager;
@@ -28,6 +30,9 @@ public class InputFieldDeselectedState : UIBaseState
         }
     }
 }
+#endregion
+
+#region Selected State
 public class InputFieldSelectedState : UIBaseState
 {
     private InputFieldStateManager manager;
@@ -37,18 +42,14 @@ public class InputFieldSelectedState : UIBaseState
 
     public override void EnterState(BaseStateManager referenceManager)
     {
+        manager = (InputFieldStateManager)referenceManager;
+
         if (!UIStateManager.Instance.Transitioning)
         {
-            manager = (InputFieldStateManager)referenceManager;
-
             referenceManager.StartCoroutine(WaitCoroutine(timeItTakes));
             manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, null);
 
             TransitionSystem.AddColorTransition(new ColorTransition(manager.text, textColor, timeItTakes, TransitionType.SmoothStop2));
-        }
-        else
-        {
-            manager.SwitchState(manager.deselectedState);
         }
     }
 
@@ -67,7 +68,9 @@ public class InputFieldSelectedState : UIBaseState
 
     }
 }
+#endregion
 
+#region Pressed State
 public class InputFieldPressedState : UIBaseState
 {
     private InputFieldStateManager manager;
@@ -107,46 +110,10 @@ public class InputFieldPressedState : UIBaseState
                 {
                     Debug.Log("User entered: " + manager.text.text);
 
-                    for (int i = 0; i < UIDataManager.instance.scoreLeaderBoard.Count; i++)
-                    {
-                        bool canAdd = true;
+                    AddNameToLeaderBoards(manager.text.text, Random.Range(1, 1000), Random.Range(1, 1000));
+                    SaveLeaderBoard();
 
-                        // Replace player with less score
-                        //for (int y = 0; y < UIDataManager.instance.scoreLeaderBoard.Count; y++)
-                        //{
-
-                        //}
-
-                        // temp check
-                        if (canAdd && UIDataManager.instance.scoreLeaderBoard.ElementAt(i).Key == null)
-                        {
-                            //UIDataManager.instance.scoreLeaderBoard.Add(manager.text.text, 0);
-                            UIDataManager.instance.CurrentData.scoreLeadBoardNames[i] = manager.text.text;
-                            UIDataManager.instance.CurrentData.scoreLeaderBoardValues[i] = 1;
-                            break;
-                        }
-                    }
-
-                    for (int i = 0; i < UIDataManager.instance.waveLeaderBoard.Count; i++)
-                    {
-                        bool canAdd = true;
-
-                        // Replace player with less score
-                        //for (int y = 0; y < UIDataManager.instance.scoreLeaderBoard.Count; y++)
-                        //{
-
-                        //}
-
-                        // temp check
-                        if (canAdd && UIDataManager.instance.waveLeaderBoard.ElementAt(i).Key == null)
-                        {
-                            UIDataManager.instance.CurrentData.waveLeadBoardNames[i] = manager.text.text;
-                            UIDataManager.instance.CurrentData.waveLeaderBoardValues[i] = 1;
-                            break;
-                        }
-                    }
-
-                    SaveSystem.Instance.SaveData(UIDataManager.instance.CurrentData);
+                    inputFieldInstance.UpdateLeadboard();
                 }
 
                 CheckIfDeselected(referenceManager, manager.deselectedState);
@@ -158,6 +125,11 @@ public class InputFieldPressedState : UIBaseState
                 manager.text.text += c;
             }
         }
+
+        if (Input.GetKeyUp(KeyCode.F2))
+        {
+            ClearLeaderboard();
+        }
     }
 
     public override void ExitState(BaseStateManager referenceManager)
@@ -167,4 +139,102 @@ public class InputFieldPressedState : UIBaseState
             manager.text.text = "WRITE NAME";
         }
     }
+
+    public void SaveLeaderBoard()
+    {
+        for (int i = 0; i < UIDataManager.instance.scoreNames.Length; i++)
+        {
+            UIDataManager.instance.CurrentData.scoreLeadBoardNames[i] = UIDataManager.instance.scoreNames[i];
+            UIDataManager.instance.CurrentData.scoreLeaderBoardValues[i] = UIDataManager.instance.score[i];
+        }
+
+        for (int i = 0; i < UIDataManager.instance.waveNames.Length; i++)
+        {
+            UIDataManager.instance.CurrentData.waveLeadBoardNames[i] = UIDataManager.instance.waveNames[i];
+            UIDataManager.instance.CurrentData.waveLeaderBoardValues[i] = UIDataManager.instance.wave[i];
+        }
+
+        SaveSystem.Instance.SaveData(UIDataManager.instance.CurrentData);
+    }
+
+    public void AddNameToLeaderBoards(string name, int score, int wave)
+    {
+        string currentName;
+
+        currentName = name;
+        int currentScore = score;
+
+        for (int i = 0; i < UIDataManager.instance.scoreNames.Length; i++)
+        {
+            int scoreOnCurrentIndex = UIDataManager.instance.score[i];
+
+            if (scoreOnCurrentIndex > currentScore)
+            {
+                string temp = UIDataManager.instance.scoreNames[i];
+
+                UIDataManager.instance.scoreNames[i] = currentName;
+                UIDataManager.instance.score[i] = currentScore;
+
+                currentName = temp;
+                currentScore = scoreOnCurrentIndex;
+            }
+            else if (scoreOnCurrentIndex == 0)
+            {
+                UIDataManager.instance.scoreNames[i] = currentName;
+                UIDataManager.instance.score[i] = currentScore;
+
+                break;
+            }
+        }
+
+        currentName = name;
+        int currentWave = wave;
+
+        for (int i = 0; i < UIDataManager.instance.waveNames.Length; i++)
+        {
+            int waveOnCurrentIndex = UIDataManager.instance.wave[i];
+
+            if (waveOnCurrentIndex > currentWave)
+            {
+                string temp = UIDataManager.instance.waveNames[i];
+
+                UIDataManager.instance.waveNames[i] = currentName;
+                UIDataManager.instance.score[i] = currentWave;
+
+                currentName = temp;
+                currentWave = waveOnCurrentIndex;
+            }
+            else if (waveOnCurrentIndex == 0)
+            {
+                UIDataManager.instance.waveNames[i] = currentName;
+                UIDataManager.instance.wave[i] = currentWave;
+
+                break;
+            }
+        }
+    }
+
+    public void ClearLeaderboard()
+    {
+        UIDataManager.instance.waveNames = new string[5];
+        UIDataManager.instance.scoreNames = new string[5];
+        UIDataManager.instance.wave = new int[5];
+        UIDataManager.instance.score = new int[5];
+
+        for (int i = 0; i < UIDataManager.instance.CurrentData.scoreLeadBoardNames.Length; i++)
+        {
+            UIDataManager.instance.CurrentData.scoreLeadBoardNames[i] = "";
+            UIDataManager.instance.CurrentData.scoreLeaderBoardValues[i] = 0;
+        }
+
+        for (int i = 0; i < UIDataManager.instance.CurrentData.waveLeadBoardNames.Length; i++)
+        {
+            UIDataManager.instance.CurrentData.waveLeadBoardNames[i] = "";
+            UIDataManager.instance.CurrentData.waveLeaderBoardValues[i] = 0;
+        }
+
+        SaveSystem.Instance.SaveData(UIDataManager.instance.CurrentData);
+        inputFieldInstance.UpdateLeadboard();
+    }
 }
+#endregion

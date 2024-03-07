@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-#region Button Deselected State
+#region Deselected State
 public class ButtonDeselectedState : UIBaseState
 {
     private ButtonStateManager manager;
@@ -19,14 +19,7 @@ public class ButtonDeselectedState : UIBaseState
 
     public override void UpdateState(BaseStateManager referenceManager)
     {
-        if (UIStateManager.Instance.GetComponentInChildren<PauseManager>() != null)
-        {
-            CheckIfSelected(referenceManager, manager.selectedState);
-        }
-        else
-        {
-            CheckIfSelected(referenceManager, manager.selectedState);
-        }
+        CheckIfSelected(referenceManager, manager.selectedState);
     }
 
     public override void ExitState(BaseStateManager referenceManager)
@@ -39,7 +32,7 @@ public class ButtonDeselectedState : UIBaseState
 }
 #endregion
 
-#region Button Selected State
+#region Selected State
 public class ButtonSelectedState : UIBaseState
 {
     private ButtonStateManager manager;
@@ -53,10 +46,6 @@ public class ButtonSelectedState : UIBaseState
         {
             manager.StartCoroutine(WaitCoroutine(timeItTakes));
             manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, manager.text);
-        }
-        else
-        {
-            manager.SwitchState(manager.deselectedState);
         }
     }
 
@@ -77,7 +66,7 @@ public class ButtonSelectedState : UIBaseState
 }
 #endregion
 
-#region Button Pressed State
+#region Pressed State
 public class ButtonPressedState : UIBaseState
 {
     private ButtonStateManager manager;

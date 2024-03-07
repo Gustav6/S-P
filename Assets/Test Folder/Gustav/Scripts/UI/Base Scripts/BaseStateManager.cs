@@ -67,7 +67,7 @@ public abstract class BaseStateManager : MonoBehaviour
             TransitionSystem.AddColorTransition(new ColorTransition(tmp, ColorPairs["TextDeSelected"], time, TransitionType.SmoothStop2));
         }
 
-        if (!UIStateManager.Instance.Transitioning && t != null)
+        if (t != null)
         {
             TransitionSystem.AddScaleTransition(new ScaleTransition(t, Vector3.one, time, TransitionType.SmoothStart2));
         }

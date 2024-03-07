@@ -176,8 +176,6 @@ public class UIStateManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(Transitioning);
-
         TransitionSystem.Update();
 
         CurrentState.UpdateState(this);

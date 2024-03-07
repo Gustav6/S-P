@@ -76,11 +76,14 @@ public class PlayerStats : MonoBehaviour, IDamageable
     [SerializeField] ParticleSystem _healParticlesPrefab;
     public float KnockbackPercent { get; set; }
 
+    // Not used at the moment.
+    public int ConsecutiveHits { get; set; }
+
     public PowerUp currentPowerUp { get; private set; }
     [SerializeField] private Image _powerUpHudElement;
+    public bool PowerupActive { get; private set; }
 
     public int Score { get; private set; }
-
 
     public void AddScore(int amount)
     {
@@ -179,12 +182,14 @@ public class PlayerStats : MonoBehaviour, IDamageable
     {
         _powerUpHudElement.color = new Color(1, 1, 1, 1);
         _powerUpHudElement.sprite = currentPowerUp.powerUpSprite;
+        PowerupActive = false;
     }
 
     private void PowerupUsed()
     {
         _powerUpHudElement.color = new Color(1, 1, 1, 0);
         _powerUpHudElement.sprite = null;
+        PowerupActive = true;
     }
 
     #region Damage and Knockback
@@ -349,5 +354,10 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _isInvulnerable = value;
     }
 
+    // Not used at the moment.
+    IEnumerator IDamageable.ResetConsecutiveHits()
+    {
+        throw new System.NotImplementedException();
+    }
     #endregion
 }

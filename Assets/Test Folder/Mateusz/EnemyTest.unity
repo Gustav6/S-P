@@ -179,7 +179,7 @@ MonoBehaviour:
   m_text: '[ Insert neat little message here ]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -4530712426691535282, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -564,6 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6138fef475b2d4d8c70739ba001e86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _powerupSprites: []
 --- !u!114 &144478174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1724,7 +1725,7 @@ MonoBehaviour:
   m_text: Wave Cleared!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -4530712426691535282, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2230,15 +2231,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fb3cc3f7af2f614d990c647cac69186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioMixer: {fileID: 24300002, guid: cd9da5f47f6c67242a5fe8c50a0c7c81, type: 2}
-  sounds:
-  - Name: Explosion
-    Clip: {fileID: 8300000, guid: 507cc976ce8fc5241a4dcbdbc8226831, type: 3}
-    Volume: 0.602
-    Pitch: 1
-    RandomizePitch: 0
-    Loop: 0
-    Source: {fileID: 0}
+  _sfxMixer: {fileID: 0}
+  _musicMixer: {fileID: 0}
+  _sounds: []
+  _music: []
 --- !u!4 &773047904
 Transform:
   m_ObjectHideFlags: 0
@@ -2386,6 +2382,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a40ac7d17f763334bb28506ed78b8bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1
 --- !u!483693784 &805295353
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -13511,7 +13508,7 @@ MonoBehaviour:
     foes.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -4530712426691535282, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -13796,6 +13793,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a35deae7de1dc6d48ae6f7cbb7816a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _directionIndicator: {fileID: 0}
 --- !u!4 &958196907
 Transform:
   m_ObjectHideFlags: 0
@@ -13907,6 +13905,8 @@ MonoBehaviour:
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   _maxDamagePercent: 300
+  _healParticlesPrefab: {fileID: 0}
+  _powerUpHudElement: {fileID: 0}
 --- !u!1 &989311537
 GameObject:
   m_ObjectHideFlags: 0
@@ -14540,7 +14540,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -6160644033787606532, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -4530712426691535282, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15441,8 +15441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14f015dd3bc6db4e89e8b4cb0e2da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pausePrefab: {fileID: 0}
-  prefabToSpawn: {fileID: 0}
 --- !u!1 &1488114218
 GameObject:
   m_ObjectHideFlags: 0
@@ -16046,7 +16044,6 @@ MonoBehaviour:
   - Fuck those fish!!
   _messageText: {fileID: 41028103}
   _waveClearAnim: {fileID: 603107909}
-  _islandGenerator: {fileID: 0}
   _islandPrefabs:
   - {fileID: 2219014881077572896, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
   _currentIsland: {fileID: 2051934466}
@@ -16055,6 +16052,10 @@ MonoBehaviour:
   _waveInfoPopup: {fileID: 1059721863}
   _gameOverUIObject: {fileID: 342279636}
   _waterPoolPrefab: {fileID: 9199059247923447511, guid: 8b4c0bc36884491478c0c3446bd6da09, type: 3}
+  _weaponRewardIncrement: 0
+  _statRewardIncrement: 0
+  _stageSwapIncrement: 0
+  _tutorialManager: {fileID: 0}
 --- !u!1 &1599309259
 GameObject:
   m_ObjectHideFlags: 0
@@ -16233,6 +16234,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a40ac7d17f763334bb28506ed78b8bfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 1
 --- !u!483693784 &1617123889
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -28544,19 +28546,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f22059464a44da74caa067109b7cfc29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 1969117436}
+  images: []
   fadeIn: 1
   color: {r: 0, g: 0, b: 0, a: 0}
   fadeInTime: 0.6
   moveIn: 0
-  baseDestinationFromScreen: 0
   moveInTime: 1
-  moveTowardsOnInstantiate: 0
-  moveTowardsOnDestroy: 0
+  moveOutTime: 1
+  moveTowardsOnEnable: 0
+  moveTowardsOnDisable: 0
+  transitionType: 3
   scaleIn: 0
   scaleInTime: 1
   scaleInResetTime: 1
-  newScale: {x: 0, y: 0, z: 0}
+  startingScale: {x: 0, y: 0, z: 0}
 --- !u!114 &1969117435
 MonoBehaviour:
   m_ObjectHideFlags: 0

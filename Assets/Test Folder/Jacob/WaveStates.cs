@@ -406,7 +406,6 @@ public class WaveRewardState : BaseWaveState
 
     void DisableWeaponRewardInteractables()
     {
-        _tutorialManager.OnWeaponPickup();
         for (int i = 0; i < _weaponRewardInteractables.Length; i++)
             _context.StateMachine.StartCoroutine(AscendReward(_weaponRewardInteractables[i], UnityEngine.Random.Range(0, 0.4f)));
 

@@ -144,6 +144,12 @@ public class WaveRewardInteractable : Interactable
 	{
 		if (_containedReward is StatReward)
         {
+			if (!TutorialManager.Instance.hasAttacked)
+            {
+				PopupManager.Instance.SpawnText("You must finish the previous part of the tutorial first", transform.position, 3f);
+				return;
+            }
+
 			PopupManager.Instance.SpawnText("Stat boost added!\n" + _containedReward.RewardName, (Vector2)transform.position + new Vector2(0, 1), 2);
             PlayerStats.Instance.AddStatModifier((_containedReward as StatReward).StatModifier);
         }

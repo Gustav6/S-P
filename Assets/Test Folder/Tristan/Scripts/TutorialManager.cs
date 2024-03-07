@@ -5,6 +5,23 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
+
+    public static TutorialManager Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Debug.LogWarning("More than one instance of TutorialManager found on " + gameObject + ", destroying instance");
+            Destroy(this);
+        }
+    }
+
+
     public GameObject[] popUps;
     private int popUpIndex;
     bool skipTutorial;
@@ -13,13 +30,16 @@ public class TutorialManager : MonoBehaviour
 
     Data ThisData;
 
-    bool hasWeapon = false;
     bool hasStat = false;
+    public bool hasAttacked = false;
 
     private void Start()
     {
         ThisData = SaveSystem.Instance.LoadData();
         //skipTutorial = ThisData.SkipTutorial;
+
+        if (skipTutorial)
+            hasAttacked = true;
     }
 
     void Update()
@@ -40,7 +60,10 @@ public class TutorialManager : MonoBehaviour
             }
             else if (popUpIndex == 1) {
                 if (Input.GetButtonDown("Fire1"))
+                {
+                    hasAttacked = true;
                     popUpIndex++;
+                }
             }
             else if (popUpIndex == 2) {
                 if (hasStat)
@@ -56,11 +79,6 @@ public class TutorialManager : MonoBehaviour
                 }
             }
         }
-    }
-
-    public void OnWeaponPickup()
-    {
-        hasWeapon = true;
     }
 
     public void OnStatPickup()

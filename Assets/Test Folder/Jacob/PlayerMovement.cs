@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+	[SerializeField] InputAction _movementIA;
+
 	[SerializeField] float _movementSpeed = 3;
 	[SerializeField] ParticleSystem _bigPoofParticle;
 	[SerializeField] Transform _feetPosition;
@@ -28,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
 		if (MovementLocked)
 			return;
 
-		Vector2 input = new(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+		Vector2 input = _movementIA.ReadValue<Vector2>();
 
 		_anim.SetBool("IsMoving", input.magnitude > 0);
 
@@ -51,5 +54,15 @@ public class PlayerMovement : MonoBehaviour
 	{
 		MovementLocked = value;
 		rb.velocity = Vector2.zero;
+	}
+
+	public void OnEnable()
+	{
+		_movementIA.Enable();
+	}
+
+	public void OnDisable()
+	{
+		_movementIA.Disable();
 	}
 }

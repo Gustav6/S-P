@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5636dff09e1360347ab761647948eb96, type: 3}
-  m_Name: SR_Homerun
+  m_Name: SR_Jackpot
   m_EditorClassIdentifier: 
-  RewardName: Homerun
+  RewardName: Jackpot
   WaveUnlocked: 0
   StatModifier:
-    AttackSpeed: 1
-    DamageModifier: 0.8
-    DamageResistanceModifier: 1
-    KnockbackModifier: 1.2
+    AttackSpeed: 1.07
+    DamageModifier: 1.07
+    DamageResistanceModifier: 1.07
+    KnockbackModifier: 1
     KnockbackResitanceModifier: 1
     MovementSpeedModifier: 1

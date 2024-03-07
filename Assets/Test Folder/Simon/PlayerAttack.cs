@@ -1,20 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
+using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] Transform _directionIndicator;
 
+    [SerializeField] InputAction _attackIA;
+    [SerializeField] InputAction _powerupIA;
+
+    [SerializeField] Image _kbInputImage, _gamepadInputImage;
+    [SerializeField] Sprite[] _buttonSprites;
+
     private PlayerAnimationController _attackController;
     private AimController _aimController;
     private PlayerStats _player;
+
+    bool _attackInputHeld;
+    bool _powerupInputHeld;
 
     private void Awake()
     {
         _attackController = GetComponentInChildren<PlayerAnimationController>();
         _aimController = GetComponent<AimController>();
         _player = GetComponent<PlayerStats>();
+
+        _attackIA.performed += ctx => { OnHit(ctx); };
+        _powerupIA.performed += ctx => { OnPowerUpUsed(ctx); };
     }
 
     private void Update()
@@ -22,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
         if (!_attackController.inAnimation)
             TurnToMouse();
 
-        if (Input.GetMouseButton(0) && !_attackController.inAnimation && EquipmentManager.Instance.CanHit())
+        if (_attackInputHeld && !_attackController.inAnimation && EquipmentManager.Instance.CanHit())
         {
             Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             Vector2 targetDirection = (mousePosition - (Vector2)transform.position).normalized;
@@ -30,8 +46,37 @@ public class PlayerAttack : MonoBehaviour
             _attackController.PlayHitAnimation(targetDirection);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && _player.currentPowerUp != null)
+        if (_powerupInputHeld && _player.currentPowerUp != null && !_player.PowerupActive)
             _player.currentPowerUp.UsePowerUp();
+    }
+
+    void OnPowerUpUsed(InputAction.CallbackContext ctx)
+    {
+        _powerupInputHeld = ctx.ReadValueAsButton();
+
+        int i = 0;
+
+        if (ctx.control.device is Keyboard)
+        {
+            _kbInputImage.gameObject.SetActive(true);
+            _gamepadInputImage.gameObject.SetActive(false);
+        }
+        else if (ctx.control.device is Gamepad)
+        {
+            _gamepadInputImage.gameObject.SetActive(true);
+            _kbInputImage.gameObject.SetActive(false);
+            i = 2;
+        }
+
+        if (_powerupInputHeld)
+            _kbInputImage.sprite = _buttonSprites[i];
+        if (_powerupInputHeld)
+            _kbInputImage.sprite = _buttonSprites[i + 1];
+    }
+
+    void OnHit(InputAction.CallbackContext ctx)
+    {
+        _attackInputHeld = ctx.ReadValueAsButton();
     }
 
     private void TurnToMouse()
@@ -43,5 +88,16 @@ public class PlayerAttack : MonoBehaviour
         _directionIndicator.eulerAngles = new Vector3(0, 0, Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90); 
 
         _aimController.FaceTarget(targetPosition);
+    }
+    public void OnEnable()
+    {
+        _attackIA.Enable();
+        _powerupIA.Enable();
+    }
+
+    public void OnDisable()
+    {
+        _attackIA.Disable();
+        _powerupIA.Enable();
     }
 }

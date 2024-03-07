@@ -47,11 +47,11 @@ public class PowerUpActivation : MonoBehaviour
             case PowerUpTypes.Anything:
 
             case PowerUpTypes.Dash:
-                playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<Dash>());
+                playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<ScalePowerup>());
                 break;
 
             case PowerUpTypes.Haste:
-                playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<HastePowerup>());
+                playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<ScalePowerup>());
                 break;
 
             case PowerUpTypes.Tank:
@@ -59,7 +59,7 @@ public class PowerUpActivation : MonoBehaviour
                 break;
 
             case PowerUpTypes.Heal:
-                playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<HealPowerup>());
+                playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<ScalePowerup>());
                 break;
 
         }

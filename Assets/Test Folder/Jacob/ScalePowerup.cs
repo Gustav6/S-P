@@ -34,7 +34,7 @@ public class ScalePowerup : PowerUp
         {
             yield return null;
             time += Time.deltaTime;
-            transform.localScale = Vector2.Lerp(Vector2.one, Vector2.one * 1.5f, time / 0.25f);
+            transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 1.5f, time / 0.25f);
         }
 
         yield return new WaitForSeconds(9.5f);
@@ -45,7 +45,7 @@ public class ScalePowerup : PowerUp
         {
             yield return null;
             time += Time.deltaTime;
-            transform.localScale = Vector2.Lerp(Vector2.one * 1.25f, Vector2.one, time / 0.25f);
+            transform.localScale = Vector3.Lerp(Vector3.one * 1.5f, Vector3.one, time / 0.25f);
         }
 
         OnDeactivatePowerUp();

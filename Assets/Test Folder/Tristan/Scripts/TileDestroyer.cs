@@ -22,7 +22,7 @@ public class TileDestroyer : MonoBehaviour
     Tilemap tilemap;
     Vector3 mousePos;
     Vector3Int snappedTile, tilePos;
-    
+
     [SerializeField] GridLayout grid;
 
     Vector3Int nTilePos, wTilePos, sTilePos, eTilePos, neTilePos, nwTilePos, swTilePos, seTilePos;
@@ -31,11 +31,13 @@ public class TileDestroyer : MonoBehaviour
     void Start() {
         tilemap = GetComponent<Tilemap>();
         grid = GetComponentInParent<Grid>();
+        BoundsInt bounds = tilemap.cellBounds;
     }
 
     void Update()
     {
         tilemap = GetComponent<Tilemap>();
+        // For testing purposes only
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         if (Input.GetMouseButtonUp(0))
         {
@@ -84,7 +86,7 @@ public class TileDestroyer : MonoBehaviour
 
     void UpdateTile(Tile_Location loc) {
         Debug.Log("Updating");
-        // Checks (almost) all possible cases and places the correct tile for said case
+        // Checks (almost) all possible cases and places for adjacent tiles for said case
         switch (loc)
         {
             case Tile_Location.N:
@@ -442,14 +444,15 @@ public class TileDestroyer : MonoBehaviour
         }
     }
 
+    // Here it tries to find all adjacent tiles
     void SetLocalTiles() {
         Debug.Log("Setting");
         foreach (Tile_Location loc in Tile_Location.GetValues(typeof(Tile_Location))) {
             Debug.Log("Locating");
+            // And calls to update them to their new tile
             UpdateTile(loc);
         }
 
-        
         if (tilemap.GetComponent<TilemapRenderer>().mode == TilemapRenderer.Mode.Individual)
         {
             tilemap.GetComponent<TilemapRenderer>().mode = TilemapRenderer.Mode.Chunk;
@@ -460,6 +463,7 @@ public class TileDestroyer : MonoBehaviour
         } 
     }
 
+    // Here it destroyes the middle tile and starts the chain reaction around it
     void DestroyTile(Vector3 worldPos, float dmg) {
         Debug.Log("I'm in");
         tileHealth -= dmg;
@@ -481,5 +485,10 @@ public class TileDestroyer : MonoBehaviour
             SetLocalTiles();
             tileHealth = 100;
         }
+    }
+
+    void setHealth(Tile_Location loc)
+    {
+        
     }
 }

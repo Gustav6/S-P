@@ -15584,6 +15584,112 @@ MonoBehaviour:
       m_Action: Powerup IA
       m_Flags: 0
     m_Flags: 0
+  _anyIA:
+    m_Name: Any IA
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: b4a44c08-a99e-400d-ba87-c72034b2bd1b
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 00913aca-6060-44e0-9cf2-dc4789224c58
+      m_Path: <Keyboard>/anyKey
+      m_Interactions: Press
+      m_Processors: 
+      m_Groups: 
+      m_Action: Any IA
+      m_Flags: 0
+    - m_Name: No anyKey for controlled, check for movement input instead
+      m_Id: d796b2e5-6b18-4f50-a1e4-4258bd9ea79c
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Any IA
+      m_Flags: 4
+    - m_Name: up
+      m_Id: 7d7a8b16-c26d-439c-a32c-286ebcadaa1e
+      m_Path: <Gamepad>/leftStick/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Any IA
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 9a6feb04-9ac3-4063-ac3e-1f78d0249364
+      m_Path: <Gamepad>/leftStick/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Any IA
+      m_Flags: 8
+    - m_Name: left
+      m_Id: 01a36b44-12fb-4a2b-b496-7367bc6be45a
+      m_Path: <Gamepad>/leftStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Any IA
+      m_Flags: 8
+    - m_Name: right
+      m_Id: 61de09eb-4921-4cf9-a39e-076ca7ed85d5
+      m_Path: <Gamepad>/leftStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Any IA
+      m_Flags: 8
+    m_Flags: 0
+  _aimIA:
+    m_Name: Aim IA
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: cff831d0-19fc-4abe-963e-491d8fdb7b96
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 2D Vector
+      m_Id: 05e32587-f238-44a7-b694-cf4867a54179
+      m_Path: 2DVector
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim IA
+      m_Flags: 4
+    - m_Name: up
+      m_Id: b5002a8c-82cd-4a5b-b5d2-fa75cade4ef8
+      m_Path: <Gamepad>/rightStick/up
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim IA
+      m_Flags: 8
+    - m_Name: down
+      m_Id: 78e6717b-f1ec-4b90-b226-1ade7c5955ff
+      m_Path: <Gamepad>/rightStick/down
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim IA
+      m_Flags: 8
+    - m_Name: left
+      m_Id: a13e3a81-f4b7-4a5a-9cb7-6236ab6f8352
+      m_Path: <Gamepad>/rightStick/left
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim IA
+      m_Flags: 8
+    - m_Name: right
+      m_Id: da051281-2002-481c-aaee-0c9ed2c43cca
+      m_Path: <Gamepad>/rightStick/right
+      m_Interactions: 
+      m_Processors: 
+      m_Groups: 
+      m_Action: Aim IA
+      m_Flags: 8
+    m_Flags: 0
   _kbInputImage: {fileID: 549523446}
   _gamepadInputImage: {fileID: 462252388}
   _buttonSprites:

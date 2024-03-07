@@ -13,6 +13,8 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] InputAction _attackIA;
     [SerializeField] InputAction _powerupIA;
+    [SerializeField] InputAction _anyIA;
+    [SerializeField] InputAction _aimIA;
 
     [SerializeField] Image _kbInputImage, _gamepadInputImage;
     [SerializeField] Sprite[] _buttonSprites;
@@ -24,7 +26,7 @@ public class PlayerAttack : MonoBehaviour
     bool _attackInputHeld;
     bool _powerupInputHeld;
 
-    int _buttonIndex;
+    bool _isOnKBM = true;
 
     private void Awake()
     {
@@ -34,6 +36,29 @@ public class PlayerAttack : MonoBehaviour
 
         _attackIA.performed += ctx => { OnHit(ctx); };
         _powerupIA.performed += ctx => { OnPowerUpUsed(ctx); };
+        _anyIA.performed += ctx => { OnAnyInput(ctx); };
+    }
+
+    void OnAnyInput(InputAction.CallbackContext ctx)
+    {
+        if (ctx.control.device is Keyboard || ctx.control.device is Mouse)
+        {
+            _isOnKBM = true;
+            if (!_kbInputImage.gameObject.activeSelf)
+            {
+                _kbInputImage.gameObject.SetActive(true);
+                _gamepadInputImage.gameObject.SetActive(false);
+            }
+        }
+        else if (ctx.control.device is Gamepad)
+        {
+            _isOnKBM = false;
+            if (!_gamepadInputImage.gameObject.activeSelf)
+            {
+                _gamepadInputImage.gameObject.SetActive(true);
+                _kbInputImage.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void Update()
@@ -43,7 +68,12 @@ public class PlayerAttack : MonoBehaviour
 
         if (_attackInputHeld && !_attackController.inAnimation && EquipmentManager.Instance.CanHit())
         {
-            Vector2 targetDirection = GetMouseDirection();
+            Vector2 targetDirection;
+
+            if (_isOnKBM)
+                targetDirection = GetMouseDirection();
+            else
+                targetDirection = _aimIA.ReadValue<Vector2>().normalized;
 
             _attackController.PlayHitAnimation(targetDirection);
         }
@@ -51,19 +81,19 @@ public class PlayerAttack : MonoBehaviour
         if (_powerupInputHeld && _player.currentPowerUp != null && !_player.PowerupActive)
             _player.currentPowerUp.UsePowerUp();
 
-        if (_buttonIndex == 0)
+        if (_isOnKBM)
         {
-            if (_powerupInputHeld && _kbInputImage.sprite != _buttonSprites[_buttonIndex])
-                _kbInputImage.sprite = _buttonSprites[_buttonIndex];
-            else if (!_powerupInputHeld && _kbInputImage.sprite != _buttonSprites[_buttonIndex + 1])
-                _kbInputImage.sprite = _buttonSprites[_buttonIndex + 1];
+            if (_powerupInputHeld && _kbInputImage.sprite != _buttonSprites[0])
+                _kbInputImage.sprite = _buttonSprites[0];
+            else if (!_powerupInputHeld && _kbInputImage.sprite != _buttonSprites[1])
+                _kbInputImage.sprite = _buttonSprites[1];
         }
         else
         {
-            if (_powerupInputHeld && _gamepadInputImage.sprite != _buttonSprites[_buttonIndex])
-                _gamepadInputImage.sprite = _buttonSprites[_buttonIndex];
-            else if (!_powerupInputHeld && _gamepadInputImage.sprite != _buttonSprites[_buttonIndex + 1])
-                _gamepadInputImage.sprite = _buttonSprites[_buttonIndex + 1];
+            if (_powerupInputHeld && _gamepadInputImage.sprite != _buttonSprites[2])
+                _gamepadInputImage.sprite = _buttonSprites[2];
+            else if (!_powerupInputHeld && _gamepadInputImage.sprite != _buttonSprites[3])
+                _gamepadInputImage.sprite = _buttonSprites[3];
         }
     }
 
@@ -75,27 +105,9 @@ public class PlayerAttack : MonoBehaviour
         return targetDirection;
     }
 
-    private Vector2 GetJoystickDirection(Vector2 joyStickVector)
-    {
-        return (joyStickVector - (Vector2)transform.position).normalized;
-    }
-
     void OnPowerUpUsed(InputAction.CallbackContext ctx)
     {
         _powerupInputHeld = ctx.ReadValueAsButton();
-
-        if (ctx.control.device is Keyboard)
-        {
-            _kbInputImage.gameObject.SetActive(true);
-            _gamepadInputImage.gameObject.SetActive(false);
-            _buttonIndex = 0;
-        }
-        else if (ctx.control.device is Gamepad)
-        {
-            _gamepadInputImage.gameObject.SetActive(true);
-            _kbInputImage.gameObject.SetActive(false);
-            _buttonIndex = 2;
-        }
     }
 
     void OnHit(InputAction.CallbackContext ctx)
@@ -116,11 +128,13 @@ public class PlayerAttack : MonoBehaviour
     {
         _attackIA.Enable();
         _powerupIA.Enable();
+        _anyIA.Enable();
     }
 
     public void OnDisable()
     {
         _attackIA.Disable();
-        _powerupIA.Enable();
+        _powerupIA.Disable();
+        _anyIA.Disable();
     }
 }

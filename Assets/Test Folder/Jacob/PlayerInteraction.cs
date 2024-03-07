@@ -3,20 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] float _maxInteractionRadius;
     [SerializeField] LayerMask _interactableLayer;
 
+    [SerializeField] InputAction _interactIA;
+
     Interactable _focusedInteractable;
+
+    private void Awake()
+    {
+        _interactIA.performed += ctx => { Interact(); };
+    }
 
     private void Update()
     {
         CheckRadiusForInteractables();
-
-        if (Input.GetKeyDown(KeyCode.F))
-            Interact();
     }
 
     void CheckRadiusForInteractables()
@@ -70,5 +75,15 @@ public class PlayerInteraction : MonoBehaviour
 
         _focusedInteractable.ExitInteractionRange();
         _focusedInteractable = null;
+    }
+
+    public void OnEnable()
+    {
+        _interactIA.Enable();
+    }
+
+    public void OnDisable()
+    {
+        _interactIA.Disable();
     }
 }

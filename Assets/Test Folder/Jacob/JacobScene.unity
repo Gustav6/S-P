@@ -15575,6 +15575,14 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Powerup IA
       m_Flags: 0
+    - m_Name: 
+      m_Id: 37c9d9d6-827e-4bf4-91d1-7dca762ab0e9
+      m_Path: <Gamepad>/buttonEast
+      m_Interactions: Press(behavior=2)
+      m_Processors: 
+      m_Groups: 
+      m_Action: Powerup IA
+      m_Flags: 0
     m_Flags: 0
   _kbInputImage: {fileID: 549523446}
   _gamepadInputImage: {fileID: 462252388}
@@ -15712,6 +15720,31 @@ MonoBehaviour:
   _interactableLayer:
     serializedVersion: 2
     m_Bits: 256
+  _interactIA:
+    m_Name: Interact IA
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 99f0cc14-3d23-41b2-83c2-43a631a47ff5
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings:
+    - m_Name: 
+      m_Id: 3d1089d9-a0ae-4ddf-aac6-ec8306bcebe3
+      m_Path: <Keyboard>/f
+      m_Interactions: Press
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact IA
+      m_Flags: 0
+    - m_Name: 
+      m_Id: ea83bcaf-34ef-437f-aa58-c52c86206974
+      m_Path: <Gamepad>/buttonSouth
+      m_Interactions: Press
+      m_Processors: 
+      m_Groups: 
+      m_Action: Interact IA
+      m_Flags: 0
+    m_Flags: 0
 --- !u!114 &958196911
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16383,13 +16416,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044731722}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1311641995}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 94, y: -26.000015}
@@ -17100,7 +17133,7 @@ MonoBehaviour:
     this will start the wave'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: -4342694438242365024, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -31567,7 +31600,7 @@ MonoBehaviour:
   m_text: Stat Boosts
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: 0}
+  m_sharedMaterial: {fileID: -4342694438242365024, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

@@ -23,6 +23,8 @@ public class PlayerAttack : MonoBehaviour
     bool _attackInputHeld;
     bool _powerupInputHeld;
 
+    int _buttonIndex;
+
     private void Awake()
     {
         _attackController = GetComponentInChildren<PlayerAnimationController>();
@@ -48,30 +50,39 @@ public class PlayerAttack : MonoBehaviour
 
         if (_powerupInputHeld && _player.currentPowerUp != null && !_player.PowerupActive)
             _player.currentPowerUp.UsePowerUp();
+
+        if (_buttonIndex == 0)
+        {
+            if (_powerupInputHeld && _kbInputImage.sprite != _buttonSprites[_buttonIndex])
+                _kbInputImage.sprite = _buttonSprites[_buttonIndex];
+            else if (!_powerupInputHeld && _kbInputImage.sprite != _buttonSprites[_buttonIndex + 1])
+                _kbInputImage.sprite = _buttonSprites[_buttonIndex + 1];
+        }
+        else
+        {
+            if (_powerupInputHeld && _gamepadInputImage.sprite != _buttonSprites[_buttonIndex])
+                _gamepadInputImage.sprite = _buttonSprites[_buttonIndex];
+            else if (!_powerupInputHeld && _gamepadInputImage.sprite != _buttonSprites[_buttonIndex + 1])
+                _gamepadInputImage.sprite = _buttonSprites[_buttonIndex + 1];
+        }
     }
 
     void OnPowerUpUsed(InputAction.CallbackContext ctx)
     {
         _powerupInputHeld = ctx.ReadValueAsButton();
 
-        int i = 0;
-
         if (ctx.control.device is Keyboard)
         {
             _kbInputImage.gameObject.SetActive(true);
             _gamepadInputImage.gameObject.SetActive(false);
+            _buttonIndex = 0;
         }
         else if (ctx.control.device is Gamepad)
         {
             _gamepadInputImage.gameObject.SetActive(true);
             _kbInputImage.gameObject.SetActive(false);
-            i = 2;
+            _buttonIndex = 2;
         }
-
-        if (_powerupInputHeld)
-            _kbInputImage.sprite = _buttonSprites[i];
-        if (_powerupInputHeld)
-            _kbInputImage.sprite = _buttonSprites[i + 1];
     }
 
     void OnHit(InputAction.CallbackContext ctx)

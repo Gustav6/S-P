@@ -48,6 +48,25 @@ public class AimController : MonoBehaviour
         }
 	}
 
+	public void FaceDirection(Vector2 direction)
+    {
+		float x = direction.x;
+		float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+
+		// Minus is here because of how the sprites interact with their local scale and different pivot points.
+		float currentAimDirection = -Mathf.Sign(x);
+
+		RotateBody(x, angle);
+
+		if (currentAimDirection != _previousAimDirection && Mathf.Abs(x) >= turnThreshold)
+		{
+			StopAllCoroutines();
+
+			_previousAimDirection = currentAimDirection;
+			StartCoroutine(TurnAround(currentAimDirection));
+		}
+	}
+
     private void RotateBody(float x, float angle)
 	{
 		void SetLocalRotation(bool isNeckRotation)

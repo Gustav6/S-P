@@ -10,8 +10,6 @@ public class ShrimpEnemy : Enemy
         if (knockbackMultiplier == 0)
             return;
 
-        shouldResetHits = false;
-
         _enemyAttack.CanAttack(false);
         _attackController.LeaveMovement(false);
         _attackController.EnemyHit();

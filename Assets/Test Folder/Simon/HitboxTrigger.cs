@@ -76,9 +76,9 @@ public class HitboxTrigger : MonoBehaviour
         float decreaseValuePerHit = 0.2f;
 
         float stunTime = currentKnockbackPercent / 250;
-        stunTime = stunTime < 0.1f ? 0.1f : stunTime >= 0.5f ? 0.5f + ((stunTime - 0.5f) / 4) : stunTime;
+        stunTime = stunTime < 0.05f ? 0.05f : stunTime >= 0.5f ? 0.5f + ((stunTime - 0.5f) / 4) : stunTime;
         stunTime = (stunTime / 2) + baseStunTime;
-        stunTime = stunTime - decreaseValuePerHit * consecutiveHits > 0 ? stunTime - decreaseValuePerHit * consecutiveHits : 0.1f;
+        stunTime = stunTime - decreaseValuePerHit * consecutiveHits > 0 ? stunTime - decreaseValuePerHit * consecutiveHits : 0.05f;
 
         return stunTime;
     }

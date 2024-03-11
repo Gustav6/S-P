@@ -1780,6 +1780,22 @@ MonoBehaviour:
         m_CallState: 1
     m_ActionId: 3656e81c-f67c-4cd8-adcc-83ca51cafea3
     m_ActionName: 'UI/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 305582104}
+        m_TargetAssemblyTypeName: UIInput, Assembly-CSharp
+        m_MethodName: Pointer
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+    m_ActionId: 9e4cdac5-9f3e-43a6-9553-698ae7831eb0
+    m_ActionName: 'UI/Pointer[/Mouse/position]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI
@@ -15925,12 +15941,28 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 305582100}
     m_Modifications:
+    - target: {fileID: 1795085671899911281, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: playTransition
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1795085671899911281, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: transitionDuration
+      value: 0.47
+      objectReference: {fileID: 0}
+    - target: {fileID: 1795085671899911281, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: selectedFunctions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2929108061838049748, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
     - target: {fileID: 2929108061838049748, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
       propertyPath: m_hasFontAssetChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3243182422321909837, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: playTransition
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3243182422321909837, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
@@ -16043,6 +16075,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4666405518097127181, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
       propertyPath: NewScene
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4666405518097127181, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: playTransition
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4666405518097127181, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}

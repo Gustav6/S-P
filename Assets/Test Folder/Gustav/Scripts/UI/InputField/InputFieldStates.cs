@@ -136,6 +136,10 @@ public class InputFieldPressedState : UIBaseState
         {
             manager.text.text = "WRITE NAME";
         }
+        else
+        {
+            inputFieldInstance.ActivateSelectedFunctions();
+        }
     }
 
     public void SaveLeaderBoard()

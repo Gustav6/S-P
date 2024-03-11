@@ -13,7 +13,7 @@ public class Button : UI
 
     [Header("Button variables")]
     [SerializeField] private List<Functions> selectedFunctions = new();
-    private Dictionary<Functions, System.Action> functionLookup;
+    private Dictionary<Functions, Action> functionLookup;
 
     [Range(0.1f, 5)] public float transitionDuration;
 
@@ -78,7 +78,7 @@ public class Button : UI
         {
             ExecuteOnCompletion execute = SwitchScene;
 
-            Cover(execute);
+            CoverManager.Instance.Cover(transitionDuration, execute);
         }
         else if (CoverManager.Instance == null || !playTransition)
         {
@@ -89,14 +89,6 @@ public class Button : UI
     private void SwitchScene()
     {
         SceneManager.LoadScene((int)NewScene);
-    }
-
-    private void Cover(ExecuteOnCompletion execute)
-    {
-        if (CoverManager.Instance != null)
-        {
-            CoverManager.Instance.Cover(transitionDuration, execute);
-        }
     }
 
     private void ClearLeaderboard()

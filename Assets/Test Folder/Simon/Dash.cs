@@ -11,6 +11,7 @@ public class Dash : PowerUp
 
     private List<SpriteRenderer> _sr;
     private SpriteRenderer _bodySr;
+    private Sprite _startSprite;
 
     private readonly float _dashTime = 0.5f;
 
@@ -23,6 +24,7 @@ public class Dash : PowerUp
         _sr = GetComponentsInChildren<SpriteRenderer>().ToList();
         _sr.RemoveAt(4); // 4 = Weapon flash sprite.
         _bodySr = _sr[0];
+        _startSprite = _bodySr.sprite;
     }
 
     private void Start()
@@ -35,6 +37,7 @@ public class Dash : PowerUp
     public override void UsePowerUp()
     {
         EquipmentManager.Instance.OnPowerUpUsed?.Invoke();
+        EquipmentManager.Instance.ToggleHit(false);
 
         Vector2 direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")).normalized;
 
@@ -49,8 +52,6 @@ public class Dash : PowerUp
     private IEnumerator MakePlayerInvincible()
     {
         _playerHitbox.enabled = false;
-
-        Sprite startSprite = _bodySr.sprite;
 
         GameObject hitbox = Instantiate(PlayerStats.Instance.CurrentWeapon.Hitbox, transform);
         hitbox.transform.localPosition = Vector2.zero;
@@ -70,15 +71,30 @@ public class Dash : PowerUp
             sr.enabled = true;
         }
 
-        _bodySr.sprite = startSprite;
+        _bodySr.sprite = _startSprite;
 
-        Destroy(hitbox);
+        EquipmentManager.Instance.ToggleHit(true);
         OnDeactivatePowerUp();
+        Destroy(hitbox);
     }
 
     public override void OnDeactivatePowerUp()
     {
         _playerHitbox.enabled = true;
         PlayerStats.Instance.ClearEquippedAbility();
+    }
+
+    // Here as insurance
+    private void OnDestroy()
+    {
+        EquipmentManager.Instance.ToggleHit(true);
+        OnDeactivatePowerUp();
+
+        foreach (SpriteRenderer sr in _sr)
+        {
+            sr.enabled = true;
+        }
+
+        _bodySr.sprite = _startSprite;
     }
 }

@@ -15,7 +15,7 @@ public class InputFieldDeselectedState : UIBaseState
     {
         manager = (InputFieldStateManager)referenceManager;
 
-        manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, manager.text);
+        manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.outline, manager.bgImage, manager.transform, manager.text);
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
@@ -47,7 +47,7 @@ public class InputFieldSelectedState : UIBaseState
         if (!UIStateManager.Instance.Transitioning)
         {
             referenceManager.StartCoroutine(WaitCoroutine(timeItTakes));
-            manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, null);
+            manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.outline, manager.bgImage, manager.transform);
 
             TransitionSystem.AddColorTransition(new ColorTransition(manager.text, textColor, timeItTakes, TransitionType.SmoothStop2));
         }
@@ -127,6 +127,13 @@ public class InputFieldPressedState : UIBaseState
             {
                 manager.text.text += c;
             }
+        }
+
+        if (!UIStateManager.Instance.KeyOrControlActive)
+        {
+            CheckIfDeselected(referenceManager, manager.deselectedState);
+            CheckIfSelected(referenceManager, manager.selectedState);
+            manager.UIActivated = false;
         }
     }
 

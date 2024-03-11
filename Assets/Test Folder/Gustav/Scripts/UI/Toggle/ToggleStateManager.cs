@@ -10,9 +10,9 @@ public class ToggleStateManager : BaseStateManager
     public ToggleSelectedState selectedState = new();
     public TogglePressedState pressedState = new();
 
-    [HideInInspector] public Image outLineImage;
+    [HideInInspector] public Image bgImage;
+    [HideInInspector] public GameObject outline;
     [HideInInspector] public RectTransform movingPart;
-    [HideInInspector] public RectTransform outLine;
     [HideInInspector] public TextMeshProUGUI textForV2;
     [HideInInspector] public GameObject checkMark;
 
@@ -26,12 +26,12 @@ public class ToggleStateManager : BaseStateManager
 
         referenceScript = (Toggle)UIInstance;
 
-        outLineImage = transform.GetChild(0).GetComponent<Image>();
-        outLine = transform.GetChild(0).GetComponent<RectTransform>();
+        bgImage = transform.GetChild(0).GetComponent<Image>();
 
         if (referenceScript.version == ToggleVersion.Version1)
         {
-            movingPart = transform.GetChild(1).GetComponent<RectTransform>();
+            movingPart = transform.GetChild(2).GetComponent<RectTransform>();
+            outline = transform.GetChild(1).gameObject;
             movingPartOffset = movingPart.localPosition.x;
         }
         else if (referenceScript.version == ToggleVersion.Version2)

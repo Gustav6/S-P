@@ -161,6 +161,21 @@ public class UIManagerLoadedState : UIManagerBaseState
             }
         }
 
+        if (stateManager.KeyOrControlActive)
+        {
+            if (stateManager.cursor != null)
+            {
+                stateManager.cursor.SetActive(false);
+            }
+        }
+        else
+        {
+            if (stateManager.cursor != null)
+            {
+                stateManager.cursor.SetActive(true);
+            }
+        }
+
         Debug.Log("Loaded");
     }
 

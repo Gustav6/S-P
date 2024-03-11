@@ -12,11 +12,11 @@ public abstract class UI : MonoBehaviour
     public bool isInteractable;
 
     [Header("UI selected color")]
-    public Color outlineSelected;
+    public Color bgSelected;
     public Color textSelected;
 
     [Header("UI deselected color")]
-    public Color outlineDeselected;
+    public Color bgDeselected;
     public Color textDeselected;
 
     [Header("UI selected scale")]

@@ -35,36 +35,48 @@ public abstract class BaseStateManager : MonoBehaviour
         CurrentState.EnterState(this);
     }
 
-    public void DefaultSelectTransition(float time, GameObject pointers, Transform t = null, Image i = null, TextMeshProUGUI tmp = null)
+    public void DefaultSelectTransition(float time, GameObject pointers, GameObject outline = null, Image bg = null, Transform t = null, TextMeshProUGUI tmp = null)
     {
-        pointers.SetActive(true);
+        //pointers.SetActive(true);
+
+        if (outline != null)
+        {
+            outline.SetActive(true);
+        }
 
         if (t != null)
         {
             TransitionSystem.AddScaleTransition(new ScaleTransition(t, ScalePairs["CurrentObjectSelected"], time, TransitionType.SmoothStart2));
         }
-        if (i != null)
+
+        if (bg != null)
         {
-            TransitionSystem.AddColorTransition(new ColorTransition(i, ColorPairs["OutlineSelected"], time, TransitionType.SmoothStop2));
+            TransitionSystem.AddColorTransition(new ColorTransition(bg, ColorPairs["BgSelected"], time, TransitionType.SmoothStop2));
         }
+
         if (tmp != null)
         {
-            TransitionSystem.AddColorTransition(new ColorTransition(tmp, ColorPairs["TextSelected"], time, TransitionType.SmoothStop2));
+            TransitionSystem.AddColorTransition(new ColorTransition(tmp, ColorPairs["TextSelected"], 0.1f, TransitionType.SmoothStop2));
         }
     }
 
-    public void DefaultDeselectTransition(float time, GameObject pointers, Transform t = null, Image i = null, TextMeshProUGUI tmp = null)
+    public void DefaultDeselectTransition(float time, GameObject pointers, GameObject outline = null, Image bg = null, Transform t = null, TextMeshProUGUI tmp = null)
     {
-        pointers.SetActive(false);
+        //pointers.SetActive(false);
 
-        if (i != null)
+        if (outline != null)
         {
-            TransitionSystem.AddColorTransition(new ColorTransition(i, ColorPairs["OutlineDeSelected"], time, TransitionType.SmoothStop2));
+            outline.SetActive(false);
+        }
+
+        if (bg != null)
+        {
+            TransitionSystem.AddColorTransition(new ColorTransition(bg, ColorPairs["BgDeselected"], time, TransitionType.SmoothStop2));
         }
 
         if (tmp != null)
         {
-            TransitionSystem.AddColorTransition(new ColorTransition(tmp, ColorPairs["TextDeSelected"], time, TransitionType.SmoothStop2));
+            TransitionSystem.AddColorTransition(new ColorTransition(tmp, ColorPairs["TextDeselected"], 0.1f, TransitionType.SmoothStop2));
         }
 
         if (t != null)
@@ -75,21 +87,10 @@ public abstract class BaseStateManager : MonoBehaviour
 
     public void SetDictionaries()
     {
-        if (!ScalePairs.ContainsKey("CurrentObjectSelected"))
-        {
-            ScalePairs.Add("CurrentObjectSelected", UIInstance.selectedScale);
-        }
-
-        if (!ColorPairs.ContainsKey("OutlineSelected") && !ColorPairs.ContainsKey("TextSelected"))
-        {
-            ColorPairs.Add("OutlineSelected", UIInstance.outlineSelected);
-            ColorPairs.Add("TextSelected", UIInstance.textSelected);
-        }
-
-        if (!ColorPairs.ContainsKey("OutlineDeSelected") && !ColorPairs.ContainsKey("TextDeSelected"))
-        {
-            ColorPairs.Add("OutlineDeSelected", UIInstance.outlineDeselected);
-            ColorPairs.Add("TextDeSelected", UIInstance.textDeselected);
-        }
+        ScalePairs.TryAdd("CurrentObjectSelected", UIInstance.selectedScale);
+        ColorPairs.TryAdd("BgSelected", UIInstance.bgSelected);
+        ColorPairs.TryAdd("TextSelected", UIInstance.textSelected);
+        ColorPairs.TryAdd("BgDeselected", UIInstance.bgDeselected);
+        ColorPairs.TryAdd("TextDeselected", UIInstance.textDeselected);
     }
 }

@@ -70,7 +70,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8878379312397028261
 RectTransform:
   m_ObjectHideFlags: 0
@@ -145,7 +145,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7028975423942523727
 RectTransform:
   m_ObjectHideFlags: 0
@@ -256,9 +256,9 @@ MonoBehaviour:
   position: {x: 0, y: 1}
   hovering: 0
   isInteractable: 1
-  outlineSelected: {r: 1, g: 1, b: 1, a: 1}
+  bgSelected: {r: 1, g: 1, b: 1, a: 1}
   textSelected: {r: 1, g: 1, b: 0, a: 1}
-  outlineDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
+  bgDeselected: {r: 1, g: 1, b: 1, a: 0.8}
   textDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
   selectedScale: {x: 0, y: 0, z: 0}
   selectedFunctions: 
@@ -278,7 +278,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 103ccf8a6f2247e40b351226aa7ca366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outLineImage: {fileID: 0}
+  bgImage: {fileID: 0}
+  outline: {fileID: 0}
   movingPart: {fileID: 0}
   outLine: {fileID: 0}
   textForV2: {fileID: 0}
@@ -397,8 +398,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: FULLSCREEN
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4ccb64f7af233ff4f9ed2a2a604484a6, type: 2}
-  m_sharedMaterial: {fileID: -3262743510935591868, guid: 4ccb64f7af233ff4f9ed2a2a604484a6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -4342694438242365024, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -422,8 +423,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 65
+  m_fontSizeBase: 65
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -553,7 +554,7 @@ GameObject:
   - component: {fileID: 4797406402486019988}
   - component: {fileID: 2195792653403498722}
   m_Layer: 0
-  m_Name: Outline
+  m_Name: Bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

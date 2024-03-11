@@ -1,5 +1,80 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &249011508999266119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8300371173187088321}
+  - component: {fileID: 8589163630502897622}
+  - component: {fileID: 8948086698686565970}
+  m_Layer: 5
+  m_Name: Outline
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8300371173187088321
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249011508999266119}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5270490091103469088}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 180, y: 90}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8589163630502897622
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249011508999266119}
+  m_CullTransparentMesh: 1
+--- !u!114 &8948086698686565970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249011508999266119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.91764706, b: 0, a: 0.8}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -5712847383913442551, guid: 8111f172550143645959d3fe9d80de24, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &282298612368666476
 GameObject:
   m_ObjectHideFlags: 0
@@ -17,7 +92,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5194336702494647950
 RectTransform:
   m_ObjectHideFlags: 0
@@ -142,8 +217,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: QUIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4ccb64f7af233ff4f9ed2a2a604484a6, type: 2}
-  m_sharedMaterial: {fileID: -3262743510935591868, guid: 4ccb64f7af233ff4f9ed2a2a604484a6, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -4342694438242365024, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -167,8 +242,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 65
+  m_fontSizeBase: 65
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -276,7 +351,7 @@ GameObject:
   - component: {fileID: 2445320651262414892}
   - component: {fileID: 5154025753127744046}
   m_Layer: 0
-  m_Name: Outline
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,6 +448,7 @@ RectTransform:
   - {fileID: 3195562526669914697}
   - {fileID: 2231653874266008664}
   - {fileID: 2414562495873335305}
+  - {fileID: 8300371173187088321}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -392,7 +468,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70db9597454a1a542991dbbddb82042a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  outlineImage: {fileID: 0}
+  backgroundImage: {fileID: 0}
+  outline: {fileID: 0}
   text: {fileID: 0}
 --- !u!114 &8400108020923393028
 MonoBehaviour:
@@ -409,9 +486,9 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   hovering: 0
   isInteractable: 1
-  outlineSelected: {r: 1, g: 1, b: 1, a: 1}
+  bgSelected: {r: 1, g: 1, b: 1, a: 1}
   textSelected: {r: 1, g: 0.9166666, b: 0, a: 1}
-  outlineDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
+  bgDeselected: {r: 1, g: 1, b: 1, a: 0.79607844}
   textDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
   selectedScale: {x: 1.05, y: 1.05, z: 1}
   selectedFunctions: 
@@ -483,7 +560,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8966469076544473362
 RectTransform:
   m_ObjectHideFlags: 0

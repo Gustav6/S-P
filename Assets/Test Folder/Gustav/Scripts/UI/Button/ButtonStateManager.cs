@@ -11,14 +11,16 @@ public class ButtonStateManager : BaseStateManager
     public ButtonSelectedState selectedState = new();
     public ButtonPressedState pressedState = new();
 
-    [HideInInspector] public Image outlineImage;
+    [HideInInspector] public Image backgroundImage;
+    [HideInInspector] public GameObject outline;
     [HideInInspector] public TextMeshProUGUI text;
 
     public override void OnStart()
     {
         base.OnStart();
 
-        outlineImage = UIInstance.GetComponentInChildren<Image>();
+        backgroundImage = UIInstance.GetComponentInChildren<Image>();
+        outline = UIInstance.transform.GetChild(3).gameObject;
         Pointers = UIInstance.transform.GetChild(2).GetComponent<Transform>().gameObject;
         text = UIInstance.GetComponentInChildren<TextMeshProUGUI>();
 

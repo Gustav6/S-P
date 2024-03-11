@@ -128,6 +128,8 @@ public class UIStateManager : MonoBehaviour
     public bool PauseMenuActive { get; set; }
     public bool Transitioning { get; set; }
 
+    public GameObject cursor;
+
     private Vector2 prevPosition;
     public GameObject pausePrefab;
 

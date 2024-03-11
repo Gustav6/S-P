@@ -10,7 +10,8 @@ public class SliderStateManager : BaseStateManager
     public SliderSelectedState selectedState = new();
     public SliderPressedState pressedState = new();
 
-    [HideInInspector] public Image outLineImage;
+    [HideInInspector] public Image bgImage;
+    [HideInInspector] public GameObject outline;
     [HideInInspector] public RectTransform outLinePosition;
     [HideInInspector] public Image sliderImage;
     [HideInInspector] public TextMeshProUGUI text;
@@ -24,13 +25,14 @@ public class SliderStateManager : BaseStateManager
     {
         base.OnStart();
 
-        outLineImage = transform.GetChild(0).GetComponent<Image>();
+        bgImage = transform.GetChild(0).GetComponent<Image>();
         outLinePosition = transform.GetChild(0).GetComponent<RectTransform>();
-        sliderImage = transform.GetChild(1).GetComponent<Image>();
-        sliderPosition = transform.GetChild(1).GetComponent<RectTransform>();
+        outline = transform.GetChild(1).gameObject;
+        sliderImage = transform.GetChild(2).GetComponent<Image>();
+        sliderPosition = transform.GetChild(2).GetComponent<RectTransform>();
         maxMoveValue = Mathf.Abs(sliderPosition.localPosition.x);
-        text = transform.GetChild(2).GetComponent<TextMeshProUGUI>();
-        Pointers = transform.GetChild(3).GetComponent<Transform>().gameObject;
+        text = transform.GetChild(3).GetComponent<TextMeshProUGUI>();
+        Pointers = transform.GetChild(4).GetComponent<Transform>().gameObject;
         slidersOffset = sliderPosition.localPosition.x;
 
         SetStartPositionToValue();

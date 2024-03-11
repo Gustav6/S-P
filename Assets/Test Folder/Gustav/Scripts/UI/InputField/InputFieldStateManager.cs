@@ -10,14 +10,15 @@ public class InputFieldStateManager : BaseStateManager
     public InputFieldSelectedState selectedState = new();
     public InputFieldPressedState pressedState = new();
 
-    [HideInInspector] public Image outlineImage;
+    [HideInInspector] public Image bgImage;
+    [HideInInspector] public GameObject outline;
     [HideInInspector] public TextMeshProUGUI text;
 
     public override void OnStart()
     {
         base.OnStart();
 
-        outlineImage = UIInstance.GetComponentInChildren<Image>();
+        bgImage = UIInstance.GetComponentInChildren<Image>();
         text = UIInstance.GetComponentInChildren<TextMeshProUGUI>();
         Pointers = UIInstance.transform.GetChild(2).GetComponent<Transform>().gameObject;
 

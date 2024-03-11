@@ -14,7 +14,7 @@ public class ButtonDeselectedState : UIBaseState
     {
         manager = (ButtonStateManager)referenceManager;
 
-        manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, manager.text);
+        manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.outline, manager.backgroundImage, manager.transform, manager.text);
     }
 
     public override void UpdateState(BaseStateManager referenceManager)
@@ -45,7 +45,7 @@ public class ButtonSelectedState : UIBaseState
         if (!UIStateManager.Instance.Transitioning)
         {
             manager.StartCoroutine(WaitCoroutine(timeItTakes));
-            manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.transform, manager.outlineImage, manager.text);
+            manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.outline, manager.backgroundImage, manager.transform, manager.text);
         }
     }
 
@@ -88,7 +88,7 @@ public class ButtonPressedState : UIBaseState
         }
 
         TransitionSystem.AddScaleTransition(new ScaleTransition(manager.transform, newScale, timeItTakes, TransitionType.SmoothStop2));
-        TransitionSystem.AddColorTransition(new ColorTransition(manager.outlineImage, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));
+        TransitionSystem.AddColorTransition(new ColorTransition(manager.backgroundImage, newOutlineColor, timeItTakes, TransitionType.SmoothStart2));
 
         referenceManager.StartCoroutine(WaitCoroutine(timeItTakes));
     }

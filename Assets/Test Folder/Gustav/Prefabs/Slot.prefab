@@ -226,8 +226,20 @@ PrefabInstance:
 '
       objectReference: {fileID: 0}
     - target: {fileID: 2669615222144469310, guid: 0b0a2a8678ae01f4e8dd67d3218b07b3, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+    - target: {fileID: 2669615222144469310, guid: 0b0a2a8678ae01f4e8dd67d3218b07b3, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -4342694438242365024, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+    - target: {fileID: 2669615222144469310, guid: 0b0a2a8678ae01f4e8dd67d3218b07b3, type: 3}
       propertyPath: m_HorizontalAlignment
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2669615222144469310, guid: 0b0a2a8678ae01f4e8dd67d3218b07b3, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5965768432277020786, guid: 0b0a2a8678ae01f4e8dd67d3218b07b3, type: 3}
       propertyPath: m_SizeDelta.x
@@ -387,6 +399,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3902729743598329435, guid: 4297f9f1dda96a040a97de8b87dadc46, type: 3}
       propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5419976716129489800, guid: 4297f9f1dda96a040a97de8b87dadc46, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+    - target: {fileID: 5419976716129489800, guid: 4297f9f1dda96a040a97de8b87dadc46, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -4342694438242365024, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+    - target: {fileID: 5419976716129489800, guid: 4297f9f1dda96a040a97de8b87dadc46, type: 3}
+      propertyPath: m_hasFontAssetChanged
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5454029981492109065, guid: 4297f9f1dda96a040a97de8b87dadc46, type: 3}

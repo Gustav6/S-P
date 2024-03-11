@@ -47,6 +47,7 @@ public class UIInput : MonoBehaviour
                 if (!UIStateManager.Instance.KeyOrControlActive)
                 {
                     UIStateManager.Instance.KeyOrControlActive = true;
+
                     return;
                 }
 

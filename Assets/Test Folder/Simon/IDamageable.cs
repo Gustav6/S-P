@@ -31,13 +31,6 @@ public interface IDamageable
 
     public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration);
 
-    internal void CountHit()
-    {
-        ConsecutiveHits++;
-    }
-
-    internal IEnumerator ResetConsecutiveHits();
-
     public void CheckDeath(Tilemap tilemap, Dictionary<Vector2Int, TileBase> tiles, Collider2D collider)
     {
         Vector2 position = collider.bounds.center;

@@ -29,7 +29,10 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public float KnockbackPercent { get; set; }
     public int ConsecutiveHits { get; set; }
-    internal bool shouldResetHits;
+    private float _hitResetTime;
+    private readonly float _maxHitTime = 0.2f;
+    public bool ShouldCount { get; set; }
+    internal bool isImune;
 
     private void Awake()
     {
@@ -53,16 +56,31 @@ public class Enemy : MonoBehaviour, IDamageable
 
     public virtual void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
     {
+        ConsecutiveHits++;
+        _hitResetTime = _maxHitTime;
         StartCoroutine(GiveEnemyMovement(stunDuration));
     }
 
-    // Temporary for debugging purposes, remove before building
     public void TakeDamage(float damageAmount)
     {
+        if (isImune)
+            return;
+
         AudioManager.Instance.PlaySound("Hurt");
         KnockbackPercent += damageAmount;
-        _thisDamagable.CountHit();
         PopupManager.Instance.SpawnText(((int)KnockbackPercent).ToString(), transform.position, 1.5f);
+    }
+
+    private void Update()
+    {
+        if (ShouldCount)
+            _hitResetTime -= Time.deltaTime;
+
+        if (_hitResetTime <= 0)
+        {
+            ConsecutiveHits = 0;
+            ShouldCount = false;
+        }
     }
 
     internal IEnumerator GiveEnemyMovement(float time)
@@ -71,8 +89,8 @@ public class Enemy : MonoBehaviour, IDamageable
         _attackController.EnterMovement();
         _enemyAttack.CanAttack(true);
 
-        shouldResetHits = true;
-        StartCoroutine(_thisDamagable.ResetConsecutiveHits());
+        isImune = false;
+        ShouldCount = true;
         _thisDamagable.CheckDeath(_tilemap, _tiles, _thisFeetCollider);
     }
 
@@ -118,17 +136,5 @@ public class Enemy : MonoBehaviour, IDamageable
         AudioManager.Instance.PlaySound("Explosion");
         yield return new WaitForSeconds(0.2f);
         Destroy(gameObject);
-    }
-
-    IEnumerator IDamageable.ResetConsecutiveHits()
-    {
-        yield return new WaitForSeconds(0.25f);
-
-        if (!shouldResetHits)
-            yield break;
-
-        Debug.Log("Reset!!!!");
-
-        ConsecutiveHits = 0;
     }
 }

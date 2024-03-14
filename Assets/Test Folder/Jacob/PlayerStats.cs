@@ -353,11 +353,5 @@ public class PlayerStats : MonoBehaviour, IDamageable
 	{
         _isInvulnerable = value;
     }
-
-    // Not used at the moment.
-    IEnumerator IDamageable.ResetConsecutiveHits()
-    {
-        throw new System.NotImplementedException();
-    }
     #endregion
 }

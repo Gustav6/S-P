@@ -25,7 +25,7 @@ public class WaveCreationState : BaseWaveState
 
 	public override void EnterState()
 	{
-        _context.SetEnemiesToSpawn(GetEnemies((int)(_context.WaveNumber / 2f * 50f + (_context.WaveNumber * 5f)), (WaveStateMachine.WaveType)UnityEngine.Random.Range(0, 5)));
+        _context.SetEnemiesToSpawn(GetEnemies((int)(_context.WaveNumber / 2f * 50f + (_context.WaveNumber * 5f)), (WaveStateMachine.WaveType)UnityEngine.Random.Range(5, 6)));
         _context.StateMachine.TransitionToState(WaveStateMachine.WaveState.Reward);
 	}
 

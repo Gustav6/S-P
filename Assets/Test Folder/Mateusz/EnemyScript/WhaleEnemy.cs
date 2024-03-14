@@ -7,8 +7,10 @@ public class WhaleEnemy : Enemy
 {
     public override void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration)
     {
-        if (knockbackMultiplier == 0)
+        if (knockbackMultiplier == 0 || stunDuration == 0 || isImune)
             return;
+
+        isImune = true;
 
         _enemyAttack.CanAttack(false);
         _attackController.LeaveMovement(false);

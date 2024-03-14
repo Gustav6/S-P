@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WR_WaterGun
   m_EditorClassIdentifier: 
   RewardName: Water Gun
-  WaveUnlocked: 5
+  WaveUnlocked: 0
   ContainedWeapon: {fileID: 11400000, guid: 4cf4376c0a7881a4bb8564451a15f752, type: 2}
   RewardSprite: {fileID: 21300000, guid: 1574f279875daae4fa6efb4b9a8e7a82, type: 3}

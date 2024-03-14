@@ -85,6 +85,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     public int Score { get; private set; }
 
+    [SerializeField] Animator _powerupAnim;
+
     public void AddScore(int amount)
     {
         Score += amount;
@@ -154,6 +156,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void NewAbilityEquipped(PowerUp powerUp)
     {
         currentPowerUp = powerUp;
+        _powerupAnim.Play("PowerupEquipped");
     }
 
     public void ClearEquippedAbility()
@@ -161,9 +164,10 @@ public class PlayerStats : MonoBehaviour, IDamageable
         if (currentPowerUp = null)
             return;
 
+        _powerupAnim.speed = 1;
+        _powerupAnim.Play("PowerupCleared");
         DeActivateAbilityStats();
         Destroy(GetComponent<PowerUp>());
-        PowerupUsed();
         EquipmentManager.Instance.SetPowerUpCanSpawn(true);
         currentPowerUp = null;
     }
@@ -187,8 +191,12 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private void PowerupUsed()
     {
-        _powerUpHudElement.color = new Color(1, 1, 1, 0);
-        _powerUpHudElement.sprite = null;
+        if (currentPowerUp.duration > 0)
+        {
+            _powerupAnim.speed = 1 / currentPowerUp.duration;
+            _powerupAnim.Play("PowerupDuration");
+        }
+
         PowerupActive = true;
     }
 

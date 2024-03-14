@@ -8,6 +8,8 @@ public class ScalePowerup : PowerUp
 
     private void Start()
     {
+        duration = 10f;
+
         powerUpSprite = EquipmentManager.Instance.ReturnPowerupSprite(PowerUpTypes.Tank);
 
         EquipmentManager.Instance.OnPowerUpEquipped?.Invoke();
@@ -37,7 +39,7 @@ public class ScalePowerup : PowerUp
             transform.localScale = Vector3.Lerp(Vector3.one, Vector3.one * 1.5f, time / 0.25f);
         }
 
-        yield return new WaitForSeconds(9.5f);
+        yield return new WaitForSeconds(duration - 0.5f);
 
         time = 0;
 
@@ -53,7 +55,7 @@ public class ScalePowerup : PowerUp
 
     public override void OnDeactivatePowerUp()
     {
-        transform.localScale = Vector2.one;
+        transform.localScale = Vector3.one;
 
         PlayerStats.Instance.DeActivateAbilityStats();
         PlayerStats.Instance.ClearEquippedAbility();

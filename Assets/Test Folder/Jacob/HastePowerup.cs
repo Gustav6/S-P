@@ -8,6 +8,7 @@ public class HastePowerup : PowerUp
 
     private void Start()
     {
+        duration = 10;
         powerUpSprite = EquipmentManager.Instance.ReturnPowerupSprite(PowerUpTypes.Haste);
 
         EquipmentManager.Instance.OnPowerUpEquipped?.Invoke();
@@ -22,7 +23,7 @@ public class HastePowerup : PowerUp
 
         _isUsingPowerup = true;
         PlayerStats.Instance.ActivateAbilityStats(new StatBlock(1.25f, 1, 1, 1, 1, 1.25f));
-        Invoke(nameof(OnDeactivatePowerUp), 10f);
+        Invoke(nameof(OnDeactivatePowerUp), duration);
     }
 
     public override void OnDeactivatePowerUp()

@@ -63,8 +63,13 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        if (!_attackController.inAnimation)
+        if (_isOnKBM)
             TurnToTarget(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        else
+        {
+            Debug.Log(_aimIA.ReadValue<Vector2>());
+            TurnToTargetController(_aimIA.ReadValue<Vector2>().normalized);
+        }
 
         if (_attackInputHeld && !_attackController.inAnimation && EquipmentManager.Instance.CanHit())
         {
@@ -122,6 +127,14 @@ public class PlayerAttack : MonoBehaviour
         _directionIndicator.eulerAngles = new Vector3(0, 0, Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90); 
 
         _aimController.FaceTarget(targetPosition);
+    }
+
+    private void TurnToTargetController(Vector2 targetDirection)
+    {
+        // If this is giving you an error, copy the DirectionIndicator object in JacobScene under Entities/Player and assign it to this script through the inspector.
+        _directionIndicator.eulerAngles = new Vector3(0, 0, Mathf.Atan2(targetDirection.y, targetDirection.x) * Mathf.Rad2Deg - 90);
+
+        _aimController.FaceDirection(targetDirection);
     }
 
     public void OnEnable()

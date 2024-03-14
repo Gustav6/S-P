@@ -21,14 +21,16 @@ public class HealPowerup : PowerUp
 
 	public override void UsePowerUp()
 	{
-		EquipmentManager.Instance.OnPowerUpUsed?.Invoke();
-
 		if (_isUsingPowerup)
 			return;
 
+		EquipmentManager.Instance.OnPowerUpUsed?.Invoke();
 		_isUsingPowerup = true;
 		PlayerStats.Instance.HealDamage(75);
-		PlayerStats.Instance.ActivateAbilityStats(new StatBlock(1, 1, 1.25f, 1, 1, 1));
-		Invoke(nameof(OnDeactivatePowerUp), 10f);
+		OnDeactivatePowerUp();
+
+		// Temporary damage resistance, not sure if we should use it though.
+		//PlayerStats.Instance.ActivateAbilityStats(new StatBlock(1, 1, 1.25f, 1, 1, 1));
+		//Invoke(nameof(OnDeactivatePowerUp), 10f);
 	}
 }

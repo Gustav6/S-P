@@ -47,7 +47,7 @@ public class PowerUpActivation : MonoBehaviour
             case PowerUpTypes.Anything:
 
             case PowerUpTypes.Dash:
-                playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<Dash>());
+                playerStat.NewAbilityEquipped(playerStat.gameObject.AddComponent<DashPowerup>());
                 break;
 
             case PowerUpTypes.Haste:

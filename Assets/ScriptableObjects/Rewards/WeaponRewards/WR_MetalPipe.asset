@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WR_MetalPipe
   m_EditorClassIdentifier: 
   RewardName: Metal Pipe
-  WaveUnlocked: 5
+  WaveUnlocked: 0
   ContainedWeapon: {fileID: 11400000, guid: 6e96ed472bf92654d802ac178534379b, type: 2}
   RewardSprite: {fileID: 6545302980019263681, guid: aa84524fc831f1047a4986b6d4b37578, type: 3}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Dash : PowerUp
+public class DashPowerup : PowerUp
 {
     private PlayerMovement _player;
     private Rigidbody2D _rb;
@@ -13,10 +13,9 @@ public class Dash : PowerUp
     private SpriteRenderer _bodySr;
     private Sprite _startSprite;
 
-    private readonly float _dashTime = 0.5f;
-
     private void Awake()
     {
+        duration = 0.5f;
         _player = GetComponent<PlayerMovement>();
         _rb = GetComponent<Rigidbody2D>();
         _playerHitbox = GetComponent<BoxCollider2D>();
@@ -36,6 +35,7 @@ public class Dash : PowerUp
 
     public override void UsePowerUp()
     {
+        AudioManager.Instance.PlaySound("Dash");
         EquipmentManager.Instance.OnPowerUpUsed?.Invoke();
         EquipmentManager.Instance.ToggleHit(false);
 
@@ -44,7 +44,7 @@ public class Dash : PowerUp
         if (direction == Vector2.zero)
             return;
 
-        StartCoroutine(AttackLogic.AddBoost(_player, _rb, direction, 20, _dashTime));
+        StartCoroutine(AttackLogic.AddBoost(_player, _rb, direction, 20, duration));
 
         StartCoroutine(MakePlayerInvincible());
     }
@@ -64,7 +64,7 @@ public class Dash : PowerUp
         _bodySr.enabled = true;
         _bodySr.sprite = PlayerStats.Instance.dashSprite;
 
-        yield return new WaitForSeconds(_dashTime);
+        yield return new WaitForSeconds(duration);
 
         foreach (SpriteRenderer sr in _sr)
         {

@@ -1106,7 +1106,7 @@ GameObject:
   - component: {fileID: 196112675}
   m_Layer: 8
   m_Name: WeaponReward Left
-  m_TagString: Untagged
+  m_TagString: WaveReward
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3242,7 +3242,7 @@ GameObject:
   - component: {fileID: 731845696}
   m_Layer: 8
   m_Name: StatReward Right
-  m_TagString: Untagged
+  m_TagString: WaveReward
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16131,7 +16131,7 @@ GameObject:
   - component: {fileID: 989311538}
   m_Layer: 8
   m_Name: WeaponReward Right
-  m_TagString: Untagged
+  m_TagString: WaveReward
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17628,7 +17628,7 @@ GameObject:
   - component: {fileID: 1488114219}
   m_Layer: 8
   m_Name: StatReward Bottom
-  m_TagString: Untagged
+  m_TagString: WaveReward
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17738,7 +17738,7 @@ GameObject:
   - component: {fileID: 1503581186}
   m_Layer: 8
   m_Name: StatReward Left
-  m_TagString: Untagged
+  m_TagString: WaveReward
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18286,6 +18286,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7a0221a85017eb3488b845791444418f, type: 2}
   - {fileID: 11400000, guid: f2f5a367ddee1d749be7456cd1d95d8c, type: 2}
   - {fileID: 11400000, guid: 37f83bbb3c62f2b42a62afd435459c79, type: 2}
+  - {fileID: 11400000, guid: c0dfcfcb9bfc82544ab10c6aabcb18e8, type: 2}
   _dropCurve:
     serializedVersion: 2
     m_Curve:

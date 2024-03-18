@@ -13,6 +13,7 @@ TagManager:
   - UIManager
   - DataManager
   - ActiveSettingPrefab
+  - WaveReward
   layers:
   - Default
   - TransparentFX

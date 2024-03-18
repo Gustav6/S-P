@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,6 @@ public abstract class BaseStateManager : MonoBehaviour
     public Dictionary<string, Color> ColorPairs { get; private set; }
     public Dictionary<string, Vector3> ScalePairs { get; private set; }
     public UIBaseState CurrentState { get; set; }
-    public GameObject Pointers { get; protected set; }
     public bool UIActivated { get; set; }
 
     public virtual void OnStart()
@@ -35,13 +35,14 @@ public abstract class BaseStateManager : MonoBehaviour
         CurrentState.EnterState(this);
     }
 
-    public void DefaultSelectTransition(float time, GameObject pointers, GameObject outline = null, Image bg = null, Transform t = null, TextMeshProUGUI tmp = null)
+    public void DefaultSelectTransition(float time, List<GameObject> enable = null, Image bg = null, Transform t = null, TextMeshProUGUI tmp = null)
     {
-        //pointers.SetActive(true);
-
-        if (outline != null)
+        if (enable != null && enable.Count > 0)
         {
-            outline.SetActive(true);
+            for (int i = 0; i < enable.Count; i++)
+            {
+                enable[i].SetActive(true);
+            }
         }
 
         if (t != null)
@@ -60,13 +61,14 @@ public abstract class BaseStateManager : MonoBehaviour
         }
     }
 
-    public void DefaultDeselectTransition(float time, GameObject pointers, GameObject outline = null, Image bg = null, Transform t = null, TextMeshProUGUI tmp = null)
+    public void DefaultDeselectTransition(float time, List<GameObject> disable = null, Image bg = null, Transform t = null, TextMeshProUGUI tmp = null)
     {
-        //pointers.SetActive(false);
-
-        if (outline != null)
+        if (disable != null && disable.Count > 0)
         {
-            outline.SetActive(false);
+            for (int i = 0; i < disable.Count; i++)
+            {
+                disable[i].SetActive(false);
+            }
         }
 
         if (bg != null)

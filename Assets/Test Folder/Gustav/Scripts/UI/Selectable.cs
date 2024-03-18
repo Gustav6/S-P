@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -57,6 +58,14 @@ public class Selectable : UI
 
     public void Select()
     {
+        if (enableOnSelect.Count > 0)
+        {
+            for (int i = 0; i < enableOnSelect.Count; i++)
+            {
+                enableOnSelect[i].SetActive(true);
+            }
+        }
+
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.PlaySound("Hover");
@@ -81,6 +90,14 @@ public class Selectable : UI
 
     public void Deselect()
     {
+        if (enableOnSelect.Count > 0)
+        {
+            for (int i = 0; i < enableOnSelect.Count; i++)
+            {
+                enableOnSelect[i].SetActive(false);
+            }
+        }
+
         for (int i = 0; i < images.Count; i++)
         {
             TransitionSystem.AddColorTransition(new ColorTransition(images[i], imageDeselectedColor, 0.2f, TransitionType.SmoothStop2));

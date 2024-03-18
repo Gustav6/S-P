@@ -11,7 +11,6 @@ public class InputFieldStateManager : BaseStateManager
     public InputFieldPressedState pressedState = new();
 
     [HideInInspector] public Image bgImage;
-    [HideInInspector] public GameObject outline;
     [HideInInspector] public TextMeshProUGUI text;
 
     public override void OnStart()
@@ -20,7 +19,6 @@ public class InputFieldStateManager : BaseStateManager
 
         bgImage = UIInstance.GetComponentInChildren<Image>();
         text = UIInstance.GetComponentInChildren<TextMeshProUGUI>();
-        Pointers = UIInstance.transform.GetChild(2).GetComponent<Transform>().gameObject;
 
         CurrentState = deselectedState;
 

@@ -35,7 +35,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 180, y: 90}
+  m_SizeDelta: {x: 180, y: 105}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8589163630502897622
 CanvasRenderer:
@@ -469,7 +469,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   backgroundImage: {fileID: 0}
-  outline: {fileID: 0}
   text: {fileID: 0}
 --- !u!114 &8400108020923393028
 MonoBehaviour:
@@ -486,6 +485,8 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   hovering: 0
   isInteractable: 1
+  enableOnSelect:
+  - {fileID: 249011508999266119}
   bgSelected: {r: 1, g: 1, b: 1, a: 1}
   textSelected: {r: 1, g: 0.9166666, b: 0, a: 1}
   bgDeselected: {r: 1, g: 1, b: 1, a: 0.79607844}

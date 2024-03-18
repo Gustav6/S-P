@@ -6,6 +6,7 @@ using UnityEngine;
 public class SliderDeselectedState : UIBaseState
 {
     private SliderStateManager manager;
+    private Slider sliderInstance;
 
     private readonly float timeItTakes = 0.2f;
     private readonly Color newSliderColor = new(1, 1, 1, 0.9f);
@@ -13,8 +14,9 @@ public class SliderDeselectedState : UIBaseState
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (SliderStateManager)referenceManager;
+        sliderInstance = (Slider)referenceManager.UIInstance;
 
-        manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.outline, manager.bgImage, manager.transform, manager.text);
+        manager.DefaultDeselectTransition(timeItTakes, sliderInstance.enableOnSelect, manager.bgImage, manager.transform, manager.text);
 
         TransitionSystem.AddColorTransition(new ColorTransition(manager.sliderImage, newSliderColor, timeItTakes, TransitionType.SmoothStart2));
     }
@@ -37,16 +39,18 @@ public class SliderDeselectedState : UIBaseState
 public class SliderSelectedState : UIBaseState
 {
     private SliderStateManager manager;
+    private Slider sliderInstance;
 
     private readonly float timeItTakes = 0.15f;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (SliderStateManager)referenceManager;
+        sliderInstance = (Slider)referenceManager.UIInstance;
 
         if (!UIStateManager.Instance.Transitioning)
         {
-            manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.outline, manager.bgImage, manager.transform, manager.text);
+            manager.DefaultSelectTransition(timeItTakes, sliderInstance.enableOnSelect, manager.bgImage, manager.transform, manager.text);
         }
     }
     public override void UpdateState(BaseStateManager referenceManager)

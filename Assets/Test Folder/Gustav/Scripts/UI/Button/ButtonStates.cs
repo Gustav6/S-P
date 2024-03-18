@@ -9,12 +9,14 @@ public class ButtonDeselectedState : UIBaseState
 {
     private ButtonStateManager manager;
     private readonly float timeItTakes = 0.25f;
+    private Button buttonInstance;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (ButtonStateManager)referenceManager;
+        buttonInstance = (Button)referenceManager.UIInstance;
 
-        manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.outline, manager.backgroundImage, manager.transform, manager.text);
+        manager.DefaultDeselectTransition(timeItTakes, buttonInstance.enableOnSelect, manager.backgroundImage, manager.transform, manager.text);
     }
 
     public override void UpdateState(BaseStateManager referenceManager)
@@ -37,15 +39,17 @@ public class ButtonSelectedState : UIBaseState
 {
     private ButtonStateManager manager;
     private readonly float timeItTakes = 0.2f;
+    private Button buttonInstance;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
+        buttonInstance = (Button)referenceManager.UIInstance;
         manager = (ButtonStateManager)referenceManager;
 
         if (!UIStateManager.Instance.Transitioning)
         {
             manager.StartCoroutine(WaitCoroutine(timeItTakes));
-            manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.outline, manager.backgroundImage, manager.transform, manager.text);
+            manager.DefaultSelectTransition(timeItTakes, buttonInstance.enableOnSelect, manager.backgroundImage, manager.transform, manager.text);
         }
     }
 

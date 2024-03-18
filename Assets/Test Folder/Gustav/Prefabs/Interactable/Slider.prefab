@@ -543,6 +543,8 @@ MonoBehaviour:
   position: {x: 0, y: 0}
   hovering: 0
   isInteractable: 1
+  enableOnSelect:
+  - {fileID: 3100157825005532311}
   bgSelected: {r: 1, g: 1, b: 1, a: 1}
   textSelected: {r: 1, g: 0.9166666, b: 0, a: 1}
   bgDeselected: {r: 1, g: 1, b: 1, a: 0.8}
@@ -562,7 +564,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bgImage: {fileID: 0}
-  outline: {fileID: 0}
   outLinePosition: {fileID: 0}
   sliderImage: {fileID: 0}
   text: {fileID: 0}

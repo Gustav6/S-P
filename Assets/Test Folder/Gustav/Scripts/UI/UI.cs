@@ -11,6 +11,8 @@ public abstract class UI : MonoBehaviour
     public bool hovering;
     public bool isInteractable;
 
+    public List<GameObject> enableOnSelect;
+
     [Header("UI selected color")]
     public Color bgSelected;
     public Color textSelected;

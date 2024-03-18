@@ -17,11 +17,11 @@ public class ToggleDeselectedState : UIBaseState
 
         if (toggleInstance.version == ToggleVersion.Version1)
         {
-            manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.outline, manager.bgImage, manager.transform);
+            manager.DefaultDeselectTransition(timeItTakes, toggleInstance.enableOnSelect, manager.bgImage, manager.transform);
         }
         else if (toggleInstance.version == ToggleVersion.Version2)
         {
-            manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, null, manager.bgImage, null, manager.textForV2);
+            manager.DefaultDeselectTransition(timeItTakes, toggleInstance.enableOnSelect, manager.bgImage, null, manager.textForV2);
         }
     }
 
@@ -57,11 +57,11 @@ public class ToggleSelectedState : UIBaseState
         {
             if (toggleInstance.version == ToggleVersion.Version1)
             {
-                manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.outline, manager.bgImage, manager.transform);
+                manager.DefaultSelectTransition(timeItTakes, toggleInstance.enableOnSelect, manager.bgImage, manager.transform);
             }
             else if (toggleInstance.version == ToggleVersion.Version2)
             {
-                manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.outline, manager.bgImage, null, manager.textForV2);
+                manager.DefaultSelectTransition(timeItTakes, toggleInstance.enableOnSelect, manager.bgImage, null, manager.textForV2);
             }
         }
     }

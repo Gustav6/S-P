@@ -9,13 +9,16 @@ using UnityEngine.UI;
 public class InputFieldDeselectedState : UIBaseState
 {
     private InputFieldStateManager manager;
+    private InputField inputFieldInstance;
+
     private readonly float timeItTakes = 0.25f;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (InputFieldStateManager)referenceManager;
+        inputFieldInstance = (InputField)referenceManager.UIInstance;
 
-        manager.DefaultDeselectTransition(timeItTakes, manager.Pointers, manager.outline, manager.bgImage, manager.transform, manager.text);
+        manager.DefaultDeselectTransition(timeItTakes, inputFieldInstance.enableOnSelect, manager.bgImage, manager.transform, manager.text);
     }
     public override void UpdateState(BaseStateManager referenceManager)
     {
@@ -36,6 +39,7 @@ public class InputFieldDeselectedState : UIBaseState
 public class InputFieldSelectedState : UIBaseState
 {
     private InputFieldStateManager manager;
+    private InputField inputFieldInstance;
 
     private readonly Color textColor = new(1, 1, 1, 1);
     private readonly float timeItTakes = 0.25f;
@@ -43,11 +47,12 @@ public class InputFieldSelectedState : UIBaseState
     public override void EnterState(BaseStateManager referenceManager)
     {
         manager = (InputFieldStateManager)referenceManager;
+        inputFieldInstance = (InputField)referenceManager.UIInstance;
 
         if (!UIStateManager.Instance.Transitioning)
         {
             referenceManager.StartCoroutine(WaitCoroutine(timeItTakes));
-            manager.DefaultSelectTransition(timeItTakes, manager.Pointers, manager.outline, manager.bgImage, manager.transform);
+            manager.DefaultSelectTransition(timeItTakes, inputFieldInstance.enableOnSelect, manager.bgImage, manager.transform);
 
             TransitionSystem.AddColorTransition(new ColorTransition(manager.text, textColor, timeItTakes, TransitionType.SmoothStop2));
         }

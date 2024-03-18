@@ -11,7 +11,6 @@ public class ToggleStateManager : BaseStateManager
     public TogglePressedState pressedState = new();
 
     [HideInInspector] public Image bgImage;
-    [HideInInspector] public GameObject outline;
     [HideInInspector] public RectTransform movingPart;
     [HideInInspector] public TextMeshProUGUI textForV2;
     [HideInInspector] public GameObject checkMark;
@@ -31,7 +30,6 @@ public class ToggleStateManager : BaseStateManager
         if (referenceScript.version == ToggleVersion.Version1)
         {
             movingPart = transform.GetChild(2).GetComponent<RectTransform>();
-            outline = transform.GetChild(1).gameObject;
             movingPartOffset = movingPart.localPosition.x;
         }
         else if (referenceScript.version == ToggleVersion.Version2)
@@ -40,8 +38,6 @@ public class ToggleStateManager : BaseStateManager
             checkMark = transform.GetChild(3).gameObject;
             referenceScript.toggleOn = true;
         }
-
-        Pointers = transform.GetChild(2).GetComponent<Transform>().gameObject;
 
         if (referenceScript.version == ToggleVersion.Version1)
         {

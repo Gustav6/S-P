@@ -41,8 +41,7 @@ public class InputFieldSelectedState : UIBaseState
     private InputFieldStateManager manager;
     private InputField inputFieldInstance;
 
-    private readonly Color textColor = new(1, 1, 1, 1);
-    private readonly float timeItTakes = 0.25f;
+    private readonly float timeItTakes = 0.2f;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
@@ -51,10 +50,9 @@ public class InputFieldSelectedState : UIBaseState
 
         if (!UIStateManager.Instance.Transitioning)
         {
+            manager.text.color = Color.white;
             referenceManager.StartCoroutine(WaitCoroutine(timeItTakes));
             manager.DefaultSelectTransition(timeItTakes, inputFieldInstance.enableOnSelect, manager.bgImage, manager.transform);
-
-            TransitionSystem.AddColorTransition(new ColorTransition(manager.text, textColor, timeItTakes, TransitionType.SmoothStop2));
         }
     }
 
@@ -81,9 +79,6 @@ public class InputFieldPressedState : UIBaseState
     private InputFieldStateManager manager;
     private InputField inputFieldInstance;
 
-    private readonly Color textColor = new(1, 1, 0, 0.8f);
-    private readonly float timeItTakes = 0.25f;
-
     public override void EnterState(BaseStateManager referenceManager)
     {
         if (AudioManager.Instance != null)
@@ -93,7 +88,7 @@ public class InputFieldPressedState : UIBaseState
 
         manager = (InputFieldStateManager)referenceManager;
         inputFieldInstance = (InputField)referenceManager.UIInstance;
-        TransitionSystem.AddColorTransition(new ColorTransition(manager.text, textColor, timeItTakes, TransitionType.SmoothStop2));
+        manager.text.color = new Color (1, 1, 0, 0.8f);
 
         manager.text.text = "";
     }

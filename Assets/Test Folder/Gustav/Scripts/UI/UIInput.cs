@@ -40,6 +40,7 @@ public class UIInput : MonoBehaviour
                 {
                     if (g.GetComponent<BaseStateManager>().UIActivated)
                     {
+                        
                         return;
                     }
                 }

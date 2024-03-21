@@ -127,8 +127,7 @@ public class UIStateManager : MonoBehaviour
     public GameObject ActivePrefab { get; set; }
     public bool PauseMenuActive { get; set; }
     public bool Transitioning { get; set; }
-
-    public GameObject cursor;
+    public GameObject CursorInstance { get; private set; }
 
     private Vector2 prevPosition;
     public GameObject pausePrefab;
@@ -149,6 +148,8 @@ public class UIStateManager : MonoBehaviour
 
     private void Start()
     {
+        CursorInstance = GameObject.FindGameObjectWithTag("Cursor");
+
         ManagerTransitioningState = new();
         ManagerUnLoadedState = new();
         ManagerLoadedState = new();

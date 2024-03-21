@@ -8,24 +8,21 @@ public class UIManagerUnLoadedState : UIManagerBaseState
     public override void EnterState(UIStateManager stateManager)
     {
         stateManager.ActivePrefab = null;
+        stateManager.CursorInstance.SetActive(false);
     }
 
     public override void UpdateState(UIStateManager stateManager)
     {
-        if (stateManager.pausePrefab != null)
+        if (stateManager.pausePrefab != null && stateManager.PauseMenuActive && !PauseManager.Transitioning)
         {
-            if (stateManager.PauseMenuActive && !PauseManager.Transitioning)
-            {
-                stateManager.PlayTransition = false;
-                stateManager.PrefabToEnable = stateManager.pausePrefab;
-                stateManager.PauseInstance = stateManager.PrefabToEnable;
-                stateManager.PauseInstance.transform.localPosition = Vector3.zero;
-                stateManager.SwitchState(stateManager.ManagerTransitioningState);
-                Debug.Log("Pause");
-            }
+            stateManager.PlayTransition = false;
+            stateManager.PrefabToEnable = stateManager.pausePrefab;
+            stateManager.PauseInstance = stateManager.PrefabToEnable;
+            stateManager.PauseInstance.transform.localPosition = Vector3.zero;
+            stateManager.SwitchState(stateManager.ManagerTransitioningState);
+            Debug.Log("Pause");
         }
-
-        if (stateManager.PrefabToEnable != null)
+        else if (stateManager.PrefabToEnable != null)
         {
             stateManager.SwitchState(stateManager.ManagerTransitioningState);
         }
@@ -163,16 +160,17 @@ public class UIManagerLoadedState : UIManagerBaseState
 
         if (stateManager.KeyOrControlActive)
         {
-            if (stateManager.cursor != null)
+            if (stateManager.CursorInstance != null)
             {
-                stateManager.cursor.SetActive(false);
+                stateManager.CursorInstance.SetActive(false);
             }
         }
         else
         {
-            if (stateManager.cursor != null)
+            if (stateManager.CursorInstance != null)
             {
-                stateManager.cursor.SetActive(true);
+                stateManager.CursorInstance.SetActive(true);
+                Debug.Log("Cursor on");
             }
         }
 

@@ -13,7 +13,11 @@ TagManager:
   - UIManager
   - DataManager
   - ActiveSettingPrefab
+<<<<<<< Updated upstream
   - WaveReward
+=======
+  - Cursor
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

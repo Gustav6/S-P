@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      SHARKANATORIcon_0: -773626670805966017
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -20,14 +20,11 @@ public class UIManagerUnLoadedState : UIManagerBaseState
             stateManager.PauseInstance = stateManager.PrefabToEnable;
             stateManager.PauseInstance.transform.localPosition = Vector3.zero;
             stateManager.SwitchState(stateManager.ManagerTransitioningState);
-            Debug.Log("Pause");
         }
         else if (stateManager.PrefabToEnable != null)
         {
             stateManager.SwitchState(stateManager.ManagerTransitioningState);
         }
-
-        Debug.Log("Unloaded");
     }
 
     public override void ExitState(UIStateManager stateManager)
@@ -173,8 +170,6 @@ public class UIManagerLoadedState : UIManagerBaseState
                 Debug.Log("Cursor on");
             }
         }
-
-        Debug.Log("Loaded");
     }
 
     public override void ExitState(UIStateManager stateManager)

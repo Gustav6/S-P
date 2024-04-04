@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: W_SHARKANATOR
   m_EditorClassIdentifier: 
   hitbox: {fileID: 288263448704326756, guid: 5a502e0c359b82947bccae73332471d1, type: 3}
-  weaponAnimationToUse: {fileID: 22100000, guid: c329182c0e932584dbc17b692744f1b1, type: 2}
+  weaponAnimationToUse: {fileID: 22100000, guid: edf8f34851f9525429f6d3b07414553a, type: 2}
   weaponImpulseMultiplier: -3
   weaponImpulseTime: 0.075
   damage: 15

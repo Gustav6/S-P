@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: W_WaterGun
   m_EditorClassIdentifier: 
   hitbox: {fileID: 288263448704326756, guid: 8ecb55dc559b91c4dab7831ee9f81478, type: 3}
-  weaponAnimationToUse: {fileID: 22100000, guid: c329182c0e932584dbc17b692744f1b1, type: 2}
+  weaponAnimationToUse: {fileID: 22100000, guid: edf8f34851f9525429f6d3b07414553a, type: 2}
   weaponImpulseMultiplier: -3
   weaponImpulseTime: 0.075
   damage: 15
   knockbackMultiplier: 1.25
+  stunTime: 0
   animationSpeedMultiplier: 0.5
   isWeaponAnimationResetable: 1
   resetMultiplier: 1

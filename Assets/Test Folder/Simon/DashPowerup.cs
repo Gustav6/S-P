@@ -13,6 +13,8 @@ public class DashPowerup : PowerUp
     private SpriteRenderer _bodySr;
     private Sprite _startSprite;
 
+    GameObject hitbox;
+
     private void Awake()
     {
         duration = 0.5f;
@@ -53,7 +55,7 @@ public class DashPowerup : PowerUp
     {
         _playerHitbox.enabled = false;
 
-        GameObject hitbox = Instantiate(PlayerStats.Instance.CurrentWeapon.Hitbox, transform);
+        hitbox = Instantiate(PlayerStats.Instance.CurrentWeapon.Hitbox, transform);
         hitbox.transform.localPosition = Vector2.zero;
 
         foreach (SpriteRenderer sr in _sr)
@@ -89,6 +91,7 @@ public class DashPowerup : PowerUp
     {
         EquipmentManager.Instance.ToggleHit(true);
         OnDeactivatePowerUp();
+        Destroy(hitbox);
 
         foreach (SpriteRenderer sr in _sr)
         {

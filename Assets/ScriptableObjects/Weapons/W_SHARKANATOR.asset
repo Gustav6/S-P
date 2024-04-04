@@ -15,10 +15,10 @@ MonoBehaviour:
   hitbox: {fileID: 288263448704326756, guid: 5a502e0c359b82947bccae73332471d1, type: 3}
   weaponAnimationToUse: {fileID: 22100000, guid: edf8f34851f9525429f6d3b07414553a, type: 2}
   weaponImpulseMultiplier: -3
-  weaponImpulseTime: 0.075
-  damage: 15
-  knockbackMultiplier: 1.25
-  stunTime: 0
+  weaponImpulseTime: 0.15
+  damage: 50
+  knockbackMultiplier: 5
+  stunTime: 0.15
   animationSpeedMultiplier: 1
   isWeaponAnimationResetable: 1
   resetMultiplier: 0.2

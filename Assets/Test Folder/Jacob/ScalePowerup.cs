@@ -60,4 +60,9 @@ public class ScalePowerup : PowerUp
         PlayerStats.Instance.DeActivateAbilityStats();
         PlayerStats.Instance.ClearEquippedAbility();
     }
+
+    private void OnDestroy()
+    {
+        OnDeactivatePowerUp();
+    }
 }

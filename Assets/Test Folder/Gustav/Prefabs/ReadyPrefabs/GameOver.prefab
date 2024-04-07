@@ -420,11 +420,11 @@ MonoBehaviour:
   fadeIn: 0
   color: {r: 0, g: 0, b: 0, a: 0}
   fadeInTime: 1.5
-  moveIn: 0
+  moveIn: 1
   moveInTime: 1
   moveOutTime: 1
-  moveTowardsOnEnable: 4
-  moveTowardsOnDisable: 4
+  moveTowardsOnEnable: 2
+  moveTowardsOnDisable: 3
   transitionType: 3
   scaleIn: 0
   scaleInTime: 1
@@ -611,7 +611,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6776574943263549923, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_Size.y
-      value: 75
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 7292290588515505781, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_text
@@ -823,6 +823,14 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 105
       objectReference: {fileID: 0}
+    - target: {fileID: 6793727853127410416, guid: 55dc8d5cee1799e4c8e75b8301b9997b, type: 3}
+      propertyPath: m_Size.x
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 6793727853127410416, guid: 55dc8d5cee1799e4c8e75b8301b9997b, type: 3}
+      propertyPath: m_Size.y
+      value: 85
+      objectReference: {fileID: 0}
     - target: {fileID: 7199148599165828584, guid: 55dc8d5cee1799e4c8e75b8301b9997b, type: 3}
       propertyPath: m_SizeDelta.x
       value: 500
@@ -943,7 +951,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6776574943263549923, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_Size.y
-      value: 75
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 7292290588515505781, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_text

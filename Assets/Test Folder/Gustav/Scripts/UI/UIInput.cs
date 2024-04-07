@@ -116,31 +116,45 @@ public class UIInput : MonoBehaviour
 
     public void Submit(InputAction.CallbackContext context)
     {
-        if (UIIsLoaded() && CanInteractWithSelectedUI())
+        GameObject g = UIStateManager.Instance.FindInteractableUI(UIStateManager.Instance.CurrentUISelected);
+
+        if (UIIsLoaded())
         {
-            GameObject g = UIStateManager.Instance.FindInteractableUI(UIStateManager.Instance.CurrentUISelected);
-            BaseStateManager referenceManager = g.GetComponent<BaseStateManager>();
-
-            if (context.performed)
+            if (CanInteractWithSelectedUI())
             {
-                if (g.GetComponent<Slider>() == null && g.GetComponent<InputField>() == null)
+                BaseStateManager referenceManager = g.GetComponent<BaseStateManager>();
+
+                if (context.performed)
                 {
-                    referenceManager.UIActivated = true;
+                    if (g.GetComponent<Slider>() == null && g.GetComponent<InputField>() == null)
+                    {
+                        referenceManager.UIActivated = true;
+                    }
+                    else
+                    {
+                        bool temp = referenceManager.UIActivated;
+
+                        temp = !temp;
+
+                        referenceManager.UIActivated = temp;
+                    }
                 }
-                else
+                if (context.canceled)
                 {
-                    bool temp = referenceManager.UIActivated;
-
-                    temp = !temp;
-
-                    referenceManager.UIActivated = temp;
+                    if (g.GetComponent<SliderStateManager>() == null && g.GetComponent<InputFieldStateManager>() == null)
+                    {
+                        referenceManager.UIActivated = false;
+                    }
                 }
             }
-            if (context.canceled)
+            else
             {
-                if (g.GetComponent<SliderStateManager>() == null && g.GetComponent<InputFieldStateManager>() == null)
+                if (context.performed)
                 {
-                    referenceManager.UIActivated = false;
+                    if (g.GetComponent<Credits>() != null)
+                    {
+                        g.GetComponent<Credits>().ActivateSelectedFunctions();
+                    }
                 }
             }
         }
@@ -159,21 +173,53 @@ public class UIInput : MonoBehaviour
 
     public void ClickOnGameObject(InputAction.CallbackContext context)
     {
-        if (UIIsLoaded() && CanInteractWithSelectedUI() && !UIStateManager.Instance.KeyOrControlActive)
+        if (!UIStateManager.Instance.KeyOrControlActive)
         {
-            BaseStateManager stateManager = UIStateManager.Instance.FindInteractableUI(UIStateManager.Instance.CurrentUISelected).GetComponent<BaseStateManager>();
+            GameObject g = UIStateManager.Instance.FindInteractableUI(UIStateManager.Instance.CurrentUISelected);
 
-            if (stateManager.UIInstance.hovering)
+            if (UIIsLoaded())
             {
-                if (context.performed)
+                if (CanInteractWithSelectedUI())
                 {
-                    stateManager.UIActivated = true;
-                }
-            }
+                    BaseStateManager referenceManager = g.GetComponent<BaseStateManager>();
 
-            if (context.canceled)
-            {
-                stateManager.UIActivated = false;
+                    if (referenceManager.UIInstance.hovering)
+                    {
+                        if (g.GetComponent<Slider>() == null && g.GetComponent<InputField>() == null)
+                        {
+                            referenceManager.UIActivated = true;
+                        }
+                        else
+                        {
+                            bool temp = referenceManager.UIActivated;
+
+                            temp = !temp;
+
+                            referenceManager.UIActivated = temp;
+                        }
+                    }
+
+                    if (context.canceled)
+                    {
+                        if (g.GetComponent<SliderStateManager>() == null && g.GetComponent<InputFieldStateManager>() == null)
+                        {
+                            referenceManager.UIActivated = false;
+                        }
+                    }
+                }
+                else
+                {
+                    if (g.GetComponent<Selectable>() != null)
+                    {
+                        if (g.GetComponent<Selectable>().hovering)
+                        {
+                            if (g.GetComponent<Credits>() != null)
+                            {
+                                g.GetComponent<Credits>().ActivateSelectedFunctions();
+                            }
+                        }
+                    }
+                }
             }
         }
     }
@@ -200,7 +246,7 @@ public class UIInput : MonoBehaviour
         {
             UIStateManager uIManager = UIStateManager.Instance;
 
-            if (uIManager.FindInteractableUI(uIManager.CurrentUISelected).GetComponent<UI>() != null)
+            if (uIManager.FindInteractableUI(uIManager.CurrentUISelected).GetComponent<BaseStateManager>() != null)
             {
                 if (uIManager.FindInteractableUI(uIManager.CurrentUISelected).GetComponent<UI>().isInteractable)
                 {

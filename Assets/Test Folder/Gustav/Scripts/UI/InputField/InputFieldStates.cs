@@ -17,9 +17,9 @@ public class InputFieldDeselectedState : UIBaseState
     {
         manager = (InputFieldStateManager)referenceManager;
         inputFieldInstance = (InputField)referenceManager.UIInstance;
-
-        manager.DefaultDeselectTransition(timeItTakes, inputFieldInstance.enableOnSelect, manager.bgImage, manager.transform, manager.text);
+        manager.DefaultDeselectTransition(timeItTakes, inputFieldInstance.enableOnSelect, manager.bgImage, manager.transform);
     }
+
     public override void UpdateState(BaseStateManager referenceManager)
     {
         CheckIfSelected(referenceManager, manager.selectedState);
@@ -50,7 +50,7 @@ public class InputFieldSelectedState : UIBaseState
 
         if (!UIStateManager.Instance.Transitioning)
         {
-            manager.text.color = Color.white;
+            manager.text.color = new Color(1, 1, 1, 1);
             referenceManager.StartCoroutine(WaitCoroutine(timeItTakes));
             manager.DefaultSelectTransition(timeItTakes, inputFieldInstance.enableOnSelect, manager.bgImage, manager.transform);
         }
@@ -78,9 +78,12 @@ public class InputFieldPressedState : UIBaseState
 {
     private InputFieldStateManager manager;
     private InputField inputFieldInstance;
+    private bool hasEnteredName = false;
 
     public override void EnterState(BaseStateManager referenceManager)
     {
+        hasEnteredName = false;
+
         if (AudioManager.Instance != null)
         {
             AudioManager.Instance.PlaySound("Click");
@@ -117,6 +120,8 @@ public class InputFieldPressedState : UIBaseState
                     SaveLeaderBoard();
 
                     inputFieldInstance.UpdateLeadboard();
+
+                    hasEnteredName = true;
                 }
 
                 CheckIfDeselected(referenceManager, manager.deselectedState);
@@ -132,20 +137,21 @@ public class InputFieldPressedState : UIBaseState
         if (!UIStateManager.Instance.KeyOrControlActive)
         {
             CheckIfDeselected(referenceManager, manager.deselectedState);
-            CheckIfSelected(referenceManager, manager.selectedState);
-            manager.UIActivated = false;
         }
     }
 
     public override void ExitState(BaseStateManager referenceManager)
     {
-        if (manager.text.text.Length == 0)
+        if (hasEnteredName)
         {
-            manager.text.text = "WRITE NAME";
+            inputFieldInstance.ActivateSelectedFunctions();
         }
         else
         {
-            inputFieldInstance.ActivateSelectedFunctions();
+            manager.UIActivated = false;
+            manager.text.text = "WRITE NAME";
+            manager.text.color = new Color(1, 1, 1, 0);
+            TransitionSystem.AddColorTransition(new ColorTransition(manager.text, Color.white, 0.65f, TransitionType.SmoothStop2));
         }
     }
 

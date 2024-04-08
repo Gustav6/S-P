@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Serialization;
@@ -19,12 +20,15 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] Image _kbInputImage, _gamepadInputImage;
     [SerializeField] Sprite[] _buttonSprites;
 
+    [SerializeField] private PauseController _pauseController;
+
     private PlayerAnimationController _attackController;
     private AimController _aimController;
     private PlayerStats _player;
 
     bool _attackInputHeld;
     bool _powerupInputHeld;
+    bool _paused;
 
     bool _isOnKBM = true;
 
@@ -59,6 +63,11 @@ public class PlayerAttack : MonoBehaviour
                 _kbInputImage.gameObject.SetActive(false);
             }
         }
+    }
+
+    private void TogglePlayerAction(object sender, EventArgs args)
+    {
+        _paused = ((OnPausedEventArgs)args).isPaused;
     }
 
     private void Update()

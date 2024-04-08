@@ -53,8 +53,16 @@ public class UIManagerTransitioningState : UIManagerBaseState
             }
             else
             {
-                stateManager.StartCoroutine(WaitCoroutine());
-                hasStartedCoroutine = true;
+                if (stateManager.PrefabToEnable != stateManager.PauseInstance)
+                {
+                    stateManager.StartCoroutine(WaitCoroutine(transitionTime / 2));
+                    hasStartedCoroutine = true;
+                }
+                else
+                {
+                    stateManager.StartCoroutine(WaitCoroutine(0));
+                    hasStartedCoroutine = true;
+                }
             }
         }
         else
@@ -91,9 +99,9 @@ public class UIManagerTransitioningState : UIManagerBaseState
         }
     }
 
-    private IEnumerator WaitCoroutine()
+    private IEnumerator WaitCoroutine(float time)
     {
-        yield return new WaitForSeconds(transitionTime / 2);
+        yield return new WaitForSeconds(time);
 
         SwitchToLoadedState();
     }
@@ -167,7 +175,6 @@ public class UIManagerLoadedState : UIManagerBaseState
             if (stateManager.CursorInstance != null)
             {
                 stateManager.CursorInstance.SetActive(true);
-                Debug.Log("Cursor on");
             }
         }
     }
@@ -176,7 +183,7 @@ public class UIManagerLoadedState : UIManagerBaseState
     {
         ExecuteOnCompletion execute = null;
 
-        if (stateManager.PauseInstance != null)
+        if (stateManager.PauseInstance != null && stateManager.ActivePrefab == stateManager.PauseInstance)
         {
             PauseManager pauseManager = stateManager.PauseInstance.GetComponentInChildren<PauseManager>();
 

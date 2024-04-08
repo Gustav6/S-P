@@ -80,6 +80,11 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        if (UIStateManager.Instance.PauseMenuActive)
+        {
+            CanMove = false;
+        }
+
         if (!CanMove)
         {
             if (IsNotGettingHit)

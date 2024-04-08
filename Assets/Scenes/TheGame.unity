@@ -15973,9 +15973,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 305582100}
     m_Modifications:
+    - target: {fileID: 122310672851554083, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204077760259394153, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 1935960243886050184, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -100
+      objectReference: {fileID: 0}
     - target: {fileID: 3436001664701962289, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
       propertyPath: m_Name
       value: GameOver
+      objectReference: {fileID: 0}
+    - target: {fileID: 3436001664701962289, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3926876728030735410, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
       propertyPath: m_Pivot.x
@@ -16056,6 +16072,38 @@ PrefabInstance:
     - target: {fileID: 3926876728030735410, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268534824694853159, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1400
+      objectReference: {fileID: 0}
+    - target: {fileID: 4268534824694853159, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212762754340291896, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212762754340291896, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 27ec88894ee37d748b1dc0b6636c93c5, type: 3}
+    - target: {fileID: 6212762754340291896, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212762754340291896, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212762754340291896, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9040343437276499241, guid: f37e44dfe2a00454e88dc68d6b09be04, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -31672,7 +31720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2027919082
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32195,6 +32243,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4224508278314902551, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
+      propertyPath: selectedFunctions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4224508278314902551, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
+      propertyPath: 'selectedFunctions.Array.data[0]'
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4224508278314902551, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
+      propertyPath: 'selectedFunctions.Array.data[1]'
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 5443569142214700333, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
       propertyPath: prefabToEnable
       value: 
@@ -32202,6 +32262,10 @@ PrefabInstance:
     - target: {fileID: 9189982670187135639, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
       propertyPath: m_Name
       value: PauseMenuPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 9189982670187135639, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

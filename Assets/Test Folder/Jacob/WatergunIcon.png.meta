@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      WatergunIcon_0: 5605807595202411321
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

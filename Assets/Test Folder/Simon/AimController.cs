@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 
+// Simon
 public class AimController : MonoBehaviour
 {
 	[SerializeField] private float turnTime;
@@ -17,9 +18,6 @@ public class AimController : MonoBehaviour
 	private float _topArmRotation = -165, _bottomArmRotation = -14;
 
 	private float _previousAimDirection = 1;
-
-	// TODO: Make a bool that checks if the distance between the mouse and the rotation anchors are too great, if it is play the aim animations.
-	// Unless _previousAimDirection isn't equal to the current aim direction and the player should turn.
 
     /// <summary>
     /// Aims the weapon of the entity towards a certain target.
@@ -48,6 +46,9 @@ public class AimController : MonoBehaviour
         }
 	}
 
+	/// <summary>
+	/// Aims the weapon of the entity in a certain direction.
+	/// </summary>
 	public void FaceDirection(Vector2 direction)
     {
 		float x = direction.x;
@@ -67,6 +68,9 @@ public class AimController : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Rotates the neck and the body of the entity, also handles turning of the body.
+	/// </summary>
     private void RotateBody(float x, float angle)
 	{
 		void SetLocalRotation(bool isNeckRotation)
@@ -123,6 +127,9 @@ public class AimController : MonoBehaviour
         return distToA < distToB;
     }
 
+	/// <summary>
+	/// Turns the the whole entity in a certain direction.
+	/// </summary>
     private IEnumerator TurnAround(float direction)
 	{
 		EquipmentManager.Instance.ToggleHit(false);

@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - InteractableUI
+  - WaveReward
+  - UIManager
+  - Cursor
+  - Enemy
+  - UIPrefab
   layers:
   - Default
   - TransparentFX
@@ -38,6 +44,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: BG
+    uniqueID: 1165818915
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 3903539431
     locked: 0

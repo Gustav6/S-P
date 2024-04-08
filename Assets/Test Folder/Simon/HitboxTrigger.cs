@@ -7,6 +7,9 @@ public class HitboxTrigger : MonoBehaviour
 {
     private Enemy _thisController;
 
+    private const float _maxTime = 5;
+    private float _timer;
+
     private void Awake()
     {
         _thisController = GetComponentInParent<Enemy>();
@@ -82,5 +85,13 @@ public class HitboxTrigger : MonoBehaviour
         stunTime = stunTime - (decreaseValuePerHit * consecutiveHits) > 0 ? stunTime - (decreaseValuePerHit * consecutiveHits) : 0;
 
         return stunTime;
+    }
+
+    private void Update()
+    {
+        _timer += Time.deltaTime;
+
+        if (_timer >= _maxTime)
+            Destroy(gameObject);
     }
 }

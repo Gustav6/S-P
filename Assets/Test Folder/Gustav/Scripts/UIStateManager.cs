@@ -185,8 +185,6 @@ public class UIStateManager : MonoBehaviour
     {
         TransitionSystem.Update();
 
-        Debug.Log(PauseMenuActive);
-
         CurrentState.UpdateState(this);
     }
 

@@ -23,17 +23,15 @@ public class PauseManager : MonoBehaviour
         visuals.SetActive(false);
     }
 
-    public void PauseGame()
+    public void EnablePauseMenu()
     {
-        Time.timeScale = 0;
-        anim.SetTrigger("Pause");
+        anim.SetBool("UnPaused", false);
     }
 
-    public void UnPauseGame()
+    public void DisablePauseMenu()
     {
         Transitioning = true;
-        Time.timeScale = 1;
-        anim.SetTrigger("UnPause");
+        anim.SetBool("UnPaused", true);
     }
 
     public void CallOnDisable()

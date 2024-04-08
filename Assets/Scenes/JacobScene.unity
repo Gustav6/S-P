@@ -30550,6 +30550,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1241575559}
     m_Modifications:
+    - target: {fileID: 938314214613743004, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
+      propertyPath: startingScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 938314214613743004, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
+      propertyPath: startingScale.y
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 938314214613743004, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
+      propertyPath: scaleInResetTime
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 2513271949040214555, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -30634,9 +30646,17 @@ PrefabInstance:
       propertyPath: prefabToEnable
       value: 
       objectReference: {fileID: 1865252011}
+    - target: {fileID: 7398111829672972725, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9189982670187135639, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
       propertyPath: m_Name
       value: PauseMenuPrefab
+      objectReference: {fileID: 0}
+    - target: {fileID: 9189982670187135639, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

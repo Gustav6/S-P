@@ -55,7 +55,7 @@ public class UIManagerTransitioningState : UIManagerBaseState
             {
                 if (stateManager.PrefabToEnable != stateManager.PauseInstance)
                 {
-                    stateManager.StartCoroutine(WaitCoroutine(transitionTime / 2));
+                    stateManager.StartCoroutine(WaitCoroutine(transitionTime));
                     hasStartedCoroutine = true;
                 }
                 else
@@ -185,9 +185,7 @@ public class UIManagerLoadedState : UIManagerBaseState
 
         if (stateManager.PauseInstance != null && stateManager.ActivePrefab == stateManager.PauseInstance)
         {
-            PauseManager pauseManager = stateManager.PauseInstance.GetComponentInChildren<PauseManager>();
-
-            pauseManager.UnPauseGame();
+            stateManager.PauseInstance.GetComponentInChildren<PauseManager>().DisablePauseMenu();
         }
         else
         {

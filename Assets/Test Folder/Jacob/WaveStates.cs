@@ -867,6 +867,11 @@ public class WaveLossState : BaseWaveState
     {
         //_gameOverObject.SetActive(true);
 
+        if (UIStateManager.Instance.ActivePrefab != null)
+        {
+            UIStateManager.Instance.PrefabToDisable = UIStateManager.Instance.ActivePrefab;
+        }
+
         UIStateManager.Instance.PrefabToEnable = _gameOverObject;
 
         _context.CanSpawnEnemies = false;

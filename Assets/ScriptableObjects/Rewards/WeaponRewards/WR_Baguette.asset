@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WR_Baguette
   m_EditorClassIdentifier: 
   RewardName: Baguette
-  WaveUnlocked: 0
+  WaveUnlocked: 5
   ContainedWeapon: {fileID: 11400000, guid: aa8e512fae2c0824ea3d754466753bf0, type: 2}
   RewardSprite: {fileID: -4383923719173538831, guid: ed471d904e9ee6e428547a1b7adcfab1, type: 3}

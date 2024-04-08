@@ -84,12 +84,18 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public bool PowerupActive { get; private set; }
 
     public int Score { get; private set; }
+    public int WaveNumber { get; private set; }
 
     [SerializeField] Animator _powerupAnim;
 
     public void AddScore(int amount)
     {
         Score += amount;
+    }
+
+    public void SetWaveNumber(int number)
+    {
+        WaveNumber = number;
     }
 
     private void Start()

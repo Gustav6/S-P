@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WR_Fish
   m_EditorClassIdentifier: 
   RewardName: Little Brother
-  WaveUnlocked: 0
+  WaveUnlocked: 5
   ContainedWeapon: {fileID: 11400000, guid: cd3ba98949bd2ef4c85cc687d1cfcc11, type: 2}
   RewardSprite: {fileID: 6361611475456273693, guid: cbe1f6d449b42034d860c988f1b7ea35, type: 3}

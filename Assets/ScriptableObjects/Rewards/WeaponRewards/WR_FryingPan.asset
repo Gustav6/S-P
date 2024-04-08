@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WR_FryingPan
   m_EditorClassIdentifier: 
   RewardName: Frying Pan
-  WaveUnlocked: 0
+  WaveUnlocked: 5
   ContainedWeapon: {fileID: 11400000, guid: b6ec83e6724370a498f256b9e588ba0c, type: 2}
   RewardSprite: {fileID: -7714727748090963735, guid: 42cef9a76cdf7444ca7cfaba485309cb, type: 3}

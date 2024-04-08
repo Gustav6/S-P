@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: SR_Nice
   m_EditorClassIdentifier: 
   RewardName: Nice
-  WaveUnlocked: 10
+  WaveUnlocked: 0
   StatModifier:
     AttackSpeed: 1
-    DamageModifier: 1
-    DamageResistanceModifier: 1.69
+    DamageModifier: 1.069
+    DamageResistanceModifier: 1.069
     KnockbackModifier: 1
     KnockbackResitanceModifier: 1
-    MovementSpeedModifier: 1
+    MovementSpeedModifier: 1.069

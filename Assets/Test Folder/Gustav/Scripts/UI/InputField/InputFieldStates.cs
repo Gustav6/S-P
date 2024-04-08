@@ -113,10 +113,7 @@ public class InputFieldPressedState : UIBaseState
                 {
                     Debug.Log("User entered: " + manager.text.text);
 
-                    int rnd1 = Random.Range(1, 10000);
-                    int rnd2 = Random.Range(1, 10);
-
-                    AddNameToLeaderBoards(manager.text.text, rnd1, rnd2);
+                    AddNameToLeaderBoards(manager.text.text, PlayerStats.Instance.Score, PlayerStats.Instance.WaveNumber);
                     SaveLeaderBoard();
 
                     inputFieldInstance.UpdateLeadboard();

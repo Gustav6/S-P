@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WR_Burrito
   m_EditorClassIdentifier: 
   RewardName: Burrito
-  WaveUnlocked: 0
+  WaveUnlocked: 5
   ContainedWeapon: {fileID: 11400000, guid: 93e55237f95581f4c8a3e106bcdfe517, type: 2}
   RewardSprite: {fileID: 8535930466193072334, guid: 7b7f0202ed8ec9344a792ded308acd8c, type: 3}

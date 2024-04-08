@@ -140,6 +140,8 @@ public class UIStateManager : MonoBehaviour
 
     private void Awake()
     {
+        Time.maximumDeltaTime = 10;
+
         if (Instance == null)
             Instance = this;
         else
@@ -148,6 +150,8 @@ public class UIStateManager : MonoBehaviour
 
     private void Start()
     {
+        Time.timeScale = 1;
+
         CursorInstance = GameObject.FindGameObjectWithTag("Cursor");
 
         ManagerTransitioningState = new();
@@ -180,6 +184,8 @@ public class UIStateManager : MonoBehaviour
     private void Update()
     {
         TransitionSystem.Update();
+
+        Debug.Log(PauseMenuActive);
 
         CurrentState.UpdateState(this);
     }

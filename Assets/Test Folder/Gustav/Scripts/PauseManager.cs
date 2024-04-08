@@ -23,10 +23,16 @@ public class PauseManager : MonoBehaviour
         visuals.SetActive(false);
     }
 
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        anim.SetTrigger("Pause");
+    }
+
     public void UnPauseGame()
     {
         Transitioning = true;
-
+        Time.timeScale = 1;
         anim.SetTrigger("UnPause");
     }
 

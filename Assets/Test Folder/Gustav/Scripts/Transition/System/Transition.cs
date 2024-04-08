@@ -20,7 +20,14 @@ public class Transition
 
     public virtual void Update()
     {
-        timer += Time.deltaTime;
+        if (Time.timeScale > 0)
+        {
+            timer += Time.deltaTime;
+        }
+        else
+        {
+            timer += Time.unscaledDeltaTime;
+        }
 
         if (timer > timerMax)
         {

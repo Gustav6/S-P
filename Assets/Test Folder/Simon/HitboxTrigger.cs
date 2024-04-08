@@ -7,6 +7,9 @@ public class HitboxTrigger : MonoBehaviour
 {
     private Enemy _thisController;
 
+    private const float _maxTime = 5;
+    private float _timer;
+
     private void Awake()
     {
         _thisController = GetComponentInParent<Enemy>();
@@ -43,7 +46,7 @@ public class HitboxTrigger : MonoBehaviour
                 return;
 
             Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage * PlayerStats.Instance.GetStat(StatType.DamageDealt),
-                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), transform.position,
+                   PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), PlayerStats.Instance.transform.position,
                    CalculateStunTime(damageable.KnockbackPercent, PlayerStats.Instance.CurrentWeapon.StunTime, damageable.ConsecutiveHits));
         }
     }
@@ -82,5 +85,13 @@ public class HitboxTrigger : MonoBehaviour
         stunTime = stunTime - (decreaseValuePerHit * consecutiveHits) > 0 ? stunTime - (decreaseValuePerHit * consecutiveHits) : 0;
 
         return stunTime;
+    }
+
+    private void Update()
+    {
+        _timer += Time.deltaTime;
+
+        if (_timer >= _maxTime)
+            Destroy(gameObject);
     }
 }

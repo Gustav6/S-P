@@ -1,0 +1,494 @@
+fileFormatVersion: 2
+guid: 5fdf54a9e1c95cc47989834c286d0ef7
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7125383593648881331
+    second: sharkanatorexplosion_0
+  - first:
+      213: 4874638329359425130
+    second: sharkanatorexplosion_1
+  - first:
+      213: -482903162081356522
+    second: sharkanatorexplosion_2
+  - first:
+      213: 8902609219014691610
+    second: sharkanatorexplosion_3
+  - first:
+      213: -786511342529266156
+    second: sharkanatorexplosion_4
+  - first:
+      213: 3149401009246436786
+    second: sharkanatorexplosion_5
+  - first:
+      213: 8679954252693348066
+    second: sharkanatorexplosion_6
+  - first:
+      213: 7535541838376744093
+    second: sharkanatorexplosion_7
+  - first:
+      213: -8882562798976946165
+    second: sharkanatorexplosion_8
+  - first:
+      213: 8237711881936164173
+    second: sharkanatorexplosion_9
+  - first:
+      213: 7667036194112392009
+    second: sharkanatorexplosion_10
+  - first:
+      213: -5398509229042924647
+    second: sharkanatorexplosion_11
+  - first:
+      213: 4789792733148816577
+    second: sharkanatorexplosion_12
+  - first:
+      213: 3375711535907131737
+    second: sharkanatorexplosion_13
+  - first:
+      213: -214573266889054364
+    second: sharkanatorexplosion_14
+  - first:
+      213: -53666916153274290
+    second: sharkanatorexplosion_15
+  - first:
+      213: -1372441204513765138
+    second: sharkanatorexplosion_16
+  - first:
+      213: 3553699863383221342
+    second: sharkanatorexplosion_17
+  - first:
+      213: -5809584505679740154
+    second: sharkanatorexplosion_18
+  - first:
+      213: 4741760275999596101
+    second: sharkanatorexplosion_19
+  - first:
+      213: 3227016079293978475
+    second: sharkanatorexplosion_20
+  - first:
+      213: 3065648823504855201
+    second: sharkanatorexplosion_21
+  - first:
+      213: 6794564355156416940
+    second: sharkanatorexplosion_22
+  - first:
+      213: 5579461668182659018
+    second: sharkanatorexplosion_23
+  - first:
+      213: 5692732676020249508
+    second: sharkanatorexplosion_24
+  - first:
+      213: 1390025506538204195
+    second: sharkanatorexplosion_25
+  - first:
+      213: 4064647612207715134
+    second: sharkanatorexplosion_26
+  - first:
+      213: -3868971991141130645
+    second: sharkanatorexplosion_27
+  - first:
+      213: -8547146812950085387
+    second: sharkanatorexplosion_28
+  - first:
+      213: -7494361983276821587
+    second: sharkanatorexplosion_29
+  - first:
+      213: 907398585120445007
+    second: sharkanatorexplosion_30
+  - first:
+      213: 6297879694309038889
+    second: sharkanatorexplosion_31
+  - first:
+      213: 2316872432549774634
+    second: sharkanatorexplosion_32
+  - first:
+      213: 8195704537925328734
+    second: sharkanatorexplosion_33
+  - first:
+      213: -7966448240606002247
+    second: sharkanatorexplosion_34
+  - first:
+      213: 1997548613630990753
+    second: sharkanatorexplosion_35
+  - first:
+      213: -6426078987530658139
+    second: sharkanatorexplosion_36
+  - first:
+      213: -4547789212890339006
+    second: sharkanatorexplosion_37
+  - first:
+      213: -2714346187278384307
+    second: sharkanatorexplosion_38
+  - first:
+      213: -4511916519610276032
+    second: sharkanatorexplosion_39
+  - first:
+      213: -323348598555761120
+    second: sharkanatorexplosion_40
+  - first:
+      213: 1660416822226121349
+    second: sharkanatorexplosion_41
+  - first:
+      213: 7975201100963843991
+    second: sharkanatorexplosion_42
+  - first:
+      213: 8371802497851441459
+    second: sharkanatorexplosion_43
+  - first:
+      213: 8225355467661502194
+    second: sharkanatorexplosion_44
+  - first:
+      213: 8705840100871018079
+    second: sharkanatorexplosion_45
+  - first:
+      213: 8149573836780646134
+    second: sharkanatorexplosion_46
+  - first:
+      213: 8532439803475409560
+    second: sharkanatorexplosion_47
+  - first:
+      213: 2811079266964837313
+    second: sharkanatorexplosion_48
+  - first:
+      213: -5656548815355329591
+    second: sharkanatorexplosion_49
+  - first:
+      213: 7456729257255897870
+    second: sharkanatorexplosion_50
+  - first:
+      213: -5028263470660911440
+    second: sharkanatorexplosion_51
+  - first:
+      213: -3798642115892899870
+    second: sharkanatorexplosion_52
+  - first:
+      213: 6555918260268819056
+    second: sharkanatorexplosion_53
+  - first:
+      213: 124203491515544133
+    second: sharkanatorexplosion_54
+  - first:
+      213: -2762437658506197352
+    second: sharkanatorexplosion_55
+  - first:
+      213: -3313176093191061353
+    second: sharkanatorexplosion_56
+  - first:
+      213: 4069906068682075384
+    second: sharkanatorexplosion_57
+  - first:
+      213: -554691036876072051
+    second: sharkanatorexplosion_58
+  - first:
+      213: -5060159949106077037
+    second: sharkanatorexplosion_59
+  - first:
+      213: 5968127244284421321
+    second: sharkanatorexplosion_60
+  - first:
+      213: 2614894914580529224
+    second: sharkanatorexplosion_61
+  - first:
+      213: 2361348016439265307
+    second: sharkanatorexplosion_62
+  - first:
+      213: -2331512238726665592
+    second: sharkanatorexplosion_63
+  - first:
+      213: -4003186938351907320
+    second: sharkanatorexplosion_64
+  - first:
+      213: 1486188268724074857
+    second: sharkanatorexplosion_65
+  - first:
+      213: 849022713542580883
+    second: sharkanatorexplosion_66
+  - first:
+      213: -6640980287540987087
+    second: sharkanatorexplosion_67
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: sharkanatorexplosion_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 494
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d41892c9f5d8d1d90800000000000000
+      internalID: -7125383593648881331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sharkanatorexplosion_1
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 494
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6ed8fdcbb136a340800000000000000
+      internalID: 4874638329359425130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sharkanatorexplosion_2
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 494
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6155a33f1226c49f0800000000000000
+      internalID: -482903162081356522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sharkanatorexplosion_3
+      rect:
+        serializedVersion: 2
+        x: 1455
+        y: 494
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1b0d79aaeb6c8b70800000000000000
+      internalID: 8902609219014691610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sharkanatorexplosion_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41e3ab0e910c515f0800000000000000
+      internalID: -786511342529266156
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sharkanatorexplosion_5
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 0
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2bdf36b188be4bb20800000000000000
+      internalID: 3149401009246436786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sharkanatorexplosion_6
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 0
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ee9d6a8764657870800000000000000
+      internalID: 8679954252693348066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: sharkanatorexplosion_7
+      rect:
+        serializedVersion: 2
+        x: 1455
+        y: 0
+        width: 485
+        height: 494
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d943a82806f939860800000000000000
+      internalID: 7535541838376744093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      sharkanatorexplosion_0: -7125383593648881331
+      sharkanatorexplosion_1: 4874638329359425130
+      sharkanatorexplosion_2: -482903162081356522
+      sharkanatorexplosion_3: 8902609219014691610
+      sharkanatorexplosion_4: -786511342529266156
+      sharkanatorexplosion_5: 3149401009246436786
+      sharkanatorexplosion_6: 8679954252693348066
+      sharkanatorexplosion_7: 7535541838376744093
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

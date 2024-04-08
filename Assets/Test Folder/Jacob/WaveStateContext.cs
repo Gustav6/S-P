@@ -48,5 +48,6 @@ public class WaveStateContext
 	{
         EnemiesToSpawn = null;
         WaveNumber++;
+        PlayerStats.Instance.SetWaveNumber(WaveNumber);
 	}
 }

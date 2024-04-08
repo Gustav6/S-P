@@ -15,4 +15,4 @@ MonoBehaviour:
   RewardName: Water Gun
   WaveUnlocked: 0
   ContainedWeapon: {fileID: 11400000, guid: 4cf4376c0a7881a4bb8564451a15f752, type: 2}
-  RewardSprite: {fileID: 21300000, guid: 1574f279875daae4fa6efb4b9a8e7a82, type: 3}
+  RewardSprite: {fileID: 5605807595202411321, guid: 0fd1ba197d6734b498115c018cc45c8d, type: 3}

@@ -5,6 +5,8 @@ using UnityEngine;
 // Modified version of HitboxTrigger.cs for explosive weaponry. Modified by Jacob.
 public class ExplosiveHitbox : MonoBehaviour
 {
+    [SerializeField] GameObject _explosionPrefab;
+
     [SerializeField] float _explosionRadius;
     [SerializeField] LayerMask _enemyLayer;
 
@@ -32,7 +34,7 @@ public class ExplosiveHitbox : MonoBehaviour
                     CalculateStunTime(damageable.KnockbackPercent, PlayerStats.Instance.CurrentWeapon.StunTime, damageable.ConsecutiveHits));
         }
 
-        PopupManager.Instance.SpawnText("BOOM\nit spolded", transform.position, 1.5f);
+        Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

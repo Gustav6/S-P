@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using System.Runtime.CompilerServices;
+using System;
 
 public class EnemyAI : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class EnemyAI : MonoBehaviour
 
     [SerializeField] private float speed = 2;
     [SerializeField] private float flipSpeed;
+
+    [SerializeField] private PauseController _pauseController;
+    private bool _paused;
 
     private float nextWayPointDistance = 3f;
 
@@ -46,6 +50,11 @@ public class EnemyAI : MonoBehaviour
         InvokeRepeating("UpdatePath", 0f, .2f);
     }
     
+    private void ToggleEnemyAction(object sender, EventArgs args)
+    {
+        _paused = ((OnPausedEventArgs)args).isPaused;
+    }
+
     void UpdatePath()
     {
         if (!CanMove)

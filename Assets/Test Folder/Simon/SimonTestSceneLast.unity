@@ -2176,7 +2176,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -4342694438242365024, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -2904755577101316286, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14529,7 +14529,7 @@ MonoBehaviour:
     foes.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -4342694438242365024, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -2904755577101316286, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -14833,6 +14833,24 @@ MonoBehaviour:
     m_Interactions: 
     m_SingletonActionBindings: []
     m_Flags: 0
+  _anyIA:
+    m_Name: Any IA
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: eafeac41-54ab-4237-b87c-e9a5c9ae4f98
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  _aimIA:
+    m_Name: Aim IA
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 6a327192-7a96-4205-9f08-2eb1972b4a18
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
   _kbInputImage: {fileID: 0}
   _gamepadInputImage: {fileID: 0}
   _buttonSprites: []
@@ -14967,6 +14985,7 @@ MonoBehaviour:
   _maxDamagePercent: 300
   _healParticlesPrefab: {fileID: 8860623131104852182, guid: 22cf678a65815d448b1bc67fdb61b004, type: 3}
   _powerUpHudElement: {fileID: 2063885585}
+  _powerupAnim: {fileID: 0}
 --- !u!1001 &982643893
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30451,6 +30470,50 @@ Transform:
   - {fileID: 731845699}
   m_Father: {fileID: 162969440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2144453372
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2144453374}
+  - component: {fileID: 2144453373}
+  m_Layer: 0
+  m_Name: Pause Controller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2144453373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144453372}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 404b61233dcfa6b4d8c2e7307577ee9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2144453374
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144453372}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &6960819574033480549
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30547,3 +30610,4 @@ SceneRoots:
   - {fileID: 162969440}
   - {fileID: 731253919}
   - {fileID: 40035876}
+  - {fileID: 2144453374}

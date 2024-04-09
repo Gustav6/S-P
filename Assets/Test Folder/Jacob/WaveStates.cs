@@ -870,6 +870,11 @@ public class WaveLossState : BaseWaveState
         if (UIStateManager.Instance.ActivePrefab != null)
         {
             UIStateManager.Instance.PrefabToDisable = UIStateManager.Instance.ActivePrefab;
+
+            if (UIStateManager.Instance.PauseMenuActive)
+            {
+                UIStateManager.Instance.PauseMenuActive = false;
+            }
         }
 
         UIStateManager.Instance.PrefabToEnable = _gameOverObject;

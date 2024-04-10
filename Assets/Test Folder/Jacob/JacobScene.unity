@@ -1826,7 +1826,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d80f5210bd51294bad728b6b4e0e84c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pausePrefab: {fileID: 0}
+  pausePrefab: {fileID: 2115146285}
   prefabWillEnableOnStart: {fileID: 0}
   maxXPos: 0
   maxYPos: 0
@@ -2547,7 +2547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &592400793
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32220,6 +32220,11 @@ PrefabInstance:
 --- !u!224 &2115146284 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2513271949040214555, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
+  m_PrefabInstance: {fileID: 2115146283}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2115146285 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9189982670187135639, guid: 9549ff92fc319b3489c6bc8934164a0a, type: 3}
   m_PrefabInstance: {fileID: 2115146283}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2127289319

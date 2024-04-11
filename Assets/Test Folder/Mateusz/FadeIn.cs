@@ -3,33 +3,41 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FadeIn : MonoBehaviour
 {
+    [SerializeField] private List<GameObject> inOrderOfFadeIn = new();
 
-    private bool screenFaded = false;
-
-    public float fadeDuration = 0.4f;
-
-    
+    [SerializeField] private float fadeDuration;
 
     public void Start()
     {
-        var canvGroup = GetComponent<CanvasGroup>();
-        StartCoroutine(DoFadeOut(canvGroup, canvGroup.alpha, screenFaded ? 1 : 0));
+        if (!UIDataManager.instance.hasRunStartScreen)
+        {
+            for (int i = 0; i < inOrderOfFadeIn.Count; i++)
+            {
+                Image imageTemp = inOrderOfFadeIn[i].GetComponent<Image>();
+                TransitionSystem.AddColorTransition(new ColorTransition(imageTemp, new Color(1, 1, 1, 1), fadeDuration * 2, TransitionType.SmoothStop2, FadeOutImages));
+            }
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void Update()
     {
         if (Input.GetButtonDown("Jump"))
         {
-            fadeDuration = 1.7f;
+            gameObject.SetActive(false);
+            EnableHasRunStartScreen();
         }
     }
 
     IEnumerator DoFadeOut(CanvasGroup canvGroup, float start, float end)
     {
-            
         float elapsedTime = 0F;
 
         while (canvGroup.alpha > 0)
@@ -40,5 +48,25 @@ public class FadeIn : MonoBehaviour
         }
 
         yield return null;
+    }
+
+    public void FadeOutBackground()
+    {
+        Image imageTemp = GetComponent<Image>();
+        TransitionSystem.AddColorTransition(new ColorTransition(imageTemp, new Color(0, 0, 0, 0), 2, TransitionType.SmoothStop2, EnableHasRunStartScreen));
+    }
+
+    public void FadeOutImages()
+    {
+        for (int i = 0; i < inOrderOfFadeIn.Count; i++)
+        {
+            Image imageTemp = inOrderOfFadeIn[i].GetComponent<Image>();
+            TransitionSystem.AddColorTransition(new ColorTransition(imageTemp, new Color(1, 1, 1, 0), fadeDuration, TransitionType.SmoothStop2, FadeOutBackground));
+        }
+    }
+
+    private void EnableHasRunStartScreen()
+    {
+        UIDataManager.instance.hasRunStartScreen = true;
     }
 }

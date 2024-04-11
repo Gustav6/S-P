@@ -24,4 +24,24 @@ public class ShrimpEnemy : Enemy
 
         base.TakeKnockback(sourcePosition, knockbackMultiplier, stunDuration);
     }
+
+    public override void TakeKnockback(Vector2 sourcePosition, Vector2 targetPosition, float knockbackMultiplier, float stunDuration)
+    {
+        if (knockbackMultiplier == 0 || stunDuration == 0 || isImune)
+            return;
+
+        isImune = true;
+
+        _enemyAttack.CanAttack(false);
+        _attackController.LeaveMovement(false);
+        _attackController.EnemyHit();
+        _attackController.GroundEnemyHit();
+
+        Vector2 knockbackVector = (targetPosition - sourcePosition).normalized;
+        float multiplier = (4 + (KnockbackPercent / 100)) * knockbackMultiplier;
+
+        StartCoroutine(SetEnemyVelocity(knockbackVector, multiplier, stunDuration));
+
+        base.TakeKnockback(sourcePosition, targetPosition, knockbackMultiplier, stunDuration);
+    }
 }

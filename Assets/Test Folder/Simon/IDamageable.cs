@@ -31,6 +31,11 @@ public interface IDamageable
 
     public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration);
 
+    public virtual void TakeKnockback(Vector2 sourcePosition, Vector2 targetDirection, float knockbackMultiplier, float stunDuration)
+    {
+
+    }
+
     public void CheckDeath(Tilemap tilemap, Dictionary<Vector2Int, TileBase> tiles, Collider2D collider)
     {
         Vector2 position = collider.bounds.center;

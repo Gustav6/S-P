@@ -61,6 +61,13 @@ public class Enemy : MonoBehaviour, IDamageable
         StartCoroutine(GiveEnemyMovement(stunDuration));
     }
 
+    public virtual void TakeKnockback(Vector2 sourcePosition, Vector2 targetPosition, float knockbackMultiplier, float stunDuration)
+    {
+        ConsecutiveHits++;
+        _hitResetTime = _maxHitTime;
+        StartCoroutine(GiveEnemyMovement(stunDuration));
+    }
+
     public void TakeDamage(float damageAmount)
     {
         if (isImune)

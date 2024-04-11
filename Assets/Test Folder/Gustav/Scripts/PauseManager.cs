@@ -49,7 +49,6 @@ public class PauseManager : MonoBehaviour
             UIStateManager.Instance.DisableUIPrefab();
         }
         Transitioning = false;
-        UIStateManager.Instance.CursorInstance.SetActive(false);
     }
 
     public void LoadUIOnEnable(UIStateManager stateManager)

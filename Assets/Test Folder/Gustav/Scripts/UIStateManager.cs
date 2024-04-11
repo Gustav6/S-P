@@ -150,8 +150,6 @@ public class UIStateManager : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 1;
-
         CursorInstance = GameObject.FindGameObjectWithTag("Cursor");
 
         ManagerTransitioningState = new();

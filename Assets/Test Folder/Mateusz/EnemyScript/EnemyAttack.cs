@@ -55,7 +55,7 @@ public class EnemyAttack : MonoBehaviour
 
     void Update()
     {
-        if (!CanEnemyAttack || UIStateManager.Instance.PauseMenuActive)
+        if (!CanEnemyAttack || UIStateManager.Instance.ActivePrefab != null)
             return;
 
         if (isAttacking && attackReady)

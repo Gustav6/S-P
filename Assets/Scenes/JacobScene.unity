@@ -549,7 +549,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &68332282
 MonoBehaviour:
@@ -2603,7 +2603,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &611910526
 MonoBehaviour:
@@ -2705,7 +2705,7 @@ MonoBehaviour:
 '
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -2904755577101316286, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -1975702702556552367, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2908,8 +2908,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hotSpot: {x: 18, y: -40, z: 0}
-  pressedSprite: {fileID: 4454631428275665778, guid: 1aefdd21ceefc18478995385f415a06b, type: 3}
-  regulerSprite: {fileID: -3397387025712965628, guid: 1aefdd21ceefc18478995385f415a06b, type: 3}
+  pressedMenuSprite: {fileID: 4454631428275665778, guid: 1aefdd21ceefc18478995385f415a06b, type: 3}
+  regulerMenuSprite: {fileID: -3397387025712965628, guid: 1aefdd21ceefc18478995385f415a06b, type: 3}
+  gameSprite: {fileID: 21300000, guid: 1c3556d0910dbd84f8bbc449f5114d28, type: 3}
 --- !u!223 &638472297
 Canvas:
   m_ObjectHideFlags: 0
@@ -2931,7 +2932,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &638472298
 MonoBehaviour:
@@ -15112,7 +15113,7 @@ MonoBehaviour:
     foes.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -2904755577101316286, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -1975702702556552367, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -15219,9 +15220,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 14571241}
   - {fileID: 638472295}
   - {fileID: 1241575559}
-  - {fileID: 14571241}
   m_Father: {fileID: 999809840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}

@@ -8,8 +8,10 @@ public class CursorScript : MonoBehaviour
     private Image image;
     public Vector3 hotSpot;
 
-    public Sprite pressedSprite;
-    public Sprite regulerSprite;
+    public Sprite pressedMenuSprite;
+    public Sprite regulerMenuSprite;
+
+    public Sprite gameSprite;
 
     private void Start()
     {
@@ -19,15 +21,36 @@ public class CursorScript : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (UIStateManager.Instance.ActivePrefab != null)
         {
-            image.sprite = pressedSprite;
-        }
-        else if (Input.GetMouseButtonUp(0))
-        {
-            image.sprite = regulerSprite;
-        }
+            if (image.sprite != pressedMenuSprite && image.sprite != regulerMenuSprite)
+            {
+                image.color = Color.white;
+                transform.localScale = new Vector3(1, 1, 1);
+                image.sprite = regulerMenuSprite;
+            }
 
-        transform.position = Input.mousePosition + hotSpot;
+            if (Input.GetMouseButtonDown(0))
+            {
+                image.sprite = pressedMenuSprite;
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                image.sprite = regulerMenuSprite;
+            }
+
+            transform.position = Input.mousePosition + hotSpot;
+        }
+        else
+        {
+            if (image.sprite != gameSprite)
+            {
+                image.color = new Color(1, 1, 1, 0.5f);
+                transform.localScale = new Vector3(0.4f, 0.4f, 1);
+                image.sprite = gameSprite;
+            }
+
+            transform.position = Input.mousePosition;
+        }
     }
 }

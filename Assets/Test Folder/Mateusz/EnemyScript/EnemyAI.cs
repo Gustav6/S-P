@@ -80,7 +80,7 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        if (!CanMove || UIStateManager.Instance.PauseMenuActive)
+        if (!CanMove || UIStateManager.Instance.ActivePrefab != null)
         {
             if (IsNotGettingHit)
                 rb.velocity = Vector2.zero;

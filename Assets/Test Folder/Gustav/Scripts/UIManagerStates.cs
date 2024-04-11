@@ -7,8 +7,8 @@ public class UIManagerUnLoadedState : UIManagerBaseState
 {
     public override void EnterState(UIStateManager stateManager)
     {
+        stateManager.CursorInstance.SetActive(true);
         stateManager.ActivePrefab = null;
-        stateManager.CursorInstance.SetActive(false);
     }
 
     public override void UpdateState(UIStateManager stateManager)

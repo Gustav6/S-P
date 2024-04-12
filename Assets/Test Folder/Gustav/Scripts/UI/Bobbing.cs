@@ -37,7 +37,8 @@ public class Bobbing : MonoBehaviour
         {
             Scale();
         }
-        else if (move)
+
+        if (move)
         {
             BobLeftToRight();
         }

@@ -124,12 +124,12 @@ TextureImporter:
       name: slider and button and other 1_7
       rect:
         serializedVersion: 2
-        x: 1071
-        y: 183
-        width: 799
-        height: 151
+        x: 1072
+        y: 184
+        width: 797
+        height: 149
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 35, y: 35, z: 35, w: 35}
       outline: []
       physicsShape: []
@@ -137,6 +137,153 @@ TextureImporter:
       bones: []
       spriteID: 903d1d18293e7b0b0800000000000000
       internalID: -5712847383913442551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slider and button and other 1_0
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 892
+        width: 678
+        height: 52
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaad928556f67c94e9246d68f69187ff
+      internalID: -2961953833042591800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slider and button and other 1_1
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 727
+        width: 771
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87a99276f5f2caf4ea5a75c72b7b0122
+      internalID: 8993048079900877084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slider and button and other 1_2
+      rect:
+        serializedVersion: 2
+        x: 1173
+        y: 727
+        width: 308
+        height: 121
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e634a9fb888b3941b8c8f25dff3412f
+      internalID: -4190243538025119855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slider and button and other 1_3
+      rect:
+        serializedVersion: 2
+        x: 395
+        y: 464
+        width: 61
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7680f6e33481da4387950dc2b232850
+      internalID: 4036986123490322270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slider and button and other 1_4
+      rect:
+        serializedVersion: 2
+        x: 1212
+        y: 636
+        width: 92
+        height: 66
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 656fc7487dc9af14aa2fda6963e051e7
+      internalID: 6111238745239808989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slider and button and other 1_5
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 412
+        width: 771
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b3608f408db928a4fa9a5cea4ae36b0b
+      internalID: -3465263725707163600
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: slider and button and other 1_6
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 197
+        width: 771
+        height: 123
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc4632a5b2ac48748bbef181c8955304
+      internalID: 1544263834525352698
       vertices: []
       indices: 
       edges: []

@@ -10,11 +10,16 @@ public class PauseManager : MonoBehaviour
 
     public GameObject visuals;
 
+    public TextMeshProUGUI wave;
+    public TextMeshProUGUI score;
+
     public static bool Transitioning { get; private set; }
 
     public void EnableVisuals()
     {
         visuals.SetActive(true);
+        wave.text = PlayerStats.Instance.WaveNumber.ToString();
+        score.text = PlayerStats.Instance.Score.ToString();
         LoadUIOnEnable(UIStateManager.Instance);
     }
 

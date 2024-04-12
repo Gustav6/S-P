@@ -18,6 +18,8 @@ public class FadeIn : MonoBehaviour
     {
         if (!UIDataManager.instance.hasRunStartScreen)
         {
+            UIStateManager.Instance.EnableTransitioning();
+
             TextMeshProUGUI text = skipTextGameObject.GetComponent<TextMeshProUGUI>();
             TransitionSystem.AddColorTransition(new ColorTransition(text, new Color(1, 1, 1, 1), fadeDuration, TransitionType.SmoothStop2));
 
@@ -36,7 +38,7 @@ public class FadeIn : MonoBehaviour
         }
         else
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 
@@ -44,8 +46,10 @@ public class FadeIn : MonoBehaviour
     {
         if (Input.GetButtonDown("Jump"))
         {
-            gameObject.SetActive(false);
-            EnableHasRunStartScreen();
+            UIDataManager.instance.hasRunStartScreen = true;
+            UIStateManager.Instance.DisableTransitioning();
+
+            transform.position = new Vector3(transform.position.x + transform.position.x * 2, transform.position.y, 0);
         }
     }
 
@@ -91,6 +95,7 @@ public class FadeIn : MonoBehaviour
     private void EnableHasRunStartScreen()
     {
         UIDataManager.instance.hasRunStartScreen = true;
-        gameObject.SetActive(false);
+        UIStateManager.Instance.DisableTransitioning();
+        Destroy(gameObject);
     }
 }

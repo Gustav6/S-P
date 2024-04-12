@@ -497,6 +497,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd12a4bb1ff04f74f874beee6d6b1a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasRunStartScreen: 0
   score: 
   scoreNames: []
   wave: 
@@ -3034,8 +3035,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hotSpot: {x: 18, y: -40, z: 0}
-  pressedSprite: {fileID: 4454631428275665778, guid: 1aefdd21ceefc18478995385f415a06b, type: 3}
-  regulerSprite: {fileID: -3397387025712965628, guid: 1aefdd21ceefc18478995385f415a06b, type: 3}
+  pressedMenuSprite: {fileID: 0}
+  regulerMenuSprite: {fileID: 0}
+  gameSprite: {fileID: 0}
 --- !u!223 &659548514
 Canvas:
   m_ObjectHideFlags: 0
@@ -18448,8 +18450,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: f2f5a367ddee1d749be7456cd1d95d8c, type: 2}
   - {fileID: 11400000, guid: 37f83bbb3c62f2b42a62afd435459c79, type: 2}
   - {fileID: 11400000, guid: c0dfcfcb9bfc82544ab10c6aabcb18e8, type: 2}
-  - {fileID: 11400000, guid: 0ef3ae01b3b791b4ca365d8974e98f5d, type: 2}
-  - {fileID: 11400000, guid: a26137207ef919e46ab25618ce66f3b5, type: 2}
+  - {fileID: 11400000, guid: 7e911962bd74e3549803cdeb5d6e5bff, type: 2}
+  - {fileID: 11400000, guid: 34565af3eb98eca47b0be1cb25cf2992, type: 2}
   _dropCurve:
     serializedVersion: 2
     m_Curve:

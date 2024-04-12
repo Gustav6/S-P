@@ -22,7 +22,7 @@ MonoBehaviour:
   animationSpeedMultiplier: 0.5
   isWeaponAnimationResetable: 1
   resetMultiplier: 1
-  projectileVelocity: 0.4
+  projectileVelocity: 0.1
   weaponSprite: {fileID: 21300000, guid: 1574f279875daae4fa6efb4b9a8e7a82, type: 3}
   weaponFlashSprite: {fileID: 21300000, guid: 1574f279875daae4fa6efb4b9a8e7a82, type: 3}
   particleSystem: {fileID: 1567073594253252592, guid: a03547f8df435af4b914589d0b209a2d, type: 3}

@@ -34,8 +34,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -400, y: 450}
-  m_SizeDelta: {x: 350, y: 50}
+  m_AnchoredPosition: {x: -740, y: 100}
+  m_SizeDelta: {x: 365, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1478464726267465707
 CanvasRenderer:
@@ -65,16 +65,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'GAME ARTISTS:
+  m_text: 'ARTISTS -
+
+    EIJE,
 
     MYRA,
 
-    OLIVIA,
-
-    EIJE'
+    OLIVIA,'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -2904755577101316286, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -1975702702556552367, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -176,8 +176,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -750, y: 450}
-  m_SizeDelta: {x: 300, y: 50}
+  m_AnchoredPosition: {x: -740, y: 450}
+  m_SizeDelta: {x: 380, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6687907464946990599
 CanvasRenderer:
@@ -207,7 +207,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'GAME DEVS:
+  m_text: 'PROGRAMMERS -
 
     GUSTAV,
 
@@ -220,7 +220,7 @@ MonoBehaviour:
     TRISTAN'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
-  m_sharedMaterial: {fileID: -2904755577101316286, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+  m_sharedMaterial: {fileID: -1975702702556552367, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -336,6 +336,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7271205641851989297}
+  - component: {fileID: 5065605905203871095}
   m_Layer: 5
   m_Name: Buttons
   m_TagString: Untagged
@@ -363,6 +364,32 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5065605905203871095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6579036313941239394}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f22059464a44da74caa067109b7cfc29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  images: []
+  fadeIn: 0
+  color: {r: 0, g: 0, b: 0, a: 0}
+  fadeInTime: 1.5
+  moveIn: 1
+  moveInTime: 1
+  moveOutTime: 1
+  moveTowardsOnEnable: 2
+  moveTowardsOnDisable: 3
+  transitionType: 3
+  scaleIn: 0
+  scaleInTime: 1
+  scaleInResetTime: 1
+  startingScale: {x: 0, y: 0, z: 0}
 --- !u!1 &8957313915428382563
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,8 +447,8 @@ MonoBehaviour:
   moveIn: 1
   moveInTime: 1
   moveOutTime: 1
-  moveTowardsOnEnable: 1
-  moveTowardsOnDisable: 0
+  moveTowardsOnEnable: 3
+  moveTowardsOnDisable: 2
   transitionType: 3
   scaleIn: 0
   scaleInTime: 1
@@ -713,11 +740,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -625
+      value: 660
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -465
+      value: -475
       objectReference: {fileID: 0}
     - target: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -733,11 +760,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6776574943263549923, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_Size.x
-      value: 500
+      value: 580
       objectReference: {fileID: 0}
     - target: {fileID: 6776574943263549923, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_Size.y
-      value: 90
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7292290588515505781, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_text
@@ -746,7 +773,7 @@ PrefabInstance:
     - target: {fileID: 7292290588515505781, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -2904755577101316286, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
+      objectReference: {fileID: -1975702702556552367, guid: 7b1f2a4c4b188a641be7b1dfd04c2f51, type: 2}
     - target: {fileID: 8300371173187088321, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
       propertyPath: m_SizeDelta.x
       value: 570
@@ -782,42 +809,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8732738409933366688, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1368152399485033438}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
---- !u!1 &1321333181300700327 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8732738409933366688, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}
-  m_PrefabInstance: {fileID: 7739078445705040135}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1368152399485033438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1321333181300700327}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f22059464a44da74caa067109b7cfc29, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  images: []
-  fadeIn: 0
-  color: {r: 0, g: 0, b: 0, a: 0}
-  fadeInTime: 1.5
-  moveIn: 1
-  moveInTime: 1
-  moveOutTime: 1
-  moveTowardsOnEnable: 2
-  moveTowardsOnDisable: 3
-  transitionType: 3
-  scaleIn: 0
-  scaleInTime: 1
-  scaleInResetTime: 1
-  startingScale: {x: 0, y: 0, z: 0}
 --- !u!224 &2468588354612080423 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5270490091103469088, guid: 4a8b21868946d8a438cefd3d5bf0c90f, type: 3}

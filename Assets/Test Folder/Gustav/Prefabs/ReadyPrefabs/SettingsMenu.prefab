@@ -813,6 +813,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: VideoSettings
       objectReference: {fileID: 0}
+    - target: {fileID: 2055519291901798772, guid: 5639d421d67f13c4ab358f3936296f5e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3503843533985484711, guid: 5639d421d67f13c4ab358f3936296f5e, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -898,12 +902,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5144763402206728921, guid: 5639d421d67f13c4ab358f3936296f5e, type: 3}
+      propertyPath: moveInTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5144763402206728921, guid: 5639d421d67f13c4ab358f3936296f5e, type: 3}
       propertyPath: moveOutTime
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 5144763402206728921, guid: 5639d421d67f13c4ab358f3936296f5e, type: 3}
       propertyPath: transitionType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5144763402206728921, guid: 5639d421d67f13c4ab358f3936296f5e, type: 3}
       propertyPath: moveTowardsOnEnable
@@ -937,12 +945,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 8442048998401145677}
     m_Modifications:
     - target: {fileID: 2840533290751648624, guid: 375039d89c1b54c4f83217f0d1eb8fd9, type: 3}
+      propertyPath: moveInTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2840533290751648624, guid: 375039d89c1b54c4f83217f0d1eb8fd9, type: 3}
       propertyPath: moveOutTime
-      value: 0.6
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 2840533290751648624, guid: 375039d89c1b54c4f83217f0d1eb8fd9, type: 3}
       propertyPath: transitionType
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2840533290751648624, guid: 375039d89c1b54c4f83217f0d1eb8fd9, type: 3}
       propertyPath: moveTowardsOnEnable

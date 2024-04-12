@@ -55,7 +55,16 @@ public class UIManagerTransitioningState : UIManagerBaseState
             {
                 if (stateManager.PrefabToEnable != stateManager.PauseInstance)
                 {
-                    stateManager.StartCoroutine(WaitCoroutine(transitionTime));
+                    if (stateManager.PrefabToEnable.GetComponent<OnLoad>() == null)
+                    {
+                        stateManager.StartCoroutine(WaitCoroutine(transitionTime));
+                    }
+                    else
+                    {
+                        float temp = stateManager.PrefabToEnable.GetComponent<OnLoad>().moveOutTime;
+                        stateManager.StartCoroutine(WaitCoroutine(temp));
+                    }
+
                     hasStartedCoroutine = true;
                 }
                 else
@@ -189,6 +198,17 @@ public class UIManagerLoadedState : UIManagerBaseState
         }
         else
         {
+            if (stateManager.PrefabToEnable != null && stateManager.PrefabToDisable != null)
+            {
+                if (stateManager.PrefabToEnable.GetComponentInChildren<ActiveSettingManager>() == null)
+                {
+                    if (stateManager.PrefabToDisable.GetComponentInChildren<ActiveSettingManager>() != null)
+                    {
+                        stateManager.PrefabToDisable.GetComponentInChildren<ActiveSettingManager>().gameObject.SetActive(false);
+                    }
+                }
+            }
+
             CallOnDisable(stateManager, execute);
         }
     }

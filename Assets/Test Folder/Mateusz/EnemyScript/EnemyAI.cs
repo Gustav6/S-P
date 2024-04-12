@@ -25,14 +25,18 @@ public class EnemyAI : MonoBehaviour
 
     int currentWayPoint = 0;
 
-    private int _previousDirection = 1;
+    private float _previousDirection = 1;
 
     bool reachedEndOfPath;
     public bool CanMove { get; set; }
     public bool IsNotGettingHit { get; set; }
 
+    float _originalScale;
+
     void Start()
     {
+        _originalScale = transform.localScale.x;
+
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
 
@@ -49,7 +53,7 @@ public class EnemyAI : MonoBehaviour
 
         InvokeRepeating("UpdatePath", 0f, .2f);
     }
-    
+
     private void ToggleEnemyAction(object sender, EventArgs args)
     {
         _paused = ((OnPausedEventArgs)args).isPaused;
@@ -104,7 +108,7 @@ public class EnemyAI : MonoBehaviour
         Vector2 direction = ((Vector2)target.position - (Vector2)transform.position).normalized;
         Vector2 pathDirection = ((Vector2)path.vectorPath[currentWayPoint] - rb.position).normalized;
 
-        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);    
+        float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
         angle *= Mathf.Sign(transform.localScale.x);
         pivot.transform.localRotation = Quaternion.AngleAxis(angle, Vector3.forward);
@@ -128,14 +132,15 @@ public class EnemyAI : MonoBehaviour
     private IEnumerator Flip(float direction)
     {
         float time = 0;
+        direction *= _originalScale;
 
         while (time <= flipSpeed)
         {
-            transform.localScale = new Vector3(Mathf.Lerp(-direction, direction, time / flipSpeed), 1, 1);
+            transform.localScale = new Vector3(Mathf.Lerp(-direction, direction, time / flipSpeed), _originalScale, 1);
             time += Time.deltaTime;
             yield return null;
         }
 
-        transform.localScale = new Vector3(direction, 1, 1);
+        transform.localScale = new Vector3(direction, _originalScale, 1);
     }
 }

@@ -49,6 +49,8 @@ public class HitboxTrigger : MonoBehaviour
                    PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), PlayerStats.Instance.transform.position,
                    CalculateStunTime(damageable.KnockbackPercent, PlayerStats.Instance.CurrentWeapon.StunTime, damageable.ConsecutiveHits));
         }
+
+        AudioManager.Instance.PlaySound("WaterGun");
     }
 
     public void Attack(IDamageable damageable, float damage, float knockbackMultiplier, Vector2 sourcePosition, float stunTime)

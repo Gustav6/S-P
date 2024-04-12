@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: aa84524fc831f1047a4986b6d4b37578
+guid: 6f5dd72fb6c49a04ca8e434d9983c449
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6545302980019263681
-    second: MetalPipeIcon_0
+      213: -9115312466609006391
+    second: RATONASTICK_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MetalPipeIcon_0
+      name: RATONASTICK_0
       rect:
         serializedVersion: 2
-        x: 48
-        y: 8
-        width: 337
-        height: 394
+        x: 108
+        y: 0
+        width: 186
+        height: 483
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1c89a5fb16695da50800000000000000
-      internalID: 6545302980019263681
+      spriteID: 9c8941b4b97ef7180800000000000000
+      internalID: -9115312466609006391
       vertices: []
       indices: 
       edges: []
@@ -131,7 +131,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MetalPipeIcon_0: 6545302980019263681
+      RATONASTICK_0: -9115312466609006391
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

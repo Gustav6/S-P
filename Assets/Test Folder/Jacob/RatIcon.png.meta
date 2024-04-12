@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: aa84524fc831f1047a4986b6d4b37578
+guid: 2b83be5d733b11f42bf37bb66dd8f565
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 6545302980019263681
-    second: MetalPipeIcon_0
+      213: 1443369312480542054
+    second: RatIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: MetalPipeIcon_0
+      name: RatIcon_0
       rect:
         serializedVersion: 2
-        x: 48
-        y: 8
-        width: 337
-        height: 394
+        x: 70
+        y: 10
+        width: 382
+        height: 486
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -114,8 +114,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 1c89a5fb16695da50800000000000000
-      internalID: 6545302980019263681
+      spriteID: 66d3a1e0eb0e70410800000000000000
+      internalID: 1443369312480542054
       vertices: []
       indices: 
       edges: []
@@ -131,7 +131,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      MetalPipeIcon_0: 6545302980019263681
+      RatIcon_0: 1443369312480542054
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WR_BaseballBat
   m_EditorClassIdentifier: 
   RewardName: Baseball Bat
-  WaveUnlocked: 10
+  WaveUnlocked: 0
   ContainedWeapon: {fileID: 11400000, guid: c22b063aade945b4093abe75608eb398, type: 2}
   RewardSprite: {fileID: 21300000, guid: 02e23ff8c971dda4c82505cac7670533, type: 3}

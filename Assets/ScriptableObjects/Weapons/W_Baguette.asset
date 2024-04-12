@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83798ac8aa17ef34981f663d8bb53092, type: 3}
   m_Name: W_Baguette
   m_EditorClassIdentifier: 
-  weaponAnimationToUse: {fileID: 22100000, guid: c329182c0e932584dbc17b692744f1b1, type: 2}
-  weaponSprite: {fileID: -1692451804227615028, guid: 962da15309302a246817c52372453c02, type: 3}
-  animationSpeedMultiplier: 1.25
-  damage: 17.5
-  knockbackMultiplier: 1
-  weaponImpulseMultiplier: 7
-  weaponImpulseTime: 0
-  rangedWeaponSpeed: 0
   hitbox: {fileID: 2494041383529764252, guid: 9fe73e10d19d0194a8b50a11e805d950, type: 3}
-  weaponFlashSprite: {fileID: -7978083749908223333, guid: e391f5039968edc479031973dcc73d92, type: 3}
-  particleSystem: {fileID: 1567073594253252592, guid: a03547f8df435af4b914589d0b209a2d, type: 3}
+  weaponAnimationToUse: {fileID: 22100000, guid: c329182c0e932584dbc17b692744f1b1, type: 2}
+  weaponImpulseMultiplier: 0
+  weaponImpulseTime: 0
+  damage: 20
+  knockbackMultiplier: 1
+  stunTime: 0.15
+  animationSpeedMultiplier: 1.25
   isWeaponAnimationResetable: 1
   resetMultiplier: 3
+  projectileVelocity: 0
+  weaponSprite: {fileID: -1692451804227615028, guid: 962da15309302a246817c52372453c02, type: 3}
+  weaponFlashSprite: {fileID: -7978083749908223333, guid: e391f5039968edc479031973dcc73d92, type: 3}
+  particleSystem: {fileID: 1567073594253252592, guid: a03547f8df435af4b914589d0b209a2d, type: 3}

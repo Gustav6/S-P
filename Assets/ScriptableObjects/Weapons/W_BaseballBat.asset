@@ -12,16 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83798ac8aa17ef34981f663d8bb53092, type: 3}
   m_Name: W_BaseballBat
   m_EditorClassIdentifier: 
-  weaponAnimationToUse: {fileID: 22100000, guid: c329182c0e932584dbc17b692744f1b1, type: 2}
-  weaponSprite: {fileID: 1021989635934165948, guid: a926f839d66eb4a4b809dfb1de851f3d, type: 3}
-  animationSpeedMultiplier: 0.9
-  damage: 30
-  knockbackMultiplier: 1.25
-  weaponImpulseMultiplier: 7
-  weaponImpulseTime: 0
-  rangedWeaponSpeed: 0
   hitbox: {fileID: 4724571836604968063, guid: 6ad4fcf6ca403f24fa138a65cf36d4a4, type: 3}
-  weaponFlashSprite: {fileID: 5229747728011372442, guid: 4d61f8196e931234ba2c59d4db879e86, type: 3}
-  particleSystem: {fileID: 1567073594253252592, guid: a03547f8df435af4b914589d0b209a2d, type: 3}
+  weaponAnimationToUse: {fileID: 22100000, guid: c329182c0e932584dbc17b692744f1b1, type: 2}
+  weaponImpulseMultiplier: 0
+  weaponImpulseTime: 0
+  damage: 15
+  knockbackMultiplier: 1.25
+  stunTime: 0.15
+  animationSpeedMultiplier: 0.9
   isWeaponAnimationResetable: 1
   resetMultiplier: 3
+  projectileVelocity: 0
+  weaponSprite: {fileID: 1021989635934165948, guid: a926f839d66eb4a4b809dfb1de851f3d, type: 3}
+  weaponFlashSprite: {fileID: 5229747728011372442, guid: 4d61f8196e931234ba2c59d4db879e86, type: 3}
+  particleSystem: {fileID: 1567073594253252592, guid: a03547f8df435af4b914589d0b209a2d, type: 3}

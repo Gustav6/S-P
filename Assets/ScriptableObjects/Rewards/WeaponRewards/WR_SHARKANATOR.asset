@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WR_SHARKANATOR
   m_EditorClassIdentifier: 
   RewardName: SHARKANATOR
-  WaveUnlocked: 0
+  WaveUnlocked: 10
   ContainedWeapon: {fileID: 11400000, guid: 86e4f52053c2e2f44ad777143682c73f, type: 2}
   RewardSprite: {fileID: -773626670805966017, guid: 21422a237eb406c4987a4147688005ee, type: 3}

@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,14 +12,26 @@ public class FadeIn : MonoBehaviour
 
     [SerializeField] private float fadeDuration;
 
+    public GameObject skipTextGameObject;
+
     public void Start()
     {
         if (!UIDataManager.instance.hasRunStartScreen)
         {
+            TextMeshProUGUI text = skipTextGameObject.GetComponent<TextMeshProUGUI>();
+            TransitionSystem.AddColorTransition(new ColorTransition(text, new Color(1, 1, 1, 1), fadeDuration, TransitionType.SmoothStop2));
+
             for (int i = 0; i < inOrderOfFadeIn.Count; i++)
             {
                 Image imageTemp = inOrderOfFadeIn[i].GetComponent<Image>();
-                TransitionSystem.AddColorTransition(new ColorTransition(imageTemp, new Color(1, 1, 1, 1), fadeDuration * 2, TransitionType.SmoothStop2, FadeOutImages));
+                if (i == inOrderOfFadeIn.Count - 1)
+                {
+                    TransitionSystem.AddColorTransition(new ColorTransition(imageTemp, new Color(1, 1, 1, 1), fadeDuration, TransitionType.SmoothStop2, FadeOutImages));
+                }
+                else
+                {
+                    TransitionSystem.AddColorTransition(new ColorTransition(imageTemp, new Color(1, 1, 1, 1), fadeDuration, TransitionType.SmoothStop2));
+                }
             }
         }
         else
@@ -53,7 +66,7 @@ public class FadeIn : MonoBehaviour
     public void FadeOutBackground()
     {
         Image imageTemp = GetComponent<Image>();
-        TransitionSystem.AddColorTransition(new ColorTransition(imageTemp, new Color(0, 0, 0, 0), 2, TransitionType.SmoothStop2, EnableHasRunStartScreen));
+        TransitionSystem.AddColorTransition(new ColorTransition(imageTemp, new Color(0, 0, 0, 0), fadeDuration / 2, TransitionType.SmoothStart3, EnableHasRunStartScreen));
     }
 
     public void FadeOutImages()
@@ -70,6 +83,9 @@ public class FadeIn : MonoBehaviour
                 TransitionSystem.AddColorTransition(new ColorTransition(imageTemp, new Color(1, 1, 1, 0), fadeDuration, TransitionType.SmoothStop2));
             }
         }
+
+        TextMeshProUGUI text = skipTextGameObject.GetComponent<TextMeshProUGUI>();
+        TransitionSystem.AddColorTransition(new ColorTransition(text, new Color(1, 1, 1, 0), fadeDuration, TransitionType.SmoothStop2));
     }
 
     private void EnableHasRunStartScreen()

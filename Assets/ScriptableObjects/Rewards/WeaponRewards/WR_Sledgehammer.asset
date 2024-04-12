@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: WR_Sledgehammer
   m_EditorClassIdentifier: 
   RewardName: Sledgehammer
-  WaveUnlocked: 5
+  WaveUnlocked: 10
   ContainedWeapon: {fileID: 11400000, guid: beac021e44b2cb54194e83e00bcf7f0f, type: 2}
   RewardSprite: {fileID: -6951956379418105232, guid: 8cc45ce19892a71408eddfe776cfc44b, type: 3}

@@ -30,11 +30,12 @@ public class ExplosiveHitbox : MonoBehaviour
             }
 
             Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage * PlayerStats.Instance.GetStat(StatType.DamageDealt),
-                    PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), transform.position,
+                    PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), PlayerStats.Instance.transform.position,
                     CalculateStunTime(damageable.KnockbackPercent, PlayerStats.Instance.CurrentWeapon.StunTime, damageable.ConsecutiveHits));
         }
 
         Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        AudioManager.Instance.PlaySound("Explosion");
         Destroy(gameObject);
     }
 

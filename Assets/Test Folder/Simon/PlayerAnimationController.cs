@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Simon
 public class PlayerAnimationController : MonoBehaviour
 {
     private PlayerMovement _player;

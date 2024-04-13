@@ -6,6 +6,7 @@ using TMPro;
 using System.Runtime.CompilerServices;
 using UnityEngine.UI;
 
+// Simon & Jacob
 public class PlayerStats : MonoBehaviour, IDamageable
 {
     #region Singleton
@@ -129,6 +130,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
             _damageDisplayText.text = "300%";
     }
 
+    // Simon
     public void SetLocalDataToSave(PlayerData data)
     {
         _mainStatBlock = data.MainStatBlock;
@@ -188,6 +190,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _abilityStatBlock = new(1, 1, 1, 1, 1, 1);
     }
 
+    // Simon
     private void PowerupEquipped()
     {
         _powerUpHudElement.color = new Color(1, 1, 1, 1);
@@ -207,6 +210,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     }
 
     #region Damage and Knockback
+    // Simon
     public void TakeDamage(float damageAmount)
     {
         KnockbackPercent += damageAmount / GetStat(StatType.DamageResistance);
@@ -244,6 +248,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         SetDamageDisplay();
     }
 
+    // Simon
     /// <summary>
     /// Applies knockback to player and prevents them from moving for a specified time.
     /// </summary>
@@ -283,7 +288,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         StartCoroutine(SetPlayerVelocityOverTime((knockbackVector + diVector) / GetStat(StatType.KnockbackResistance), stunDuration));
     }
-    
+
+    // Simon
     private void PlayKnockbackSprite()
     {
         for (int i = 0; i < _allSrsOnPlayer.Length; i++)
@@ -297,6 +303,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _allSrsOnPlayer[0].sprite = _playerKnockbackSprite;
     }
 
+    // Simon
     private void ResetKnockbackSprite()
     {
         foreach (SpriteRenderer sr in _allSrsOnPlayer)
@@ -307,6 +314,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _allSrsOnPlayer[0].sprite = _initialBody;
     }
 
+    // Simon
     internal IEnumerator SetPlayerVelocityOverTime(Vector2 knockbackVector, float stunDuration)
     {
         foreach (Vector2 velocity in GetVelocity(knockbackVector, stunDuration))
@@ -319,6 +327,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         ResetKB();
     }
 
+    // Simon
     private IEnumerable<Vector2> GetVelocity(Vector2 knockbackVector, float stun)
     {
         Vector2 returningVector;
@@ -345,6 +354,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _playerCollider.enabled = true;
     }
 
+    // Simon
     public void Die()
     {
         if (_isInvulnerable)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
+// Simon
 public interface IDamageable
 {
     public float KnockbackPercent { get; set; }
@@ -33,7 +34,7 @@ public interface IDamageable
 
     public virtual void TakeKnockback(Vector2 sourcePosition, Vector2 targetPosition, float knockbackMultiplier, float stunDuration)
     {
-
+        // Defined in each individual enemy.
     }
 
     public void CheckDeath(Tilemap tilemap, Dictionary<Vector2Int, TileBase> tiles, Collider2D collider)

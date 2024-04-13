@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Simon
 [CreateAssetMenu(fileName = "Weapon", menuName = "ScriptableObjects/Weapon")]
 public class WeaponSO : ScriptableObject
 {

@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Simon
 public class EquipmentManager : MonoBehaviour
 {
     #region Singleton Pattern

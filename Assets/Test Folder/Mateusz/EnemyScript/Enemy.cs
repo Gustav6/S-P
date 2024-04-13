@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public float KnockbackPercent { get; set; }
     public int ConsecutiveHits { get; set; }
     private float _hitResetTime;
-    private readonly float _maxHitTime = 0.2f;
+    private readonly float _maxHitTime = 0.4f;
     public bool ShouldCount { get; set; }
     internal bool isImune;
 
@@ -131,7 +131,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (EquipmentManager.Instance.CanSpawnPowerUps)
         {
             EquipmentManager.Instance.SetPowerUpCanSpawn(false);
-            EquipmentManager.Instance.OnSpawnPowerUp(transform.position, 100, PowerUpTypes.Anything);
+            EquipmentManager.Instance.OnSpawnPowerUp(transform.position, 20, PowerUpTypes.Anything);
         }
 
         AudioManager.Instance.PlaySound("WaterSplash");

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Simon
 public abstract class PowerUp : MonoBehaviour
 {
     internal Sprite powerUpSprite;

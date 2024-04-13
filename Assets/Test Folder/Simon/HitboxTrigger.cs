@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Simon
 public class HitboxTrigger : MonoBehaviour
 {
     private Enemy _thisController;
@@ -84,8 +85,7 @@ public class HitboxTrigger : MonoBehaviour
         float decreaseValuePerHit = 0.15f;
 
         float stunTime = CalculateStunTime(currentKnockbackPercent);
-        stunTime = stunTime + baseStunTime;
-        stunTime = stunTime - (decreaseValuePerHit * consecutiveHits) > 0 ? stunTime - (decreaseValuePerHit * consecutiveHits) : 0;
+        stunTime = stunTime - (decreaseValuePerHit * consecutiveHits) > baseStunTime ? stunTime - (decreaseValuePerHit * consecutiveHits) : baseStunTime;
 
         return stunTime;
     }

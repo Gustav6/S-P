@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml.Serialization;
 using UnityEngine;
 
+// Simon
 public class SaveSystem : MonoBehaviour
 {
     public static SaveSystem Instance;
@@ -13,7 +14,6 @@ public class SaveSystem : MonoBehaviour
 
     private void Awake()
     {
-        // TODO: Maybe use don't destroy on load if issues arise, should be fine.
         #region Singleton
         if (Instance == null)
             Instance = this;
@@ -31,30 +31,6 @@ public class SaveSystem : MonoBehaviour
         playerStatsSaveFileDirectory = Application.dataPath + "/pSaveFile.json";
         dataSaveFileDirectory = Application.dataPath + "/dSaveFile.json";
     }
-
-    /*bool a;
-
-    private void Update()
-    {
-        if (UIManager.Instance.Paused && !a)
-        {
-            a = true;
-            StartCoroutine(PauseEED());
-        }
-        else if (!UIManager.Instance.Paused)
-        {
-            a = false;
-            Time.timeScale = 1;
-        }
-
-    }
-
-    IEnumerator PauseEED()
-    {
-        yield return new WaitForSeconds(1f);
-
-        Time.timeScale = 0;
-    }*/
 
     /// <summary>
     /// Checks if a game save file has been created and loads it.

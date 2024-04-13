@@ -9,6 +9,11 @@ public interface IDamageable
     public float KnockbackPercent { get; set; }
     public int ConsecutiveHits { get; set; }
 
+    /// <summary>
+    /// Gets all tiles that can be stood upon.
+    /// </summary>
+    /// <param name="tilemap">The current maps tilemap</param>
+    /// <returns>All the tiles in a tilemap in a grid like dictionary</returns>
     public static Dictionary<Vector2Int, TileBase> PopulateTilesDictonary(Tilemap tilemap)
     {
         Dictionary<Vector2Int, TileBase> tiles = new Dictionary<Vector2Int, TileBase>();
@@ -37,6 +42,12 @@ public interface IDamageable
         // Defined in each individual enemy.
     }
 
+    /// <summary>
+    /// Checks if the entity is standing on a tile.
+    /// </summary>
+    /// <param name="tilemap"></param>
+    /// <param name="tiles">All tiles of the tilemap in a dictionary, use PopulateTilesDictonary method</param>
+    /// <param name="collider">The collider of the entity that checks if the entity is standing on a valid tile</param>
     public void CheckDeath(Tilemap tilemap, Dictionary<Vector2Int, TileBase> tiles, Collider2D collider)
     {
         Vector2 position = collider.bounds.center;

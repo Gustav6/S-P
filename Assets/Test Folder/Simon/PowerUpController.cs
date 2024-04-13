@@ -24,13 +24,21 @@ public class PowerUpController : MonoBehaviour
     /// <param name="type">The type of powerup to spawn. If set to "Anything" a random powerup</param>
     private void ChanceToSpawnPowerUp(Vector2 spawnPosition, float chance, PowerUpTypes type)
     {
+        Debug.Log("pp");
+
         if (powerUpPrefab == null)
+        {
+            EquipmentManager.Instance.SetPowerUpCanSpawn(true);
             return;
+        }
 
         float rng = UnityEngine.Random.Range(0, 101);
 
         if (rng > chance || chance == 0)
+        {
+            EquipmentManager.Instance.SetPowerUpCanSpawn(true);
             return;
+        }
 
         PowerUpActivation newSpawn;
 

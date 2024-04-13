@@ -22,7 +22,9 @@ public class WeaponSO : ScriptableObject
             "Leave this variable, or the one above, at 0 and this effect will not occur.")]
     [SerializeField] private float weaponImpulseTime;
     [SerializeField] private float damage, knockbackMultiplier;
-    [Range(0.05f, 4)] [SerializeField] private float stunTime;
+
+    [Tooltip("The lowest amount of stun time that a weapon can give an enemy.")]
+    [Range(0.05f, 0.45f)] [SerializeField] private float stunTime;
 
     [Space(5)]
     [Header("Animation Stats")]

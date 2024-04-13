@@ -4,7 +4,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
-// For test
+// For testing
 // Simon
 public class HUD : MonoBehaviour
 {

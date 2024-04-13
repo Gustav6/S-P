@@ -144,6 +144,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void UpdateTilemap(Tilemap newTilemap)
     {
         tilemap = newTilemap;
+        _tiles = IDamageable.PopulateTilesDictonary(tilemap);
     }
 
     public float GetStat(StatType stat)
@@ -365,7 +366,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         if (waveStateMachine.CurrentState != waveStateMachine.States[WaveStateMachine.WaveState.WaveInProgress])
         {
-            transform.position = Vector2.zero;
+            transform.position = tilemap.transform.GetChild(2).position;
             return;
         }
 

@@ -18453,6 +18453,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c0dfcfcb9bfc82544ab10c6aabcb18e8, type: 2}
   - {fileID: 11400000, guid: 7e911962bd74e3549803cdeb5d6e5bff, type: 2}
   - {fileID: 11400000, guid: 34565af3eb98eca47b0be1cb25cf2992, type: 2}
+  - {fileID: 11400000, guid: 497b2e26e95ad9e4689552f861210323, type: 2}
   _dropCurve:
     serializedVersion: 2
     m_Curve:
@@ -18563,7 +18564,6 @@ MonoBehaviour:
   _messageText: {fileID: 41028103}
   _waveClearAnim: {fileID: 603107909}
   _islandPrefabs:
-  - {fileID: 2219014881077572896, guid: 9d925c577d0ade843aaa3c8f57a741b2, type: 3}
   - {fileID: 8876761688983302919, guid: 72382b25bfb0c5545b2e11a98b548dd4, type: 3}
   _currentIsland: {fileID: 2051934466}
   _gridTransform: {fileID: 1146938536}
@@ -18573,7 +18573,7 @@ MonoBehaviour:
   _waterPoolPrefab: {fileID: 9199059247923447511, guid: 8b4c0bc36884491478c0c3446bd6da09, type: 3}
   _weaponRewardIncrement: 3
   _statRewardIncrement: 1
-  _stageSwapIncrement: 5
+  _stageSwapIncrement: 1
   _tutorialManager: {fileID: 1951687191}
 --- !u!1 &1599309259
 GameObject:

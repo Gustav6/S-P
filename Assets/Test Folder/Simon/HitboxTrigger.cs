@@ -43,7 +43,7 @@ public class HitboxTrigger : MonoBehaviour
         }
         else
         {
-            if (collision.CompareTag(tag))
+            if (collision.CompareTag(tag) || collision.CompareTag("Player") || collision.CompareTag("WaveReward"))
                 return;
 
             Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage * PlayerStats.Instance.GetStat(StatType.DamageDealt),

@@ -65,8 +65,9 @@ public class PlayerStats : MonoBehaviour, IDamageable
     private IDamageable _thisDamagable;
 
     [SerializeField] float _diStrength = 0.25f; // DI stands for direction input, used to reduce or enhance knockback when counteracting it with movement input.
+    [SerializeField] TMP_Text _scoreDisplayText;
     [SerializeField] TMP_Text _damageDisplayText;
-    [SerializeField] Gradient _damageGradient;
+    public Gradient DamageGradient;
     float _currentDamageDisplay;
     float _desiredDamageDisplay;
 
@@ -92,6 +93,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void AddScore(int amount)
     {
         Score += amount;
+        _scoreDisplayText.text = Score.ToString();
     }
 
     public void SetWaveNumber(int number)
@@ -101,6 +103,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        SetWaveNumber(1);
         _data = SaveSystem.Instance.LoadGameSave();
         SetLocalDataToSave(_data);
 
@@ -124,7 +127,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         _currentDamageDisplay = Mathf.Lerp(_currentDamageDisplay, _desiredDamageDisplay, Time.deltaTime * 10);
         _damageDisplayText.text = ((int)_currentDamageDisplay).ToString() + "%";
-        _damageDisplayText.color = _damageGradient.Evaluate(_currentDamageDisplay / _maxDamagePercent);
+        _damageDisplayText.color = DamageGradient.Evaluate(_currentDamageDisplay / _maxDamagePercent);
 
         if (_currentDamageDisplay >= 299 && KnockbackPercent == 300)
             _damageDisplayText.text = "300%";

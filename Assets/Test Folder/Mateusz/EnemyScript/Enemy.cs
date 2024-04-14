@@ -75,7 +75,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         AudioManager.Instance.PlaySound("Hurt");
         KnockbackPercent += damageAmount;
-        PopupManager.Instance.SpawnText(((int)KnockbackPercent).ToString(), transform.position, 1.5f);
+        PopupManager.Instance.SpawnText(((int)KnockbackPercent).ToString() + "%", transform.position, 0.8f, PlayerStats.Instance.DamageGradient.Evaluate(Mathf.Clamp01(KnockbackPercent / 300)));
     }
 
     private void Update()

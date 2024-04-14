@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 public class PauseManager : MonoBehaviour
 {
-    public Animator anim;
+	public Animator anim;
 
     public GameObject visuals;
 

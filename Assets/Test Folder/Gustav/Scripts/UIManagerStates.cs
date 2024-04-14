@@ -55,14 +55,22 @@ public class UIManagerTransitioningState : UIManagerBaseState
             {
                 if (stateManager.PrefabToEnable != stateManager.PauseInstance)
                 {
-                    if (stateManager.PrefabToEnable.GetComponent<OnLoad>() == null)
+                    if (stateManager.PrefabToEnable.GetComponent<OnLoad>() == null && stateManager.PrefabToEnable.GetComponentInChildren<OnLoad>() == null)
                     {
                         stateManager.StartCoroutine(WaitCoroutine(transitionTime));
                     }
                     else
                     {
-                        float temp = stateManager.PrefabToEnable.GetComponent<OnLoad>().moveOutTime;
-                        stateManager.StartCoroutine(WaitCoroutine(temp));
+                        if (stateManager.PrefabToEnable.GetComponent<OnLoad>() != null)
+                        {
+                            float temp = stateManager.PrefabToEnable.GetComponent<OnLoad>().moveOutTime;
+                            stateManager.StartCoroutine(WaitCoroutine(temp));
+                        }
+                        else
+                        {
+                            float temp = stateManager.PrefabToEnable.GetComponentInChildren<OnLoad>().moveOutTime;
+                            stateManager.StartCoroutine(WaitCoroutine(temp));
+                        }
                     }
 
                     hasStartedCoroutine = true;

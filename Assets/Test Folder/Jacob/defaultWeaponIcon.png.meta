@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      defaultWeaponIcon_0: 1261122995908925393
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

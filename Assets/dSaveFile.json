@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 {"sliderTypes":[0,1,2],"sliderValues":[0.46619778871536257,0.7083565592765808,1.0],"toggleTypes":[0,1,2],"toggleValues":[true,true,true],"scoreLeadBoardNames":["Test1","Johanna A","Anton","",""],"scoreLeaderBoardValues":[7830,140,0,0,0],"waveLeadBoardNames":["Test1","Anton","Johanna A","",""],"waveLeaderBoardValues":[8,2,2,0,0],"SkipTutorial":false}
+=======
+{"sliderTypes":[0,1,2],"sliderValues":[0.49717003107070925,0.7083565592765808,1.0],"toggleTypes":[0,1,2],"toggleValues":[true,false,true],"scoreLeadBoardNames":["Johanna A","Anton","","",""],"scoreLeaderBoardValues":[140,0,0,0,0],"waveLeadBoardNames":["Johanna A","Anton","","",""],"waveLeaderBoardValues":[2,2,0,0,0],"SkipTutorial":false}
+>>>>>>> parent of dfa1fad (BALANCING YIPPIE EPIC GAMING MOMENT)

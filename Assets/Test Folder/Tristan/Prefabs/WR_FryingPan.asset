@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d06b72b9e22196459ebaa460dc3f602, type: 3}
+  m_Name: WR_FryingPan
+  m_EditorClassIdentifier: 
+  RewardName: Frying Pan
+  WaveUnlocked: 10
+  ContainedWeapon: {fileID: 11400000, guid: b6ec83e6724370a498f256b9e588ba0c, type: 2}
+  RewardSprite: {fileID: -7714727748090963735, guid: 42cef9a76cdf7444ca7cfaba485309cb, type: 3}

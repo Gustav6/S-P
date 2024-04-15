@@ -38,8 +38,8 @@ public class TutorialManager : MonoBehaviour
         ThisData = SaveSystem.Instance.LoadData();
         //skipTutorial = ThisData.SkipTutorial;
 
-        if (skipTutorial)
-            hasAttacked = true;
+        /*if (skipTutorial)
+            hasAttacked = true;*/
     }
 
     void Update()

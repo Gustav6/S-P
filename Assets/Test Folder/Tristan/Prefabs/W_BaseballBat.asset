@@ -16,12 +16,12 @@ MonoBehaviour:
   weaponAnimationToUse: {fileID: 22100000, guid: c329182c0e932584dbc17b692744f1b1, type: 2}
   weaponImpulseMultiplier: 0
   weaponImpulseTime: 0
-  damage: 15
+  damage: 10
   knockbackMultiplier: 1.25
-  stunTime: 0.15
-  animationSpeedMultiplier: 0.9
+  stunTime: 0.1
+  animationSpeedMultiplier: 1.25
   isWeaponAnimationResetable: 1
-  resetMultiplier: 3
+  resetMultiplier: 0.75
   projectileVelocity: 0
   weaponSprite: {fileID: 1021989635934165948, guid: a926f839d66eb4a4b809dfb1de851f3d, type: 3}
   weaponFlashSprite: {fileID: 5229747728011372442, guid: 4d61f8196e931234ba2c59d4db879e86, type: 3}

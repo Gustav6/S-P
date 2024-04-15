@@ -17714,7 +17714,7 @@ Transform:
   m_GameObject: {fileID: 1437333472}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0.6427876, w: 0.7660445}
-  m_LocalPosition: {x: -0.83, y: 0.127, z: 1}
+  m_LocalPosition: {x: -0.83, y: 0.127, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -18581,19 +18581,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 43532bcf171113842ba16be9d953c4d4, type: 2}
   - {fileID: 11400000, guid: d5fe43409f3b7374fa1fccca52d5d377, type: 2}
   _weaponRewardPool:
-  - {fileID: 11400000, guid: cc5a58de7c50b01489d30e23d7a112b6, type: 2}
-  - {fileID: 11400000, guid: 6a38e243318a380488b617c9978768cc, type: 2}
-  - {fileID: 11400000, guid: 617924119179b3744a3f29cacf400db5, type: 2}
-  - {fileID: 11400000, guid: 04a5bde66efb1ba49a5263a4fcbb7c51, type: 2}
-  - {fileID: 11400000, guid: 146d8a9233a695b4ab63ae416acd57d7, type: 2}
-  - {fileID: 11400000, guid: 48149513d61a39a439f8fc3c95045752, type: 2}
-  - {fileID: 11400000, guid: 7a0221a85017eb3488b845791444418f, type: 2}
-  - {fileID: 11400000, guid: f2f5a367ddee1d749be7456cd1d95d8c, type: 2}
-  - {fileID: 11400000, guid: 37f83bbb3c62f2b42a62afd435459c79, type: 2}
-  - {fileID: 11400000, guid: c0dfcfcb9bfc82544ab10c6aabcb18e8, type: 2}
-  - {fileID: 11400000, guid: 7e911962bd74e3549803cdeb5d6e5bff, type: 2}
-  - {fileID: 11400000, guid: 34565af3eb98eca47b0be1cb25cf2992, type: 2}
-  - {fileID: 11400000, guid: 497b2e26e95ad9e4689552f861210323, type: 2}
+  - {fileID: 11400000, guid: 4c214138f51bddf42914819e23293a0d, type: 2}
+  - {fileID: 11400000, guid: 854db10f5aa35e345851ed68a9aea088, type: 2}
+  - {fileID: 11400000, guid: 5dd862928c40e1247910c8fd696002de, type: 2}
   _dropCurve:
     serializedVersion: 2
     m_Curve:

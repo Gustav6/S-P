@@ -37,7 +37,7 @@ public interface IDamageable
 
     public void TakeKnockback(Vector2 sourcePosition, float knockbackMultiplier, float stunDuration);
 
-    public virtual void TakeKnockback(Vector2 sourcePosition, Vector2 targetPosition, float knockbackMultiplier, float stunDuration)
+    public virtual void TakeKnockback(Vector2 sourcePosition, Vector2 targetDirection, float knockbackMultiplier, float stunDuration)
     {
         // Defined in each individual enemy.
     }

@@ -105,7 +105,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 1, y: 1, z: 1}
+        value: {x: 0, y: 0, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -688,7 +688,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -736,7 +736,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -784,7 +784,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -1105,7 +1105,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: SpriteWrapper/SpritePivot/BodyPivot/BodyPivot2/Body/FrontArmPivot/FrontArmPivot2/FrontArmPivot3/FrontArm/HandPivot/HandPivot2
+    path: SpriteWrapper/SpritePivot/BodyPivot/BodyPivot2/Body/HeadPivot/HeadPivot2/HeadPivot3
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1117,7 +1117,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: SpriteWrapper/SpritePivot/BodyPivot/BodyPivot2/Body/FrontArmPivot/FrontArmPivot2/FrontArmPivot3/FrontArm/HandPivot/HandPivot2
+    path: SpriteWrapper/SpritePivot/BodyPivot/BodyPivot2/Body/HeadPivot/HeadPivot2/HeadPivot3
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1129,7 +1129,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: SpriteWrapper/SpritePivot/BodyPivot/BodyPivot2/Body/FrontArmPivot/FrontArmPivot2/FrontArmPivot3/FrontArm/HandPivot/HandPivot2
+    path: SpriteWrapper/SpritePivot/BodyPivot/BodyPivot2/Body/HeadPivot/HeadPivot2/HeadPivot3
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1177,7 +1177,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: SpriteWrapper/SpritePivot/BodyPivot/BodyPivot2/Body/HeadPivot/HeadPivot2/HeadPivot3
+    path: SpriteWrapper/SpritePivot/BodyPivot/BodyPivot2/Body/FrontArmPivot/FrontArmPivot2/FrontArmPivot3/FrontArm/HandPivot/HandPivot2
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1189,7 +1189,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: SpriteWrapper/SpritePivot/BodyPivot/BodyPivot2/Body/HeadPivot/HeadPivot2/HeadPivot3
+    path: SpriteWrapper/SpritePivot/BodyPivot/BodyPivot2/Body/FrontArmPivot/FrontArmPivot2/FrontArmPivot3/FrontArm/HandPivot/HandPivot2
     classID: 4
     script: {fileID: 0}
     flags: 0
@@ -1201,7 +1201,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: SpriteWrapper/SpritePivot/BodyPivot/BodyPivot2/Body/HeadPivot/HeadPivot2/HeadPivot3
+    path: SpriteWrapper/SpritePivot/BodyPivot/BodyPivot2/Body/FrontArmPivot/FrontArmPivot2/FrontArmPivot3/FrontArm/HandPivot/HandPivot2
     classID: 4
     script: {fileID: 0}
     flags: 0

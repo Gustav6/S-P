@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Simon
 public class PowerUpController : MonoBehaviour
 {
     [SerializeField] private PowerUpActivation powerUpPrefab;
@@ -16,15 +17,28 @@ public class PowerUpController : MonoBehaviour
             EquipmentManager.Instance.OnSpawnPowerUp = ChanceToSpawnPowerUp;
     }
 
+    /// <summary>
+    /// Has a set chance to spawn a powerup of a certain type.
+    /// </summary>
+    /// <param name="chance">The chance to spawn in a powerup; ranges from 0 - 100</param>
+    /// <param name="type">The type of powerup to spawn. If set to "Anything" a random powerup</param>
     private void ChanceToSpawnPowerUp(Vector2 spawnPosition, float chance, PowerUpTypes type)
     {
+        Debug.Log("pp");
+
         if (powerUpPrefab == null)
+        {
+            EquipmentManager.Instance.SetPowerUpCanSpawn(true);
             return;
+        }
 
         float rng = UnityEngine.Random.Range(0, 101);
 
         if (rng > chance || chance == 0)
+        {
+            EquipmentManager.Instance.SetPowerUpCanSpawn(true);
             return;
+        }
 
         PowerUpActivation newSpawn;
 

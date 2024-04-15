@@ -7,8 +7,8 @@ public class UIManagerUnLoadedState : UIManagerBaseState
 {
     public override void EnterState(UIStateManager stateManager)
     {
+        stateManager.CursorInstance.SetActive(true);
         stateManager.ActivePrefab = null;
-        stateManager.CursorInstance.SetActive(false);
     }
 
     public override void UpdateState(UIStateManager stateManager)
@@ -55,7 +55,24 @@ public class UIManagerTransitioningState : UIManagerBaseState
             {
                 if (stateManager.PrefabToEnable != stateManager.PauseInstance)
                 {
-                    stateManager.StartCoroutine(WaitCoroutine(transitionTime));
+                    if (stateManager.PrefabToEnable.GetComponent<OnLoad>() == null && stateManager.PrefabToEnable.GetComponentInChildren<OnLoad>() == null)
+                    {
+                        stateManager.StartCoroutine(WaitCoroutine(transitionTime));
+                    }
+                    else
+                    {
+                        if (stateManager.PrefabToEnable.GetComponent<OnLoad>() != null)
+                        {
+                            float temp = stateManager.PrefabToEnable.GetComponent<OnLoad>().moveOutTime;
+                            stateManager.StartCoroutine(WaitCoroutine(temp));
+                        }
+                        else
+                        {
+                            float temp = stateManager.PrefabToEnable.GetComponentInChildren<OnLoad>().moveOutTime;
+                            stateManager.StartCoroutine(WaitCoroutine(temp));
+                        }
+                    }
+
                     hasStartedCoroutine = true;
                 }
                 else
@@ -189,6 +206,17 @@ public class UIManagerLoadedState : UIManagerBaseState
         }
         else
         {
+            if (stateManager.PrefabToEnable != null && stateManager.PrefabToDisable != null)
+            {
+                if (stateManager.PrefabToEnable.GetComponentInChildren<ActiveSettingManager>() == null)
+                {
+                    if (stateManager.PrefabToDisable.GetComponentInChildren<ActiveSettingManager>() != null)
+                    {
+                        stateManager.PrefabToDisable.GetComponentInChildren<ActiveSettingManager>().gameObject.SetActive(false);
+                    }
+                }
+            }
+
             CallOnDisable(stateManager, execute);
         }
     }

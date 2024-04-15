@@ -126,7 +126,7 @@ public class UIStateManager : MonoBehaviour
     public GameObject PrefabToDisable { get; set; }
     public GameObject ActivePrefab { get; set; }
     public bool PauseMenuActive { get; set; }
-    public bool Transitioning { get; set; }
+    public bool Transitioning { get; private set; }
     public GameObject CursorInstance { get; private set; }
 
     private Vector2 prevPosition;
@@ -140,7 +140,7 @@ public class UIStateManager : MonoBehaviour
 
     private void Awake()
     {
-        Time.maximumDeltaTime = 10;
+        TransitionSystem.transitions.Clear();
 
         if (Instance == null)
             Instance = this;
@@ -150,8 +150,6 @@ public class UIStateManager : MonoBehaviour
 
     private void Start()
     {
-        Time.timeScale = 1;
-
         CursorInstance = GameObject.FindGameObjectWithTag("Cursor");
 
         ManagerTransitioningState = new();

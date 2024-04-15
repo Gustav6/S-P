@@ -4,6 +4,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
+// For testing
+// Simon
 public class HUD : MonoBehaviour
 {
     private TMP_Text _percentText;

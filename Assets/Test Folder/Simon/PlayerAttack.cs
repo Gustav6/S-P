@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Users;
 using UnityEngine.UI;
 
+// Jacob & Simon
 public class PlayerAttack : MonoBehaviour
 {
     [SerializeField] Transform _directionIndicator;
@@ -111,6 +112,7 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    // Simon
     private Vector2 GetMouseDirection()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -129,6 +131,7 @@ public class PlayerAttack : MonoBehaviour
         _attackInputHeld = ctx.ReadValueAsButton();
     }
 
+    // Simon
     private void TurnToTarget(Vector2 targetPosition)
     {
         Vector2 targetDirection = (targetPosition - (Vector2)transform.position).normalized;
@@ -138,6 +141,7 @@ public class PlayerAttack : MonoBehaviour
         _aimController.FaceTarget(targetPosition);
     }
 
+    // Simon
     private void TurnToTargetController(Vector2 targetDirection)
     {
         // If this is giving you an error, copy the DirectionIndicator object in JacobScene under Entities/Player and assign it to this script through the inspector.

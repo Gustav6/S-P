@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Simon
 public class HitboxTrigger : MonoBehaviour
 {
     private Enemy _thisController;
@@ -42,13 +43,16 @@ public class HitboxTrigger : MonoBehaviour
         }
         else
         {
-            if (collision.CompareTag(tag))
+            if (collision.CompareTag(tag) || collision.CompareTag("Player") || collision.CompareTag("WaveReward"))
                 return;
 
             Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage * PlayerStats.Instance.GetStat(StatType.DamageDealt),
                    PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), PlayerStats.Instance.transform.position,
                    CalculateStunTime(damageable.KnockbackPercent, PlayerStats.Instance.CurrentWeapon.StunTime, damageable.ConsecutiveHits));
         }
+
+        if (gameObject.name.Contains("Water"))
+            AudioManager.Instance.PlaySound("WaterGun");
     }
 
     public void Attack(IDamageable damageable, float damage, float knockbackMultiplier, Vector2 sourcePosition, float stunTime)
@@ -78,11 +82,10 @@ public class HitboxTrigger : MonoBehaviour
     /// <returns></returns>
     private float CalculateStunTime(float currentKnockbackPercent, float baseStunTime, int consecutiveHits)
     {
-        float decreaseValuePerHit = 0.15f;
+        float decreaseValuePerHit = 0.1f;
 
         float stunTime = CalculateStunTime(currentKnockbackPercent);
-        stunTime = stunTime + baseStunTime;
-        stunTime = stunTime - (decreaseValuePerHit * consecutiveHits) > 0 ? stunTime - (decreaseValuePerHit * consecutiveHits) : 0;
+        stunTime = stunTime - (decreaseValuePerHit * consecutiveHits) > baseStunTime ? stunTime - (decreaseValuePerHit * consecutiveHits) : baseStunTime;
 
         return stunTime;
     }

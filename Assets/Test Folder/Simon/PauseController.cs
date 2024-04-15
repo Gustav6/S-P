@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// This class and things related to it are unused.
+// Simon
 public class PauseController : MonoBehaviour
 {
-    // This class and things related to it are unused.
     public event EventHandler<OnPausedEventArgs> OnPaused;
 
     private bool _isPaused;

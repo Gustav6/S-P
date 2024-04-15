@@ -150,9 +150,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5226433133459199365}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.601018, y: -0.16785252, z: -0.9311022}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2273521895054552632}
@@ -172,6 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08e26d71f8a56224fb3187fb4157a551, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpForce: 5
 --- !u!50 &6893826389171908904
 Rigidbody2D:
   serializedVersion: 4
@@ -261,7 +262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369d351a6e40e344e96566db2e0155f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDist: 1.75
+  minDist: 1.25
   maxCooldown: 1
   hasAttacked: 0
   attackReady: 0
@@ -283,6 +284,7 @@ MonoBehaviour:
   pivot: {fileID: 1526075326591432245}
   speed: 2.5
   flipSpeed: 0.1
+  _pauseController: {fileID: 0}
 --- !u!114 &7414615531617396932
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,8 +297,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7b3834913f437146a20e1a6692708df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 75
-  KnockbackMultiplier: 2
+  Damage: 35
+  KnockbackMultiplier: 3
   _rb: {fileID: 0}
   _enemyAI: {fileID: 0}
   _attackController: {fileID: 0}

@@ -25,24 +25,24 @@ public class ExplosiveHitbox : MonoBehaviour
         {
             if (collider.CompareTag("Player") || !collider.TryGetComponent(out IDamageable damageable))
             {
-                Debug.Log("BIRDS ARE NOT WORDS ON        " + collider.gameObject.name);
                 continue;
             }
 
             Attack(damageable, PlayerStats.Instance.CurrentWeapon.Damage * PlayerStats.Instance.GetStat(StatType.DamageDealt),
                     PlayerStats.Instance.CurrentWeapon.KnockBackMultiplier * PlayerStats.Instance.GetStat(StatType.KnockbackDealt), transform.position,
-                    CalculateStunTime(damageable.KnockbackPercent, PlayerStats.Instance.CurrentWeapon.StunTime, damageable.ConsecutiveHits));
+                    CalculateStunTime(damageable.KnockbackPercent, PlayerStats.Instance.CurrentWeapon.StunTime, damageable.ConsecutiveHits), collider.transform);
         }
 
         Instantiate(_explosionPrefab, transform.position, Quaternion.identity);
+        AudioManager.Instance.PlaySound("Explosion");
         Destroy(gameObject);
     }
 
-    public void Attack(IDamageable damageable, float damage, float knockbackMultiplier, Vector2 sourcePosition, float stunTime)
+    public void Attack(IDamageable damageable, float damage, float knockbackMultiplier, Vector2 sourcePosition, float stunTime, Transform enemyTransform)
     {
         // TODO: Play SFX in take damage method.
         damageable.TakeDamage(damage);
-        damageable.TakeKnockback(sourcePosition, knockbackMultiplier, stunTime);
+        damageable.TakeKnockback(sourcePosition, enemyTransform.position, knockbackMultiplier, stunTime);
     }
 
     /// <summary>

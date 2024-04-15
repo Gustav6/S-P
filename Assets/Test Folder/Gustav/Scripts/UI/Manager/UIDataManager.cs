@@ -8,6 +8,8 @@ public class UIDataManager : MonoBehaviour
 {
     public static UIDataManager instance = null;
 
+    public bool hasRunStartScreen = false;
+
     public Dictionary<SliderType, float> sliderValues = new();
     public Dictionary<ToggleType, bool> toggleValues = new();
 

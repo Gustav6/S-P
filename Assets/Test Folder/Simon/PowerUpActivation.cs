@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+// Simon
 public class PowerUpActivation : MonoBehaviour
 {
     internal PowerUpTypes thisType;

@@ -40,6 +40,15 @@ public class PopupManager : MonoBehaviour
         StartCoroutine(FadeOutText(fadeTime, textComponent));
     }
 
+    public void SpawnText(string text, Vector2 position, float fadeTime, Color color)
+    {
+        TMP_Text textComponent = Instantiate(_textPopup, position, Quaternion.identity, transform);
+        textComponent.text = text;
+        textComponent.color = color;
+
+        StartCoroutine(FadeOutText(fadeTime, textComponent));
+    }
+
     IEnumerator FadeOutText(float fadeTime, TMP_Text textComponent)
     {
         float time = fadeTime;

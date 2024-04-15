@@ -30,26 +30,29 @@ public class Selectable : UI
 
     public override void Update()
     {
-        if (UIStateManager.Instance.KeyOrControlActive && isInteractable)
+        if (!UIStateManager.Instance.Transitioning)
         {
-            if (UIStateManager.Instance.CurrentUISelected == position && hasRunDeselected)
+            if (UIStateManager.Instance.KeyOrControlActive && isInteractable)
             {
-                Select();
+                if (UIStateManager.Instance.CurrentUISelected == position && hasRunDeselected)
+                {
+                    Select();
+                }
+                else if (UIStateManager.Instance.CurrentUISelected != position && !hasRunDeselected)
+                {
+                    Deselect();
+                }
             }
-            else if (UIStateManager.Instance.CurrentUISelected != position && !hasRunDeselected)
+            else
             {
-                Deselect();
-            }
-        }
-        else
-        {
-            if (hovering && hasRunDeselected)
-            {
-                Select();
-            }
-            else if (!hovering && !hasRunDeselected)
-            {
-                Deselect();
+                if (hovering && hasRunDeselected)
+                {
+                    Select();
+                }
+                else if (!hovering && !hasRunDeselected)
+                {
+                    Deselect();
+                }
             }
         }
 

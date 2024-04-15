@@ -185,7 +185,7 @@ public class UIInput : MonoBehaviour
 
                     if (referenceManager.UIInstance.hovering)
                     {
-                        if (g.GetComponent<Slider>() == null && g.GetComponent<InputField>() == null)
+                        if (g.GetComponent<InputField>() == null)
                         {
                             referenceManager.UIActivated = true;
                         }
@@ -201,7 +201,7 @@ public class UIInput : MonoBehaviour
 
                     if (context.canceled)
                     {
-                        if (g.GetComponent<SliderStateManager>() == null && g.GetComponent<InputFieldStateManager>() == null)
+                        if (g.GetComponent<InputFieldStateManager>() == null)
                         {
                             referenceManager.UIActivated = false;
                         }

@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour, IDamageable
     public float KnockbackPercent { get; set; }
     public int ConsecutiveHits { get; set; }
     private float _hitResetTime;
-    private readonly float _maxHitTime = 0.2f;
+    private readonly float _maxHitTime = 0.4f;
     public bool ShouldCount { get; set; }
     internal bool isImune;
 
@@ -61,6 +61,13 @@ public class Enemy : MonoBehaviour, IDamageable
         StartCoroutine(GiveEnemyMovement(stunDuration));
     }
 
+    public virtual void TakeKnockback(Vector2 sourcePosition, Vector2 targetPosition, float knockbackMultiplier, float stunDuration)
+    {
+        ConsecutiveHits++;
+        _hitResetTime = _maxHitTime;
+        StartCoroutine(GiveEnemyMovement(stunDuration));
+    }
+
     public void TakeDamage(float damageAmount)
     {
         if (isImune)
@@ -68,7 +75,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
         AudioManager.Instance.PlaySound("Hurt");
         KnockbackPercent += damageAmount;
-        PopupManager.Instance.SpawnText(((int)KnockbackPercent).ToString(), transform.position, 1.5f);
+        PopupManager.Instance.SpawnText(((int)KnockbackPercent).ToString() + "%", transform.position, 0.8f, PlayerStats.Instance.DamageGradient.Evaluate(Mathf.Clamp01(KnockbackPercent / 300)));
     }
 
     private void Update()
@@ -124,7 +131,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (EquipmentManager.Instance.CanSpawnPowerUps)
         {
             EquipmentManager.Instance.SetPowerUpCanSpawn(false);
-            EquipmentManager.Instance.OnSpawnPowerUp(transform.position, 100, PowerUpTypes.Anything);
+            EquipmentManager.Instance.OnSpawnPowerUp(transform.position, 20, PowerUpTypes.Anything);
         }
 
         AudioManager.Instance.PlaySound("WaterSplash");

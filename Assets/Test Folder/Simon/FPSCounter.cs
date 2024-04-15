@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// For testing
+// Simon
 public class FPSCounter : MonoBehaviour
 {
     private float _deltaTime, _fps;

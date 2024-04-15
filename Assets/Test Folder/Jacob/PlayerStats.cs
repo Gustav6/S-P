@@ -6,6 +6,7 @@ using TMPro;
 using System.Runtime.CompilerServices;
 using UnityEngine.UI;
 
+// Simon & Jacob
 public class PlayerStats : MonoBehaviour, IDamageable
 {
     #region Singleton
@@ -64,8 +65,9 @@ public class PlayerStats : MonoBehaviour, IDamageable
     private IDamageable _thisDamagable;
 
     [SerializeField] float _diStrength = 0.25f; // DI stands for direction input, used to reduce or enhance knockback when counteracting it with movement input.
+    [SerializeField] TMP_Text _scoreDisplayText;
     [SerializeField] TMP_Text _damageDisplayText;
-    [SerializeField] Gradient _damageGradient;
+    public Gradient DamageGradient;
     float _currentDamageDisplay;
     float _desiredDamageDisplay;
 
@@ -91,6 +93,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void AddScore(int amount)
     {
         Score += amount;
+        _scoreDisplayText.text = Score.ToString();
     }
 
     public void SetWaveNumber(int number)
@@ -100,6 +103,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
     private void Start()
     {
+        SetWaveNumber(1);
         _data = SaveSystem.Instance.LoadGameSave();
         SetLocalDataToSave(_data);
 
@@ -123,12 +127,13 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         _currentDamageDisplay = Mathf.Lerp(_currentDamageDisplay, _desiredDamageDisplay, Time.deltaTime * 10);
         _damageDisplayText.text = ((int)_currentDamageDisplay).ToString() + "%";
-        _damageDisplayText.color = _damageGradient.Evaluate(_currentDamageDisplay / _maxDamagePercent);
+        _damageDisplayText.color = DamageGradient.Evaluate(_currentDamageDisplay / _maxDamagePercent);
 
         if (_currentDamageDisplay >= 299 && KnockbackPercent == 300)
             _damageDisplayText.text = "300%";
     }
 
+    // Simon
     public void SetLocalDataToSave(PlayerData data)
     {
         _mainStatBlock = data.MainStatBlock;
@@ -142,6 +147,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     public void UpdateTilemap(Tilemap newTilemap)
     {
         tilemap = newTilemap;
+        _tiles = IDamageable.PopulateTilesDictonary(tilemap);
     }
 
     public float GetStat(StatType stat)
@@ -188,6 +194,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _abilityStatBlock = new(1, 1, 1, 1, 1, 1);
     }
 
+    // Simon
     private void PowerupEquipped()
     {
         _powerUpHudElement.color = new Color(1, 1, 1, 1);
@@ -207,6 +214,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
     }
 
     #region Damage and Knockback
+    // Simon
     public void TakeDamage(float damageAmount)
     {
         KnockbackPercent += damageAmount / GetStat(StatType.DamageResistance);
@@ -244,6 +252,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         SetDamageDisplay();
     }
 
+    // Simon
     /// <summary>
     /// Applies knockback to player and prevents them from moving for a specified time.
     /// </summary>
@@ -283,7 +292,8 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         StartCoroutine(SetPlayerVelocityOverTime((knockbackVector + diVector) / GetStat(StatType.KnockbackResistance), stunDuration));
     }
-    
+
+    // Simon
     private void PlayKnockbackSprite()
     {
         for (int i = 0; i < _allSrsOnPlayer.Length; i++)
@@ -297,6 +307,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _allSrsOnPlayer[0].sprite = _playerKnockbackSprite;
     }
 
+    // Simon
     private void ResetKnockbackSprite()
     {
         foreach (SpriteRenderer sr in _allSrsOnPlayer)
@@ -307,6 +318,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _allSrsOnPlayer[0].sprite = _initialBody;
     }
 
+    // Simon
     internal IEnumerator SetPlayerVelocityOverTime(Vector2 knockbackVector, float stunDuration)
     {
         foreach (Vector2 velocity in GetVelocity(knockbackVector, stunDuration))
@@ -319,6 +331,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         ResetKB();
     }
 
+    // Simon
     private IEnumerable<Vector2> GetVelocity(Vector2 knockbackVector, float stun)
     {
         Vector2 returningVector;
@@ -345,6 +358,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
         _playerCollider.enabled = true;
     }
 
+    // Simon
     public void Die()
     {
         if (_isInvulnerable)
@@ -355,7 +369,7 @@ public class PlayerStats : MonoBehaviour, IDamageable
 
         if (waveStateMachine.CurrentState != waveStateMachine.States[WaveStateMachine.WaveState.WaveInProgress])
         {
-            transform.position = Vector2.zero;
+            transform.position = tilemap.transform.GetChild(2).position;
             return;
         }
 

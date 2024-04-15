@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class Toggle : UI
 {
@@ -13,6 +14,14 @@ public class Toggle : UI
     [Header("Toggle variables")]
     public ToggleType toggleType;
     public ToggleVersion version;
+
+    [SerializeField] private AudioMixer audioMixer;
+
+    private const string MIXER_SFX = "SFXVolume";
+
+    private const string MIXER_Music = "MusicVolume";
+
+    private const string MIXER_Master = "MasterVolume";
 
     public bool toggleOn;
     [Range(0.1f, 1)] public float transitionTime = 0.3f;
@@ -63,7 +72,58 @@ public class Toggle : UI
             }
         }
 
+        switch (type)
+        {
+            case ToggleType.MainOnOrOff:
+                if (value)
+                {
+                    SetMasterVolume(UIDataManager.instance.sliderValues[SliderType.MainVolume]);
+                }
+                else
+                {
+                    SetMasterVolume(-80);
+                }
+                break;
+            case ToggleType.MusicOnOrOff:
+                if (value)
+                {
+                    SetMusicVolume(UIDataManager.instance.sliderValues[SliderType.MusicVolume]);
+                }
+                else
+                {
+                    SetMusicVolume(-80);
+                }
+                break;
+            case ToggleType.SfxOnOrOff:
+                if (value)
+                {
+                    SetSFXVolume(UIDataManager.instance.sliderValues[SliderType.SfxVolume]);
+                }
+                else
+                {
+                    SetSFXVolume(-80);
+                }
+                break;
+            default:
+                break;
+        }
+
         SaveSystem.Instance.SaveData(UIDataManager.instance.CurrentData);
+    }
+
+    private void SetMasterVolume(float value)
+    {
+        audioMixer.SetFloat(MIXER_Master, Mathf.Log10(value) * 20);
+    }
+
+    private void SetMusicVolume(float value)
+    {
+        audioMixer.SetFloat(MIXER_Music, Mathf.Log10(value) * 20);
+    }
+
+    private void SetSFXVolume(float value)
+    {
+        audioMixer.SetFloat(MIXER_SFX, Mathf.Log10(value) * 20);
     }
 
     private void ToggleFullscreen()

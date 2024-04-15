@@ -551,6 +551,7 @@ MonoBehaviour:
   textDeselected: {r: 1, g: 1, b: 1, a: 0.9019608}
   selectedScale: {x: 1.05, y: 1.05, z: 1}
   sliderType: 0
+  audioMixer: {fileID: 24100000, guid: cd9da5f47f6c67242a5fe8c50a0c7c81, type: 2}
 --- !u!114 &1703430521525398762
 MonoBehaviour:
   m_ObjectHideFlags: 0

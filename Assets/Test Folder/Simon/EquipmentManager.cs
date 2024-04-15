@@ -70,7 +70,7 @@ public class EquipmentManager : MonoBehaviour
 
         PlayerStats.Instance.CurrentWeapon = newWeapon;
 
-        controller.weaponAnimator.SetFloat("s", newWeapon.AnimationSpeed);
+        controller.weaponAnimator.SetFloat("s", newWeapon.AnimationSpeed);              
         controller.weaponAnimator.runtimeAnimatorController = newWeapon.AnimatorOverride;
 
         weaponSpriteRenderer.sprite = newWeapon.WeaponSprite;

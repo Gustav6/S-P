@@ -351,6 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd12a4bb1ff04f74f874beee6d6b1a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 24100000, guid: cd9da5f47f6c67242a5fe8c50a0c7c81, type: 2}
   hasRunStartScreen: 0
   score: 
   scoreNames: []
@@ -486,7 +487,7 @@ MonoBehaviour:
   hotSpot: {x: 15, y: -40, z: 0}
   pressedMenuSprite: {fileID: 4454631428275665778, guid: 1aefdd21ceefc18478995385f415a06b, type: 3}
   regularMenuSprite: {fileID: -3397387025712965628, guid: 1aefdd21ceefc18478995385f415a06b, type: 3}
-  gameSprite: {fileID: 5899200154976946171, guid: 371dbaf1c98f4ba4ab4a349fa0b02de1, type: 3}
+  gameSprite: {fileID: -6142374563283994760, guid: d46dd58e43a224e46952eeb78b8c0dfa, type: 3}
   gameCrosshairColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &394714223
 GameObject:
@@ -1144,9 +1145,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 767902809}
     m_Modifications:
+    - target: {fileID: 1048190071798599228, guid: df738c3cef1fced4a87102877decaae5, type: 3}
+      propertyPath: sliderType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5684370413568922887, guid: df738c3cef1fced4a87102877decaae5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6128976556278935385, guid: df738c3cef1fced4a87102877decaae5, type: 3}
       propertyPath: m_Name
       value: SettingsMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 6128976556278935385, guid: df738c3cef1fced4a87102877decaae5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6737907542597591216, guid: df738c3cef1fced4a87102877decaae5, type: 3}
       propertyPath: prefabToEnable
@@ -1561,7 +1574,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7483745770511535740, guid: 3b0cc3d55ccf6c04c9c5e86ad20468fc, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1674,7 +1687,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4560380586507857669, guid: 8f3ce481d15f4284cb85f3da35712bf6, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5935279072914918843, guid: 8f3ce481d15f4284cb85f3da35712bf6, type: 3}
       propertyPath: m_sharedMaterial

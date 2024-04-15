@@ -491,6 +491,7 @@ MonoBehaviour:
   selectedFunctions: 
   toggleType: 0
   version: 0
+  audioMixer: {fileID: 24100000, guid: cd9da5f47f6c67242a5fe8c50a0c7c81, type: 2}
   toggleOn: 0
   transitionTime: 0.2
 --- !u!114 &1393227582848674268

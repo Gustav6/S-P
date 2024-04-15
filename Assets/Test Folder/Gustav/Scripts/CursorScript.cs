@@ -47,7 +47,7 @@ public class CursorScript : MonoBehaviour
             if (image.sprite != gameSprite)
             {
                 image.color = gameCrosshairColor;
-                transform.localScale = new Vector3(0.35f, 0.35f, 1);
+                transform.localScale = new Vector3(0.6f, 0.6f, 1);
                 image.sprite = gameSprite;
             }
 

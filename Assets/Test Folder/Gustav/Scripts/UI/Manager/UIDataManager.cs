@@ -2,11 +2,20 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SocialPlatforms.Impl;
 
 public class UIDataManager : MonoBehaviour
 {
     public static UIDataManager instance = null;
+
+    [SerializeField] private AudioMixer audioMixer;
+
+    private const string MIXER_SFX = "SFXVolume";
+
+    private const string MIXER_Music = "MusicVolume";
+
+    private const string MIXER_Master = "MasterVolume";
 
     public bool hasRunStartScreen = false;
 
@@ -32,6 +41,13 @@ public class UIDataManager : MonoBehaviour
             Destroy(gameObject);
 
         SetValues();
+    }
+
+    public void Start()
+    {
+        SetMasterVolume(sliderValues[SliderType.MainVolume]);
+        SetMusicVolume(sliderValues[SliderType.MusicVolume]);
+        SetSFXVolume(sliderValues[SliderType.SfxVolume]);
     }
 
     public void SetValues()
@@ -95,6 +111,21 @@ public class UIDataManager : MonoBehaviour
                 wave[i] = 0;
             }
         }
+    }
+
+    private void SetMasterVolume(float value)
+    {
+        audioMixer.SetFloat(MIXER_Master, Mathf.Log10(value) * 20);
+    }
+
+    private void SetMusicVolume(float value)
+    {
+        audioMixer.SetFloat(MIXER_Music, Mathf.Log10(value) * 20);
+    }
+
+    private void SetSFXVolume(float value)
+    {
+        audioMixer.SetFloat(MIXER_SFX, Mathf.Log10(value) * 20);
     }
 }
 

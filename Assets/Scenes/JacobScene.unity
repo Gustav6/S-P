@@ -646,6 +646,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd12a4bb1ff04f74f874beee6d6b1a1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMixer: {fileID: 0}
   hasRunStartScreen: 0
   score: 
   scoreNames: []
@@ -15882,20 +15883,21 @@ MonoBehaviour:
   dashSprite: {fileID: 7110878671101974141, guid: 89f2d449051b6ac48b4dd27b529ff1f9, type: 3}
   tilemap: {fileID: 2051934469}
   _diStrength: 0.25
+  _scoreDisplayText: {fileID: 0}
   _damageDisplayText: {fileID: 615657383}
-  _damageGradient:
+  DamageGradient:
     serializedVersion: 2
-    key0: {r: 0.3972155, g: 1, b: 0.3443396, a: 1}
-    key1: {r: 0.88025105, g: 0.9056604, b: 0.16660735, a: 1}
-    key2: {r: 1, g: 0, b: 0, a: 0}
+    key0: {r: 1, g: 1, b: 1, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 32768
-    ctime2: 65535
+    ctime1: 65535
+    ctime2: 0
     ctime3: 0
     ctime4: 0
     ctime5: 0
@@ -15911,7 +15913,7 @@ MonoBehaviour:
     atime7: 0
     m_Mode: 0
     m_ColorSpace: -1
-    m_NumColorKeys: 3
+    m_NumColorKeys: 2
     m_NumAlphaKeys: 2
   _maxDamagePercent: 300
   _healParticlesPrefab: {fileID: 8860623131104852182, guid: 22cf678a65815d448b1bc67fdb61b004, type: 3}
@@ -31940,7 +31942,7 @@ RectTransform:
   m_GameObject: {fileID: 2056426835}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 937038659}
@@ -31965,7 +31967,7 @@ MonoBehaviour:
   hotSpot: {x: 15, y: -40, z: 0}
   pressedMenuSprite: {fileID: 4454631428275665778, guid: 1aefdd21ceefc18478995385f415a06b, type: 3}
   regularMenuSprite: {fileID: -3397387025712965628, guid: 1aefdd21ceefc18478995385f415a06b, type: 3}
-  gameSprite: {fileID: 21300000, guid: 1c3556d0910dbd84f8bbc449f5114d28, type: 3}
+  gameSprite: {fileID: -6142374563283994760, guid: d46dd58e43a224e46952eeb78b8c0dfa, type: 3}
   gameCrosshairColor: {r: 1, g: 1, b: 1, a: 0.5882353}
 --- !u!223 &2056426838
 Canvas:
@@ -32010,7 +32012,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -3397387025712965628, guid: 1aefdd21ceefc18478995385f415a06b, type: 3}
+  m_Sprite: {fileID: -6142374563283994760, guid: d46dd58e43a224e46952eeb78b8c0dfa, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
